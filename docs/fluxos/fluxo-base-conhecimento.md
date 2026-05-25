@@ -28,7 +28,7 @@ flowchart TD
     
     DOC --> COMPILE{Compilar para<br/>qual formato?}
     
-    COMPILE -->|SKILL.md genérico| C1[skill-creator]
+    COMPILE -->|SKILL.md genérico ou serviço cloud| C1[skill-creator]
     COMPILE -->|SKILL.md arquitetura| C2[archtecture-approches-skill-generator]
     COMPILE -->|SKILL.md metodologia| C3[methodologies-skill-generator]
     COMPILE -->|.instructions.md Terraform| C4[terraform-instructions-compiler]
@@ -78,9 +78,10 @@ flowchart TD
 | Pesquisa de... | Compiler | Output |
 |---------------|----------|--------|
 | Tecnologia genérica | `skill-creator` | `SKILL.md` + `blueprints/` |
+| Serviço cloud + Terraform (`technical-framework-researcher-terraform`) | `skill-creator` | `SKILL.md` de provisionamento |
 | Arquitetura (C4, DDD) | `archtecture-approches-skill-generator` | `SKILL.md` |
 | Metodologia (Scrum, SAFe) | `methodologies-skill-generator` | `SKILL.md` |
-| Terraform (services ou práticas) | `terraform-instructions-compiler` | Múltiplos `.instructions.md` |
+| Práticas Terraform (`terraform-engineering-best-practices-researcher`) | `terraform-instructions-compiler` | Múltiplos `.instructions.md` |
 
 **Input**: Documento de pesquisa (output da Etapa 1)
 **Output**: Artefato operacional estruturado em three-tier

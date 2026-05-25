@@ -82,7 +82,18 @@ Documento de pesquisa com:
 - Skill: `researching-technical-frameworks`
 
 ### Próximos Passos
-Após a pesquisa → usar `terraform-instructions-compiler` para gerar .instructions.md
+Após a pesquisa → usar `skill-creator` para compilar em SKILL.md de provisionamento (ex: `provisioning-aws-s3`)
+
+---
+
+> ### Quando usar qual prompt Terraform?
+>
+> | Objetivo | Prompt | Compiler | Output |
+> |----------|--------|----------|--------|
+> | Provisionar um serviço cloud específico | `technical-framework-researcher-terraform` | `skill-creator` | SKILL.md por serviço (ex: `provisioning-aws-s3`) |
+> | Definir padrões de projeto Terraform | `terraform-engineering-best-practices-researcher` | `terraform-instructions-compiler` | .instructions.md geral (1 por projeto) |
+>
+> Os dois são complementares: o de práticas define o arcabouço do projeto; o de serviço preenche com HCL específico de cada recurso.
 
 ---
 
@@ -117,6 +128,8 @@ Documento de pesquisa com:
 
 ### Próximos Passos
 Após a pesquisa → usar `terraform-instructions-compiler` para gerar .instructions.md
+
+> **Nota**: Esta pesquisa gera **uma skill geral por projeto** — não repetir por serviço. Para skills de provisionamento de serviços específicos (ex: S3, RDS, OCI Functions), use `technical-framework-researcher-terraform`.
 
 ---
 

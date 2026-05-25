@@ -77,9 +77,10 @@ Se sua pesquisa é de um domínio específico, use o compiler especializado:
 | Domínio da pesquisa | Usar |
 |---------------------|------|
 | Genérico | `skill-creator` |
+| Serviço cloud + Terraform (`technical-framework-researcher-terraform`) | `skill-creator` |
 | Arquitetura (C4, DDD, TOGAF) | `archtecture-approches-skill-generator` |
 | Metodologias (Scrum, SAFe) | `methodologies-skill-generator` |
-| Terraform (gera .instructions.md, não SKILL.md) | `terraform-instructions-compiler` |
+| Práticas Terraform (`terraform-engineering-best-practices-researcher`) | `terraform-instructions-compiler` (gera .instructions.md, não SKILL.md) |
 
 ---
 

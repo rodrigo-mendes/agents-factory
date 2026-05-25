@@ -54,7 +54,8 @@ Após a pesquisa, transforme em skill ou instruction:
 | Tipo de pesquisa | Compiler |
 |-----------------|----------|
 | Tecnologia genérica | `@workspace /skill-creator` |
-| Terraform services | `@workspace /terraform-instructions-compiler` |
+| Serviço cloud + Terraform | `@workspace /skill-creator` |
+| Práticas Terraform (org, CI/CD, testes) | `@workspace /terraform-instructions-compiler` |
 | Metodologia de arquitetura | `@workspace /archtecture-approches-skill-generator` |
 | Metodologia de requisitos | `@workspace /methodologies-skill-generator` |
 
