@@ -1,6 +1,6 @@
 ---
-name: [skill-name]
-description: "[Brief description — third person, max 1024 chars, starts with verb]"
+name: [verbing-tech-task]
+description: "[Action verb] [what] with [Tech] v[X.Y]+. Use when [trigger context]."
 ---
 
 ## Function

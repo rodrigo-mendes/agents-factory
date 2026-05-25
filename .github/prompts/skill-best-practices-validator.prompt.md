@@ -88,35 +88,31 @@ Explora `.github/skills/*/SKILL.md` y evalúa cada skill según los criterios ab
 
 ---
 
-### Paso 3: Generar Informe de Validación
+### Paso 3: Generar Informes de Validación
 
-Crea un archivo `SKILL_BEST_PRACTICES_REVIEW.md` con la siguiente estructura:
+Para **cada skill evaluada**, crea un archivo individual en `.github/skills/[skill-name]/[skill-name]-best-practices-review.md` con la siguiente estructura:
 
 ```markdown
-# Análisis de Mejores Prácticas para Agent Skills
+# Análisis de Mejores Prácticas: [skill-name]
 
 **Fecha**: [Fecha]
+**Archivo**: `.github/skills/[skill-name]/SKILL.md`
+**Líneas**: [N]
 **Referencia Oficial**: https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices
 **Referencia Equipo**: .github/skills/authoring-agent-skills/SKILL.md
 
 ---
 
-## Resumen Ejecutivo
+## Resumen
 
-- Skills evaluados: [N]
-- Cumplen criterios oficiales: [N] ([X]%)
-- Cumplen convenciones de equipo: [N] ([X]%)
+- Criterios oficiales cumplidos: [X]/8
+- Convenciones de equipo cumplidas: [X]/7
 - Problemas críticos: [N]
 
 ---
 
-## Evaluación por Skill
+## Criterios Oficiales (Claude Best Practices)
 
-### Skill: [nombre-skill]
-**Archivo**: `.github/skills/[nombre-skill]/SKILL.md`
-**Líneas**: [N]
-
-#### Criterios Oficiales (Claude Best Practices)
 | Criterio | Estado | Notas |
 |----------|--------|-------|
 | A1. YAML Frontmatter | ✅/❌ | [detalle] |
@@ -128,7 +124,8 @@ Crea un archivo `SKILL_BEST_PRACTICES_REVIEW.md` con la siguiente estructura:
 | B. Código y Scripts | ✅/❌/N/A | [detalle] |
 | C. Testing/Evaluación | ✅/❌ | [detalle] |
 
-#### Convenciones del Equipo
+## Convenciones del Equipo
+
 | Criterio | Estado | Notas |
 |----------|--------|-------|
 | D1. Naming (gerundio, kebab) | ✅/❌ | [detalle] |
@@ -138,18 +135,6 @@ Crea un archivo `SKILL_BEST_PRACTICES_REVIEW.md` con la siguiente estructura:
 | D5. Anti-patrones con alternativas | ✅/❌ | [detalle] |
 | D6. Links funcionales | ✅/❌ | [detalle] |
 | D7. Recursos externos | ✅/❌ | [detalle] |
-
-**Hallazgos principales**: [Resumen de issues y fortalezas]
-
----
-
-## Matriz de Cumplimiento
-
-| Skill | Oficial (A-C) | Equipo (D) | Total |
-|-------|---------------|------------|-------|
-| [skill-1] | [X]/9 | [X]/7 | [X]% |
-| [skill-2] | [X]/9 | [X]/7 | [X]% |
-| PROMEDIO | [X]/9 | [X]/7 | [X]% |
 
 ---
 
@@ -167,7 +152,48 @@ Crea un archivo `SKILL_BEST_PRACTICES_REVIEW.md` con la siguiente estructura:
 ---
 
 ## Conclusiones
-[Resumen general y próximas acciones]
+[Resumen de issues y fortalezas]
+```
+
+Después de generar todos los archivos individuales, crea `.github/skills/skills-best-practices-summary.md` con la matriz comparativa:
+
+```markdown
+# Resumen de Mejores Prácticas — Agent Skills
+
+**Fecha**: [Fecha]
+**Referencia Oficial**: https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices
+
+---
+
+## Resumen Ejecutivo
+
+- Skills evaluados: [N]
+- Cumplen criterios oficiales: [N] ([X]%)
+- Cumplen convenciones de equipo: [N] ([X]%)
+- Problemas críticos: [N]
+
+---
+
+## Matriz de Cumplimiento
+
+| Skill | Oficial (A-C) | Equipo (D) | Total | Review |
+|-------|---------------|------------|-------|--------|
+| [skill-1] | [X]/8 | [X]/7 | [X]% | [skill-1-best-practices-review.md](skill-1/skill-1-best-practices-review.md) |
+| [skill-2] | [X]/8 | [X]/7 | [X]% | [skill-2-best-practices-review.md](skill-2/skill-2-best-practices-review.md) |
+| PROMEDIO | [X]/8 | [X]/7 | [X]% | — |
+
+---
+
+## Recomendaciones Globales por Prioridad
+
+### ALTA (Bloquean Funcionalidad)
+[Lista consolidada]
+
+### MEDIA (Reducen Calidad)
+[Lista consolidada]
+
+### BAJA (Optimización)
+[Lista consolidada]
 ```
 
 ---
@@ -204,5 +230,5 @@ El validador debe detectar y reportar:
 Analiza los skills en este repositorio usando el validador de mejores prácticas.
 ```
 
-**Salida esperada**: `SKILL_BEST_PRACTICES_REVIEW.md` con análisis completo y recomendaciones priorizadas.
+**Salida esperada**: Um arquivo `.github/skills/[skill-name]/[skill-name]-best-practices-review.md` por skill + `.github/skills/skills-best-practices-summary.md` com a matriz comparativa consolidada.
 

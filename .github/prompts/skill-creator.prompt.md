@@ -133,46 +133,15 @@ See [Three-Tier Architecture](../../skills/authoring-agent-skills/SKILL.md#file-
 
 ## Output Structure
 
-See the complete [Skill Template](../../skills/authoring-agent-skills/SKILL.md#skill-template) in authoring-agent-skills.
+The output is a complete `SKILL.md` file ready to save at `.github/skills/{{SKILL_NAME}}/SKILL.md`.
 
-**Quick Summary**:
-```markdown
----
-name: {{SKILL_NAME}}
-description: "[Action verb] [what] with {{SYSTEM_OR_TECH_NAME}} v{{TARGET_VERSION}}. Use when [trigger context]."
----
+**How to produce it**:
+1. Start from the canonical scaffold: [TEMPLATE.SKILL.md](../../templates/skills/TEMPLATE.SKILL.md) — it defines every required section with placeholders. Do not invent sections or omit existing ones.
+2. Populate each section following the conventions in [authoring-agent-skills/SKILL.md](../../skills/authoring-agent-skills/SKILL.md): naming rules, three-tier guardrails (✅⚠️🚫), version lock, degrees of freedom. That skill is the authoritative reference for *how* to write each section.
+3. Replace all `[placeholder]` values with content derived from the research file mapping (Step 2 above).
+4. Apply progressive disclosure: if the file approaches 500 lines, move large code examples to `blueprints/*.md` and link from SKILL.md.
 
-## Version Context
-[Target version, release date, support status]
-
----
-
-## Blueprints & Guardrails
-
-### ✅ Always Do
-[Required patterns from research]
-
-### ⚠️ Ask First
-[Architectural decisions]
-
-### 🚫 Never Do
-[Anti-patterns with alternatives]
-
----
-
-## Integration Patterns
-[Partner technology integrations]
-
----
-
-## Verification Loop
-[Testing commands]
-
----
-
-## External Resources
-[Links to official docs]
-```
+> The template defines **what** to include. The skill defines **how** to write it. This prompt defines **when and in what order**.
 
 ---
 

@@ -396,55 +396,22 @@ Metadata.Target_Version  → Version Context
 
 ## Skill Template
 
-```markdown
----
-name: verbing-tech-specific-task
-description: "[Action verb] [what] with [Tech] v[X.Y]+. Use when [trigger context]."
----
+Use the canonical scaffold at [TEMPLATE.SKILL.md](../../templates/skills/TEMPLATE.SKILL.md) as your starting point — it contains every required section with placeholders ready to fill.
 
-## Version Context
-**Target**: [Tech] v[X.Y.Z]
-**Released**: [Date]
-**Support**: [Status]
+**Sections the template provides**:
+- Frontmatter (`name`, `description`) — follows the naming and description rules above
+- `## Function` — one-line role declaration
+- `## Version Context` — version lock block
+- `## Quick Navigation` — TOC linking all sections
+- `## Blueprints & Guardrails` — ✅ Always Do / ⚠️ Ask First / 🚫 Never Do with Domain Complexity Tiers
+- `## Integration Patterns` — cross-service summaries
+- `## Verification Loop` — build / test / health-check commands
+- `## Quick Reference` — essential commands and critical limits table
+- `## Blueprints Directory Structure` — when to use `blueprints/` vs inline
+- `## External Resources` — official docs, security, migration links
 
-⚠️ **Version Lock**: [Version-specific warnings]
+> Populate each section following the conventions documented in this file (naming, three-tier guardrails, version lock, degrees of freedom).
 
----
-
-## Blueprints & Guardrails
-
-### ✅ Always Do
-[Mandatory patterns with concise, commented code]
-
-### ⚠️ Ask First
-[Architectural decisions with tradeoff matrix]
-
-### 🚫 Never Do
-[Anti-patterns with incorrect/correct code side by side]
-
----
-
-## Integration Patterns
-
-### [Tech] ↔ [Partner]
-[Complete example]
-
----
-
-## Verification Loop
-
-```bash
-[exact and tested commands]
-```
-
----
-
-## External Resources
-
-- [Official Guide](URL)
-- [API Reference](URL)
-- [Changelog](URL)
-```
 ### Common Mistakes vs. Correct Usage
 
 | Aspect | ❌ Incorrect | ✅ Correct |
