@@ -19,6 +19,51 @@ The output is **NOT a document for humans to read** — it is a set of **operati
 
 ---
 
+## Quick Navigation
+
+- **[Blueprints & Guardrails](#blueprints--guardrails)** — Three-tier rules for this compiler's own operation
+- **[Evaluation Scenarios](./blueprints/evaluation-scenarios.md)** — 3 scenarios: canonical, edge, misuse
+- **[Interview Questions](./blueprints/interview-questions.md)** — Full interview script (Phase 2)
+- **[Standards Reference](./blueprints/terraform-standards-reference.md)** — Pattern catalog (Phase 4)
+- **[Verification Loop](#verification-loop)** — Post-generation self-check
+- **[External Resources](#external-resources)** — Reference links
+
+---
+
+## Blueprints & Guardrails
+
+These rules govern this compiler's own operation (not the instruction files it generates).
+
+### ✅ Always Do
+
+- **Load the research file first** — Read `{{RESEARCH_FILE}}` completely before starting the interview. Classify all findings into ✅/⚠️/🚫 before presenting interview questions. A missing or unread research file must trigger the error-handling path, not a silent default.
+- **Present the plan before generating** — After the interview, produce the full file plan and wait for explicit user approval before writing any instruction file. Never generate files speculatively.
+- **Always generate `terraform-standards.md`** — This file is mandatory regardless of interview answers. It is the foundation for all other instruction files.
+- **Produce the coverage matrix** — After generating all files, present Phase 5 coverage matrix to the user showing which research patterns map to which instruction files and how many remain pending.
+- **Use the correct template for each file type** — Load templates from `.claude/templates/instructions/` and match each generated file to STANDARDS, CONFIG, or SKILLS as appropriate.
+- **Validate each generated file** — Run Phase 5 validation checklist for every file before delivering. Flag every failure; do not skip silently.
+- **Place files in the correct location** — `{{PROJECT_ROOT}}/.claude/rules/` for Claude Code, `{{PROJECT_ROOT}}/.github/instructions/` for Copilot. Match `TARGET_PLATFORM`.
+- **Scope `applyTo` patterns precisely** — Never use `**/*` as the sole glob; each instruction file must target a specific file pattern relevant to its concern.
+
+### ⚠️ Ask First
+
+- **Number of instruction files** — When interview answers imply more than 5 instruction files, ask the user to confirm scope before proceeding. More files = more maintenance surface.
+- **Overlapping `applyTo` patterns** — When two planned instruction files share a significant overlap in their glob patterns (e.g., both target `**/*.tf`), ask whether to merge them or document the precedence order explicitly.
+- **Conditional patterns unresolved by interview** — When a ⚠️ conditional pattern from research was not resolved by the user's answers, ask whether to defer it with a `<!-- TODO -->` comment or to resolve it with the research default. Do not silently choose.
+- **`TARGET_PLATFORM` mismatch** — When the user's project has both `.claude/` and `.github/` directories, ask which platform is the target before placing files.
+
+### 🚫 Never Do
+
+- **Never generate files without user approval of the plan** — Phase 3 plan must be approved before any file is written. ✅ Present the plan table and wait for "yes" or "adjust plan".
+- **Never use `**/*` as the sole `applyTo` glob** — Overly broad patterns apply the instruction to unrelated files, causing noise. ✅ Use the specific patterns from the Phase 3 table (e.g., `**/*.tf`, `**/modules/**/*.tf`).
+- **Never include secrets or credentials in code examples** — Even example values must use placeholder variables. ✅ Use `var.secret_value` or `TF_VAR_*` references in all examples.
+- **Never mix Terraform version syntax** — Do not use `terraform 0.x` syntax in an instruction targeting `{{TERRAFORM_VERSION}} 1.x`. ✅ Every code example must use `{{TERRAFORM_VERSION}}` syntax only.
+- **Never duplicate constraints across instruction files** — Each rule lives in exactly one file. ✅ If a rule appears in `terraform-standards.md`, it must not be repeated in `terraform-modules.instructions.md`.
+- **Never skip the coverage matrix** — Deliver the Phase 5 coverage matrix even if all patterns are covered. ✅ The matrix is the user's receipt that research was fully consumed.
+- **Never generate files if the research file is missing** — Display the error-handling message and stop. ✅ Prompt the user to run `/terraform-engineering-best-practices-researcher` first.
+
+---
+
 ## INPUT VARIABLES
 
 ```yaml
@@ -68,7 +113,11 @@ Understand the three template types and their purposes:
 
 ### Phase 2: User Interview (REQUIRED)
 
-Roteiro completo de entrevista (perguntas por área: estrutura, ambientes, backend, módulos, CI/CD, testes, compliance) para coletar o contexto do projeto. Perguntas em [Interview Questions](./blueprints/interview-questions.md).
+Full interview script (questions by area: structure, environments, backend, modules, CI/CD,
+testing, compliance) is in [Interview Questions](./blueprints/interview-questions.md).
+
+---
+
 ### Phase 3: Planning (REQUIRED)
 
 Based on the interview answers, generate a **plan** before creating any files. The plan MUST be presented to the user for approval.
@@ -93,7 +142,7 @@ Evaluate which instruction files are needed based on answers:
 Present the plan in this format:
 
 ```
-📋 INSTRUCTION FILES PLAN
+INSTRUCTION FILES PLAN
 
 Based on your answers, I will generate the following instruction files:
 
@@ -110,9 +159,9 @@ Based on your answers, I will generate the following instruction files:
 └─────────────────────────────────────────────────────────────┘
 
 Each file will enforce:
-  ✅ [N] mandatory patterns
-  ⚠️ [N] conditional patterns (resolved by your answers)
-  🚫 [N] forbidden patterns
+  [N] mandatory patterns
+  [N] conditional patterns (resolved by your answers)
+  [N] forbidden patterns
 
 Total files: [N]
 Location: {{PROJECT_ROOT}}/.claude/rules/ (Claude Code) or {{PROJECT_ROOT}}/.github/instructions/ (Copilot)
@@ -130,19 +179,15 @@ For each planned file, follow the structure below. Use the appropriate template 
 
 #### 4.1 — terraform-standards.md (ALWAYS GENERATED)
 
-```markdown
+The `terraform-standards.md` file enforces Terraform v`{{TERRAFORM_VERSION}}` coding standards
+for `{{CLOUD_PROVIDER}}`: version constraints, file organization, naming conventions, mandatory
+and forbidden patterns, variable/output rules, module patterns, state management, CI/CD gates,
+testing standards, security/compliance, tagging, and skill routing.
+
+Pattern catalog reference: [Standards Reference](./blueprints/terraform-standards-reference.md)
+
 ---
-name: terraform-standards
-description: Terraform v{{TERRAFORM_VERSION}} coding standards for {{CLOUD_PROVIDER}} — naming, structure, code quality, and mandatory patterns
-applyTo: "**/*.tf"
----
 
-You are a Terraform Code Quality specialist for {{CLOUD_PROVIDER}} infrastructure. 
-Ensure all Terraform code follows v{{TERRAFORM_VERSION}} best practices for production readiness.
-
-## Terraform Standards Reference
-
-Catálogo de padrões que o compilador aplica: version constraints, organização de arquivos, naming, ✅/🚫, variáveis, módulos, state, pipelines, testes, segurança/compliance, tags e roteamento de skills. Referência completa em [Standards Reference](./blueprints/terraform-standards-reference.md).
 ### Phase 5: Validation (REQUIRED)
 
 After generating all files, validate each instruction file:
@@ -166,7 +211,7 @@ After generating all files, validate each instruction file:
 Present a final coverage matrix to the user:
 
 ```
-📊 COVERAGE MATRIX
+COVERAGE MATRIX
 
 Research Section                    → Instruction File
 ─────────────────────────────────────────────────────
@@ -188,35 +233,53 @@ Conditional Pending (⚠️):     [N] deferred (user didn't decide)
 
 ---
 
+## Verification Loop
+
+After generating all instruction files, the agent MUST verify:
+
+```
+[ ] terraform-standards.md was generated (always required)
+[ ] Each generated file has valid YAML frontmatter (name, description, applyTo)
+[ ] No applyTo glob is "**/*" without a more specific qualifier
+[ ] No secrets or credential literals appear in any code example
+[ ] All code examples use {{TERRAFORM_VERSION}} syntax (not 0.x patterns)
+[ ] Coverage matrix delivered and shows 0 uncovered ✅ mandatory patterns
+[ ] Coverage matrix delivered and shows 0 uncovered 🚫 forbidden patterns
+[ ] Files placed in correct location for {{TARGET_PLATFORM}}
+[ ] User approval of plan was received before Phase 4 execution
+```
+
+---
+
 ## Quality Gates (Final Checklist)
 
 Before delivering output:
-- [ ] ✅ Research file was fully loaded and parsed
-- [ ] ✅ User interview completed (all 16 questions answered)
-- [ ] ✅ Plan was approved by user before generation
-- [ ] ✅ All generated files follow template structure from `.claude/templates/instructions/`
-- [ ] ✅ YAML frontmatter is valid in every file
-- [ ] ✅ `applyTo` patterns don't overlap excessively between files
-- [ ] ✅ No research patterns left uncovered (coverage matrix is complete)
-- [ ] ✅ No hardcoded secrets or credentials in examples
-- [ ] ✅ All code examples use {{TERRAFORM_VERSION}} syntax
-- [ ] ✅ Cloud provider references match {{CLOUD_PROVIDER}}
-- [ ] ✅ Each instruction file is self-contained (can be understood without other files)
-- [ ] ✅ Conditional patterns resolved by user are converted to mandatory rules
-- [ ] ✅ Files are placed in `{{PROJECT_ROOT}}/.claude/rules/` (Claude Code) or `.github/instructions/` (Copilot)
+- [ ] Research file was fully loaded and parsed
+- [ ] User interview completed (all applicable questions answered)
+- [ ] Plan was approved by user before generation
+- [ ] All generated files follow template structure from `.claude/templates/instructions/`
+- [ ] YAML frontmatter is valid in every file
+- [ ] `applyTo` patterns don't overlap excessively between files
+- [ ] No research patterns left uncovered (coverage matrix is complete)
+- [ ] No hardcoded secrets or credentials in examples
+- [ ] All code examples use {{TERRAFORM_VERSION}} syntax
+- [ ] Cloud provider references match {{CLOUD_PROVIDER}}
+- [ ] Each instruction file is self-contained (can be understood without other files)
+- [ ] Conditional patterns resolved by user are converted to mandatory rules
+- [ ] Files are placed in `{{PROJECT_ROOT}}/.claude/rules/` (Claude Code) or `.github/instructions/` (Copilot)
 
 ---
 
 ## Output Priorities
-1. 🚨 Security and state safety rules (always in terraform-standards)
-2. ✅ Core coding standards (terraform-standards — always generated)
-3. 📁 Project structure (terraform-project-config)
-4. 📦 Module design (terraform-modules)
-5. 🔒 State management (terraform-state-backend)
-6. 🔄 CI/CD enforcement (terraform-cicd)
-7. 🧪 Testing standards (terraform-testing)
-8. 📋 Governance (terraform-governance — conditional)
-9. 🔗 Skill routing (terraform-skills — conditional)
+1. Security and state safety rules (always in terraform-standards)
+2. Core coding standards (terraform-standards — always generated)
+3. Project structure (terraform-project-config)
+4. Module design (terraform-modules)
+5. State management (terraform-state-backend)
+6. CI/CD enforcement (terraform-cicd)
+7. Testing standards (terraform-testing)
+8. Governance (terraform-governance — conditional)
+9. Skill routing (terraform-skills — conditional)
 
 ---
 
@@ -246,3 +309,22 @@ For any unanswered question, use the research file's recommended default and add
 
 ### If Templates Are Missing
 Generate instruction files using the patterns documented in this prompt directly. The templates are preferred but not required.
+
+---
+
+## External Resources
+
+### Terraform Official Documentation
+- [Terraform Language Documentation](https://developer.hashicorp.com/terraform/language) — HashiCorp (current)
+- [Terraform Registry](https://registry.terraform.io) — Provider and module registry
+- [Terraform CLI Reference](https://developer.hashicorp.com/terraform/cli) — HashiCorp
+- [Terraform Best Practices](https://developer.hashicorp.com/terraform/cloud-docs/recommended-practices) — HashiCorp recommended practices
+
+### Instruction File Standards
+- [TEMPLATE.STANDARDS.instructions.md](../../../.github/templates/instructions/TEMPLATE.STANDARDS.instructions.md) — Standards template
+- [TEMPLATE.CONFIG.instructions.md](../../../.github/templates/instructions/TEMPLATE.CONFIG.instructions.md) — Config template
+- [TEMPLATE.SKILLS.instructions.md](../../../.github/templates/instructions/TEMPLATE.SKILLS.instructions.md) — Skills template
+- [skill-frontmatter rules](../../rules/skill-frontmatter.md) — YAML frontmatter requirements
+
+### Research Generator
+- Run `/terraform-engineering-best-practices-researcher` to generate the research file input

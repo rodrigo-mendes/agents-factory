@@ -26,6 +26,13 @@ When used as part of the multi-model orchestrator (`/audit-architecture-consensu
 
 ---
 
+## Quick Navigation
+
+- **[Evaluation Scenarios](./blueprints/evaluation-scenarios.md)** — 4 scenarios: canonical injection audit, global applyTo edge case, misuse guard, context budget pile-up
+- **[Verification Loop](#verification-loop)** — Post-report checklist to confirm the output file is complete and well-formed
+
+---
+
 ## Trigger Keywords
 
 Use this prompt when the user mentions:
@@ -36,6 +43,41 @@ Use this prompt when the user mentions:
 - "engine mechanics"
 - "deduplication issues"
 - "passive injection audit"
+
+---
+
+## ✅ Always Do
+
+- **Determine what file types the agent creates before evaluating applyTo patterns.** Read the agent's P4 (Implement) step and all prompt "What will be generated" sections first. Evaluating `applyTo` without knowing target file types produces false positives and false negatives.
+- **Calculate actual line counts from file reads.** Budget estimates based on placeholder numbers are not actionable. Read each instruction file and count lines before simulating scenarios.
+- **Simulate injection for every file type the agent creates.** One injection scenario per file type is the minimum; cover every distinct file extension.
+- **Distinguish redundancy from contradiction.** Redundant rules repeat the same directive — they waste context budget (⚠️) but do not break behavior. Contradictory rules cannot both be true — they break behavior (❌).
+- **Check name uniqueness across all instruction, prompt, and skill files** (C.19). VS Code silently drops one instruction when two share the same `name` value — this is the most invisible failure mode.
+- **Persist the report as `TECHNICAL_MECHANISMS_AUDIT_REPORT.md`.** This is the final artifact — do not summarize in-chat without saving the file.
+- **Cite the criterion ID for every finding** (e.g., C.6, C.10). Findings without criterion references cannot be correlated in a consensus audit.
+
+---
+
+## ⚠️ Ask First
+
+- **Multiple agents share the same instruction files.** If two agents have overlapping `applyTo` coverage (same instruction files auto-inject for both), ask: "Should I simulate injection scenarios for both agents, or only [target agent]?"
+- **Context budget threshold.** The practical limit (~500 lines combined) is a heuristic. If the user has a known project-specific limit, ask: "Is there a specific context token budget you're targeting, or should I use the default ~500-line heuristic?"
+- **Frontmatter audit scope.** If the project has many instruction files, ask: "Run full frontmatter compliance check (C.19–C.24) across all files, or only the files directly associated with [target agent]?"
+- **Conflict tolerance.** Some redundancy may be intentional (belt-and-suspenders rules). Ask before flagging every redundancy: "Should I flag all redundant rules, or only redundancies that measurably impact context budget (>20 duplicate lines)?"
+
+---
+
+## 🚫 Never Do
+
+| Never Do | Why | Correct Behavior |
+|---|---|---|
+| Assume an applyTo pattern fires without verifying against actual file types | A pattern like `*.tf` only fires if the agent actually creates `.tf` files | Read the agent's generate/implement steps first; only then evaluate applyTo correctness |
+| Report a "conflict" between rules that say the same thing in different words | Redundancy ≠ contradiction | Redundancy is ⚠️ (wastes budget); contradiction is ❌ (breaks behavior) — label them correctly |
+| Skip the context budget calculation | It is the most quantitative and actionable finding this model produces | Always calculate: passive lines + active lines + always-on lines = combined total vs ~500-line limit |
+| Confuse skills (active, explicit load) with instructions (passive, auto-inject) | They load differently and have different failure modes | Skills require explicit `read_file` by agent/prompt; instructions fire automatically via `applyTo` |
+| Mark redundant rules as critical | Redundancy wastes context but does not cause incorrect behavior | Redundancy is always ⚠️ Medium at most — recommend consolidation, do not call it a breaking issue |
+| Skip the name uniqueness check because "it's probably unique" | A name collision causes one instruction to silently drop — the most invisible failure mode | Run C.19 across all files in scope, every time |
+| Generate application code or modify instruction/skill files | This model identifies issues; it does not implement fixes | Produce only analysis, the injection simulation, and the remediation plan |
 
 ---
 
@@ -215,7 +257,7 @@ Check each instruction/prompt/skill frontmatter for VS Code engine compliance:
 |---|---|---|
 | C.19 | name uniqueness | No two files share the same `name` value |
 | C.20 | name format | kebab-case, max 64 chars, no special characters |
-| C.21 | description length | Under 1024 characters |
+| C.21 | description length | Under 1536 characters |
 | C.22 | applyTo syntax | Valid glob syntax (no regex, no absolute paths) |
 | C.23 | tools validity | Only recognized tool names in array |
 | C.24 | No YAML errors | Frontmatter parses without errors |
@@ -252,142 +294,35 @@ Score scale:
 
 **Output filename**: `TECHNICAL_MECHANISMS_AUDIT_REPORT.md`
 
-Use this structure:
-
-```markdown
-# Technical Mechanisms Audit Report (Model C)
-## Agent: {agent-name} | Audit Date: {date}
+The report must contain all 8 sections: Executive Summary, Injection Landscape, Injection Scenarios (Simulated), Conflict Analysis, Criteria Evaluation, Issues Found, Remediation Plan, and Conclusion. Every section must be fully written — do not abbreviate with "... and so on".
 
 ---
 
-## 1. Executive Summary
+## Verification Loop
 
-[Assessment of engine-level correctness: do the mechanical parts work?]
+After generating the report, run these checks before confirming to the user:
 
-### Mechanism Health: {✅ HEALTHY | ⚠️ STRESSED | ❌ FAILING}
-### Overall Score: [X.X/10]
-
-| Component | Score | Status | Issues |
-|---|---|---|---|
-| applyTo Correctness | [X/10] | [✅/⚠️/❌] | [count] |
-| Conflict Freedom | [X/10] | [✅/⚠️/❌] | [count] |
-| Context Budget | [X/10] | [✅/⚠️/❌] | [count] |
-| Active Path Correctness | [X/10] | [✅/⚠️/❌] | [count] |
-| Frontmatter Compliance | [X/10] | [✅/⚠️/❌] | [count] |
-| **Overall (weighted)** | **[X.X/10]** | **[Status]** | **[total]** |
-
----
-
-## 2. Injection Landscape
-
-### Passive Injection Map
-
-| File Type | Instructions Injected | Total Lines | Budget % |
-|---|---|---|---|
-| *.tf | [list] | [N] | [X%] |
-| *.tftest.hcl | [list] | [N] | [X%] |
-| ... | ... | ... | ... |
-
-### Active Loading Map
-
-| Trigger | Skill Loaded | Lines | Combined Total |
-|---|---|---|---|
-| keyword: "function" | provisioning-oci-functions | [N] | [N] |
-| ... | ... | ... | ... |
-
----
-
-## 3. Injection Scenarios (Simulated)
-
-### Scenario 1: Editing {file-type}
-
-[Full scenario simulation as described in Step 4]
-
----
-
-## 4. Conflict Analysis
-
-### 4.1 applyTo Overlap Matrix
-
-| Instruction A | Instruction B | Overlap Pattern | Conflict? |
-|---|---|---|---|
-| [name] | [name] | [pattern] | ✅ None / ⚠️ Redundant / ❌ Contradicts |
-
-### 4.2 Rule Contradictions Found
-
-| Rule in File A | Rule in File B | Nature | Impact |
-|---|---|---|---|
-| [rule] | [contradicting rule] | [what conflicts] | [behavioral impact] |
-
-### 4.3 Redundancy Report
-
-| Rule | Appears In | Recommendation |
-|---|---|---|
-| [repeated rule] | [file1, file2, file3] | Consolidate to [single file] |
-
----
-
-## 5. Criteria Evaluation
-
-### 5.1 Passive Path (applyTo + Injection)
-
-| # | Criterion | Result | Evidence |
-|---|---|---|---|
-| C.1 | Pattern matches intended files | [✅/⚠️/❌] | [specific finding] |
-| ... | ... | ... | ... |
-
-### 5.2 Active Path (Skill Loading)
-
-| # | Criterion | Result | Evidence |
-|---|---|---|---|
-| C.12 | Skills not auto-injected | [✅/⚠️/❌] | [specific finding] |
-| ... | ... | ... | ... |
-
-### 5.3 Frontmatter Compliance
-
-| # | Criterion | Result | Evidence |
-|---|---|---|---|
-| C.19 | name uniqueness | [✅/⚠️/❌] | [specific finding] |
-| ... | ... | ... | ... |
-
----
-
-## 6. Issues Found
-
-| # | Severity | Category | Issue | File(s) | Impact |
-|---|---|---|---|---|---|
-| M1 | 🔴 Critical | Conflict | [description] | [files] | [impact] |
-| M2 | 🟡 Medium | Budget | [description] | [files] | [impact] |
-| ... | ... | ... | ... | ... | ... |
-
-**Total: [N] issues ([X] 🔴, [Y] 🟡, [Z] 🟢)**
-
----
-
-## 7. Remediation Plan
-
-### Mechanism Fixes (Priority 1)
-
-#### M1: [Title]
-- **Category**: [Conflict / Budget / Frontmatter / Pattern]
-- **Files**: [list]
-- **What's Wrong**: [technical description]
-- **Fix**: [specific action]
-- **Proposed Change**: [code block]
-
-[Repeat per issue]
-
----
-
-## 8. Conclusion
-
-[Assessment of engine-level health and stability recommendations]
-
----
-
-*Generated by `/audit-architecture-engine` (Model C) | Audit date: {date}*
-*Scoring weights: applyTo=30%, Conflicts=25%, Budget=20%, Active=15%, Frontmatter=10%*
 ```
+1. Confirm file exists:
+   ls -lh TECHNICAL_MECHANISMS_AUDIT_REPORT.md
+   Expected: file present, size > 0
+
+2. Confirm required sections are present (all must return a match):
+   grep -c "## Executive Summary" TECHNICAL_MECHANISMS_AUDIT_REPORT.md
+   grep -c "Injection Landscape" TECHNICAL_MECHANISMS_AUDIT_REPORT.md
+   grep -c "Conflict Analysis" TECHNICAL_MECHANISMS_AUDIT_REPORT.md
+   grep -c "Remediation Plan" TECHNICAL_MECHANISMS_AUDIT_REPORT.md
+
+3. Confirm injection scenarios were simulated:
+   grep -c "BUDGET STATUS" TECHNICAL_MECHANISMS_AUDIT_REPORT.md
+   Expected: count equals the number of file types the agent creates
+
+4. Confirm name uniqueness check ran:
+   grep -c "C.19\|name uniqueness" TECHNICAL_MECHANISMS_AUDIT_REPORT.md
+   Expected: >= 1
+```
+
+If any check fails, complete the missing sections before confirming.
 
 ---
 
@@ -402,24 +337,26 @@ Use this structure:
 
 ---
 
-## Anti-Patterns to Avoid
-
-🚫 **Never** assume an applyTo pattern works without verifying against actual file types.
-
-🚫 **Never** report a "conflict" between rules that say the same thing differently (redundancy ≠ conflict).
-
-🚫 **Never** skip the context budget calculation — it's the most actionable finding.
-
-🚫 **Never** confuse skills (active, explicit load) with instructions (passive, auto-inject).
-
-🚫 **Never** mark redundant rules as critical — they waste context but don't cause errors.
-
----
-
 ## Complementary Prompts
 
 - `/audit-architecture-scope` → Model A: Scope hierarchy and responsibility leakage
 - `/audit-architecture-flow` → Model B: Runtime invocation chains and reachability
 - `/audit-architecture-consensus` → Runs all 3 models and produces comparison report
 
-**CRITICAL**: To validate applyTo patterns, you must know what file types the agent creates. Read the agent's P4 (Implement) step and all prompt "What will be generated" sections to build the list of file types before evaluating patterns.
+---
+
+## External Resources
+
+### GitHub Copilot Engine Mechanics
+- [GitHub Copilot — Customizing Copilot](https://docs.github.com/en/copilot/customizing-copilot) — Official docs for instruction files, `applyTo`, and injection behavior
+- [GitHub Copilot — Adding custom instructions](https://docs.github.com/en/copilot/customizing-copilot/adding-custom-instructions-for-github-copilot) — `applyTo` glob semantics, how multiple instructions interact, deduplication
+- [VS Code Copilot extensibility overview](https://code.visualstudio.com/docs/copilot/copilot-extensibility-overview) — Active vs passive loading, context window mechanics
+- [VS Code glob pattern reference](https://code.visualstudio.com/docs/editor/glob-patterns) — Valid glob syntax for `applyTo` patterns (forward slashes, `**`, `{}` alternation)
+
+### Claude Code Agent Mechanics
+- [Claude Code — Sub-agents](https://docs.anthropic.com/en/docs/claude-code/sub-agents) — How `tools:` field controls agent capabilities; least-privilege principle
+- [Claude Code — Memory and storage](https://docs.anthropic.com/en/docs/claude-code/memory) — CLAUDE.md global injection and scope
+
+### Context Window and Budget
+- [Anthropic — Claude context windows](https://docs.anthropic.com/en/docs/about-claude/models/overview) — Token limits per model (reference for budget calculations)
+- [GitHub Copilot — Context and completions](https://docs.github.com/en/copilot/using-github-copilot/getting-code-suggestions-in-your-ide-with-github-copilot) — How context window size affects suggestion quality

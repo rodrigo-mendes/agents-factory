@@ -34,7 +34,7 @@ Define como criar e refinar Skills para GitHub Copilot seguindo best practices o
 ### Usado por
 - `skill-creator.prompt.md` — Referencia como padrão de qualidade
 - `skill-best-practices-validator.prompt.md` — Usa como baseline de validação
-- `archtecture-approches-skill-generator.prompt.md` — Segue o padrão
+- `architecture-approaches-skill-generator.prompt.md` — Segue o padrão
 - `methodologies-skill-generator.prompt.md` — Segue o padrão
 
 ---

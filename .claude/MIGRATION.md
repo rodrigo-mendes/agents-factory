@@ -33,7 +33,7 @@ o decommission é uma fase final, executada **só após validação em uso real*
   | `cloud-architecture-researcher` | 610 → 198 | 2 |
   | `audit-architecture-scope` | 605 → 336 | 2 |
   | `terraform-instructions-compiler` | 599 → 247 | 2 |
-  | `archtecture-approches-skill-generator` | 587 → 309 | 1 |
+  | `architecture-approaches-skill-generator` | 587 → 309 | 1 |
   Todas < 500 linhas; 0 links quebrados; frontmatter inalterado.
 - **`examples/` removido** das duas árvores (`.claude/templates/`, `.github/templates/`) — 71% da árvore,
   OCI/Terraform hardcoded. READMEs passam a apontar para os artefatos vivos (`.claude/agents/`, `.claude/skills/`).
@@ -54,7 +54,7 @@ Rodados os próprios validadores/auditor da fábrica contra `.claude/`:
 - **Vocabulário conceitual Copilot** ainda presente nos rubrics de auditoria (rótulos "Layer L0–L4", `.agent.md`
   em tabelas de critério, `report-template.md`) — é o modelo conceitual, não caminho de runtime; reescrever
   para vocabulário Claude Code é doc-only (R1).
-- **Typo** `archtecture-approches-skill-generator` → renomear muda o nome do comando `/...`; decidir em separado.
+- **Typo** `architecture-approaches-skill-generator` → renomear muda o nome do comando `/...`; decidir em separado.
 - **Variáveis de prompt** (`{{VAR}}`, seções INPUT VARIABLES) foram preservadas; o subagente as coleta.
   Onde fizer sentido um argumento único, usar `$ARGUMENTS`/`$1`.
 

@@ -21,6 +21,50 @@ guarantees.
 
 ---
 
+## Quick Navigation
+
+- **[Blueprints & Guardrails](#blueprints--guardrails)** — Three-tier rules for this generator's own operation
+- **[Evaluation Scenarios](./blueprints/evaluation-scenarios.md)** — 3 scenarios: canonical, edge, misuse
+- **[Verification Loop](#verification-loop)** — Post-generation self-check
+- **[External Resources](#external-resources)** — Reference links
+
+---
+
+## Blueprints & Guardrails
+
+These rules govern this generator's own operation (not the skills it generates).
+
+### ✅ Always Do
+
+- **Classify before researching** — Complete Phase 1 classification before any research. The category determines which SKILL.md sections to emphasize, preventing generic outputs that don't fit the methodology.
+- **Source every claim at Tier 1 or 2** — Every mandatory element, role definition, or artifact template in the generated SKILL.md must cite an official guide, governing body, or recognized methodology author. Tag with `[HIGH]`/`[MEDIUM]`/`[LOW]`.
+- **Include full three-tier guardrails in the generated SKILL.md** — The output SKILL.md must contain ✅ Always Do, ⚠️ Ask First, and 🚫 Never Do sections with correct-alternative counterparts for every Never Do item. Never omit any tier.
+- **Create `blueprints/evaluation-scenarios.md` for the generated skill** — Every generated SKILL.md must be accompanied by at least 3 evaluation scenarios (canonical, edge, misuse) in the house JSON format. Link from Quick Navigation in the generated SKILL.md.
+- **Add `## External Resources` to the generated SKILL.md** — Include links to the official guide, governing body, and canonical tooling. All links must be dated.
+- **Include a Verification Loop in the generated SKILL.md** — Provide concrete self-check steps the consuming agent can execute after generating a methodology artifact.
+- **Run Phase 4 self-validation before finalizing** — Complete the full checklist; flag every failure explicitly. Do not silently skip items.
+- **Keep the generated SKILL.md under 500 lines** — Use `blueprints/` to extract content that exceeds the limit.
+- **Include the source bibliography** — Section 11 of the generated SKILL.md must list all sources used, tagged by tier.
+
+### ⚠️ Ask First
+
+- **Ambiguous edition** — When `METHODOLOGY_EDITION` is absent or multiple editions exist (e.g., Scrum Guide 2017 vs 2020), ask for the specific edition before researching. Mixing editions is disinformation.
+- **Category boundary** — When a methodology spans categories (e.g., SAFe spans Scaling Framework and Engineering Practices), ask the user which primary use case to emphasize before classifying.
+- **Engineering context scope** — When `ENGINEERING_CONTEXT` is vague, ask for team size, tooling, and maturity level. These determine which artifact templates and flow metrics to include.
+- **Tier 1 source unavailable** — When no official guide exists for a mandatory element, ask whether to use a Tier 2 source with `[MEDIUM]` confidence or omit and document as a Research Gap.
+
+### 🚫 Never Do
+
+- **Never include Tier 5 sources** — Blog posts, informal adaptations, or undated community posts must not appear in the generated SKILL.md. ✅ Find a Tier 1 or 2 source, or document the gap in Research Gaps.
+- **Never omit the correct alternative for a Never Do item** — Every prohibited pattern in the generated SKILL.md must include a concrete correct alternative. ✅ Write the correct alternative inline, side-by-side with the anti-pattern.
+- **Never mix methodology versions** — Do not blend Scrum Guide 2017 and 2020 guidance in the same SKILL.md. ✅ Pin to a single edition; mark older patterns as deprecated with their replacement.
+- **Never produce a generic SKILL.md** — The generated output must be specific to the methodology's category (Flow & Delivery, Scaling Framework, etc.). ✅ Complete Phase 1 classification and adapt sections accordingly.
+- **Never skip Research Gaps** — If a finding cannot be confirmed at Tier 1–3, do not silently omit it. ✅ Document it in Research Gaps with a conservative default behavior.
+- **Never allow the generated SKILL.md to exceed 500 lines** — ✅ Extract large content (artifact templates, metrics tables) to `blueprints/` files and link from Quick Navigation.
+- **Never include the Flow Metrics section for structural methodologies** — Only include Section 6 (Flow Metrics) when the methodology defines measurable flow outcomes. ✅ Skip the section for Team Topologies, TOGAF-style frameworks, and similar structural approaches.
+
+---
+
 ## INPUT VARIABLES
 
 ```yaml
@@ -132,214 +176,50 @@ The SKILL.md must satisfy these non-negotiable requirements:
 - Every artifact example is **copy-ready** — no placeholders left unfilled in the mandatory sections
 - Every forbidden pattern has a **correct alternative** — never just say "don't do X"
 - Structure adapts to the methodology category — do not use a one-size-fits-all template
-
----
+- **Three-tier guardrails are complete** — ✅ Always Do, ⚠️ Ask First, and 🚫 Never Do sections
+  must all be present with correct alternatives for every Never Do item
+- **`blueprints/evaluation-scenarios.md` is created** alongside the SKILL.md with
+  ≥3 scenarios (canonical, edge, misuse) and linked from Quick Navigation
+- **`## External Resources` section is present** with dated official links
+- **A Verification Loop section is present** with concrete self-check steps
 
 ### SKILL.md STRUCTURE
+
+The generated SKILL.md follows 11 sections: What This Skill Does, When To Use, Methodology Facts,
+Artifact Generation Rules, Three-Tier Guardrails (✅/⚠️/🚫), Flow Metrics (conditional),
+Edition Changes, Integration with Adjacent Methodologies, Scale Boundaries, Confidence Map,
+and Source Bibliography. It also requires Quick Navigation, Verification Loop, and External
+Resources sections. Full structure and field-by-field guidance is in the prompt body below.
+
+#### Generated SKILL.md Section Outline
 
 ```markdown
 # SKILL: {{METHODOLOGY_NAME}} — {{METHODOLOGY_EDITION}}
 # For: Engineering teams (Tech Leads and Engineers)
 # Context: {{ENGINEERING_CONTEXT}}
 # Generated: [Date]
-# Review By: [Date + 18 months — methodology guidance expires]
+# Review By: [Date + 18 months]
 
----
+## Quick Navigation
+- [Always Do / Ask First / Never Do](#three-tier-guardrails)
+- [Evaluation Scenarios](./blueprints/evaluation-scenarios.md)
+- [Artifact Templates](#artifact-generation-rules)
+- [Verification Loop](#verification-loop)
+- [External Resources](#external-resources)
 
 ## 1. WHAT THIS SKILL DOES
-
-[1 paragraph: what Claude can do with this skill — be specific about artifact types,
- not methodology theory. E.g., "Claude can generate Kanban board designs, WIP limit
- recommendations, and cycle time analysis templates for engineering teams."]
-
----
-
 ## 2. WHEN TO USE THIS SKILL
-
-Trigger this skill when the user asks about:
-- [Trigger phrase or request type 1]
-- [Trigger phrase or request type 2]
-- [Trigger phrase or request type 3]
-
-Do NOT trigger this skill when:
-- [Out-of-scope request 1 — e.g., "user asks about business strategy, not delivery process"]
-- [Out-of-scope request 2]
-
----
-
 ## 3. METHODOLOGY FACTS
-
-[HIGH-confidence facts only. Everything here must be Tier 1 or Tier 2 sourced.]
-
-Core Purpose: [What problem this methodology solves — 1 sentence, official definition]
-Governing Body: [Organization that maintains the methodology]
-Official Guide: [URL]
-Current Edition: [{{METHODOLOGY_EDITION}}]
-Key Change From Previous: [Most important change engineers must know]
-
-Mandatory Roles (if defined by the methodology):
-- [Role]: [Responsibility relevant to artifact generation]
-
-Mandatory Artifacts:
-- [Artifact]: [Purpose and mandatory elements]
-
-Mandatory Events/Cadences (if applicable):
-- [Event]: [Purpose, timebox, required outputs]
-
----
-
 ## 4. ARTIFACT GENERATION RULES
-
-For each artifact type Claude may produce using this skill:
-
-### [Artifact Name]
-
-**When to generate**: [Condition that triggers this artifact]
-
-**Mandatory elements** — Claude MUST include all of these:
-```
-[Element 1]: [Why mandatory — cite guide section]
-[Element 2]: [Why mandatory]
-[Element 3]: [Why mandatory]
-```
-
-**Template**:
-```
-[Complete, copy-ready artifact template — engineering-calibrated,
- no business fluff, includes technical constraints and CI/CD hooks where relevant]
-```
-
-**Quality gate** — before presenting to user, verify:
-- [ ] [Check 1 — engineer-evaluable question]
-- [ ] [Check 2]
-- [ ] [Check 3 — verifiable without source code access]
-
-**Source**: [Official guide section or Tier 2 reference]
-
----
-
-## 5. THREE-TIER GUARDRAILS
-
-Pattern counts in each tier should be driven by the methodology's domain complexity, not by a fixed template. Simple flow methodologies may need 3-4 Always Do rules; comprehensive scaling frameworks may need 7-9. Include every pattern the domain requires — never pad to reach a count, never omit to fit under a cap.
-
-### ✅ ALWAYS DO
-
-[Rules Claude must follow every time, for every artifact, with no exceptions]
-
-Rule: [Name]
-What: [Exact behavior required]
-Why: [Official rationale — source tier and reference]
-Example:
-```
-[Correct artifact fragment]
-```
-
----
-
-### ⚠️ ASK FIRST
-
-[Decisions Claude must NOT make autonomously — must ask the engineering team]
-
-Decision: [What to choose]
-Why It Matters: [What breaks if the wrong choice is made]
-Options:
-| Option | Best For | Engineering Trade-off |
-|--------|----------|----------------------|
-Ask: "[Exact question to ask the tech lead or engineer]"
-Source: [Reference]
-
----
-
-### 🚫 NEVER DO
-
-[Hard prohibitions — patterns Claude must refuse to produce as-is]
-
-Anti-Pattern: [Name]
-What It Looks Like:
-```
-[Concrete bad example — engineering context]
-```
-Why It's Wrong: [Flow degradation | Methodology violation | Misleading | Untestable]
-Instead:
-```
-[Correct alternative — same intent, properly done]
-```
-Engineering Impact: [What breaks downstream]
-Source: [Reference]
-
----
-
-## 6. FLOW METRICS (if applicable)
-
-[Include this section only if the methodology defines measurable flow outcomes.
- Skip for methodologies that are purely structural, e.g., Team Topologies.]
-
-| Metric | Definition | What It Signals | Anti-Pattern |
-|--------|-----------|----------------|--------------|
-| [Name] | [Exact definition per {{METHODOLOGY_EDITION}}] | [Engineering signal] | [How it's gamed] |
-
----
-
+## 5. THREE-TIER GUARDRAILS  ← ✅ Always Do / ⚠️ Ask First / 🚫 Never Do
+## 6. FLOW METRICS (conditional — only if methodology defines measurable outcomes)
 ## 7. EDITION CHANGES ENGINEERS MUST KNOW
-
-[Changes in {{METHODOLOGY_EDITION}} that affect how Claude generates artifacts]
-
-Changed: [What changed]
-Before: [Old behavior or artifact pattern]
-After: [New required behavior or artifact pattern]
-Source: [Official changelog or guide diff]
-
-Deprecated: [Practice no longer valid in {{METHODOLOGY_EDITION}}]
-Replaced By: [Current correct approach]
-
----
-
 ## 8. INTEGRATION WITH ADJACENT METHODOLOGIES
-
-[How this methodology connects to others Claude might be used with simultaneously]
-
-Integrates With: [Methodology name]
-How: [Connection point — e.g., "Scrum stories feed Kanban flow board after sprint planning"]
-Conflict Risk: [Where the two methodologies contradict each other]
-Resolution: [Which takes precedence and why — cite both official sources]
-
----
-
 ## 9. SCALE BOUNDARIES
-
-[Where this methodology breaks down — critical for Claude to know when to flag limits]
-
-Works Well For: [Team size, system complexity, organizational scale]
-Breaks Down When: [Specific conditions — e.g., "Scrum degrades above 9 team members per official guide"]
-At Scale, Use Instead: [Alternative or scaling extension with source]
-
----
-
 ## 10. CONFIDENCE MAP
-
-[Claude's operating confidence for different artifact types in this skill]
-
-HIGH — Generate autonomously:
-- [Artifact type]: [Why high confidence]
-
-MEDIUM — Generate with user confirmation:
-- [Artifact type]: [What to confirm before generating]
-
-LOW — Do not generate without explicit human design input:
-- [Artifact type]: [Why — and what to ask instead]
-
-STOP — Escalate to human before proceeding:
-- [Condition]: [Why this requires human judgment]
-
----
-
 ## 11. SOURCE BIBLIOGRAPHY
-
-[All sources used, tagged by tier]
-
-[Tier 1] [Title] — [URL] — [Edition/Date]
-[Tier 2] [Author, Title] — [URL or ISBN] — [Publication Date]
-[Tier 3] [Study name] — [URL] — [Date]
+## Verification Loop
+## External Resources
 ```
 
 ---
@@ -354,6 +234,11 @@ STRUCTURE
 [ ] Section 2 has clear trigger conditions and explicit out-of-scope exclusions
 [ ] Section 4 has at least one complete, copy-ready artifact template
 [ ] Every template uses engineering-calibrated language — no pure business language
+[ ] Three-tier guardrails complete (✅ Always Do, ⚠️ Ask First, 🚫 Never Do all present)
+[ ] blueprints/evaluation-scenarios.md created with ≥3 scenarios
+[ ] blueprints/evaluation-scenarios.md linked from Quick Navigation
+[ ] External Resources section present with dated links
+[ ] Verification Loop section present
 
 CORRECTNESS
 [ ] Every mandatory element in Section 4 cites a Tier 1 or Tier 2 source
@@ -374,6 +259,7 @@ USABILITY
 [ ] Quality gates are evaluable by an engineer — no abstract or business-only language
 [ ] SKILL.md is self-contained — no external references required to use it
 [ ] Review date is set to 18 months from generation — methodology guidance expires
+[ ] Generated SKILL.md is under 500 lines
 ```
 
 ---
@@ -391,12 +277,15 @@ Produce the following output, in this order:
    > |---------|--------|------|------------|
 
 3. **SKILL.md** (Phase 3 output — complete file, ready to save)
-   > Save as: `SKILL_{{METHODOLOGY_NAME}}_{{METHODOLOGY_EDITION}}.md`
+   > Save as: `.claude/skills/<skill-name>/SKILL.md`
 
-4. **Validation Report** (Phase 4 output — checklist with pass/fail per item)
+4. **`blueprints/evaluation-scenarios.md`** (≥3 scenarios in house JSON format)
+   > Save as: `.claude/skills/<skill-name>/blueprints/evaluation-scenarios.md`
+
+5. **Validation Report** (Phase 4 output — checklist with pass/fail per item)
    > Flag any item that does not pass — do not silently skip failures.
 
-5. **Research Gaps** (any Tier 5 rejections or LOW confidence items that
+6. **Research Gaps** (any Tier 5 rejections or LOW confidence items that
    could not be resolved — with follow-up instructions)
    > ```
    > Gap: [What could not be confirmed at Tier 1–3]
@@ -404,6 +293,24 @@ Produce the following output, in this order:
    > Default: [Conservative behavior until gap is resolved]
    > Follow-up: [Where to find the authoritative answer]
    > ```
+
+---
+
+## Verification Loop
+
+After generating a SKILL.md, the agent MUST verify:
+
+```
+[ ] Generated SKILL.md is < 500 lines (wc -l .claude/skills/<skill-name>/SKILL.md)
+[ ] blueprints/evaluation-scenarios.md exists at .claude/skills/<skill-name>/blueprints/
+[ ] Quick Navigation in SKILL.md links to ./blueprints/evaluation-scenarios.md
+[ ] Three-tier section is present and all three tiers (✅/⚠️/🚫) are populated
+[ ] External Resources section is present with at least one dated official link
+[ ] Verification Loop section is present in the generated SKILL.md
+[ ] Every 🚫 Never Do item has an inline ✅ correct alternative
+[ ] Phase 4 validation checklist has no unresolved failures
+[ ] Flow Metrics section is present ONLY if methodology defines measurable outcomes
+```
 
 ---
 
@@ -424,4 +331,22 @@ Expected output:
 - Artifact templates: Kanban board design, WIP limit calculation, cycle time SLA template
 - Key guardrails: WIP limits are mandatory (not optional), columns represent work states
   (not team states), cycle time must be measured (not estimated)
-```
+- `blueprints/evaluation-scenarios.md` created with ≥3 scenarios and linked
+
+---
+
+## External Resources
+
+### Methodology Governing Bodies & Official Guides
+- [Scrum Guide 2020](https://scrumguides.org/scrum-guide.html) — Schwaber & Sutherland
+- [Kanban Guide 2020](https://kanban.university/kanban-guide/) — Kanban University
+- [SAFe 6.0](https://scaledagileframework.com) — Scaled Agile, Inc.
+- [BPMN 2.0.2 Specification](https://www.omg.org/spec/BPMN/2.0.2/) — OMG
+- [DORA State of DevOps](https://dora.dev/research/) — DORA Research Program
+- [Team Topologies](https://teamtopologies.com) — Skelton & Pais (official site)
+- [Shape Up](https://basecamp.com/shapeup) — Basecamp / Ryan Singer
+
+### Skill Authoring Standards
+- [authoring-agent-skills SKILL.md](../authoring-agent-skills/SKILL.md) — House conventions for generated SKILL.md files
+- [TEMPLATE.SKILL.md](../../templates/skills/TEMPLATE.SKILL.md) — Canonical scaffold for generated output
+- [skill-frontmatter rules](../../rules/skill-frontmatter.md) — YAML frontmatter requirements
