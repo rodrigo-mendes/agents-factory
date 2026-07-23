@@ -12,7 +12,7 @@ Todos seguem o padrão do `TEMPLATE.GENERATOR.prompt.md`.
 |--------|-------|--------|---------|
 | `skill-creator` | Qualquer pesquisa | SKILL.md | Genérico |
 | `terraform-instructions-compiler` | Pesquisa Terraform | .instructions.md (múltiplos) | Terraform |
-| `archtecture-approches-skill-generator` | Pesquisa de arquitetura | SKILL.md | Arquitetura |
+| `architecture-approaches-skill-generator` | Pesquisa de arquitetura | SKILL.md | Arquitetura |
 | `methodologies-skill-generator` | Pesquisa de metodologia | SKILL.md | Metodologias |
 
 ---
@@ -101,16 +101,16 @@ Compilador interativo que extrai best practices de pesquisa Terraform e gera mú
 
 ---
 
-## 3. archtecture-approches-skill-generator
+## 3. architecture-approaches-skill-generator
 
-> **Arquivo**: `.github/prompts/archtecture-approches-skill-generator.prompt.md`
+> **Arquivo**: `.github/prompts/architecture-approaches-skill-generator.prompt.md`
 
 ### Descrição
 Gera SKILL.md a partir de pesquisa de metodologia de arquitetura, aplicando o padrão three-tier com foco em decisões arquiteturais.
 
 ### Invocação
 ```
-@workspace /archtecture-approches-skill-generator
+@workspace /architecture-approaches-skill-generator
 ```
 
 ### Workflow Interno
@@ -176,7 +176,7 @@ Gera SKILL.md a partir de pesquisa de metodologia de engenharia/requisitos, estr
 | `technical-framework-researcher` | `skill-creator` |
 | `technical-framework-researcher-terraform` | `terraform-instructions-compiler` |
 | `terraform-engineering-best-practices-researcher` | `terraform-instructions-compiler` |
-| `architecture-methodology-researcher` | `archtecture-approches-skill-generator` |
+| `architecture-methodology-researcher` | `architecture-approaches-skill-generator` |
 | `cloud-architecture-researcher` | `skill-creator` |
 | `business-domain-researcher` | `skill-creator` |
 | `requirements-methodology-researcher` | `methodologies-skill-generator` |

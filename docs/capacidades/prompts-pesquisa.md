@@ -161,7 +161,7 @@ Documento de pesquisa com:
 - Skill: `researching-technical-frameworks`
 
 ### Próximos Passos
-Após a pesquisa → usar `archtecture-approches-skill-generator` para compilar em SKILL.md
+Após a pesquisa → usar `architecture-approaches-skill-generator` para compilar em SKILL.md
 
 ---
 

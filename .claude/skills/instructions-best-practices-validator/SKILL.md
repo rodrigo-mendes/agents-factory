@@ -15,9 +15,49 @@ Generar un análisis de calidad y adherencia a mejores prácticas de archivos `.
 - **Biblioteca de Ejemplos**: https://docs.github.com/en/copilot/tutorials/customization-library/custom-instructions
 - **Equipo**: Convenciones establecidas en `.claude/rules/` (Claude Code) o `.github/instructions/` (Copilot) del repositorio actual
 
+## Quick Navigation
+
+- **[Evaluation Scenarios](./blueprints/evaluation-scenarios.md)** — 3 escenarios: canónico, edge, misuso
+- **[Verification Loop](#verification-loop)** — Auto-validación antes de guardar
+- **[External Resources](#external-resources)** — Documentación oficial de la que derivan los criterios
+
+---
+
 ## Instrucciones para Agente
 
 Actúa como un Custom Instructions Quality Specialist. Evalúa cada `.instructions.md` contra los criterios oficiales de GitHub/VS Code y las convenciones del equipo.
+
+---
+
+## Blueprints & Guardrails
+
+### ✅ Always Do
+
+- **Leer al menos 3 archivos de instrucción existentes como referencia de estilo** antes de emitir cualquier hallazgo — establece la línea base de convenciones del equipo.
+- **Confirmar que `applyTo` existe en cada archivo** — su ausencia es el problema más crítico; sin él, las instrucciones nunca se aplican automáticamente.
+- **Citar el criterio exacto y el archivo en cada hallazgo** — cada problema debe referenciar el criterio (A1, B2, E3, etc.) y el nombre del archivo afectado.
+- **Analizar overlaps y gaps en los patrones `applyTo`** — el análisis de cobertura de patrones es una sección obligatoria del informe.
+- **Diferenciar criterios oficiales (A-D) de convenciones de equipo (E)** en tablas separadas — permite priorizar correctamente.
+- **Confirmar la existencia de archivos referenciados** — si un archivo `.instructions.md` referencia otro archivo o skill, verificar que ese target existe.
+
+### ⚠️ Ask First
+
+- **`applyTo: "**"` global** — si se detecta un patrón excesivamente amplio, preguntar si es intencional (ej. instrucciones globales de proyecto) antes de marcarlo como violación.
+- **Instrucciones en idioma mixto** — si el repositorio tiene instrucciones en múltiples idiomas, preguntar cuál es el idioma canónico antes de evaluar consistencia.
+- **Archivos con >300 líneas** — cuando un archivo supera las 300 líneas, preguntar si el usuario quiere solo el diagnóstico o también una propuesta de división.
+- **Conflictos entre archivos con el mismo `applyTo`** — antes de marcar como violación, preguntar si las instrucciones conflictivas son intencionales (ej. una sobreescribe a la otra por orden de carga).
+
+### 🚫 Never Do
+
+- **Nunca omitir el análisis de `applyTo`** — es el campo más crítico; un archivo sin `applyTo` nunca se activa automáticamente. ✅ Siempre verificar presencia, validez del glob, y especificidad del patrón.
+- **Nunca marcar una regla como buena solo porque existe** — la calidad depende de que incluya el razonamiento ("Use X because Y"). ✅ Verificar que cada regla explica el POR QUÉ existe.
+- **Nunca reportar una violación sin citar el archivo y la sección** — produce output inaccionable. ✅ Nombrar el archivo exacto (ej. `terraform-standards.instructions.md`) y la sección o línea.
+- **Nunca ignorar conflictos entre archivos** — instrucciones conflictivas con el mismo `applyTo` producen comportamiento no determinista. ✅ Listar cada par conflictivo con sus patrones y las reglas que se contradicen.
+- **Nunca generar el informe sin la sección "Análisis de applyTo Patterns"** — overlaps y gaps son igual de importantes que los hallazgos por archivo. ✅ La sección de análisis de patrones es obligatoria.
+
+---
+
+## Instrucciones de Ejecución
 
 ### Paso 1: Cargar Criterios de Referencia
 
@@ -43,7 +83,7 @@ Explora `.claude/rules/*.md` (Claude Code) o `.github/instructions/*.instruction
 
 **A2. Campo `description`**
 - Presente y no vacío
-- Máximo 1024 caracteres
+- Máximo 1536 caracteres
 - Describe QUÉ hace Y CUÁNDO se activa
 - Tercera persona (no "I help" ni "You can")
 - Suficientemente específico para matching semántico
@@ -156,7 +196,7 @@ Explora `.claude/rules/*.md` (Claude Code) o `.github/instructions/*.instruction
 
 Crea un archivo `INSTRUCTIONS_BEST_PRACTICES_REVIEW.md` con la siguiente estructura:
 
-````markdown
+```markdown
 # Análisis de Mejores Prácticas para Custom Instructions
 
 **Fecha**: [Fecha]
@@ -254,7 +294,7 @@ Crea un archivo `INSTRUCTIONS_BEST_PRACTICES_REVIEW.md` con la siguiente estruct
 
 ## Conclusiones
 [Resumen general y próximas acciones]
-````
+```
 
 ---
 
@@ -279,6 +319,18 @@ El validador debe detectar y reportar:
 
 ---
 
+## Verification Loop
+
+Antes de guardar el informe, el validador DEBE auto-verificar:
+
+1. **Conteo de archivos** — confirmar que el número de archivos evaluados en la Matriz de Cumplimiento coincide con los encontrados con `ls`/`Glob` en el directorio objetivo.
+2. **Sección applyTo obligatoria** — verificar que la sección "Análisis de applyTo Patterns" está presente con las tres subsecciones: Cobertura, Conflictos, Gaps.
+3. **Hallazgos con criterio citado** — cada ítem en "Recomendaciones por Prioridad" debe referenciar al menos un criterio (A3, B2, E1, etc.) y un archivo específico.
+4. **Links referenciados** — si el informe enlaza skills o archivos de instrucción, verificar que los paths existen antes de incluirlos.
+5. **Tablas completas** — cada archivo evaluado debe tener exactamente 13 filas de criterios oficiales (A1-A4, B1-B5, C, D1-D3) y 6 filas de equipo (E1-E6).
+
+---
+
 ## Formato de Salida
 
 - Lenguaje técnico y objetivo
@@ -287,6 +339,22 @@ El validador debe detectar y reportar:
 - Análisis de `applyTo` patterns como sección especial (overlaps, gaps, conflictos)
 - Matriz de cumplimiento para visualización rápida
 - Acciones concretas y priorizadas
+
+---
+
+## External Resources
+
+### Documentación Oficial GitHub Copilot
+- [Adding repository custom instructions for GitHub Copilot](https://docs.github.com/en/copilot/customizing-copilot/adding-repository-custom-instructions-for-github-copilot) — fuente primaria de los criterios A-D
+- [Configure custom instructions (GitHub how-to)](https://docs.github.com/en/copilot/how-tos/configure-custom-instructions) — campos `applyTo`, `excludeAgent`, y ejemplos
+- [Custom instructions library](https://docs.github.com/en/copilot/tutorials/customization-library/custom-instructions) — ejemplos canónicos por dominio
+
+### Documentación Oficial VS Code
+- [Custom instructions (VS Code)](https://code.visualstudio.com/docs/copilot/customization/custom-instructions) — best practices de concisión, razonamiento, y scope
+
+### Convenciones del Equipo
+- [skill-frontmatter rules](./../../rules/skill-frontmatter.md) — reglas de frontmatter para `.claude/rules/` y `.claude/agents/`
+- [authoring-agent-skills SKILL.md](./../authoring-agent-skills/SKILL.md) — contexto del ecosistema de skills
 
 ---
 

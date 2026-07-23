@@ -35,7 +35,7 @@ Os comandos operacionais forkam (`context: fork`) para um subagente. Os 4 subage
 | Subagente | Faz | Comandos que roteia |
 |---|---|---|
 | [framework-researcher](.claude/agents/framework-researcher.md) | pesquisa anti-alucinação (usa WebSearch/WebFetch) | `technical-framework-researcher`(+`-terraform`), `cloud-architecture-researcher`, `business-domain-researcher`, `requirements-methodology-researcher`, `architecture-methodology-researcher`, `terraform-engineering-best-practices-researcher` |
-| [skill-author](.claude/agents/skill-author.md) | gera SKILL.md / rules | `skill-creator`, `methodologies-skill-generator`, `archtecture-approches-skill-generator`, `terraform-instructions-compiler` |
+| [skill-author](.claude/agents/skill-author.md) | gera SKILL.md / rules | `skill-creator`, `methodologies-skill-generator`, `architecture-approaches-skill-generator`, `terraform-instructions-compiler` |
 | [architecture-auditor](.claude/agents/architecture-auditor.md) | audita arquitetura (consensus = 3 lentes em paralelo via tool Agent) | `audit-architecture-scope`/`flow`/`engine`/`consensus` |
 | [quality-validator](.claude/agents/quality-validator.md) | valida qualidade/aderência | `skill-best-practices-validator`, `instructions-best-practices-validator`, `agent-router-pattern-validator`, `copilot-compatibility-review` |
 

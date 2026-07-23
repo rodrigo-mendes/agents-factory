@@ -16,7 +16,7 @@ not documents for humans to read.
 ## When to use this agent
 
 Route here skill/instruction generation: `skill-creator`, `methodologies-skill-generator`,
-`archtecture-approches-skill-generator`, and `terraform-instructions-compiler`. Each is exposed as
+`architecture-approaches-skill-generator`, and `terraform-instructions-compiler`. Each is exposed as
 a `/command` that forks into this agent.
 
 ## Core Principles

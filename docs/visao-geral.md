@@ -101,7 +101,7 @@ mindmap
     Compilação
       skill-creator
       terraform-instructions-compiler
-      archtecture-approches-skill-generator
+      architecture-approaches-skill-generator
       methodologies-skill-generator
     Validação
       copilot-compatibility-review

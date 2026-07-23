@@ -20,6 +20,15 @@ disable-model-invocation: true
 
 ---
 
+## Quick Navigation
+
+- **[Cloud Patterns & Reference](./blueprints/research-scope-patterns.md)** — Cloud-native design, security, networking, landing zones, service equivalence map
+- **[Output Template](./blueprints/output-format.md)** — Full research document structure with all required sections
+- **[Evaluation Scenarios](./blueprints/evaluation-scenarios.md)** — 4 scenarios: canonical WAF research, multi-cloud edge case, misuse/ADR-authoring, anti-pattern trap
+- **[External Resources](#external-resources)** — Official framework docs and architecture centers this skill relies on
+
+---
+
 # Role & Mission
 
 Senior Cloud Architecture Researcher & AI Safety Engineer specializing in **`{{CLOUD_PROVIDER}} {{ARCHITECTURE_DOMAIN}} ({{TARGET_EDITION}})`** — building a hallucination-proof cloud architecture knowledge base that enables production of architecture decisions, reference patterns, and service composition strategies with correctness, completeness, and trade-off transparency guarantees for **cloud architects and tech leads**.
@@ -180,19 +189,66 @@ Anti-Pattern: [What NOT to do]
 Why: [Security | Reliability | Cost | Compliance reason — cite framework pillar]
 Risk Level: [CRITICAL | HIGH | MEDIUM]
 Blast Radius: [What is impacted if this anti-pattern is present]
-Instead:
-  [Correct architecture pattern with {{CLOUD_PROVIDER}} service names]
+❌ Wrong:
+  [Concrete wrong architecture decision or config — use exact {{CLOUD_PROVIDER}} service names,
+   e.g., "Single-AZ RDS instance with no Multi-AZ standby" or "S3 bucket with Block Public Access disabled"]
+✅ Correct:
+  [Concrete correct architecture pattern with exact {{CLOUD_PROVIDER}} service names,
+   e.g., "Multi-AZ RDS with automatic failover standby in second AZ" or "S3 bucket with Block Public Access enabled at account level via SCP"]
 Detection:
   [How to detect this anti-pattern — audit tool, CLI command, or console check]
 Impact: [Data breach | Service outage | Cost overrun | Compliance violation | Cascading failure]
 Source: [Official security/compliance documentation URL]
 ```
 
+> Every Never Do entry **must** include a side-by-side ❌ wrong / ✅ correct example using exact
+> `{{CLOUD_PROVIDER}}` service names. Do not leave prohibitions as prose only — the wrong pattern
+> and the correct alternative must both be concrete and named.
+
 ---
 
 ## Research Scope §3–10 — Patterns, Security, Networking & Reference
 
 Cloud-native design, segurança, operações, migração, networking, landing zones, service equivalence map e diferenciais por provider (AWS/GCP/Azure/OCI). Detalhes em [Cloud Patterns & Reference](./blueprints/research-scope-patterns.md).
+
+---
+
 # Output Format
 
 Template de saída (Metadata, Executive Summary, Glossary, Architecture Guardrails, design patterns, reference architectures, service map, differentiators, scenario coverage). Estrutura completa em [Output Template](./blueprints/output-format.md).
+
+---
+
+## External Resources
+
+### Official Architecture Frameworks (what this skill relies on)
+
+| Provider | Architecture Framework | URL |
+|----------|----------------------|-----|
+| **AWS** | Well-Architected Framework | https://docs.aws.amazon.com/wellarchitected/ |
+| **AWS** | Architecture Center | https://aws.amazon.com/architecture/ |
+| **AWS** | Prescriptive Guidance | https://aws.amazon.com/prescriptive-guidance/ |
+| **Google Cloud** | Architecture Framework | https://cloud.google.com/architecture/framework |
+| **Google Cloud** | Architecture Center | https://cloud.google.com/architecture |
+| **Azure** | Well-Architected Framework | https://learn.microsoft.com/en-us/azure/well-architected/ |
+| **Azure** | Cloud Adoption Framework (CAF) | https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ |
+| **Azure** | Architecture Center | https://learn.microsoft.com/en-us/azure/architecture/ |
+| **Oracle Cloud (OCI)** | Best Practices Framework | https://docs.oracle.com/en-us/iaas/Content/cloud-adoption-framework/ |
+| **Oracle Cloud (OCI)** | Reference Architectures | https://docs.oracle.com/solutions/ |
+
+### Provider Blogs & Whitepapers (secondary sources — cite with date)
+
+- [AWS Blog — Architecture](https://aws.amazon.com/blogs/architecture/)
+- [Google Cloud Blog — Architecture](https://cloud.google.com/blog/topics/solutions-how-tos)
+- [Azure Blog — Architecture](https://techcommunity.microsoft.com/category/azure/blog/azurearchitectureblog)
+- [OCI Blog](https://blogs.oracle.com/cloud-infrastructure/)
+
+### Recognized Architecture Books (tertiary — community-verified)
+
+- "Fundamentals of Software Architecture" — Mark Richards & Neal Ford
+- "Designing Data-Intensive Applications" — Martin Kleppmann (data architecture patterns)
+
+### Meta-Skills
+
+- [authoring-agent-skills SKILL.md](../authoring-agent-skills/SKILL.md) — Three-tier pattern conventions
+- [researching-technical-frameworks SKILL.md](../researching-technical-frameworks/SKILL.md) — Anti-hallucination research methodology

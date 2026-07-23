@@ -1,11 +1,21 @@
 ---
 name: skill-creator
 description: Guides generation of an Agent Skill using the authoring-agent-skills standard. Use when creating a new skill from validated research.
+argument-hint: "Path to research file (e.g. StoryBeat/research_Stripe_Java_v33.md)"
 context: fork
 agent: skill-author
 disable-model-invocation: true
 ---
 # PROMPT: Skill Generator for Programming Agents
+
+## Quick Navigation
+
+- **[Critical Requirements](#critical-requirements)** — Three-tier + Essential Sections mandates for generated output
+- **[Evaluation Scenarios](./blueprints/evaluation-scenarios.md)** — 3 scenarios: canonical, edge, misuse
+- **[Quality Gates](#quality-gates-final-checklist)** — Final checklist before delivering output
+- **[External Resources](#external-resources)** — Reference links
+
+---
 
 ## How This Prompt Works with authoring-agent-skills
 
@@ -29,13 +39,13 @@ This is an **orchestration prompt** for agents. It guides you through the workfl
 ---
 
 ## Role
-Copilot Configuration Architect
+Skill Author
 
 ## Context
-You have received technical documentation for **{{SYSTEM_OR_TECH_NAME}} v{{TARGET_VERSION}}**. Your mission is to transform this research into a production-grade GitHub Copilot Agent Skill following the [official Claude best practices](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices) and the team conventions in **authoring-agent-skills**.
+You have received technical documentation in the research file provided as `$ARGUMENTS`. Derive the technology name, target version, and skill name from the research file path and its frontmatter (by convention: `research_<TechName>_<Version>.md`). Your mission is to transform this research into a production-grade Claude Code Agent Skill following the [official Claude best practices](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices) and the team conventions in **authoring-agent-skills**.
 
-**Input**: Research file in {{FILE_RESULT}}
-**Output**: Complete `SKILL.md` ready for `.claude/skills/{{SKILL_NAME}}/`
+**Input**: Research file at `$ARGUMENTS`
+**Output**: Complete `SKILL.md` saved at `.claude/skills/<skill-name>/SKILL.md`
 
 ### Key Principle: Conciseness
 The context window is a shared resource. For every piece of content, ask:
@@ -55,13 +65,13 @@ Read `.claude/skills/authoring-agent-skills/SKILL.md` before proceeding.
 
 **Check that you have loaded**:
 - [ ] Core principles (conciseness, degrees of freedom)
-- [ ] YAML frontmatter rules (name: max 64 chars, lowercase/numbers/hyphens; description: third-person, max 1024 chars)
+- [ ] YAML frontmatter rules (name: max 64 chars, lowercase/numbers/hyphens; description: third-person, max 1536 chars)
 - [ ] Three-level structure (✅⚠️🚫) — team convention
 - [ ] Progressive disclosure patterns
 - [ ] Quality checklist (official + team)
 
 ### Step 2: Process Research File
-Load {{FILE_RESULT}} and map:
+Load `$ARGUMENTS` and map:
 - "Mandatory Patterns" → ✅ Always Do
 - "Conditional Patterns" → ⚠️ Ask First  
 - "Forbidden Patterns" → 🚫 Never Do
@@ -84,14 +94,17 @@ For each pattern, determine the appropriate **degree of freedom**:
 Apply the authoring-agent-skills standards (see [File Structure](../../skills/authoring-agent-skills/SKILL.md#file-structure--three-tier-architecture)) to create the file.
 
 ### Step 4: Create Evaluation Scenarios
-Create at least 3 evaluation scenarios to test the skill:
+Create at least 3 evaluation scenarios to test the skill. Derive `<skill-name>` from the research file metadata (folder name = YAML `name`).
+
 ```json
 {
-  "skills": ["{{SKILL_NAME}}"],
+  "skills": ["<skill-name>"],
   "query": "[representative task]",
   "expected_behavior": ["[specific expected outcome 1]", "[specific expected outcome 2]"]
 }
 ```
+
+Save scenarios as `.claude/skills/<skill-name>/blueprints/evaluation-scenarios.md`. Add a Quick Navigation link in SKILL.md: `[Evaluation Scenarios](./blueprints/evaluation-scenarios.md)`.
 
 ---
 
@@ -102,8 +115,8 @@ All skills MUST follow the patterns documented in [authoring-agent-skills](../..
 
 - **Naming**: `lowercase-kebab-case`, gerund form preferred (folder = YAML name)
 - **Name constraints**: max 64 chars, lowercase letters/numbers/hyphens only, no reserved words (`anthropic`, `claude`)
-- **File**: Exactly `.claude/skills/{{SKILL_NAME}}/SKILL.md`
-- **YAML `description`**: third-person, max 1024 chars. Format: `"[Action verb] [what] with [Tech]. Use when [trigger]."`
+- **File**: Exactly `.claude/skills/<skill-name>/SKILL.md` (derive `<skill-name>` from research file)
+- **YAML `description`**: third-person, max 1536 chars. Format: `"[Action verb] [what] with [Tech]. Use when [trigger]."`
 
 ### 2. Three-Level Architecture (✅⚠️🚫)
 See [Three-Tier Architecture](../../skills/authoring-agent-skills/SKILL.md#file-structure--three-tier-architecture) in authoring-agent-skills for complete details.
@@ -136,7 +149,7 @@ See [Three-Tier Architecture](../../skills/authoring-agent-skills/SKILL.md#file-
 
 ## Output Structure
 
-The output is a complete `SKILL.md` file ready to save at `.claude/skills/{{SKILL_NAME}}/SKILL.md`.
+The output is a complete `SKILL.md` file ready to save at `.claude/skills/<skill-name>/SKILL.md` (derive `<skill-name>` from the research file path and frontmatter).
 
 **How to produce it**:
 1. Start from the canonical scaffold: [TEMPLATE.SKILL.md](../../templates/skills/TEMPLATE.SKILL.md) — it defines every required section with placeholders. Do not invent sections or omit existing ones.
@@ -162,22 +175,26 @@ Before generating output, verify against the [Quality Checklist](../../skills/au
 
 **Team Conventions**:
 - [ ] YAML `name` = folder name = kebab-case (gerund preferred)
-- [ ] All three levels (✅⚠️🚫) populated with research data
+- [ ] All three tiers (✅⚠️🚫) populated with research data — no tier may be empty
+- [ ] Every 🚫 Never Do item has an inline ✅ correct alternative (not just "don't do X")
 - [ ] Version Context section present
 - [ ] Anti-patterns have correct alternatives in code
 - [ ] Code examples are copy-paste executable
 - [ ] No absolute paths (only relative or URLs)
 - [ ] All links tested (no 404s)
-- [ ] Research bibliography linked as external resources
+- [ ] `## External Resources` section present with at least one dated official link
+- [ ] Research bibliography linked under External Resources
 
 **Evaluation**:
-- [ ] At least 3 evaluation scenarios created
+- [ ] At least 3 evaluation scenarios created and saved as `blueprints/evaluation-scenarios.md`
+- [ ] Quick Navigation in SKILL.md links to `./blueprints/evaluation-scenarios.md`
+- [ ] Scenarios cover: canonical use, edge case, and misuse/anti-pattern trap
 
 ---
 
 ## Expected Input Format
 
-The {{FILE_RESULT}} file should be the output of the research protocol containing:
+The `$ARGUMENTS` file (research file path) should be the output of the research protocol containing:
 
 ```yaml
 Metadata:
@@ -213,25 +230,41 @@ Source Bibliography:
 ## Instructions for the Agent
 
 1. **FIRST**: Load `.claude/skills/authoring-agent-skills/SKILL.md`
-2. **SECOND**: Read the research file in {{FILE_RESULT}} thoroughly
+2. **SECOND**: Read the research file at `$ARGUMENTS` thoroughly; derive `<skill-name>`, tech name, and version from its path and frontmatter
 3. **THIRD**: Map the sections of the research to the skill structure (consider degrees of freedom for each pattern)
 4. **FOURTH**: Apply authoring-agent-skills rules (official + team conventions)
-5. **FIFTH**: Generate concise, production-ready SKILL.md (under 500 lines)
-6. **SIXTH**: Create 3 evaluation scenarios
+5. **FIFTH**: Generate concise, production-ready `SKILL.md` at `.claude/skills/<skill-name>/SKILL.md` (under 500 lines)
+6. **SIXTH**: Create 3 evaluation scenarios; save as `.claude/skills/<skill-name>/blueprints/evaluation-scenarios.md`; add Quick Navigation link in SKILL.md
 7. **SEVENTH**: Perform self-verification against the quality checklist
 
-**Final Output**: Complete file ready to save in `.claude/skills/{{SKILL_NAME}}/SKILL.md`
+**Final Output** (two mandatory artifacts):
+- `.claude/skills/<skill-name>/SKILL.md`
+- `.claude/skills/<skill-name>/blueprints/evaluation-scenarios.md`
 
 ---
 
 ## Invocation Example
 
-**Context variables:**
-- `SYSTEM_OR_TECH_NAME` = "FastAPI"
-- `TARGET_VERSION` = "0.104.1"
-- `FILE_RESULT` = "./research_fastapi_v0.104.1.md"
-- `SKILL_NAME` = "fastapi-async-api"
+**Command (via `/skill-creator`):**
+```
+/skill-creator StoryBeat/research_FastAPI_v0.104.1.md
+```
 
-**Command:** "Using authoring-agent-skills, generate a skill for `fastapi-async-api` based on `./research_fastapi_v0.104.1.md`"
+The agent derives from the path: tech = `FastAPI`, version = `0.104.1`, skill name = `fastapi-async-api`.
 
-**Expected output**: Complete and functional `.claude/skills/fastapi-async-api/SKILL.md`.
+**Expected output** (two artifacts):
+- `.claude/skills/fastapi-async-api/SKILL.md`
+- `.claude/skills/fastapi-async-api/blueprints/evaluation-scenarios.md`
+
+---
+
+## External Resources
+
+### Claude Code Skill Authoring
+- [Claude Code — Agent Skills best practices](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices) — Anthropic official (current)
+- [authoring-agent-skills SKILL.md](../../skills/authoring-agent-skills/SKILL.md) — House conventions: three-tier architecture, progressive disclosure, quality checklist
+- [TEMPLATE.SKILL.md](../../templates/skills/TEMPLATE.SKILL.md) — Canonical scaffold for generated SKILL.md files
+- [skill-frontmatter rules](../../rules/skill-frontmatter.md) — YAML frontmatter requirements (name, description, allowed-tools, context, agent)
+
+### Research Input Standard
+- [researching-technical-frameworks SKILL.md](../researching-technical-frameworks/SKILL.md) — Research protocol that produces the `$ARGUMENTS` input file
