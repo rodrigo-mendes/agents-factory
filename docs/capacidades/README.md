@@ -33,7 +33,7 @@ Todas as capacidades do Agents Factory organizadas por categoria.
 | 11 | `requirements-methodology-researcher` | Prompt | Pesquisa | Pesquisa frameworks de requisitos (Scrum, SAFe) |
 | 12 | `skill-creator` | Prompt | Compilação | Gera SKILL.md a partir de pesquisa |
 | 13 | `terraform-instructions-compiler` | Prompt | Compilação | Compila pesquisa Terraform em .instructions.md |
-| 14 | `archtecture-approches-skill-generator` | Prompt | Compilação | Gera SKILL.md de metodologia de arquitetura |
+| 14 | `architecture-approaches-skill-generator` | Prompt | Compilação | Gera SKILL.md de metodologia de arquitetura |
 | 15 | `methodologies-skill-generator` | Prompt | Compilação | Gera SKILL.md de metodologia de engenharia |
 | 16 | `copilot-compatibility-review` | Prompt | Validação | Verifica compatibilidade com docs oficiais do Copilot |
 | 17 | `instructions-best-practices-validator` | Prompt | Validação | Valida .instructions.md contra best practices |

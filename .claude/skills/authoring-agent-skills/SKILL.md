@@ -15,6 +15,7 @@ description: Creates, documents, and refines Agent Skills (SKILL.md) following o
 - **[Quality Checklist](#quality-checklist)** — Validation before sharing
 - **[Template](#skill-template)** — Copy-paste starting point
 - **[Common Mistakes](#common-mistakes-vs-correct-usage)** — What to avoid
+- **[Evaluation Scenarios](./blueprints/evaluation-scenarios.md)** — Test cases to verify skill correctness
 
 **Reference**: https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices
 
@@ -59,7 +60,7 @@ Skills act as additions to models — effectiveness depends on the underlying mo
 - No XML tags, no reserved words (`anthropic`, `claude`)
 
 **`description`** (required):
-- Maximum 1024 characters, non-empty, no XML tags
+- Maximum 1536 characters, non-empty, no XML tags
 - Write in **third person** (not "I can help" or "You can use")
 - Include BOTH what the skill does AND when to use it
 
@@ -132,11 +133,13 @@ For complete rules and examples, see [Three-Tier Architecture](./blueprints/thre
 ```
 **Expected**: [output] | **Exit code**: 0
 
-### 2. Tests
+### 2. Unit Tests
 ```bash
 [exact command]
 ```
 **Expected**: [output] | **Exit code**: 0
+
+> If the research file includes a `Mocking_Protocol` section, populate test commands and expected output from it.
 
 ### 3. Integration/Health Check (if applicable)
 ```bash
@@ -389,6 +392,7 @@ Mandatory_Patterns       → ✅ Always Do
 Conditional_Patterns     → ⚠️ Ask First  
 Forbidden_Patterns       → 🚫 Never Do
 Verification_Commands    → Verification Loop
+Mocking_Protocol         → Verification Loop → "### 2. Unit Tests" step
 Source_Bibliography      → External Resources
 Metadata.Target_Version  → Version Context
 ```
@@ -425,15 +429,68 @@ Use the canonical scaffold at [TEMPLATE.SKILL.md](../../templates/skills/TEMPLAT
 
 ---
 
+## Skill Artifact Verification
+
+Run these checks on a freshly created SKILL.md before committing or sharing the skill.
+
+### 1. Line count — must stay under 500
+
+```bash
+wc -l SKILL.md
+```
+
+**Expected**: a number ≤ 500. If above 500, extract the largest section into `blueprints/`.
+
+### 2. Frontmatter has required fields
+
+```bash
+grep -E "^name:|^description:" SKILL.md | head -5
+```
+
+**Expected**: at least one `name:` line and one `description:` line both present.
+
+### 3. Three-tier headings present
+
+```bash
+grep -E "^## ✅ Always Do|^## ⚠️ Ask First|^## 🚫 Never Do" SKILL.md
+```
+
+**Expected**: all three headings found (exit code 0). Missing any tier means the guardrails are incomplete.
+
+### 4. Blueprint links resolve
+
+```bash
+grep -oE '\./blueprints/[a-zA-Z0-9_-]+\.md' SKILL.md | while read f; do
+  [ -f "$f" ] && echo "OK: $f" || echo "MISSING: $f"
+done
+```
+
+**Expected**: every line reads `OK: ./blueprints/...`. A `MISSING:` line means a linked blueprint was not created.
+
+### 5. Description within 1536 characters
+
+```bash
+awk '/^description:/{found=1} found{line=line $0} /^---$/ && found>1{exit} {found+=found>0}' SKILL.md \
+  | wc -c
+```
+
+**Expected**: output ≤ 1536. Descriptions over the limit are silently truncated by the Claude API.
+
+### 6. No absolute local paths
+
+```bash
+grep -nE '(C:\\\\|/Users/|/home/|/root/)' SKILL.md
+```
+
+**Expected**: no output (exit code 1). Any match must be replaced with a relative path or removed.
+
+---
+
 ## External Resources
 
 - [Official: Skill Authoring Best Practices](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices) — Primary reference
 - [Official: Skills Overview](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview) — Architecture and structure
 - [Three-Tier Architecture (Team)](./blueprints/three-tier-architecture.md) — ✅⚠️🚫 framework with examples
 - [Evaluation & Iteration (Official)](./blueprints/evaluation-iteration.md) — Testing and improving skills
-| **Links** | Generic link | Direct deep link:<br>`fastapi.com/async#technical` |
-| **Version** | Not mentioned | Mentioned 5x:<br>- Frontmatter<br>- Version Context<br>- Code comments<br>- Anti-patterns<br>- Final warning |
----
-
-## References
-- [GitHub Copilot Agent Skills Documentation](https://docs.github.com/en/copilot/building-copilot-extensions/building-a-copilot-agent-for-your-copilot-extension/about-agent-skills)
+- [Evaluation Scenarios (Team)](./blueprints/evaluation-scenarios.md) — Test cases: canonical, edge, misuse
+- [GitHub Copilot docs](https://docs.github.com/en/copilot/building-copilot-extensions/building-a-copilot-agent-for-your-copilot-extension/about-agent-skills) — Dual-target compatibility only; NOT authoritative for Claude Code skills

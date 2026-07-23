@@ -29,7 +29,7 @@ flowchart TD
     DOC --> COMPILE{Compilar para<br/>qual formato?}
     
     COMPILE -->|SKILL.md genérico ou serviço cloud| C1[skill-creator]
-    COMPILE -->|SKILL.md arquitetura| C2[archtecture-approches-skill-generator]
+    COMPILE -->|SKILL.md arquitetura| C2[architecture-approaches-skill-generator]
     COMPILE -->|SKILL.md metodologia| C3[methodologies-skill-generator]
     COMPILE -->|.instructions.md Terraform| C4[terraform-instructions-compiler]
     
@@ -79,7 +79,7 @@ flowchart TD
 |---------------|----------|--------|
 | Tecnologia genérica | `skill-creator` | `SKILL.md` + `blueprints/` |
 | Serviço cloud + Terraform (`technical-framework-researcher-terraform`) | `skill-creator` | `SKILL.md` de provisionamento |
-| Arquitetura (C4, DDD) | `archtecture-approches-skill-generator` | `SKILL.md` |
+| Arquitetura (C4, DDD) | `architecture-approaches-skill-generator` | `SKILL.md` |
 | Metodologia (Scrum, SAFe) | `methodologies-skill-generator` | `SKILL.md` |
 | Práticas Terraform (`terraform-engineering-best-practices-researcher`) | `terraform-instructions-compiler` | Múltiplos `.instructions.md` |
 
@@ -114,7 +114,7 @@ terraform-engineering-best-practices-researcher → terraform-instructions-compi
 
 ### Variante C: Skill de arquitetura
 ```
-architecture-methodology-researcher → archtecture-approches-skill-generator → skill-best-practices-validator
+architecture-methodology-researcher → architecture-approaches-skill-generator → skill-best-practices-validator
 ```
 
 ### Variante D: Skill de metodologia

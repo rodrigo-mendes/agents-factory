@@ -5,7 +5,9 @@ context: fork
 agent: framework-researcher
 disable-model-invocation: true
 ---
+
 # INPUT VARIABLES
+
 - `SYSTEM_OR_TECH_NAME`: [e.g., "FastAPI", "Redis", "Next.js"]
 - `TARGET_VERSION`: [e.g., "3.11", "7.2", "14.0"]
 - `OFFICIAL_URL_IF_KNOWN`: [optional]
@@ -14,21 +16,36 @@ disable-model-invocation: true
 ---
 
 # Role & Mission
-Senior Technical Researcher & AI Safety Engineer building a hallucination-proof knowledge base for {{SYSTEM_OR_TECH_NAME}} v{{TARGET_VERSION}} enabling autonomous agent operation with architectural safety guarantees.
+
+Senior Technical Researcher & AI Safety Engineer building a hallucination-proof knowledge base for
+`{{SYSTEM_OR_TECH_NAME}} v{{TARGET_VERSION}}` enabling autonomous agent operation with architectural
+safety guarantees.
 
 ## Core Principles
-1. **Version Absolutism**: Only {{TARGET_VERSION}} patterns—treat older versions as misinformation
+
+1. **Version Absolutism**: Only `{{TARGET_VERSION}}` patterns — treat older versions as misinformation
 2. **Source Hierarchy**: Official Docs > Official Blog > Verified Community > Reject All Else
 3. **Safety First**: Prioritize security anti-patterns over features
 4. **Executable Truth**: Every claim must link to verifiable documentation or runnable code
 
 ---
 
+## Quick Navigation
+
+- **[Output Format Template](./blueprints/output-format-template.md)** — Full output document structure with all sections
+- **[Evaluation Scenarios](./blueprints/evaluation-scenarios.md)** — 4 scenarios: canonical research, thin-docs edge case, misuse/out-of-scope, unversioned anti-pattern trap
+- **[Research Scope](#research-scope)** — Seven research areas (authority, patterns, migration, ecosystem, verification, mocking, production)
+- **[Output Priorities](#output-priorities)** — Ordering: security > mandatory > version-pitfalls > performance > advanced
+- **[External Resources](#external-resources)** — Official documentation this skill relies on
+
+---
+
 # Research Strategy
 
 ## Source Priority
-1. Official docs at {{OFFICIAL_URL_IF_KNOWN}}, GitHub repo, release notes
-2. Validate via Stack Overflow trends, GitHub issues for {{TARGET_VERSION}}
+
+1. Official docs at `{{OFFICIAL_URL_IF_KNOWN}}`, GitHub repo, release notes
+2. Validate via Stack Overflow trends, GitHub issues for `{{TARGET_VERSION}}`
 3. Flag content older than 12 months
 4. Conflict resolution: Official Docs → Blog → GitHub → Community
 
@@ -37,8 +54,9 @@ Senior Technical Researcher & AI Safety Engineer building a hallucination-proof 
 # Research Scope
 
 ## 1. Authority & Versioning
+
 - Locate primary official documentation
-- **Reject** patterns not validated for {{TARGET_VERSION}}
+- **Reject** patterns not validated for `{{TARGET_VERSION}}`
 - Identify release date and support/EOL timeline
 
 ## 2. Domain Complexity Assessment
@@ -51,11 +69,14 @@ Before extracting patterns, assess the domain's inherent complexity:
 | **Standard** | Multi-concern integration, moderate config | 5-6 | 3-4 | 4-5 | Multiple integrations, security considerations |
 | **Complex** | Security-critical, multi-layer, broad surface | 7-9 | 4-6 | 5-7 | Auth, encryption, multi-service, compliance |
 
-**Quality rule**: Include every pattern the domain requires. Never pad to reach a count; never omit to fit under a cap. The ranges above are guidelines — let the domain's actual complexity drive the final count.
+**Quality rule**: Include every pattern the domain requires. Never pad to reach a count; never omit
+to fit under a cap. The ranges above are guidelines — let the domain's actual complexity drive the
+final count.
 
 ## 3. Three-Tier Operational Guardrails
 
 ### ✅ Always Do: Mandatory Patterns
+
 Identify all non-negotiable standards the domain requires:
 - Required initialization, security configs, error handling
 - Essential lifecycle management (startup/shutdown)
@@ -71,6 +92,7 @@ Source: [Link]
 ```
 
 ### ⚠️ Ask First: Architectural Crossroads
+
 Identify all valid patterns where tradeoffs exist:
 - Multiple approaches exist
 - Choice depends on scale/performance/context
@@ -86,8 +108,9 @@ Source: [Link]
 ```
 
 ### 🚫 Never Do: Forbidden Patterns
+
 Identify all anti-patterns and vulnerabilities:
-- Deprecated methods in {{TARGET_VERSION}}
+- Deprecated methods in `{{TARGET_VERSION}}`
 - Known CVEs, data loss patterns, silent failures
 - Include every anti-pattern discovered — do not cap artificially
 
@@ -95,19 +118,30 @@ Identify all anti-patterns and vulnerabilities:
 ```
 Anti-Pattern: [What NOT to do]
 Why: [Security/stability reason]
-Instead: [Correct alternative with code]
+❌ Wrong:
+  [Bad code or artifact example — e.g., wrong source, wrong annotation, unsafe call]
+✅ Correct:
+  [Right code or artifact example — e.g., official source, safe pattern]
 Impact: [What breaks]
 Source: [Link]
 ```
 
-## 3. Migration Considerations
+> Every Never Do entry **must** include a side-by-side ❌ wrong / ✅ correct example. For
+> non-code domains (documentation sourcing, annotation), use concrete artifact examples (wrong-source
+> vs correct-source, wrong-annotation vs correct-annotation) rather than leaving the prohibition as
+> prose only.
+
+## 4. Migration Considerations
+
 - Breaking changes from previous version
 - Upgrade path with exact commands
 - Compatibility matrix for dependencies
 - Deprecation warnings
 
-## 4. Ecosystem Interoperability
-For each {{INTEGRATION_PARTNERS_LIST}} item:
+## 5. Ecosystem Interoperability
+
+For each `{{INTEGRATION_PARTNERS_LIST}}` item:
+
 ```
 Integration: [System ↔ Partner]
 Approach: [Library/pattern]
@@ -118,17 +152,20 @@ Issues: [Gotchas]
 Source: [Link]
 ```
 
-## 5. Executable Verification
-Exact CLI commands for:
+## 6. Executable Verification
+
+Exact CLI commands for validation. Mark every command block as representative:
 
 **Project Init**:
 ```bash
+# Representative — adapt to your environment
 [command with flags]
 # Expected: [success output]
 ```
 
 **Validation**:
 ```bash
+# Representative — adapt to your environment
 [lint command]
 [type check]
 # Expected: [passing state]
@@ -136,6 +173,7 @@ Exact CLI commands for:
 
 **Testing**:
 ```bash
+# Representative — adapt to your environment
 [run tests]
 [coverage]
 # Expected: [success criteria]
@@ -143,13 +181,15 @@ Exact CLI commands for:
 
 **Health Check**:
 ```bash
+# Representative — adapt to your environment
 [start service]
 [check health]
 [view logs]
 # Expected: [healthy state]
 ```
 
-## 6. Isolation & Mocking
+## 7. Isolation & Mocking
+
 - Official testing framework
 - Mocking approach for external dependencies
 - Ensuring isolated, deterministic tests
@@ -163,7 +203,8 @@ Guarantee: [Test independence method]
 Source: [Link]
 ```
 
-## 7. Production Considerations
+## 8. Production Considerations
+
 - Scalability boundaries and resource requirements
 - Common gotchas at scale
 - Monitoring metrics and APM integrations
@@ -173,144 +214,50 @@ Source: [Link]
 
 # Output Format
 
-Save as `research_{{SYSTEM_NAME}}_v{{TARGET_VERSION}}.md`:
+Full output document structure, section order, and field definitions are in
+**[Output Format Template](./blueprints/output-format-template.md)**.
 
-## Metadata
-```yaml
-Full_Name: [Official Name]
-Target_Version: [Version]
-Release_Date: [Date]
-Support_Status: [Active/LTS/EOL]
-Primary_Docs: [URL]
-Official_Repo: [URL]
-Research_Date: [Date]
-Domain_Complexity: [Foundational/Standard/Complex]
-```
-
-## Executive Summary
-[2-3 paragraphs: what it does, key changes in version, critical guardrails, domain complexity tier and why]
-
-## Architectural Guardrails
-
-### ✅ Mandatory Patterns
-[Pattern Name]
-- Why: [Reason]
-- Code: ```[language]\n[example]\n```
-- Source: [Link]
-
-### ⚠️ Conditional Patterns
-[Decision Point]
-- Options: [A, B, C]
-- Tradeoffs:
-
-  | Option | Optimizes | Sacrifices | Best When |
-  |--------|-----------|------------|-----------|
-
-- Agent: "Ask user [decision based on factors]"
-- Source: [Link]
-
-### 🚫 Forbidden Patterns
-[Anti-Pattern]
-```[language]
-// DON'T
-[bad code]
-```
-- Why: [Reason]
-- Instead: ```[language]\n// DO\n[good code]\n```
-- Impact: [What breaks]
-- Source: [Link]
-
-## Migration Guide
-**Breaking Changes**: [List]
-**Upgrade Steps**: [Numbered list with commands]
-**Compatibility Matrix**:
-
-| Dependency | Min | Max | Notes |
-|------------|-----|-----|-------|
-
-## Implementation Blueprint
-
-**Lifecycle**:
-```[language]
-// Init, Usage, Cleanup
-[code]
-```
-
-**Integration**: {{SYSTEM_NAME}} ↔ [Partner]
-```[language]
-[complete example]
-```
-
-## Quality Control
-
-**Verification Commands**:
-```bash
-# Init, Lint, Test, Health
-[commands with expected outputs]
-```
-
-**Mocking**:
-```[language]
-[test example with mocking]
-```
-
-## Production Readiness
-- **Performance**: [Latency, throughput, resources]
-- **Scalability**: [Vertical/horizontal limits]
-- **Monitoring**: [Critical metrics checklist]
-- **Security**: [Hardening checklist]
-
-## Reference Implementations
-- [Official examples with URLs]
-- [Canonical patterns]
-- [Educational resources]
-
-## Source Bibliography
-**Primary**: [Official docs, blog, release notes with URLs and dates]
-**Validation**: [Stack Overflow, GitHub issues with relevance]
-**All Deep-Links**: [Complete organized list]
-
-## Completion Checklist
-- [ ] Domain complexity tier assessed and documented
-- [ ] All scope areas cited
-- [ ] Pattern counts driven by domain needs (not template minimums)
-- [ ] Every anti-pattern has alternative
-- [ ] All CLI commands validated/marked
-- [ ] Integration examples complete
-- [ ] Sources dated and linked
-- [ ] Security documented
-- [ ] 1+ copy-paste working example
-
-## Research Gaps
-```
-Gap: [What's missing]
-Impact: [Effect on safety]
-Workaround: [Temporary approach]
-Follow-up: [Where to check]
-```
-
-## Agent Operation Notes
-- **High Confidence**: [Can execute without asking]
-- **Medium**: [Should validate]
-- **Low**: [Must ask human]
-- **Edge Cases**: [When to pause]
-- **Emergency Stop**: [Halt conditions]
+Save as `research_{{SYSTEM_NAME}}_v{{TARGET_VERSION}}.md`.
 
 ---
 
 # Output Priorities
-1. 🚨 Security vulnerabilities & anti-patterns
-2. ✅ Mandatory patterns
-3. ⚠️ Version-specific pitfalls
-4. 📈 Performance optimization
-5. 🎯 Advanced patterns
+
+1. Security vulnerabilities & anti-patterns
+2. Mandatory patterns
+3. Version-specific pitfalls
+4. Performance optimization
+5. Advanced patterns
 
 # Validation
+
 Before finalizing:
 1. Code examples syntactically valid
-2. CLI commands specify output/exit codes
-3. Forbidden patterns have alternatives
+2. CLI commands specify output/exit codes and carry `# Representative — adapt to your environment`
+3. Every Forbidden pattern has a side-by-side ❌ / ✅ alternative
 4. Links tested (no 404s)
 5. Versions explicitly confirmed
+6. Research Gaps section populated for any unverified claims
 
 ---
+
+## External Resources
+
+### Skill-Level References (what this skill itself relies on)
+
+- [authoring-agent-skills SKILL.md](../authoring-agent-skills/SKILL.md) — Three-tier pattern
+  authoring conventions used by this research workflow
+- [researching-technical-frameworks SKILL.md](../researching-technical-frameworks/SKILL.md) —
+  Meta-skill for anti-hallucination research methodology
+
+### Source Hierarchy Guidance
+
+- **Official docs first**: always start at the framework's own documentation site and GitHub repo
+- **Version-pinned searches**: append version number to all searches; filter GitHub issues by tag
+- **Age limit**: reject sources older than 12 months unless they document the current stable version
+- **Conflict resolution**: Official Docs → Official Blog → GitHub Issues → Verified Community → Reject
+
+### Quality Validators
+
+- `/skill-best-practices-validator` — validate the generated SKILL.md output
+- `/instructions-best-practices-validator` — validate any rules/instructions generated from research

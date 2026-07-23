@@ -74,8 +74,54 @@ Used to verify that the skill activates correctly, enforces version absolutism, 
     "During research, if a source has no publication date, flags it explicitly: '[WARNING: Source undated — cannot validate currency for Kafka 3.5]'",
     "Does NOT include undated sources as authoritative references",
     "Searches for the official Kafka 3.5 release date from kafka.apache.org/downloads",
-    "Flags any community blog posts older than 12 months as 'potentially outdated — verify against official docs'",
+    "Flags any community blog posts older than 6 months as 'potentially outdated — verify against official docs'; rejects sources older than 12 months unless they document the current stable version",
     "Self-validation checklist at end of research confirms: 'Every URL includes publication date: ✅' or lists which ones are missing dates"
+  ]
+}
+```
+
+---
+
+## Scenario 5: JVM SDK — Stripe Java SDK (version absolutism + multi-artifact research)
+
+```json
+{
+  "skills": ["researching-technical-frameworks"],
+  "query": "Research the Stripe Java SDK v27 covering payment intents, webhook handling, and idempotency. Integration partners: Stripe Webhooks, Stripe API 2026-06-24.dahlia.",
+  "expected_behavior": [
+    "Asks clarifying question about research breadth (Minimal / Standard / Comprehensive) before proceeding",
+    "After user confirms scope, identifies primary sources: stripe.com/docs/api, github.com/stripe/stripe-java, mvnrepository.com entry for com.stripe:stripe-java:27.x",
+    "Pins SDK version to v27.x in every code comment — never uses 'latest' or omits version",
+    "Documents multi-artifact scope: SDK artifact (Maven GAV), Stripe API date version (2026-06-24.dahlia), and webhook secret separately",
+    "Mandatory Patterns include: STRIPE_SECRET_KEY via env var (never hardcoded), Stripe.apiVersion pinned to exact date string, idempotency key on all mutating calls",
+    "Conditional Patterns include: retry strategy (RateLimitException only vs. broader), webhook signature verification (required if webhooks in scope)",
+    "Forbidden Patterns include: hardcoded API keys, relying on SDK default API version, retrying on 400 validation errors",
+    "Webhook section documents Webhook.constructEvent() signature verification before any processing",
+    "Idempotency section documents key generation strategy and 24-hour server retention window",
+    "Output named research_Stripe-Java-SDK_v27.md with Stripe-API-version 2026-06-24.dahlia noted in metadata",
+    "All sources include publication/access dates"
+  ]
+}
+```
+
+---
+
+## Scenario 6 (Edge): Date-versioned REST API — Stripe API non-semver version absolutism
+
+```json
+{
+  "skills": ["researching-technical-frameworks"],
+  "query": "Research the Stripe API version 2026-06-24.dahlia — focus on Payment Intents and the new breaking changes from the previous version.",
+  "expected_behavior": [
+    "Recognizes this is a date-versioned API (not semver) and applies version absolutism to the exact string '2026-06-24.dahlia'",
+    "Does NOT treat the version as a date range or approximate it — pins exactly to '2026-06-24.dahlia' in all code comments",
+    "Primary source: stripe.com/docs/api and stripe.com/docs/upgrades (changelog between versions)",
+    "Documents what changed from the previous date version (breaking changes section is mandatory for date-version migrations)",
+    "Mandatory Patterns include: Stripe-Version header set to '2026-06-24.dahlia' in every API call; SDK pinned to matching SDK version",
+    "Forbidden Patterns include: omitting the version header (reverts to account default, which may differ), using approximate dates like '2026-06-*'",
+    "Flags any source referencing a different date version as out-of-scope for this research document",
+    "Output named research_Stripe-API_v2026-06-24-dahlia.md — filename reflects the full version string",
+    "Version mentioned 5+ times throughout: title, metadata, code comments, anti-patterns, final warning"
   ]
 }
 ```

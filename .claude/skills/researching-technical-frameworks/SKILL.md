@@ -1,9 +1,11 @@
 ---
 name: researching-technical-frameworks
-description: Researches technologies and frameworks to create comprehensive, hallucination-proof knowledge bases enabling skill authoring. Use when starting technical research for a new skill.
+description: "Researches technologies, frameworks, and SDKs to produce hallucination-proof research_[TECH]_v[VERSION].md documents. Use when starting technical research for a new skill, researching a version migration, or researching an SDK integration (e.g., Stripe Java SDK, Terraform AWS provider)."
 ---
 
-## Core Mission
+## Function
+Produces hallucination-proof `research_[TECH]_v[VERSION].md` documents by enforcing version absolutism, source hierarchy, and three-tier guardrails for downstream skill authoring.
+
 Transform vague technology requirements into **research_[TECH]_v[VERSION].md** documents that:
 - Prevent hallucination through official documentation validation
 - Enforce version-specific patterns
@@ -13,8 +15,10 @@ Transform vague technology requirements into **research_[TECH]_v[VERSION].md** d
 ## Quick Navigation
 
 - **[Always Do Patterns](./blueprints/always-do-patterns.md)** — Mandatory implementation patterns
-- **[Ask First](#ask-first)** — Architectural decisions requiring context
+- **[Ask First](./blueprints/ask-first-decisions.md)** — Architectural decisions requiring context
 - **[Never Do Patterns](./blueprints/never-do-patterns.md)** — Anti-patterns with alternatives
+- **[Integration Patterns](./blueprints/integration-patterns.md)** — SDK/library integration template
+- **[Evaluation Scenarios](./blueprints/evaluation-scenarios.md)** — Test cases: standard, edge, misuse
 - **[Research Execution Workflow](#research-execution-workflow)** — Phase-by-phase research process
 - **[Verification Loop](#verification-loop)** — Validation commands and expected outputs
 - **[External Resources](#external-resources)** — Official documentation links
@@ -28,9 +32,9 @@ Transform vague technology requirements into **research_[TECH]_v[VERSION].md** d
 - Works with: FastAPI, Terraform, Kafka, PostgreSQL, Next.js, Redis, etc.
 
 **Research Framework**: Version-Absolutism
-- Only {{TARGET_VERSION}} patterns accepted
+- Only patterns for the specified target version are accepted
 - Treat older/newer versions as separate research tasks
-- Flag every source date; reject content >12 months old
+- Flag every source date; flag if >6 months old; reject if >12 months old (unless it documents the current stable version)
 
 ⚠️ **Agent Warning**: 
 Do NOT conflate versions. Terraform 1.6 ≠ 1.7. PostgreSQL 14 ≠ 15.
@@ -46,11 +50,8 @@ For complete patterns with examples, see [Always Do Patterns](./blueprints/alway
 - **Input Variable Validation** — Validate technology name, version, and research scope before starting
 - **Source Hierarchy Enforcement** — Official docs > release notes > API references > community. Never invert
 - **Version Tagging on Every Claim** — Every code sample and behavior must specify exact version
-- **Async Context Manager** — Use correct async patterns for the target framework version
 
 ---
-
-## ⚠️ Ask First
 
 ## ⚠️ Ask First
 
@@ -77,7 +78,7 @@ C) Comprehensive guide for framework migration (Comprehensive)'"
 - Number of integration partners
 - Whether this is migration research
 
-**Source**: [Research Scope Planning](../technical-framework-researcher/SKILL.md)
+**Source**: [Ask First Decisions — Decision 1](./blueprints/ask-first-decisions.md)
 
 ### Decision: Cloud Provider for Terraform Research
 
@@ -130,14 +131,20 @@ INTEGRATION_PARTNERS_LIST=?  # Comma-separated or empty
 ```bash
 # Identify primary documentation sources
 
-## FastAPI v0.100
+## Generic Template (all technologies)
+Primary:       [OFFICIAL_DOCS_URL]
+Registry:      [PACKAGE_REGISTRY]   # pypi.org, registry.terraform.io, mvnrepository.com, etc.
+GitHub:        [REPO_URL]
+Release Notes: [RELEASE_NOTES_URL]
+
+## Example: FastAPI v0.100
 Primary: https://fastapi.tiangolo.com/
 Registry: https://pypi.org/project/fastapi/
 GitHub: https://github.com/tiangolo/fastapi/
 Release Notes: https://fastapi.tiangolo.com/release-notes/
 Changelog: https://github.com/tiangolo/fastapi/releases/tag/0.100.0
 
-## Terraform AWS Provider v5.x
+## Example: Terraform AWS Provider v5.x
 Primary: https://registry.terraform.io/providers/hashicorp/aws/latest
 Official Repo: https://github.com/hashicorp/terraform-provider-aws
 Blog: https://www.hashicorp.com/blog/
@@ -211,7 +218,7 @@ For each section of the Technical Framework Researcher prompt:
 
 [ ] All code examples tested/verified?
 [ ] Every claim links to official source?
-[ ] Sources dated (none >12 months old)?
+[ ] Sources dated (flagged if >6 months; rejected if >12 months, unless documenting current stable)?
 [ ] Version mentioned 5+ times throughout?
 [ ] Anti-patterns include correct alternatives?
 [ ] CLI commands include expected output?
@@ -322,6 +329,19 @@ research_AWS_RDS_PostgreSQL_v5.45.md
 
 ---
 
+## Integration Patterns
+
+When researching SDKs or libraries that integrate with external services, capture these generic concerns regardless of technology:
+
+- **Auth clients** — how credentials are injected (env var, secret manager, SDK config)
+- **Retries** — built-in retry policy vs. manual; which errors are retryable
+- **Webhook handling** — signature verification, idempotency key, event ordering
+- **Idempotency** — whether the API enforces it and how to implement it from the client side
+
+For the full technology-agnostic template, version-pinning rules (semver/date/channel), and a language-neutral skeleton, see [Integration Patterns Blueprint](./blueprints/integration-patterns.md).
+
+---
+
 ## Verification Loop
 
 ### Self-Validation Commands
@@ -386,15 +406,16 @@ grep -c "# ✅\|# DO" research_[TECH]_v[VERSION].md
 | **Output naming** | `research_<Tech>_<Context>_v<X.Y>.md` |
 | **Source priority** | Official docs > GitHub releases > API reference > Stack Overflow (filtered) |
 | **Version absolutism** | Target version mentioned 5+ times: title, context, code comments, anti-patterns, final warning |
-| **Research depth** | 20-30 pages covering all 3 tiers + integrations + verification |
+| **Research depth** | Scope-dependent: Minimal 5-10 / Standard 15-25 / Comprehensive 30-50 — confirm via Ask First Decision 1 |
 | **Code examples** | 3+ working, commented, version-tagged |
 | **Every claim** | Must trace to official source with publication date |
 
 ## External Resources
 
-### Research Prompts
-- [Technical Framework Researcher](../technical-framework-researcher/SKILL.md) - Generic research
-- [Technical Framework Researcher - Terraform](../technical-framework-researcher-terraform/SKILL.md) - IaC research
+### Downstream Commands
+These commands invoke this skill and consume its `research_[TECH]_v[VERSION].md` output — they are not reference inputs to this skill.
+- [Technical Framework Researcher](../technical-framework-researcher/SKILL.md) - Generic research entry point
+- [Technical Framework Researcher - Terraform](../technical-framework-researcher-terraform/SKILL.md) - IaC research entry point
 
 ### Skill Authoring
 - [Skill Author Specialist](../authoring-agent-skills/SKILL.md) - Transforms research into skills
@@ -414,7 +435,7 @@ grep -c "# ✅\|# DO" research_[TECH]_v[VERSION].md
 
 ### High Confidence (Execute without asking)
 - Input validation (reject generic inputs)
-- Source date checking (flag >12 months old)
+- Source date checking (flag if >6 months; reject if >12 months, unless documenting current stable version)
 - Version tagging on every claim
 - Extraction of mandatory/conditional/forbidden patterns
 - Structure validation (3 tiers, metadata, bibliography)

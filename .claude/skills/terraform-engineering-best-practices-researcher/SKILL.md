@@ -17,7 +17,20 @@ disable-model-invocation: true
 
 ---
 
+## Quick Navigation
+
+- **[Project & Modules](./blueprints/research-scope-project-modules.md)** — Repository layout, module types, interface, composition
+- **[Environments & State](./blueprints/research-scope-environments-state.md)** — Isolation, backend, segmentation, recovery
+- **[CI/CD & Testing](./blueprints/research-scope-cicd-testing.md)** — Pipeline architecture, test pyramid, native test framework
+- **[Quality, Advanced & Governance](./blueprints/research-scope-quality-advanced-governance.md)** — Naming, DRY, multi-account, change control, compliance
+- **[Output Template](./blueprints/output-format.md)** — Full research document structure
+- **[Evaluation Scenarios](./blueprints/evaluation-scenarios.md)** — 4 scenarios: canonical, edge case, misuse, anti-pattern trap
+- **[External Resources](#external-resources)** — Official documentation this skill relies on
+
+---
+
 # Role & Mission
+
 Senior Infrastructure Engineer & AI Safety Architect building a hallucination-proof knowledge base for **Terraform v{{TERRAFORM_VERSION}} engineering best practices** — covering project organization, module design, environment strategy, CI/CD pipelines, testing, governance, and team collaboration patterns for **{{CLOUD_PROVIDER}}** workloads at **{{PROJECT_SCALE}}** scale with **{{TEAM_SIZE}}** team.
 
 ## Core Principles
@@ -120,12 +133,18 @@ Anti-patterns that cause state corruption, security breaches, or operational fai
 ```
 Anti-Pattern: [What NOT to do]
 Why: [Security | State corruption | Operational risk]
-Instead:
-  [Correct pattern with code]
+❌ Wrong:
+  [Bad HCL, bad CLI invocation, or bad CI config — concrete artifact, not prose]
+✅ Correct:
+  [Right HCL, CLI invocation, or CI config with brief explanation]
 Impact: [What breaks]
 Severity: [CRITICAL | HIGH | MEDIUM]
 Source: [Link]
 ```
+
+> Every Never Do entry **must** include a side-by-side ❌ wrong / ✅ correct example. For
+> workflow anti-patterns (e.g., apply without plan, force-unlock misuse), use concrete CLI
+> commands or CI YAML snippets rather than prose-only prohibitions.
 
 ---
 
@@ -179,11 +198,55 @@ Follow-up: [Where to verify]
 5. 🎯 Scale-appropriate governance patterns
 
 # Validation
+
 Before finalizing:
 1. Directory structures are complete and consistent
 2. Module examples follow Registry standards
 3. CI/CD pipelines are syntactically valid
 4. All HCL examples pass `terraform fmt` conventions
-5. Anti-patterns include severity ratings
-6. Recommendations are proportional to {{TEAM_SIZE}} and {{PROJECT_SCALE}}
-7. All sources are dated and version-specific to v{{TERRAFORM_VERSION}}
+5. Every Never Do entry has ❌ wrong / ✅ correct side-by-side (not prose only)
+6. Anti-patterns include severity ratings
+7. Recommendations are proportional to `{{TEAM_SIZE}}` and `{{PROJECT_SCALE}}`
+8. All sources are dated and version-specific to v`{{TERRAFORM_VERSION}}`
+
+---
+
+## External Resources
+
+### HashiCorp Official Documentation
+
+- [Terraform Language Documentation](https://developer.hashicorp.com/terraform/language)
+- [Terraform CLI Documentation](https://developer.hashicorp.com/terraform/cli)
+- [Terraform Best Practices Guide](https://developer.hashicorp.com/terraform/cloud-adopt/best-practices)
+- [Terraform Registry — Module Standards](https://developer.hashicorp.com/terraform/registry/modules/publish)
+- [Terraform native test framework](https://developer.hashicorp.com/terraform/language/tests)
+- [HashiCorp Learn — Terraform](https://developer.hashicorp.com/terraform/tutorials)
+
+### Recognized IaC Books (source tier: community-verified)
+
+- "Terraform: Up & Running" — Yevgeniy Brikman (cite edition matching `{{TERRAFORM_VERSION}}`)
+- "Infrastructure as Code" — Kief Morris (patterns and practices reference)
+
+### Community Reference Architectures (source tier: verified community)
+
+- [Cloud Posse reference architecture](https://github.com/cloudposse) — >1 k stars, actively maintained
+- [Gruntwork / Terragrunt documentation](https://terragrunt.gruntwork.io/) — when `TOOLING_PREFERENCES` includes Terragrunt
+
+### Static Analysis & Testing Tools
+
+- [tfsec — security scanner](https://github.com/aquasecurity/tfsec)
+- [tflint — Terraform linter](https://github.com/terraform-linters/tflint)
+- [Checkov — policy-as-code](https://www.checkov.io/)
+- [Terratest — Go testing framework](https://terratest.gruntwork.io/)
+- [Infracost — cost estimation](https://www.infracost.io/)
+
+### CI/CD Platform Docs (cite when `TOOLING_PREFERENCES` specifies them)
+
+- [Atlantis — Terraform pull request automation](https://www.runatlantis.io/docs/)
+- [Spacelift documentation](https://docs.spacelift.io/)
+- [Terraform Cloud / HCP Terraform](https://developer.hashicorp.com/terraform/cloud-docs)
+
+### Meta-Skills
+
+- [authoring-agent-skills SKILL.md](../authoring-agent-skills/SKILL.md) — Three-tier pattern conventions
+- [researching-technical-frameworks SKILL.md](../researching-technical-frameworks/SKILL.md) — Anti-hallucination research methodology

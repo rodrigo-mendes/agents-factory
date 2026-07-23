@@ -90,7 +90,7 @@ Research becomes useless for skill authoring (incompatible patterns, outdated do
 4. 🚫 **REJECTED**
    - Medium articles (no fact-checking)
    - Reddit (opinion-based)
-   - Outdated (>12 months old)
+   - Flagged if >6 months old; rejected if >12 months old (unless documenting current stable version)
    - Tutorials without version tags
    - ChatGPT/LLM generated content
 
@@ -104,7 +104,7 @@ Prevents AI hallucinations by restricting sources to verifiable, authoritative c
 **Failure if omitted**: 
 Research mixes official with opinion content → skills contain false patterns.
 
-**Source**: [AI Safety Research - Hallucination Prevention](https://research.anthropic.com/long-context)
+**Source**: Team convention — Source Hierarchy principle in CLAUDE.md ("doc oficial/registry > blog oficial > exemplos oficiais > comunidade verificada"). No external URL; this is a factory-level guardrail, not a published paper.
 
 ### Pattern: Version Tagging on Every Claim
 
@@ -113,9 +113,11 @@ Research mixes official with opinion content → skills contain false patterns.
 ```markdown
 # ✅ CORRECT: Version-tagged code
 
-## Pattern: Async Context Manager
+## Version-Specific API Pattern (Example: FastAPI lifespan)
 **Version**: FastAPI v0.100+ (Changed in October 2023)
 **Breaking**: In FastAPI v0.99, use `startup`/`shutdown` events (deprecated)
+# This is an illustration of how version-specific API changes must be tagged.
+# Apply the same discipline to any technology: JVM SDKs, REST APIs, IaC providers, etc.
 
 ```python
 # ✅ FastAPI v0.100+ ONLY
