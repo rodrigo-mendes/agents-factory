@@ -4,6 +4,8 @@ description: "Integrates [STANDARD_NAME] skills from .github/skills/ for [LANGUA
 applyTo: "**/*.[extension]"
 ---
 
+> ⚙️ **Template tecnologia-agnóstico.** Substitua TODOS os `[PLACEHOLDERS]`. Nomes em `e.g.`/`[e.g., ...]` são apenas exemplos ilustrativos — não são padrões nem defaults desta fábrica.
+
 ## ⚠️ Check Prompts First!
 
 Before loading skills directly, check if a specialized prompt exists for the user's request:

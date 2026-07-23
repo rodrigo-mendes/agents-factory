@@ -4,6 +4,8 @@ agent: [advisory-agent-name]
 argument-hint: '[HINT about what context the user should provide]'
 ---
 
+> ⚙️ **Template tecnologia-agnóstico.** Substitua TODOS os `[PLACEHOLDERS]`. Nomes em `e.g.`/`[e.g., ...]` são apenas exemplos ilustrativos — não são padrões nem defaults desta fábrica.
+
 # Design [DOMAIN]
 
 **Skill**: `[design-skill-name]`

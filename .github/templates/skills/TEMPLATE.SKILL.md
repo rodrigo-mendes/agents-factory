@@ -3,6 +3,8 @@ name: [verbing-tech-task]
 description: "[Action verb] [what] with [Tech] v[X.Y]+. Use when [trigger context]."
 ---
 
+> ⚙️ **Template tecnologia-agnóstico.** Substitua TODOS os `[PLACEHOLDERS]`. Nomes em `e.g.`/`[e.g., ...]` são apenas exemplos ilustrativos — não são padrões nem defaults desta fábrica.
+
 ## Function
 Specialist in [SPECIALTY] for [TECHNOLOGY/FRAMEWORK] v[VERSION]
 

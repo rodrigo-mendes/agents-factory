@@ -2,6 +2,8 @@
 description: 'Senior Technical Researcher building a hallucination-proof knowledge base for [SYSTEM_OR_TECH_NAME] v[TARGET_VERSION].'
 ---
 
+> ⚙️ **Template tecnologia-agnóstico.** Substitua TODOS os `[PLACEHOLDERS]`. Nomes em `e.g.`/`[e.g., ...]` são apenas exemplos ilustrativos — não são padrões nem defaults desta fábrica.
+
 # INPUT VARIABLES
 - `SYSTEM_OR_TECH_NAME`: [e.g., "FastAPI", "Redis", "OCI Functions Java FDK"]
 - `TARGET_VERSION`: [e.g., "3.11", "7.2", "1.1.x"]

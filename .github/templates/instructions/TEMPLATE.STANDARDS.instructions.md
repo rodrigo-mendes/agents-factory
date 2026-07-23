@@ -4,6 +4,8 @@ description: "[LANGUAGE] coding standards for [FRAMEWORK] v[VERSION] — naming,
 applyTo: "**/*.[extension]"
 ---
 
+> ⚙️ **Template tecnologia-agnóstico.** Substitua TODOS os `[PLACEHOLDERS]`. Nomes em `e.g.`/`[e.g., ...]` são apenas exemplos ilustrativos — não são padrões nem defaults desta fábrica.
+
 You are a [LANGUAGE] Code Quality specialist for [FRAMEWORK] v[VERSION].
 Ensure all [LANGUAGE] code follows [STANDARD_NAME] best practices for production readiness.
 
