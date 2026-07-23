@@ -1,5 +1,5 @@
 ---
-name: archtecture-approches-skill-generator
+name: architecture-approaches-skill-generator
 description: Researches a system-architecture methodology/notation and generates an operational SKILL.md for producing correct architecture artifacts. Use when turning architecture research into a skill.
 context: fork
 agent: skill-author
@@ -19,6 +19,49 @@ high-quality architecture artifacts.
 The output is not a document for humans to read — it is an **operational knowledge file
 for Claude**, structured to enable autonomous artifact generation with correctness,
 abstraction-level discipline, and decision traceability guarantees.
+
+---
+
+## Quick Navigation
+
+- **[Blueprints & Guardrails](#blueprints--guardrails)** — Three-tier rules for this generator's own operation
+- **[Evaluation Scenarios](./blueprints/evaluation-scenarios.md)** — 3 scenarios: canonical, edge, misuse
+- **[Generated SKILL Structure](./blueprints/generated-skill-structure.md)** — Template for generated output
+- **[Verification Loop](#verification-loop)** — Post-generation self-check
+- **[External Resources](#external-resources)** — Reference links
+
+---
+
+## Blueprints & Guardrails
+
+These rules govern this generator's own operation (not the skills it generates).
+
+### ✅ Always Do
+
+- **Classify before researching** — Complete Phase 1 classification before any research. The category determines which SKILL.md sections to emphasize, preventing generic outputs that don't fit the subject.
+- **Source every claim at Tier 1 or 2** — Every mandatory element, rule, or artifact template in the generated SKILL.md must cite an official spec, governing body, or recognized author. Tag with `[HIGH]`/`[MEDIUM]`/`[LOW]`.
+- **Include full three-tier guardrails in the generated SKILL.md** — The output SKILL.md must contain ✅ Always Do, ⚠️ Ask First, and 🚫 Never Do sections with correct-alternative counterparts for every Never Do item. Never omit any tier.
+- **Create `blueprints/evaluation-scenarios.md` for the generated skill** — Every generated SKILL.md must be accompanied by at least 3 evaluation scenarios (canonical, edge, misuse) in the house JSON format. Link from Quick Navigation in the generated SKILL.md.
+- **Add `## External Resources` to the generated SKILL.md** — Include links to the official spec, governing body, and canonical tooling. All links must be dated.
+- **Include a Verification Loop in the generated SKILL.md** — Provide concrete self-check commands or criteria the consuming agent can execute after generating an artifact.
+- **Run Phase 4 self-validation before finalizing** — Complete the full checklist; flag every failure explicitly. Do not silently skip items.
+- **Keep the generated SKILL.md under 500 lines** — Use `blueprints/` to extract content that exceeds the limit.
+
+### ⚠️ Ask First
+
+- **Ambiguous category** — When the subject spans multiple categories (e.g., DDD spans Domain Modeling and Design Pattern Catalog), ask the user which primary use case to emphasize before classifying.
+- **Missing edition information** — When `SUBJECT_EDITION` is absent or ambiguous, ask for the specific version/edition before researching. Do not infer the edition; incorrect version = disinformation.
+- **Tier 1 source unavailable** — When no Tier 1 source exists for a mandatory element, ask the user whether to use a Tier 2 source and mark the finding `[MEDIUM]`, or to skip the element entirely.
+- **Scope of architecture context** — When `ARCHITECTURE_CONTEXT` is vague (e.g., "enterprise system"), ask for team size, deployment model, and existing tooling before proceeding. These affect which SKILL.md sections to emphasize.
+
+### 🚫 Never Do
+
+- **Never include Tier 5 sources** — Blog posts, informal adaptations, or undated community posts must not appear in the generated SKILL.md. ✅ Find a Tier 1 or 2 source, or mark the gap in Research Gaps.
+- **Never omit the correct alternative for a Never Do item** — Every prohibited pattern in the generated SKILL.md must include a concrete correct alternative. ✅ Write the correct alternative inline, side-by-side with the anti-pattern.
+- **Never mix version patterns** — Do not blend guidance from different editions of the same subject. ✅ Pin the generated SKILL.md to a single edition and mark older patterns as deprecated.
+- **Never produce a generic SKILL.md** — The generated output must be specific to the subject's category. ✅ Complete Phase 1 classification and adapt the structure accordingly.
+- **Never skip Research Gaps** — If a finding cannot be confirmed at Tier 1–3, do not silently omit it. ✅ Document it in the Research Gaps section with a conservative default behavior.
+- **Never allow the generated SKILL.md to exceed 500 lines** — ✅ Extract large content to `blueprints/` files and link from Quick Navigation.
 
 ---
 
@@ -175,15 +218,17 @@ The SKILL.md must satisfy these non-negotiable requirements:
 - **Abstraction discipline is enforced** — every artifact example must declare its
   level and respect the forbidden-detail rules for that level
 - Structure adapts to the subject category — no one-size-fits-all template
+- **Three-tier guardrails are complete** — ✅ Always Do, ⚠️ Ask First, and 🚫 Never Do
+  sections must all be present with correct alternatives for every Never Do item
+- **`blueprints/evaluation-scenarios.md` is created** alongside the SKILL.md with
+  ≥3 scenarios (canonical, edge, misuse) and linked from Quick Navigation
+- **`## External Resources` section is present** with dated official links
+- **A Verification Loop section is present** with concrete self-check steps
+
+Template reference: [Generated SKILL Structure](./blueprints/generated-skill-structure.md)
 
 ---
 
-### SKILL.md STRUCTURE
-
-```markdown
-### Estrutura do SKILL.md gerado
-
-O SKILL.md produzido segue um template de 14 seções: What/When, Subject Facts, Abstraction Level Discipline, Artifact Generation Rules, Three-Tier Guardrails (✅/⚠️/🚫), Decision Traceability, Quality Attributes, Edition Changes, Integration, Tooling, Scale Boundaries, Confidence Map e Source Bibliography. Template completo em [Generated SKILL Structure](./blueprints/generated-skill-structure.md).
 ## PHASE 4 — SKILL.md SELF-VALIDATION
 
 Before finalizing the SKILL.md, run this checklist:
@@ -195,6 +240,11 @@ STRUCTURE
 [ ] Section 4 (Abstraction Discipline) present and correctly scoped to the subject category
 [ ] Section 5 has at least one complete, copy-ready artifact template per artifact type
 [ ] Every template declares its abstraction level explicitly
+[ ] Three-tier guardrails complete (✅ Always Do, ⚠️ Ask First, 🚫 Never Do all present)
+[ ] blueprints/evaluation-scenarios.md created with ≥3 scenarios
+[ ] blueprints/evaluation-scenarios.md linked from Quick Navigation
+[ ] External Resources section present with dated links
+[ ] Verification Loop section present
 
 CORRECTNESS
 [ ] Every mandatory element in Section 5 cites a Tier 1 or Tier 2 source
@@ -222,6 +272,7 @@ USABILITY
 [ ] SKILL.md is self-contained — no external references required to use it
 [ ] Review date set to 18 months from generation — architecture guidance evolves
 [ ] Scale boundaries warn Claude when to flag limits to the architect
+[ ] Generated SKILL.md is under 500 lines
 ```
 
 ---
@@ -239,19 +290,39 @@ Produce the following output, in this order:
    > |---------|--------|------|------------|
 
 3. **SKILL.md** (Phase 3 output — complete file, ready to save)
-   > Save as: `SKILL_{{SUBJECT_NAME}}_{{SUBJECT_EDITION}}.md`
+   > Save as: `.claude/skills/<skill-name>/SKILL.md`
 
-4. **Validation Report** (Phase 4 output — checklist with pass/fail per item)
+4. **`blueprints/evaluation-scenarios.md`** (≥3 scenarios in house JSON format)
+   > Save as: `.claude/skills/<skill-name>/blueprints/evaluation-scenarios.md`
+
+5. **Validation Report** (Phase 4 output — checklist with pass/fail per item)
    > Flag every failure — do not silently skip. For each failure, state what
    > is missing and what source would resolve it.
 
-5. **Research Gaps**
+6. **Research Gaps**
    > ```
    > Gap: [What could not be confirmed at Tier 1–3]
    > Risk: [What Claude might get wrong without this]
    > Default: [Conservative behavior until gap is resolved]
    > Follow-up: [Where to find the authoritative answer]
    > ```
+
+---
+
+## Verification Loop
+
+After generating a SKILL.md, the agent MUST verify:
+
+```
+[ ] Generated SKILL.md file is < 500 lines (wc -l .claude/skills/<skill-name>/SKILL.md)
+[ ] blueprints/evaluation-scenarios.md exists at .claude/skills/<skill-name>/blueprints/
+[ ] Quick Navigation in SKILL.md contains link to ./blueprints/evaluation-scenarios.md
+[ ] Three-tier section is present and all three tiers (✅/⚠️/🚫) are populated
+[ ] External Resources section is present with at least one dated official link
+[ ] Verification Loop section is present in generated SKILL.md
+[ ] Every 🚫 Never Do item has an inline ✅ correct alternative
+[ ] Phase 4 validation checklist has no unresolved failures
+```
 
 ---
 
@@ -306,4 +377,22 @@ OFFICIAL_SOURCE:      "https://spec.openapis.org/oas/v3.1.0"
 Expected: Classification as API Specification. SKILL.md emphasizes required fields
 (info, paths, components), schema correctness, versioning strategy, contract-first
 discipline, tooling validation, and ADR triggers for breaking changes.
-```
+
+---
+
+## External Resources
+
+### Architecture Methodology References
+- [C4 Model](https://c4model.com) — Simon Brown's official site (current)
+- [ADR GitHub](https://adr.github.io) — ADR format catalog and tooling
+- [MADR](https://adr.github.io/madr/) — Markdown Architectural Decision Records
+- [OpenAPI Specification](https://spec.openapis.org/oas/latest.html) — OpenAPI Initiative
+- [AsyncAPI Specification](https://www.asyncapi.com/docs/reference/specification/latest) — AsyncAPI Initiative
+- [ArchiMate 3.2](https://pubs.opengroup.org/architecture/archimate32-doc/) — The Open Group
+- [TOGAF Standard](https://www.opengroup.org/togaf) — The Open Group
+- [Domain Language / DDD](https://domainlanguage.com/ddd/) — Eric Evans
+
+### Skill Authoring Standards
+- [authoring-agent-skills SKILL.md](../authoring-agent-skills/SKILL.md) — House conventions for generated SKILL.md files
+- [TEMPLATE.SKILL.md](../../templates/skills/TEMPLATE.SKILL.md) — Canonical scaffold for generated output
+- [skill-frontmatter rules](../../rules/skill-frontmatter.md) — YAML frontmatter requirements

@@ -56,7 +56,7 @@ Após a pesquisa, transforme em skill ou instruction:
 | Tecnologia genérica | `@workspace /skill-creator` |
 | Serviço cloud + Terraform | `@workspace /skill-creator` |
 | Práticas Terraform (org, CI/CD, testes) | `@workspace /terraform-instructions-compiler` |
-| Metodologia de arquitetura | `@workspace /archtecture-approches-skill-generator` |
+| Metodologia de arquitetura | `@workspace /architecture-approaches-skill-generator` |
 | Metodologia de requisitos | `@workspace /methodologies-skill-generator` |
 
 ---

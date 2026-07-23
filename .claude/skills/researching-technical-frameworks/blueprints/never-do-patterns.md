@@ -84,7 +84,7 @@ Research recommends deprecated patterns because source date is unknown.
 
 **Solution**: 
 Include publication date for every external source.
-Flag sources older than 6 months (especially for framework research).
+Flag sources older than 6 months (especially for framework research); reject sources older than 12 months unless they document the current stable version.
 
 **Source**: Technical Framework Researcher Prompt — Source Priority section
 

@@ -17,8 +17,23 @@ disable-model-invocation: true
 
 ---
 
+## Quick Navigation
+
+- **[Terraform CLI Commands](./blueprints/terraform-cli-commands.md)** — init/fmt/validate/tfsec/plan/apply/state/destroy with expected outputs
+- **[Output Template](./blueprints/terraform-output-template.md)** — Full research document structure
+- **[State Patterns](./blueprints/terraform-state-patterns.md)** — Local vs remote (S3+DynamoDB), encryption, isolation
+- **[Module Patterns](./blueprints/terraform-module-patterns.md)** — Standard layout, composition, versioning
+- **[Integration Example](./blueprints/terraform-integration-example.md)** — Cross-service integration examples
+- **[Testing Patterns](./blueprints/terraform-testing-patterns.md)** — fmt/validate/tfsec/terratest examples
+- **[Production Readiness](./blueprints/terraform-production-readiness.md)** — DR, cost, monitoring, upgrade strategy
+- **[Evaluation Scenarios](./blueprints/evaluation-scenarios.md)** — 4 scenarios: canonical research, edge case, misuse, anti-pattern trap
+- **[External Resources](#external-resources)** — Registry, provider docs, and tooling this skill relies on
+
+---
+
 # Role & Mission
-Senior Infrastructure Engineer & AI Safety Architect building a hallucination-proof IaC knowledge base for {{CLOUD_PROVIDER}} {{SERVICE_NAME}} using Terraform v{{TERRAFORM_VERSION}} with {{PROVIDER_VERSION}}, enabling autonomous agent operation with infrastructure safety guarantees.
+
+Senior Infrastructure Engineer & AI Safety Architect building a hallucination-proof IaC knowledge base for `{{CLOUD_PROVIDER}} {{SERVICE_NAME}}` using Terraform v`{{TERRAFORM_VERSION}}` with `{{PROVIDER_VERSION}}`, enabling autonomous agent operation with infrastructure safety guarantees.
 
 ## Core Principles
 1. **Version Absolutism**: Only {{TERRAFORM_VERSION}} and {{PROVIDER_VERSION}} patterns—treat older versions as misinformation
@@ -122,17 +137,24 @@ Identify all anti-patterns, vulnerabilities, and state-corruption risks — incl
 - Direct AWS API calls bypassing Terraform (drift)
 
 **Format**:
-```terraform
+```
 Anti-Pattern: [What NOT to do]
 Why: [Security/state-consistency/compliance reason]
-Instead:
-  # DO
+❌ Wrong:
+  # DON'T — [reason]
+  [bad HCL]
+✅ Correct:
+  # DO — [reason]
   [correct HCL with explanations]
 
 Impact: [state corruption | security breach | unmanaged drift | data loss]
 Severity: [CRITICAL | HIGH | MEDIUM]
 Source: [Registry security advisory link]
 ```
+
+> Every Never Do entry **must** include a side-by-side ❌ wrong HCL / ✅ correct HCL example.
+> For non-HCL anti-patterns (e.g., workflow anti-patterns like manual apply without plan),
+> use concrete command-line or CI config examples rather than prose-only prohibitions.
 
 ## 4. State Management (Critical for IaC)
 - Backend configuration strategy (local/S3/Terraform Cloud)
@@ -211,7 +233,12 @@ Source: [Registry resource type docs]
 
 ## 8. Executable Verification (Terraform CLI)
 
-Valide o IaC com o ciclo `init → fmt → validate → tfsec/checkov → plan → apply → state → destroy`. Comandos completos com saídas esperadas em [Terraform CLI Commands](./blueprints/terraform-cli-commands.md).
+Valide o IaC com o ciclo `init → fmt → validate → tfsec/checkov → plan → apply → state → destroy`.
+Comandos completos com saídas esperadas em [Terraform CLI Commands](./blueprints/terraform-cli-commands.md).
+
+> All CLI command blocks in the research output MUST carry the annotation
+> `# Representative — adapt to your environment` so consumers know they are illustrative, not
+> guaranteed-tested against their specific provider version and credentials.
 ## 9. Configuration Validation & Type Safety
 - Variable type constraints (string, number, bool, list, map, object)
 - Variable validation blocks
@@ -421,14 +448,49 @@ Follow-up: [Where to check next time - GitHub issue/docs link]
 6. 🎯 Advanced patterns (modules, dynamic blocks, conditionals)
 
 # Validation Checklist
+
 Before finalizing research:
 1. All HCL code examples are syntactically valid (run `terraform validate`)
 2. All `.tf` files format-checked (`terraform fmt`)
-3. All security anti-patterns include tested alternatives
+3. All security anti-patterns include ❌ wrong / ✅ correct HCL side-by-side
 4. All links tested (no 404s, actual documents)
-5. {{TERRAFORM_VERSION}} and {{PROVIDER_VERSION}} explicitly confirmed in examples
+5. `{{TERRAFORM_VERSION}}` and `{{PROVIDER_VERSION}}` explicitly confirmed in examples
 6. tfsec scan shows no critical findings on example code
-7. CLI commands include expected success output/exit codes
+7. CLI command blocks carry `# Representative — adapt to your environment`
 8. Integration examples use variables, not hardcoded values
 
 ---
+
+## External Resources
+
+### Terraform Registry & Core Documentation
+
+- [Terraform Registry — AWS Provider](https://registry.terraform.io/providers/hashicorp/aws/latest)
+- [Terraform Registry — Google Provider](https://registry.terraform.io/providers/hashicorp/google/latest)
+- [Terraform Registry — Azure Provider](https://registry.terraform.io/providers/hashicorp/azurerm/latest)
+- [Terraform Registry — OCI Provider](https://registry.terraform.io/providers/oracle/oci/latest)
+- [Terraform Language Documentation (HCL)](https://developer.hashicorp.com/terraform/language)
+- [Terraform CLI Documentation](https://developer.hashicorp.com/terraform/cli)
+- [Terraform Best Practices Guide](https://developer.hashicorp.com/terraform/cloud-adopt/best-practices)
+
+### Security & Static Analysis Tools
+
+- [tfsec — Terraform security scanner](https://github.com/aquasecurity/tfsec)
+- [Checkov — Policy-as-code validator](https://www.checkov.io/)
+- [tflint — Terraform linter](https://github.com/terraform-linters/tflint)
+
+### Testing
+
+- [Terratest — Go testing framework for IaC](https://terratest.gruntwork.io/)
+- [Terraform test — native test framework](https://developer.hashicorp.com/terraform/language/tests)
+
+### Provider Source Repositories
+
+- [hashicorp/terraform-provider-aws (GitHub issues)](https://github.com/hashicorp/terraform-provider-aws/issues)
+- [hashicorp/terraform-provider-google (GitHub issues)](https://github.com/hashicorp/terraform-provider-google/issues)
+- [hashicorp/terraform-provider-azurerm (GitHub issues)](https://github.com/hashicorp/terraform-provider-azurerm/issues)
+
+### Meta-Skills
+
+- [authoring-agent-skills SKILL.md](../authoring-agent-skills/SKILL.md) — Three-tier pattern conventions
+- [researching-technical-frameworks SKILL.md](../researching-technical-frameworks/SKILL.md) — Anti-hallucination methodology

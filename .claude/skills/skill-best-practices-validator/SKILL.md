@@ -13,9 +13,49 @@ Generar un análisis de calidad y adherencia a mejores prácticas de Agent Skill
 - **Oficial**: https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices
 - **Equipo**: `.claude/skills/authoring-agent-skills/SKILL.md`
 
+## Quick Navigation
+
+- **[Evaluation Scenarios](./blueprints/evaluation-scenarios.md)** — 3 escenarios: canónico, edge, misuso
+- **[Verification Loop](#verification-loop)** — Auto-validación antes de guardar
+- **[External Resources](#external-resources)** — Documentación oficial de la que derivan los criterios
+
+---
+
 ## Instrucciones para Agente
 
 Actúa como un Agent Skills Quality Specialist. Evalúa cada skill contra los criterios oficiales de Claude y las convenciones del equipo documentadas en `authoring-agent-skills`.
+
+---
+
+## Blueprints & Guardrails
+
+### ✅ Always Do
+
+- **Leer los archivos de referencia antes de evaluar** — leer `.claude/skills/authoring-agent-skills/SKILL.md` y `blueprints/three-tier-architecture.md` antes de emitir cualquier criterio.
+- **Confirmar conteos con inspección real del filesystem** — usar `ls`/`Glob` para enumerar los SKILL.md presentes; nunca confiar en conteos auto-reportados ni asumir qué archivos existen.
+- **Citar el criterio exacto en cada hallazgo** — cada problema debe referenciar el criterio (A1, B2, D3, etc.) y la ubicación (nombre de archivo + sección).
+- **Generar un archivo individual por skill evaluada** — en `.claude/skills/[skill-name]/[skill-name]-best-practices-review.md`.
+- **Generar el resumen consolidado al final** — `.claude/skills/skills-best-practices-summary.md` con la matriz comparativa de todas las skills.
+- **Contar líneas reales del SKILL.md** — usar lectura del archivo para confirmar el número de líneas; no estimarlo visualmente.
+
+### ⚠️ Ask First
+
+- **Skills de terceros o legadas** — si la skill evaluada está marcada como de terceros o tiene avisos de "legacy", preguntar al usuario si aplicar los criterios de equipo D1-D7 o solo los oficiales A-C.
+- **Skills sin version context** — si el SKILL.md no declara versión, preguntar si la skill es intencionalmente agnóstica de versión o si falta el contexto.
+- **Directorio personalizado** — si el argumento `$ARGUMENTS` apunta a una ruta no estándar, confirmar antes de proceder.
+- **Skills con > 500 líneas** — cuando SKILL.md supera 500 líneas, preguntar si el usuario quiere solo el diagnóstico o también una propuesta de extracción a `blueprints/`.
+
+### 🚫 Never Do
+
+- **Nunca reportar una violación sin citar criterio + ubicación** — produce output inaccionable. ✅ Siempre nombrar el criterio (ej. "A1 — description max 1536 chars") y la línea o sección donde ocurre.
+- **Nunca asumir que una skill cumple un criterio sin leer el archivo** — si el archivo no fue leído, no asignar estado. ✅ Leer el archivo completo antes de evaluar; reportar "archivo no leído" si es inaccesible.
+- **Nunca mezclar criterios oficiales con convenciones de equipo en la misma celda** — dificulta priorización. ✅ Mantener las tablas A-C (oficiales) y D (equipo) separadas como en la plantilla.
+- **Nunca omitir la sección "Recomendaciones por Prioridad"** — es la sección más accionable. ✅ Siempre incluirla con clasificación ALTA / MEDIA / BAJA.
+- **Nunca generar solo el resumen consolidado sin los archivos individuales** — el resumen sin detalle no permite corrección. ✅ Generar ambos: archivo individual + resumen.
+
+---
+
+## Instrucciones de Ejecución
 
 ### Paso 1: Cargar Criterios de Referencia
 
@@ -25,7 +65,7 @@ Lee los siguientes archivos antes de evaluar:
 
 ### Paso 2: Descubrir y Analizar Skills
 
-Explora `.claude/skills/*/SKILL.md` y evalúa cada skill según los criterios abajo.
+Explora `.claude/skills/*/SKILL.md` (o el directorio indicado en `$ARGUMENTS`) y evalúa cada skill según los criterios abajo.
 
 ---
 
@@ -35,7 +75,7 @@ Explora `.claude/skills/*/SKILL.md` y evalúa cada skill según los criterios ab
 
 **A1. YAML Frontmatter**
 - `name`: max 64 chars, solo minúsculas/números/guiones, sin XML tags, sin palabras reservadas (`anthropic`, `claude`)
-- `description`: no vacío, max 1024 chars, sin XML tags
+- `description`: no vacío, max 1536 chars, sin XML tags
 - Descripción en **tercera persona** (no "I can help" ni "You can use")
 - Incluye QUÉ hace Y CUÁNDO usarlo
 
@@ -90,7 +130,7 @@ Explora `.claude/skills/*/SKILL.md` y evalúa cada skill según los criterios ab
 
 ---
 
-### Paso 3: Generar Informes de Validación
+### Paso 3: Generar Archivos de Validación
 
 Para **cada skill evaluada**, crea un archivo individual en `.claude/skills/[skill-name]/[skill-name]-best-practices-review.md` con la siguiente estructura:
 
@@ -205,15 +245,28 @@ Después de generar todos los archivos individuales, crea `.claude/skills/skills
 El validador debe detectar y reportar:
 
 1. **SKILL.md excede 500 líneas** — Recomendar extraer contenido a `blueprints/`
-2. **Descripción vaga o en primera persona** — Ejemplo: "Helps with docs" o "I can process files" → Corregir a tercera persona con trigger
-3. **Rutas Windows-style** — `scripts\helper.py` → `scripts/helper.py`
-4. **Referencias anidadas profundas** — SKILL.md → A.md → B.md → C.md → Aplanar a un nivel
-5. **Demasiadas opciones sin default** — "Use pypdf, or pdfplumber, or PyMuPDF" → Proporcionar default
-6. **Información sensible al tiempo** — "If before August 2025..." → Usar sección "old patterns"
-7. **Guardrails incompletos** (equipo) — Solo ✅ Always Do, sin ⚠️ o 🚫 → Marcar como incompleto
-8. **Anti-patrones sin alternativa** (equipo) — 🚫 sin código ✅ correcto → Marcar como crítico
-9. **Constantes mágicas** — `TIMEOUT = 47` sin explicación → Documentar razón
-10. **Scripts que delegan al agente** — Script que simplemente falla y deja al agente resolver → Manejar errores explícitamente
+2. **Descripción vaga o en primera persona** — "Helps with docs" o "I can process files" → Corregir a tercera persona con trigger
+3. **description supera 1536 chars** — Truncar y reescribir con trigger "Use when..."
+4. **Rutas Windows-style** — `scripts\helper.py` → `scripts/helper.py`
+5. **Referencias anidadas profundas** — SKILL.md → A.md → B.md → C.md → Aplanar a un nivel
+6. **Demasiadas opciones sin default** — "Use pypdf, or pdfplumber, or PyMuPDF" → Proporcionar default
+7. **Información sensible al tiempo** — "If before August 2025..." → Usar sección "old patterns"
+8. **Guardrails incompletos** (equipo) — Solo ✅ Always Do, sin ⚠️ o 🚫 → Marcar como incompleto
+9. **Anti-patrones sin alternativa** (equipo) — 🚫 sin código ✅ correcto → Marcar como crítico
+10. **Constantes mágicas** — `TIMEOUT = 47` sin explicación → Documentar razón
+11. **Scripts que delegan al agente** — Script que simplemente falla y deja al agente resolver → Manejar errores explícitamente
+
+---
+
+## Verification Loop
+
+Antes de guardar los archivos de salida, el validador DEBE auto-verificar:
+
+1. **Conteo de skills** — confirmar que el número de skills evaluadas en la matriz coincide con el número de archivos `SKILL.md` encontrados con `ls`/`Glob`.
+2. **Criterios cubiertos** — verificar que la tabla de cada skill contiene exactamente 8 filas de criterios oficiales (A1–A6, B, C) y 7 filas de equipo (D1–D7).
+3. **Archivos generados** — verificar que existe un archivo `[skill-name]-best-practices-review.md` para cada skill evaluada.
+4. **Resumen generado** — verificar que `skills-best-practices-summary.md` existe y contiene todas las skills de la matriz.
+5. **Hallazgos con criterio citado** — cada ítem en "Recomendaciones por Prioridad" debe referenciar al menos un criterio (A1, D2, etc.).
 
 ---
 
@@ -227,9 +280,22 @@ El validador debe detectar y reportar:
 
 ---
 
+## External Resources
+
+### Documentación Oficial Claude
+- [Claude Agent Skills Best Practices](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices) — fuente primaria de los criterios A-C
+- [Claude Agent Skills Overview](https://platform.claude.com/docs/en/agents-and-tools/agent-skills) — definición de skills y frontmatter válido
+
+### Convenciones del Equipo
+- [authoring-agent-skills SKILL.md](./../authoring-agent-skills/SKILL.md) — estándar del equipo (criterios D)
+- [authoring-agent-skills — three-tier-architecture](./../authoring-agent-skills/blueprints/three-tier-architecture.md) — arquitectura de tres niveles
+- [skill-frontmatter rules](./../../rules/skill-frontmatter.md) — límites de frontmatter (description max 1536 chars, `allowed-tools` vs `tools`, etc.)
+
+---
+
 **Invocación sugerida**:
 ```
 Analiza los skills en este repositorio usando el validador de mejores prácticas.
 ```
 
-**Salida esperada**: Um arquivo `.claude/skills/[skill-name]/[skill-name]-best-practices-review.md` por skill + `.claude/skills/skills-best-practices-summary.md` com a matriz comparativa consolidada.
+**Salida esperada**: Un archivo `.claude/skills/[skill-name]/[skill-name]-best-practices-review.md` por skill + `.claude/skills/skills-best-practices-summary.md` con la matriz comparativa consolidada.

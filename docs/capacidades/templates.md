@@ -73,7 +73,7 @@
 | **Categoria** | Compilação pesquisa → artefato |
 | **Quando usar** | Criar prompt que transforma pesquisa em SKILL.md ou .instructions.md |
 | **Referenciado por** | Nenhum explicitamente |
-| **Implementações que seguem** | `skill-creator`, `archtecture-approches-skill-generator`, `methodologies-skill-generator`, `terraform-instructions-compiler` |
+| **Implementações que seguem** | `skill-creator`, `architecture-approaches-skill-generator`, `methodologies-skill-generator`, `terraform-instructions-compiler` |
 
 ### TEMPLATE.VALIDATION.prompt.md
 > **Arquivo**: `.github/templates/prompts/TEMPLATE.VALIDATION.prompt.md`

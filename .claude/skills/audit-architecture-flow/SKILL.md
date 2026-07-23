@@ -26,6 +26,13 @@ When used as part of the multi-model orchestrator (`/audit-architecture-consensu
 
 ---
 
+## Quick Navigation
+
+- **[Evaluation Scenarios](./blueprints/evaluation-scenarios.md)** — 4 scenarios: canonical chain tracing, instruction-only reachability, misuse guard, cycle detection
+- **[Verification Loop](#verification-loop)** — Post-report checklist to confirm the output file is complete and well-formed
+
+---
+
 ## Trigger Keywords
 
 Use this prompt when the user mentions:
@@ -36,6 +43,41 @@ Use this prompt when the user mentions:
 - "invocation audit"
 - "flow validation"
 - "dead-end detection"
+
+---
+
+## ✅ Always Do
+
+- **Read every file referenced in the agent's routing table** before tracing any chain. Reachability based on file existence alone (without verifying internal references) produces false positives.
+- **Trace every entry point step by step.** Every prompt with `agent: {target}` in frontmatter is a PATH 1 entry point; `@agent-name` direct invocation is always a PATH 2 entry point. Both must be traced.
+- **Verify the path at each step.** For each chain step, confirm the referenced file exists AND the reference appears inside it — not just that the file exists on disk.
+- **Build the Reachability Matrix before scoring.** The matrix is the primary evidence for skill reachability (B.16) and orphan detection (B.5).
+- **Label every chain result as COMPLETE or BROKEN at step N.** A chain result without a status label is ambiguous.
+- **Persist the report as `INVOCATION_FLOW_AUDIT_REPORT.md`.** This is the final artifact — do not summarize in-chat without saving the file.
+- **Cite the criterion ID for every finding** (e.g., B.7, B.16). Findings without criterion references cannot be correlated with other models in a consensus audit.
+
+---
+
+## ⚠️ Ask First
+
+- **Multiple agents share keywords.** If the user's agent name appears as a routing target in more than one agent file, ask: "Which agent should I trace — [A] or [B]?" before reading files.
+- **Partial vs full trace.** If the user asks for "a quick flow check" or "just check the prompts", ask: "Should I trace the full entry-point-to-skill chain including @agent direct paths, or only the structured prompt chains (PATH 1)?" Label the scope in the report.
+- **Project directory without an agent name.** If the argument is a directory path, confirm: "I see multiple agent files. Trace flow for all agents, or one specific agent?"
+- **Analysis depth for large agents.** If an agent has more than 10 prompts, ask: "Trace all chains individually, or produce a summary matrix first and drill into broken chains only?"
+
+---
+
+## 🚫 Never Do
+
+| Never Do | Why | Correct Behavior |
+|---|---|---|
+| Report a chain as broken without tracing it step by step | A chain that looks broken from the top may be valid at a later step | Trace every step: prompt → agent file exists? → skill declared? → agent references it? → instruction routes to it? |
+| Assume a skill is reachable because its file exists on disk | A file on disk but unreferenced by any chain is an orphan | Verify at least one complete chain (prompt or @agent keyword) leads to the skill |
+| Skip the @agent direct path (PATH 2) | It is a valid entry point even when structured prompts exist | Always trace @agent + every keyword in the agent's routing table |
+| Confuse passive instruction injection with active agent skill loading | Instructions auto-inject silently; skills require explicit `read_file` | Mark instruction routing tables as ⚠️ partial path, not a complete chain on their own |
+| Mark a skill as orphaned when an instruction's "When to Load Skills" section references it | Instruction routing tables are valid reachability paths | Check instruction routing tables before declaring a skill unreachable |
+| Report a cycle as COMPLETE | A prompt→agent→prompt loop is an infinite loop in practice | Mark cycles as 🔴 Critical dead-ends in the DEAD-END CHAINS section |
+| Generate application code or create missing prompt/skill files | This model traces and reports — it does not implement fixes | Produce only chain traces, the reachability matrix, and the remediation plan |
 
 ---
 
@@ -266,142 +308,35 @@ Score scale:
 
 **Output filename**: `INVOCATION_FLOW_AUDIT_REPORT.md`
 
-Use this structure:
-
-```markdown
-# Invocation Flow Audit Report (Model B)
-## Agent: {agent-name} | Audit Date: {date}
+The report must contain all 8 sections: Executive Summary, Entry Point Registry, Invocation Chain Traces, Reachability Matrix, Criteria Evaluation, Flow Issues, Remediation Plan, and Conclusion. Use the structure defined inline in [Step 6 of the Workflow](#step-6-generate-the-report) above — every section must be fully written, not summarized.
 
 ---
 
-## 1. Executive Summary
+## Verification Loop
 
-[Assessment of invocation flow health: are user requests reaching their intended handlers?]
+After generating the report, run these checks before confirming to the user:
 
-### Flow Health: {✅ HEALTHY | ⚠️ DEGRADED | ❌ BROKEN}
-### Overall Score: [X.X/10]
-
-| Component | Score | Chains | Issues |
-|---|---|---|---|
-| Entry Points (Prompts) | [X/10] | [N complete / M total] | [count] |
-| Delegation Hub (Agent) | [X/10] | [routing coverage %] | [count] |
-| Passive Injection (Instructions) | [X/10] | [N firing correctly] | [count] |
-| Terminal Nodes (Skills) | [X/10] | [N reachable / M total] | [count] |
-| **Overall (weighted)** | **[X.X/10]** | — | **[total]** |
-
----
-
-## 2. Entry Point Registry
-
-[Full list of all entry points with their status]
-
-| # | Entry Point | Type | Target Agent | Status |
-|---|---|---|---|---|
-| 1 | /prompt-name | Structured | {agent} | ✅/❌ |
-| 2 | @agent-name | Direct | — | ✅/❌ |
-
----
-
-## 3. Invocation Chain Traces
-
-### 3.1 Structured Entry Chains (via /prompt)
-
-#### Chain: /prompt-1
-
-| Step | Component | Status | Evidence |
-|---|---|---|---|
-| 1 | Prompt activates agent | ✅/❌ | `agent: {name}` in frontmatter |
-| 2 | Agent receives context | ✅/❌ | Agent file exists and is valid |
-| 3 | Agent identifies skill | ✅/❌ | Keyword/domain in routing table |
-| 4 | Skill file exists | ✅/❌ | Path resolves to actual file |
-| 5 | Instruction supports | ✅/❌ | applyTo fires for generated files |
-
-**Chain Status: COMPLETE / BROKEN at step [N]**
-
-[Repeat for each prompt]
-
-### 3.2 Direct Entry Chains (via @agent)
-
-[Repeat for each keyword in agent routing table]
-
----
-
-## 4. Reachability Matrix
-
-[Full matrix as described in Step 4]
-
-### Unreachable Skills
-[List with explanation of why they're unreachable]
-
-### Orphan Prompts
-[Prompts with no valid agent linkage]
-
-### Dead-End Chains
-[Chains that start but don't reach a skill]
-
----
-
-## 5. Criteria Evaluation
-
-### 5.1 Entry Points
-
-| # | Criterion | Result | Evidence |
-|---|---|---|---|
-| B.1 | Agent linkage | [✅/⚠️/❌] | [specific finding] |
-| ... | ... | ... | ... |
-
-### 5.2 Delegation Hub
-
-| # | Criterion | Result | Evidence |
-|---|---|---|---|
-| B.6 | Skill loading step | [✅/⚠️/❌] | [specific finding] |
-| ... | ... | ... | ... |
-
-### 5.3 Passive Injection
-
-[Same format]
-
-### 5.4 Terminal Nodes
-
-[Same format]
-
----
-
-## 6. Flow Issues
-
-| # | Severity | Issue | Chain Affected | Impact |
-|---|---|---|---|---|
-| F1 | 🔴 Critical | [description] | [chain] | [what user can't do] |
-| F2 | 🟡 Medium | [description] | [chain] | [degraded experience] |
-| ... | ... | ... | ... | ... |
-
-**Total: [N] issues ([X] 🔴, [Y] 🟡, [Z] 🟢)**
-
----
-
-## 7. Remediation Plan
-
-### Fix Broken Chains (Priority 1)
-
-#### F1: [Title]
-- **Chain**: /prompt → agent → [BREAK] → skill
-- **Break Point**: [where the chain breaks]
-- **Fix**: [specific action to restore the chain]
-- **Proposed Change**: [code block with fix]
-
-[Repeat per issue]
-
----
-
-## 8. Conclusion
-
-[Assessment of overall flow health and expected state after fixes]
-
----
-
-*Generated by `/audit-architecture-flow` (Model B) | Audit date: {date}*
-*Scoring weights: Entry=25%, Agent=30%, Instructions=20%, Skills=25%*
 ```
+1. Confirm file exists:
+   ls -lh INVOCATION_FLOW_AUDIT_REPORT.md
+   Expected: file present, size > 0
+
+2. Confirm required sections are present (all must return a match):
+   grep -c "## Executive Summary" INVOCATION_FLOW_AUDIT_REPORT.md
+   grep -c "Entry Point Registry" INVOCATION_FLOW_AUDIT_REPORT.md
+   grep -c "Reachability Matrix" INVOCATION_FLOW_AUDIT_REPORT.md
+   grep -c "Remediation Plan" INVOCATION_FLOW_AUDIT_REPORT.md
+
+3. Confirm every chain has a status label:
+   grep -c "CHAIN STATUS" INVOCATION_FLOW_AUDIT_REPORT.md
+   Expected: count equals the number of entry points traced
+
+4. Confirm unreachable skills section is present:
+   grep -c "UNREACHABLE SKILLS" INVOCATION_FLOW_AUDIT_REPORT.md
+   Expected: >= 1 (even if the value is "none")
+```
+
+If any check fails, complete the missing sections before confirming.
 
 ---
 
@@ -415,24 +350,23 @@ Use this structure:
 
 ---
 
-## Anti-Patterns to Avoid
-
-🚫 **Never** report a chain as broken without tracing it step by step.
-
-🚫 **Never** assume a skill is reachable because it exists — verify the path from entry point.
-
-🚫 **Never** skip the @agent direct path — it's a valid entry point even if prompts exist.
-
-🚫 **Never** confuse "instructions auto-inject" with "agent explicitly calls instructions" — instructions are passive.
-
-🚫 **Never** mark a skill as orphaned if it's reachable via instruction routing tables (even without a prompt).
-
----
-
 ## Complementary Prompts
 
 - `/audit-architecture-scope` → Model A: Scope hierarchy and responsibility leakage
 - `/audit-architecture-engine` → Model C: VS Code engine mechanics and passive injection
 - `/audit-architecture-consensus` → Runs all 3 models and produces comparison report
 
-**CRITICAL**: Read every file referenced in the agent's routing table. A reachability report based on file existence alone (without verifying internal references) will produce false positives.
+---
+
+## External Resources
+
+### Claude Code / GitHub Copilot Agent Architecture
+- [Claude Code — Sub-agents](https://docs.anthropic.com/en/docs/claude-code/sub-agents) — Agent definition, routing, `tools:` and delegation mechanics
+- [Claude Code — Memory and storage](https://docs.anthropic.com/en/docs/claude-code/memory) — How CLAUDE.md is loaded globally (always-on context)
+- [GitHub Copilot — Customizing Copilot](https://docs.github.com/en/copilot/customizing-copilot) — Prompt files, agent linkage, `applyTo` semantics
+- [GitHub Copilot — Copilot instructions](https://docs.github.com/en/copilot/customizing-copilot/adding-custom-instructions-for-github-copilot) — Passive injection via `applyTo` and when instructions fire
+- [VS Code Copilot extensibility overview](https://code.visualstudio.com/docs/copilot/copilot-extensibility-overview) — Active vs passive loading in VS Code
+
+### Architecture Patterns
+- [Event-driven routing (Martin Fowler)](https://martinfowler.com/articles/201701-event-driven.html) — Background on routing and delegation chains in event-driven systems
+- [Chain of Responsibility pattern](https://refactoring.guru/design-patterns/chain-of-responsibility) — Conceptual basis for the prompt→agent→skill invocation chain

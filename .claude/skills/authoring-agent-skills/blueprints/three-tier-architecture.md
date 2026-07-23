@@ -30,7 +30,7 @@ name: skill-name
 description: "[Action verb] [what] with [TECH] [VERSION]. Use when [trigger context]."
 ---
 ```
-- `description`: max 1024 characters, non-empty, no XML tags
+- `description`: max 1536 characters, non-empty, no XML tags
 - Write in **third person** — not "I can help" or "You can use"
 - Include BOTH what the skill does AND when to use it
 
@@ -43,6 +43,11 @@ description: "[Action verb] [what] with [TECH] [VERSION]. Use when [trigger cont
 - ❌ "Helps with FastAPI" (vague, no trigger)
 - ❌ "I can help you process Excel files" (first person)
 - ❌ "Useful for building APIs" (no specific technology/version)
+
+### ⚠️ Ask First
+
+- **Inline code examples vs. `blueprints/`**: When a pattern's code exceeds ~30 lines or has multiple variations, ask whether to keep it inline or delegate to a blueprint file. Inline keeps context local; blueprints reduce SKILL.md length and enable progressive disclosure.
+- **Auto-invocable vs. deliberate-action command**: When authoring a command skill, ask whether it should be auto-invocable (knowledge skill — omit `disable-model-invocation`) or deliberate-action (researcher/generator/validator — add `context: fork`, `agent:`, `disable-model-invocation: true`). Wrong choice either hides the skill from auto-selection or exposes it at unintended cost.
 
 ### 🚫 Never Do
 - ❌ Mixed case in folder names: `FastAPI-Async`
