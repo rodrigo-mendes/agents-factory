@@ -95,59 +95,13 @@ What are you creating?
 
 ---
 
-## Examples (Existing Implementations)
+## Exemplos vivos (não há mais `examples/`)
 
-All examples live in `templates/examples/` so the templates directory is self-contained.
+Esta fábrica é **tecnologia-agnóstica** — não mantemos implementações concretas de exemplo dentro de
+`templates/`. Para ver artefatos reais como referência, olhe os **artefatos vivos** do repo:
 
-| Template | Example (in `templates/examples/`) |
-|----------|------------------------------------|
-| Implementation Agent | `examples/agents/oci-terraform.agent.md` |
-| Advisory Agent | `examples/agents/oci-serverless-architect.agent.md` |
-| Orchestrator Agent | `examples/agents/oci-serverless-stack.agent.md` |
-| Feature-Add Prompt | `examples/prompts/add-oci-function.prompt.md` |
-| Design Prompt | `examples/prompts/design-api-gateway.prompt.md` |
-| Research Prompt | `examples/prompts/technical-framework-researcher.prompt.md` |
-| Validation Prompt | `examples/prompts/skill-best-practices-validator.prompt.md` |
-| Compiler Prompt | `examples/prompts/terraform-instructions-compiler.prompt.md` |
-| Scaffolding Prompt | `examples/prompts/agent-bootstrap.prompt.md` |
-| Entry-Point Prompt | `examples/prompts/oci-terraform.prompt.md` |
-| Skill (with blueprints) | `examples/skills/provisioning-oci-functions/` |
-| CONFIG Instruction | `examples/instructions/terraform-project-config.instructions.md` |
-| STANDARDS Instruction | `examples/instructions/terraform-standards.instructions.md` |
-| SKILLS Instruction | `examples/instructions/terraform-skills.instructions.md` |
+- **Prompts** — `.github/prompts/` (ex.: `technical-framework-researcher.prompt.md`)
+- **Skills** — `.github/skills/` (ex.: `authoring-agent-skills/`)
 
----
-
-## Examples Directory (`templates/examples/`)
-
-Local copies of representative implementations for each template type, organized by artifact:
-
-```
-templates/examples/
-├── agents/
-│   ├── oci-terraform.agent.md              (Implementation)
-│   ├── oci-serverless-architect.agent.md   (Advisory)
-│   └── oci-serverless-stack.agent.md       (Orchestrator)
-├── prompts/
-│   ├── add-oci-function.prompt.md          (Feature-Add)
-│   ├── design-api-gateway.prompt.md        (Design)
-│   ├── technical-framework-researcher.prompt.md (Research)
-│   ├── skill-best-practices-validator.prompt.md (Validation)
-│   ├── terraform-instructions-compiler.prompt.md (Compiler)
-│   ├── agent-bootstrap.prompt.md           (Scaffolding)
-│   └── oci-terraform.prompt.md             (Entry-Point)
-├── instructions/
-│   ├── terraform-project-config.instructions.md  (CONFIG)
-│   ├── terraform-standards.instructions.md       (STANDARDS)
-│   └── terraform-skills.instructions.md          (SKILLS)
-└── skills/
-    └── provisioning-oci-functions/          (Skill with blueprints)
-        ├── SKILL.md
-        └── blueprints/
-            ├── always-do-patterns.md
-            ├── ask-first-decisions.md
-            ├── integration-patterns.md
-            └── never-do-patterns.md
-```
-
-> **Note**: These are point-in-time snapshots. The authoritative versions live in `.github/agents/`, `.github/prompts/`, `.github/instructions/`, and `.github/skills/`.
+Esses são a fonte da verdade e evoluem com o repo — use-os como modelo, e os `TEMPLATE.*` acima como
+scaffolding em branco.

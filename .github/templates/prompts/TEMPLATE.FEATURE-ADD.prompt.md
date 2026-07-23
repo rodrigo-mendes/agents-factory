@@ -4,6 +4,8 @@ agent: [agent-name]
 argument-hint: '[Suggested argument: e.g., "Choose the [FEATURE] strategy"]'
 ---
 
+> ⚙️ **Template tecnologia-agnóstico.** Substitua TODOS os `[PLACEHOLDERS]`. Nomes em `e.g.`/`[e.g., ...]` são apenas exemplos ilustrativos — não são padrões nem defaults desta fábrica.
+
 # Add [FEATURE NAME]
 
 **Skill**: `[primary-skill-name]`
