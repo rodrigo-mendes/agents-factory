@@ -36,7 +36,7 @@ Os comandos operacionais forkam (`context: fork`) para um subagente. Os 4 subage
 |---|---|---|
 | [framework-researcher](.claude/agents/framework-researcher.md) | pesquisa anti-alucinação (usa WebSearch/WebFetch) | `technical-framework-researcher`(+`-terraform`), `cloud-architecture-researcher`, `business-domain-researcher`, `requirements-methodology-researcher`, `architecture-methodology-researcher`, `terraform-engineering-best-practices-researcher` |
 | [skill-author](.claude/agents/skill-author.md) | gera SKILL.md / rules | `skill-creator`, `methodologies-skill-generator`, `architecture-approaches-skill-generator`, `terraform-instructions-compiler` |
-| [architecture-auditor](.claude/agents/architecture-auditor.md) | audita arquitetura (consensus = 3 lentes em paralelo via tool Agent) | `audit-architecture-scope`/`flow`/`engine`/`consensus` |
+| [architecture-auditor](.claude/agents/architecture-auditor.md) | audita arquitetura (consensus = 3 lentes em paralelo via tool Agent) | `audit-architecture-scope`/`flow`/`engine`/`consensus` (alvo Copilot) · `audit-cc-architecture-scope`/`flow`/`engine`/`consensus` (alvo Claude Code) |
 | [quality-validator](.claude/agents/quality-validator.md) | valida qualidade/aderência | `skill-best-practices-validator`, `instructions-best-practices-validator`, `agent-router-pattern-validator`, `copilot-compatibility-review` |
 
 **Meta-skills** (auto-invocáveis, conhecimento base):
@@ -52,7 +52,7 @@ Não é código compilado — os artefatos rodam **no Claude Code** via `/<coman
 - Auditar arquitetura (consenso): `/audit-architecture-consensus <alvo>`
 - Validar qualidade de skills: `/skill-best-practices-validator .claude/skills/`
 
-Os 19 comandos usam `disable-model-invocation: true` (ações deliberadas) — acessíveis por `/nome`,
+Os 23 comandos usam `disable-model-invocation: true` (ações deliberadas) — acessíveis por `/nome`,
 sem custo de auto-listagem. Só as 2 meta-skills ficam auto-invocáveis.
 
 ## Estrutura
