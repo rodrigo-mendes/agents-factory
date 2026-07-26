@@ -12,15 +12,18 @@
       "Bash(cat *)",
       "Bash(git status *)",
       "Bash(git diff *)",
-      "Bash(git log *)"
-    ],
-    "ask": [
-      "Write(./.github/**)",
-      "Edit(./.github/**)"
+      "Bash(git log *)",
+      "Read(//Users/roka.mendes/work/projects/brx/fast-track/OCI/poc-oci-serverless/.claude/skills/invoking-rest-apis-from-oci-functions/**)",
+      "Read(//Users/roka.mendes/work/projects/brx/fast-track/OCI/poc-oci-serverless/.claude/skills/logging-oci-java-functions/**)",
+      "Read(//Users/roka.mendes/work/projects/brx/fast-track/OCI/poc-oci-serverless/.claude/skills/managing-terraform-cicd/**)"
     ],
     "deny": [
       "Read(./**/.env)",
       "Read(./**/*.tfvars)"
+    ],
+    "ask": [
+      "Write(./.github/**)",
+      "Edit(./.github/**)"
     ]
   }
 }

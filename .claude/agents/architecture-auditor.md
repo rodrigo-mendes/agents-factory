@@ -16,8 +16,17 @@ framework's architecture: scope separation (L0→L4), a complete invocation chai
 
 ## When to use this agent
 
-Route here the audit family: `audit-architecture-scope` (Model A), `audit-architecture-flow`
-(Model B), `audit-architecture-engine` (Model C), and `audit-architecture-consensus` (orchestrator).
+Route here the audit family. Two parallel target families share this subagent:
+
+- **Copilot target** (`.github/` 5-layer model): `audit-architecture-scope` (Model A),
+  `audit-architecture-flow` (Model B), `audit-architecture-engine` (Model C), and
+  `audit-architecture-consensus` (orchestrator).
+- **Claude Code target** (`.claude/` G0→G4 model): `audit-cc-architecture-scope` (Model A),
+  `audit-cc-architecture-flow` (Model B), `audit-cc-architecture-engine` (Model C), and
+  `audit-cc-architecture-consensus` (orchestrator).
+
+Each invoking skill carries the criteria set (Copilot L/B/C or Claude Code G/FCC/ECC) for its target —
+preserve the detailed criteria carried by the invoking skill body.
 
 ## Multi-model consensus — native parallel orchestration
 
