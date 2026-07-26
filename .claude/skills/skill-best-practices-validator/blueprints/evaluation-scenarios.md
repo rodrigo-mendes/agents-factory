@@ -3,6 +3,12 @@
 Used to verify that the validator correctly identifies compliant, partially compliant, and violating
 Agent Skills — and that it generates accurate, criterion-cited output without hallucinating findings.
 
+## Contents
+
+- [Scenario 1: Canonical — fully compliant skill](#scenario-1-canonical--fully-compliant-skill)
+- [Scenario 2: Edge case — stale description limit and missing Never Do alternatives](#scenario-2-edge-case--skill-with-stale-description-limit-and-missing-never-do-alternatives)
+- [Scenario 3: Misuse — validator pointed at a non-skills directory](#scenario-3-misuse--validator-pointed-at-a-non-skills-directory)
+
 ---
 
 ## Scenario 1: Canonical — fully compliant skill

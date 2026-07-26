@@ -15,7 +15,11 @@ Generar un análisis de calidad y adherencia a mejores prácticas de Agent Skill
 
 ## Quick Navigation
 
+- **[Output Templates](./blueprints/output-templates.md)** — plantillas del review individual + resumen consolidado
 - **[Evaluation Scenarios](./blueprints/evaluation-scenarios.md)** — 3 escenarios: canónico, edge, misuso
+- **[Instrucciones de Ejecución](#instrucciones-de-ejecución)** — workflow de 3 pasos
+- **[Criterios de Evaluación](#criterios-de-evaluación)** — A1–A6, B, C (oficial) + D1–D7 (equipo)
+- **[Detección de Anti-Patrones](#detección-de-anti-patrones)** — 11 reglas de detección
 - **[Verification Loop](#verification-loop)** — Auto-validación antes de guardar
 - **[External Resources](#external-resources)** — Documentación oficial de la que derivan los criterios
 
@@ -31,7 +35,7 @@ Actúa como un Agent Skills Quality Specialist. Evalúa cada skill contra los cr
 
 ### ✅ Always Do
 
-- **Leer los archivos de referencia antes de evaluar** — leer `.claude/skills/authoring-agent-skills/SKILL.md` y `blueprints/three-tier-architecture.md` antes de emitir cualquier criterio.
+- **Leer los archivos de referencia antes de evaluar** — leer `.claude/skills/authoring-agent-skills/SKILL.md` y `.claude/skills/authoring-agent-skills/blueprints/three-tier-architecture.md` antes de emitir cualquier criterio.
 - **Confirmar conteos con inspección real del filesystem** — usar `ls`/`Glob` para enumerar los SKILL.md presentes; nunca confiar en conteos auto-reportados ni asumir qué archivos existen.
 - **Citar el criterio exacto en cada hallazgo** — cada problema debe referenciar el criterio (A1, B2, D3, etc.) y la ubicación (nombre de archivo + sección).
 - **Generar un archivo individual por skill evaluada** — en `.claude/skills/[skill-name]/[skill-name]-best-practices-review.md`.
@@ -52,6 +56,24 @@ Actúa como un Agent Skills Quality Specialist. Evalúa cada skill contra los cr
 - **Nunca mezclar criterios oficiales con convenciones de equipo en la misma celda** — dificulta priorización. ✅ Mantener las tablas A-C (oficiales) y D (equipo) separadas como en la plantilla.
 - **Nunca omitir la sección "Recomendaciones por Prioridad"** — es la sección más accionable. ✅ Siempre incluirla con clasificación ALTA / MEDIA / BAJA.
 - **Nunca generar solo el resumen consolidado sin los archivos individuales** — el resumen sin detalle no permite corrección. ✅ Generar ambos: archivo individual + resumen.
+
+#### Hallazgo: incorrecto vs. correcto (lado a lado)
+
+El formato de cada hallazgo es la salida principal del validador. Contrasta:
+
+```markdown
+<!-- 🚫 INCORRECTO — inaccionable: sin criterio, sin ubicación -->
+- La descripción es muy larga y debería acortarse.
+- Faltan algunos guardrails.
+```
+
+```markdown
+<!-- ✅ CORRECTO — criterio + ubicación + acción -->
+- **A1** (SKILL.md, frontmatter `description`, línea 3): 1710 chars > límite 1536.
+  Reescribir con trigger "Use when…" ≤ 1536.
+- **D2** (SKILL.md, `## Blueprints & Guardrails`): falta el tier `### ⚠️ Ask First`.
+  Añadir el tier con ítems poblados.
+```
 
 ---
 
@@ -132,111 +154,15 @@ Explora `.claude/skills/*/SKILL.md` (o el directorio indicado en `$ARGUMENTS`) y
 
 ### Paso 3: Generar Archivos de Validación
 
-Para **cada skill evaluada**, crea un archivo individual en `.claude/skills/[skill-name]/[skill-name]-best-practices-review.md` con la siguiente estructura:
+Genera **dos artefactos** siguiendo las plantillas exactas en
+**[blueprints/output-templates.md](./blueprints/output-templates.md)**:
 
-```markdown
-# Análisis de Mejores Prácticas: [skill-name]
+1. **Un archivo individual por skill** — `.claude/skills/[skill-name]/[skill-name]-best-practices-review.md`
+   (header + Resumen + tabla oficial A1–A6/B/C + tabla equipo D1–D7 + Recomendaciones por Prioridad + Conclusiones).
+2. **El resumen consolidado** — `.claude/skills/skills-best-practices-summary.md`
+   (Resumen Ejecutivo + Matriz de Cumplimiento con una fila por skill + fila PROMEDIO + Recomendaciones Globales).
 
-**Fecha**: [Fecha]
-**Archivo**: `.claude/skills/[skill-name]/SKILL.md`
-**Líneas**: [N]
-**Referencia Oficial**: https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices
-**Referencia Equipo**: .claude/skills/authoring-agent-skills/SKILL.md
-
----
-
-## Resumen
-
-- Criterios oficiales cumplidos: [X]/8
-- Convenciones de equipo cumplidas: [X]/7
-- Problemas críticos: [N]
-
----
-
-## Criterios Oficiales (Claude Best Practices)
-
-| Criterio | Estado | Notas |
-|----------|--------|-------|
-| A1. YAML Frontmatter | ✅/❌ | [detalle] |
-| A2. Concisión (<500 líneas) | ✅/❌ | [detalle] |
-| A3. Disclosure Progresivo | ✅/❌ | [detalle] |
-| A4. Contenido (terminología, temporal) | ✅/❌ | [detalle] |
-| A5. Workflows claros | ✅/❌ | [detalle] |
-| A6. Rutas de archivo | ✅/❌ | [detalle] |
-| B. Código y Scripts | ✅/❌/N/A | [detalle] |
-| C. Testing/Evaluación | ✅/❌ | [detalle] |
-
-## Convenciones del Equipo
-
-| Criterio | Estado | Notas |
-|----------|--------|-------|
-| D1. Naming (gerundio, kebab) | ✅/❌ | [detalle] |
-| D2. Tres niveles (✅⚠️🚫) | ✅/❌ | [detalle] |
-| D3. Version Context | ✅/❌ | [detalle] |
-| D4. Verification Loop | ✅/❌ | [detalle] |
-| D5. Anti-patrones con alternativas | ✅/❌ | [detalle] |
-| D6. Links funcionales | ✅/❌ | [detalle] |
-| D7. Recursos externos | ✅/❌ | [detalle] |
-
----
-
-## Recomendaciones por Prioridad
-
-### ALTA (Bloquean Funcionalidad)
-[Lista — ej: YAML inválido, description vacía, body >500 líneas]
-
-### MEDIA (Reducen Calidad)
-[Lista — ej: terminología inconsistente, links rotos, sin feedback loops]
-
-### BAJA (Optimización)
-[Lista — ej: disclosure progresivo puede mejorar, naming no usa gerundio]
-
----
-
-## Conclusiones
-[Resumen de issues y fortalezas]
-```
-
-Después de generar todos los archivos individuales, crea `.claude/skills/skills-best-practices-summary.md` con la matriz comparativa:
-
-```markdown
-# Resumen de Mejores Prácticas — Agent Skills
-
-**Fecha**: [Fecha]
-**Referencia Oficial**: https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices
-
----
-
-## Resumen Ejecutivo
-
-- Skills evaluados: [N]
-- Cumplen criterios oficiales: [N] ([X]%)
-- Cumplen convenciones de equipo: [N] ([X]%)
-- Problemas críticos: [N]
-
----
-
-## Matriz de Cumplimiento
-
-| Skill | Oficial (A-C) | Equipo (D) | Total | Review |
-|-------|---------------|------------|-------|--------|
-| [skill-1] | [X]/8 | [X]/7 | [X]% | [skill-1-best-practices-review.md](skill-1/skill-1-best-practices-review.md) |
-| [skill-2] | [X]/8 | [X]/7 | [X]% | [skill-2-best-practices-review.md](skill-2/skill-2-best-practices-review.md) |
-| PROMEDIO | [X]/8 | [X]/7 | [X]% | — |
-
----
-
-## Recomendaciones Globales por Prioridad
-
-### ALTA (Bloquean Funcionalidad)
-[Lista consolidada]
-
-### MEDIA (Reducen Calidad)
-[Lista consolidada]
-
-### BAJA (Optimización)
-[Lista consolidada]
-```
+Copiar las estructuras del blueprint verbatim; no improvisar el formato.
 
 ---
 
@@ -250,7 +176,7 @@ El validador debe detectar y reportar:
 4. **Rutas Windows-style** — `scripts\helper.py` → `scripts/helper.py`
 5. **Referencias anidadas profundas** — SKILL.md → A.md → B.md → C.md → Aplanar a un nivel
 6. **Demasiadas opciones sin default** — "Use pypdf, or pdfplumber, or PyMuPDF" → Proporcionar default
-7. **Información sensible al tiempo** — "If before August 2025..." → Usar sección "old patterns"
+7. **Información sensible al tiempo** — fechas absolutas ("if before <mes> <año>...") o "edición <año>" → Usar sección "old patterns" o anclar a versión ("before upgrading to v2...")
 8. **Guardrails incompletos** (equipo) — Solo ✅ Always Do, sin ⚠️ o 🚫 → Marcar como incompleto
 9. **Anti-patrones sin alternativa** (equipo) — 🚫 sin código ✅ correcto → Marcar como crítico
 10. **Constantes mágicas** — `TIMEOUT = 47` sin explicación → Documentar razón
@@ -260,13 +186,30 @@ El validador debe detectar y reportar:
 
 ## Verification Loop
 
-Antes de guardar los archivos de salida, el validador DEBE auto-verificar:
+Antes de guardar los archivos de salida, el validador DEBE ejecutar estos comandos y confirmar la
+salida esperada. Sustituir `<skills-dir>` por el directorio validado (ej. `.claude/skills`).
 
-1. **Conteo de skills** — confirmar que el número de skills evaluadas en la matriz coincide con el número de archivos `SKILL.md` encontrados con `ls`/`Glob`.
-2. **Criterios cubiertos** — verificar que la tabla de cada skill contiene exactamente 8 filas de criterios oficiales (A1–A6, B, C) y 7 filas de equipo (D1–D7).
-3. **Archivos generados** — verificar que existe un archivo `[skill-name]-best-practices-review.md` para cada skill evaluada.
-4. **Resumen generado** — verificar que `skills-best-practices-summary.md` existe y contiene todas las skills de la matriz.
-5. **Hallazgos con criterio citado** — cada ítem en "Recomendaciones por Prioridad" debe referenciar al menos un criterio (A1, D2, etc.).
+```bash
+# 1. Conteo de skills: nº de review files debe igualar nº de SKILL.md
+find <skills-dir> -name SKILL.md | wc -l
+find <skills-dir> -name '*-best-practices-review.md' | wc -l   # → mismo número
+# 2. Resumen existe y lista todas las skills
+test -f <skills-dir>/skills-best-practices-summary.md && echo OK
+# 3. Cada skill tiene su review file (lista los que FALTAN — salida vacía = OK)
+for f in <skills-dir>/*/SKILL.md; do d=$(dirname "$f"); s=$(basename "$d"); \
+  test -f "$d/$s-best-practices-review.md" || echo "MISSING: $s"; done
+# 4. Cada review cita criterios (0 = fallo: review sin referencias A#/B/C/D#)
+for r in <skills-dir>/*/*-best-practices-review.md; do \
+  grep -qE '\b([A-D][0-9]?|B|C)\.' "$r" || echo "NO-CRITERIA: $r"; done
+```
+
+Checklist de contenido (verificación manual antes de guardar):
+
+- [ ] **Criterios cubiertos** — la tabla de cada skill tiene exactamente 8 filas oficiales (A1–A6, B, C) y 7 filas de equipo (D1–D7).
+- [ ] **Matriz completa** — el nº de filas en la matriz consolidada == salida del comando 1.
+- [ ] **Hallazgos accionables** — cada ítem en "Recomendaciones por Prioridad" referencia ≥1 criterio (A1, D2, etc.) + ubicación.
+
+Todos los comandos deben salir con código `0` y sin líneas `MISSING:` / `NO-CRITERIA:` antes de guardar.
 
 ---
 
