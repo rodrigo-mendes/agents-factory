@@ -1,6 +1,7 @@
 ---
 name: architecture-methodology-researcher
 description: Researches an architecture methodology or notation (C4, UML, ADR, TOGAF, DDD, EDA) into a hallucination-proof knowledge base. Use when researching an architecture methodology to author an architecture skill.
+argument-hint: "<methodology> (e.g. C4, TOGAF, DDD, EDA)"
 context: fork
 agent: framework-researcher
 disable-model-invocation: true
@@ -21,11 +22,38 @@ disable-model-invocation: true
 
 ## Quick Navigation
 
+- **[Blueprints & Guardrails](#blueprints--guardrails)** — Three-tier operational rules for this skill's own execution
 - **[Research Scope Detail](./blueprints/research-scope.md)** — Format templates for guardrails, toolchain, and scenario sections
 - **[Output Format](./blueprints/output-format.md)** — Full output file structure with all section templates
 - **[Evaluation Scenarios](./blueprints/evaluation-scenarios.md)** — 4 scenarios: canonical request, brownfield edge case, out-of-scope misuse, abstraction-level anti-pattern trap
 - **[Verification Loop](#verification-loop)** — Self-check checklist confirming the research output is complete
 - **[External Resources](#external-resources)** — Official methodology/domain standards
+
+---
+
+## Blueprints & Guardrails
+
+### ✅ Always Do
+
+- **Source from the official specification** — every mandatory element and forbidden pattern must cite the official `{{TARGET_VERSION_OR_EDITION}}` spec or authoritative body (OMG, OpenGroup, ADR community) with a URL and access date. No pattern is valid without a verifiable source.
+- **Reject patterns from superseded versions** — if a pattern is from a pre-`{{TARGET_VERSION_OR_EDITION}}` spec, flag it explicitly or exclude it. Version absolutism applies.
+- **Include a concrete Markdown artifact example for every forbidden pattern** — the Never-Do table must show a wrong artifact THEN the corrected artifact side by side. Prose prohibitions without examples are not acceptable.
+- **Declare abstraction level on every artifact example** — every diagram or decision record example must explicitly state its C4 level, UML diagram type, or equivalent abstraction level. Undeclared level is a hard violation.
+- **Flag guidance older than 18 months** — add a review note for any source older than 18 months (architecture methodology tooling and community conventions evolve frequently).
+
+### ⚠️ Ask First
+
+- **Abstraction scope ambiguity** — if `{{ARCHITECTURE_CONTEXT}}` spans multiple C4 levels or the user hasn't stated which abstraction level to focus on, ask before scoping research to a specific level.
+- **Multiple methodology combinations** — if the user's context mixes methodologies (e.g., C4 + TOGAF), ask which is the primary notation and which is supplemental before researching cross-methodology patterns.
+- **Governance requirements** — if the `{{ARCHITECTURE_CONTEXT}}` mentions enterprise, regulated, or compliance-driven environments, ask before including governance-specific ADR and diagram approval patterns that may not apply to all teams.
+
+### 🚫 Never Do
+
+| Anti-Pattern | Why Forbidden | Correct Alternative |
+|---|---|---|
+| Research patterns without pinning to `{{TARGET_VERSION_OR_EDITION}}` | Cross-version contamination produces contradictory notation guidance | Pin every section header with `{{TARGET_VERSION_OR_EDITION}}`; flag any pattern from a superseded version |
+| Leave a Never-Do entry as prose only | Agents need a concrete artifact to recognize the anti-pattern | Every prohibition must show a wrong diagram/ADR example followed by the corrected version |
+| Document what the architecture is without documenting why it is | Violates the core purpose of ADR; future architects lose the decision rationale | Every ADR must include Context (forces at play), Decision (what was chosen), Consequences (trade-offs accepted) |
 
 ---
 

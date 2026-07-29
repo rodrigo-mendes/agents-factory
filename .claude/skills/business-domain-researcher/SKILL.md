@@ -1,6 +1,7 @@
 ---
 name: business-domain-researcher
 description: Researches a business domain and its organizational processes into a structured, source-backed knowledge base. Use when researching a business/organizational domain to author a domain skill.
+argument-hint: "<business-domain> (e.g. supply-chain, fintech)"
 context: fork
 agent: framework-researcher
 disable-model-invocation: true
@@ -71,7 +72,7 @@ Non-negotiable standards required by regulation, professional ethics, or organiz
 - Required documentation before, during, and after interactions
 - Escalation triggers that cannot be bypassed
 
-#### ⚠️ Escalate/Validate — Human Decision Required
+#### ⚠️ Ask First
 
 Valid approaches requiring human validation before execution:
 - Decisions with financial, legal, or reputational impact above defined thresholds

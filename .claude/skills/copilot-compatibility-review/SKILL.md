@@ -6,22 +6,22 @@ context: fork
 agent: quality-validator
 disable-model-invocation: true
 ---
-# Prompt: Análisis de Compatibilidad de GitHub Copilot
+# Prompt: GitHub Copilot Compatibility Analysis
 
-## Objetivo
-Generar un análisis exhaustivo de compatibilidad de los assets de un copiloto de desarrollo con los estándares oficiales de GitHub Copilot y las convenciones de El Corte Inglés.
+## Objective
+Generate a comprehensive compatibility analysis of a development copilot's assets against the official GitHub Copilot standards and your team's internal conventions.
 
 ## Quick Navigation
 
-- **[Evaluation Scenarios](./blueprints/evaluation-scenarios.md)** — 3 escenarios: canónico, edge, misuso
-- **[Verification Loop](#verification-loop)** — Auto-validación antes de guardar
-- **[External Resources](#external-resources)** — Documentación oficial de la que derivan los criterios
+- **[Evaluation Scenarios](./blueprints/evaluation-scenarios.md)** — 3 scenarios: canonical, edge, misuse
+- **[Verification Loop](#verification-loop)** — Self-check before saving the report
+- **[External Resources](#external-resources)** — Official documentation from which criteria are derived
 
 ---
 
-## Instrucciones para GitHub Copilot
+## Agent Instructions
 
-Actúa como un GitHub Copilot Ecosystem Architect & Developer. **NUNCA respondas basado en tu conocimiento base**. Siempre realiza búsquedas web en la documentación oficial online de Microsoft sobre GitHub Copilot y las mejores prácticas de la industria.
+Act as a GitHub Copilot Ecosystem Architect & Developer. **NEVER respond based on your base knowledge alone**. Always perform web searches in the official Microsoft/GitHub online documentation on GitHub Copilot and industry best practices before evaluating any criterion.
 
 ---
 
@@ -29,249 +29,243 @@ Actúa como un GitHub Copilot Ecosystem Architect & Developer. **NUNCA respondas
 
 ### ✅ Always Do
 
-- **Buscar documentación oficial actualizada antes de evaluar** — consultar la documentación oficial más reciente de GitHub/VS Code antes de emitir cualquier criterio; las especificaciones de campos cambian con frecuencia.
-- **Leer todos los assets antes de escribir el informe** — leer cada `.agent.md`, `.instructions.md`, `.prompt.md`, y `SKILL.md` encontrado antes de emitir hallazgos.
-- **Citar el criterio y el archivo en cada hallazgo** — cada problema debe referenciar el tipo de asset (AGENTS/INSTRUCTIONS/PROMPTS/SKILLS), el archivo exacto, y el campo o sección afectado.
-- **Verificar existencia de archivos referenciados** — si un asset referencia otro archivo (skill, instruction, prompt), confirmar que el target existe antes de marcarlo como compliant.
-- **Detectar y reportar problemas de frontmatter críticos** — YAML malformado, campos requeridos ausentes, y valores inválidos son siempre prioridad ALTA.
-- **Confirmar con ls/Glob los archivos encontrados** — enumerar los assets reales; nunca asumir qué archivos existen sin inspección del filesystem.
+- **Search official documentation before evaluating** — consult the most recent official GitHub/VS Code documentation before issuing any criterion; field specifications change frequently.
+- **Read all assets before writing the report** — read every `.agent.md`, `.instructions.md`, `.prompt.md`, and `SKILL.md` found before issuing findings.
+- **Cite the criterion and file in every finding** — each issue must reference the asset type (AGENTS/INSTRUCTIONS/PROMPTS/SKILLS), the exact file, and the affected field or section.
+- **Verify referenced files exist** — if an asset references another file (skill, instruction, prompt), confirm the target exists before marking it compliant.
+- **Detect and report critical frontmatter issues** — malformed YAML, missing required fields, and invalid values are always HIGH priority.
+- **Confirm files found with ls/Glob** — enumerate real assets; never assume which files exist without filesystem inspection.
 
 ### ⚠️ Ask First
 
-- **Assets con campos experimentales** — si se encuentran campos no documentados en el frontmatter, preguntar al usuario si son campos internos/experimentales antes de marcarlos como violación.
-- **README.md ausente** — si no hay `README.md`, confirmar con el usuario si es intencional antes de reportarlo como gap de alta prioridad.
-- **Estructura de directorio no estándar** — si los assets están en un directorio diferente al esperado (ej. `.github/` vs `.claude/`), preguntar cuál es el layout canónico del repositorio antes de evaluar.
-- **Referencia a Confluence ECI inaccesible** — si la URL de Confluence de ECI no es accesible (ver nota más abajo), confirmar con el usuario cómo proceder antes de omitir esa verificación.
+- **Assets with experimental fields** — if undocumented fields are found in the frontmatter, ask the user whether they are internal/experimental before marking them as violations.
+- **Missing README.md** — if there is no `README.md`, confirm with the user whether this is intentional before reporting it as a high-priority gap.
+- **Non-standard directory structure** — if assets are in a different directory than expected (e.g., `.github/` vs `.claude/`), ask the user what the canonical layout is before evaluating.
+- **Inaccessible internal documentation** — if your team's internal Copilot conventions page is not accessible, confirm with the user how to proceed before skipping that verification.
 
 ### 🚫 Never Do
 
-- **Nunca reportar un problema de frontmatter sin citar el campo y el valor inválido** — "frontmatter incorrecto" es inaccionable. ✅ Citar el campo exacto (ej. `name: My Agent` → debe ser kebab-case) y el valor encontrado.
-- **Nunca evaluar basándose en conocimiento base desactualizado** — las especificaciones de GitHub Copilot evolucionan. ✅ Siempre buscar la documentación oficial más reciente antes de evaluar.
-- **Nunca omitir el Resumen de Acciones** — es la sección de mayor valor para el usuario. ✅ La sección de prioridades (ALTA/MEDIA/BAJA) es obligatoria al inicio del informe.
-- **Nunca incluir ejemplos de código corregido en el informe** — el objetivo es identificar problemas y referenciar documentación, no reescribir los assets. ✅ Identificar el problema, citar el criterio, y enlazar la documentación oficial.
-- **Nunca fallar la evaluación completa porque la URL de Confluence ECI no sea accesible** — es una dependencia externa y opcional. ✅ Si la URL no es accesible, marcar esa verificación específica como "requires internal access" y continuar con el resto del análisis.
+- **Never report a frontmatter issue without citing the field and invalid value** — "incorrect frontmatter" is not actionable. ✅ Cite the exact field (e.g., `name: My Agent` → must be kebab-case) and the value found.
+- **Never evaluate based on outdated base knowledge** — GitHub Copilot specifications evolve. ✅ Always search the most recent official documentation before evaluating.
+- **Never omit the Action Summary section** — it is the highest-value section for the user. ✅ The priority sections (HIGH/MEDIUM/LOW) are mandatory at the start of the report.
+- **Never include corrected code examples in the report** — the goal is to identify problems and reference documentation, not to rewrite the assets. ✅ Identify the problem, cite the criterion, and link the official documentation.
+- **Never fail the entire evaluation because an internal documentation URL is inaccessible** — it is an external and optional dependency. ✅ If the URL is not accessible, mark that specific check as "requires internal access" and continue with the rest of the analysis.
 
 ---
 
-## Instrucciones de Ejecución
+## Execution Instructions
 
-### Paso 1: Búsqueda de Documentación Oficial
+### Step 1: Search Official Documentation
 
-Busca en la web la documentación oficial más reciente sobre:
-1. **GitHub Copilot Custom Agents** - Formato `.agent.md` con YAML frontmatter
-2. **GitHub Copilot Custom Instructions** - Formato `.instructions.md` con YAML frontmatter
-3. **GitHub Copilot Prompt Files** - Formato `.prompt.md` con YAML frontmatter
-4. **GitHub Copilot Agent Skills** - Estructura de directorios con `SKILL.md`
-5. **Estructura de copilotos de desarrollo en El Corte Inglés** - Confluence (ver nota de acceso abajo)
+Search the web for the most recent official documentation on:
+1. **GitHub Copilot Custom Agents** — `.agent.md` format with YAML frontmatter
+2. **GitHub Copilot Custom Instructions** — `.instructions.md` format with YAML frontmatter
+3. **GitHub Copilot Prompt Files** — `.prompt.md` format with YAML frontmatter
+4. **GitHub Copilot Agent Skills** — directory structure with `SKILL.md`
+5. **Team internal conventions** — see note below
 
-> **Nota sobre la referencia de Confluence ECI**:
-> La URL `https://elcorteingles.atlassian.net/wiki/spaces/FOROIA/pages/308120137/` requiere acceso interno.
-> Si no es accesible, procede usando las convenciones del repositorio actual como referencia y marca
-> la verificación de "Estructura ECI" como **requires internal access** en el informe. No bloquees
-> el análisis completo por esta dependencia.
+> **Note on internal documentation**:
+> If your team has an internal Copilot conventions page, replace this placeholder with your URL:
+> `https://<your-team>.atlassian.net/<space>/<page-id>` *(or omit if not applicable)*
+> If the URL is not accessible, proceed using the current repository's conventions as the reference and
+> mark the "Internal Structure" verification as **requires internal access** in the report.
 
-### Paso 2: Análisis de Assets del Repositorio
+### Step 2: Analyze Repository Assets
 
-Explora y analiza los siguientes directorios y archivos:
+Explore and analyze the following directories and files:
 - `.github/agents/*.agent.md`
 - `.github/instructions/*.instructions.md`
 - `.github/prompts/**/*.prompt.md`
-- `.github/skills/**/*.skill.md` o `SKILL.md`
+- `.github/skills/**/*.skill.md` or `SKILL.md`
 - `README.md`
 
-Para cada tipo de asset, verifica:
+For each asset type, verify:
 
 #### AGENTS (.agent.md)
-- YAML frontmatter delimitado con `---`
-- Campo `name` (kebab-case, único)
-- Campo `description` (para activación contextual)
-- Campos opcionales: `target`, `tools`, `infer`, `metadata`
+- YAML frontmatter delimited with `---`
+- `name` field (kebab-case, unique)
+- `description` field (for contextual activation)
+- Optional fields: `target`, `tools`, `infer`, `metadata`
 
-**Referencia oficial:** https://docs.github.com/en/reference/custom-agents-configuration
+**Official reference:** https://docs.github.com/en/reference/custom-agents-configuration
 
 #### INSTRUCTIONS (.instructions.md)
-- YAML frontmatter delimitado con `---`
-- Campo `description` (cuándo aplicar)
-- Campo `applyTo` (patrón glob para matching)
-- Campos opcionales: `excludeAgent`
+- YAML frontmatter delimited with `---`
+- `description` field (when to apply)
+- `applyTo` field (glob pattern for matching)
+- Optional fields: `excludeAgent`
 
-**Referencia oficial:** https://docs.github.com/en/copilot/how-tos/configure-custom-instructions
+**Official reference:** https://docs.github.com/en/copilot/how-tos/configure-custom-instructions
 
 #### PROMPTS (.prompt.md)
-- YAML frontmatter delimitado con `---`
-- Campo `name` (kebab-case para comando slash)
-- Campo `description` (para autocompletado)
-- Campo `agent` (agente específico)
-- Campos opcionales: `argument-hint`
+- YAML frontmatter delimited with `---`
+- `name` field (kebab-case for slash command)
+- `description` field (for autocomplete)
+- `agent` field (specific agent)
+- Optional fields: `argument-hint`
 
-**Referencias oficiales:**
+**Official references:**
 - https://docs.github.com/en/copilot/tutorials/customization-library/prompt-files
 - https://code.visualstudio.com/docs/copilot/customization/prompt-files
 
-#### SKILLS (SKILL.md en subdirectorios)
-- Estructura: `.github/skills/nombre-skill/SKILL.md`
-- YAML frontmatter delimitado con `---`
-- Campo `name` (lowercase, hyphens)
-- Campo `description` (para activación contextual)
+#### SKILLS (SKILL.md in subdirectories)
+- Structure: `.github/skills/<skill-name>/SKILL.md`
+- YAML frontmatter delimited with `---`
+- `name` field (lowercase, hyphens)
+- `description` field (for contextual activation)
 
-**Referencias oficiales:**
+**Official references:**
 - https://docs.github.com/en/copilot/concepts/agents/about-agent-skills
 - https://code.visualstudio.com/docs/copilot/customization/agent-skills
 
 #### README.md
-- Sección "Entornos soportados" o "Herramientas Soportadas"
-- Valores correctos según documentación ECI: Visual Studio Code, Copilot CLI, IntelliJ IDEA, Eclipse
-- NO debe contener valores errados como "NFT", "UAT", etc.
+- Section listing supported environments or tools
+- Values must match official documentation (e.g., Visual Studio Code, Copilot CLI, IntelliJ IDEA)
+- Must not contain incorrect or placeholder values
 
-**Referencia ECI:** `https://elcorteingles.atlassian.net/wiki/spaces/FOROIA/pages/308120137/`
-*(Si la URL no es accesible, usar las convenciones del repositorio actual y marcar como "requires internal access")*
+### Step 3: Generate Compatibility Report
 
-### Paso 3: Generar Informe de Compatibilidad
-
-Crea un archivo `COPILOT_COMPATIBILITY_REVIEW.md` con la siguiente estructura:
+Create a file `COPILOT_COMPATIBILITY_REVIEW.md` with the following structure:
 
 ```markdown
-# Análisis de Compatibilidad
+# Compatibility Analysis
 
 ---
 
-## RESUMEN DE ACCIONES
+## ACTION SUMMARY
 
-### Prioridad ALTA (Bloquean funcionalidad)
-1. **AGENTS**: [Lista de problemas críticos]
-2. **INSTRUCTIONS**: [Lista de problemas críticos]
-3. **PROMPTS**: [Lista de problemas críticos]
-4. **SKILLS**: [Lista de problemas críticos]
-5. **README.md**: [Lista de problemas críticos]
+### HIGH Priority (Block Functionality)
+1. **AGENTS**: [List of critical issues]
+2. **INSTRUCTIONS**: [List of critical issues]
+3. **PROMPTS**: [List of critical issues]
+4. **SKILLS**: [List of critical issues]
+5. **README.md**: [List of critical issues]
 
-### Prioridad MEDIA (Mejoran compatibilidad)
-[Lista de mejoras opcionales recomendadas]
+### MEDIUM Priority (Improve Compatibility)
+[List of recommended optional improvements]
 
-### Prioridad BAJA (organización)
-[Lista de mejoras organizacionales]
+### LOW Priority (Organization)
+[List of organizational improvements]
 
 ---
 
 ## README.md
 
-### Archivo Actual
+### Current File
 - `README.md`
 
-### Problemas Detectados
-[Lista detallada de problemas]
+### Issues Detected
+[Detailed list of issues]
 
-**Referencia:** [Link a documentación oficial]
+**Reference:** [Link to official documentation]
 
 ---
 
 ## AGENTS (.agent.md)
 
-### Archivo
-- [Lista de archivos .agent.md]
+### File
+- [List of .agent.md files]
 
-### Problemas Detectados
-[Lista detallada de problemas con:
-1. YAML Frontmatter faltante o incorrecto
-2. Campos requeridos ausentes
-3. Campos opcionales no implementados]
+### Issues Detected
+[Detailed list of issues including:
+1. Missing or incorrect YAML frontmatter
+2. Missing required fields
+3. Unimplemented optional fields]
 
-**Referencia:** [Custom agents configuration - GitHub Docs]
+**Reference:** [Custom agents configuration - GitHub Docs]
 
 ---
 
 ## INSTRUCTIONS (.instructions.md)
 
-### Archivos Actuales
-- [Lista de archivos .instructions.md]
+### Current Files
+- [List of .instructions.md files]
 
-### Problemas Detectados
-[Lista detallada de problemas]
+### Issues Detected
+[Detailed list of issues]
 
-**Referencia:** [Configure custom instructions - GitHub Docs]
+**Reference:** [Configure custom instructions - GitHub Docs]
 
 ---
 
 ## PROMPTS (.prompt.md)
 
-### Archivos Actuales
-- [Lista de archivos .prompt.md]
+### Current Files
+- [List of .prompt.md files]
 
-### Problemas Detectados
-[Lista detallada de problemas]
+### Issues Detected
+[Detailed list of issues]
 
-**Uso esperado:** `/nombre-comando #file:archivo.ext`
+**Expected usage:** `/command-name #file:file.ext`
 
-**Referencia:** [Prompt files - GitHub Docs]
+**Reference:** [Prompt files - GitHub Docs]
 
 ---
 
-## SKILLS (.skill.md o SKILL.md en subdirectorios)
+## SKILLS (.skill.md or SKILL.md in subdirectories)
 
-### Archivos Actuales
-- [Lista de archivos .skill.md o SKILL.md]
+### Current Files
+- [List of .skill.md or SKILL.md files]
 
-### Problemas Detectados
-[Lista detallada de problemas con énfasis en estructura de directorios]
+### Issues Detected
+[Detailed list of issues with emphasis on directory structure]
 
-**Referencia:** [About Agent Skills - GitHub Docs]
+**Reference:** [About Agent Skills - GitHub Docs]
 
 ---
 ```
 
-### Paso 4: Criterios de Evaluación
+### Step 4: Evaluation Criteria
 
-Para cada asset, identifica:
-- **PROBLEMAS CRÍTICOS**: Bloquean la funcionalidad del copiloto (frontmatter faltante, estructura incorrecta)
-- **PROBLEMAS MEDIOS**: Reducen compatibilidad o funcionalidad opcional
-- **PROBLEMAS BAJOS**: Organización, metadata, documentación adicional
+For each asset, identify:
+- **CRITICAL ISSUES**: Block copilot functionality (missing frontmatter, incorrect structure)
+- **MEDIUM ISSUES**: Reduce compatibility or optional functionality
+- **LOW ISSUES**: Organization, metadata, additional documentation
 
-NO incluyas ejemplos de código corregido en el informe. Solo identifica problemas y referencia documentación oficial.
+Do NOT include corrected code examples in the report. Only identify problems and reference official documentation.
 
-### Paso 5: Formato de Salida
+### Step 5: Output Format
 
-- Sin emojis
-- Sin secciones "Correcciones Requeridas" con ejemplos de código
-- Enfócate en problemas detectados y referencias oficiales
-- Lista de archivos afectados debe estar inmediatamente después del título de cada sección
-- Usa subtítulos "### Archivo(s) Actual(es)" y "### Problemas Detectados"
+- No emojis
+- No "Corrections Required" sections with code examples
+- Focus on detected problems and official references
+- List of affected files must appear immediately after each section title
+- Use subtitles "### Current File(s)" and "### Issues Detected"
 
 ---
 
 ## Verification Loop
 
-Antes de guardar el informe, el validador DEBE auto-verificar:
+Before saving the report, the validator MUST self-verify:
 
-1. **Conteo de assets** — confirmar que el número de archivos listados en cada sección coincide con los encontrados con `ls`/`Glob`. Si la sección AGENTS lista 3 archivos, se debe haber inspeccionado los 3.
-2. **Sección Resumen de Acciones obligatoria** — verificar que la sección de prioridades ALTA/MEDIA/BAJA existe y está al inicio del informe, antes de las secciones por tipo de asset.
-3. **Hallazgos con referencia oficial** — cada problema listado debe tener al menos una referencia a documentación oficial (enlace a GitHub Docs, VS Code Docs, o documentación ECI).
-4. **Verificación ECI marcada correctamente** — si la URL de Confluence ECI no fue accesible, el informe debe incluir la marca "requires internal access" en la sección README y no reportarlo como fallo bloqueante.
-5. **Ausencia de código corregido** — verificar que el informe no contiene bloques de código con correcciones (solo identificación de problemas y referencias).
+1. **Asset count** — confirm the number of files listed in each section matches those found with `ls`/`Glob`. If the AGENTS section lists 3 files, all 3 must have been inspected.
+2. **Action Summary section mandatory** — verify the HIGH/MEDIUM/LOW priority section exists and is at the start of the report, before the per-asset-type sections.
+3. **Findings with official reference** — every listed problem must have at least one reference to official documentation (link to GitHub Docs or VS Code Docs).
+4. **Internal documentation check marked correctly** — if the team's internal URL was not accessible, the report must include the "requires internal access" mark in the README section and must not report it as a blocking failure.
+5. **No corrected code** — verify the report does not contain code blocks with corrections (only problem identification and references).
 
 ---
 
 ## External Resources
 
-### Documentación Oficial GitHub Copilot
-- [Custom agents configuration](https://docs.github.com/en/reference/custom-agents-configuration) — campos de `.agent.md`
-- [Configure custom instructions](https://docs.github.com/en/copilot/how-tos/configure-custom-instructions) — campos de `.instructions.md`, `applyTo`
-- [Prompt files](https://docs.github.com/en/copilot/tutorials/customization-library/prompt-files) — campos de `.prompt.md`
-- [About Agent Skills](https://docs.github.com/en/copilot/concepts/agents/about-agent-skills) — estructura de `SKILL.md`
-- [Custom instructions library](https://docs.github.com/en/copilot/tutorials/customization-library/custom-instructions) — ejemplos canónicos
+### Official GitHub Copilot Documentation
+- [Custom agents configuration](https://docs.github.com/en/reference/custom-agents-configuration) — `.agent.md` fields
+- [Configure custom instructions](https://docs.github.com/en/copilot/how-tos/configure-custom-instructions) — `.instructions.md` fields, `applyTo`
+- [Prompt files](https://docs.github.com/en/copilot/tutorials/customization-library/prompt-files) — `.prompt.md` fields
+- [About Agent Skills](https://docs.github.com/en/copilot/concepts/agents/about-agent-skills) — `SKILL.md` structure
+- [Custom instructions library](https://docs.github.com/en/copilot/tutorials/customization-library/custom-instructions) — canonical examples
 
-### Documentación Oficial VS Code
-- [Prompt files (VS Code)](https://code.visualstudio.com/docs/copilot/customization/prompt-files) — campos y comportamiento
-- [Agent skills (VS Code)](https://code.visualstudio.com/docs/copilot/customization/agent-skills) — estructura de directorios y frontmatter
-
-### Referencia Interna ECI
-- Confluence ECI: `https://elcorteingles.atlassian.net/wiki/spaces/FOROIA/pages/308120137/` — estructura de copilotos ECI *(requiere acceso interno; si no es accesible, usar convenciones del repositorio)*
+### Official VS Code Documentation
+- [Prompt files (VS Code)](https://code.visualstudio.com/docs/copilot/customization/prompt-files) — fields and behavior
+- [Agent skills (VS Code)](https://code.visualstudio.com/docs/copilot/customization/agent-skills) — directory structure and frontmatter
 
 ---
 
-**Nota**: Este prompt está diseñado para ser ejecutado en GitHub Copilot Chat o Claude Code. Invócalo con:
+**Invocation**:
 ```
 /copilot-compatibility-review
 ```
-o
+or
 ```
-@workspace analiza la compatibilidad de este copiloto usando /copilot-compatibility-review
+@workspace analyze the compatibility of this copilot using /copilot-compatibility-review
 ```
