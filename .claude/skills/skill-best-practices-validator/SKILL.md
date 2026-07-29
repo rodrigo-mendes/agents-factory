@@ -6,28 +6,29 @@ context: fork
 agent: quality-validator
 disable-model-invocation: true
 ---
-# Prompt: Validador de Mejores Prácticas para Agent Skills
+# Prompt: Agent Skills Best Practices Validator
 
-## Objetivo
-Generar un análisis de calidad y adherencia a mejores prácticas de Agent Skills basado en:
-- **Oficial**: https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices
-- **Equipo**: `.claude/skills/authoring-agent-skills/SKILL.md`
+## Objective
+Generate a quality and best-practices adherence analysis of Agent Skills based on:
+- **Official**: https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices
+- **Team**: `.claude/skills/authoring-agent-skills/SKILL.md`
 
 ## Quick Navigation
 
-- **[Output Templates](./blueprints/output-templates.md)** — plantillas del review individual + resumen consolidado
-- **[Evaluation Scenarios](./blueprints/evaluation-scenarios.md)** — 3 escenarios: canónico, edge, misuso
-- **[Instrucciones de Ejecución](#instrucciones-de-ejecución)** — workflow de 3 pasos
-- **[Criterios de Evaluación](#criterios-de-evaluación)** — A1–A6, B, C (oficial) + D1–D7 (equipo)
-- **[Detección de Anti-Patrones](#detección-de-anti-patrones)** — 11 reglas de detección
-- **[Verification Loop](#verification-loop)** — Auto-validación antes de guardar
-- **[External Resources](#external-resources)** — Documentación oficial de la que derivan los criterios
+- **[Output Templates](./blueprints/output-templates.md)** — individual review + consolidated summary templates
+- **[Evaluation Scenarios](./blueprints/evaluation-scenarios.md)** — 3 scenarios: canonical, edge, misuse
+- **[Execution Instructions](#execution-instructions)** — 3-step workflow
+- **[Evaluation Criteria](#evaluation-criteria)** — A1–A6, B, C (official) + D1–D7 (team)
+- **[Anti-Pattern Detection](#anti-pattern-detection)** — 11 detection rules
+- **[Verification Loop](#verification-loop)** — Self-validation before saving
+- **[External Resources](#external-resources)** — Official documentation from which criteria derive
 
 ---
 
-## Instrucciones para Agente
+## Agent Instructions
 
-Actúa como un Agent Skills Quality Specialist. Evalúa cada skill contra los criterios oficiales de Claude y las convenciones del equipo documentadas en `authoring-agent-skills`.
+Act as an Agent Skills Quality Specialist. Evaluate each skill against the official Claude criteria
+and the team conventions documented in `authoring-agent-skills`.
 
 ---
 
@@ -35,210 +36,241 @@ Actúa como un Agent Skills Quality Specialist. Evalúa cada skill contra los cr
 
 ### ✅ Always Do
 
-- **Leer los archivos de referencia antes de evaluar** — leer `.claude/skills/authoring-agent-skills/SKILL.md` y `.claude/skills/authoring-agent-skills/blueprints/three-tier-architecture.md` antes de emitir cualquier criterio.
-- **Confirmar conteos con inspección real del filesystem** — usar `ls`/`Glob` para enumerar los SKILL.md presentes; nunca confiar en conteos auto-reportados ni asumir qué archivos existen.
-- **Citar el criterio exacto en cada hallazgo** — cada problema debe referenciar el criterio (A1, B2, D3, etc.) y la ubicación (nombre de archivo + sección).
-- **Generar un archivo individual por skill evaluada** — en `.claude/skills/[skill-name]/[skill-name]-best-practices-review.md`.
-- **Generar el resumen consolidado al final** — `.claude/skills/skills-best-practices-summary.md` con la matriz comparativa de todas las skills.
-- **Contar líneas reales del SKILL.md** — usar lectura del archivo para confirmar el número de líneas; no estimarlo visualmente.
+- **Read reference files before evaluating** — read `.claude/skills/authoring-agent-skills/SKILL.md`
+  and `.claude/skills/authoring-agent-skills/blueprints/three-tier-architecture.md` before emitting
+  any criterion.
+- **Confirm counts with real filesystem inspection** — use `ls`/`Glob` to enumerate the SKILL.md
+  files present; never rely on self-reported counts or assume which files exist.
+- **Cite the exact criterion in each finding** — every issue must reference the criterion (A1, B2,
+  D3, etc.) and the location (filename + section).
+- **Generate an individual file per evaluated skill** — at
+  `.claude/skills/[skill-name]/[skill-name]-best-practices-review.md`.
+- **Generate the consolidated summary at the end** — `.claude/skills/skills-best-practices-summary.md`
+  with the comparative matrix of all skills.
+- **Count real lines in SKILL.md** — use file reading to confirm the line count; do not estimate
+  visually.
 
 ### ⚠️ Ask First
 
-- **Skills de terceros o legadas** — si la skill evaluada está marcada como de terceros o tiene avisos de "legacy", preguntar al usuario si aplicar los criterios de equipo D1-D7 o solo los oficiales A-C.
-- **Skills sin version context** — si el SKILL.md no declara versión, preguntar si la skill es intencionalmente agnóstica de versión o si falta el contexto.
-- **Directorio personalizado** — si el argumento `$ARGUMENTS` apunta a una ruta no estándar, confirmar antes de proceder.
-- **Skills con > 500 líneas** — cuando SKILL.md supera 500 líneas, preguntar si el usuario quiere solo el diagnóstico o también una propuesta de extracción a `blueprints/`.
+- **Third-party or legacy skills** — if the evaluated skill is marked as third-party or has
+  "legacy" notices, ask the user whether to apply team criteria D1-D7 or only the official A-C
+  criteria.
+- **Skills without version context** — if SKILL.md does not declare a version, ask whether the
+  skill is intentionally version-agnostic or if the context is missing.
+- **Custom directory** — if the `$ARGUMENTS` argument points to a non-standard path, confirm before
+  proceeding.
+- **Skills with > 500 lines** — when SKILL.md exceeds 500 lines, ask whether the user wants only
+  the diagnosis or also a proposed extraction to `blueprints/`.
 
 ### 🚫 Never Do
 
-- **Nunca reportar una violación sin citar criterio + ubicación** — produce output inaccionable. ✅ Siempre nombrar el criterio (ej. "A1 — description max 1536 chars") y la línea o sección donde ocurre.
-- **Nunca asumir que una skill cumple un criterio sin leer el archivo** — si el archivo no fue leído, no asignar estado. ✅ Leer el archivo completo antes de evaluar; reportar "archivo no leído" si es inaccesible.
-- **Nunca mezclar criterios oficiales con convenciones de equipo en la misma celda** — dificulta priorización. ✅ Mantener las tablas A-C (oficiales) y D (equipo) separadas como en la plantilla.
-- **Nunca omitir la sección "Recomendaciones por Prioridad"** — es la sección más accionable. ✅ Siempre incluirla con clasificación ALTA / MEDIA / BAJA.
-- **Nunca generar solo el resumen consolidado sin los archivos individuales** — el resumen sin detalle no permite corrección. ✅ Generar ambos: archivo individual + resumen.
+- **Never report a violation without citing criterion + location** — produces unactionable output.
+  ✅ Always name the criterion (e.g. "A1 — description max 1536 chars") and the line or section
+  where it occurs.
+- **Never assume a skill meets a criterion without reading the file** — if the file was not read,
+  do not assign a status. ✅ Read the complete file before evaluating; report "file not read" if
+  inaccessible.
+- **Never mix official criteria with team conventions in the same cell** — makes prioritization
+  harder. ✅ Keep the A-C (official) and D (team) tables separate as in the template.
+- **Never omit the "Recommendations by Priority" section** — it is the most actionable section.
+  ✅ Always include it with HIGH / MEDIUM / LOW classification.
+- **Never generate only the consolidated summary without individual files** — summary without detail
+  does not allow correction. ✅ Generate both: individual file + summary.
 
-#### Hallazgo: incorrecto vs. correcto (lado a lado)
+#### Finding: incorrect vs. correct (side by side)
 
-El formato de cada hallazgo es la salida principal del validador. Contrasta:
+The format of each finding is the validator's primary output. Contrast:
 
 ```markdown
-<!-- 🚫 INCORRECTO — inaccionable: sin criterio, sin ubicación -->
-- La descripción es muy larga y debería acortarse.
-- Faltan algunos guardrails.
+<!-- 🚫 INCORRECT — unactionable: no criterion, no location -->
+- The description is too long and should be shortened.
+- Some guardrails are missing.
 ```
 
 ```markdown
-<!-- ✅ CORRECTO — criterio + ubicación + acción -->
-- **A1** (SKILL.md, frontmatter `description`, línea 3): 1710 chars > límite 1536.
-  Reescribir con trigger "Use when…" ≤ 1536.
-- **D2** (SKILL.md, `## Blueprints & Guardrails`): falta el tier `### ⚠️ Ask First`.
-  Añadir el tier con ítems poblados.
+<!-- ✅ CORRECT — criterion + location + action -->
+- **A1** (SKILL.md, frontmatter `description`, line 3): 1710 chars > limit 1536.
+  Rewrite with "Use when…" trigger ≤ 1536.
+- **D2** (SKILL.md, `## Blueprints & Guardrails`): `### ⚠️ Ask First` tier is missing.
+  Add the tier with populated items.
 ```
 
 ---
 
-## Instrucciones de Ejecución
+## Execution Instructions
 
-### Paso 1: Cargar Criterios de Referencia
+### Step 1: Load Reference Criteria
 
-Lee los siguientes archivos antes de evaluar:
-1. `.claude/skills/authoring-agent-skills/SKILL.md` — Estándar del equipo
-2. `.claude/skills/authoring-agent-skills/blueprints/three-tier-architecture.md` — Arquitectura de tres niveles
+Read the following files before evaluating:
+1. `.claude/skills/authoring-agent-skills/SKILL.md` — Team standard
+2. `.claude/skills/authoring-agent-skills/blueprints/three-tier-architecture.md` — Three-tier architecture
 
-### Paso 2: Descubrir y Analizar Skills
+### Step 2: Discover and Analyze Skills
 
-Explora `.claude/skills/*/SKILL.md` (o el directorio indicado en `$ARGUMENTS`) y evalúa cada skill según los criterios abajo.
+Explore `.claude/skills/*/SKILL.md` (or the directory indicated in `$ARGUMENTS`) and evaluate each
+skill against the criteria below.
 
 ---
 
-## Criterios de Evaluación
+## Evaluation Criteria
 
-### A. Calidad Core (Oficial — de Claude Best Practices)
+### A. Core Quality (Official — from Claude Best Practices)
 
 **A1. YAML Frontmatter**
-- `name`: max 64 chars, solo minúsculas/números/guiones, sin XML tags, sin palabras reservadas (`anthropic`, `claude`)
-- `description`: no vacío, max 1536 chars, sin XML tags
-- Descripción en **tercera persona** (no "I can help" ni "You can use")
-- Incluye QUÉ hace Y CUÁNDO usarlo
+- `name`: max 64 chars, only lowercase/numbers/hyphens, no XML tags, no reserved words
+  (`anthropic`, `claude`)
+- `description`: non-empty, max 1536 chars, no XML tags
+- Description in **third person** (not "I can help" or "You can use")
+- Includes WHAT it does AND WHEN to use it
 
-**A2. Concisión**
-- SKILL.md body bajo 500 líneas
-- Solo agrega contexto que Claude no conoce
-- Sin explicaciones innecesarias
+**A2. Conciseness**
+- SKILL.md body under 500 lines
+- Only adds context Claude does not already have
+- No unnecessary explanations
 
-**A3. Estructura y Disclosure Progresivo**
-- Detalles adicionales en archivos separados (si necesario)
-- Referencias a archivos: máximo un nivel de profundidad desde SKILL.md
-- Archivos de referencia >100 líneas incluyen tabla de contenido
-- Nombres de archivos descriptivos (`form_validation_rules.md`, no `doc2.md`)
+**A3. Structure and Progressive Disclosure**
+- Additional details in separate files (when needed)
+- File references: maximum one level deep from SKILL.md
+- Reference files >100 lines include a table of contents
+- Descriptive file names (`form_validation_rules.md`, not `doc2.md`)
 
-**A4. Contenido**
-- Sin información sensible al tiempo (o en sección "old patterns")
-- Terminología consistente (no mezclar "API endpoint", "URL", "route")
-- Ejemplos concretos, no abstractos
-- No ofrecer demasiadas opciones — proporcionar un default + escape hatch
+**A4. Content**
+- No time-sensitive information (or in an "old patterns" section)
+- Consistent terminology (do not mix "API endpoint", "URL", "route")
+- Concrete examples, not abstract ones
+- Do not offer too many options — provide a default + escape hatch
 
 **A5. Workflows**
-- Operaciones complejas tienen pasos secuenciales claros
-- Feedback loops presentes para tareas críticas (ejecutar → validar → corregir → repetir)
+- Complex operations have clear sequential steps
+- Feedback loops present for critical tasks (run → validate → fix → repeat)
 
-**A6. Rutas de Archivo**
-- Solo forward slashes (`scripts/helper.py`, no `scripts\helper.py`)
-- Solo rutas relativas o URLs completas (nunca `C:\Users\...` o `/home/user/...`)
+**A6. File Paths**
+- Forward slashes only (`scripts/helper.py`, not `scripts\helper.py`)
+- Only relative paths or full URLs (never `C:\Users\...` or `/home/user/...`)
 
-### B. Código y Scripts (Oficial)
+### B. Code and Scripts (Official)
 
-**B1. Scripts resuelven problemas** — no delegan al agente lo que un script puede resolver
-**B2. Manejo de errores explícito** — scripts no fallan silenciosamente
-**B3. Sin "constantes mágicas"** — todos los valores documentados/justificados
-**B4. Dependencias listadas** — paquetes requeridos documentados
-**B5. Validación** — pasos de verificación para operaciones críticas
+**B1. Scripts solve problems** — do not delegate to the agent what a script can resolve
+**B2. Explicit error handling** — scripts do not fail silently
+**B3. No "magic constants"** — all values documented/justified
+**B4. Listed dependencies** — required packages documented
+**B5. Validation** — verification steps for critical operations
 
-### C. Testing (Oficial)
+### C. Testing (Official)
 
-**C1.** Al menos 3 escenarios de evaluación creados
-**C2.** Probado con escenarios de uso real
-**C3.** Feedback del equipo incorporado (si aplica)
+**C1.** At least 3 evaluation scenarios created
+**C2.** Tested with real usage scenarios
+**C3.** Team feedback incorporated (if applicable)
 
-### D. Convenciones del Equipo
+### D. Team Conventions
 
-**D1. Naming**: YAML `name` = nombre de carpeta = kebab-case (forma gerundio preferida)
-**D2. Tres niveles**: ✅ Always Do, ⚠️ Ask First, 🚫 Never Do — todos presentes y poblados
-**D3. Version Context**: Sección incluida (si el skill es específico de versión)
-**D4. Verification Loop**: Comandos presentes y testeados
-**D5. Anti-patrones**: Código incorrecto + alternativa correcta lado a lado
-**D6. Links**: Todos funcionales, sin 404s
-**D7. Recursos externos**: Links a documentación oficial
+**D1. Naming**: YAML `name` = folder name = kebab-case (gerund form preferred)
+**D2. Three tiers**: ✅ Always Do, ⚠️ Ask First, 🚫 Never Do — all present and populated
+**D3. Version Context**: Section included (if the skill is version-specific)
+**D4. Verification Loop**: Commands present and tested
+**D5. Anti-patterns**: Incorrect code + correct alternative side by side
+**D6. Links**: All functional, no 404s
+**D7. External resources**: Links to official documentation
 
 ---
 
-### Paso 3: Generar Archivos de Validación
+### Step 3: Generate Validation Files
 
-Genera **dos artefactos** siguiendo las plantillas exactas en
+Generate **two artifacts** following the exact templates in
 **[blueprints/output-templates.md](./blueprints/output-templates.md)**:
 
-1. **Un archivo individual por skill** — `.claude/skills/[skill-name]/[skill-name]-best-practices-review.md`
-   (header + Resumen + tabla oficial A1–A6/B/C + tabla equipo D1–D7 + Recomendaciones por Prioridad + Conclusiones).
-2. **El resumen consolidado** — `.claude/skills/skills-best-practices-summary.md`
-   (Resumen Ejecutivo + Matriz de Cumplimiento con una fila por skill + fila PROMEDIO + Recomendaciones Globales).
+1. **One individual file per skill** —
+   `.claude/skills/[skill-name]/[skill-name]-best-practices-review.md`
+   (header + Summary + official table A1–A6/B/C + team table D1–D7 + Recommendations by Priority
+   + Conclusions).
+2. **The consolidated summary** — `.claude/skills/skills-best-practices-summary.md`
+   (Executive Summary + Compliance Matrix with one row per skill + AVERAGE row + Global
+   Recommendations).
 
-Copiar las estructuras del blueprint verbatim; no improvisar el formato.
+Copy the blueprint structures verbatim; do not improvise the format.
 
 ---
 
-## Detección de Anti-Patrones
+## Anti-Pattern Detection
 
-El validador debe detectar y reportar:
+The validator must detect and report:
 
-1. **SKILL.md excede 500 líneas** — Recomendar extraer contenido a `blueprints/`
-2. **Descripción vaga o en primera persona** — "Helps with docs" o "I can process files" → Corregir a tercera persona con trigger
-3. **description supera 1536 chars** — Truncar y reescribir con trigger "Use when..."
-4. **Rutas Windows-style** — `scripts\helper.py` → `scripts/helper.py`
-5. **Referencias anidadas profundas** — SKILL.md → A.md → B.md → C.md → Aplanar a un nivel
-6. **Demasiadas opciones sin default** — "Use pypdf, or pdfplumber, or PyMuPDF" → Proporcionar default
-7. **Información sensible al tiempo** — fechas absolutas ("if before <mes> <año>...") o "edición <año>" → Usar sección "old patterns" o anclar a versión ("before upgrading to v2...")
-8. **Guardrails incompletos** (equipo) — Solo ✅ Always Do, sin ⚠️ o 🚫 → Marcar como incompleto
-9. **Anti-patrones sin alternativa** (equipo) — 🚫 sin código ✅ correcto → Marcar como crítico
-10. **Constantes mágicas** — `TIMEOUT = 47` sin explicación → Documentar razón
-11. **Scripts que delegan al agente** — Script que simplemente falla y deja al agente resolver → Manejar errores explícitamente
+1. **SKILL.md exceeds 500 lines** — Recommend extracting content to `blueprints/`
+2. **Vague or first-person description** — "Helps with docs" or "I can process files" → Correct to
+   third person with trigger
+3. **description exceeds 1536 chars** — Truncate and rewrite with "Use when..." trigger
+4. **Windows-style paths** — `scripts\helper.py` → `scripts/helper.py`
+5. **Deep nested references** — SKILL.md → A.md → B.md → C.md → Flatten to one level
+6. **Too many options without a default** — "Use pypdf, or pdfplumber, or PyMuPDF" → Provide
+   default
+7. **Time-sensitive information** — absolute dates ("if before <month> <year>...") or
+   "edition <year>" → Use "old patterns" section or anchor to version ("before upgrading to v2...")
+8. **Incomplete guardrails** (team) — Only ✅ Always Do, missing ⚠️ or 🚫 → Flag as incomplete
+9. **Anti-patterns without alternative** (team) — 🚫 without ✅ correct code → Flag as critical
+10. **Magic constants** — `TIMEOUT = 47` without explanation → Document reason
+11. **Scripts that delegate to the agent** — Script that simply fails and leaves the agent to
+    resolve → Handle errors explicitly
 
 ---
 
 ## Verification Loop
 
-Antes de guardar los archivos de salida, el validador DEBE ejecutar estos comandos y confirmar la
-salida esperada. Sustituir `<skills-dir>` por el directorio validado (ej. `.claude/skills`).
+Before saving the output files, the validator MUST run these commands and confirm the expected
+output. Replace `<skills-dir>` with the validated directory (e.g. `.claude/skills`).
 
 ```bash
-# 1. Conteo de skills: nº de review files debe igualar nº de SKILL.md
+# 1. Skill count: number of review files must equal number of SKILL.md
 find <skills-dir> -name SKILL.md | wc -l
-find <skills-dir> -name '*-best-practices-review.md' | wc -l   # → mismo número
-# 2. Resumen existe y lista todas las skills
+find <skills-dir> -name '*-best-practices-review.md' | wc -l   # → same number
+# 2. Summary exists and lists all skills
 test -f <skills-dir>/skills-best-practices-summary.md && echo OK
-# 3. Cada skill tiene su review file (lista los que FALTAN — salida vacía = OK)
+# 3. Each skill has its review file (lists those MISSING — empty output = OK)
 for f in <skills-dir>/*/SKILL.md; do d=$(dirname "$f"); s=$(basename "$d"); \
   test -f "$d/$s-best-practices-review.md" || echo "MISSING: $s"; done
-# 4. Cada review cita criterios (0 = fallo: review sin referencias A#/B/C/D#)
+# 4. Each review cites criteria (0 = failure: review without A#/B/C/D# references)
 for r in <skills-dir>/*/*-best-practices-review.md; do \
   grep -qE '\b([A-D][0-9]?|B|C)\.' "$r" || echo "NO-CRITERIA: $r"; done
 ```
 
-Checklist de contenido (verificación manual antes de guardar):
+Content checklist (manual verification before saving):
 
-- [ ] **Criterios cubiertos** — la tabla de cada skill tiene exactamente 8 filas oficiales (A1–A6, B, C) y 7 filas de equipo (D1–D7).
-- [ ] **Matriz completa** — el nº de filas en la matriz consolidada == salida del comando 1.
-- [ ] **Hallazgos accionables** — cada ítem en "Recomendaciones por Prioridad" referencia ≥1 criterio (A1, D2, etc.) + ubicación.
+- [ ] **Criteria covered** — each skill's table has exactly 8 official rows (A1–A6, B, C) and 7
+  team rows (D1–D7).
+- [ ] **Complete matrix** — the number of rows in the consolidated matrix == output of command 1.
+- [ ] **Actionable findings** — each item in "Recommendations by Priority" references ≥1 criterion
+  (A1, D2, etc.) + location.
 
-Todos los comandos deben salir con código `0` y sin líneas `MISSING:` / `NO-CRITERIA:` antes de guardar.
+All commands must exit with code `0` and no `MISSING:` / `NO-CRITERIA:` lines before saving.
 
 ---
 
-## Formato de Salida
+## Output Format
 
-- Lenguaje técnico y objetivo
-- Enfoque en problemas específicos, no generalizaciones
-- Diferenciar claramente: criterios **oficiales** (de Claude docs) vs **convenciones del equipo**
-- Matriz de cumplimiento para visualización rápida
-- Acciones concretas y priorizadas
+- Technical and objective language
+- Focus on specific problems, not generalizations
+- Clearly differentiate: **official** criteria (from Claude docs) vs **team conventions**
+- Compliance matrix for quick visualization
+- Concrete and prioritized actions
 
 ---
 
 ## External Resources
 
-### Documentación Oficial Claude
-- [Claude Agent Skills Best Practices](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices) — fuente primaria de los criterios A-C
-- [Claude Agent Skills Overview](https://platform.claude.com/docs/en/agents-and-tools/agent-skills) — definición de skills y frontmatter válido
+### Official Claude Documentation
+- [Claude Agent Skills Best Practices](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices) — primary source of A-C criteria
+- [Claude Agent Skills Overview](https://platform.claude.com/docs/en/agents-and-tools/agent-skills) — skill definition and valid frontmatter
 
-### Convenciones del Equipo
-- [authoring-agent-skills SKILL.md](./../authoring-agent-skills/SKILL.md) — estándar del equipo (criterios D)
-- [authoring-agent-skills — three-tier-architecture](./../authoring-agent-skills/blueprints/three-tier-architecture.md) — arquitectura de tres niveles
-- [skill-frontmatter rules](./../../rules/skill-frontmatter.md) — límites de frontmatter (description max 1536 chars, `allowed-tools` vs `tools`, etc.)
+### Team Conventions
+- [authoring-agent-skills SKILL.md](./../authoring-agent-skills/SKILL.md) — team standard (D criteria)
+- [authoring-agent-skills — three-tier-architecture](./../authoring-agent-skills/blueprints/three-tier-architecture.md) — three-tier architecture
+- [skill-frontmatter rules](./../../rules/skill-frontmatter.md) — frontmatter limits (description max 1536 chars, `allowed-tools` vs `tools`, etc.)
 
 ---
 
-**Invocación sugerida**:
+**Suggested invocation**:
 ```
-Analiza los skills en este repositorio usando el validador de mejores prácticas.
+Analyze the skills in this repository using the best practices validator.
 ```
 
-**Salida esperada**: Un archivo `.claude/skills/[skill-name]/[skill-name]-best-practices-review.md` por skill + `.claude/skills/skills-best-practices-summary.md` con la matriz comparativa consolidada.
+**Expected output**: A `.claude/skills/[skill-name]/[skill-name]-best-practices-review.md` file per
+skill + `.claude/skills/skills-best-practices-summary.md` with the consolidated comparative matrix.

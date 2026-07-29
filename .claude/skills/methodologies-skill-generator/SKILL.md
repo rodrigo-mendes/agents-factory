@@ -1,6 +1,7 @@
 ---
 name: methodologies-skill-generator
 description: Researches an engineering/process methodology and generates an operational SKILL.md for producing correct artifacts. Use when turning a methodology into a skill.
+argument-hint: "<methodology> (e.g. TDD, scrum, kanban)"
 context: fork
 agent: skill-author
 disable-model-invocation: true

@@ -47,6 +47,11 @@ This orchestrator must **not** just describe running three models. It forks into
 parallel** as real sub-agents, then synthesizes. See
 [.claude/agents/architecture-auditor.md](../../agents/architecture-auditor.md).
 
+> **Criteria fidelity:** when `architecture-auditor` spawns each lens sub-agent, the complete
+> criteria for that lens must be embedded in the prompt. Scope: G0–G4 + XCC criteria;
+> Flow: FCC.1–FCC.20; Engine: ECC.1–ECC.18. Each lens command's SKILL.md body carries its
+> criteria — pass them explicitly; do not rely on description-match alone.
+
 ---
 
 ## ✅ Always Do
@@ -113,6 +118,10 @@ Each model has blind spots the others cover:
 │ 🟢 CONSIDER  │   │ 🟢 CONSIDER  │   │ 🟢 CONSIDER  │
 └──────────────┘   └──────────────┘   └──────────────┘
 ```
+
+> **Recursion guard:** spawn only the three single-lens variants (`audit-cc-architecture-scope`,
+> `audit-cc-architecture-flow`, `audit-cc-architecture-engine`). Never spawn
+> `audit-cc-architecture-consensus` from within this orchestration.
 
 ---
 

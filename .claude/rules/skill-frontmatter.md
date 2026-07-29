@@ -1,7 +1,10 @@
 ---
+name: skill-frontmatter
 paths:
   - ".claude/skills/**/SKILL.md"
   - ".claude/agents/*.md"
+  - ".claude/rules/*.md"
+  - ".claude/templates/**/*.md"
 ---
 
 # Convenções de frontmatter (fábrica de artefatos)
