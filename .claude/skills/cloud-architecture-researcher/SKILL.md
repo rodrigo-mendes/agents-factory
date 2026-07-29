@@ -1,6 +1,7 @@
 ---
 name: cloud-architecture-researcher
 description: Researches a cloud provider's architecture framework/patterns (AWS WAF, Azure CAF, GCP, OCI) into a hallucination-proof, version-absolute knowledge base. Use when researching cloud architecture best practices for a skill.
+argument-hint: "<cloud-provider> (e.g. AWS, Azure, GCP, OCI)"
 context: fork
 agent: framework-researcher
 disable-model-invocation: true
@@ -22,10 +23,40 @@ disable-model-invocation: true
 
 ## Quick Navigation
 
+- **[Blueprints & Guardrails](#blueprints--guardrails)** — Three-tier operational rules for this skill's own execution
 - **[Cloud Patterns & Reference](./blueprints/research-scope-patterns.md)** — Cloud-native design, security, networking, landing zones, service equivalence map
 - **[Output Template](./blueprints/output-format.md)** — Full research document structure with all required sections
 - **[Evaluation Scenarios](./blueprints/evaluation-scenarios.md)** — 4 scenarios: canonical WAF research, multi-cloud edge case, misuse/ADR-authoring, anti-pattern trap
+- **[Verification Loop](#verification-loop)** — Self-check commands after completing research
 - **[External Resources](#external-resources)** — Official framework docs and architecture centers this skill relies on
+
+---
+
+## Blueprints & Guardrails
+
+### ✅ Always Do
+
+- **Source every pattern from the official provider framework** — cite the exact document, section, and access date for every Always-Do and Never-Do item. No pattern ships without a verifiable URL.
+- **Use exact provider-specific service names** — never substitute generic terms (e.g., write "AWS S3" not "object storage", "Azure Event Hubs" not "message bus") when a canonical name exists in `{{CLOUD_PROVIDER}}` docs.
+- **Pin to `{{TARGET_EDITION}}`** — reject patterns from earlier editions; flag any source with no explicit version/edition as unverified.
+- **Flag content older than 12 months** — cloud services evolve (GA promotions, pricing changes, new regions). Add a `> ⚠️ Source dated [YYYY-MM]; verify currency.` note for any source past 12 months.
+- **Apply all six mandatory output sections** — every research output must include: Framework Pillars, Always-Do Patterns, Ask-First Decisions, Never-Do Anti-patterns, Service Equivalence Map, and Source Bibliography.
+
+### ⚠️ Ask First
+
+- **Multi-cloud scope** — if `{{CLOUD_PROVIDER}}` covers more than one provider, confirm whether the user wants unified patterns, per-provider sections, or a comparison matrix before proceeding.
+- **Compliance-specific requirements** — SOC2, HIPAA, PCI-DSS, GDPR patterns depend on the organization's certification scope. Surface the requirement and ask before adding compliance-specific architecture constraints.
+- **Cost optimization decisions** — pricing guidance tied to billing agreements, reserved instances, or committed use discounts is organization-specific. Ask before adding cost prescriptions beyond general optimization patterns.
+- **Scope of Never-Do section** — if the provider framework classifies a pattern as "discouraged" but not explicitly forbidden, ask whether to include it under Never-Do or Ask-First.
+
+### 🚫 Never Do
+
+| Anti-Pattern | Why Forbidden | Correct Alternative |
+|---|---|---|
+| Include patterns without a verifiable provider URL | Hallucination risk; unverifiable claims undermine the knowledge base | Every pattern must link to official provider documentation with access date |
+| Use generic cloud terms when provider-specific names exist | Breaks Provider Fidelity; readers cannot act on "use a managed database" | Use exact service names: "Amazon RDS Multi-AZ", "Azure SQL Hyperscale", "Cloud Spanner" |
+| Research multi-provider patterns without explicitly scoping to `{{TARGET_EDITION}}` | Different editions have different pillars and guidelines; mixing versions produces contradictions | Pin every section to `{{TARGET_EDITION}}`; reject cross-edition pattern mix |
+| Omit the Service Equivalence Map | Architects choosing between providers need the comparison — it is a mandatory output section | Always include the equivalence table across AWS / GCP / Azure / OCI for every service class covered |
 
 ---
 
@@ -35,7 +66,7 @@ Senior Cloud Architecture Researcher & AI Safety Engineer specializing in **`{{C
 
 ## Core Principles
 
-1. **Provider-Edition Absolutism**: Only patterns, services, and recommendations valid for `{{TARGET_EDITION}}` — treat deprecated services, sunset features, renamed APIs, and outdated pricing models as misinformation
+1. **Version Absolutism**: Only patterns, services, and recommendations valid for `{{TARGET_EDITION}}` — treat deprecated services, sunset features, renamed APIs, and outdated pricing models as misinformation
 2. **Source Hierarchy**: Official Cloud Provider Documentation > Well-Architected / CAF Reviews > Provider Reference Architectures > Recognized Cloud Architecture Books (Richards, Ford, Kleppmann) > Practitioner Community > Reject All Else
 3. **Architectural Completeness**: Every pattern must include: context (when), forces (why), solution (what), consequences (trade-offs), and verification (how to validate)
 4. **Decision Traceability**: Architecture patterns must support reasoning, not just description — capture *why* a pattern applies, *what* it trades off, and *when* it breaks down
@@ -107,7 +138,7 @@ Source: [Official documentation URL]
 
 ---
 
-## 2. Three-Tier Operational Guardrails
+## 2. Domain Research Tiers (Output Content)
 
 ### ✅ Always Do: Mandatory Cloud Architecture Patterns
 
@@ -216,6 +247,38 @@ Cloud-native design, segurança, operações, migração, networking, landing zo
 # Output Format
 
 Template de saída (Metadata, Executive Summary, Glossary, Architecture Guardrails, design patterns, reference architectures, service map, differentiators, scenario coverage). Estrutura completa em [Output Template](./blueprints/output-format.md).
+
+---
+
+## Verification Loop
+
+Run this checklist before finalizing any research output.
+
+```
+[ ] TARGET_EDITION explicitly stated in output metadata and in every major section
+[ ] All 6 mandatory output sections present: Framework Pillars, Always-Do Patterns,
+    Ask-First Decisions, Never-Do Anti-patterns, Service Equivalence Map, Source Bibliography
+[ ] Every pattern cites an official provider URL with access date
+[ ] Every Never-Do entry has a side-by-side ❌ Wrong / ✅ Correct example using exact service names
+[ ] All sources dated; sources > 12 months flagged with ⚠️ note
+[ ] Service Equivalence Map covers all service classes researched
+[ ] No generic cloud terms where provider-specific names exist
+```
+
+```bash
+# Confirm mandatory output sections are present
+grep -E "^## (Framework Pillars|Mandatory Patterns|Architectural Decisions|Anti-Patterns|Service Equivalence|Source Bibliography)" \
+  research_*.md
+# Expected: all 6 headers appear
+
+# Confirm every Never-Do entry has a correct alternative
+grep -c "✅ Correct" research_*.md
+# Expected: equals or exceeds the number of anti-pattern entries
+
+# Confirm version/edition appears throughout (not only in header)
+grep -c "{{TARGET_EDITION}}\|WAF 20\|CAF v\|Architecture Framework 20" research_*.md
+# Expected: multiple matches distributed across sections
+```
 
 ---
 

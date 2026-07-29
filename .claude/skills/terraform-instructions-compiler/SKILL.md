@@ -1,6 +1,7 @@
 ---
 name: terraform-instructions-compiler
 description: Interactive compiler that extracts Terraform best practices from a research file, interviews the user, and compiles targeted rules/instruction files. Use when turning Terraform research into scoped rules.
+argument-hint: "<research-file-path> (e.g. StoryBeat/research_terraform_v1.5.md)"
 context: fork
 agent: skill-author
 disable-model-invocation: true
@@ -40,7 +41,7 @@ These rules govern this compiler's own operation (not the instruction files it g
 - **Present the plan before generating** — After the interview, produce the full file plan and wait for explicit user approval before writing any instruction file. Never generate files speculatively.
 - **Always generate `terraform-standards.md`** — This file is mandatory regardless of interview answers. It is the foundation for all other instruction files.
 - **Produce the coverage matrix** — After generating all files, present Phase 5 coverage matrix to the user showing which research patterns map to which instruction files and how many remain pending.
-- **Use the correct template for each file type** — Load templates from `.claude/templates/instructions/` and match each generated file to STANDARDS, CONFIG, or SKILLS as appropriate.
+- **Use the correct template for each file type** — Load templates from `.claude/templates/rules/` (if `TARGET_PLATFORM: claude-code`) or `.github/templates/instructions/` (if `TARGET_PLATFORM: copilot`) and match each generated file to STANDARDS, CONFIG, or SKILLS as appropriate.
 - **Validate each generated file** — Run Phase 5 validation checklist for every file before delivering. Flag every failure; do not skip silently.
 - **Place files in the correct location** — `{{PROJECT_ROOT}}/.claude/rules/` for Claude Code, `{{PROJECT_ROOT}}/.github/instructions/` for Copilot. Match `TARGET_PLATFORM`.
 - **Scope `applyTo` patterns precisely** — Never use `**/*` as the sole glob; each instruction file must target a specific file pattern relevant to its concern.
@@ -99,10 +100,11 @@ Read the research file at `{{RESEARCH_FILE}}` and extract and classify all findi
 
 #### Step 1.2: Load Instruction Templates
 
-Read the three instruction templates from `.claude/templates/instructions/`:
-- `TEMPLATE.STANDARDS.md`
-- `TEMPLATE.CONFIG.md`
-- `TEMPLATE.SKILLS.md`
+Read the three instruction templates from the platform-appropriate directory:
+- If `TARGET_PLATFORM: claude-code`: load from `.claude/templates/rules/`
+- If `TARGET_PLATFORM: copilot`: load from `.github/templates/instructions/`
+
+Templates: `TEMPLATE.STANDARDS.md`, `TEMPLATE.CONFIG.md`, `TEMPLATE.SKILLS.md`
 
 Understand the three template types and their purposes:
 - **STANDARDS** → Code quality, naming, structure rules (applies to `*.tf` files)
@@ -175,7 +177,7 @@ Proceed with generation? (yes / adjust plan)
 
 ### Phase 4: Generate Instruction Files
 
-For each planned file, follow the structure below. Use the appropriate template from `.claude/templates/instructions/` as the base.
+For each planned file, follow the structure below. Use the appropriate template from `.claude/templates/rules/` (claude-code) or `.github/templates/instructions/` (copilot) as the base.
 
 #### 4.1 — terraform-standards.md (ALWAYS GENERATED)
 
@@ -257,7 +259,7 @@ Before delivering output:
 - [ ] Research file was fully loaded and parsed
 - [ ] User interview completed (all applicable questions answered)
 - [ ] Plan was approved by user before generation
-- [ ] All generated files follow template structure from `.claude/templates/instructions/`
+- [ ] All generated files follow template structure from `.claude/templates/rules/` (claude-code) or `.github/templates/instructions/` (copilot)
 - [ ] YAML frontmatter is valid in every file
 - [ ] `applyTo` patterns don't overlap excessively between files
 - [ ] No research patterns left uncovered (coverage matrix is complete)

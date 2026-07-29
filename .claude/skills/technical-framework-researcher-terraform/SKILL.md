@@ -1,6 +1,7 @@
 ---
 name: technical-framework-researcher-terraform
 description: Researches a Terraform provider/module for a pinned Terraform and provider version into a hallucination-proof IaC knowledge base. Use when researching Terraform/IaC for a skill.
+argument-hint: "<provider> <version> (e.g. aws 5.x)"
 context: fork
 agent: framework-researcher
 disable-model-invocation: true
@@ -233,8 +234,8 @@ Source: [Registry resource type docs]
 
 ## 8. Executable Verification (Terraform CLI)
 
-Valide o IaC com o ciclo `init → fmt → validate → tfsec/checkov → plan → apply → state → destroy`.
-Comandos completos com saídas esperadas em [Terraform CLI Commands](./blueprints/terraform-cli-commands.md).
+Validate the IaC using the cycle `init → fmt → validate → tfsec/checkov → plan → apply → state → destroy`.
+Complete commands with expected outputs are in [Terraform CLI Commands](./blueprints/terraform-cli-commands.md).
 
 > All CLI command blocks in the research output MUST carry the annotation
 > `# Representative — adapt to your environment` so consumers know they are illustrative, not
@@ -335,22 +336,22 @@ Source: [AWS + TF best practices docs]
 
 # Output Format
 
-O documento de saída segue um template com **Metadata**, **Executive Summary** e **Architectural Guardrails** (✅/⚠️/🚫) com exemplos de código. Template completo e exemplos em [Output Template](./blueprints/terraform-output-template.md).
+The output document follows a template with **Metadata**, **Executive Summary**, and **Architectural Guardrails** (✅/⚠️/🚫) with code examples. Full template and examples in [Output Template](./blueprints/terraform-output-template.md).
 ## State Management (patterns)
 
-Local (dev) vs. remoto de produção (S3 + DynamoDB, versioning, encryption) e tratamento de state sensível. Exemplos em [State Patterns](./blueprints/terraform-state-patterns.md).
-## Module Architecture (se `USE_MODULES: yes`)
+Local (dev) vs. remote production (S3 + DynamoDB, versioning, encryption) and sensitive state handling. Examples in [State Patterns](./blueprints/terraform-state-patterns.md).
+## Module Architecture (if `USE_MODULES: yes`)
 
-Estrutura padrão de módulo, definição (variables/outputs) e composição no root. Exemplos em [Module Patterns](./blueprints/terraform-module-patterns.md).
+Standard module structure, definition (variables/outputs), and root composition. Examples in [Module Patterns](./blueprints/terraform-module-patterns.md).
 ## Integration Patterns
 
-Exemplo de integração Terraform ↔ parceiros (ex.: VPC): resource types, data sources, issues e fontes. Em [Integration Example](./blueprints/terraform-integration-example.md).
+Terraform ↔ partner integration example (e.g., VPC): resource types, data sources, known issues, and sources. In [Integration Example](./blueprints/terraform-integration-example.md).
 ## Quality Control & Testing
 
-Comandos de verificação (fmt/validate/tfsec/tflint/plan/state) e testes com Terratest (Go). Em [Testing Patterns](./blueprints/terraform-testing-patterns.md).
+Verification commands (fmt/validate/tfsec/tflint/plan/state) and testing with Terratest (Go). In [Testing Patterns](./blueprints/terraform-testing-patterns.md).
 ## Production Readiness
 
-Performance, escalabilidade, monitoramento/alertas, checklist de segurança e runbook de disaster recovery. Em [Production Readiness](./blueprints/terraform-production-readiness.md).
+Performance, scalability, monitoring/alerting, security checklist, and disaster recovery runbook. In [Production Readiness](./blueprints/terraform-production-readiness.md).
 
 ## Reference Implementations
 
@@ -406,36 +407,9 @@ Follow-up: [Where to check next time - GitHub issue/docs link]
 
 ## Agent Operation Notes
 
-### High Confidence (Execute without asking)
-- State management setup and migration
-- Terraform syntax validation and formatting
-- Mandatory security patterns (encryption, IAM, least-privilege)
-- Basic resource creation (EC2, S3, RDS)
-- Drift detection and reconciliation
-
-### Medium Confidence (Validate with user)
-- Multi-environment strategy (workspaces vs. separate backends)
-- Module decomposition and structure
-- Performance optimization (instance types, storage sizing)
-- Integration with CI/CD (approval workflows)
-
-### Low Confidence (Must ask user)
-- Cost optimization decisions (instance reserves, spot pricing)
-- Compliance-specific requirements (SOC2, HIPAA, PCI-DSS)
-- Custom provider development
-- Cross-account/cross-region strategies
-
-### Edge Cases (When to pause)
-- State file corruption or loss
-- Secrets exposure in code history
-- Resource deletion conflicts with retention policies
-- Manual AWS changes conflicting with Terraform state
-
-### Emergency Stop
-- Halt if state file encryption disabled
-- Halt if credentials found in code
-- Halt if `terraform destroy` planned without explicit approval
-- Halt if insufficient IAM permissions detected
+Confidence maps directly to the three tiers: High = ✅ Always Do (execute); Medium = ⚠️ Ask First
+(validate); Low / Emergency Stop = 🚫 Never Do (block until approved). See the three-tier sections
+above for the full pattern list.
 
 ---
 
@@ -447,9 +421,9 @@ Follow-up: [Where to check next time - GitHub issue/docs link]
 5. 📈 Performance optimization at scale
 6. 🎯 Advanced patterns (modules, dynamic blocks, conditionals)
 
-# Validation Checklist
+## Verification Loop
 
-Before finalizing research:
+Before finalizing research, confirm:
 1. All HCL code examples are syntactically valid (run `terraform validate`)
 2. All `.tf` files format-checked (`terraform fmt`)
 3. All security anti-patterns include ❌ wrong / ✅ correct HCL side-by-side
@@ -458,6 +432,21 @@ Before finalizing research:
 6. tfsec scan shows no critical findings on example code
 7. CLI command blocks carry `# Representative — adapt to your environment`
 8. Integration examples use variables, not hardcoded values
+
+```bash
+# Confirm mandatory output sections are present
+grep -E "^## (Mandatory_Patterns|Conditional_Patterns|Forbidden_Patterns|Version_Context|Verification_Commands)" \
+  research_Terraform_*.md
+# Expected: section headers appear in the research output file
+
+# Confirm every Never-Do entry has a correct alternative
+grep -c "✅ Correct" research_Terraform_*.md
+# Expected: count equals or exceeds the number of anti-pattern entries
+
+# Confirm version string appears throughout (not only in header)
+grep -c "{{TERRAFORM_VERSION}}\|v1\.[0-9]" research_Terraform_*.md
+# Expected: multiple matches distributed across sections
+```
 
 ---
 
