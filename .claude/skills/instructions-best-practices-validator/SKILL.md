@@ -6,26 +6,26 @@ context: fork
 agent: quality-validator
 disable-model-invocation: true
 ---
-# Prompt: Validador de Mejores Prácticas para Custom Instructions
+# Prompt: Custom Instructions Best Practices Validator
 
-## Objetivo
-Generar un análisis de calidad y adherencia a mejores prácticas de archivos `.instructions.md` basado en:
-- **Oficial GitHub**: https://docs.github.com/en/copilot/customizing-copilot/adding-repository-custom-instructions-for-github-copilot
-- **Oficial VS Code**: https://code.visualstudio.com/docs/copilot/customization/custom-instructions
-- **Biblioteca de Ejemplos**: https://docs.github.com/en/copilot/tutorials/customization-library/custom-instructions
-- **Equipo**: Convenciones establecidas en `.claude/rules/` (Claude Code) o `.github/instructions/` (Copilot) del repositorio actual
+## Objective
+Generate a quality and best-practices adherence analysis of `.instructions.md` files based on:
+- **Official GitHub**: https://docs.github.com/en/copilot/customizing-copilot/adding-repository-custom-instructions-for-github-copilot
+- **Official VS Code**: https://code.visualstudio.com/docs/copilot/customization/custom-instructions
+- **Examples Library**: https://docs.github.com/en/copilot/tutorials/customization-library/custom-instructions
+- **Team conventions**: established in `.claude/rules/` (Claude Code) or `.github/instructions/` (Copilot) of the current repository
 
 ## Quick Navigation
 
-- **[Evaluation Scenarios](./blueprints/evaluation-scenarios.md)** — 3 escenarios: canónico, edge, misuso
-- **[Verification Loop](#verification-loop)** — Auto-validación antes de guardar
-- **[External Resources](#external-resources)** — Documentación oficial de la que derivan los criterios
+- **[Evaluation Scenarios](./blueprints/evaluation-scenarios.md)** — 3 scenarios: canonical, edge, misuse
+- **[Verification Loop](#verification-loop)** — Self-check before saving the report
+- **[External Resources](#external-resources)** — Official documentation from which criteria are derived
 
 ---
 
-## Instrucciones para Agente
+## Agent Instructions
 
-Actúa como un Custom Instructions Quality Specialist. Evalúa cada `.instructions.md` contra los criterios oficiales de GitHub/VS Code y las convenciones del equipo.
+Act as a Custom Instructions Quality Specialist. Evaluate each `.instructions.md` against the official GitHub/VS Code criteria and team conventions.
 
 ---
 
@@ -33,334 +33,334 @@ Actúa como un Custom Instructions Quality Specialist. Evalúa cada `.instructio
 
 ### ✅ Always Do
 
-- **Leer al menos 3 archivos de instrucción existentes como referencia de estilo** antes de emitir cualquier hallazgo — establece la línea base de convenciones del equipo.
-- **Confirmar que `applyTo` existe en cada archivo** — su ausencia es el problema más crítico; sin él, las instrucciones nunca se aplican automáticamente.
-- **Citar el criterio exacto y el archivo en cada hallazgo** — cada problema debe referenciar el criterio (A1, B2, E3, etc.) y el nombre del archivo afectado.
-- **Analizar overlaps y gaps en los patrones `applyTo`** — el análisis de cobertura de patrones es una sección obligatoria del informe.
-- **Diferenciar criterios oficiales (A-D) de convenciones de equipo (E)** en tablas separadas — permite priorizar correctamente.
-- **Confirmar la existencia de archivos referenciados** — si un archivo `.instructions.md` referencia otro archivo o skill, verificar que ese target existe.
+- **Read at least 3 existing instruction files as style references** before issuing any findings — establish the team conventions baseline.
+- **Confirm `applyTo` exists in every file** — its absence is the most critical issue; without it, instructions are never applied automatically.
+- **Cite the exact criterion and file in every finding** — each issue must reference the criterion (A1, B2, E3, etc.) and the affected filename.
+- **Analyze overlaps and gaps in `applyTo` patterns** — pattern coverage analysis is a mandatory section of the report.
+- **Differentiate official criteria (A-D) from team conventions (E)** in separate tables — enables correct prioritization.
+- **Confirm referenced files exist** — if an `.instructions.md` references another file or skill, verify the target exists.
 
 ### ⚠️ Ask First
 
-- **`applyTo: "**"` global** — si se detecta un patrón excesivamente amplio, preguntar si es intencional (ej. instrucciones globales de proyecto) antes de marcarlo como violación.
-- **Instrucciones en idioma mixto** — si el repositorio tiene instrucciones en múltiples idiomas, preguntar cuál es el idioma canónico antes de evaluar consistencia.
-- **Archivos con >300 líneas** — cuando un archivo supera las 300 líneas, preguntar si el usuario quiere solo el diagnóstico o también una propuesta de división.
-- **Conflictos entre archivos con el mismo `applyTo`** — antes de marcar como violación, preguntar si las instrucciones conflictivas son intencionales (ej. una sobreescribe a la otra por orden de carga).
+- **Global `applyTo: "**"` pattern** — if an excessively broad pattern is detected, ask whether it is intentional (e.g., global project instructions) before marking it as a violation.
+- **Mixed-language instructions** — if the repository has instructions in multiple languages, ask what the canonical language is before evaluating consistency.
+- **Files with >300 lines** — when a file exceeds 300 lines, ask whether the user wants only the diagnosis or also a split proposal.
+- **Conflicts between files with the same `applyTo`** — before marking as a violation, ask whether the conflicting instructions are intentional (e.g., one overrides the other by load order).
 
 ### 🚫 Never Do
 
-- **Nunca omitir el análisis de `applyTo`** — es el campo más crítico; un archivo sin `applyTo` nunca se activa automáticamente. ✅ Siempre verificar presencia, validez del glob, y especificidad del patrón.
-- **Nunca marcar una regla como buena solo porque existe** — la calidad depende de que incluya el razonamiento ("Use X because Y"). ✅ Verificar que cada regla explica el POR QUÉ existe.
-- **Nunca reportar una violación sin citar el archivo y la sección** — produce output inaccionable. ✅ Nombrar el archivo exacto (ej. `terraform-standards.instructions.md`) y la sección o línea.
-- **Nunca ignorar conflictos entre archivos** — instrucciones conflictivas con el mismo `applyTo` producen comportamiento no determinista. ✅ Listar cada par conflictivo con sus patrones y las reglas que se contradicen.
-- **Nunca generar el informe sin la sección "Análisis de applyTo Patterns"** — overlaps y gaps son igual de importantes que los hallazgos por archivo. ✅ La sección de análisis de patrones es obligatoria.
+- **Never omit the `applyTo` analysis** — it is the most critical field; a file without `applyTo` never activates automatically. ✅ Always verify presence, glob validity, and pattern specificity.
+- **Never mark a rule as good just because it exists** — quality requires that it include the reasoning ("Use X because Y"). ✅ Verify that each rule explains WHY it exists.
+- **Never report a violation without citing the file and section** — produces unactionable output. ✅ Name the exact file (e.g., `terraform-standards.instructions.md`) and the section or line.
+- **Never ignore conflicts between files** — conflicting instructions with the same `applyTo` produce non-deterministic behavior. ✅ List every conflicting pair with their patterns and the rules that contradict each other.
+- **Never generate the report without the "applyTo Patterns Analysis" section** — overlaps and gaps are as important as per-file findings. ✅ The pattern analysis section is mandatory.
 
 ---
 
-## Instrucciones de Ejecución
+## Execution Instructions
 
-### Paso 1: Cargar Criterios de Referencia
+### Step 1: Load Reference Criteria
 
-Lee los siguientes archivos antes de evaluar:
-1. `.claude/rules/` (Claude Code) o `.github/instructions/` (Copilot) — Listar todos los archivos existentes para entender convenciones del equipo
-2. Al menos 3 archivos `.instructions.md` existentes como referencia de estilo
+Read the following before evaluating:
+1. `.claude/rules/` (Claude Code) or `.github/instructions/` (Copilot) — list all existing files to understand team conventions
+2. At least 3 existing `.instructions.md` files as style reference
 
-### Paso 2: Descubrir y Analizar Instructions
+### Step 2: Discover and Analyze Instructions
 
-Explora `.claude/rules/*.md` (Claude Code) o `.github/instructions/*.instructions.md` (Copilot) y evalúa cada archivo según los criterios abajo.
+Explore `.claude/rules/*.md` (Claude Code) or `.github/instructions/*.instructions.md` (Copilot) and evaluate each file against the criteria below.
 
 ---
 
-## Criterios de Evaluación
+## Evaluation Criteria
 
-### A. YAML Frontmatter (Oficial — GitHub + VS Code)
+### A. YAML Frontmatter (Official — GitHub + VS Code)
 
-**A1. Campo `name`**
-- Presente y descriptivo
-- Kebab-case (minúsculas, guiones)
-- Máximo 64 caracteres
-- Coincide con el nombre del archivo (sin extensión `.instructions.md`)
+**A1. `name` field**
+- Present and descriptive
+- Kebab-case (lowercase, hyphens)
+- Maximum 64 characters
+- Matches the filename (without `.instructions.md` extension)
 
-**A2. Campo `description`**
-- Presente y no vacío
-- Máximo 1536 caracteres
-- Describe QUÉ hace Y CUÁNDO se activa
-- Tercera persona (no "I help" ni "You can")
-- Suficientemente específico para matching semántico
+**A2. `description` field**
+- Present and not empty
+- Maximum 1536 characters
+- Describes WHAT it does AND WHEN it activates
+- Third person (not "I help" or "You can")
+- Specific enough for semantic matching
 
-**A3. Campo `applyTo`**
-- Presente (si no existe, las instrucciones NO se aplican automáticamente)
-- Glob pattern válido con forward slashes solamente
-- Patrón relativo al workspace root
-- Específico (no usa `**` a menos que sea intencionalmente global)
-- Patrones múltiples separados por coma cuando aplica
+**A3. `applyTo` field**
+- Present (if absent, instructions are NEVER applied automatically)
+- Valid glob pattern with forward slashes only
+- Path relative to workspace root
+- Specific (does not use `**` unless intentionally global)
+- Multiple patterns comma-separated when applicable
 
-**A4. Campo `excludeAgent` (opcional)**
-- Si presente, valor válido: `"code-review"` o `"cloud-agent"`
+**A4. `excludeAgent` field (optional)**
+- If present, valid value: `"code-review"` or `"cloud-agent"`
 
-### B. Contenido y Estructura (Oficial — VS Code Best Practices)
+### B. Content and Structure (Official — VS Code Best Practices)
 
-**B1. Concisión**
-- Instrucciones cortas y autocontenidas
-- Cada instrucción es una declaración simple y clara
-- Sin explicaciones innecesarias de conceptos que Copilot ya conoce
-- Enfocado en reglas no obvias (no repetir lo que linters/formatters ya hacen)
+**B1. Conciseness**
+- Short, self-contained instructions
+- Each instruction is a simple, clear statement
+- No unnecessary explanations of concepts Copilot already knows
+- Focused on non-obvious rules (not repeating what linters/formatters already do)
 
-**B2. Razonamiento incluido**
-- Las reglas incluyen el POR QUÉ existe la convención
-- El AI toma mejores decisiones en edge cases cuando entiende la razón
-- Ejemplo correcto: "Use `date-fns` instead of `moment.js` because moment.js is deprecated and increases bundle size"
-- Ejemplo incorrecto: "Use `date-fns`" (sin justificación)
+**B2. Reasoning included**
+- Rules include WHY the convention exists
+- The AI makes better decisions in edge cases when it understands the reason
+- Correct example: "Use `date-fns` instead of `moment.js` because moment.js is deprecated and increases bundle size"
+- Incorrect example: "Use `date-fns`" (without justification)
 
-**B3. Ejemplos concretos**
-- Patrones preferidos mostrados con código concreto
-- Patrones a evitar mostrados con código concreto
-- No abstracto — siempre con ejemplos reales
+**B3. Concrete examples**
+- Preferred patterns shown with concrete code
+- Patterns to avoid shown with concrete code
+- Not abstract — always with real examples
 
-**B4. Lenguaje natural en Markdown**
-- Formato Markdown limpio
-- Sin XML tags ni formatos propietarios
-- Whitespace entre instrucciones para legibilidad
+**B4. Natural language in Markdown**
+- Clean Markdown format
+- No XML tags or proprietary formats
+- Whitespace between instructions for readability
 
 **B5. Default + Escape Hatch**
-- Provee un default claro para decisiones comunes
-- Indica cuándo es válido desviarse del default
-- No ofrece demasiadas opciones sin recomendación
+- Provides a clear default for common decisions
+- States when it is valid to deviate from the default
+- Does not offer too many options without a recommendation
 
-### C. Rutas y Referencias (Oficial)
+### C. Paths and References (Official)
 
-**C1. Forward slashes solamente**
+**C1. Forward slashes only**
 - `src/main/java/**/*.java` ✅
 - `src\main\java\**\*.java` ❌
 
-**C2. Rutas relativas o URLs completas**
+**C2. Relative paths or full URLs**
 - `./blueprints/pattern.md` ✅
 - `https://docs.example.com/guide` ✅
 - `C:\Users\dev\project\file.md` ❌
 - `/home/user/project/file.md` ❌
 
-**C3. Referencias a otros archivos**
-- Markdown links para referenciar archivos del workspace
-- Links verificables (targets existentes)
-- Máximo un nivel de profundidad desde el archivo de instrucciones
+**C3. References to other files**
+- Markdown links to reference workspace files
+- Verifiable links (existing targets)
+- Maximum one level of depth from the instruction file
 
-### D. Scope y Granularidad (Oficial — GitHub)
+### D. Scope and Granularity (Official — GitHub)
 
 **D1. Single Responsibility**
-- Cada archivo cubre UN tema/dominio coherente
-- No mezcla concerns no relacionados
-- Nombre del archivo refleja su scope exacto
+- Each file covers ONE coherent topic/domain
+- Does not mix unrelated concerns
+- Filename reflects its exact scope
 
-**D2. Granularidad del `applyTo`**
-- Pattern no demasiado amplio (evitar `**/*` sin razón)
-- Pattern no demasiado restrictivo (cubre todos los archivos relevantes)
-- Consistente con otros archivos del mismo dominio
+**D2. `applyTo` granularity**
+- Pattern not too broad (avoid `**/*` without reason)
+- Pattern not too restrictive (covers all relevant files)
+- Consistent with other files in the same domain
 
-**D3. Sin conflictos entre archivos**
-- No contradice otros `.instructions.md` del mismo repositorio
-- Si múltiples archivos aplican al mismo glob, no generan instrucciones conflictivas
+**D3. No conflicts between files**
+- Does not contradict other `.instructions.md` in the same repository
+- If multiple files apply to the same glob, they do not generate conflicting instructions
 
-### E. Convenciones del Equipo
+### E. Team Conventions
 
-**E1. Naming consistente**
-- Formato: `{dominio}-{sub-dominio}.instructions.md`
-- Ejemplos: `java-functions-fdk`, `terraform-standards`, `java-functions-error-handling`
-- Patrón de agrupación por tecnología + concern
+**E1. Consistent naming**
+- Format: `{domain}-{sub-domain}.instructions.md`
+- Examples: `java-functions-fdk`, `terraform-standards`, `java-functions-error-handling`
+- Grouping pattern by technology + concern
 
 **E2. Role Statement**
-- Primera línea del body define el rol del agente: "You are a [Role] specialist..."
-- Específico al dominio del archivo
+- First line of body defines the agent role: "You are a [Role] specialist..."
+- Specific to the file's domain
 
-**E3. Sección de Version Context (si aplica)**
-- Versiones de tecnologías explícitas
-- Constraints de versión claros (e.g., "FDK v1.1.x", "Terraform v1.11+")
+**E3. Version Context section (if applicable)**
+- Technology versions explicit
+- Clear version constraints (e.g., "FDK v1.1.x", "Terraform v1.11+")
 
-**E4. Código como instrucción**
-- Bloques de código con patrón correcto + incorrecto
-- Comentarios en código: `// ✅ CORRECT:` y `// 🚫 WRONG:`
-- Language tag correcto en code fences
+**E4. Code as instruction**
+- Code blocks with correct + incorrect pattern
+- Comments in code: `// ✅ CORRECT:` and `// 🚫 WRONG:`
+- Correct language tag in code fences
 
-**E5. Skill Integration (si es archivo de routing)**
-- Tabla de mapping keywords → skills completa
-- Todas las rutas de skills referenciadas existen
-- Workflow de integración documentado
+**E5. Skill Integration (if routing file)**
+- Complete keyword → skill mapping table
+- All referenced skill paths exist
+- Integration workflow documented
 
-**E6. Links funcionales**
-- Cross-references a otros instructions/skills válidos
-- Links externos a documentación oficial
-- Sin 404s
+**E6. Functional links**
+- Valid cross-references to other instructions/skills
+- External links to official documentation
+- No 404s
 
 ---
 
-### Paso 3: Generar Informe de Validación
+### Step 3: Generate Validation Report
 
-Crea un archivo `INSTRUCTIONS_BEST_PRACTICES_REVIEW.md` con la siguiente estructura:
+Create a file `INSTRUCTIONS_BEST_PRACTICES_REVIEW.md` with the following structure:
 
 ```markdown
-# Análisis de Mejores Prácticas para Custom Instructions
+# Custom Instructions Best Practices Analysis
 
-**Fecha**: [Fecha]
-**Referencia Oficial GitHub**: https://docs.github.com/en/copilot/customizing-copilot/adding-repository-custom-instructions-for-github-copilot
-**Referencia Oficial VS Code**: https://code.visualstudio.com/docs/copilot/customization/custom-instructions
-**Referencia Equipo**: .github/instructions/
-
----
-
-## Resumen Ejecutivo
-
-- Instructions evaluados: [N]
-- Cumplen criterios oficiales: [N] ([X]%)
-- Cumplen convenciones de equipo: [N] ([X]%)
-- Problemas críticos: [N]
+**Date**: [Date]
+**Official GitHub Reference**: https://docs.github.com/en/copilot/customizing-copilot/adding-repository-custom-instructions-for-github-copilot
+**Official VS Code Reference**: https://code.visualstudio.com/docs/copilot/customization/custom-instructions
+**Team Reference**: .github/instructions/
 
 ---
 
-## Evaluación por Archivo
+## Executive Summary
 
-### Instruction: [nombre-archivo]
-**Archivo**: `.github/instructions/[nombre].instructions.md`
-**Líneas**: [N]
+- Instructions evaluated: [N]
+- Meet official criteria: [N] ([X]%)
+- Meet team conventions: [N] ([X]%)
+- Critical issues: [N]
+
+---
+
+## Per-File Evaluation
+
+### Instruction: [filename]
+**File**: `.github/instructions/[name].instructions.md`
+**Lines**: [N]
 **applyTo**: `[pattern]`
 
-#### Criterios Oficiales (GitHub + VS Code)
-| Criterio | Estado | Notas |
+#### Official Criteria (GitHub + VS Code)
+| Criterion | Status | Notes |
 |----------|--------|-------|
-| A1. name (kebab-case, max 64) | ✅/❌ | [detalle] |
-| A2. description (clara, tercera persona) | ✅/❌ | [detalle] |
-| A3. applyTo (glob válido, específico) | ✅/❌ | [detalle] |
-| A4. excludeAgent (si presente) | ✅/❌/N/A | [detalle] |
-| B1. Concisión | ✅/❌ | [detalle] |
-| B2. Razonamiento incluido | ✅/❌ | [detalle] |
-| B3. Ejemplos concretos | ✅/❌ | [detalle] |
-| B4. Markdown limpio | ✅/❌ | [detalle] |
-| B5. Default + Escape Hatch | ✅/❌ | [detalle] |
-| C. Rutas y referencias | ✅/❌ | [detalle] |
-| D1. Single Responsibility | ✅/❌ | [detalle] |
-| D2. Granularidad applyTo | ✅/❌ | [detalle] |
-| D3. Sin conflictos | ✅/❌ | [detalle] |
+| A1. name (kebab-case, max 64) | ✅/❌ | [detail] |
+| A2. description (clear, third person) | ✅/❌ | [detail] |
+| A3. applyTo (valid glob, specific) | ✅/❌ | [detail] |
+| A4. excludeAgent (if present) | ✅/❌/N/A | [detail] |
+| B1. Conciseness | ✅/❌ | [detail] |
+| B2. Reasoning included | ✅/❌ | [detail] |
+| B3. Concrete examples | ✅/❌ | [detail] |
+| B4. Clean Markdown | ✅/❌ | [detail] |
+| B5. Default + Escape Hatch | ✅/❌ | [detail] |
+| C. Paths and references | ✅/❌ | [detail] |
+| D1. Single Responsibility | ✅/❌ | [detail] |
+| D2. applyTo granularity | ✅/❌ | [detail] |
+| D3. No conflicts | ✅/❌ | [detail] |
 
-#### Convenciones del Equipo
-| Criterio | Estado | Notas |
+#### Team Conventions
+| Criterion | Status | Notes |
 |----------|--------|-------|
-| E1. Naming consistente | ✅/❌ | [detalle] |
-| E2. Role Statement | ✅/❌ | [detalle] |
-| E3. Version Context | ✅/❌ | [detalle] |
-| E4. Código como instrucción | ✅/❌ | [detalle] |
-| E5. Skill Integration | ✅/❌/N/A | [detalle] |
-| E6. Links funcionales | ✅/❌ | [detalle] |
+| E1. Consistent naming | ✅/❌ | [detail] |
+| E2. Role Statement | ✅/❌ | [detail] |
+| E3. Version Context | ✅/❌ | [detail] |
+| E4. Code as instruction | ✅/❌ | [detail] |
+| E5. Skill Integration | ✅/❌/N/A | [detail] |
+| E6. Functional links | ✅/❌ | [detail] |
 
-**Hallazgos principales**: [Resumen de issues y fortalezas]
+**Key Findings**: [Summary of issues and strengths]
 
 ---
 
-## Matriz de Cumplimiento
+## Compliance Matrix
 
-| Instruction | Oficial (A-D) | Equipo (E) | Total |
+| Instruction | Official (A-D) | Team (E) | Total |
 |-------------|---------------|------------|-------|
 | [instruction-1] | [X]/13 | [X]/6 | [X]% |
 | [instruction-2] | [X]/13 | [X]/6 | [X]% |
-| PROMEDIO | [X]/13 | [X]/6 | [X]% |
+| AVERAGE | [X]/13 | [X]/6 | [X]% |
 
 ---
 
-## Análisis de applyTo Patterns
+## applyTo Patterns Analysis
 
-### Cobertura de Patrones
-| Pattern | Archivos que usa | Overlaps |
+### Pattern Coverage
+| Pattern | Files using it | Overlaps |
 |---------|-----------------|----------|
-| `**/*.tf` | terraform-*.instructions.md | [lista de overlaps] |
-| `**/src/main/java/**/*.java` | java-functions-*.instructions.md | [lista de overlaps] |
+| `**/*.tf` | terraform-*.instructions.md | [list of overlaps] |
+| `**/src/main/java/**/*.java` | java-functions-*.instructions.md | [list of overlaps] |
 
-### Conflictos Detectados
-[Lista de instrucciones que aplican al mismo glob con reglas potencialmente conflictivas]
+### Conflicts Detected
+[List of instructions applying to the same glob with potentially conflicting rules]
 
-### Gaps Detectados
-[Tipos de archivo sin coverage por ningún instruction]
-
----
-
-## Recomendaciones por Prioridad
-
-### ALTA (Bloquean Funcionalidad)
-[Lista — ej: applyTo ausente, description vacía, YAML malformado]
-
-### MEDIA (Reducen Calidad)
-[Lista — ej: sin razonamiento en reglas, ejemplos abstractos, naming inconsistente]
-
-### BAJA (Optimización)
-[Lista — ej: concisión mejorable, role statement genérico]
+### Gaps Detected
+[File types with no coverage by any instruction]
 
 ---
 
-## Conclusiones
-[Resumen general y próximas acciones]
+## Recommendations by Priority
+
+### HIGH (Block Functionality)
+[List — e.g.: missing applyTo, empty description, malformed YAML]
+
+### MEDIUM (Reduce Quality)
+[List — e.g.: no reasoning in rules, abstract examples, inconsistent naming]
+
+### LOW (Optimization)
+[List — e.g.: conciseness improvable, generic role statement]
+
+---
+
+## Conclusions
+[General summary and next actions]
 ```
 
 ---
 
-## Detección de Anti-Patrones
+## Anti-Pattern Detection
 
-El validador debe detectar y reportar:
+The validator must detect and report:
 
-1. **`applyTo` ausente** — El archivo NUNCA se aplica automáticamente (solo manual attachment)
-2. **`applyTo` demasiado amplio** — `"**"` o `"**/*"` sin justificación clara
-3. **Descripción vaga** — "Helps with code" → Corregir a descripción específica con trigger
-4. **Descripción en primera persona** — "I help you with..." → Tercera persona
-5. **Rutas Windows-style** — `src\main\java` → `src/main/java`
-6. **Rutas absolutas** — `/home/user/...` o `C:\Users\...` → Rutas relativas
-7. **Archivo monolítico** — Un solo `.instructions.md` con >300 líneas cubriendo múltiples concerns → Dividir
-8. **Reglas sin justificación** — "Use X" sin explicar por qué → Agregar razonamiento
-9. **Solo reglas abstractas sin ejemplos** — "Follow best practices" → Código concreto
-10. **Conflicto entre archivos** — Dos instrucciones con mismo `applyTo` dando indicaciones contradictorias
-11. **Name no coincide con archivo** — `name: foo` en archivo `bar.instructions.md`
-12. **Glob patterns inválidos** — Backslashes, paths absolutos, syntax incorrecta
-13. **Información temporal sin marcación** — "The new API (released 2024)" → Marcar como version context
-14. **Skills referenciados inexistentes** — Link a `.claude/skills/X/SKILL.md` donde X no existe
+1. **Missing `applyTo`** — the file is NEVER applied automatically (manual attachment only)
+2. **Overly broad `applyTo`** — `"**"` or `"**/*"` without clear justification
+3. **Vague description** — "Helps with code" → correct to a specific description with trigger
+4. **First-person description** — "I help you with..." → third person
+5. **Windows-style paths** — `src\main\java` → `src/main/java`
+6. **Absolute paths** — `/home/user/...` or `C:\Users\...` → relative paths
+7. **Monolithic file** — a single `.instructions.md` with >300 lines covering multiple concerns → split
+8. **Rules without justification** — "Use X" without explaining why → add reasoning
+9. **Only abstract rules without examples** — "Follow best practices" → concrete code
+10. **Conflict between files** — two instructions with the same `applyTo` giving contradictory guidance
+11. **Name does not match filename** — `name: foo` in file `bar.instructions.md`
+12. **Invalid glob patterns** — backslashes, absolute paths, incorrect syntax
+13. **Temporal information without marking** — "The new API (released 2024)" → mark as version context
+14. **Referenced skills that don't exist** — link to `.claude/skills/X/SKILL.md` where X does not exist
 
 ---
 
 ## Verification Loop
 
-Antes de guardar el informe, el validador DEBE auto-verificar:
+Before saving the report, the validator MUST self-verify:
 
-1. **Conteo de archivos** — confirmar que el número de archivos evaluados en la Matriz de Cumplimiento coincide con los encontrados con `ls`/`Glob` en el directorio objetivo.
-2. **Sección applyTo obligatoria** — verificar que la sección "Análisis de applyTo Patterns" está presente con las tres subsecciones: Cobertura, Conflictos, Gaps.
-3. **Hallazgos con criterio citado** — cada ítem en "Recomendaciones por Prioridad" debe referenciar al menos un criterio (A3, B2, E1, etc.) y un archivo específico.
-4. **Links referenciados** — si el informe enlaza skills o archivos de instrucción, verificar que los paths existen antes de incluirlos.
-5. **Tablas completas** — cada archivo evaluado debe tener exactamente 13 filas de criterios oficiales (A1-A4, B1-B5, C, D1-D3) y 6 filas de equipo (E1-E6).
+1. **File count** — confirm the number of files evaluated in the Compliance Matrix matches those found with `ls`/`Glob` in the target directory.
+2. **Mandatory applyTo section** — verify the "applyTo Patterns Analysis" section is present with three subsections: Coverage, Conflicts, Gaps.
+3. **Findings with cited criterion** — every item in "Recommendations by Priority" must reference at least one criterion (A3, B2, E1, etc.) and a specific file.
+4. **Referenced links** — if the report links to skills or instruction files, verify the paths exist before including them.
+5. **Complete tables** — each evaluated file must have exactly 13 rows of official criteria (A1-A4, B1-B5, C, D1-D3) and 6 rows of team conventions (E1-E6).
 
 ---
 
-## Formato de Salida
+## Output Format
 
-- Lenguaje técnico y objetivo
-- Enfoque en problemas específicos, no generalizaciones
-- Diferenciar claramente: criterios **oficiales** (de GitHub/VS Code docs) vs **convenciones del equipo**
-- Análisis de `applyTo` patterns como sección especial (overlaps, gaps, conflictos)
-- Matriz de cumplimiento para visualización rápida
-- Acciones concretas y priorizadas
+- Technical and objective language
+- Focus on specific problems, not generalizations
+- Clearly differentiate: **official** criteria (from GitHub/VS Code docs) vs **team conventions**
+- Analysis of `applyTo` patterns as a special section (overlaps, gaps, conflicts)
+- Compliance matrix for quick visualization
+- Concrete and prioritized actions
 
 ---
 
 ## External Resources
 
-### Documentación Oficial GitHub Copilot
-- [Adding repository custom instructions for GitHub Copilot](https://docs.github.com/en/copilot/customizing-copilot/adding-repository-custom-instructions-for-github-copilot) — fuente primaria de los criterios A-D
-- [Configure custom instructions (GitHub how-to)](https://docs.github.com/en/copilot/how-tos/configure-custom-instructions) — campos `applyTo`, `excludeAgent`, y ejemplos
-- [Custom instructions library](https://docs.github.com/en/copilot/tutorials/customization-library/custom-instructions) — ejemplos canónicos por dominio
+### Official GitHub Copilot Documentation
+- [Adding repository custom instructions for GitHub Copilot](https://docs.github.com/en/copilot/customizing-copilot/adding-repository-custom-instructions-for-github-copilot) — primary source for criteria A-D
+- [Configure custom instructions (GitHub how-to)](https://docs.github.com/en/copilot/how-tos/configure-custom-instructions) — `applyTo`, `excludeAgent` fields and examples
+- [Custom instructions library](https://docs.github.com/en/copilot/tutorials/customization-library/custom-instructions) — canonical examples by domain
 
-### Documentación Oficial VS Code
-- [Custom instructions (VS Code)](https://code.visualstudio.com/docs/copilot/customization/custom-instructions) — best practices de concisión, razonamiento, y scope
+### Official VS Code Documentation
+- [Custom instructions (VS Code)](https://code.visualstudio.com/docs/copilot/customization/custom-instructions) — best practices for conciseness, reasoning, and scope
 
-### Convenciones del Equipo
-- [skill-frontmatter rules](./../../rules/skill-frontmatter.md) — reglas de frontmatter para `.claude/rules/` y `.claude/agents/`
-- [authoring-agent-skills SKILL.md](./../authoring-agent-skills/SKILL.md) — contexto del ecosistema de skills
+### Team Conventions
+- [skill-frontmatter rules](./../../rules/skill-frontmatter.md) — frontmatter rules for `.claude/rules/` and `.claude/agents/`
+- [authoring-agent-skills SKILL.md](./../authoring-agent-skills/SKILL.md) — skills ecosystem context
 
 ---
 
-**Invocación sugerida**:
+**Suggested invocation**:
 ```
-Analiza los archivos .instructions.md en este repositorio usando el validador de mejores prácticas.
+Analyze the .instructions.md files in this repository using the best practices validator.
 ```
 
-**Salida esperada**: `INSTRUCTIONS_BEST_PRACTICES_REVIEW.md` con análisis completo y recomendaciones priorizadas.
+**Expected output**: `INSTRUCTIONS_BEST_PRACTICES_REVIEW.md` with complete analysis and prioritized recommendations.

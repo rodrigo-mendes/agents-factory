@@ -308,6 +308,16 @@ For complete evaluation-driven development guidance, see [Evaluation & Iteration
 
 ---
 
+**Tier mapping for this meta-skill:**
+- ✅ **Always Do** → [Quality Checklist](#quality-checklist) below
+- ⚠️ **Ask First** — decisions requiring judgment before proceeding:
+  - Skill body nearing 500 lines — confirm which section to extract to `blueprints/` before adding new content
+  - No research file available — confirm whether to use documented knowledge or run a researcher skill first
+  - Three-tier tier assignments unclear — review [Three-Tier Architecture](./blueprints/three-tier-architecture.md) before finalizing tiers
+  - Version-agnostic skill — confirm whether to omit `## Version Context` or add a "version-agnostic" note
+  - Output language undecided — ask whether skill body should match a specific language convention
+- 🚫 **Never Do** → [Common Mistakes vs. Correct Usage](#common-mistakes-vs-correct-usage) below
+
 ## Quality Checklist
 
 Based on the [official checklist](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices#checklist-for-effective-skills) plus team conventions.
@@ -356,32 +366,11 @@ Based on the [official checklist](https://platform.claude.com/docs/en/agents-and
 ## Integration with Search Protocol
 
 ### Expected Input
-Search file containing:
 
-```yaml
-Metadata:
-  Full_Name: [string]
-  Target_Version: [string]
-  Release_Date: [date]
-  Support_Status: [string]
-
-Architectural_Guardrails:
-  Mandatory_Patterns: [list with code]
-  Conditional_Patterns: [list with tradeoffs]
-  Forbidden_Patterns: [list with alternatives]
-
-Implementation_Blueprint:
-  Lifecycle: [code]
-  Integrations: [list of examples]
-
-Quality_Control:
-  Verification_Commands: [bash scripts]
-  Expected_Outputs: [strings]
-
-Source_Bibliography:
-  Primary: [URLs]
-  DeepLinks: [organized URLs]
-```
+The research file produced by `framework-researcher` — see
+[researching-technical-frameworks](../researching-technical-frameworks/SKILL.md) for the
+output schema. Required sections: `Metadata`, `Architectural_Guardrails` (Mandatory/Conditional/
+Forbidden Patterns), `Implementation_Blueprint`, `Quality_Control`, `Source_Bibliography`.
 
 ### Transformation (Direct Mapping)
 
@@ -429,7 +418,7 @@ Use the canonical scaffold at [TEMPLATE.SKILL.md](../../templates/skills/TEMPLAT
 
 ---
 
-## Skill Artifact Verification
+## Verification Loop
 
 Run these checks on a freshly created SKILL.md before committing or sharing the skill.
 

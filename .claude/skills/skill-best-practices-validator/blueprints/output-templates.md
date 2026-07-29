@@ -15,66 +15,66 @@ the **per-skill review file** and the **consolidated summary**.
 Write one per evaluated skill at `.claude/skills/[skill-name]/[skill-name]-best-practices-review.md`:
 
 ```markdown
-# Análisis de Mejores Prácticas: [skill-name]
+# Best Practices Analysis: [skill-name]
 
-**Fecha**: [Fecha]
-**Archivo**: `.claude/skills/[skill-name]/SKILL.md`
-**Líneas**: [N]
-**Referencia Oficial**: https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices
-**Referencia Equipo**: .claude/skills/authoring-agent-skills/SKILL.md
-
----
-
-## Resumen
-
-- Criterios oficiales cumplidos: [X]/8
-- Convenciones de equipo cumplidas: [X]/7
-- Problemas críticos: [N]
+**Date**: [Date]
+**File**: `.claude/skills/[skill-name]/SKILL.md`
+**Lines**: [N]
+**Official Reference**: https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices
+**Team Reference**: .claude/skills/authoring-agent-skills/SKILL.md
 
 ---
 
-## Criterios Oficiales (Claude Best Practices)
+## Summary
 
-| Criterio | Estado | Notas |
+- Official criteria met: [X]/8
+- Team conventions met: [X]/7
+- Critical issues: [N]
+
+---
+
+## Official Criteria (Claude Best Practices)
+
+| Criterion | Status | Notes |
 |----------|--------|-------|
-| A1. YAML Frontmatter | ✅/❌ | [detalle] |
-| A2. Concisión (<500 líneas) | ✅/❌ | [detalle] |
-| A3. Disclosure Progresivo | ✅/❌ | [detalle] |
-| A4. Contenido (terminología, temporal) | ✅/❌ | [detalle] |
-| A5. Workflows claros | ✅/❌ | [detalle] |
-| A6. Rutas de archivo | ✅/❌ | [detalle] |
-| B. Código y Scripts | ✅/❌/N/A | [detalle] |
-| C. Testing/Evaluación | ✅/❌ | [detalle] |
+| A1. YAML Frontmatter | ✅/❌ | [detail] |
+| A2. Conciseness (<500 lines) | ✅/❌ | [detail] |
+| A3. Progressive Disclosure | ✅/❌ | [detail] |
+| A4. Content (terminology, temporal) | ✅/❌ | [detail] |
+| A5. Clear Workflows | ✅/❌ | [detail] |
+| A6. File paths | ✅/❌ | [detail] |
+| B. Code and Scripts | ✅/❌/N/A | [detail] |
+| C. Testing/Evaluation | ✅/❌ | [detail] |
 
-## Convenciones del Equipo
+## Team Conventions
 
-| Criterio | Estado | Notas |
+| Criterion | Status | Notes |
 |----------|--------|-------|
-| D1. Naming (gerundio, kebab) | ✅/❌ | [detalle] |
-| D2. Tres niveles (✅⚠️🚫) | ✅/❌ | [detalle] |
-| D3. Version Context | ✅/❌ | [detalle] |
-| D4. Verification Loop | ✅/❌ | [detalle] |
-| D5. Anti-patrones con alternativas | ✅/❌ | [detalle] |
-| D6. Links funcionales | ✅/❌ | [detalle] |
-| D7. Recursos externos | ✅/❌ | [detalle] |
+| D1. Naming (gerund, kebab) | ✅/❌ | [detail] |
+| D2. Three tiers (✅⚠️🚫) | ✅/❌ | [detail] |
+| D3. Version Context | ✅/❌ | [detail] |
+| D4. Verification Loop | ✅/❌ | [detail] |
+| D5. Anti-patterns with alternatives | ✅/❌ | [detail] |
+| D6. Functional links | ✅/❌ | [detail] |
+| D7. External resources | ✅/❌ | [detail] |
 
 ---
 
-## Recomendaciones por Prioridad
+## Recommendations by Priority
 
-### ALTA (Bloquean Funcionalidad)
-[Lista — ej: YAML inválido, description vacía, body >500 líneas]
+### HIGH (Block Functionality)
+[List — e.g.: invalid YAML, empty description, body >500 lines]
 
-### MEDIA (Reducen Calidad)
-[Lista — ej: terminología inconsistente, links rotos, sin feedback loops]
+### MEDIUM (Reduce Quality)
+[List — e.g.: inconsistent terminology, broken links, no feedback loops]
 
-### BAJA (Optimización)
-[Lista — ej: disclosure progresivo puede mejorar, naming no usa gerundio]
+### LOW (Optimization)
+[List — e.g.: progressive disclosure can improve, naming does not use gerund]
 
 ---
 
-## Conclusiones
-[Resumen de issues y fortalezas]
+## Conclusions
+[Summary of issues and strengths]
 ```
 
 ---
@@ -84,40 +84,40 @@ Write one per evaluated skill at `.claude/skills/[skill-name]/[skill-name]-best-
 After all individual files, write `.claude/skills/skills-best-practices-summary.md`:
 
 ```markdown
-# Resumen de Mejores Prácticas — Agent Skills
+# Best Practices Summary — Agent Skills
 
-**Fecha**: [Fecha]
-**Referencia Oficial**: https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices
-
----
-
-## Resumen Ejecutivo
-
-- Skills evaluados: [N]
-- Cumplen criterios oficiales: [N] ([X]%)
-- Cumplen convenciones de equipo: [N] ([X]%)
-- Problemas críticos: [N]
+**Date**: [Date]
+**Official Reference**: https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices
 
 ---
 
-## Matriz de Cumplimiento
+## Executive Summary
 
-| Skill | Oficial (A-C) | Equipo (D) | Total | Review |
+- Skills evaluated: [N]
+- Meet official criteria: [N] ([X]%)
+- Meet team conventions: [N] ([X]%)
+- Critical issues: [N]
+
+---
+
+## Compliance Matrix
+
+| Skill | Official (A-C) | Team (D) | Total | Review |
 |-------|---------------|------------|-------|--------|
 | [skill-1] | [X]/8 | [X]/7 | [X]% | [skill-1-best-practices-review.md](skill-1/skill-1-best-practices-review.md) |
 | [skill-2] | [X]/8 | [X]/7 | [X]% | [skill-2-best-practices-review.md](skill-2/skill-2-best-practices-review.md) |
-| PROMEDIO | [X]/8 | [X]/7 | [X]% | — |
+| AVERAGE | [X]/8 | [X]/7 | [X]% | — |
 
 ---
 
-## Recomendaciones Globales por Prioridad
+## Global Recommendations by Priority
 
-### ALTA (Bloquean Funcionalidad)
-[Lista consolidada]
+### HIGH (Block Functionality)
+[Consolidated list]
 
-### MEDIA (Reducen Calidad)
-[Lista consolidada]
+### MEDIUM (Reduce Quality)
+[Consolidated list]
 
-### BAJA (Optimización)
-[Lista consolidada]
+### LOW (Optimization)
+[Consolidated list]
 ```

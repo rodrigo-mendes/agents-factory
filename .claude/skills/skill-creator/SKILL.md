@@ -1,7 +1,7 @@
 ---
 name: skill-creator
 description: Guides generation of an Agent Skill using the authoring-agent-skills standard. Use when creating a new skill from validated research.
-argument-hint: "Path to research file (e.g. StoryBeat/research_Stripe_Java_v33.md)"
+argument-hint: "Path to research file (e.g. StoryBeat/research_FastAPI_v0.115.md)"
 context: fork
 agent: skill-author
 disable-model-invocation: true
@@ -10,10 +10,39 @@ disable-model-invocation: true
 
 ## Quick Navigation
 
+- **[Blueprints & Guardrails](#blueprints--guardrails)** — Three-tier rules for this skill's own operation
 - **[Critical Requirements](#critical-requirements)** — Three-tier + Essential Sections mandates for generated output
 - **[Evaluation Scenarios](./blueprints/evaluation-scenarios.md)** — 3 scenarios: canonical, edge, misuse
 - **[Quality Gates](#quality-gates-final-checklist)** — Final checklist before delivering output
+- **[Verification Loop](#verification-loop)** — Post-generation self-check commands
 - **[External Resources](#external-resources)** — Reference links
+
+---
+
+## Blueprints & Guardrails
+
+### ✅ Always Do
+
+- **Load `authoring-agent-skills` before generating** — Read `.claude/skills/authoring-agent-skills/SKILL.md` as Step 1. It is the authoritative reference for naming rules, three-tier structure, and quality checklist.
+- **Verify the research file exists before proceeding** — If `$ARGUMENTS` is missing or unreadable, stop and display the error message. Do not generate from memory.
+- **Start from `TEMPLATE.SKILL.md`** — Use `.claude/templates/skills/TEMPLATE.SKILL.md` as the scaffold. Populate every section placeholder; never invent new sections or skip existing ones.
+- **Create `blueprints/evaluation-scenarios.md`** — Generate at least 3 evaluation scenarios and save them as part of the output. This is always required, not optional.
+- **Stay under 500 lines** — Monitor line count during generation; if approaching 500, extract the largest content block to `blueprints/` before writing further inline content.
+
+### ⚠️ Ask First
+
+- **Skill approaching 500 lines during generation** — Pause and confirm with user which section(s) to extract to `blueprints/` before exceeding the limit.
+- **Domain complexity unclear** — If the research file lacks a `Domain_Complexity` field and complexity is genuinely ambiguous, ask the user before deciding tier counts (Foundational vs. Standard vs. Complex).
+- **No research file, user wants to generate from conversation** — Ask whether to run a researcher skill first or proceed with the user's provided specification.
+
+### 🚫 Never Do
+
+| ❌ Incorrect | ✅ Correct |
+|---|---|
+| Generate a SKILL.md without reading a research file | Run `/technical-framework-researcher` or an equivalent first; pass the output as `$ARGUMENTS` |
+| Skip creating `blueprints/evaluation-scenarios.md` | Always produce at least 3 scenarios — this is a mandatory artifact, not optional |
+| Use absolute or Windows-style paths in the generated SKILL.md | Use relative paths only (`./blueprints/file.md`, `../../rules/skill-frontmatter.md`) |
+| Duplicate large documentation blocks inline | Move blocks > 30 lines to `blueprints/` and link from SKILL.md |
 
 ---
 
@@ -139,11 +168,12 @@ See [Three-Tier Architecture](../../skills/authoring-agent-skills/SKILL.md#file-
 - Keep file references one level deep from SKILL.md
 - Use forward slashes in all paths
 
-🚫 **Don't**:
-- Duplicate large blocks of documentation
-- Use absolute paths or Windows-style paths
-- Link to non-existent files
-- Include time-sensitive information (use "old patterns" section)
+| ❌ Don't | ✅ Do instead |
+|---|---|
+| Duplicate large documentation blocks inline | Move to `blueprints/` and link from SKILL.md |
+| Use absolute or Windows-style paths | Use relative paths: `./blueprints/file.md`, `../../rules/file.md` |
+| Link to files that don't exist yet | Create the target file first, then add the link |
+| Include time-sensitive information (release dates, "new in v1.x") | Move to a `## Version Context` section with explicit version lock |
 
 ---
 
@@ -189,6 +219,38 @@ Before generating output, verify against the [Quality Checklist](../../skills/au
 - [ ] At least 3 evaluation scenarios created and saved as `blueprints/evaluation-scenarios.md`
 - [ ] Quick Navigation in SKILL.md links to `./blueprints/evaluation-scenarios.md`
 - [ ] Scenarios cover: canonical use, edge case, and misuse/anti-pattern trap
+
+---
+
+## Verification Loop
+
+After generating the SKILL.md and evaluation scenarios, run these checks:
+
+```bash
+# 1. Line count must stay under 500
+wc -l ".claude/skills/<skill-name>/SKILL.md"
+# Expected: ≤ 500
+
+# 2. All three tiers present
+grep -c "### ✅ Always Do\|### ⚠️ Ask First\|### 🚫 Never Do" ".claude/skills/<skill-name>/SKILL.md"
+# Expected: 3
+
+# 3. Evaluation scenarios created
+test -f ".claude/skills/<skill-name>/blueprints/evaluation-scenarios.md" && echo "OK" || echo "MISSING"
+# Expected: OK
+
+# 4. All blueprint links resolve
+grep -oE '\./blueprints/[^)]+' ".claude/skills/<skill-name>/SKILL.md" | while read f; do
+  [ -f ".claude/skills/<skill-name>/$f" ] && echo "OK: $f" || echo "MISSING: $f"
+done
+# Expected: all OK
+
+# 5. No absolute paths
+grep -nE "(C:\\\\|/Users/|/home/)" ".claude/skills/<skill-name>/SKILL.md"
+# Expected: no output
+```
+
+> Replace `<skill-name>` with the actual skill folder name derived from the research file.
 
 ---
 
