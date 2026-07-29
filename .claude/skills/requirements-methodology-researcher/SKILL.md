@@ -1,6 +1,7 @@
 ---
 name: requirements-methodology-researcher
 description: Researches agile/product requirements methodologies (user stories, requirement artifacts) into a source-backed knowledge base. Use when researching requirements practices for a skill.
+argument-hint: "<methodology> (e.g. user-stories, BDD)"
 context: fork
 agent: framework-researcher
 disable-model-invocation: true
@@ -19,11 +20,38 @@ disable-model-invocation: true
 
 ## Quick Navigation
 
+- **[Blueprints & Guardrails](#blueprints--guardrails)** — Three-tier operational rules for this skill's own execution
 - **[Research Scope Detail](./blueprints/research-scope.md)** — Format templates for guardrails, toolchain, quality verification, artifact templates, and scenario sections
 - **[Output Format](./blueprints/output-format.md)** — Full output file structure with all section templates
 - **[Evaluation Scenarios](./blueprints/evaluation-scenarios.md)** — 4 scenarios: standard Scrum research, edge case (story too large), out-of-scope misuse (autonomous DoD), anti-pattern trap (solution-prescriptive story)
 - **[Verification Loop](#verification-loop)** — Self-check checklist confirming the research output is complete and edition-accurate
 - **[External Resources](#external-resources)** — Official framework guides, recognized authors, and toolchain documentation
+
+---
+
+## Blueprints & Guardrails
+
+### ✅ Always Do
+
+- **Source from the official framework guide** — every Always-Do and Never-Do item must cite the official `{{FRAMEWORK_EDITION}}` guide with a URL and access date. No pattern is valid without a verifiable source.
+- **Reject practices from superseded editions** — if a practice is from a pre-`{{FRAMEWORK_EDITION}}` guide, flag it explicitly or exclude it. Version absolutism applies.
+- **Include a concrete artifact example for every forbidden pattern** — the Never-Do table must show a wrong artifact THEN the corrected artifact side by side. Prose prohibitions without examples are not acceptable.
+- **Confirm testability for every mandatory element** — every required acceptance criterion must be phrased as an observable, verifiable outcome. "The page loads fast" is not a valid acceptance criterion.
+- **Flag guidance older than 24 months** — add a review note for any source dated more than 24 months ago (requirements methodologies evolve with each framework edition).
+
+### ⚠️ Ask First
+
+- **Scale ambiguity** — if `{{TEAM_CONTEXT}}` suggests both team-level and portfolio-level practices may apply (e.g., SAFe with multiple squads), confirm which level is the primary focus before scoping research.
+- **Multiple frameworks in scope** — if the user's context mixes practices from different frameworks (e.g., Scrum + Shape Up), ask which takes precedence before researching cross-framework patterns.
+- **Compliance or regulatory context** — if the `{{TEAM_CONTEXT}}` mentions regulated domains (healthcare, finance), ask before adding compliance-specific artifact requirements that may not apply to all teams.
+
+### 🚫 Never Do
+
+| Anti-Pattern | Why Forbidden | Correct Alternative |
+|---|---|---|
+| Research patterns without pinning to `{{FRAMEWORK_EDITION}}` | Cross-edition contamination produces contradictory guidance | Pin every section header with `{{FRAMEWORK_EDITION}}`; reject patterns from other editions unless explicitly comparing |
+| Leave a Never-Do entry as prose only | Agents need a concrete artifact to recognize the anti-pattern | Every prohibition must show the wrong artifact (e.g., bad user story) followed by the corrected version |
+| Use vague confidence categories in Agent Operation Notes | "Medium confidence — verify" is not actionable | Specify exactly what to verify and where (e.g., "verify against {{FRAMEWORK_EDITION}} §X before applying to regulated healthcare context") |
 
 ---
 

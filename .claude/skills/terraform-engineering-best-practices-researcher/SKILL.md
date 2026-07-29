@@ -1,6 +1,7 @@
 ---
 name: terraform-engineering-best-practices-researcher
 description: Researches Terraform engineering best practices (project layout, module design, CI/CD, testing, governance) into a source-backed knowledge base. Use when researching Terraform engineering practices for a skill or rules.
+argument-hint: "<topic> (e.g. module-design, CI/CD, testing)"
 context: fork
 agent: framework-researcher
 disable-model-invocation: true
@@ -68,16 +69,16 @@ Senior Infrastructure Engineer & AI Safety Architect building a hallucination-pr
 
 ## Research Scope §1–2 — Project Organization & Module Design
 
-Layout de repositório/módulos, tipos de módulo, interface e composição. Detalhes em [Project & Modules](./blueprints/research-scope-project-modules.md).
+Repository/module layout, module types, interface definition, and composition patterns. Details in [Project & Modules](./blueprints/research-scope-project-modules.md).
 ## Research Scope §3–4 — Environment Management & State at Scale
 
-Isolamento de ambientes, variáveis por ambiente, backend, isolamento/segmentação e recovery de state. Detalhes em [Environments & State](./blueprints/research-scope-environments-state.md).
+Environment isolation, per-environment variables, backend configuration, state segmentation, and state recovery. Details in [Environments & State](./blueprints/research-scope-environments-state.md).
 ## Research Scope §5–6 — CI/CD Pipelines & Testing
 
-Arquitetura e segurança de pipeline, tooling, pirâmide de testes, framework nativo e policy-as-code. Detalhes em [CI/CD & Testing](./blueprints/research-scope-cicd-testing.md).
+Pipeline architecture and security, tooling, testing pyramid, native test framework, and policy-as-code. Details in [CI/CD & Testing](./blueprints/research-scope-cicd-testing.md).
 ## Research Scope §7–9 — Code Quality, Advanced Patterns & Governance
 
-Naming, DRY, code review; multi-account/scale/refactoring; change control, compliance-as-code, documentação. Detalhes em [Quality, Advanced & Governance](./blueprints/research-scope-quality-advanced-governance.md).
+Naming, DRY, code review; multi-account/scale/refactoring; change control, compliance-as-code, and documentation. Details in [Quality, Advanced & Governance](./blueprints/research-scope-quality-advanced-governance.md).
 # Three-Tier Operational Guardrails Summary
 
 ## ✅ Always Do: Mandatory Patterns
@@ -197,7 +198,7 @@ Follow-up: [Where to verify]
 4. 📈 CI/CD and testing automation
 5. 🎯 Scale-appropriate governance patterns
 
-# Validation
+## Verification Loop
 
 Before finalizing:
 1. Directory structures are complete and consistent
@@ -208,6 +209,21 @@ Before finalizing:
 6. Anti-patterns include severity ratings
 7. Recommendations are proportional to `{{TEAM_SIZE}}` and `{{PROJECT_SCALE}}`
 8. All sources are dated and version-specific to v`{{TERRAFORM_VERSION}}`
+
+```bash
+# Confirm mandatory output sections are present
+grep -E "^## (Mandatory_Patterns|Conditional_Patterns|Forbidden_Patterns|Agent_Operation_Notes|Source_Bibliography)" \
+  research_Terraform_Engineering_*.md
+# Expected: section headers appear in the research output file
+
+# Confirm every Never-Do entry has a correct alternative
+grep -c "✅ Correct" research_Terraform_Engineering_*.md
+# Expected: count equals or exceeds the number of anti-pattern entries
+
+# Confirm version specificity throughout the document
+grep -c "v{{TERRAFORM_VERSION}}\|v1\.[0-9]" research_Terraform_Engineering_*.md
+# Expected: multiple version references distributed across sections, not only in the header
+```
 
 ---
 

@@ -1,6 +1,7 @@
 ---
 name: technical-framework-researcher
 description: Researches a technology/framework for a pinned version into a hallucination-proof knowledge base (version absolutism, official sources). Use when researching a technology to author a technical skill.
+argument-hint: "<tech> <version> (e.g. FastAPI 0.115)"
 context: fork
 agent: framework-researcher
 disable-model-invocation: true
@@ -229,7 +230,7 @@ Save as `research_{{SYSTEM_NAME}}_v{{TARGET_VERSION}}.md`.
 4. Performance optimization
 5. Advanced patterns
 
-# Validation
+## Verification Loop
 
 Before finalizing:
 1. Code examples syntactically valid
@@ -238,6 +239,21 @@ Before finalizing:
 4. Links tested (no 404s)
 5. Versions explicitly confirmed
 6. Research Gaps section populated for any unverified claims
+
+```bash
+# Confirm mandatory output sections are present
+grep -E "^## (Mandatory_Patterns|Conditional_Patterns|Forbidden_Patterns|Version_Context|Source_Bibliography)" \
+  research_*.md
+# Expected: all section headers appear in the research output file
+
+# Confirm every Never-Do entry has a correct alternative
+grep -c "✅ Correct" research_*.md
+# Expected: count equals or exceeds the number of anti-pattern entries
+
+# Confirm version string appears throughout (not only in header)
+grep -c "{{TARGET_VERSION}}\|v[0-9]\+\.[0-9]" research_*.md
+# Expected: multiple matches distributed across sections
+```
 
 ---
 
