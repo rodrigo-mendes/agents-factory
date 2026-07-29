@@ -1,6 +1,7 @@
 ---
 name: architecture-approaches-skill-generator
 description: Researches a system-architecture methodology/notation and generates an operational SKILL.md for producing correct architecture artifacts. Use when turning architecture research into a skill.
+argument-hint: "<approach> (e.g. event-driven, microservices)"
 context: fork
 agent: skill-author
 disable-model-invocation: true

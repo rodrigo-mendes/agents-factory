@@ -18,7 +18,7 @@ Agent Skills — and that it generates accurate, criterion-cited output without 
   "skills": ["skill-best-practices-validator"],
   "query": "Validate the skills in .claude/skills/",
   "skill_state": {
-    "name": "integrating-stripe-payments-java",
+    "name": "integrating-payments-example",
     "description_chars": 190,
     "body_lines": 266,
     "has_always_do": true,

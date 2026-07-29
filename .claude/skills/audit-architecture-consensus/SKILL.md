@@ -101,6 +101,15 @@ Each model has blind spots that the others cover:
 └──────────────┘   └──────────────┘   └──────────────┘
 ```
 
+> **Recursion guard:** spawn only the three single-lens variants (`audit-architecture-scope`,
+> `audit-architecture-flow`, `audit-architecture-engine`). Never spawn
+> `audit-architecture-consensus` from within this orchestration.
+
+> **Criteria fidelity:** when `architecture-auditor` spawns each lens sub-agent, the complete
+> criteria for that lens must be embedded in the prompt. Scope: L0–L4 + X criteria;
+> Flow: B.1–B.20; Engine: C.1–C.24. Each lens command's SKILL.md body carries its criteria —
+> pass them explicitly; do not rely on description-match alone.
+
 ---
 
 ## Workflow

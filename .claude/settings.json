@@ -12,10 +12,10 @@
       "Bash(cat *)",
       "Bash(git status *)",
       "Bash(git diff *)",
-      "Bash(git log *)",
-      "Read(//Users/roka.mendes/work/projects/brx/fast-track/OCI/poc-oci-serverless/.claude/skills/invoking-rest-apis-from-oci-functions/**)",
-      "Read(//Users/roka.mendes/work/projects/brx/fast-track/OCI/poc-oci-serverless/.claude/skills/logging-oci-java-functions/**)",
-      "Read(//Users/roka.mendes/work/projects/brx/fast-track/OCI/poc-oci-serverless/.claude/skills/managing-terraform-cicd/**)"
+      "Write(./StoryBeat/**)",
+      "Write(./.claude/**)",
+      "Edit(./.claude/**)",
+      "Agent"
     ],
     "deny": [
       "Read(./**/.env)",

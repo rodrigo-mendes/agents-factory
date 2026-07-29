@@ -53,14 +53,14 @@ Não é código compilado — os artefatos rodam **no Claude Code** via `/<coman
 - Validar qualidade de skills: `/skill-best-practices-validator .claude/skills/`
 
 Os 23 comandos usam `disable-model-invocation: true` (ações deliberadas) — acessíveis por `/nome`,
-sem custo de auto-listagem. Só as 2 meta-skills ficam auto-invocáveis.
+sem custo de auto-listagem. As 2 meta-skills ficam auto-invocáveis (2 no total).
 
 ## Estrutura
 
 ```
 .claude/
 ├── agents/     ← 4 subagentes (framework-researcher, skill-author, architecture-auditor, quality-validator)
-├── skills/     ← 2 meta-skills + 19 comandos operacionais (fork → subagente)
+├── skills/     ← 2 meta-skills + 23 comandos operacionais (fork → subagente)
 ├── rules/      ← rules por caminho (paths:) + templates
 ├── templates/  ← scaffolding (variantes Claude Code de agents/skills/rules)
 └── settings.json
@@ -71,8 +71,6 @@ StoryBeat/      ← saídas de pesquisa geradas por agentes (untracked)
 
 ## Gotchas
 
-- `tools:` é de subagentes; `allowed-tools:` é de skills/commands. Não trocar.
-- Nomes de modelo válidos: `opus`/`sonnet`/`haiku`/`fable`/`inherit` ou IDs (`claude-opus-4-8`).
-  Inválidos: versões antigas e sufixos `*plan`.
-- YAML: valores com `:` precisam de aspas (ex.: `argument-hint: "Scope: new / review"`).
+- **Frontmatter conventions** (field names, model values, YAML quoting): see
+  [`.claude/rules/skill-frontmatter.md`](.claude/rules/skill-frontmatter.md).
 - Não confie em contagens de auditorias — confirme com `ls`/`wc`/`grep`.

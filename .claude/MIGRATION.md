@@ -9,7 +9,7 @@ o decommission é uma fase final, executada **só após validação em uso real*
 |---|---|
 | `CLAUDE.md` (raiz) | novo — princípios, convenções, tabela de roteamento, dual-target |
 | Subagentes | 4 reais em `.claude/agents/` (framework-researcher, skill-author, architecture-auditor, quality-validator) |
-| Prompts operacionais | 19 → `.claude/skills/<n>/SKILL.md` (`context: fork` + `agent:` + `disable-model-invocation: true`) |
+| Prompts operacionais | 23 → `.claude/skills/<n>/SKILL.md` (`context: fork` + `agent:` + `disable-model-invocation: true`) |
 | Meta-skills | 2 → `.claude/skills/` (wording neutralizado) |
 | Rules | `skill-frontmatter` (ativa, `paths:`) + templates de instructions → `templates/rules/` |
 | Templates/examples | variantes Claude Code (tools traduzidos, `applyTo:`→`paths:`, `.agent.md`/`.instructions.md`→`.md`) |
@@ -20,7 +20,7 @@ o decommission é uma fase final, executada **só após validação em uso real*
 2. **WebSearch/WebFetch** no `framework-researcher` → anti-alucinação real (antes dependia do usuário colar docs).
 3. **Auditoria multi-modelo como orquestração paralela nativa**: `architecture-auditor` recebe a tool `Agent`
    e dispara scope/flow/engine em paralelo, sintetizando consenso (antes era só instrução em texto).
-4. **`disable-model-invocation: true`** nos 19 comandos → custo de auto-listagem ~zero; só as 2 meta-skills auto-invocáveis.
+4. **`disable-model-invocation: true`** nos 23 comandos → custo de auto-listagem ~zero; só as 2 meta-skills auto-invocáveis.
 5. **Frontmatter corrigido** em ~10 prompts que não tinham `name`/`description` válidos.
 
 ## Fase 2 — limpeza & progressive disclosure (feita)
@@ -42,7 +42,7 @@ o decommission é uma fase final, executada **só após validação em uso real*
 ## Validação por dogfooding (feita)
 Rodados os próprios validadores/auditor da fábrica contra `.claude/`:
 - **architecture-auditor** (consenso scope+flow+engine): **PASS 9.4/10**, 0 P0/P1. Contagens todas confirmadas
-  (4 subagentes, 21 skills, 19 comandos, 0 refs `agent:` quebradas, 0 órfãos).
+  (4 subagentes, 25 skills, 23 comandos, 0 refs `agent:` quebradas, 0 órfãos).
 - **quality-validator** (skill-best-practices + agent-router): 0 P0. Os 8 P1 apontaram **resíduo Copilot no corpo**
   das skills de auditoria/validação (instruções de runtime lendo `.github/agents/*.agent.md`,
   `.github/copilot-instructions.md`, `*.prompt.md`, `.github/instructions/`). **Corrigidos**: agora apontam para
