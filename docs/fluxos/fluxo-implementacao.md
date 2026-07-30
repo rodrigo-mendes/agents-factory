@@ -31,10 +31,12 @@ flowchart TD
     
     VALID -->|✅ passa| AUDIT{Auditar?}
     
-    AUDIT -->|Sim| ARC[audit-architecture-consensus]
+    AUDIT -->|Sim — alvo .claude/| ARC[audit-cc-architecture-consensus]
+    AUDIT -->|Sim — alvo .github/| ARCP[audit-architecture-consensus]
     AUDIT -->|Não| DONE([✅ Implementado])
     
     ARC --> DONE
+    ARCP --> DONE
 ```
 
 ---
@@ -148,7 +150,8 @@ graph TD
 | Implementação single | Implementation | Skills do domínio (provisioning-*, developing-*) |
 | Implementação cross | Orchestrator | Skills de múltiplos domínios |
 | Validação | (built-in P5) | — |
-| Auditoria | audit-architecture-consensus | — |
+| Auditoria CC | `audit-cc-architecture-consensus` (alvo `.claude/`) | — |
+| Auditoria Copilot | `audit-architecture-consensus` (alvo `.github/`) | — |
 
 ---
 
@@ -172,3 +175,8 @@ Cada layer só inicia após a anterior estar completa e validada.
 - **Advisory**: ADRs + diagrama + plano de delegação
 - **Implementation**: Código gerado + validado (fmt/compile)
 - **Orchestrator**: Stack multi-domínio completa + validada cross-domain
+
+---
+
+> **Referência de auditoria**: Para detalhes completos sobre variantes CC vs Copilot, critérios de
+> consensus e lentes individuais → [Manual do architecture-auditor](../manual/architecture-auditor.md)

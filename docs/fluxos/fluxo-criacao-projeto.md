@@ -15,7 +15,7 @@ flowchart TD
     VALID -->|desvios| FIX[Corrigir desvios]
     FIX --> VALID
     
-    VALID -->|conforme| AUDIT[audit-architecture-consensus<br/>Auditoria 3 modelos]
+    VALID -->|conforme| AUDIT[audit-cc-architecture-consensus<br/>Auditoria 3 modelos — alvo .claude/]
     
     AUDIT -->|issues| FIX2[Remediar]
     FIX2 --> AUDIT
@@ -78,12 +78,14 @@ flowchart TD
 
 ### Etapa 4: Auditoria Multi-Modelo
 
-**Prompt**: `/audit-architecture-consensus`
+**Prompt**: `/audit-cc-architecture-consensus` (alvo `.claude/`)
+
+> Para projetos GitHub Copilot (`.github/`), usar `/audit-architecture-consensus`.
 
 **O que acontece**:
-- Modelo A verifica hierarquia de responsabilidades (L0→L4)
-- Modelo B verifica cadeias de invocação (reachability)
-- Modelo C verifica mecânicas do VS Code engine
+- Modelo A verifica hierarquia de responsabilidades (G0→G4: CLAUDE.md → agentes → rules → skills)
+- Modelo B verifica cadeias de invocação (reachability, dead-ends, orphans)
+- Modelo C verifica mecânicas do Claude Code engine (paths:, disable-model-invocation, context: fork)
 - Orquestrador compara e prioriza por consenso
 
 **Input**: Nome do agente ou path
@@ -103,10 +105,10 @@ flowchart TD
 | 1 | `technical-framework-researcher` | Pesquisa |
 | 2 | `skill-creator` | Compilação |
 | 3 | `agent-router-pattern-validator` | Framework |
-| 4 | `audit-architecture-scope` | Auditoria |
-| 4 | `audit-architecture-flow` | Auditoria |
-| 4 | `audit-architecture-engine` | Auditoria |
-| 4 | `audit-architecture-consensus` | Auditoria |
+| 4 | `audit-cc-architecture-scope` | Auditoria CC |
+| 4 | `audit-cc-architecture-flow` | Auditoria CC |
+| 4 | `audit-cc-architecture-engine` | Auditoria CC |
+| 4 | `audit-cc-architecture-consensus` | Auditoria CC |
 
 ---
 
@@ -121,7 +123,7 @@ Projeto com:
 - ✅ Estrutura conforme Agent Router Pattern
 - ✅ Hierarquia de responsabilidades correta
 - ✅ Cadeias de invocação completas
-- ✅ Mecânicas VS Code compatíveis
+- ✅ Mecânicas Claude Code engine conformes
 
 ## Próximos Passos
 

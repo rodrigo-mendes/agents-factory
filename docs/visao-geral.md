@@ -24,7 +24,7 @@ graph LR
 ```mermaid
 graph TD
     subgraph "Camada de Entrada"
-        P[Skills<br/>26 skills (24 comandos + 2 meta-skills)]
+        P[Skills<br/>26 skills - 24 comandos + 2 meta-skills]
     end
 
     subgraph "Camada de Orquestração"
@@ -108,12 +108,12 @@ mindmap
       instructions-best-practices-validator
       skill-best-practices-validator
       project-analysis-validator
-    Auditoria
-      audit-architecture-consensus
+    "Auditoria (8 total)"
+      "Copilot — audit-architecture-consensus"
       audit-architecture-scope
       audit-architecture-flow
       audit-architecture-engine
-      audit-cc-architecture-consensus
+      "Claude Code — audit-cc-architecture-consensus"
       audit-cc-architecture-scope
       audit-cc-architecture-flow
       audit-cc-architecture-engine

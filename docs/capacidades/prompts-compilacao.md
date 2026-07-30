@@ -84,11 +84,25 @@ terraform-instructions-compiler
 - Documento de pesquisa de `terraform-engineering-best-practices-researcher` ou `technical-framework-researcher-terraform`
 
 ### Output Produzido
+
+> **Runtime alvo determina o caminho de saída:**
+> - `terraform-config.instructions.md` (GitHub Copilot) → `.github/instructions/`
+> - `terraform-config.md` (Claude Code) → `.claude/rules/`
+>
+> O compilador pergunta o runtime alvo na entrevista interativa da Fase 2.
+
 ```
+# Exemplo Copilot (padrão)
 .github/instructions/
 ├── terraform-config.instructions.md      ← Setup, backend, providers
 ├── terraform-standards.instructions.md   ← Naming, modules, structure
 └── terraform-skills.instructions.md      ← Keyword → skill routing table
+
+# Equivalente Claude Code
+.claude/rules/
+├── terraform-config.md
+├── terraform-standards.md
+└── terraform-skills.md
 ```
 
 ### Dependências

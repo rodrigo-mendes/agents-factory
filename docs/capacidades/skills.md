@@ -6,10 +6,11 @@ O Agents Factory possui 2 meta-skills que definem os padrões fundamentais usado
 
 ## 1. authoring-agent-skills
 
-> **Arquivo**: `.github/skills/authoring-agent-skills/SKILL.md`
+> **Arquivo Claude Code**: `.claude/skills/authoring-agent-skills/SKILL.md`  
+> **Arquivo Copilot**: `.github/skills/authoring-agent-skills/SKILL.md`
 
 ### Propósito
-Define como criar e refinar Skills para GitHub Copilot seguindo best practices oficiais do Claude + convenções do time.
+Define como criar e refinar Agent Skills (SKILL.md) seguindo best practices oficiais do Claude + convenções do time.
 
 ### Quando Usar
 - Ao criar uma nova SKILL.md
@@ -32,16 +33,17 @@ Define como criar e refinar Skills para GitHub Copilot seguindo best practices o
 - `blueprints/never-do-patterns.md` — Anti-padrões com alternativas
 
 ### Usado por
-- `skill-creator.prompt.md` — Referencia como padrão de qualidade
-- `skill-best-practices-validator.prompt.md` — Usa como baseline de validação
-- `architecture-approaches-skill-generator.prompt.md` — Segue o padrão
-- `methodologies-skill-generator.prompt.md` — Segue o padrão
+- `skill-creator` — Referencia como padrão de qualidade
+- `skill-best-practices-validator` — Usa como baseline de validação
+- `architecture-approaches-skill-generator` — Segue o padrão
+- `methodologies-skill-generator` — Segue o padrão
 
 ---
 
 ## 2. researching-technical-frameworks
 
-> **Arquivo**: `.github/skills/researching-technical-frameworks/SKILL.md`
+> **Arquivo Claude Code**: `.claude/skills/researching-technical-frameworks/SKILL.md`  
+> **Arquivo Copilot**: `.github/skills/researching-technical-frameworks/SKILL.md`
 
 ### Propósito
 Define a metodologia de pesquisa para criar bases de conhecimento livres de alucinações, com validação contra fontes oficiais e versionamento rigoroso.
@@ -66,13 +68,13 @@ Define a metodologia de pesquisa para criar bases de conhecimento livres de aluc
 - `blueprints/never-do-patterns.md` — Anti-padrões de pesquisa
 
 ### Usado por
-- `technical-framework-researcher.prompt.md` — Segue a metodologia
-- `technical-framework-researcher-terraform.prompt.md` — Segue a metodologia
-- `terraform-engineering-best-practices-researcher.prompt.md` — Segue a metodologia
-- `architecture-methodology-researcher.prompt.md` — Segue a metodologia
-- `cloud-architecture-researcher.prompt.md` — Segue a metodologia
-- `business-domain-researcher.prompt.md` — Segue a metodologia
-- `requirements-methodology-researcher.prompt.md` — Segue a metodologia
+- `technical-framework-researcher` — Segue a metodologia
+- `technical-framework-researcher-terraform` — Segue a metodologia
+- `terraform-engineering-best-practices-researcher` — Segue a metodologia
+- `architecture-methodology-researcher` — Segue a metodologia
+- `cloud-architecture-researcher` — Segue a metodologia
+- `business-domain-researcher` — Segue a metodologia
+- `requirements-methodology-researcher` — Segue a metodologia
 - Referencia `TEMPLATE.SKILL.md` (L459) como "Structure reference"
 
 ---

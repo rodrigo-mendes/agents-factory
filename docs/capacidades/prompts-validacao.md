@@ -1,6 +1,6 @@
 # Prompts de Validação
 
-5 prompts dedicados a verificar qualidade e conformidade de artefatos do framework.
+4 prompts dedicados a verificar qualidade e conformidade de artefatos do framework.
 
 Todos seguem o padrão do `TEMPLATE.VALIDATION.prompt.md`.
 
@@ -99,7 +99,7 @@ skill-best-practices-validator
 ```
 
 ### O que Verifica
-- Three-tier correto (✅⚠️🚫PresidentPresença e conteúdo)
+- Three-tier correto (✅⚠️🚫 — presença e conteúdo)
 - YAML frontmatter (name ≤64 chars, description ≤1024 chars)
 - Version absolutism (uma versão por skill)
 - Blueprints presentes e completos
@@ -128,7 +128,7 @@ skill-best-practices-validator
 > **Arquivo**: `.claude/skills/project-analysis-validator/SKILL.md`
 
 ### Descrição
-Análise de qualidade technology-agnostic para projetos de agente GitHub Copilot completos, com recomendações priorizadas.
+Análise holística de projetos de agente Claude Code (`.claude/`) e GitHub Copilot (`.github/`) — detecta drift de CLAUDE.md, frontmatter inválido, routing quebrado e componentes órfãos. Emite score e roadmap de remediação priorizados.
 
 ### Invocação
 ```

@@ -68,7 +68,7 @@ Organize os artefatos gerados sob `.claude/`:
 ### 6. (Opcional) Auditoria completa
 
 ```
-/audit-architecture-consensus
+/audit-cc-architecture-consensus
 ```
 
 ---
@@ -123,6 +123,69 @@ As skills geradas pelo `/skill-creator` ficam como ponto de partida. Próximos p
 | Agente sem skills (hardcoded knowledge) | Sempre externalizar conhecimento em skills |
 | Skill genérica demais ("cloud-stuff") | Uma skill por serviço/conceito específico |
 | Não validar após criar | Executar `/agent-router-pattern-validator` e `/project-analysis-validator .claude/` |
+
+---
+
+## Criando os Ficheiros Manualmente (sem bootstrap)
+
+Como o `agent-bootstrap` foi cancelado, os 4 ficheiros de definição do agente precisam de ser
+criados manualmente. Use os templates disponíveis como ponto de partida.
+
+### Ficheiros a criar
+
+| Ficheiro | Propósito | Template de referência |
+|----------|-----------|----------------------|
+| `.claude/agents/{domain}.md` | Persona do agente (P0-P5) | `.claude/templates/agents/TEMPLATE.AGENT.md` |
+| `.claude/rules/{domain}-config.md` | Setup do projecto (paths:, versões) | `.claude/templates/rules/TEMPLATE.CONFIG.md` |
+| `.claude/rules/{domain}-standards.md` | Padrões de código e naming | `.claude/templates/rules/TEMPLATE.STANDARDS.md` |
+| `.claude/rules/{domain}-skills.md` | Routing table: keywords → skills a carregar | `.claude/templates/rules/TEMPLATE.SKILLS.md` |
+
+### Ordem recomendada de criação
+
+```
+1. Copiar template do agente:
+   cp .claude/templates/agents/TEMPLATE.AGENT.md .claude/agents/{domain}.md
+
+2. Copiar templates de rules:
+   cp .claude/templates/rules/TEMPLATE.CONFIG.md    .claude/rules/{domain}-config.md
+   cp .claude/templates/rules/TEMPLATE.STANDARDS.md .claude/rules/{domain}-standards.md
+   cp .claude/templates/rules/TEMPLATE.SKILLS.md    .claude/rules/{domain}-skills.md
+
+3. Editar cada ficheiro:
+   - agents/{domain}.md: nome, persona, skills a carregar em P0
+   - {domain}-config.md: paths: para os ficheiros do domínio (ex: "**/*.tf")
+   - {domain}-standards.md: padrões de código do domínio
+   - {domain}-skills.md: tabela keyword → nome-da-skill
+
+4. Criar as skills (se ainda não existirem):
+   /skill-creator StoryBeat/research_{Tech}_v{Version}.md
+```
+
+### Frontmatter mínimo por tipo
+
+**Agent** (`.claude/agents/{domain}.md`):
+```yaml
+---
+name: {domain}
+description: >-
+  {Domain} agent. Implements P0-P5 workflow for {domain} tasks.
+  Use when working with {domain} projects.
+tools: ['Read', 'Edit', 'Write', 'Bash']
+---
+```
+
+**Rule** (`.claude/rules/{domain}-skills.md`):
+```yaml
+---
+description: Skill routing for {domain} domain
+paths: "**/*.{ext}"
+---
+```
+
+> **Referência completa**: Ver [Manual do skill-author](../manual/skill-author.md) para exemplos de
+> output do `/skill-creator` e [Convenções](../referencia/convencoes.md) para regras de YAML.
+
+---
 
 ## Fluxo Completo
 

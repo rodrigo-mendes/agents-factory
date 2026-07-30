@@ -28,13 +28,16 @@ flowchart TD
     
     S3 -->|✅ OK| S4{Auditoria<br/>necessária?}
     
-    S4 -->|Sim - pre-release| S5[Step 4: audit-architecture-consensus<br/>Auditoria 3 modelos]
+    S4 -->|Sim — alvo .claude/| S5CC[Step 4: audit-cc-architecture-consensus<br/>Auditoria 3 modelos CC]
+    S4 -->|Sim — alvo .github/| S5CP[Step 4: audit-architecture-consensus<br/>Auditoria 3 modelos Copilot]
     S4 -->|Não - check rotineiro| DONE([✅ Qualidade OK])
     
-    S5 -->|issues| FIX5[Remediar]
-    FIX5 --> S5
+    S5CC -->|issues| FIX5[Remediar]
+    S5CP -->|issues| FIX5
+    FIX5 --> S5CC
     
-    S5 -->|✅ aprovado| DONE
+    S5CC -->|✅ aprovado| DONE
+    S5CP -->|✅ aprovado| DONE
 ```
 
 ---
@@ -92,13 +95,18 @@ flowchart TD
 
 ### Step 4 (opcional): Auditoria Arquitetural
 
-**Prompt**: `/audit-architecture-consensus`
+**Prompt** — escolha pelo runtime alvo:
+
+| Alvo | Comando |
+|------|---------|
+| Projeto Claude Code (`.claude/`) | `/audit-cc-architecture-consensus` |
+| Projeto GitHub Copilot (`.github/`) | `/audit-architecture-consensus` |
 
 **O que verifica**:
-- Hierarquia de responsabilidades (Modelo A)
-- Cadeias de invocação (Modelo B)
-- Mecânicas VS Code (Modelo C)
-- Consenso priorizado
+- Hierarquia de responsabilidades — Modelo A (G0→G4 para CC; L0→L4 para Copilot)
+- Cadeias de invocação — Modelo B (reachability, dead-ends, orphans)
+- Mecânicas do engine — Modelo C (paths:/applyTo, context budget, frontmatter)
+- Consenso priorizado: 3/3 🔴 Must-Fix, 2/3 🟡 Should-Fix, 1/3 🟢 Consider
 
 **Quando incluir Step 4**:
 - Antes de release/produção
@@ -127,7 +135,7 @@ flowchart TD
 | 2a | `instructions-best-practices-validator` | Conteúdo (instructions) |
 | 2b | `skill-best-practices-validator` | Conteúdo (skills) |
 | 3 | `project-analysis-validator` | Holístico (projeto) |
-| 4 | `audit-architecture-consensus` | Arquitetural (3 modelos) |
+| 4 | `audit-cc-architecture-consensus` (CC) / `audit-architecture-consensus` (Copilot) | Arquitetural (3 modelos) |
 
 ---
 
