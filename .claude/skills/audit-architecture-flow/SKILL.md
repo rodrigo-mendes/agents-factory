@@ -356,6 +356,9 @@ If any check fails, complete the missing sections before confirming.
 - `/audit-architecture-engine` → Model C: VS Code engine mechanics and passive injection
 - `/audit-architecture-consensus` → Runs all 3 models and produces comparison report
 
+For the **Claude Code (`.claude/`) target**, use the CC family instead:
+`/audit-cc-architecture-flow`, `/audit-cc-architecture-scope`, `/audit-cc-architecture-engine`, `/audit-cc-architecture-consensus`.
+
 ---
 
 ## External Resources

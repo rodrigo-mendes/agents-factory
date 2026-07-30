@@ -327,6 +327,9 @@ Each model prompt can be used independently:
 | `/audit-architecture-engine` | After changing applyTo patterns or adding instructions |
 | `/audit-architecture-consensus` | Full audit before release, quarterly review, or after major changes |
 
+For the **Claude Code (`.claude/`) target**, use the CC family instead:
+`/audit-cc-architecture-consensus`, `/audit-cc-architecture-scope`, `/audit-cc-architecture-flow`, `/audit-cc-architecture-engine`.
+
 ---
 
 ## External Resources

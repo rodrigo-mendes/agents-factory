@@ -1,6 +1,6 @@
 ---
 name: skill-creator
-description: Guides generation of an Agent Skill using the authoring-agent-skills standard. Use when creating a new skill from validated research.
+description: "Guides generation of an Agent Skill from a pre-existing research file using the authoring-agent-skills standard. Use when creating a new skill from a research_[TECH]_v[VERSION].md produced by a researcher skill (e.g. /technical-framework-researcher). For all-in-one research + skill generation, use /methodologies-skill-generator or /architecture-approaches-skill-generator instead."
 argument-hint: "Path to research file (e.g. StoryBeat/research_FastAPI_v0.115.md)"
 context: fork
 agent: skill-author

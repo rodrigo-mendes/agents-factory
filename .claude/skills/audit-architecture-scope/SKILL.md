@@ -386,6 +386,9 @@ For deeper analysis of individual layers:
 4. /audit-architecture-engine               → Model C: Engine mechanics
 ```
 
+For the **Claude Code (`.claude/`) target**, use the CC family instead:
+`/audit-cc-architecture-scope`, `/audit-cc-architecture-flow`, `/audit-cc-architecture-engine`, `/audit-cc-architecture-consensus`.
+
 ---
 
 ## External Resources

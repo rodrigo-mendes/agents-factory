@@ -4,9 +4,9 @@ Fábrica de artefatos de IA (**Skills, Prompts/Commands, Subagentes, Rules**) co
 **anti-alucinação**. Este repositório **produz** artefatos para agentes de código e **também roda no
 Claude Code**: os prompts operacionais são expostos como skills/comandos que forkam para subagentes.
 
-> **Dual-target.** A fábrica documenta adoção para **Claude Code** (`docs/adocao-claude-code/`) e
-> **GitHub Copilot** (`docs/adopcion/`). Config em `.github/` (Copilot) e `.claude/` (Claude Code)
-> **coexistem** durante a transição — não apague `.github/`.
+> **Claude Code-first.** A fábrica documenta adoção para **Claude Code** (`docs/adocao-claude-code/`).
+> Config em `.github/` (Copilot) e `.claude/` (Claude Code) coexistem — não apague `.github/`.
+> O guia de adoção Copilot/ECI foi arquivado em `docs/archive/adopcion/`.
 
 ## Princípios (não-negociáveis)
 
@@ -37,7 +37,7 @@ Os comandos operacionais forkam (`context: fork`) para um subagente. Os 4 subage
 | [framework-researcher](.claude/agents/framework-researcher.md) | pesquisa anti-alucinação (usa WebSearch/WebFetch) | `technical-framework-researcher`(+`-terraform`), `cloud-architecture-researcher`, `business-domain-researcher`, `requirements-methodology-researcher`, `architecture-methodology-researcher`, `terraform-engineering-best-practices-researcher` |
 | [skill-author](.claude/agents/skill-author.md) | gera SKILL.md / rules | `skill-creator`, `methodologies-skill-generator`, `architecture-approaches-skill-generator`, `terraform-instructions-compiler` |
 | [architecture-auditor](.claude/agents/architecture-auditor.md) | audita arquitetura (consensus = 3 lentes em paralelo via tool Agent) | `audit-architecture-scope`/`flow`/`engine`/`consensus` (alvo Copilot) · `audit-cc-architecture-scope`/`flow`/`engine`/`consensus` (alvo Claude Code) |
-| [quality-validator](.claude/agents/quality-validator.md) | valida qualidade/aderência | `skill-best-practices-validator`, `instructions-best-practices-validator`, `agent-router-pattern-validator`, `copilot-compatibility-review` |
+| [quality-validator](.claude/agents/quality-validator.md) | valida qualidade/aderência | `skill-best-practices-validator`, `instructions-best-practices-validator`, `agent-router-pattern-validator`, `copilot-compatibility-review`, `project-analysis-validator` |
 
 **Meta-skills** (auto-invocáveis, conhecimento base):
 [researching-technical-frameworks](.claude/skills/researching-technical-frameworks/SKILL.md) ·
@@ -48,11 +48,14 @@ Os comandos operacionais forkam (`context: fork`) para um subagente. Os 4 subage
 Não é código compilado — os artefatos rodam **no Claude Code** via `/<comando>`:
 
 - Pesquisar tecnologia: `/technical-framework-researcher <tech> <versão>`
-- Criar skill: `/skill-creator`
-- Auditar arquitetura (consenso): `/audit-architecture-consensus <alvo>`
+- Criar skill a partir de research file: `/skill-creator StoryBeat/research_X_v1.md`
+- Criar skill de metodologia (tudo-em-um): `/methodologies-skill-generator <metodologia>`
+- Auditar projeto Claude Code (consenso): `/audit-cc-architecture-consensus <alvo>`
+- Auditar projeto GitHub Copilot (consenso): `/audit-architecture-consensus <alvo>`
 - Validar qualidade de skills: `/skill-best-practices-validator .claude/skills/`
+- Auditar saúde do projeto completo: `/project-analysis-validator .claude/`
 
-Os 23 comandos usam `disable-model-invocation: true` (ações deliberadas) — acessíveis por `/nome`,
+Os 24 comandos usam `disable-model-invocation: true` (ações deliberadas) — acessíveis por `/nome`,
 sem custo de auto-listagem. As 2 meta-skills ficam auto-invocáveis (2 no total).
 
 ## Estrutura
@@ -60,11 +63,19 @@ sem custo de auto-listagem. As 2 meta-skills ficam auto-invocáveis (2 no total)
 ```
 .claude/
 ├── agents/     ← 4 subagentes (framework-researcher, skill-author, architecture-auditor, quality-validator)
-├── skills/     ← 2 meta-skills + 23 comandos operacionais (fork → subagente)
+├── skills/     ← 2 meta-skills + 24 comandos operacionais (fork → subagente)
 ├── rules/      ← rules por caminho (paths:) + templates
-├── templates/  ← scaffolding (variantes Claude Code de agents/skills/rules)
+├── templates/  ← scaffolding: agents/, skills/, rules/, prompts/, reports/
+├── MIGRATION.md ← histórico da migração Copilot → Claude Code
+├── worktrees/  ← worktrees Git temporários (gerado automaticamente; não editar)
 └── settings.json
-docs/           ← visão geral, capacidades, fluxos, referência, programas de adoção
+docs/
+├── adocao-claude-code/ ← programa de adoção Claude Code
+├── archive/adopcion/   ← guia Copilot/ECI arquivado
+├── capacidades/        ← catálogo de skills/comandos
+├── como-usar/          ← guias operacionais
+├── fluxos/             ← diagramas de fluxo
+└── referencia/         ← glossário e convenções
 StoryBeat/      ← saídas de pesquisa geradas por agentes (untracked)
 .github/        ← config Copilot (coexistência; não apagar)
 ```
