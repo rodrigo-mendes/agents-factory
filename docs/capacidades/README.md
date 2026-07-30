@@ -43,7 +43,7 @@ Todas as capacidades do Agents Factory organizadas por categoria.
 | 21 | `audit-architecture-flow` | Prompt | Auditoria | Modelo B: cadeias de invocação prompt→agent→skill (alvo Copilot) |
 | 22 | `audit-architecture-engine` | Prompt | Auditoria | Modelo C: mecânicas do VS Code engine (alvo Copilot) |
 | 23 | `audit-cc-architecture-consensus` | Prompt | Auditoria | Orquestra 3 modelos em paralelo + consenso (alvo Claude Code) |
-| 24 | `audit-cc-architecture-scope` | Prompt | Auditoria | Modelo A: hierarquia de responsabilidades L0→L4 (alvo Claude Code) |
+| 24 | `audit-cc-architecture-scope` | Prompt | Auditoria | Modelo A: hierarquia de responsabilidades G0→G4 (alvo Claude Code) |
 | 25 | `audit-cc-architecture-flow` | Prompt | Auditoria | Modelo B: cadeias de invocação prompt→agent→skill (alvo Claude Code) |
 | 26 | `audit-cc-architecture-engine` | Prompt | Auditoria | Modelo C: mecânicas do Claude Code engine (alvo Claude Code) |
 
@@ -73,8 +73,7 @@ flowchart TD
     Q3 -->|Skills| V3[skill-best-practices-validator]
     Q3 -->|Projeto todo| V4[project-analysis-validator]
     
-    Q4 -->|Auditoria completa| A1[audit-architecture-consensus]
-    Q4 -->|Só escopo| A2[audit-architecture-scope]
-    Q4 -->|Só fluxo| A3[audit-architecture-flow]
-    Q4 -->|Só engine| A4[audit-architecture-engine]
+    Q4 -->|Projeto .claude/ — completa| A1CC[audit-cc-architecture-consensus]
+    Q4 -->|Projeto .github/ — completa| A1[audit-architecture-consensus]
+    Q4 -->|Lentes individuais| AIND[Ver prompts-arquitetura.md]
 ```

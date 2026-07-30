@@ -20,7 +20,8 @@ Como usar os prompts de validação para garantir qualidade dos artefatos.
 | Arquivo `SKILL.md` | `skill-best-practices-validator` |
 | Projeto de agente completo | `project-analysis-validator .claude/` |
 | Estrutura de routing | `agent-router-pattern-validator` |
-| Arquitetura completa | `audit-architecture-consensus` |
+| Arquitetura completa — projeto `.claude/` | `audit-cc-architecture-consensus` |
+| Arquitetura completa — projeto `.github/` | `audit-architecture-consensus` |
 
 ## Pipeline Recomendado
 
@@ -47,10 +48,19 @@ Para validação completa, execute nesta ordem:
 > frontmatter, naming, progressive disclosure e cobertura de rules.
 
 ### Step 4 (opcional): Auditoria arquitetural
+
+Para projetos **Claude Code** (`.claude/`):
+```
+/audit-cc-architecture-consensus
+```
+
+Para projetos **GitHub Copilot** (`.github/`):
 ```
 /audit-architecture-consensus
 ```
-> Análise multi-modelo completa (scope + flow + engine).
+
+> Análise multi-modelo completa (scope + flow + engine). Corre 3 lentes em paralelo e prioriza
+> findings por consenso: 3/3 = Must-Fix 🔴, 2/3 = Should-Fix 🟡, 1/3 = Consider 🟢.
 
 ---
 

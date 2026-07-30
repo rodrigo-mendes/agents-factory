@@ -4,7 +4,8 @@
 
 | Requisito | Mínimo |
 |-----------|--------|
-| Claude Code CLI | claude.ai/code |
+| Claude Code CLI | [claude.ai/code](https://claude.ai/code) |
+| Git | Qualquer versão recente |
 
 ## Setup
 
@@ -22,6 +23,10 @@
 
 > **Nota**: Os comandos em `.claude/skills/` são carregados automaticamente pelo Claude Code quando o projeto está aberto.
 
+## Início Rápido (5 minutos)
+
+> Quer ver o pipeline completo numa única leitura? → [Início Rápido](inicio-rapido.md)
+
 ## Primeiro Uso
 
 Escolha um dos cenários abaixo baseado no seu objetivo:
@@ -33,19 +38,19 @@ Escolha um dos cenários abaixo baseado no seu objetivo:
 /technical-framework-researcher
 ```
 
-### "Quero criar um agente novo"
-→ [Criando Agentes](criando-agentes.md)
-
-```
-/skill-creator
-```
-
 ### "Quero criar uma skill"
 → [Criando Skills](criando-skills.md)
 
 ```
-/skill-creator
+/skill-creator StoryBeat/research_<Tech>_v<Version>.md
 ```
+
+### "Quero criar um agente completo"
+→ [Criando Agentes](criando-agentes.md)
+
+Não há um único comando — o processo envolve pesquisar tecnologias, criar skills e depois
+criar manualmente os ficheiros de definição do agente a partir dos templates em
+`.claude/templates/`.
 
 ### "Quero validar o que já tenho"
 → [Validando Artefatos](validando-artefatos.md)
@@ -71,5 +76,6 @@ Antes de mergulhar nos guias, entenda estes 4 conceitos:
 |-----------------|------|
 | Entender a arquitetura | [Visão Geral](../visao-geral.md) |
 | Ver todas as capacidades | [Catálogo](../capacidades/README.md) |
+| Exemplos de chamadas para cada comando | [Manual de Uso dos Agentes](../manual/README.md) |
 | Entender fluxos combinados | [Fluxos](../fluxos/README.md) |
-| Referência de convenções | [Convenções](../referencia/convencoes.md) |
+| Referência de convenções e termos | [Convenções](../referencia/convencoes.md) · [Glossário](../referencia/glossario.md) |

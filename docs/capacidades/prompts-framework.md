@@ -14,7 +14,7 @@
 
 ## 1. agent-router-pattern-validator
 
-> **Arquivo**: `.claude/skills/agent-router-pattern-validator.md`
+> **Arquivo**: `.claude/skills/agent-router-pattern-validator/SKILL.md`
 
 ### Descrição
 Analisa qualquer projeto de agente Claude Code e gera relatório de conformidade com o Agent Router Pattern, identificando desvios e propondo melhorias.

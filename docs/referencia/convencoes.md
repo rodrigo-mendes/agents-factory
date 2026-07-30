@@ -133,15 +133,27 @@ argument-hint: Sugestão de input para o usuário
 
 ---
 
-## Hierarquia de Responsabilidades (L0→L4)
+## Hierarquia de Responsabilidades
+
+### GitHub Copilot (L0→L4)
 
 | Camada | Artefato | Responsabilidade | Não deve conter |
 |:------:|----------|-----------------|-----------------|
 | **L0** | `.vscode/settings.json` | Config global do workspace | Lógica |
-| **L1** | `.instructions.md` | Padrões project-wide | Código de exemplo longo |
+| **L1** | `.instructions.md` | Padrões project-wide (`applyTo:`) | Código de exemplo longo |
 | **L2** | `SKILL.md` | Conhecimento de domínio | Routing / orchestration |
 | **L3** | `.agent.md` | Orquestração P0-P5 | Knowledge hardcoded |
 | **L4** | `.prompt.md` | Entry-point do usuário | Lógica de implementação |
+
+### Claude Code (G0→G4)
+
+| Camada | Artefato | Responsabilidade | Não deve conter |
+|:------:|----------|-----------------|-----------------|
+| **G0** | `CLAUDE.md` | Manifesto global — routing table + princípios | Lógica de domínio |
+| **G1** | `.claude/agents/*.md` | Personas de execução com P0-P5 completo | Knowledge hardcoded |
+| **G2** | `.claude/rules/*.md` | Contexto automático por scope (`paths:`) | Código extenso |
+| **G3** | `.claude/skills/*/SKILL.md` (`context: fork`) | Entry-points de utilizador — roteia para agente | Lógica de implementação |
+| **G4** | `.claude/skills/*/SKILL.md` (meta-skills) | Bases de conhecimento — carregadas pelo agente em P0 | Routing/orchestration |
 
 **Princípio**: Cada camada delega para baixo, nunca para cima.
 
@@ -167,17 +179,29 @@ skill-name/
 
 ## Agent Router Pattern
 
-Padrão de separação de concerns para projetos de agente:
+Padrão de separação de concerns para projetos de agente.
+
+### Cadeia GitHub Copilot
 
 ```
-Prompt (entry-point)
-  → Agent (orquestração)
-    → Skills (conhecimento)
-    → Instructions (configuração)
+.prompt.md (entry-point — L4)
+  → .agent.md (orquestração P0-P5 — L3)
+    → SKILL.md (conhecimento de domínio — L2)
+    → .instructions.md (configuração project-wide — L1)
 ```
 
-**Regras**:
-- Prompt nunca implementa — só coleta contexto e roteia
-- Agent nunca contém knowledge hardcoded — sempre carrega de skills
-- Skill nunca faz routing — só fornece padrões
-- Instructions nunca contêm código extenso — só configuração
+### Cadeia Claude Code
+
+```
+/comando-skill (context: fork — G3)
+  → subagente .claude/agents/*.md (P0-P5 — G1)
+    → meta-skills authoring-agent-skills + researching-technical-frameworks (P0 — G4)
+    → rules .claude/rules/*.md (injectadas automaticamente por paths: — G2)
+    → output (código / relatório / SKILL.md)
+```
+
+**Regras (ambos os sistemas)**:
+- Entry-point nunca implementa — só coleta contexto e roteia
+- Agente nunca contém knowledge hardcoded — sempre carrega de skills/meta-skills
+- Skill nunca faz routing — só fornece padrões three-tier
+- Rules/Instructions nunca contêm código extenso — só configuração de escopo

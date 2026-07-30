@@ -2,6 +2,10 @@
 
 14 templates disponíveis para criar qualquer tipo de artefato do framework.
 
+> **Coexistência de sistemas**: Os templates existem em duas localizações espelhadas — `.github/templates/` (GitHub Copilot) e `.claude/templates/` (Claude Code). A única diferença estrutural é que `.github/` usa `instructions/` enquanto `.claude/` usa `rules/` para os templates de instrução de escopo.
+
+---
+
 ---
 
 ## Resumo por Categoria
