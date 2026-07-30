@@ -101,7 +101,7 @@ Esse fluxo é aprofundado no [Módulo 2](../modulo-2-modos-claude-code/README.md
 | Extensões de IDE (VS Code/JetBrains) | ✅ | Painel do Claude Code integrado ao editor |
 | Versão web (claude.ai/code) | ✅ | Segundo o plano |
 | Subagentes customizados BRX | ✅ | Ver catálogo no Módulo 1 |
-| Skills e comandos slash customizados | ✅ | `.claude/skills/` e `.claude/commands/` |
+| Skills e comandos slash customizados | ✅ | `.claude/skills/<nome>/SKILL.md` (comandos slash usam `context: fork` no frontmatter) |
 | Memória de projeto (`CLAUDE.md`) | ✅ | Instruções e contexto do projeto, carregados automaticamente |
 | MCP servers (ferramentas externas) | ✅ | Para conectar sistemas externos, segundo configuração |
 | Execução de código em produção | ❌ | Só propõe e executa localmente sob suas permissões |

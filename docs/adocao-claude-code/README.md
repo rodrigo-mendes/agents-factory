@@ -54,7 +54,7 @@ Se você vem do GitHub Copilot, esta tabela ajuda a traduzir os conceitos:
 | Ask mode (chat) | Modo de exploração / **Plan Mode** (Shift+Tab), read-only |
 | Edit mode (`Ctrl+I`) | Edição direta: você pede, o Claude mostra o **diff** e você aprova |
 | Agent mode | **Modo agente** — o modo padrão do Claude Code no terminal |
-| Agentes customizados `@nome` | **Subagentes** (`.claude/agents/`) e **comandos slash** (`.claude/commands/`) |
+| Agentes customizados `@nome` | **Subagentes** (`.claude/agents/`) e **comandos slash** (`.claude/skills/<nome>/SKILL.md`, com `context: fork` no frontmatter) |
 | Skills (`.github/skills/`) | **Skills** (`.claude/skills/`) — conceito nativo |
 | `copilot-instructions.md` | **`CLAUDE.md`** (raiz e subpastas) |
 | Referência `#arquivo` | Referência `@arquivo` |
