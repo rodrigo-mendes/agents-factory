@@ -75,7 +75,7 @@ Toda skill organiza guardrails em 3 camadas:
 - **Exemplos**:
   - ✅ `technical-framework-researcher`
   - ✅ `skill-best-practices-validator`
-  - ✅ `agent-bootstrap`
+  - ✅ `agent-router-pattern-validator`
 
 ### Agents
 - **Formato**: `domain-role` (kebab-case)
@@ -102,26 +102,32 @@ name: nome-do-artefato        # ≤64 chars, kebab-case
 description: >
   Descrição em terceira pessoa, verbo de ação primeiro.
   Deve incluir "Use when..." para contexto de ativação.
-  Máximo 1024 caracteres.
+  Máximo 1536 caracteres.
 ---
 ```
 
 ### Campos adicionais por tipo
 
-**Agents**:
+**Subagentes** (`.claude/agents/`): usam o campo `tools:`
 ```yaml
-tools: ['read', 'editFiles', 'createFile', 'runInTerminal', 'search']
+tools: ['Read', 'Edit', 'Write', 'Bash', 'WebSearch', 'WebFetch']
 ```
 
-**Prompts**:
+**Skills/Comandos** (`.claude/skills/`): usam o campo `allowed-tools:`
 ```yaml
-agent: nome-do-agent           # Se roteia para agent
+allowed-tools: ['Read', 'Edit', 'Write', 'Bash']
+```
+
+> **Distinção importante**: `tools:` é o campo correto para subagentes; `allowed-tools:` é o campo correto para skills e comandos. Usar o campo errado faz o artefato ser ignorado silenciosamente.
+
+**Comandos** (entry-points):
+```yaml
 argument-hint: Sugestão de input para o usuário
 ```
 
 ### Regras
 - `name`: ≤64 chars, `[a-z0-9-]` apenas
-- `description`: ≤1024 chars, terceira pessoa, verbo primeiro
+- `description`: ≤1536 chars, terceira pessoa, verbo primeiro
 - Sem campos customizados não documentados
 - YAML válido (sem tabs, indentação correta)
 

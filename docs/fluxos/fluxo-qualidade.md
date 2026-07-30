@@ -43,7 +43,7 @@ flowchart TD
 
 ### Step 1: Compatibilidade Técnica
 
-**Prompt**: `@workspace /copilot-compatibility-review`
+**Prompt**: `/copilot-compatibility-review`
 
 **O que verifica**:
 - YAML frontmatter válido
@@ -58,7 +58,7 @@ flowchart TD
 ### Step 2: Qualidade de Conteúdo
 
 #### 2a: Instructions
-**Prompt**: `@workspace /instructions-best-practices-validator`
+**Prompt**: `/instructions-best-practices-validator`
 
 **O que verifica**:
 - Clareza e concisão
@@ -67,7 +67,7 @@ flowchart TD
 - Padrões de naming
 
 #### 2b: Skills
-**Prompt**: `@workspace /skill-best-practices-validator`
+**Prompt**: `/skill-best-practices-validator`
 
 **O que verifica**:
 - Three-tier completo (✅⚠️🚫)
@@ -80,7 +80,7 @@ flowchart TD
 
 ### Step 3: Qualidade de Projeto
 
-**Prompt**: `@workspace /project-analysis-validator`
+**Prompt**: `/project-analysis-validator`
 
 **O que verifica**:
 - Consistência entre artefatos
@@ -92,7 +92,7 @@ flowchart TD
 
 ### Step 4 (opcional): Auditoria Arquitetural
 
-**Prompt**: `@workspace /audit-architecture-consensus`
+**Prompt**: `/audit-architecture-consensus`
 
 **O que verifica**:
 - Hierarquia de responsabilidades (Modelo A)

@@ -34,10 +34,10 @@ flowchart TD
 
 ```mermaid
 graph LR
-    A[agent-bootstrap] --> B[agent-router-pattern-validator] --> C[audit-architecture-consensus] --> D[✅ Produção]
+    A[technical-framework-researcher] --> B[skill-creator] --> C[agent-router-pattern-validator] --> D[audit-architecture-consensus] --> E[✅ Produção]
 ```
 
-**Capacidades envolvidas**: 2 de framework + 5 de auditoria
+**Capacidades envolvidas**: 1 de framework + 4 de auditoria + pesquisa + compilação
 
 ---
 
@@ -104,14 +104,14 @@ graph TD
     end
 
     subgraph "Fase 2: Projeto"
-        B[agent-bootstrap] --> RP[router-pattern-validator]
+        RP[agent-router-pattern-validator]
     end
 
     subgraph "Fase 3: Qualidade"
         PV[project-analysis-validator] --> AU[audit-architecture-consensus]
     end
 
-    V1 -->|skills prontas| B
+    V1 -->|skills prontas| RP
     RP --> PV
     AU --> PROD[✅ Production Ready]
 ```
