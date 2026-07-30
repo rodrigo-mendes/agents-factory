@@ -4,25 +4,23 @@
 
 | Requisito | Mínimo |
 |-----------|--------|
-| VS Code | Versão recente |
-| GitHub Copilot Chat | Extensão ≥ 0.20 |
-| Plano Copilot | Individual, Business ou Enterprise |
+| Claude Code CLI | claude.ai/code |
 
 ## Setup
 
 1. Clone ou adicione este repositório ao seu workspace:
    ```bash
-   git clone <repo-url> .github-factory
+   git clone <repo-url> agents-factory
    ```
 
-2. Abra no VS Code:
+2. Abra com Claude Code:
    ```bash
-   code .github-factory
+   claude agents-factory
    ```
 
-3. Os prompts ficam disponíveis automaticamente via `@workspace /nome-do-prompt`
+3. Os comandos ficam disponíveis automaticamente via `/nome-do-comando`
 
-> **Nota**: Os prompts em `.github/prompts/` são detectados automaticamente pelo Copilot Chat quando o workspace está aberto.
+> **Nota**: Os comandos em `.claude/skills/` são carregados automaticamente pelo Claude Code quando o projeto está aberto.
 
 ## Primeiro Uso
 
@@ -32,28 +30,28 @@ Escolha um dos cenários abaixo baseado no seu objetivo:
 → [Pesquisando Tecnologias](pesquisando-tecnologias.md)
 
 ```
-@workspace /technical-framework-researcher
+/technical-framework-researcher
 ```
 
 ### "Quero criar um agente novo"
 → [Criando Agentes](criando-agentes.md)
 
 ```
-@workspace /agent-bootstrap
+/skill-creator
 ```
 
 ### "Quero criar uma skill"
 → [Criando Skills](criando-skills.md)
 
 ```
-@workspace /skill-creator
+/skill-creator
 ```
 
 ### "Quero validar o que já tenho"
 → [Validando Artefatos](validando-artefatos.md)
 
 ```
-@workspace /project-analysis-validator
+/project-analysis-validator .claude/
 ```
 
 ## Conceitos Essenciais

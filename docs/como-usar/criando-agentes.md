@@ -1,33 +1,40 @@
 # Guia: Criando Agentes
 
-Como criar um projeto de agente completo usando o agent-bootstrap.
+Como criar um projeto de agente completo no Claude Code.
+
+> **Nota**: O artefato `agent-bootstrap` foi cancelado e nunca foi implementado. Para criar um
+> novo projeto de agente, comece com `/skill-creator` para criar as skills individuais e organize-as
+> sob `.claude/`. A estrutura do projeto segue as convenções do Agent Router Pattern descrito abaixo.
 
 ---
 
 ## Quando Usar
 
 - Começar um domínio novo de automação
-- Estruturar um agente que precisa de skills, instructions e prompts
+- Estruturar um agente que precisa de skills, rules e comandos
 - Garantir aderência ao Agent Router Pattern desde o início
 
 ## Passo a Passo
 
-### 1. Execute o bootstrap
+### 1. Pesquise as tecnologias do domínio
+
+Antes de criar qualquer artefato, pesquise as tecnologias que o agente precisará conhecer:
 
 ```
-@workspace /agent-bootstrap
+/technical-framework-researcher
 ```
 
-### 2. Responda às perguntas do wizard
+### 2. Crie cada skill com o skill-creator
 
-| Pergunta | Exemplo de Resposta |
-|----------|-------------------|
-| Domínio do agente | "Provisionar infraestrutura OCI com Terraform" |
-| Tipo de agente | Implementation / Advisory / Orchestrator |
-| Skills necessárias | "networking, iam, functions, api-gateway" |
-| Tecnologias | "Terraform 1.5+, OCI Provider 5.x" |
+Para cada área de conhecimento do domínio, execute:
 
-### 3. Escolha o tipo correto
+```
+/skill-creator
+```
+
+As skills são criadas em `.claude/skills/{nome-da-skill}/SKILL.md` seguindo o padrão three-tier.
+
+### 3. Escolha o tipo correto de agente
 
 | Tipo | Quando | Gera código? |
 |------|--------|:---:|
@@ -35,59 +42,49 @@ Como criar um projeto de agente completo usando o agent-bootstrap.
 | **Advisory** | Agente que produz designs, ADRs, recomendações | ❌ |
 | **Orchestrator** | Agente que coordena múltiplos domínios | ✅ |
 
-### 4. Resultado gerado
+### 4. Estrutura esperada do projeto
+
+Organize os artefatos gerados sob `.claude/`:
 
 ```
-.github/
+.claude/
 ├── agents/
-│   └── {domain}.agent.md           ← Definição do agente (P0-P5)
-├── instructions/
-│   ├── {domain}-config.instructions.md     ← Setup do projeto
-│   ├── {domain}-standards.instructions.md  ← Padrões de código
-│   └── {domain}-skills.instructions.md     ← Routing table
-├── prompts/
-│   └── {domain}.prompt.md           ← Entry-point do usuário
-└── skills/
-    └── {domain}/
-        └── SKILL.md                 ← Skill placeholder
+│   └── {domain}.md                  ← Definição do agente (P0-P5)
+├── rules/
+│   ├── {domain}-config.md           ← Setup do projeto
+│   ├── {domain}-standards.md        ← Padrões de código
+│   └── {domain}-skills.md           ← Routing table
+├── skills/
+│   └── {domain}/
+│       └── SKILL.md                 ← Skill principal + blueprints/
 ```
 
-### 5. Valide a estrutura
+### 5. Valide a estrutura de routing
 
 ```
-@workspace /agent-router-pattern-validator
+/agent-router-pattern-validator
 ```
 
 ### 6. (Opcional) Auditoria completa
 
 ```
-@workspace /audit-architecture-consensus
+/audit-architecture-consensus
 ```
 
 ---
 
-## Após o Bootstrap
+## Após Criar as Skills
 
-O bootstrap gera a **estrutura** mas as skills ficam como placeholders. Próximos passos:
+As skills geradas pelo `/skill-creator` ficam como ponto de partida. Próximos passos:
 
-1. **Pesquisar** cada skill necessária:
+1. **Validar** cada skill:
    ```
-   @workspace /technical-framework-researcher
-   ```
-
-2. **Compilar** pesquisa em SKILL.md:
-   ```
-   @workspace /skill-creator
+   /skill-best-practices-validator
    ```
 
-3. **Validar** cada skill:
+2. **Validar** o projeto completo:
    ```
-   @workspace /skill-best-practices-validator
-   ```
-
-4. **Validar** o projeto completo:
-   ```
-   @workspace /project-analysis-validator
+   /project-analysis-validator .claude/
    ```
 
 ---
@@ -102,7 +99,7 @@ O bootstrap gera a **estrutura** mas as skills ficam como placeholders. Próximo
 ### Advisory Agent
 - Segue P0-P5 mas P4 é "Deliver" (não "Implement")
 - Produz: ADRs, diagramas, roadmaps, delegation plans
-- **Delega** implementação para outros agentes (ex: "Use @oci-terraform para provisionar X")
+- **Delega** implementação para outros agentes
 - Precisa de `tools: ['read', 'search']` (sem edit/create)
 
 ### Orchestrator Agent
@@ -116,16 +113,16 @@ O bootstrap gera a **estrutura** mas as skills ficam como placeholders. Próximo
 
 - **Comece pelo advisory**: Se não tem certeza do design, crie um advisory agent primeiro para definir a arquitetura, depois um implementation agent para executar.
 - **Granularidade de skills**: Prefira skills focadas (1 serviço/conceito) vs mega-skills. Facilita composição.
-- **Routing table**: A `{domain}-skills.instructions.md` é o "mapa" que diz ao agente qual skill carregar baseado em keywords do request.
+- **Routing table**: O arquivo `{domain}-skills.md` em `.claude/rules/` é o "mapa" que diz ao agente qual skill carregar baseado em keywords do request.
 
 ## Armadilhas Comuns
 
 | Armadilha | Solução |
 |-----------|---------|
-| Pular o bootstrap e criar manualmente | Use o bootstrap — garante estrutura completa |
+| Criar skills sem pesquisa prévia | Pesquise primeiro com `/technical-framework-researcher` — evita alucinações |
 | Agente sem skills (hardcoded knowledge) | Sempre externalizar conhecimento em skills |
 | Skill genérica demais ("cloud-stuff") | Uma skill por serviço/conceito específico |
-| Não validar após criar | Executar router-pattern-validator |
+| Não validar após criar | Executar `/agent-router-pattern-validator` e `/project-analysis-validator .claude/` |
 
 ## Fluxo Completo
 

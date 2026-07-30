@@ -27,7 +27,7 @@ Como usar os prompts de pesquisa para construir bases de conhecimento validadas.
 ### 2. Execute o prompt
 
 ```
-@workspace /technical-framework-researcher
+/technical-framework-researcher
 ```
 
 ### 3. Forneça os inputs
@@ -53,18 +53,18 @@ Após a pesquisa, transforme em skill ou instruction:
 
 | Tipo de pesquisa | Compiler |
 |-----------------|----------|
-| Tecnologia genérica | `@workspace /skill-creator` |
-| Serviço cloud + Terraform | `@workspace /skill-creator` |
-| Práticas Terraform (org, CI/CD, testes) | `@workspace /terraform-instructions-compiler` |
-| Metodologia de arquitetura | `@workspace /architecture-approaches-skill-generator` |
-| Metodologia de requisitos | `@workspace /methodologies-skill-generator` |
+| Tecnologia genérica | `/skill-creator` |
+| Serviço cloud + Terraform | `/skill-creator` |
+| Práticas Terraform (org, CI/CD, testes) | `/terraform-instructions-compiler` |
+| Metodologia de arquitetura | `/architecture-approaches-skill-generator` |
+| Metodologia de requisitos | `/methodologies-skill-generator` |
 
 ---
 
 ## Dicas
 
 - **Não pule a compilação**: O documento de pesquisa não é o artefato final — precisa ser estruturado em three-tier para ser útil a agentes
-- **Valide após compilar**: Use `@workspace /skill-best-practices-validator` no resultado
+- **Valide após compilar**: Use `/skill-best-practices-validator` no resultado
 - **Uma versão por vez**: Se precisa de múltiplas versões, faça pesquisas separadas
 
 ## Armadilhas Comuns

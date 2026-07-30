@@ -16,14 +16,14 @@ Como criar uma SKILL.md que segue todos os padrões do framework.
 
 Uma skill precisa de conteúdo validado. Se ainda não tem:
 ```
-@workspace /technical-framework-researcher
+/technical-framework-researcher
 ```
 Ver: [Pesquisando Tecnologias](pesquisando-tecnologias.md)
 
 ### 2. Execute o skill-creator
 
 ```
-@workspace /skill-creator
+/skill-creator
 ```
 
 Forneça o caminho para o documento de pesquisa quando solicitado.
@@ -52,7 +52,7 @@ skill-name/
 ### 5. Valide a skill
 
 ```
-@workspace /skill-best-practices-validator
+/skill-best-practices-validator
 ```
 
 ### 6. Checklist de qualidade
