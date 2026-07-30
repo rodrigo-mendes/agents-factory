@@ -24,7 +24,7 @@ graph LR
 ```mermaid
 graph TD
     subgraph "Camada de Entrada"
-        P[Prompts<br/>21 prompts operacionais]
+        P[Skills<br/>26 skills (24 comandos + 2 meta-skills)]
     end
 
     subgraph "Camada de Orquestração"
@@ -57,10 +57,10 @@ graph TD
 | Artefato | Extensão | Propósito | Quem consome |
 |----------|----------|-----------|--------------|
 | **Skill** | `SKILL.md` | Base de conhecimento versionada com padrões ✅⚠️🚫 | Agentes (via P0-P2) |
-| **Prompt** | `.prompt.md` | Ponto de entrada do usuário — coleta contexto e roteia | Usuário via Copilot Chat |
-| **Agent** | `.agent.md` | Orquestrador que carrega skills e executa P0-P5 | Prompts (via `agent:` field) |
+| **Prompt** | `.md` | Ponto de entrada do usuário — coleta contexto e roteia | Usuário via Claude Code |
+| **Agent** | `.md` | Orquestrador que carrega skills e executa P0-P5 | Prompts (via `agent:` field) |
 | **Instruction** | `.instructions.md` | Configuração de projeto/padrões (gerado por compilers) | Agentes automaticamente |
-| **Template** | `TEMPLATE.*.md` | Scaffolding para criar novos artefatos | Humanos / agent-bootstrap |
+| **Template** | `TEMPLATE.*.md` | Scaffolding para criar novos artefatos | Humanos |
 | **Blueprint** | `blueprints/*.md` | Padrões auxiliares (always-do / never-do) | Skills |
 
 ---
@@ -69,7 +69,7 @@ graph TD
 
 ```mermaid
 flowchart TD
-    U[👤 Usuário] -->|"@workspace /prompt-name"| PROMPT
+    U[👤 Usuário] -->|"/prompt-name"| PROMPT
     PROMPT -->|"agent: agent-name"| AGENT
     AGENT -->|"P0: load"| SKILL
     AGENT -->|"P0: load"| INSTR[Instructions]
@@ -92,12 +92,12 @@ mindmap
   root((Agents Factory))
     Pesquisa
       technical-framework-researcher
-      terraform-researcher
+      technical-framework-researcher-terraform
       cloud-architecture-researcher
       architecture-methodology-researcher
       business-domain-researcher
       requirements-methodology-researcher
-      terraform-engineering-best-practices
+      terraform-engineering-best-practices-researcher
     Compilação
       skill-creator
       terraform-instructions-compiler
@@ -113,8 +113,11 @@ mindmap
       audit-architecture-scope
       audit-architecture-flow
       audit-architecture-engine
+      audit-cc-architecture-consensus
+      audit-cc-architecture-scope
+      audit-cc-architecture-flow
+      audit-cc-architecture-engine
     Framework
-      agent-bootstrap
       agent-router-pattern-validator
 ```
 

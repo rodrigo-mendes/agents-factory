@@ -11,8 +11,8 @@ Todas as capacidades do Agents Factory organizadas por categoria.
 | [Pesquisa](prompts-pesquisa.md) | 7 | Construir bases de conhecimento validadas |
 | [Compilação](prompts-compilacao.md) | 4 | Transformar pesquisa em skills/instructions |
 | [Validação](prompts-validacao.md) | 4 | Verificar qualidade de artefatos |
-| [Auditoria](prompts-arquitetura.md) | 5 | Auditar arquitetura multi-modelo |
-| [Framework](prompts-framework.md) | 2 | Criar e validar projetos de agente |
+| [Auditoria](prompts-arquitetura.md) | 8 | Auditar arquitetura multi-modelo |
+| [Framework](prompts-framework.md) | 1 | Validar projetos de agente |
 
 ---
 
@@ -22,27 +22,30 @@ Todas as capacidades do Agents Factory organizadas por categoria.
 |:-:|------|------|-----------|-----------|
 | 1 | `authoring-agent-skills` | Skill | Meta | Padrões de criação de skills (three-tier, YAML, blueprints) |
 | 2 | `researching-technical-frameworks` | Skill | Meta | Metodologia de pesquisa com version absolutism |
-| 3 | `agent-bootstrap` | Prompt | Framework | Wizard interativo que gera projeto completo de agente |
-| 4 | `agent-router-pattern-validator` | Prompt | Framework | Análise de conformidade com Agent Router Pattern |
-| 5 | `technical-framework-researcher` | Prompt | Pesquisa | Pesquisa tecnologias/frameworks com fontes oficiais |
-| 6 | `technical-framework-researcher-terraform` | Prompt | Pesquisa | Pesquisa serviços cloud + Terraform |
-| 7 | `terraform-engineering-best-practices-researcher` | Prompt | Pesquisa | Pesquisa práticas de engenharia Terraform |
-| 8 | `architecture-methodology-researcher` | Prompt | Pesquisa | Pesquisa metodologias de arquitetura (C4, TOGAF, DDD) |
-| 9 | `cloud-architecture-researcher` | Prompt | Pesquisa | Pesquisa frameworks de arquitetura cloud (WAF, CAF) |
-| 10 | `business-domain-researcher` | Prompt | Pesquisa | Pesquisa domínios organizacionais e regulatórios |
-| 11 | `requirements-methodology-researcher` | Prompt | Pesquisa | Pesquisa frameworks de requisitos (Scrum, SAFe) |
-| 12 | `skill-creator` | Prompt | Compilação | Gera SKILL.md a partir de pesquisa |
-| 13 | `terraform-instructions-compiler` | Prompt | Compilação | Compila pesquisa Terraform em .instructions.md |
-| 14 | `architecture-approaches-skill-generator` | Prompt | Compilação | Gera SKILL.md de metodologia de arquitetura |
-| 15 | `methodologies-skill-generator` | Prompt | Compilação | Gera SKILL.md de metodologia de engenharia |
-| 16 | `copilot-compatibility-review` | Prompt | Validação | Verifica compatibilidade com docs oficiais do Copilot |
-| 17 | `instructions-best-practices-validator` | Prompt | Validação | Valida .instructions.md contra best practices |
-| 18 | `skill-best-practices-validator` | Prompt | Validação | Valida SKILL.md contra Claude best practices |
-| 19 | `project-analysis-validator` | Prompt | Validação | Análise de qualidade geral do projeto |
-| 20 | `audit-architecture-consensus` | Prompt | Auditoria | Orquestra 3 modelos em paralelo + consenso |
-| 21 | `audit-architecture-scope` | Prompt | Auditoria | Modelo A: hierarquia de responsabilidades L0→L4 |
-| 22 | `audit-architecture-flow` | Prompt | Auditoria | Modelo B: cadeias de invocação prompt→agent→skill |
-| 23 | `audit-architecture-engine` | Prompt | Auditoria | Modelo C: mecânicas do VS Code engine |
+| 3 | `agent-router-pattern-validator` | Prompt | Framework | Análise de conformidade com Agent Router Pattern |
+| 4 | `technical-framework-researcher` | Prompt | Pesquisa | Pesquisa tecnologias/frameworks com fontes oficiais |
+| 5 | `technical-framework-researcher-terraform` | Prompt | Pesquisa | Pesquisa serviços cloud + Terraform |
+| 6 | `terraform-engineering-best-practices-researcher` | Prompt | Pesquisa | Pesquisa práticas de engenharia Terraform |
+| 7 | `architecture-methodology-researcher` | Prompt | Pesquisa | Pesquisa metodologias de arquitetura (C4, TOGAF, DDD) |
+| 8 | `cloud-architecture-researcher` | Prompt | Pesquisa | Pesquisa frameworks de arquitetura cloud (WAF, CAF) |
+| 9 | `business-domain-researcher` | Prompt | Pesquisa | Pesquisa domínios organizacionais e regulatórios |
+| 10 | `requirements-methodology-researcher` | Prompt | Pesquisa | Pesquisa frameworks de requisitos (Scrum, SAFe) |
+| 11 | `skill-creator` | Prompt | Compilação | Gera SKILL.md a partir de pesquisa |
+| 12 | `terraform-instructions-compiler` | Prompt | Compilação | Compila pesquisa Terraform em .instructions.md |
+| 13 | `architecture-approaches-skill-generator` | Prompt | Compilação | Gera SKILL.md de metodologia de arquitetura |
+| 14 | `methodologies-skill-generator` | Prompt | Compilação | Gera SKILL.md de metodologia de engenharia |
+| 15 | `copilot-compatibility-review` | Prompt | Validação | Verifica compatibilidade com docs oficiais do Copilot |
+| 16 | `instructions-best-practices-validator` | Prompt | Validação | Valida .instructions.md contra best practices |
+| 17 | `skill-best-practices-validator` | Prompt | Validação | Valida SKILL.md contra Claude best practices |
+| 18 | `project-analysis-validator` | Prompt | Validação | Análise de qualidade geral do projeto |
+| 19 | `audit-architecture-consensus` | Prompt | Auditoria | Orquestra 3 modelos em paralelo + consenso (alvo Copilot) |
+| 20 | `audit-architecture-scope` | Prompt | Auditoria | Modelo A: hierarquia de responsabilidades L0→L4 (alvo Copilot) |
+| 21 | `audit-architecture-flow` | Prompt | Auditoria | Modelo B: cadeias de invocação prompt→agent→skill (alvo Copilot) |
+| 22 | `audit-architecture-engine` | Prompt | Auditoria | Modelo C: mecânicas do VS Code engine (alvo Copilot) |
+| 23 | `audit-cc-architecture-consensus` | Prompt | Auditoria | Orquestra 3 modelos em paralelo + consenso (alvo Claude Code) |
+| 24 | `audit-cc-architecture-scope` | Prompt | Auditoria | Modelo A: hierarquia de responsabilidades L0→L4 (alvo Claude Code) |
+| 25 | `audit-cc-architecture-flow` | Prompt | Auditoria | Modelo B: cadeias de invocação prompt→agent→skill (alvo Claude Code) |
+| 26 | `audit-cc-architecture-engine` | Prompt | Auditoria | Modelo C: mecânicas do Claude Code engine (alvo Claude Code) |
 
 ---
 
@@ -64,7 +67,6 @@ flowchart TD
     
     Q2 -->|Skill| C1[skill-creator]
     Q2 -->|Instructions| C2[terraform-instructions-compiler]
-    Q2 -->|Agente completo| C3[agent-bootstrap]
     
     Q3 -->|Compatibilidade| V1[copilot-compatibility-review]
     Q3 -->|Instructions| V2[instructions-best-practices-validator]

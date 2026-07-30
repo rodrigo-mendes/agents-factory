@@ -22,14 +22,14 @@ Todos seguem a metodologia definida na skill `researching-technical-frameworks` 
 
 ## 1. technical-framework-researcher
 
-> **Arquivo**: `.github/prompts/technical-framework-researcher.prompt.md`
+> **Arquivo**: `.claude/skills/technical-framework-researcher/SKILL.md`
 
 ### Descrição
 Pesquisa tecnologias e frameworks de software com version absolutism, produzindo base de conhecimento validada contra documentação oficial.
 
 ### Invocação
 ```
-@workspace /technical-framework-researcher
+technical-framework-researcher
 ```
 
 ### Input Variables
@@ -55,14 +55,14 @@ Após a pesquisa → usar `skill-creator` para compilar em SKILL.md
 
 ## 2. technical-framework-researcher-terraform
 
-> **Arquivo**: `.github/prompts/technical-framework-researcher-terraform.prompt.md`
+> **Arquivo**: `.claude/skills/technical-framework-researcher-terraform/SKILL.md`
 
 ### Descrição
 Pesquisa serviços de cloud combinados com Terraform, focando em resources, data sources, e padrões de provisionamento.
 
 ### Invocação
 ```
-@workspace /technical-framework-researcher-terraform
+technical-framework-researcher-terraform
 ```
 
 ### Input Variables
@@ -99,14 +99,14 @@ Após a pesquisa → usar `skill-creator` para compilar em SKILL.md de provision
 
 ## 3. terraform-engineering-best-practices-researcher
 
-> **Arquivo**: `.github/prompts/terraform-engineering-best-practices-researcher.prompt.md`
+> **Arquivo**: `.claude/skills/terraform-engineering-best-practices-researcher/SKILL.md`
 
 ### Descrição
 Pesquisa práticas de engenharia Terraform: organização de projeto, módulos, CI/CD, governance, testes.
 
 ### Invocação
 ```
-@workspace /terraform-engineering-best-practices-researcher
+terraform-engineering-best-practices-researcher
 ```
 
 ### Input Variables
@@ -135,14 +135,14 @@ Após a pesquisa → usar `terraform-instructions-compiler` para gerar .instruct
 
 ## 4. architecture-methodology-researcher
 
-> **Arquivo**: `.github/prompts/architecture-methodology-researcher.prompt.md`
+> **Arquivo**: `.claude/skills/architecture-methodology-researcher/SKILL.md`
 
 ### Descrição
 Pesquisa metodologias de arquitetura como C4 Model, UML, ADR, TOGAF, DDD, Event-Driven Architecture.
 
 ### Invocação
 ```
-@workspace /architecture-methodology-researcher
+architecture-methodology-researcher
 ```
 
 ### Input Variables
@@ -167,14 +167,14 @@ Após a pesquisa → usar `architecture-approaches-skill-generator` para compila
 
 ## 5. cloud-architecture-researcher
 
-> **Arquivo**: `.github/prompts/cloud-architecture-researcher.prompt.md`
+> **Arquivo**: `.claude/skills/cloud-architecture-researcher/SKILL.md`
 
 ### Descrição
 Pesquisa frameworks de arquitetura de cloud providers (AWS Well-Architected, Azure CAF, GCP, OCI CAF).
 
 ### Invocação
 ```
-@workspace /cloud-architecture-researcher
+cloud-architecture-researcher
 ```
 
 ### Input Variables
@@ -196,14 +196,14 @@ Documento de pesquisa com:
 
 ## 6. business-domain-researcher
 
-> **Arquivo**: `.github/prompts/business-domain-researcher.prompt.md`
+> **Arquivo**: `.claude/skills/business-domain-researcher/SKILL.md`
 
 ### Descrição
 Pesquisa domínios organizacionais e funções de negócio (Finance, Legal, HR, Compliance), incluindo contexto regulatório.
 
 ### Invocação
 ```
-@workspace /business-domain-researcher
+business-domain-researcher
 ```
 
 ### Input Variables
@@ -225,14 +225,14 @@ Documento de pesquisa com:
 
 ## 7. requirements-methodology-researcher
 
-> **Arquivo**: `.github/prompts/requirements-methodology-researcher.prompt.md`
+> **Arquivo**: `.claude/skills/requirements-methodology-researcher/SKILL.md`
 
 ### Descrição
 Pesquisa frameworks de requisitos e práticas ágeis (Scrum, SAFe, Shape Up, user stories, job stories).
 
 ### Invocação
 ```
-@workspace /requirements-methodology-researcher
+requirements-methodology-researcher
 ```
 
 ### Input Variables
