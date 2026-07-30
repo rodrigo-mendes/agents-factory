@@ -19,14 +19,14 @@ Todos seguem o padrão do `TEMPLATE.GENERATOR.prompt.md`.
 
 ## 1. skill-creator
 
-> **Arquivo**: `.github/prompts/skill-creator.prompt.md`
+> **Arquivo**: `.claude/skills/skill-creator/SKILL.md`
 
 ### Descrição
 Orquestra a geração de uma SKILL.md a partir de qualquer documento de pesquisa, aplicando o padrão `authoring-agent-skills`.
 
 ### Invocação
 ```
-@workspace /skill-creator
+skill-creator
 ```
 
 ### Workflow Interno
@@ -60,14 +60,14 @@ skill-name/
 
 ## 2. terraform-instructions-compiler
 
-> **Arquivo**: `.github/prompts/terraform-instructions-compiler.prompt.md`
+> **Arquivo**: `.claude/skills/terraform-instructions-compiler/SKILL.md`
 
 ### Descrição
 Compilador interativo que extrai best practices de pesquisa Terraform e gera múltiplos arquivos .instructions.md categorizados.
 
 ### Invocação
 ```
-@workspace /terraform-instructions-compiler
+terraform-instructions-compiler
 ```
 
 ### Workflow Interno
@@ -103,14 +103,14 @@ Compilador interativo que extrai best practices de pesquisa Terraform e gera mú
 
 ## 3. architecture-approaches-skill-generator
 
-> **Arquivo**: `.github/prompts/architecture-approaches-skill-generator.prompt.md`
+> **Arquivo**: `.claude/skills/architecture-approaches-skill-generator/SKILL.md`
 
 ### Descrição
 Gera SKILL.md a partir de pesquisa de metodologia de arquitetura, aplicando o padrão three-tier com foco em decisões arquiteturais.
 
 ### Invocação
 ```
-@workspace /architecture-approaches-skill-generator
+architecture-approaches-skill-generator
 ```
 
 ### Workflow Interno
@@ -138,14 +138,14 @@ Gera SKILL.md a partir de pesquisa de metodologia de arquitetura, aplicando o pa
 
 ## 4. methodologies-skill-generator
 
-> **Arquivo**: `.github/prompts/methodologies-skill-generator.prompt.md`
+> **Arquivo**: `.claude/skills/methodologies-skill-generator/SKILL.md`
 
 ### Descrição
 Gera SKILL.md a partir de pesquisa de metodologia de engenharia/requisitos, estruturando práticas em three-tier.
 
 ### Invocação
 ```
-@workspace /methodologies-skill-generator
+methodologies-skill-generator
 ```
 
 ### Workflow Interno

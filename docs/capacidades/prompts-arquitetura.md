@@ -30,14 +30,14 @@ graph TD
 
 ## 1. audit-architecture-consensus (Orquestrador)
 
-> **Arquivo**: `.github/prompts/audit-architecture-consensus.prompt.md`
+> **Arquivo**: `.claude/skills/audit-architecture-consensus/SKILL.md`
 
 ### Descrição
 Orquestra auditoria completa: executa Modelos A, B e C em paralelo, compara findings, e produz relatório priorizado por consenso.
 
 ### Invocação
 ```
-@workspace /audit-architecture-consensus
+audit-architecture-consensus
 ```
 
 ### Workflow Interno
@@ -70,14 +70,14 @@ Orquestra auditoria completa: executa Modelos A, B e C em paralelo, compara find
 
 ## 2. audit-architecture-scope (Modelo A)
 
-> **Arquivo**: `.github/prompts/audit-architecture-scope.prompt.md`
+> **Arquivo**: `.claude/skills/audit-architecture-scope/SKILL.md`
 
 ### Descrição
 Audita hierarquia de responsabilidades por camada (L0→L4), detecta vazamento de responsabilidade entre camadas.
 
 ### Invocação
 ```
-@workspace /audit-architecture-scope
+audit-architecture-scope
 ```
 
 ### O que Verifica
@@ -102,14 +102,14 @@ Audita hierarquia de responsabilidades por camada (L0→L4), detecta vazamento d
 
 ## 3. audit-architecture-flow (Modelo B)
 
-> **Arquivo**: `.github/prompts/audit-architecture-flow.prompt.md`
+> **Arquivo**: `.claude/skills/audit-architecture-flow/SKILL.md`
 
 ### Descrição
 Audita cadeias de invocação (prompt → agent → instructions → skills), validando que todo entry-point tem cadeia completa.
 
 ### Invocação
 ```
-@workspace /audit-architecture-flow
+audit-architecture-flow
 ```
 
 ### O que Verifica
@@ -132,14 +132,14 @@ Audita cadeias de invocação (prompt → agent → instructions → skills), va
 
 ## 4. audit-architecture-engine (Modelo C)
 
-> **Arquivo**: `.github/prompts/audit-architecture-engine.prompt.md`
+> **Arquivo**: `.claude/skills/audit-architecture-engine/SKILL.md`
 
 ### Descrição
 Audita mecânicas do VS Code engine — valida applyTo, context budget, frontmatter, deduplicação, conflitos.
 
 ### Invocação
 ```
-@workspace /audit-architecture-engine
+audit-architecture-engine
 ```
 
 ### O que Verifica

@@ -26,7 +26,7 @@
 | **Padrão** | Implementation (P0-P5 completo) |
 | **Gera código?** | ✅ Sim |
 | **Quando usar** | Criar agente que implementa/gera código seguindo skills |
-| **Referenciado por** | Nenhum prompt explicitamente (uso implícito via `agent-bootstrap`) |
+| **Referenciado por** | Nenhum prompt explicitamente (usar como referência manual ao criar novos agentes) |
 | **Exemplo real** | `templates/examples/agents/oci-terraform.agent.md` |
 
 ### TEMPLATE.ADVISORY-AGENT.md
@@ -212,7 +212,7 @@ graph TD
     style TD fill:#fff3cd
 ```
 
-> ⚠️ **Templates em amarelo**: Sem implementações explícitas encontradas no repositório. São usados via `agent-bootstrap` ou como referência manual.
+> ⚠️ **Templates em amarelo**: Sem implementações explícitas encontradas no repositório. São usados como referência manual ao criar novos artefatos.
 
 ---
 
@@ -221,5 +221,5 @@ graph TD
 | Issue | Descrição | Ação Sugerida |
 |-------|-----------|---------------|
 | README fantasma | `templates/README.md` menciona `TEMPLATE.COMPILER.prompt.md` — arquivo não existe | Verificar se foi renomeado para `TEMPLATE.GENERATOR.prompt.md` |
-| README fantasma | `templates/README.md` menciona `TEMPLATE.SCAFFOLDING.prompt.md` — arquivo não existe | Verificar se foi consolidado no `agent-bootstrap` |
+| README fantasma | `templates/README.md` menciona `TEMPLATE.SCAFFOLDING.prompt.md` — arquivo não existe | Verificar se foi renomeado ou removido |
 | Órfão | `POST_MORTEM_TEMPLATE.md` sem nenhuma referência | Considerar integrar em algum fluxo ou remover |

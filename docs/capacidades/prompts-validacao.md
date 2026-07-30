@@ -1,6 +1,6 @@
 # Prompts de Validação
 
-4 prompts dedicados a verificar qualidade e conformidade de artefatos do framework.
+5 prompts dedicados a verificar qualidade e conformidade de artefatos do framework.
 
 Todos seguem o padrão do `TEMPLATE.VALIDATION.prompt.md`.
 
@@ -19,14 +19,14 @@ Todos seguem o padrão do `TEMPLATE.VALIDATION.prompt.md`.
 
 ## 1. copilot-compatibility-review
 
-> **Arquivo**: `.github/prompts/copilot-compatibility-review.prompt.md`
+> **Arquivo**: `.claude/skills/copilot-compatibility-review/SKILL.md`
 
 ### Descrição
 Verifica compatibilidade de artefatos GitHub Copilot (`.agent.md`, `.instructions.md`, `.prompt.md`, `SKILL.md`) contra documentação oficial.
 
 ### Invocação
 ```
-@workspace /copilot-compatibility-review
+copilot-compatibility-review
 ```
 
 ### O que Verifica
@@ -53,14 +53,14 @@ Verifica compatibilidade de artefatos GitHub Copilot (`.agent.md`, `.instruction
 
 ## 2. instructions-best-practices-validator
 
-> **Arquivo**: `.github/prompts/instructions-best-practices-validator.prompt.md`
+> **Arquivo**: `.claude/skills/instructions-best-practices-validator/SKILL.md`
 
 ### Descrição
 Valida arquivos `.instructions.md` contra best practices oficiais de GitHub/VS Code e convenções do time.
 
 ### Invocação
 ```
-@workspace /instructions-best-practices-validator
+instructions-best-practices-validator
 ```
 
 ### O que Verifica
@@ -88,14 +88,14 @@ Valida arquivos `.instructions.md` contra best practices oficiais de GitHub/VS C
 
 ## 3. skill-best-practices-validator
 
-> **Arquivo**: `.github/prompts/skill-best-practices-validator.prompt.md`
+> **Arquivo**: `.claude/skills/skill-best-practices-validator/SKILL.md`
 
 ### Descrição
 Valida `SKILL.md` contra Claude best practices oficiais e o padrão definido em `authoring-agent-skills`.
 
 ### Invocação
 ```
-@workspace /skill-best-practices-validator
+skill-best-practices-validator
 ```
 
 ### O que Verifica
@@ -125,14 +125,14 @@ Valida `SKILL.md` contra Claude best practices oficiais e o padrão definido em 
 
 ## 4. project-analysis-validator
 
-> **Arquivo**: `.github/prompts/project-analysis-validator.prompt.md`
+> **Arquivo**: `.claude/skills/project-analysis-validator/SKILL.md`
 
 ### Descrição
 Análise de qualidade technology-agnostic para projetos de agente GitHub Copilot completos, com recomendações priorizadas.
 
 ### Invocação
 ```
-@workspace /project-analysis-validator
+project-analysis-validator
 ```
 
 ### O que Verifica
