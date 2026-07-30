@@ -343,6 +343,9 @@ If any check fails, complete the missing sections before confirming.
 - `/audit-architecture-flow` → Model B: Runtime invocation chains and reachability
 - `/audit-architecture-consensus` → Runs all 3 models and produces comparison report
 
+For the **Claude Code (`.claude/`) target**, use the CC family instead:
+`/audit-cc-architecture-engine`, `/audit-cc-architecture-scope`, `/audit-cc-architecture-flow`, `/audit-cc-architecture-consensus`.
+
 ---
 
 ## External Resources
