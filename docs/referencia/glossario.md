@@ -29,7 +29,7 @@ Termos do framework Agents Factory.
 | **Reachability** | Propriedade de um componente ser alcançável através da cadeia de invocação a partir de algum prompt. |
 | **Researcher** | Prompt que pesquisa tecnologia/metodologia seguindo a skill `researching-technical-frameworks`. |
 | **Routing Table** | Arquivo `.skills.instructions.md` que mapeia keywords do request para skills a carregar. |
-| **Scaffolding** | Geração de estrutura de arquivos a partir de templates (ex: agent-bootstrap). |
+| **Scaffolding** | Geração de estrutura de arquivos a partir de templates (ex: skill-creator gera SKILL.md a partir de pesquisa). |
 | **Skill** | Artefato `SKILL.md` com base de conhecimento versionada e padrões three-tier (✅⚠️🚫). |
 | **Template** | Arquivo `TEMPLATE.*.md` que serve como modelo para criar novos artefatos. |
 | **Three-Tier** | Arquitetura de guardrails em 3 camadas: ✅ Always Do, ⚠️ Ask First, 🚫 Never Do. |

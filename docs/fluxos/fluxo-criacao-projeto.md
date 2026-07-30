@@ -8,9 +8,9 @@ Criar um projeto de agente production-ready do zero, desde o bootstrap até audi
 
 ```mermaid
 flowchart TD
-    START([Início]) --> BOOT[agent-bootstrap<br/>Wizard interativo]
-    BOOT --> STRUCT[Projeto gerado<br/>agent + instructions + prompts + skills]
-    STRUCT --> VALID[agent-router-pattern-validator<br/>Verificar estrutura]
+    START([Início]) --> RESEARCH[technical-framework-researcher<br/>Pesquisar tecnologia]
+    RESEARCH --> SKILL[skill-creator<br/>Gerar SKILL.md]
+    SKILL --> VALID[agent-router-pattern-validator<br/>Verificar estrutura]
     
     VALID -->|desvios| FIX[Corrigir desvios]
     FIX --> VALID
@@ -27,24 +27,39 @@ flowchart TD
 
 ## Etapas Detalhadas
 
-### Etapa 1: Bootstrap
+### Etapa 1: Pesquisa de Tecnologia
 
-**Prompt**: `@workspace /agent-bootstrap`
+**Prompt**: `/technical-framework-researcher <tech>`
 
 **O que acontece**:
-- Wizard faz perguntas sobre domínio, tipo, skills
-- Gera toda a estrutura de arquivos
+- Pesquisa a tecnologia/framework com fontes oficiais
+- Produz documento de pesquisa source-dated
 
-**Input**: Respostas interativas
-**Output**: Projeto completo (estrutura de arquivos)
+**Input**: Nome da tecnologia e versão alvo
+**Output**: Documento de pesquisa validado
 
-**Duração típica**: 5-10 minutos (interativo)
+**Duração típica**: 5-10 minutos
 
 ---
 
-### Etapa 2: Validação de Estrutura
+### Etapa 2: Criação de Skill
 
-**Prompt**: `@workspace /agent-router-pattern-validator`
+**Prompt**: `/skill-creator`
+
+**O que acontece**:
+- Transforma o documento de pesquisa em SKILL.md operacional
+- Aplica padrões three-tier (✅⚠️🚫) e version absolutism
+
+**Input**: Documento de pesquisa da Etapa 1
+**Output**: SKILL.md pronta para uso por agentes
+
+**Duração típica**: 3-5 minutos
+
+---
+
+### Etapa 3: Validação de Estrutura
+
+**Prompt**: `/agent-router-pattern-validator`
 
 **O que acontece**:
 - Verifica se Agent Router Pattern está correto
@@ -61,9 +76,9 @@ flowchart TD
 
 ---
 
-### Etapa 3: Auditoria Multi-Modelo
+### Etapa 4: Auditoria Multi-Modelo
 
-**Prompt**: `@workspace /audit-architecture-consensus`
+**Prompt**: `/audit-architecture-consensus`
 
 **O que acontece**:
 - Modelo A verifica hierarquia de responsabilidades (L0→L4)
@@ -85,19 +100,20 @@ flowchart TD
 
 | Etapa | Capacidade | Tipo |
 |-------|-----------|------|
-| 1 | `agent-bootstrap` | Framework |
-| 2 | `agent-router-pattern-validator` | Framework |
-| 3 | `audit-architecture-scope` | Auditoria |
-| 3 | `audit-architecture-flow` | Auditoria |
-| 3 | `audit-architecture-engine` | Auditoria |
-| 3 | `audit-architecture-consensus` | Auditoria |
+| 1 | `technical-framework-researcher` | Pesquisa |
+| 2 | `skill-creator` | Compilação |
+| 3 | `agent-router-pattern-validator` | Framework |
+| 4 | `audit-architecture-scope` | Auditoria |
+| 4 | `audit-architecture-flow` | Auditoria |
+| 4 | `audit-architecture-engine` | Auditoria |
+| 4 | `audit-architecture-consensus` | Auditoria |
 
 ---
 
 ## Pré-requisitos
 
-- Saber qual domínio o agente vai cobrir
-- Ter ideia de quais skills serão necessárias (mesmo que placeholders)
+- Saber qual tecnologia/domínio o agente vai cobrir
+- Ter acesso ao `/technical-framework-researcher` para pesquisa inicial
 
 ## Resultado Final
 
