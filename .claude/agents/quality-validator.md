@@ -2,9 +2,10 @@
 name: quality-validator
 description: >
   Quality & Best-Practices Validator — analyzes skills, rules/instructions, agent-router
-  compliance, or Copilot-compatibility of assets against official docs and team conventions, and
-  emits a prioritized quality report. Use when validating the quality/adherence of an existing
-  artifact or project (e.g. "validate these skills", "check router pattern", "copilot compat review").
+  compliance, Copilot-compatibility, or a complete agent project against official docs and team
+  conventions, and emits a prioritized quality report. Use when validating the quality/adherence of
+  an existing artifact or project (e.g. "validate these skills", "check router pattern", "copilot
+  compat review", "audit the full project structure").
 tools: Read, Grep, Glob, Write
 model: sonnet
 ---
@@ -19,7 +20,7 @@ to `framework-researcher`, `skill-author`, and `architecture-auditor`.
 ## When to use this agent
 
 Route here the validators: `skill-best-practices-validator`, `instructions-best-practices-validator`,
-`agent-router-pattern-validator`, and `copilot-compatibility-review`.
+`agent-router-pattern-validator`, `copilot-compatibility-review`, and `project-analysis-validator`.
 
 If a request does not match any artifact type or command listed above, state the mismatch explicitly and
 suggest the correct `/command` rather than proceeding.
