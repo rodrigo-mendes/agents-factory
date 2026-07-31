@@ -1,83 +1,83 @@
 # Agents Factory — CLAUDE.md
 
-Fábrica de artefatos de IA (**Skills, Prompts/Commands, Subagentes, Rules**) com foco
-**anti-alucinação**. Este repositório **produz** artefatos para agentes de código e **também roda no
-Claude Code**: os prompts operacionais são expostos como skills/comandos que forkam para subagentes.
+AI artifact factory (**Skills, Prompts/Commands, Subagents, Rules**) with an
+**anti-hallucination** focus. This repository **produces** artifacts for code agents and **also runs on
+Claude Code**: operational prompts are exposed as skills/commands that fork to subagents.
 
-> **Claude Code-first.** A fábrica documenta adoção para **Claude Code** (`docs/adocao-claude-code/`).
-> Config em `.github/` (Copilot) e `.claude/` (Claude Code) coexistem — não apague `.github/`.
-> O guia de adoção Copilot/ECI foi arquivado em `docs/archive/adopcion/`.
+> **Claude Code-first.** The factory documents adoption for **Claude Code** (see `docs/`).
+> Config in `.github/` (Copilot) and `.claude/` (Claude Code) coexist — do not delete `.github/`.
 
-## Princípios (não-negociáveis)
+## Principles (non-negotiable)
 
-- **Version Absolutism** — 1 skill = 1 versão; tratar versões antigas como desinformação.
-- **Source Hierarchy** — doc oficial/registry > blog oficial > exemplos oficiais > comunidade
-  verificada > rejeitar o resto. Rejeitar fontes > 12 meses salvo se forem a stable atual.
-- **Executable Truth** — toda afirmação linka a fonte oficial datada; sem fonte, marcar "unverified".
+- **Version Absolutism** — 1 skill = 1 version; treat old versions as misinformation.
+- **Source Hierarchy** — official doc/registry > official blog > official examples > verified
+  community > reject the rest. Reject sources > 12 months old unless they are the current stable.
+- **Executable Truth** — every claim links to a dated official source; without a source, mark as "unverified".
 - **Workflow P0–P5** — Verify Docs → Analyze → Consult → Propose → Implement → Validate.
-- **Três Tiers** — ✅ Always-Do · ⚠️ Ask-First · 🚫 Never-Do (com alternativa).
-- **Progressive disclosure** — `SKILL.md` enxuto (< 500 linhas) linkando blueprints; nada de inline gigante.
+- **Three-Tier** — ✅ Always-Do · ⚠️ Ask-First · 🚫 Never-Do (with alternative).
+- **Progressive disclosure** — `SKILL.md` lean (< 500 lines) linking blueprints; no giant inline content.
 
-## Convenções de nome (kebab-case)
+## Naming conventions (kebab-case)
 
-| Artefato | Padrão | Exemplo |
+| Artifact | Pattern | Example |
 |---|---|---|
 | Skill | `gerund-noun` | `researching-technical-frameworks` |
-| Comando/Prompt | `action-noun` | `cloud-architecture-researcher` |
-| Subagente | `domain-role` | `framework-researcher` |
+| Command/Prompt | `action-noun` | `cloud-architecture-researcher` |
+| Subagent | `domain-role` | `framework-researcher` |
 | Rule | `scope-noun` | `skill-frontmatter` |
 
-## Roteamento — Skill (`/comando`) → Subagente → Skills
+## Routing — Skill (`/command`) → Subagent → Skills
 
-Os comandos operacionais forkam (`context: fork`) para um subagente. Os 4 subagentes vivem em
+Operational commands fork (`context: fork`) to a subagent. The 5 subagents live in
 [.claude/agents/](.claude/agents/):
 
-| Subagente | Faz | Comandos que roteia |
+| Subagent | Does | Commands it routes |
 |---|---|---|
-| [framework-researcher](.claude/agents/framework-researcher.md) | pesquisa anti-alucinação (usa WebSearch/WebFetch) | `researching-technical-frameworks`(+`-terraform`), `cloud-architecture-researcher`, `business-domain-researcher`, `requirements-methodology-researcher`, `architecture-methodology-researcher`, `terraform-engineering-best-practices-researcher` |
-| [skill-author](.claude/agents/skill-author.md) | gera SKILL.md / rules | `skill-creator`, `methodologies-skill-generator`, `architecture-approaches-skill-generator`, `terraform-instructions-compiler` |
-| [architecture-auditor](.claude/agents/architecture-auditor.md) | audita arquitetura (consensus = 3 lentes em paralelo via tool Agent) | `audit-architecture-scope`/`flow`/`engine`/`consensus` (alvo Copilot) · `audit-cc-architecture-scope`/`flow`/`engine`/`consensus` (alvo Claude Code) |
-| [quality-validator](.claude/agents/quality-validator.md) | valida qualidade/aderência | `skill-best-practices-validator`, `instructions-best-practices-validator`, `agent-router-pattern-validator`, `copilot-compatibility-review`, `project-analysis-validator` |
+| [framework-researcher](.claude/agents/framework-researcher.md) | anti-hallucination research (uses WebSearch/WebFetch) | `researching-technical-frameworks`, `technical-framework-researcher-terraform`, `cloud-architecture-researcher`, `business-domain-researcher`, `requirements-methodology-researcher`, `architecture-methodology-researcher`, `terraform-engineering-best-practices-researcher` |
+| [skill-author](.claude/agents/skill-author.md) | generates SKILL.md / rules | `skill-creator`, `methodologies-skill-generator`, `architecture-approaches-skill-generator`, `terraform-instructions-compiler` |
+| [architecture-auditor](.claude/agents/architecture-auditor.md) | audits architecture (consensus = 3 lenses in parallel via Agent tool) | `audit-architecture-scope`/`flow`/`engine`/`consensus` (Copilot target) · `audit-cc-architecture-scope`/`flow`/`engine`/`consensus` (Claude Code target) |
+| [quality-validator](.claude/agents/quality-validator.md) | validates quality/adherence | `skill-best-practices-validator`, `instructions-best-practices-validator`, `agent-router-pattern-validator`, `copilot-compatibility-review`, `project-analysis-validator` |
+| [skill-evaluator](.claude/agents/skill-evaluator.md) | evaluates skill behavior via LLM-as-judge (runs evaluation-scenarios.md and verifies real responses) | `evaluating-skill-scenarios` |
 
-## Como rodar (não há build)
+## How to run (no build step)
 
-Não é código compilado — os artefatos rodam **no Claude Code** via `/<comando>`:
+Not compiled code — artifacts run **in Claude Code** via `/<command>`:
 
-- Pesquisar tecnologia: `/researching-technical-frameworks <tech> <versão>`
-- Criar skill a partir de research file: `/skill-creator StoryBeat/research_X_v1.md`
-- Criar skill de metodologia (tudo-em-um): `/methodologies-skill-generator <metodologia>`
-- Auditar projeto Claude Code (consenso): `/audit-cc-architecture-consensus <alvo>`
-- Auditar projeto GitHub Copilot (consenso): `/audit-architecture-consensus <alvo>`
-- Validar qualidade de skills: `/skill-best-practices-validator .claude/skills/`
-- Auditar saúde do projeto completo: `/project-analysis-validator .claude/`
+- Search for a technology: `/researching-technical-frameworks <tech> <version>`
+- Create a skill from a research file: `/skill-creator StoryBeat/research_X_v1.md`
+- Create a methodology skill (all-in-one): `/methodologies-skill-generator <methodology>`
+- Audit a Claude Code project (consensus): `/audit-cc-architecture-consensus <target>`
+- Audit a GitHub Copilot project (consensus): `/audit-architecture-consensus <target>`
+- Validate skill quality: `/skill-best-practices-validator .claude/skills/`
+- Audit full project health: `/project-analysis-validator .claude/`
+- Evaluate skill behavior: `/evaluating-skill-scenarios cloud-architecture-researcher`
 
-Os 24 comandos usam `disable-model-invocation: true` (ações deliberadas) — acessíveis por `/nome`,
-sem custo de auto-listagem.
+The 25 commands use `disable-model-invocation: true` (deliberate actions) — accessible via `/name`,
+with no auto-listing cost.
 
-## Estrutura
+## Structure
 
 ```
 .claude/
-├── agents/     ← 4 subagentes (framework-researcher, skill-author, architecture-auditor, quality-validator)
-├── skills/     ← 24 comandos operacionais (fork → subagente)
-├── rules/      ← rules por caminho (paths:) + templates
+├── agents/     ← 5 subagents (framework-researcher, skill-author, architecture-auditor, quality-validator, skill-evaluator)
+├── skills/     ← 25 operational commands (fork → subagent)
+├── rules/      ← rules by path (paths:) + templates
 ├── templates/  ← scaffolding: agents/, skills/, rules/, prompts/, reports/
-├── MIGRATION.md ← histórico da migração Copilot → Claude Code
-├── worktrees/  ← worktrees Git temporários (gerado automaticamente; não editar)
+├── MIGRATION.md ← migration history Copilot → Claude Code
+├── worktrees/  ← temporary Git worktrees (auto-generated; do not edit)
 └── settings.json
 docs/
-├── adocao-claude-code/ ← programa de adoção Claude Code
-├── archive/adopcion/   ← guia Copilot/ECI arquivado
-├── capacidades/        ← catálogo de skills/comandos
-├── como-usar/          ← guias operacionais
-├── fluxos/             ← diagramas de fluxo
-└── referencia/         ← glossário e convenções
-StoryBeat/      ← saídas de pesquisa geradas por agentes (untracked)
-.github/        ← config Copilot (coexistência; não apagar)
+├── capacidades/  ← skills/commands catalog
+├── como-usar/    ← operational guides
+├── fluxos/       ← flow diagrams
+├── manual/       ← subagent reference manual
+└── referencia/   ← glossary and conventions
+StoryBeat/      ← agent-generated research outputs (untracked)
+.github/        ← Copilot config (coexistence; do not delete)
 ```
 
 ## Gotchas
 
 - **Frontmatter conventions** (field names, model values, YAML quoting): see
   [`.claude/rules/skill-frontmatter.md`](.claude/rules/skill-frontmatter.md).
-- Não confie em contagens de auditorias — confirme com `ls`/`wc`/`grep`.
+- Do not trust audit counts — verify with `ls`/`wc`/`grep`.

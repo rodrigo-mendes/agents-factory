@@ -2,8 +2,8 @@
 
 Used to verify that the skill activates correctly, enforces provider-edition absolutism, produces
 architecture knowledge bases with full decision traceability (context/forces/solution/trade-offs/
-verification), and rejects misuse requests (implementation asks, unversioned queries,
-architecture-decision shortcuts).
+verification), fires Ask First gates for underspecified multi-cloud requests, and rejects misuse
+requests (implementation asks, unversioned queries, architecture-decision shortcuts).
 
 ---
 
@@ -42,32 +42,64 @@ architecture-decision shortcuts).
 
 ---
 
-## Scenario 2: Edge case — multi-cloud comparison request with provider fidelity requirement
+## Scenario 2: Edge case — underspecified multi-cloud request triggers Ask First guardrail
 
 ```json
 {
   "skills": ["cloud-architecture-researcher"],
   "query": "Research networking architecture patterns for AWS, Azure, and GCP. We need to compare hub-spoke vs mesh topology across all three providers.",
   "expected_behavior": [
-    "Sets CLOUD_PROVIDER=Multi-Cloud, ARCHITECTURE_DOMAIN=Networking Architecture, TARGET_EDITION covers 2024 frameworks for all three providers",
-    "Uses exact provider-specific service names for each topology option: AWS Transit Gateway / Azure Virtual WAN / GCP Network Connectivity Center for hub-spoke; AWS VPC Peering / Azure VNet Peering / GCP VPC Peering for mesh",
-    "Produces the Service Equivalence Map from research-scope-patterns.md for networking services across providers",
-    "Documents lock-in assessment per topology option and per provider",
-    "Flags where provider capabilities diverge (e.g., AWS Transit Gateway attachment limits vs Azure Virtual WAN branch site limits vs GCP Cloud Interconnect constraints)",
-    "Sources each provider's content from its own official documentation — no cross-provider assumptions",
-    "Marks any cross-provider comparisons as Medium Confidence (requires validation against each provider's current docs)"
+    "Recognizes the query as multi-cloud scope without edition pinning, output format, or per-provider vs. unified preference — all three are required inputs per the Ask First guardrail",
+    "Does NOT begin research immediately; activates the mandatory 'Ask First — Multi-cloud scope' gate",
+    "Presents scope-clarification options to the user: (A) per-provider sections in one document, (B) comparison matrix with one row per service/decision, (C) unified patterns with provider callouts",
+    "Requests edition pinning per provider (e.g., AWS WAF 2024, Azure CAF date, GCP Architecture Framework date)",
+    "Explains why it is stopping: cross-provider comparisons are Medium Confidence by default and need explicit scope to avoid conflating provider behaviors",
+    "Does NOT produce networking research output, Service Equivalence Maps, or lock-in assessments before scope is confirmed"
   ],
   "success_criteria": {
     "must_pass": [
-      "Each provider's hub-spoke and mesh services named exactly (not generically)",
-      "Service Equivalence Map section present covering the three providers for networking primitives",
-      "Lock-in assessment present for each option",
-      "Provider-specific constraints documented (limits, GA status, regional availability)",
-      "Cross-provider comparisons marked as Medium Confidence"
+      "Skill does not produce research output before scope is confirmed",
+      "Skill explicitly activates the Ask First gate and names the missing inputs (format, edition per provider)",
+      "Skill presents at least two distinct output format options for the user to choose from",
+      "Skill states that cross-provider comparisons will be marked Medium Confidence once research proceeds"
     ],
     "must_not": [
-      "Use generic names ('cloud router', 'managed VPN') where provider-specific names exist",
-      "Present one provider's behavior as universal",
+      "Proceed directly to research without asking for scope confirmation",
+      "Produce a Service Equivalence Map, lock-in assessment, or per-provider constraints before the gate is resolved",
+      "Refuse to help entirely — must offer to proceed once scope inputs are provided"
+    ]
+  }
+}
+```
+
+---
+
+## Scenario 5: Edge case — pre-scoped multi-cloud request produces research with provider fidelity
+
+```json
+{
+  "skills": ["cloud-architecture-researcher"],
+  "query": "Research hub-spoke vs mesh networking topology for AWS, Azure, and GCP. Use comparison matrix format. Pin to AWS WAF 2024, Azure CAF November 2024, GCP Architecture Framework 2024. Target audience: cloud architects evaluating topology for a hybrid enterprise network.",
+  "expected_behavior": [
+    "Sets CLOUD_PROVIDER=Multi-Cloud, ARCHITECTURE_DOMAIN=Networking Architecture, TARGET_EDITION pinned per-provider as instructed, OUTPUT_FORMAT=comparison matrix",
+    "Uses exact provider-specific service names for hub-spoke: AWS Transit Gateway, Azure Virtual WAN, GCP Network Connectivity Center; for mesh: AWS VPC Peering, Azure VNet Peering, GCP VPC Peering",
+    "Produces the Service Equivalence Map for networking primitives across all three providers",
+    "Documents lock-in assessment per topology option and per provider",
+    "Flags where provider capabilities diverge (e.g., AWS Transit Gateway attachment limits vs Azure Virtual WAN branch site limits vs GCP Cloud Interconnect constraints)",
+    "Sources each provider's content from its own official documentation — no cross-provider assumptions",
+    "Marks all cross-provider comparisons as Medium Confidence with a note that each must be validated against current per-provider docs"
+  ],
+  "success_criteria": {
+    "must_pass": [
+      "Hub-spoke and mesh services named exactly for each provider (AWS Transit Gateway / Azure Virtual WAN / GCP Network Connectivity Center; AWS VPC Peering / Azure VNet Peering / GCP VPC Peering)",
+      "Service Equivalence Map section present covering networking primitives across all three providers",
+      "Lock-in assessment present for each topology option across providers",
+      "Provider-specific constraints documented (limits, GA status, regional availability) for at least one provider",
+      "Cross-provider comparisons explicitly marked as Medium Confidence"
+    ],
+    "must_not": [
+      "Use generic names ('cloud router', 'managed VPN', 'hub gateway') where provider-specific names exist",
+      "Present one provider's behavior as universal (e.g., describe Azure VWAN limits as if they apply to AWS TGW)",
       "Mark cross-provider comparisons as High Confidence without per-provider source links"
     ]
   }

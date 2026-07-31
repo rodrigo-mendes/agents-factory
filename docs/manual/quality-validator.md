@@ -1,367 +1,367 @@
-# Agente: quality-validator
+# Agent: quality-validator
 
-> **Modelo:** `sonnet` | **Tools:** Read, Grep, Glob, Write
-> **Papel:** Quality & Best-Practices Validator — analisa artefatos existentes contra documentação oficial e convenções do time, emite relatório de qualidade graduado e priorizado.
+> **Model:** `sonnet` | **Tools:** Read, Grep, Glob, Write
+> **Role:** Quality & Best-Practices Validator — analyzes existing artifacts against official documentation and team conventions, emits a graded and prioritized quality report.
 
-**O que faz:** Lê artefatos (SKILL.md, rules, prompts, projeto inteiro), compara com checklist de best practices, gradua cada dimensão com ✅ pass / ⚠️ improve / 🚫 violation e sugere correções concretas.
+**What it does:** Reads artifacts (SKILL.md, rules, prompts, entire project), compares against best practices checklist, grades each dimension with ✅ pass / ⚠️ improve / 🚫 violation and suggests concrete corrections.
 
-**O que NÃO faz:** Pesquisar tecnologias, gerar novos artefatos, auditar arquitetura multi-modelo, ou reescrever silenciosamente arquivos auditados (read-only por padrão).
+**What it does NOT do:** Research technologies, generate new artifacts, audit multi-model architecture, or silently rewrite audited files (read-only by default).
 
-**Verificação objetiva:** Usa `grep`, `wc`, `ls` para confirmar contagens — nunca confia em valores declarados sem verificar.
+**Objective verification:** Uses `grep`, `wc`, `ls` to confirm counts — never trusts declared values without verifying.
 
 ---
 
-## Ordem Recomendada de Validação
+## Recommended Validation Order
 
-Execute nesta sequência para cobertura crescente:
+Run in this sequence for increasing coverage:
 
 ```
-1. /copilot-compatibility-review          ← compatibilidade técnica primeiro
-        ↓ se OK
-2. /instructions-best-practices-validator ← qualidade de rules
-   /skill-best-practices-validator        ← qualidade de skills
-        ↓ se OK
-3. /agent-router-pattern-validator        ← consistência de roteamento
-        ↓ se OK
-4. /project-analysis-validator .claude/   ← saúde holística
+1. /copilot-compatibility-review          ← technical compatibility first
+        ↓ if OK
+2. /instructions-best-practices-validator ← rules quality
+   /skill-best-practices-validator        ← skills quality
+        ↓ if OK
+3. /agent-router-pattern-validator        ← routing consistency
+        ↓ if OK
+4. /project-analysis-validator .claude/   ← holistic health
 ```
 
 ---
 
 ## /project-analysis-validator
 
-> **Agente:** `quality-validator` | **Contexto:** fork | **Modelo invocation:** desabilitado
+> **Agent:** `quality-validator` | **Context:** fork | **Model invocation:** disabled
 
-### Quando Usar
+### When to Use
 
-Use para uma análise holística de um projeto de agente Claude Code completo — verifica estrutura de diretórios, precisão do CLAUDE.md, frontmatter de todos os artefatos, consistência de roteamento, naming conventions, progressive disclosure e cobertura de rules.
+Use for a holistic analysis of a complete Claude Code agent project — verifies directory structure, CLAUDE.md accuracy, frontmatter of all artifacts, routing consistency, naming conventions, progressive disclosure and rules coverage.
 
-**Palavras-gatilho:** "saúde do projeto", "auditar projeto completo", "verificar CLAUDE.md", "project health check", "pre-release validation", "drift entre docs e implementação".
+**Trigger words:** "project health", "audit full project", "verify CLAUDE.md", "project health check", "pre-release validation", "drift between docs and implementation".
 
-### Pré-condições
+### Prerequisites
 
-- Projeto Claude Code com estrutura básica: `.claude/agents/`, `.claude/skills/`, `.claude/rules/`, `CLAUDE.md`
+- Claude Code project with basic structure: `.claude/agents/`, `.claude/skills/`, `.claude/rules/`, `CLAUDE.md`
 
 ### Inputs
 
-| Campo | Obrigatório | Exemplo |
+| Field | Required | Example |
 |-------|:-----------:|---------|
-| Caminho do projeto | ✅ | `.claude/` (padrão) |
+| Project path | ✅ | `.claude/` (default) |
 
-### Exemplo de Chamada
+### Call Example
 
 ```
 /project-analysis-validator .claude/
 ```
 
-### 7 Dimensões de Validação
+### 7 Validation Dimensions
 
-| # | Dimensão | O que Verifica |
+| # | Dimension | What It Verifies |
 |---|----------|----------------|
-| P1 | Estrutura de diretórios | `.claude/agents/`, `.claude/skills/`, `.claude/rules/` existem; `CLAUDE.md` presente |
-| P2 | Precisão do CLAUDE.md | Contagens de skills/agentes/comandos conferem com o disco; routing table cobre todas as `context: fork` skills |
-| P3 | Frontmatter | Campos obrigatórios presentes e válidos; `allowed-tools:` nas skills, `tools:` nos agentes |
-| P4 | Consistência do Router | Cada `context: fork` skill tem `agent:` apontando para agente que existe em `.claude/agents/` |
-| P5 | Naming Conventions | Nome da pasta = campo `name:` do frontmatter; todos kebab-case |
-| P6 | Progressive Disclosure | SKILL.md < 500 linhas; blueprints usados para conteúdo extenso |
-| P7 | Cobertura de Rules | Ao menos um `.claude/rules/*.md` cobre convenções de frontmatter |
+| P1 | Directory structure | `.claude/agents/`, `.claude/skills/`, `.claude/rules/` exist; `CLAUDE.md` present |
+| P2 | CLAUDE.md accuracy | Skill/agent/command counts match disk; routing table covers all `context: fork` skills |
+| P3 | Frontmatter | Required fields present and valid; `allowed-tools:` in skills, `tools:` in agents |
+| P4 | Router consistency | Each `context: fork` skill has `agent:` pointing to an agent that exists in `.claude/agents/` |
+| P5 | Naming Conventions | Folder name = frontmatter `name:` field; all kebab-case |
+| P6 | Progressive Disclosure | SKILL.md < 500 lines; blueprints used for extensive content |
+| P7 | Rules Coverage | At least one `.claude/rules/*.md` covers frontmatter conventions |
 
-### 9 Anti-Padrões Detectados
+### 9 Detected Anti-Patterns
 
-| Anti-Padrão | Descrição |
+| Anti-Pattern | Description |
 |------------|-----------|
-| Orphan fork | `context: fork` sem campo `agent:` |
-| Broken agent ref | `agent: foo` mas `.claude/agents/foo.md` não existe |
-| Missing `disable-model-invocation` | Command skill sem essa flag consome budget de auto-listing |
-| `tools:` em skill | Deve ser `allowed-tools:` |
-| `allowed-tools:` em agente | Deve ser `tools:` |
-| Name/folder mismatch | Nome da pasta ≠ `name:` no frontmatter |
-| Overlong SKILL.md | > 500 linhas sem blueprints |
-| Dead doc reference | CLAUDE.md lista comando sem skill folder correspondente |
-| CLAUDE.md count drift | Contagem declarada ≠ contagem real no disco |
+| Orphan fork | `context: fork` without `agent:` field |
+| Broken agent ref | `agent: foo` but `.claude/agents/foo.md` does not exist |
+| Missing `disable-model-invocation` | Command skill without this flag consumes auto-listing budget |
+| `tools:` in skill | Should be `allowed-tools:` |
+| `allowed-tools:` in agent | Should be `tools:` |
+| Name/folder mismatch | Folder name ≠ `name:` in frontmatter |
+| Overlong SKILL.md | > 500 lines without blueprints |
+| Dead doc reference | CLAUDE.md lists command without corresponding skill folder |
+| CLAUDE.md count drift | Declared count ≠ actual count on disk |
 
-### Output Produzido
+### Output Produced
 
 ```
 .claude/project-analysis-report.md
 ```
 
-Estrutura do relatório:
+Report structure:
 ```markdown
 # Project Analysis Report
 
 ## Executive Summary
-Score geral + veredicto
+Overall score + verdict
 
 ## Dimension Results
-| Dimensão | Score | Status |
+| Dimension | Score | Status |
 |----------|-------|--------|
 
 ## Findings by Dimension
-[findings por dimensão com grau e correção sugerida]
+[findings per dimension with grade and suggested correction]
 
 ## Recommendations by Priority
-🚫 Critical — [bloqueantes]
-⚠️ Important — [melhorias significativas]
-ℹ️ Low — [melhorias menores]
+🚫 Critical — [blocking]
+⚠️ Important — [significant improvements]
+ℹ️ Low — [minor improvements]
 ```
 
-### Verificação do Report
+### Report Verification
 
 ```bash
 test -f .claude/project-analysis-report.md && echo "OK" || echo "MISSING"
 grep -c "🚫\|⚠️\|✅" .claude/project-analysis-report.md
 ```
 
-### Quando Usar vs. Outros Validators
+### When to Use vs. Other Validators
 
-| Validador | Escopo | Use quando |
+| Validator | Scope | Use when |
 |-----------|--------|------------|
-| `project-analysis-validator` | Projeto inteiro | Análise holística, pre-release, suspeita de drift |
-| `skill-best-practices-validator` | Uma skill ou diretório de skills | Após criar/editar uma skill específica |
-| `agent-router-pattern-validator` | Padrão de roteamento | Suspeita de problema de routing |
-| `copilot-compatibility-review` | Artefato Copilot | Migração, compatibilidade técnica |
+| `project-analysis-validator` | Entire project | Holistic analysis, pre-release, suspected drift |
+| `skill-best-practices-validator` | One skill or skills directory | After creating/editing a specific skill |
+| `agent-router-pattern-validator` | Routing pattern | Suspected routing problem |
+| `copilot-compatibility-review` | Copilot artifact | Migration, technical compatibility |
 
 ---
 
 ## /skill-best-practices-validator
 
-> **Agente:** `quality-validator` | **Contexto:** fork | **Modelo invocation:** desabilitado
+> **Agent:** `quality-validator` | **Context:** fork | **Model invocation:** disabled
 
-### Quando Usar
+### When to Use
 
-Use após `/skill-creator` ou qualquer generator para verificar se o SKILL.md gerado segue as best practices integradas ao `skill-creator`.
+Use after `/skill-creator` or any generator to verify whether the generated SKILL.md follows the best practices integrated into `skill-creator`.
 
-**Palavras-gatilho:** "validar skill", "checar SKILL.md", "quality check da skill", "verificar three-tier", "skill está correta?".
+**Trigger words:** "validate skill", "check SKILL.md", "skill quality check", "verify three-tier", "is the skill correct?".
 
 ### Inputs
 
-| Campo | Obrigatório | Exemplo |
+| Field | Required | Example |
 |-------|:-----------:|---------|
-| Caminho para skill ou diretório | ✅ | `.claude/skills/fastapi-async-api/` ou `.claude/skills/` |
+| Path to skill or directory | ✅ | `.claude/skills/fastapi-async-api/` or `.claude/skills/` |
 
-### Exemplo de Chamada
+### Call Example
 
 ```
 /skill-best-practices-validator .claude/skills/fastapi-async-api/
 ```
 
-ou para validar todas as skills:
+or to validate all skills:
 
 ```
 /skill-best-practices-validator .claude/skills/
 ```
 
-### O que Verifica
+### What It Verifies
 
-| Check | Critério |
+| Check | Criterion |
 |-------|----------|
-| Frontmatter `name` | ≤ 64 chars, kebab-case, sem palavras reservadas |
-| Frontmatter `description` | Terceira pessoa, inclui "Use when…", ≤ 1024 chars |
-| Seção ✅ Always Do | Presente e com código executável em cada pattern |
-| Seção ⚠️ Ask First | Presente com tabela de trade-offs |
-| Seção 🚫 Never Do | Presente com alternativa inline e impacto em cada item |
-| Progressive disclosure | SKILL.md < 500 linhas; blueprints existem se necessário |
-| Version absolutism | Versão específica declarada; sem mistura de versões |
-| External Resources | Seção presente com ≥ 1 link oficial datado |
-| `blueprints/evaluation-scenarios.md` | Arquivo existe com ≥ 3 cenários |
-| Nenhum caminho absoluto | Sem `C:\`, `/Users/`, `/home/` no corpo |
+| Frontmatter `name` | ≤ 64 chars, kebab-case, without reserved words |
+| Frontmatter `description` | Third person, includes "Use when…", ≤ 1536 chars |
+| Section ✅ Always Do | Present and with executable code in each pattern |
+| Section ⚠️ Ask First | Present with trade-off table |
+| Section 🚫 Never Do | Present with inline alternative and impact in each item |
+| Progressive disclosure | SKILL.md < 500 lines; blueprints exist if necessary |
+| Version absolutism | Specific version declared; no mixing of versions |
+| External Resources | Section present with ≥ 1 dated official link |
+| `blueprints/evaluation-scenarios.md` | File exists with ≥ 3 scenarios |
+| No absolute paths | Without `C:\`, `/Users/`, `/home/` in the body |
 
-### Output Produzido
+### Output Produced
 
-Relatório em chat (e opcionalmente em arquivo) com:
-- Score por dimensão
+Report in chat (and optionally in a file) with:
+- Score per dimension
 - Items ✅ pass / ⚠️ improve / 🚫 violation
-- Sugestão de correção para cada ⚠️ e 🚫
+- Correction suggestion for each ⚠️ and 🚫
 
 ---
 
 ## /instructions-best-practices-validator
 
-> **Agente:** `quality-validator` | **Contexto:** fork | **Modelo invocation:** desabilitado
+> **Agent:** `quality-validator` | **Context:** fork | **Model invocation:** disabled
 
-### Quando Usar
+### When to Use
 
-Use após `/terraform-instructions-compiler` ou ao revisar arquivos `.claude/rules/*.md` existentes.
+Use after `/terraform-instructions-compiler` or when reviewing existing `.claude/rules/*.md` files.
 
-**Palavras-gatilho:** "validar rules", "checar instructions", "qualidade de .instructions.md", "verificar regras de escopo".
+**Trigger words:** "validate rules", "check instructions", ".instructions.md quality", "check scope rules".
 
 ### Inputs
 
-| Campo | Obrigatório | Exemplo |
+| Field | Required | Example |
 |-------|:-----------:|---------|
-| Caminho para diretório de rules | ✅ | `.claude/rules/` ou `.github/instructions/` |
+| Path to rules directory | ✅ | `.claude/rules/` or `.github/instructions/` |
 
-### Exemplo de Chamada
+### Call Example
 
 ```
 /instructions-best-practices-validator .claude/rules/
 ```
 
-### O que Verifica
+### What It Verifies
 
-| Check | O que detecta |
+| Check | What it detects |
 |-------|---------------|
-| Escopo claro | Rules sem `paths:` definido ou com `paths: "**"` (muito amplo) |
-| Ausência de contradições | Duas rules no mesmo escopo com instruções opostas |
-| Conteúdo duplicado | Mesmo bloco em múltiplos arquivos — context pollution |
-| Clareza | Instruções vagas que o modelo pode interpretar de formas diferentes |
-| Escopo equilibrado | Nem muito amplo (afeta tudo) nem muito restrito (nunca dispara) |
-| YAML válido | Frontmatter correto, campos obrigatórios |
+| Clear scope | Rules without `paths:` defined or with `paths: "**"` (too broad) |
+| Absence of contradictions | Two rules in the same scope with opposing instructions |
+| Duplicate content | Same block in multiple files — context pollution |
+| Clarity | Vague instructions that the model can interpret in different ways |
+| Balanced scope | Neither too broad (affects everything) nor too narrow (never triggers) |
+| Valid YAML | Correct frontmatter, required fields |
 
-### Output Produzido
+### Output Produced
 
-Relatório em chat com análise de qualidade e sugestões de melhoria priorizadas.
+Report in chat with quality analysis and prioritized improvement suggestions.
 
 ---
 
 ## /agent-router-pattern-validator
 
-> **Agente:** `quality-validator` | **Contexto:** fork | **Modelo invocation:** desabilitado
+> **Agent:** `quality-validator` | **Context:** fork | **Model invocation:** disabled
 
-### Quando Usar
+### When to Use
 
-Use para verificar se o padrão de roteamento `/comando → subagente → skills` está corretamente implementado em todo o projeto — estrutura, routing, naming, completude.
+Use to verify whether the routing pattern `/command → sub-agent → skills` is correctly implemented across the entire project — structure, routing, naming, completeness.
 
-**Palavras-gatilho:** "verificar roteamento", "router pattern", "padrão de delegação", "estrutura de agente", "routing correto?".
+**Trigger words:** "check routing", "router pattern", "delegation pattern", "agent structure", "is routing correct?".
 
 ### Inputs
 
-| Campo | Obrigatório | Exemplo |
+| Field | Required | Example |
 |-------|:-----------:|---------|
-| Caminho do projeto | Opcional | `.claude/` (padrão) ou caminho explícito |
+| Project path | Optional | `.claude/` (default) or explicit path |
 
-### Exemplo de Chamada
+### Call Example
 
 ```
 /agent-router-pattern-validator
 ```
 
-ou com caminho explícito:
+or with explicit path:
 
 ```
 /agent-router-pattern-validator .claude/
 ```
 
-### O que Verifica
+### What It Verifies
 
-| Aspecto | Verificação |
+| Aspect | Verification |
 |---------|-------------|
-| Estrutura | Todos os diretórios esperados presentes |
-| Routing | Command skills apontam para agentes que existem |
-| Skills Loading | Agentes referenciam skills que existem |
-| Naming | kebab-case, gerund-form, coerência entre pasta e `name:` |
-| YAML | Frontmatter válido em todos os arquivos |
-| Completude | Sem dead-ends ou componentes órfãos |
-| Separação de responsabilidades | Cada camada faz só o que é sua |
+| Structure | All expected directories present |
+| Routing | Command skills point to agents that exist |
+| Skills Loading | Agents reference skills that exist |
+| Naming | kebab-case, gerund-form, consistency between folder and `name:` |
+| YAML | Valid frontmatter in all files |
+| Completeness | Without dead-ends or orphan components |
+| Responsibility separation | Each layer only does what belongs to it |
 
-### Output Produzido
+### Output Produced
 
 ```
 AGENT_ROUTER_PATTERN_REPORT.md
 ```
 
 ```markdown
-## Score de Conformidade: XX%
+## Compliance Score: XX%
 
-## Desvios
-| Severidade | Item | Correção Sugerida |
+## Deviations
+| Severity | Item | Suggested Correction |
 |-----------|------|-------------------|
 | Critical  | ... | ... |
 | Warning   | ... | ... |
 | Info      | ... | ... |
 
-## Diagrama: Routing Atual vs. Ideal
+## Diagram: Current vs. Ideal Routing
 ```
 
 ---
 
 ## /copilot-compatibility-review
 
-> **Agente:** `quality-validator` | **Contexto:** fork | **Modelo invocation:** desabilitado
+> **Agent:** `quality-validator` | **Context:** fork | **Model invocation:** disabled
 
-### Quando Usar
+### When to Use
 
-Use como **primeiro check** após criar qualquer artefato — detecta problemas técnicos de compatibilidade com o engine do GitHub Copilot (YAML malformado, limites de campo excedidos, globs inválidos) antes de partir para análise de qualidade de conteúdo.
+Use as the **first check** after creating any artifact — detects technical compatibility issues with the GitHub Copilot engine (malformed YAML, exceeded field limits, invalid globs) before proceeding to content quality analysis.
 
-**Palavras-gatilho:** "compatibilidade Copilot", "verificar YAML", "checar limites de campo", "migration check", "review de artefato Copilot".
+**Trigger words:** "Copilot compatibility", "verify YAML", "check field limits", "migration check", "Copilot artifact review".
 
 ### Inputs
 
-| Campo | Obrigatório | Exemplo |
+| Field | Required | Example |
 |-------|:-----------:|---------|
-| Caminho do repositório ou diretório | ✅ | `.github/` ou caminho para artefato específico |
+| Repository or directory path | ✅ | `.github/` or path to specific artifact |
 
-### Exemplo de Chamada
+### Call Example
 
 ```
 /copilot-compatibility-review .github/
 ```
 
-ou para um artefato específico:
+or for a specific artifact:
 
 ```
 /copilot-compatibility-review .github/prompts/skill-creator.prompt.md
 ```
 
-### O que Verifica
+### What It Verifies
 
-| Campo | Limite / Regra | O que detecta |
+| Field | Limit / Rule | What it detects |
 |-------|---------------|---------------|
-| `name` | ≤ 64 chars | Truncamento silencioso pelo engine |
-| `description` | ≤ 1024 chars | Truncamento silencioso |
-| `tools` | valores válidos | Valores inválidos ignorados pelo engine |
-| `applyTo` glob | sintaxe válida | Globs malformados que nunca disparam |
-| YAML frontmatter | YAML estrito | Aspas faltando, indentação errada, campos reservados |
-| Campos obrigatórios | por tipo de artefato | Campos faltando que impedem carregamento |
+| `name` | ≤ 64 chars | Silent truncation by the engine |
+| `description` | ≤ 1024 chars | Silent truncation |
+| `tools` | valid values | Invalid values ignored by the engine |
+| `applyTo` glob | valid syntax | Malformed globs that never trigger |
+| YAML frontmatter | strict YAML | Missing quotes, wrong indentation, reserved fields |
+| Required fields | per artifact type | Missing fields that prevent loading |
 
-### Output Produzido
+### Output Produced
 
 ```
 COPILOT_COMPATIBILITY_REVIEW.md
 ```
 
-Violações categorizadas por severidade com correção sugerida.
+Violations categorized by severity with suggested correction.
 
-### Quando Usar Este vs. Outros Validators
+### When to Use This vs. Other Validators
 
-| Use este | Quando |
+| Use this | When |
 |----------|--------|
-| `copilot-compatibility-review` | Check técnico: YAML, limites, globs — **sempre primeiro** |
-| `skill-best-practices-validator` | Qualidade de conteúdo de SKILL.md |
-| `instructions-best-practices-validator` | Qualidade de conteúdo de rules |
-| `project-analysis-validator` | Saúde holística do projeto completo |
-| `agent-router-pattern-validator` | Padrão de roteamento e delegação |
+| `copilot-compatibility-review` | Technical check: YAML, limits, globs — **always first** |
+| `skill-best-practices-validator` | Content quality of SKILL.md |
+| `instructions-best-practices-validator` | Content quality of rules |
+| `project-analysis-validator` | Holistic health of the complete project |
+| `agent-router-pattern-validator` | Routing and delegation pattern |
 
 ---
 
-## Pipeline de Validação Completo
+## Complete Validation Pipeline
 
 ```mermaid
 graph LR
-    A[Criar/Editar artefato] --> B[/copilot-compatibility-review/]
-    B -->|✅ compatível| C{Tipo de artefato?}
+    A[Create/Edit artifact] --> B[/copilot-compatibility-review/]
+    B -->|✅ compatible| C{Artifact type?}
     C -->|SKILL.md| D[/skill-best-practices-validator/]
     C -->|rules/.instructions.md| E[/instructions-best-practices-validator/]
     D --> F[/agent-router-pattern-validator/]
     E --> F
     F --> G[/project-analysis-validator .claude//]
-    G -->|✅| H[✅ Pronto para produção]
-    B -->|❌ violações| FIX1[Corrigir e repetir]
-    D -->|⚠️ melhorias| FIX2[Refinar e repetir]
-    G -->|🚫 críticos| FIX3[Corrigir e repetir]
+    G -->|✅| H[✅ Ready for production]
+    B -->|❌ violations| FIX1[Fix and repeat]
+    D -->|⚠️ improvements| FIX2[Refine and repeat]
+    G -->|🚫 critical| FIX3[Fix and repeat]
 ```
 
 ---
 
-## Princípios do Agente
+## Agent Principles
 
-**Read-only por padrão** — o agente emite relatórios e recomendações. Só modifica arquivos se o usuário pedir explicitamente com `--fix`.
+**Read-only by default** — the agent emits reports and recommendations. Only modifies files if the user explicitly requests it with `--fix`.
 
-**Verificação objetiva** — conta skills com `Glob`, conta linhas com `wc`, grep patterns com `grep`. Nunca aceita contagem declarada sem verificar.
+**Objective verification** — counts skills with `Glob`, counts lines with `wc`, grep patterns with `grep`. Never accepts declared count without verifying.
 
-**Rubric-driven** — carrega o rubric completo do SKILL.md da skill invocadora antes de revisar. Não substitui com conhecimento geral.
+**Rubric-driven** — loads the complete rubric from the invoking skill's SKILL.md before reviewing. Does not substitute with general knowledge.
 
 ---
 
-*Ver [README do manual](README.md) para navegação geral.*
+*See [manual README](README.md) for general navigation.*

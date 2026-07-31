@@ -151,7 +151,7 @@ Source: [Link]
 
 # Output Format
 
-Template de saída (Metadata, Executive Summary, seções por área e Architectural Guardrails). Estrutura completa em [Output Template](./blueprints/output-format.md).
+Output template (Metadata, Executive Summary, per-area sections, and Architectural Guardrails). Full structure in [Output Template](./blueprints/output-format.md).
 ## Reference Implementations
 - [Official HashiCorp examples with URLs]
 - [Community reference architectures (Cloud Posse, Gruntwork)]

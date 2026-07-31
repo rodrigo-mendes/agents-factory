@@ -1,6 +1,6 @@
 ---
 name: skill-creator
-description: "Creates Agent Skills (SKILL.md) from a research_[TECH]_v[VERSION].md file following official Claude best practices and team conventions. Use when authoring a new skill from a completed research file produced by a researcher skill (e.g. /researching-technical-frameworks). For all-in-one research + skill, use /methodologies-skill-generator or /architecture-approaches-skill-generator instead."
+description: "Creates Agent Skills (SKILL.md) from a research_[TECH]_v[VERSION].md file following official Claude best practices and team conventions. Use when authoring a new skill from a completed research file produced by a researcher skill (e.g. /researching-technical-frameworks). For all-in-one research + skill, use /methodologies-skill-generator instead."
 argument-hint: "Path to research file (e.g. StoryBeat/research_FastAPI_v0.115.md)"
 context: fork
 agent: skill-author

@@ -1,39 +1,39 @@
-# Fluxo: Implementação
+# Flow: Implementation
 
-Usar agentes existentes para design + implementação de funcionalidades.
+Use existing agents for feature design + implementation.
 
 ---
 
-## Diagrama
+## Diagram
 
 ```mermaid
 flowchart TD
-    START([Requisito do usuário]) --> TYPE{Precisa de<br/>design primeiro?}
+    START([User requirement]) --> TYPE{Needs<br/>design first?}
     
-    TYPE -->|Sim - escopo complexo| ADV[Advisory Agent<br/>Design + ADRs + Roadmap]
-    TYPE -->|Não - escopo claro| IMPL[Implementation Agent<br/>Gerar código]
+    TYPE -->|Yes - complex scope| ADV[Advisory Agent<br/>Design + ADRs + Roadmap]
+    TYPE -->|No - clear scope| IMPL[Implementation Agent<br/>Generate code]
     
-    ADV --> PLAN[Plano de Implementação<br/>+ Delegação para agents]
+    ADV --> PLAN[Implementation Plan<br/>+ Delegation to agents]
     PLAN --> IMPL
     
-    IMPL --> DOMAIN{Domínio?}
+    IMPL --> DOMAIN{Domain?}
     
-    DOMAIN -->|Single domain| SINGLE[Implementation Agent<br/>P0-P5 com skills do domínio]
+    DOMAIN -->|Single domain| SINGLE[Implementation Agent<br/>P0-P5 with domain skills]
     DOMAIN -->|Cross-domain| ORCH[Orchestrator Agent<br/>P0-P5 multi-skill]
     
-    SINGLE --> CODE[Código Gerado]
+    SINGLE --> CODE[Generated Code]
     ORCH --> CODE
     
     CODE --> VALID[P5: Validate<br/>terraform fmt, mvn compile...]
     
-    VALID -->|❌ falha| FIX[Corrigir + re-validar]
+    VALID -->|❌ fails| FIX[Fix + re-validate]
     FIX --> VALID
     
-    VALID -->|✅ passa| AUDIT{Auditar?}
+    VALID -->|✅ passes| AUDIT{Audit?}
     
-    AUDIT -->|Sim — alvo .claude/| ARC[audit-cc-architecture-consensus]
-    AUDIT -->|Sim — alvo .github/| ARCP[audit-architecture-consensus]
-    AUDIT -->|Não| DONE([✅ Implementado])
+    AUDIT -->|Yes — target .claude/| ARC[audit-cc-architecture-consensus]
+    AUDIT -->|Yes — target .github/| ARCP[audit-architecture-consensus]
+    AUDIT -->|No| DONE([✅ Implemented])
     
     ARC --> DONE
     ARCP --> DONE
@@ -41,142 +41,141 @@ flowchart TD
 
 ---
 
-## Padrões de Implementação
+## Implementation Patterns
 
-### Padrão 1: Advisory → Implementation (Design-first)
+### Pattern 1: Advisory → Implementation (Design-first)
 
-Para escopos complexos ou quando a arquitetura não está clara.
+For complex scopes or when the architecture is not clear.
 
 ```mermaid
 sequenceDiagram
-    participant U as Usuário
+    participant U as User
     participant ADV as Advisory Agent
     participant IMP as Implementation Agent
     
     U->>ADV: "Design a serverless API"
     ADV->>ADV: P0-P5 (read-only)
-    ADV->>U: ADR + Diagrama + Delegation Plan
-    Note over ADV: "Use @oci-terraform para X"<br/>"Use @oci-functions para Y"
-    U->>IMP: "Provisionar X conforme design"
-    IMP->>IMP: P0-P5 (com código)
-    IMP->>U: Código gerado + validado
+    ADV->>U: ADR + Diagram + Delegation Plan
+    Note over ADV: "Use @oci-terraform for X"<br/>"Use @oci-functions for Y"
+    U->>IMP: "Provision X as per design"
+    IMP->>IMP: P0-P5 (with code)
+    IMP->>U: Generated + validated code
 ```
 
-**Exemplo real**: `oci-serverless-architect` (design) → `oci-terraform` (infraestrutura)
+**Real example**: `oci-serverless-architect` (design) → `oci-terraform` (infrastructure)
 
 ---
 
-### Padrão 2: Implementation Direto (Single domain)
+### Pattern 2: Direct Implementation (Single domain)
 
-Para escopos claros em um domínio específico.
+For clear scopes in a specific domain.
 
 ```mermaid
 sequenceDiagram
-    participant U as Usuário
+    participant U as User
     participant AG as Implementation Agent
     participant SK as Skills
     
-    U->>AG: "Criar API Gateway para function X"
+    U->>AG: "Create API Gateway for function X"
     AG->>SK: P0: Load provisioning-oci-api-gateway
     SK->>AG: Patterns (✅⚠️🚫)
     AG->>AG: P1: Scan existing .tf files
     AG->>AG: P2: Extract patterns
     AG->>U: P3: Propose plan
-    U->>AG: Aprovado
+    U->>AG: Approved
     AG->>AG: P4: Generate .tf files
     AG->>AG: P5: terraform fmt + validate
-    AG->>U: ✅ Código pronto
+    AG->>U: ✅ Code ready
 ```
 
-**Exemplo real**: `oci-terraform` com skill `provisioning-oci-api-gateway`
+**Real example**: `oci-terraform` with skill `provisioning-oci-api-gateway`
 
 ---
 
-### Padrão 3: Orchestrator (Cross-domain)
+### Pattern 3: Orchestrator (Cross-domain)
 
-Para implementações que envolvem múltiplos domínios técnicos com dependências.
+For implementations involving multiple technical domains with dependencies.
 
 ```mermaid
 sequenceDiagram
-    participant U as Usuário
+    participant U as User
     participant OR as Orchestrator Agent
     participant SK1 as Java Skills
     participant SK2 as Terraform Skills
     
-    U->>OR: "Criar function + infra completa"
+    U->>OR: "Create function + full infra"
     OR->>SK1: P0: Load developing-oci-functions-java
     OR->>SK2: P0: Load provisioning-oci-*
     OR->>OR: P1: Scan Java + Terraform
-    OR->>OR: P2: Extract patterns de ambos
+    OR->>OR: P2: Extract patterns from both
     OR->>U: P3: Propose cross-domain plan
-    Note over OR: Ordem: Java → TF Function → TF IAM → TF API GW
-    U->>OR: Aprovado
-    OR->>OR: P4.1: Gerar Java (handler, pom.xml)
-    OR->>OR: P4.2: Gerar TF (function resource)
-    OR->>OR: P4.3: Gerar TF (IAM policies)
-    OR->>OR: P4.4: Gerar TF (API Gateway route)
+    Note over OR: Order: Java → TF Function → TF IAM → TF API GW
+    U->>OR: Approved
+    OR->>OR: P4.1: Generate Java (handler, pom.xml)
+    OR->>OR: P4.2: Generate TF (function resource)
+    OR->>OR: P4.3: Generate TF (IAM policies)
+    OR->>OR: P4.4: Generate TF (API Gateway route)
     OR->>OR: P5: mvn compile + terraform validate
-    OR->>U: ✅ Stack completa
+    OR->>U: ✅ Complete stack
 ```
 
-**Exemplo real**: `oci-serverless-stack` (Java + Terraform)
+**Real example**: `oci-serverless-stack` (Java + Terraform)
 
 ---
 
-## Dependência entre Padrões
+## Dependency Between Patterns
 
 ```mermaid
 graph TD
     A[Advisory] -->|"delegation plan"| B[Implementation]
     A -->|"delegation plan"| C[Orchestrator]
-    B -->|"single domain"| D[Código]
+    B -->|"single domain"| D[Code]
     C -->|"multi domain"| D
 ```
 
-| Se o escopo é... | Use |
+| If the scope is... | Use |
 |-----------------|-----|
-| Indefinido (precisa de design) | Advisory → Implementation |
-| Claro, um domínio | Implementation direto |
-| Claro, múltiplos domínios | Orchestrator direto |
-| Complexo, múltiplos domínios | Advisory → Orchestrator |
+| Undefined (needs design) | Advisory → Implementation |
+| Clear, one domain | Direct Implementation |
+| Clear, multiple domains | Direct Orchestrator |
+| Complex, multiple domains | Advisory → Orchestrator |
 
 ---
 
-## Capacidades Envolvidas
+## Capabilities Involved
 
-| Etapa | Tipo de Agente | Skills Consumidas |
+| Step | Agent Type | Skills Used |
 |-------|---------------|-------------------|
-| Design | Advisory | Skills de arquitetura (designing-*, architecting-*) |
-| Implementação single | Implementation | Skills do domínio (provisioning-*, developing-*) |
-| Implementação cross | Orchestrator | Skills de múltiplos domínios |
-| Validação | (built-in P5) | — |
-| Auditoria CC | `audit-cc-architecture-consensus` (alvo `.claude/`) | — |
-| Auditoria Copilot | `audit-architecture-consensus` (alvo `.github/`) | — |
+| Design | Advisory | Architecture skills (designing-*, architecting-*) |
+| Single Implementation | Implementation | Domain skills (provisioning-*, developing-*) |
+| Cross Implementation | Orchestrator | Skills from multiple domains |
+| Validation | (built-in P5) | — |
+| CC Audit | `audit-cc-architecture-consensus` (target `.claude/`) | — |
+| Copilot Audit | `audit-architecture-consensus` (target `.github/`) | — |
 
 ---
 
-## Ordem de Execução em Cross-Domain
+## Execution Order in Cross-Domain
 
-O Orchestrator respeita dependências entre domínios:
+The Orchestrator respects dependencies between domains:
 
 ```
-Layer 1: Networking    (base — sem dependências)
-Layer 2: IAM           (depende de networking para compartments)
-Layer 3: Core Service  (depende de IAM para policies)
-Layer 4: Integration   (depende de service para OCIDs)
+Layer 1: Networking    (base — no dependencies)
+Layer 2: IAM           (depends on networking for compartments)
+Layer 3: Core Service  (depends on IAM for policies)
+Layer 4: Integration   (depends on service for OCIDs)
 ```
 
-Cada layer só inicia após a anterior estar completa e validada.
+Each layer only starts after the previous one is complete and validated.
 
 ---
 
-## Resultado Final
+## Final Result
 
-- **Advisory**: ADRs + diagrama + plano de delegação
-- **Implementation**: Código gerado + validado (fmt/compile)
-- **Orchestrator**: Stack multi-domínio completa + validada cross-domain
+- **Advisory**: ADRs + diagram + delegation plan
+- **Implementation**: Generated + validated code (fmt/compile)
+- **Orchestrator**: Complete multi-domain stack + cross-domain validated
 
 ---
 
-> **Referência de auditoria**: Para detalhes completos sobre variantes CC vs Copilot, critérios de
-> consensus e lentes individuais → [Manual do architecture-auditor](../manual/architecture-auditor.md)
+> **Audit reference**: For full details on CC vs Copilot variants, consensus criteria, and individual lenses → [architecture-auditor Manual](../manual/architecture-auditor.md)

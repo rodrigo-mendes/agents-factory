@@ -1,45 +1,45 @@
-# Prompts de Compilação
+# Compilation Prompts
 
-4 prompts que transformam documentos de pesquisa em artefatos operacionais (SKILL.md ou .instructions.md).
+4 prompts that transform research documents into operational artifacts (SKILL.md or .instructions.md).
 
-Todos seguem o padrão do `TEMPLATE.GENERATOR.prompt.md`.
+All follow the `TEMPLATE.GENERATOR.prompt.md` pattern.
 
 ---
 
-## Visão Geral
+## Overview
 
-| Prompt | Input | Output | Domínio |
+| Prompt | Input | Output | Domain |
 |--------|-------|--------|---------|
-| `skill-creator` | Qualquer pesquisa | SKILL.md | Genérico |
-| `terraform-instructions-compiler` | Pesquisa Terraform | .instructions.md (múltiplos) | Terraform |
-| `architecture-approaches-skill-generator` | Pesquisa de arquitetura | SKILL.md | Arquitetura |
-| `methodologies-skill-generator` | Pesquisa de metodologia | SKILL.md | Metodologias |
+| `skill-creator` | Any research | SKILL.md | Generic |
+| `terraform-instructions-compiler` | Terraform research | .instructions.md (multiple) | Terraform |
+| `architecture-approaches-skill-generator` | Architecture research | SKILL.md | Architecture |
+| `methodologies-skill-generator` | Methodology research | SKILL.md | Methodologies |
 
 ---
 
 ## 1. skill-creator
 
-> **Arquivo**: `.claude/skills/skill-creator/SKILL.md`
+> **File**: `.claude/skills/skill-creator/SKILL.md`
 
-### Descrição
-Orquestra a geração de uma SKILL.md a partir de qualquer documento de pesquisa, aplicando os padrões de autoria integrados ao `skill-creator`.
+### Description
+Orchestrates the generation of a SKILL.md from any research document, applying the authoring patterns integrated into `skill-creator`.
 
-### Invocação
+### Invocation
 ```
 skill-creator
 ```
 
-### Workflow Interno
-1. Aplica padrões integrados de autoria (three-tier, YAML, blueprints)
-2. Lê documento de pesquisa fornecido
-3. Aplica three-tier architecture (✅⚠️🚫)
-4. Gera SKILL.md com YAML frontmatter correto
-5. Cria `blueprints/` com always-do e never-do patterns
+### Internal Workflow
+1. Applies integrated authoring patterns (three-tier, YAML, blueprints)
+2. Reads the provided research document
+3. Applies three-tier architecture (✅⚠️🚫)
+4. Generates SKILL.md with correct YAML frontmatter
+5. Creates `blueprints/` with always-do and never-do patterns
 
-### Input Esperado
-- Caminho para documento de pesquisa (output de qualquer researcher)
+### Expected Input
+- Path to research document (output from any researcher)
 
-### Output Produzido
+### Produced Output
 ```
 skill-name/
 ├── SKILL.md
@@ -48,144 +48,144 @@ skill-name/
     └── never-do-patterns.md
 ```
 
-### Dependências
-- Padrões de autoria integrados ao `skill-creator`
-- Template: `TEMPLATE.SKILL.md` (referência implícita)
+### Dependencies
+- Authoring patterns integrated into `skill-creator`
+- Template: `TEMPLATE.SKILL.md` (implicit reference)
 
-### Complementa
-- Todos os 7 prompts de pesquisa (recebe output deles)
-- `skill-best-practices-validator` (valida o output)
+### Complements
+- All 7 research prompts (receives their output)
+- `skill-best-practices-validator` (validates the output)
 
 ---
 
 ## 2. terraform-instructions-compiler
 
-> **Arquivo**: `.claude/skills/terraform-instructions-compiler/SKILL.md`
+> **File**: `.claude/skills/terraform-instructions-compiler/SKILL.md`
 
-### Descrição
-Compilador interativo que extrai best practices de pesquisa Terraform e gera múltiplos arquivos .instructions.md categorizados.
+### Description
+Interactive compiler that extracts best practices from Terraform research and generates multiple categorized .instructions.md files.
 
-### Invocação
+### Invocation
 ```
 terraform-instructions-compiler
 ```
 
-### Workflow Interno
-1. **Fase 1.1**: Lê documento de pesquisa Terraform
-2. **Fase 1.2**: Carrega templates de referência:
+### Internal Workflow
+1. **Phase 1.1**: Reads Terraform research document
+2. **Phase 1.2**: Loads reference templates:
    - `TEMPLATE.STANDARDS.instructions.md` (L54)
    - `TEMPLATE.CONFIG.instructions.md` (L55)
    - `TEMPLATE.SKILLS.instructions.md` (L56)
-3. **Fase 2**: Entrevista interativa (quais aspectos incluir)
-4. **Fase 3**: Planejamento (quais arquivos gerar)
-5. **Fase 4**: Geração dos .instructions.md
+3. **Phase 2**: Interactive interview (which aspects to include)
+4. **Phase 3**: Planning (which files to generate)
+5. **Phase 4**: Generation of .instructions.md files
 
-### Input Esperado
-- Documento de pesquisa de `terraform-engineering-best-practices-researcher` ou `technical-framework-researcher-terraform`
+### Expected Input
+- Research document from `terraform-engineering-best-practices-researcher` or `technical-framework-researcher-terraform`
 
-### Output Produzido
+### Produced Output
 
-> **Runtime alvo determina o caminho de saída:**
+> **Target runtime determines the output path:**
 > - `terraform-config.instructions.md` (GitHub Copilot) → `.github/instructions/`
 > - `terraform-config.md` (Claude Code) → `.claude/rules/`
 >
-> O compilador pergunta o runtime alvo na entrevista interativa da Fase 2.
+> The compiler asks for the target runtime during the Phase 2 interactive interview.
 
 ```
-# Exemplo Copilot (padrão)
+# Copilot example (default)
 .github/instructions/
 ├── terraform-config.instructions.md      ← Setup, backend, providers
 ├── terraform-standards.instructions.md   ← Naming, modules, structure
 └── terraform-skills.instructions.md      ← Keyword → skill routing table
 
-# Equivalente Claude Code
+# Claude Code equivalent
 .claude/rules/
 ├── terraform-config.md
 ├── terraform-standards.md
 └── terraform-skills.md
 ```
 
-### Dependências
-- Templates: `TEMPLATE.CONFIG.instructions.md`, `TEMPLATE.STANDARDS.instructions.md`, `TEMPLATE.SKILLS.instructions.md` (**referência explícita**)
+### Dependencies
+- Templates: `TEMPLATE.CONFIG.instructions.md`, `TEMPLATE.STANDARDS.instructions.md`, `TEMPLATE.SKILLS.instructions.md` (**explicit reference**)
 
-### Complementa
-- `terraform-engineering-best-practices-researcher` (input principal)
-- `technical-framework-researcher-terraform` (input alternativo)
-- `instructions-best-practices-validator` (valida output)
+### Complements
+- `terraform-engineering-best-practices-researcher` (main input)
+- `technical-framework-researcher-terraform` (alternative input)
+- `instructions-best-practices-validator` (validates output)
 
 ---
 
 ## 3. architecture-approaches-skill-generator
 
-> **Arquivo**: `.claude/skills/architecture-approaches-skill-generator/SKILL.md`
+> **File**: `.claude/skills/architecture-approaches-skill-generator/SKILL.md`
 
-### Descrição
-Gera SKILL.md a partir de pesquisa de metodologia de arquitetura, aplicando o padrão three-tier com foco em decisões arquiteturais.
+### Description
+Generates SKILL.md from architecture methodology research, applying the three-tier pattern with a focus on architectural decisions.
 
-### Invocação
+### Invocation
 ```
 architecture-approaches-skill-generator
 ```
 
-### Workflow Interno
-1. Aplica padrões integrados de autoria (three-tier, YAML, blueprints)
-2. Lê pesquisa de metodologia de arquitetura
-3. Identifica decisões arquiteturais → mapeia para ⚠️ Ask First
-4. Identifica padrões obrigatórios → mapeia para ✅ Always Do
-5. Identifica anti-padrões → mapeia para 🚫 Never Do
-6. Gera SKILL.md versionada
+### Internal Workflow
+1. Applies integrated authoring patterns (three-tier, YAML, blueprints)
+2. Reads architecture methodology research
+3. Identifies architectural decisions → maps to ⚠️ Ask First
+4. Identifies mandatory patterns → maps to ✅ Always Do
+5. Identifies anti-patterns → maps to 🚫 Never Do
+6. Generates versioned SKILL.md
 
-### Input Esperado
-- Documento de pesquisa de `architecture-methodology-researcher`
+### Expected Input
+- Research document from `architecture-methodology-researcher`
 
-### Output Produzido
-- `SKILL.md` com decisões arquiteturais estruturadas em three-tier
+### Produced Output
+- `SKILL.md` with architectural decisions structured in three-tier
 
-### Dependências
-- Padrões de autoria integrados ao `skill-creator`
+### Dependencies
+- Authoring patterns integrated into `skill-creator`
 
-### Complementa
+### Complements
 - `architecture-methodology-researcher` (input)
-- `skill-best-practices-validator` (valida output)
+- `skill-best-practices-validator` (validates output)
 
 ---
 
 ## 4. methodologies-skill-generator
 
-> **Arquivo**: `.claude/skills/methodologies-skill-generator/SKILL.md`
+> **File**: `.claude/skills/methodologies-skill-generator/SKILL.md`
 
-### Descrição
-Gera SKILL.md a partir de pesquisa de metodologia de engenharia/requisitos, estruturando práticas em three-tier.
+### Description
+Generates SKILL.md from engineering/requirements methodology research, structuring practices in three-tier.
 
-### Invocação
+### Invocation
 ```
 methodologies-skill-generator
 ```
 
-### Workflow Interno
-1. Aplica padrões integrados de autoria (three-tier, YAML, blueprints)
-2. Lê pesquisa de metodologia
-3. Estrutura práticas obrigatórias, opcionais e proibidas
-4. Gera SKILL.md com exemplos de aplicação
+### Internal Workflow
+1. Applies integrated authoring patterns (three-tier, YAML, blueprints)
+2. Reads methodology research
+3. Structures mandatory, optional, and prohibited practices
+4. Generates SKILL.md with application examples
 
-### Input Esperado
-- Documento de pesquisa de `requirements-methodology-researcher`
+### Expected Input
+- Research document from `requirements-methodology-researcher`
 
-### Output Produzido
-- `SKILL.md` com práticas de metodologia em three-tier
+### Produced Output
+- `SKILL.md` with methodology practices in three-tier
 
-### Dependências
-- Padrões de autoria integrados ao `skill-creator`
+### Dependencies
+- Authoring patterns integrated into `skill-creator`
 
-### Complementa
+### Complements
 - `requirements-methodology-researcher` (input)
-- `skill-best-practices-validator` (valida output)
+- `skill-best-practices-validator` (validates output)
 
 ---
 
-## Matriz de Compatibilidade: Researcher → Compiler
+## Compatibility Matrix: Researcher → Compiler
 
-| Researcher | Compiler Recomendado |
+| Researcher | Recommended Compiler |
 |-----------|---------------------|
 | `researching-technical-frameworks` | `skill-creator` |
 | `technical-framework-researcher-terraform` | `terraform-instructions-compiler` |

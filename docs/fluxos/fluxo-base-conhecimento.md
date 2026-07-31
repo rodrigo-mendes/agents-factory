@@ -1,24 +1,24 @@
-# Fluxo: Base de Conhecimento
+# Flow: Knowledge Base
 
-Pesquisar uma tecnologia/metodologia e transformar em artefato operacional (SKILL.md ou .instructions.md).
+Research a technology/methodology and transform it into an operational artifact (SKILL.md or .instructions.md).
 
 ---
 
-## Diagrama
+## Diagram
 
 ```mermaid
 flowchart TD
-    START([Início]) --> CHOOSE{Que tipo de<br/>conhecimento?}
+    START([Start]) --> CHOOSE{What type of<br/>knowledge?}
     
-    CHOOSE -->|Tecnologia/Framework| R1[researching-technical-frameworks]
+    CHOOSE -->|Technology/Framework| R1[researching-technical-frameworks]
     CHOOSE -->|Terraform + Cloud| R2[technical-framework-researcher-terraform]
-    CHOOSE -->|Práticas Terraform| R3[terraform-engineering-best-practices-researcher]
-    CHOOSE -->|Arquitetura| R4[architecture-methodology-researcher]
+    CHOOSE -->|Terraform Practices| R3[terraform-engineering-best-practices-researcher]
+    CHOOSE -->|Architecture| R4[architecture-methodology-researcher]
     CHOOSE -->|Cloud Framework| R5[cloud-architecture-researcher]
-    CHOOSE -->|Domínio Negócio| R6[business-domain-researcher]
-    CHOOSE -->|Requisitos/Agile| R7[requirements-methodology-researcher]
+    CHOOSE -->|Business Domain| R6[business-domain-researcher]
+    CHOOSE -->|Requirements/Agile| R7[requirements-methodology-researcher]
     
-    R1 --> DOC[Documento de Pesquisa]
+    R1 --> DOC[Research Document]
     R2 --> DOC
     R3 --> DOC
     R4 --> DOC
@@ -26,143 +26,143 @@ flowchart TD
     R6 --> DOC
     R7 --> DOC
     
-    DOC --> COMPILE{Compilar para<br/>qual formato?}
+    DOC --> COMPILE{Compile to<br/>which format?}
     
-    COMPILE -->|SKILL.md genérico ou serviço cloud| C1[skill-creator]
-    COMPILE -->|SKILL.md arquitetura| C2[architecture-approaches-skill-generator]
-    COMPILE -->|SKILL.md metodologia| C3[methodologies-skill-generator]
+    COMPILE -->|Generic SKILL.md or cloud service| C1[skill-creator]
+    COMPILE -->|Architecture SKILL.md| C2[architecture-approaches-skill-generator]
+    COMPILE -->|Methodology SKILL.md| C3[methodologies-skill-generator]
     COMPILE -->|.instructions.md Terraform| C4[terraform-instructions-compiler]
     
-    C1 --> ART[Artefato Gerado]
+    C1 --> ART[Generated Artifact]
     C2 --> ART
     C3 --> ART
     C4 --> ART
     
-    ART --> VALID[skill-best-practices-validator<br/>ou instructions-best-practices-validator]
+    ART --> VALID[skill-best-practices-validator<br/>or instructions-best-practices-validator]
     
-    VALID -->|issues| IMPROVE[Melhorar]
+    VALID -->|issues| IMPROVE[Improve]
     IMPROVE --> VALID
     
-    VALID -->|✅ aprovado| DONE([✅ Artefato Pronto])
+    VALID -->|✅ approved| DONE([✅ Artifact Ready])
 ```
 
 ---
 
-## Etapas Detalhadas
+## Detailed Steps
 
-### Etapa 1: Pesquisa
+### Step 1: Research
 
-**Escolha o researcher baseado no domínio:**
+**Choose the researcher based on the domain:**
 
-| Se você precisa de... | Use |
+| If you need... | Use |
 |----------------------|-----|
-| Padrões de FastAPI v0.100 | `researching-technical-frameworks` |
-| Resources Terraform do OCI Functions | `technical-framework-researcher-terraform` |
-| Estrutura de projeto Terraform | `terraform-engineering-best-practices-researcher` |
-| Padrões C4 Model ou DDD | `architecture-methodology-researcher` |
+| FastAPI v0.100 patterns | `researching-technical-frameworks` |
+| OCI Functions Terraform resources | `technical-framework-researcher-terraform` |
+| Terraform project structure | `terraform-engineering-best-practices-researcher` |
+| C4 Model or DDD patterns | `architecture-methodology-researcher` |
 | AWS Well-Architected | `cloud-architecture-researcher` |
-| Processos de compliance financeira | `business-domain-researcher` |
-| Práticas SAFe ou Shape Up | `requirements-methodology-researcher` |
+| Financial compliance processes | `business-domain-researcher` |
+| SAFe or Shape Up practices | `requirements-methodology-researcher` |
 
-**Input**: Tecnologia + versão + contexto
-**Output**: Documento markdown de pesquisa validada
+**Input**: Technology + version + context
+**Output**: Validated research markdown document
 
-> ⚠️ Regra: sempre fornecer versão específica. Sem versão = sem pesquisa.
+> ⚠️ Rule: always provide a specific version. No version = no research.
 
 ---
 
-### Etapa 2: Compilação
+### Step 2: Compilation
 
-**Escolha o compiler baseado no output desejado:**
+**Choose the compiler based on the desired output:**
 
-| Pesquisa de... | Compiler | Output |
+| Research of... | Compiler | Output |
 |---------------|----------|--------|
-| Tecnologia genérica | `skill-creator` | `SKILL.md` + `blueprints/` |
-| Serviço cloud + Terraform (`technical-framework-researcher-terraform`) | `skill-creator` | `SKILL.md` de provisionamento |
-| Arquitetura (C4, DDD) | `architecture-approaches-skill-generator` | `SKILL.md` |
-| Metodologia (Scrum, SAFe) | `methodologies-skill-generator` | `SKILL.md` |
-| Práticas Terraform (`terraform-engineering-best-practices-researcher`) | `terraform-instructions-compiler` | Múltiplos `.instructions.md` |
+| Generic technology | `skill-creator` | `SKILL.md` + `blueprints/` |
+| Cloud service + Terraform (`technical-framework-researcher-terraform`) | `skill-creator` | `SKILL.md` for provisioning |
+| Architecture (C4, DDD) | `architecture-approaches-skill-generator` | `SKILL.md` |
+| Methodology (Scrum, SAFe) | `methodologies-skill-generator` | `SKILL.md` |
+| Terraform practices (`terraform-engineering-best-practices-researcher`) | `terraform-instructions-compiler` | Multiple `.instructions.md` |
 
-**Input**: Documento de pesquisa (output da Etapa 1)
-**Output**: Artefato operacional estruturado em three-tier
+**Input**: Research document (output from Step 1)
+**Output**: Operational artifact structured in Three-Tier
 
 ---
 
-### Etapa 3: Validação
+### Step 3: Validation
 
-| Se gerou... | Valide com |
+| If you generated... | Validate with |
 |------------|-----------|
 | SKILL.md | `skill-best-practices-validator` |
 | .instructions.md | `instructions-best-practices-validator` |
 
-**Input**: Artefato gerado (output da Etapa 2)
-**Output**: Relatório de qualidade + sugestões de melhoria
+**Input**: Generated artifact (output from Step 2)
+**Output**: Quality report + improvement suggestions
 
 ---
 
-## Variantes do Fluxo
+## Flow Variants
 
-### Variante A: Skill de tecnologia
+### Variant A: Technology Skill
 ```
 researching-technical-frameworks → skill-creator → skill-best-practices-validator
 ```
 
-### Variante B: Instructions Terraform
+### Variant B: Terraform Instructions
 ```
 terraform-engineering-best-practices-researcher → terraform-instructions-compiler → instructions-best-practices-validator
 ```
 
-### Variante C: Skill de arquitetura
+### Variant C: Architecture Skill
 ```
 architecture-methodology-researcher → architecture-approaches-skill-generator → skill-best-practices-validator
 ```
 
-### Variante D: Skill de metodologia
+### Variant D: Methodology Skill
 ```
 requirements-methodology-researcher → methodologies-skill-generator → skill-best-practices-validator
 ```
 
 ---
 
-## Capacidades Envolvidas
+## Capabilities Involved
 
-| Etapa | Capacidades | Qtd |
+| Step | Capabilities | Qty |
 |-------|------------|:---:|
-| Pesquisa | 7 researchers | 7 |
-| Compilação | 4 compilers/generators | 4 |
-| Validação | 2 validators | 2 |
+| Research | 7 researchers | 7 |
+| Compilation | 4 compilers/generators | 4 |
+| Validation | 2 validators | 2 |
 | **Total** | | **13** |
 
 ---
 
-## Inputs e Outputs entre Etapas
+## Inputs and Outputs Between Steps
 
 ```mermaid
 graph LR
-    subgraph "Etapa 1"
+    subgraph "Step 1"
         R[Researcher]
     end
-    subgraph "Etapa 2"
+    subgraph "Step 2"
         C[Compiler]
     end
-    subgraph "Etapa 3"
+    subgraph "Step 3"
         V[Validator]
     end
     
-    R -->|"Markdown de pesquisa<br/>(padrões + código + versão)"| C
+    R -->|"Research markdown<br/>(patterns + code + version)"| C
     C -->|"SKILL.md ou .instructions.md<br/>(three-tier structured)"| V
-    V -->|"Relatório de qualidade<br/>(score + melhorias)"| DONE[✅]
+    V -->|"Quality report<br/>(score + improvements)"| DONE[✅]
 ```
 
 ---
 
-## Resultado Final
+## Final Result
 
-- **SKILL.md**: Base de conhecimento versionada pronta para ser carregada por agentes
-- **OU .instructions.md**: Configuração de projeto pronta para ser injetada automaticamente
+- **SKILL.md**: Versioned knowledge base ready to be loaded by agents
+- **OR .instructions.md**: Project configuration ready to be automatically injected
 
-## Próximos Passos
+## Next Steps
 
-Após ter skills prontas:
-- Usá-las em um agente existente → [Fluxo de Implementação](fluxo-implementacao.md)
-- Criar um agente novo que use essas skills → [Fluxo de Criação de Projeto](fluxo-criacao-projeto.md)
+After having ready skills:
+- Use them in an existing agent → [Implementation Flow](fluxo-implementacao.md)
+- Create a new agent that uses these skills → [Project Creation Flow](fluxo-criacao-projeto.md)

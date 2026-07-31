@@ -2,18 +2,18 @@
 
 Templates for creating new agents, skills, prompts, and rules. Each template is a parameterized blueprint — replace `[PLACEHOLDER]` variables with your specific values.
 
-> **Variantes Claude Code.** Estes templates foram adaptados para o formato Claude Code. Mapeamento
-> vindo do GitHub Copilot:
+> **Claude Code variants.** These templates were adapted for the Claude Code format. Mapping
+> from GitHub Copilot:
 >
-> | Copilot | Claude Code | Diferença principal |
+> | Copilot | Claude Code | Key Difference |
 > |---|---|---|
-> | `agents/*.agent.md` (`tools: ['read','search',...]`) | `agents/*.md` (`tools: Read, Grep, Glob, ...`) | subagente; nomes de ferramenta traduzidos; adicionar "Use when…" e `model:` opcional |
-> | `instructions/*.instructions.md` (`applyTo:`) | `rules/*.md` (`paths:`) | carga por caminho sob demanda |
-> | `prompts/*.prompt.md` (`agent:`) | `skills/<n>/SKILL.md` (`context: fork` + `agent:`) | comando `/nome` roda dentro do subagente; adicionar `disable-model-invocation: true` |
-> | `skills/*/SKILL.md` | `skills/*/SKILL.md` | igual; ver opções de frontmatter em `skills/TEMPLATE.SKILL.md` |
+> | `agents/*.agent.md` (`tools: ['read','search',...]`) | `agents/*.md` (`tools: Read, Grep, Glob, ...`) | subagent; tool names translated; add "Use when…" and optional `model:` |
+> | `instructions/*.instructions.md` (`applyTo:`) | `rules/*.md` (`paths:`) | on-demand path-based loading |
+> | `prompts/*.prompt.md` (`agent:`) | `skills/<n>/SKILL.md` (`context: fork` + `agent:`) | `/name` command runs inside the subagent; add `disable-model-invocation: true` |
+> | `skills/*/SKILL.md` | `skills/*/SKILL.md` | same; see frontmatter options in `skills/TEMPLATE.SKILL.md` |
 >
-> Os templates de **prompt** abaixo permanecem como referência de estrutura de conteúdo — ao gerar o
-> artefato final para Claude Code, embale-o como `skills/<n>/SKILL.md` com o frontmatter acima.
+> The **prompt** templates below remain as content-structure references — when generating the
+> final artifact for Claude Code, package it as `skills/<n>/SKILL.md` with the frontmatter above.
 
 ## Decision Tree: Which Template Do I Use?
 
@@ -30,8 +30,8 @@ What are you creating?
 │  ├─ Designs/reviews architecture (advisory)?  → TEMPLATE.DESIGN.prompt.md
 │  ├─ Researches a technology/framework?        → TEMPLATE.RESEARCH.prompt.md
 │  ├─ Validates artifacts against standards?    → TEMPLATE.VALIDATION.prompt.md
-│  ├─ Compiles research into operational files?  → TEMPLATE.COMPILER.prompt.md
-│  ├─ Scaffolds an entire agent project?         → TEMPLATE.SCAFFOLDING.prompt.md
+│  ├─ Compiles research into operational files?  → TEMPLATE.GENERATOR.prompt.md  (formerly COMPILER)
+│  ├─ Scaffolds an entire agent project?         → *(not implemented — use templates manually)*
 │  └─ Collects context and routes to an agent?   → TEMPLATE.ENTRY-POINT.prompt.md
 │
 ├─ A SKILL (SKILL.md)
@@ -63,8 +63,7 @@ What are you creating?
 | `TEMPLATE.DESIGN.prompt.md` | Architecture design | Single design skill | Collecting context for advisory agent to produce ADRs/diagrams |
 | `TEMPLATE.RESEARCH.prompt.md` | Knowledge building | No (IS the source) | Researching a technology to build knowledge base |
 | `TEMPLATE.VALIDATION.prompt.md` | Quality assessment | Reference only | Validating artifacts against standards |
-| `TEMPLATE.COMPILER.prompt.md` | Research-to-instructions compiler | No (uses templates) | Compiling research into operational .instructions.md files via interactive interview |
-| `TEMPLATE.SCAFFOLDING.prompt.md` | Project scaffolding | No (self-contained) | Scaffolding an entire agent project (agent + instructions + prompts + skills) |
+| `TEMPLATE.GENERATOR.prompt.md` | Research-to-instructions compiler | No (uses templates) | Compiling research into operational .instructions.md files via interactive interview |
 | `TEMPLATE.ENTRY-POINT.prompt.md` | Agent routing | No (delegated) | Collecting context and routing to an agent |
 
 ### Skills (`templates/skills/`)
@@ -108,14 +107,13 @@ What are you creating?
 
 ---
 
-## Exemplos vivos (não há mais `examples/`)
+## Live Examples (no more `examples/`)
 
-Esta fábrica é **tecnologia-agnóstica** — não mantemos implementações concretas de exemplo dentro de
-`templates/`. Para ver artefatos reais como referência, olhe os **artefatos vivos** do próprio repo:
+This factory is **technology-agnostic** — we do not maintain concrete example implementations inside
+`templates/`. To see real artifacts as reference, look at the **live artifacts** in this repo:
 
-- **Subagentes** — `.claude/agents/` (ex.: `framework-researcher.md`, `architecture-auditor.md`)
-- **Skills / comandos** — `.claude/skills/` (ex.: `researching-technical-frameworks/`, `audit-architecture-scope/`)
-- **Rules** — `.claude/rules/` (ex.: `skill-frontmatter.md`)
+- **Subagents** — `.claude/agents/` (e.g., `framework-researcher.md`, `architecture-auditor.md`)
+- **Skills / commands** — `.claude/skills/` (e.g., `researching-technical-frameworks/`, `audit-architecture-scope/`)
+- **Rules** — `.claude/rules/` (e.g., `skill-frontmatter.md`)
 
-Esses são a fonte da verdade e evoluem com o repo — use-os como modelo, e os `TEMPLATE.*` acima como
-scaffolding em branco.
+These are the source of truth and evolve with the repo — use them as models, and the `TEMPLATE.*` files above as blank scaffolding.

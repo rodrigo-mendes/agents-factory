@@ -1,132 +1,132 @@
-# Início Rápido — 3 Passos
+# Quick Start — 3 Steps
 
-Pipeline mínimo de ponta-a-ponta: pesquisar tecnologia → criar skill → validar qualidade.
-Tempo estimado: 15-20 minutos. Sem pré-condições além do Claude Code aberto no projecto.
-
----
-
-## O que vai acontecer
-
-```
-Passo 1: /researching-technical-frameworks
-         → agente pede: tecnologia, versão, URL oficial, parceiros
-         → produz: StoryBeat/research_FastAPI_v0.115.md
-
-Passo 2: /skill-creator StoryBeat/research_FastAPI_v0.115.md
-         → agente carrega padrões + aplica three-tier
-         → produz: .claude/skills/fastapi-async-api/SKILL.md + blueprints/
-
-Passo 3: /skill-best-practices-validator .claude/skills/fastapi-async-api/
-         → agente verifica qualidade contra checklist oficial
-         → produz: relatório em chat com score + itens de melhoria
-```
-
-> **Version Absolutism**: substitua `FastAPI 0.115` por qualquer tecnologia e versão específica.
-> O nome da pasta e o ficheiro de pesquisa ajustam-se automaticamente.
+Minimal end-to-end pipeline: research technology → create skill → validate quality.
+Estimated time: 15-20 minutes. No prerequisites beyond Claude Code open in the project.
 
 ---
 
-## Passo 1 — Pesquisar a Tecnologia
+## What will happen
+
+```
+Step 1: /researching-technical-frameworks
+         → agent asks for: technology, version, official URL, partners
+         → produces: StoryBeat/research_FastAPI_v0.115.md
+
+Step 2: /skill-creator StoryBeat/research_FastAPI_v0.115.md
+         → agent loads patterns + applies three-tier
+         → produces: .claude/skills/fastapi-async-api/SKILL.md + blueprints/
+
+Step 3: /skill-best-practices-validator .claude/skills/fastapi-async-api/
+         → agent verifies quality against the official checklist
+         → produces: report in chat with score + improvement items
+```
+
+> **Version Absolutism**: replace `FastAPI 0.115` with any technology and specific version.
+> The folder name and the research file adjust automatically.
+
+---
+
+## Step 1 — Research the Technology
 
 ```
 /researching-technical-frameworks
 ```
 
-O agente vai pedir (interactivamente):
+The agent will ask (interactively):
 
-| Campo | Exemplo |
+| Field | Example |
 |-------|---------|
-| Tecnologia | `FastAPI` |
-| Versão | `0.115` |
-| URL oficial | `https://fastapi.tiangolo.com/` |
-| Parceiros de integração | `Pydantic v2, SQLAlchemy 2.0, pytest` |
+| Technology | `FastAPI` |
+| Version | `0.115` |
+| Official URL | `https://fastapi.tiangolo.com/` |
+| Integration partners | `Pydantic v2, SQLAlchemy 2.0, pytest` |
 
-**Output produzido**:
+**Produced output**:
 
 ```
 StoryBeat/research_FastAPI_v0.115.md
 ```
 
-Secções que o ficheiro contém:
-- `## Version_Context` — changelog e breaking changes
-- `## Mandatory_Patterns (✅)` — padrões obrigatórios com código validado
-- `## Conditional_Patterns (⚠️)` — decisões com trade-offs
-- `## Forbidden_Patterns (🚫)` — anti-padrões com alternativas
-- `## Source_Bibliography` — todas as fontes com URL + data
+Sections the file contains:
+- `## Version_Context` — changelog and breaking changes
+- `## Mandatory_Patterns (✅)` — mandatory patterns with validated code
+- `## Conditional_Patterns (⚠️)` — decisions with trade-offs
+- `## Forbidden_Patterns (🚫)` — anti-patterns with alternatives
+- `## Source_Bibliography` — all sources with URL + date
 
-> **O que fazer se o agente parar**: se o agente disser "versão não encontrada" ou "não consigo
-> confirmar a versão X", forneça o URL oficial exacto da documentação dessa versão.
+> **What to do if the agent stops**: if the agent says "version not found" or "I cannot
+> confirm version X", provide the exact official URL of the documentation for that version.
 
 ---
 
-## Passo 2 — Criar a Skill
+## Step 2 — Create the Skill
 
 ```
 /skill-creator StoryBeat/research_FastAPI_v0.115.md
 ```
 
-O agente carrega o ficheiro de pesquisa e aplica automaticamente:
-- Nome da skill: `fastapi-async-api` (derivado do nome + contexto)
-- Estrutura three-tier: Mandatory_Patterns → ✅, Conditional → ⚠️, Forbidden → 🚫
-- YAML frontmatter correto (name ≤ 64 chars, description com "Use when...")
-- Blueprints com cenários de avaliação
+The agent loads the research file and automatically applies:
+- Skill name: `fastapi-async-api` (derived from name + context)
+- Three-tier structure: Mandatory_Patterns → ✅, Conditional → ⚠️, Forbidden → 🚫
+- Correct YAML frontmatter (name ≤ 64 chars, description with "Use when...")
+- Blueprints with evaluation scenarios
 
-**Output produzido**:
+**Produced output**:
 
 ```
 .claude/skills/fastapi-async-api/
-├── SKILL.md                              ← Base de conhecimento versionada
+├── SKILL.md                              ← Versioned knowledge base
 └── blueprints/
-    └── evaluation-scenarios.md           ← 3+ cenários de uso e avaliação
+    └── evaluation-scenarios.md           ← 3+ use and evaluation scenarios
 ```
 
-Verificação rápida:
+Quick check:
 ```bash
-wc -l .claude/skills/fastapi-async-api/SKILL.md   # deve ser ≤ 500
+wc -l .claude/skills/fastapi-async-api/SKILL.md   # should be ≤ 500
 ```
 
 ---
 
-## Passo 3 — Validar a Skill
+## Step 3 — Validate the Skill
 
 ```
 /skill-best-practices-validator .claude/skills/fastapi-async-api/
 ```
 
-O agente verifica automaticamente:
+The agent verifies automatically:
 
-| Check | Critério |
+| Check | Criterion |
 |-------|----------|
 | Frontmatter `name` | ≤ 64 chars, kebab-case |
-| Frontmatter `description` | Inclui "Use when…" |
-| Seção ✅ Always Do | Presente com código executável |
-| Seção ⚠️ Ask First | Presente com tabela de trade-offs |
-| Seção 🚫 Never Do | Presente com alternativa + impacto |
-| Tamanho | SKILL.md < 500 linhas |
-| Blueprints | `evaluation-scenarios.md` existe com ≥ 3 cenários |
-| Version absolutism | Versão única declarada |
+| Frontmatter `description` | Includes "Use when…" |
+| ✅ Always Do section | Present with executable code |
+| ⚠️ Ask First section | Present with trade-off table |
+| 🚫 Never Do section | Present with alternative + impact |
+| Size | SKILL.md < 500 lines |
+| Blueprints | `evaluation-scenarios.md` exists with ≥ 3 scenarios |
+| Version absolutism | Single version declared |
 
-**Output**: relatório em chat com score por dimensão e sugestões de melhoria concretas.
-
----
-
-## Resultados Esperados
-
-Depois dos 3 passos, tem:
-
-- Uma base de conhecimento validada contra fontes oficiais, versionada e pronta para uso por agentes
-- Uma skill com guardrails three-tier que qualquer agente pode carregar em P0
-- Um relatório de qualidade confirmando que a skill segue os padrões do framework
+**Output**: report in chat with score per dimension and concrete improvement suggestions.
 
 ---
 
-## Próximos Passos
+## Expected Results
 
-| Quer... | Vá para |
+After the 3 steps, you have:
+
+- A knowledge base validated against official sources, versioned and ready for use by agents
+- A skill with three-tier guardrails that any agent can load at P0
+- A quality report confirming the skill follows the framework's standards
+
+---
+
+## Next Steps
+
+| Want to... | Go to |
 |---------|---------|
-| Usar esta skill num agente | [Criando Agentes](criando-agentes.md) |
-| Pesquisar outra tecnologia ou domínio | [Pesquisando Tecnologias](pesquisando-tecnologias.md) |
-| Ver todos os tipos de researcher | [Catálogo — Pesquisa](../capacidades/prompts-pesquisa.md) |
-| Validar o projecto inteiro | [Validando Artefatos](validando-artefatos.md) → Step 3 |
-| Ver o pipeline completo com auditoria | [Fluxo de Criação de Projeto](../fluxos/fluxo-criacao-projeto.md) |
-| Referência completa com todos os comandos | [Manual de Uso dos Agentes](../manual/README.md) |
+| Use this skill in an agent | [Creating Agents](criando-agentes.md) |
+| Research another technology or domain | [Researching Technologies](pesquisando-tecnologias.md) |
+| See all researcher types | [Catalog — Research](../capacidades/prompts-pesquisa.md) |
+| Validate the entire project | [Validating Artifacts](validando-artefatos.md) → Step 3 |
+| See the complete pipeline with audit | [Project Creation Flow](../fluxos/fluxo-criacao-projeto.md) |
+| Complete reference with all commands | [Agent Usage Manual](../manual/README.md) |

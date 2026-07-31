@@ -2,33 +2,64 @@
 name: skill-frontmatter
 paths:
   - ".claude/skills/**/SKILL.md"
-  - ".claude/agents/*.md"
-  - ".claude/rules/*.md"
-  - ".claude/templates/**/*.md"
+  - ".claude/templates/skills/*.md"
 ---
 
-# Convenções de frontmatter (fábrica de artefatos)
+# Frontmatter conventions — Skills (`.claude/skills/<n>/SKILL.md`)
 
-Ao criar ou editar skills/subagentes neste repositório, siga:
+## Required fields (all skills)
 
-## Skills (`.claude/skills/<n>/SKILL.md`)
-- Frontmatter YAML obrigatório: `name` + `description`. A `description` deve conter um gatilho
-  **"Use when…"**, ser específica e ter ≤ 1536 caracteres.
-- Campo de ferramentas é **`allowed-tools:`** (skills/commands) — **não** `tools:`.
-- Comandos de **ação deliberada** (researchers, generators, validators, auditors): adicionar
-  `context: fork`, `agent: <subagente>` e `disable-model-invocation: true` (acessíveis por `/nome`,
-  sem custo de auto-listagem). Skills de **conhecimento** ficam auto-invocáveis (sem `disable-...`).
-- **Progressive disclosure**: manter o `SKILL.md` < 500 linhas, linkando `blueprints/` sob demanda.
-  Evitar `@arquivo` (import eager) para conteúdo grande.
+| Field | Rule |
+|---|---|
+| `name` | kebab-case; must match the folder name |
+| `description` | ≤ 1536 characters; must contain a **"Use when…"** trigger |
 
-## Subagentes (`.claude/agents/<n>.md`)
-- Campo de ferramentas é **`tools:`** (subagentes) — **não** `allowed-tools:`. Least-privilege.
-- `description` com **"Use when…"** (único campo usado para delegação automática).
-- `model:` opcional — `opus`/`sonnet`/`haiku`/`fable`/`inherit` ou IDs (`claude-opus-4-8`).
-  ❌ Nunca versões antigas nem sufixos `*plan`.
+## Knowledge skills (auto-invocable)
+
+Only `name` + `description`. No `disable-model-invocation`, no `context`. Claude auto-invokes these when the trigger is matched.
+
+```yaml
+---
+name: my-knowledge-skill
+description: "Explains X patterns for Y. Use when the user asks about X in context Z."
+---
+```
+
+## Action-command skills (deliberate, via `/name`)
+
+Add four extra fields. All four are required together — omitting any one breaks the routing:
+
+| Field | Rule |
+|---|---|
+| `argument-hint` | Human-readable hint for the slash-command argument (shown in the UI); required when the skill uses `$ARGUMENTS` |
+| `context: fork` | Forks execution to a subagent |
+| `agent:` | Name of the subagent to invoke; must match a file in `.claude/agents/` without the `.md` extension |
+| `disable-model-invocation: true` | Prevents auto-listing cost; makes the skill accessible only via `/name` |
+
+```yaml
+---
+name: my-action-command
+description: "Creates X from Y. Use when authoring a new X from a research file."
+argument-hint: "Path to research file (e.g. StoryBeat/research_X_v1.md)"
+context: fork
+agent: skill-author
+disable-model-invocation: true
+---
+```
+
+## Optional field
+
+| Field | Rule |
+|---|---|
+| `allowed-tools:` | Least-privilege tool restriction. Use **`allowed-tools:`** — **not** `tools:` (that field belongs to subagents). |
+
+## Progressive disclosure
+
+Keep `SKILL.md` < 500 lines; link `blueprints/` for large content. Avoid `@file` (eager import) for large files.
 
 ## YAML
-- Valores contendo `:` **precisam de aspas** (ex.: `argument-hint: "Scope: new / review"`).
-- Nomes em kebab-case; `name` deve casar com o nome da pasta (skills) / arquivo (agents).
 
-Referência completa: [skill-creator](../skills/skill-creator/SKILL.md).
+- Values containing `:` **require quotes** (e.g. `argument-hint: "Scope: new / review"`).
+- `name` must match the folder name exactly.
+
+Full reference: [skill-creator](../skills/skill-creator/SKILL.md).

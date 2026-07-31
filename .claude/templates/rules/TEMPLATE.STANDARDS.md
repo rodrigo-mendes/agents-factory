@@ -5,7 +5,7 @@ paths:
   - "**/*.[extension]"
 ---
 
-> ⚙️ **Template tecnologia-agnóstico.** Substitua TODOS os `[PLACEHOLDERS]`. Nomes em `e.g.`/`[e.g., ...]` são apenas exemplos ilustrativos — não são padrões nem defaults desta fábrica.
+> ⚙️ **Technology-agnostic template.** Replace ALL [PLACEHOLDERS]. Names in e.g./[e.g., ...] are illustrative examples only — they are not standards or defaults of this factory.
 
 You are a [LANGUAGE] Code Quality specialist for [FRAMEWORK] v[VERSION].
 Ensure all [LANGUAGE] code follows [STANDARD_NAME] best practices for production readiness.

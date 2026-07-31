@@ -1,81 +1,81 @@
-# Guia: Pesquisando Tecnologias
+# Guide: Researching Technologies
 
-Como usar os prompts de pesquisa para construir bases de conhecimento validadas.
+How to use the research prompts to build validated knowledge bases.
 
 ---
 
-## Quando Usar
+## When to Use
 
-- Precisa aprender uma tecnologia nova para o projeto
-- Quer criar uma skill baseada em informação verificada
-- Precisa documentar padrões de uma versão específica
+- Need to learn a new technology for the project
+- Want to create a skill based on verified information
+- Need to document patterns for a specific version
 
-## Passo a Passo
+## Step by Step
 
-### 1. Escolha o researcher certo
+### 1. Choose the right researcher
 
-| Domínio | Prompt |
+| Domain | Prompt |
 |---------|--------|
 | Framework/lib (FastAPI, Redis, Spring) | `researching-technical-frameworks` |
-| Serviço cloud + Terraform | `technical-framework-researcher-terraform` |
-| Práticas Terraform (org, CI/CD, test) | `terraform-engineering-best-practices-researcher` |
-| Metodologia de arquitetura (C4, DDD) | `architecture-methodology-researcher` |
-| Framework cloud (WAF, CAF) | `cloud-architecture-researcher` |
-| Domínio de negócio (Finance, Legal) | `business-domain-researcher` |
-| Framework de requisitos (Scrum, SAFe) | `requirements-methodology-researcher` |
+| Cloud service + Terraform | `technical-framework-researcher-terraform` |
+| Terraform practices (org, CI/CD, test) | `terraform-engineering-best-practices-researcher` |
+| Architecture methodology (C4, DDD) | `architecture-methodology-researcher` |
+| Cloud framework (WAF, CAF) | `cloud-architecture-researcher` |
+| Business domain (Finance, Legal) | `business-domain-researcher` |
+| Requirements framework (Scrum, SAFe) | `requirements-methodology-researcher` |
 
-### 2. Execute o prompt
+### 2. Run the prompt
 
 ```
 /researching-technical-frameworks
 ```
 
-### 3. Forneça os inputs
+### 3. Provide the inputs
 
-O prompt pedirá:
-- **Tecnologia**: Nome exato (ex: "FastAPI")
-- **Versão**: Versão específica (ex: "0.100")
-- **Contexto**: Parceiros de integração, caso de uso
+The prompt will ask for:
+- **Technology**: Exact name (e.g., "FastAPI")
+- **Version**: Specific version (e.g., "0.100")
+- **Context**: Integration partners, use case
 
-> ⚠️ **Version Absolutism**: Sempre forneça a versão específica. "FastAPI" não é suficiente — deve ser "FastAPI v0.100".
+> ⚠️ **Version Absolutism**: Always provide the specific version. "FastAPI" is not sufficient — it must be "FastAPI v0.100".
 
-### 4. Revise o output
+### 4. Review the output
 
-O documento de pesquisa terá:
-- Padrões oficiais validados
-- Código de exemplo (de docs oficiais, não inventado)
-- Breaking changes vs versões anteriores
-- Integrações testadas
+The research document will have:
+- Validated official patterns
+- Sample code (from official docs, not fabricated)
+- Breaking changes vs previous versions
+- Tested integrations
 
-### 5. Compile em artefato operacional
+### 5. Compile into an operational artifact
 
-Após a pesquisa, transforme em skill ou instruction:
+After research, transform into skill or instruction:
 
-| Tipo de pesquisa | Compiler |
+| Research type | Compiler |
 |-----------------|----------|
-| Tecnologia genérica | `/skill-creator` |
-| Serviço cloud + Terraform | `/skill-creator` |
-| Práticas Terraform (org, CI/CD, testes) | `/terraform-instructions-compiler` |
-| Metodologia de arquitetura | `/architecture-approaches-skill-generator` |
-| Metodologia de requisitos | `/methodologies-skill-generator` |
+| Generic technology | `/skill-creator` |
+| Cloud service + Terraform | `/skill-creator` |
+| Terraform practices (org, CI/CD, tests) | `/terraform-instructions-compiler` |
+| Architecture methodology | `/architecture-approaches-skill-generator` |
+| Requirements methodology | `/methodologies-skill-generator` |
 
 ---
 
-## Dicas
+## Tips
 
-- **Não pule a compilação**: O documento de pesquisa não é o artefato final — precisa ser estruturado em three-tier para ser útil a agentes
-- **Valide após compilar**: Use `/skill-best-practices-validator` no resultado
-- **Uma versão por vez**: Se precisa de múltiplas versões, faça pesquisas separadas
+- **Don't skip compilation**: The research document is not the final artifact — it needs to be structured in three-tier to be useful to agents
+- **Validate after compiling**: Use `/skill-best-practices-validator` on the result
+- **One version at a time**: If you need multiple versions, do separate research sessions
 
-## Armadilhas Comuns
+## Common Pitfalls
 
-| Armadilha | Solução |
+| Pitfall | Solution |
 |-----------|---------|
-| Pesquisar sem versão específica | Sempre fornecer versão exata |
-| Usar output de pesquisa como skill diretamente | Passar pelo compiler primeiro |
-| Misturar informação de versões diferentes | Separar em pesquisas distintas |
-| Não validar o resultado | Executar validator após compilar |
+| Researching without a specific version | Always provide the exact version |
+| Using research output as a skill directly | Pass through the compiler first |
+| Mixing information from different versions | Separate into distinct research sessions |
+| Not validating the result | Run validator after compiling |
 
-## Fluxo Completo
+## Full Flow
 
-Ver: [Fluxo de Base de Conhecimento](../fluxos/fluxo-base-conhecimento.md)
+See: [Knowledge Base Flow](../fluxos/fluxo-base-conhecimento.md)

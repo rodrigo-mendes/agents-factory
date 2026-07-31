@@ -1,100 +1,100 @@
-# Convenções
+# Conventions
 
-Padrões e regras do Agents Factory.
+Standards and rules of the Agents Factory.
 
 ---
 
 ## Workflow P0-P5
 
-Todo agente de implementação segue estas 6 fases obrigatórias:
+Every implementation agent follows these 6 mandatory phases:
 
-| Fase | Nome | Ação | Falha = |
+| Phase | Name | Action | Failure = |
 |:----:|------|------|---------|
-| **P0** | Verify Docs | Carregar skills e instructions obrigatórias | ❌ Abortar |
-| **P1** | Analyze | Escanear código/infra existente | ❌ Abortar |
-| **P2** | Consult | Extrair padrões ✅⚠️🚫 das skills | ❌ Abortar |
-| **P3** | Propose | Propor plano e aguardar aprovação do usuário | ⏸️ Aguardar |
-| **P4** | Implement | Gerar código seguindo padrões exatos | — |
-| **P5** | Validate | Executar ferramentas (fmt, compile, lint) | 🔄 Corrigir |
+| **P0** | Verify Docs | Load mandatory skills and instructions | ❌ Abort |
+| **P1** | Analyze | Scan existing code/infrastructure | ❌ Abort |
+| **P2** | Consult | Extract ✅⚠️🚫 patterns from skills | ❌ Abort |
+| **P3** | Propose | Propose plan and await user approval | ⏸️ Wait |
+| **P4** | Implement | Generate code following exact patterns | — |
+| **P5** | Validate | Run tools (fmt, compile, lint) | 🔄 Fix |
 
-### Regras
+### Rules
 
-- **Nunca pular P0**: Sem conhecimento carregado = alucinação garantida
-- **Nunca pular P3**: Implementar sem aprovação é proibido
-- **P5 é obrigatório**: Código não validado não é entregue
-- **Advisory agents**: P4 vira "Deliver" (entrega designs, não código)
+- **Never skip P0**: Without loaded knowledge = guaranteed hallucination
+- **Never skip P3**: Implementing without approval is prohibited
+- **P5 is mandatory**: Unvalidated code is not delivered
+- **Advisory agents**: P4 becomes "Deliver" (delivers designs, not code)
 
 ---
 
 ## Three-Tier Architecture (✅⚠️🚫)
 
-Toda skill organiza guardrails em 3 camadas:
+Every skill organizes guardrails into 3 layers:
 
 ### ✅ Always Do (Tier 1)
-- **Ação**: Auto-executar sem perguntar
-- **Requisitos**: Código funcional completo, versão específica, testável
-- **Exemplo**: "Sempre usar `lifecycle { prevent_destroy = true }` em recursos stateful"
+- **Action**: Auto-execute without asking
+- **Requirements**: Complete functional code, specific version, testable
+- **Example**: "Always use `lifecycle { prevent_destroy = true }` in stateful resources"
 
 ### ⚠️ Ask First (Tier 2)
-- **Ação**: Apresentar trade-offs e aguardar decisão do usuário
-- **Requisitos**: Trade-off matrix, prós/contras, recomendação clara
-- **Exemplo**: "Module monorepo vs. multi-repo? [Prós: X, Contras: Y]. Qual prefere?"
+- **Action**: Present trade-offs and await user decision
+- **Requirements**: Trade-off matrix, pros/cons, clear recommendation
+- **Example**: "Module monorepo vs. multi-repo? [Pros: X, Cons: Y]. Which do you prefer?"
 
 ### 🚫 Never Do (Tier 3)
-- **Ação**: Bloquear automaticamente, oferecer alternativa
-- **Requisitos**: Descrição do anti-padrão, impacto, alternativa com código
-- **Exemplo**: "Nunca usar `terraform destroy` sem confirmação explícita. Ao invés: usar targeted destroy com `-target`"
+- **Action**: Automatically block, offer alternative
+- **Requirements**: Anti-pattern description, impact, alternative with code
+- **Example**: "Never use `terraform destroy` without explicit confirmation. Instead: use targeted destroy with `-target`"
 
 ---
 
 ## Version Absolutism
 
-| Regra | Descrição |
+| Rule | Description |
 |-------|-----------|
-| 1 skill = 1 versão | `provisioning-oci-functions-terraform-5.x` ≠ `provisioning-oci-functions-terraform-4.x` |
-| Nunca conflitar versões | Não misturar padrões de versões diferentes na mesma skill |
-| Versão explícita sempre | Todo código de exemplo declara versão exata |
-| Rejeitar > 12 meses | Padrões com mais de 12 meses sem validação devem ser re-pesquisados |
-| Separar pesquisas | Se precisa de 2 versões, fazer 2 pesquisas separadas |
+| 1 skill = 1 version | `provisioning-oci-functions-terraform-5.x` ≠ `provisioning-oci-functions-terraform-4.x` |
+| Never conflict versions | Do not mix patterns from different versions in the same skill |
+| Always explicit version | All sample code declares exact version |
+| Reject > 12 months | Patterns older than 12 months without validation must be re-researched |
+| Separate research | If 2 versions are needed, do 2 separate research files |
 
 ---
 
 ## Naming Conventions
 
 ### Skills
-- **Formato**: `gerund-noun-specific` (kebab-case)
-- **Exemplos**:
+- **Format**: `gerund-noun-specific` (kebab-case)
+- **Examples**:
   - ✅ `provisioning-oci-functions`
   - ✅ `researching-technical-frameworks`
   - ✅ `designing-oci-api-gateway`
   - ❌ `helper`, `utils`, `cloud-stuff`
-  - ❌ `oci-functions` (falta verbo)
+  - ❌ `oci-functions` (missing verb)
 
 ### Prompts
-- **Formato**: `noun-noun-action` ou `action-noun` (kebab-case)
-- **Exemplos**:
+- **Format**: `noun-noun-action` or `action-noun` (kebab-case)
+- **Examples**:
   - ✅ `cloud-architecture-researcher`
   - ✅ `skill-best-practices-validator`
   - ✅ `agent-router-pattern-validator`
 
 ### Agents
-- **Formato**: `domain-role` (kebab-case)
-- **Exemplos**:
+- **Format**: `domain-role` (kebab-case)
+- **Examples**:
   - ✅ `oci-terraform`
   - ✅ `oci-serverless-architect`
   - ✅ `oci-serverless-stack`
 
-### Regras gerais
-- Sempre kebab-case (minúsculas + hifens)
+### General rules
+- Always kebab-case (lowercase + hyphens)
 - Folder name = YAML `name` field
-- Máximo 64 caracteres para `name`
-- Sem XML tags no nome
+- Maximum 64 characters for `name`
+- Without XML tags in the name
 
 ---
 
 ## YAML Frontmatter
 
-### Campos obrigatórios (todos os artefatos)
+### Required fields (all artifacts)
 
 ```yaml
 ---
@@ -106,102 +106,102 @@ description: >
 ---
 ```
 
-### Campos adicionais por tipo
+### Additional fields by type
 
-**Subagentes** (`.claude/agents/`): usam o campo `tools:`
+**Sub-agents** (`.claude/agents/`): use the `tools:` field
 ```yaml
 tools: ['Read', 'Edit', 'Write', 'Bash', 'WebSearch', 'WebFetch']
 ```
 
-**Skills/Comandos** (`.claude/skills/`): usam o campo `allowed-tools:`
+**Skills/Commands** (`.claude/skills/`): use the `allowed-tools:` field
 ```yaml
 allowed-tools: ['Read', 'Edit', 'Write', 'Bash']
 ```
 
-> **Distinção importante**: `tools:` é o campo correto para subagentes; `allowed-tools:` é o campo correto para skills e comandos. Usar o campo errado faz o artefato ser ignorado silenciosamente.
+> **Important distinction**: `tools:` is the correct field for sub-agents; `allowed-tools:` is the correct field for skills and commands. Using the wrong field causes the artifact to be silently ignored.
 
-**Comandos** (entry-points):
+**Commands** (entry-points):
 ```yaml
 argument-hint: Sugestão de input para o usuário
 ```
 
-### Regras
-- `name`: ≤64 chars, `[a-z0-9-]` apenas
-- `description`: ≤1536 chars, terceira pessoa, verbo primeiro
-- Sem campos customizados não documentados
-- YAML válido (sem tabs, indentação correta)
+### Rules
+- `name`: ≤64 chars, `[a-z0-9-]` only
+- `description`: ≤1536 chars, third person, verb first
+- Without undocumented custom fields
+- Valid YAML (no tabs, correct indentation)
 
 ---
 
-## Hierarquia de Responsabilidades
+## Responsibility Hierarchy
 
 ### GitHub Copilot (L0→L4)
 
-| Camada | Artefato | Responsabilidade | Não deve conter |
+| Layer | Artifact | Responsibility | Must not contain |
 |:------:|----------|-----------------|-----------------|
-| **L0** | `.vscode/settings.json` | Config global do workspace | Lógica |
-| **L1** | `.instructions.md` | Padrões project-wide (`applyTo:`) | Código de exemplo longo |
-| **L2** | `SKILL.md` | Conhecimento de domínio | Routing / orchestration |
-| **L3** | `.agent.md` | Orquestração P0-P5 | Knowledge hardcoded |
-| **L4** | `.prompt.md` | Entry-point do usuário | Lógica de implementação |
+| **L0** | `.vscode/settings.json` | Global workspace config | Logic |
+| **L1** | `.instructions.md` | Project-wide standards (`applyTo:`) | Long sample code |
+| **L2** | `SKILL.md` | Domain knowledge | Routing / orchestration |
+| **L3** | `.agent.md` | P0-P5 orchestration | Hardcoded knowledge |
+| **L4** | `.prompt.md` | User entry-point | Implementation logic |
 
 ### Claude Code (G0→G4)
 
-| Camada | Artefato | Responsabilidade | Não deve conter |
+| Layer | Artifact | Responsibility | Must not contain |
 |:------:|----------|-----------------|-----------------|
-| **G0** | `CLAUDE.md` | Manifesto global — routing table + princípios | Lógica de domínio |
-| **G1** | `.claude/agents/*.md` | Personas de execução com P0-P5 completo | Knowledge hardcoded |
-| **G2** | `.claude/rules/*.md` | Contexto automático por scope (`paths:`) | Código extenso |
-| **G3** | `.claude/skills/*/SKILL.md` (`context: fork`) | Entry-points de utilizador — roteia para agente | Lógica de implementação |
-| **G4** | `.claude/skills/*/SKILL.md` (meta-skills) | Bases de conhecimento — carregadas pelo agente em P0 | Routing/orchestration |
+| **G0** | `CLAUDE.md` | Global manifest — routing table + principles | Domain logic |
+| **G1** | `.claude/agents/*.md` | Execution personas with full P0-P5 | Hardcoded knowledge |
+| **G2** | `.claude/rules/*.md` | Automatic context by scope (`paths:`) | Extensive code |
+| **G3** | `.claude/skills/*/SKILL.md` (`context: fork`) | User entry-points — routes to agent | Implementation logic |
+| **G4** | `.claude/skills/*/SKILL.md` (meta-skills) | Knowledge bases — loaded by the agent in P0 | Routing/orchestration |
 
-**Princípio**: Cada camada delega para baixo, nunca para cima.
+**Principle**: Each layer delegates downward, never upward.
 
 ---
 
 ## Blueprints
 
-Toda skill pode ter um diretório `blueprints/` com conteúdo auxiliar:
+Every skill can have a `blueprints/` directory with auxiliary content:
 
 ```
 skill-name/
 ├── SKILL.md
 └── blueprints/
-    ├── always-do-patterns.md    ← Padrões ✅ expandidos com código completo
-    └── never-do-patterns.md     ← Anti-padrões 🚫 com alternativas detalhadas
+    ├── always-do-patterns.md    ← ✅ expanded patterns with full code
+    └── never-do-patterns.md     ← 🚫 anti-patterns with detailed alternatives
 ```
 
-- Blueprints são carregados por agentes durante P2 (Consult)
-- Servem para manter a SKILL.md concisa enquanto oferece detalhe quando necessário
-- Código nos blueprints deve ser funcional e testável
+- Blueprints are loaded by agents during P2 (Consult)
+- They serve to keep SKILL.md concise while offering detail when necessary
+- Code in blueprints must be functional and testable
 
 ---
 
 ## Agent Router Pattern
 
-Padrão de separação de concerns para projetos de agente.
+Separation of concerns pattern for agent projects.
 
-### Cadeia GitHub Copilot
+### GitHub Copilot chain
 
 ```
 .prompt.md (entry-point — L4)
-  → .agent.md (orquestração P0-P5 — L3)
-    → SKILL.md (conhecimento de domínio — L2)
-    → .instructions.md (configuração project-wide — L1)
+  → .agent.md (P0-P5 orchestration — L3)
+    → SKILL.md (domain knowledge — L2)
+    → .instructions.md (project-wide configuration — L1)
 ```
 
-### Cadeia Claude Code
+### Claude Code chain
 
 ```
 /comando-skill (context: fork — G3)
   → subagente .claude/agents/*.md (P0-P5 — G1)
     → meta-skill `researching-technical-frameworks` + padrões de autoria integrados ao `skill-creator` (P0 — G4)
     → rules .claude/rules/*.md (injectadas automaticamente por paths: — G2)
-    → output (código / relatório / SKILL.md)
+    → output (code / report / SKILL.md)
 ```
 
-**Regras (ambos os sistemas)**:
-- Entry-point nunca implementa — só coleta contexto e roteia
-- Agente nunca contém knowledge hardcoded — sempre carrega de skills/meta-skills
-- Skill nunca faz routing — só fornece padrões three-tier
-- Rules/Instructions nunca contêm código extenso — só configuração de escopo
+**Rules (both systems)**:
+- Entry-point never implements — only collects context and routes
+- Agent never contains hardcoded knowledge — always loads from skills/meta-skills
+- Skill never does routing — only provides three-tier patterns
+- Rules/Instructions never contain extensive code — only scope configuration

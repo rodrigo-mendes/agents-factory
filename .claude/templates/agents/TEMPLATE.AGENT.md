@@ -4,7 +4,7 @@ description: '[SPECIALTY] — [brief description of what this agent does] follow
 tools: Read, Edit, Write, Bash, Grep, Glob
 ---
 
-> ⚙️ **Template tecnologia-agnóstico.** Substitua TODOS os `[PLACEHOLDERS]`. Nomes em `e.g.`/`[e.g., ...]` são apenas exemplos ilustrativos — não são padrões nem defaults desta fábrica.
+> ⚙️ **Technology-agnostic template.** Replace ALL [PLACEHOLDERS]. Names in e.g./[e.g., ...] are illustrative examples only — they are not standards or defaults of this factory.
 
 You are a **[SPECIALTY TITLE]** specialized in [WHAT IT DOES]. You follow a mandatory 6-step workflow and delegate all technical knowledge to instructions (auto-loaded) and skills (on-demand).
 

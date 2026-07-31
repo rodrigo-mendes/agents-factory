@@ -1,71 +1,71 @@
-# Prompts de Framework (Ciclo de Vida)
+# Framework Prompts (Lifecycle)
 
-1 prompt dedicado a validar projetos de agente.
+1 prompt dedicated to validating agent projects.
 
 ---
 
-## Visão Geral
+## Overview
 
-| Prompt | Propósito | Output |
+| Prompt | Purpose | Output |
 |--------|-----------|--------|
-| `agent-router-pattern-validator` | Validar conformidade com Agent Router Pattern | Relatório de compliance |
+| `agent-router-pattern-validator` | Validate compliance with Agent Router Pattern | Compliance report |
 
 ---
 
 ## 1. agent-router-pattern-validator
 
-> **Arquivo**: `.claude/skills/agent-router-pattern-validator/SKILL.md`
+> **File**: `.claude/skills/agent-router-pattern-validator/SKILL.md`
 
-### Descrição
-Analisa qualquer projeto de agente Claude Code e gera relatório de conformidade com o Agent Router Pattern, identificando desvios e propondo melhorias.
+### Description
+Analyzes any Claude Code agent project and generates a compliance report with the Agent Router Pattern, identifying deviations and proposing improvements.
 
-### Invocação
+### Invocation
 ```
 /agent-router-pattern-validator
 ```
 
-### O que Verifica
+### What It Verifies
 
-| Aspecto | Verificação |
+| Aspect | Check |
 |---------|-------------|
-| **Estrutura** | Todos os artefatos esperados presentes? |
-| **Routing** | Prompts apontam para agents corretos? |
-| **Skills Loading** | Agents referenciam skills que existem? |
-| **Instructions Scope** | Instructions com applyTo adequado? |
-| **Naming** | Kebab-case, gerund-form, coerência? |
-| **YAML** | Frontmatter válido em todos os arquivos? |
-| **Completude** | Nenhum dead-end ou componente órfão? |
+| **Structure** | Are all expected artifacts present? |
+| **Routing** | Do prompts point to the correct agents? |
+| **Skills Loading** | Do agents reference skills that exist? |
+| **Instructions Scope** | Instructions with appropriate applyTo? |
+| **Naming** | Kebab-case, gerund-form, consistency? |
+| **YAML** | Valid frontmatter in all files? |
+| **Completeness** | No dead-ends or orphan components? |
 
-### Input Esperado
-- Caminho para diretório do projeto de agente (ou raiz do repo)
+### Expected Input
+- Path to agent project directory (or repo root)
 
-### Output Produzido
-- Relatório markdown com:
-  - Score de conformidade (%)
-  - Desvios categorizados (Critical / Warning / Info)
-  - Sugestões de correção para cada desvio
-  - Diagrama de routing atual vs. ideal
+### Produced Output
+- Markdown report with:
+  - Compliance score (%)
+  - Categorized deviations (Critical / Warning / Info)
+  - Fix suggestions for each deviation
+  - Current vs. ideal routing diagram
 
-### Tools Necessários
+### Required Tools
 - `Read`, `Grep`
 
-### Quando Usar
-- Após criação de novo projeto de agente
-- Após mudanças estruturais no projeto
-- Como step de validação no [Fluxo de Criação de Projeto](../fluxos/fluxo-criacao-projeto.md)
+### When to Use
+- After creating a new agent project
+- After structural changes to the project
+- As a validation step in the [Project Creation Flow](../fluxos/fluxo-criacao-projeto.md)
 
 ---
 
-## Fluxo Combinado
+## Combined Flow
 
 ```mermaid
 graph LR
-    A[researching-technical-frameworks] -->|pesquisa| B[skill-creator]
-    B -->|skill gerada| C[agent-router-pattern-validator]
-    C -->|conformidade OK| D[audit-architecture-consensus]
-    D -->|auditoria OK| E[✅ Produção]
-    C -->|desvios| FIX[Corrigir]
+    A[researching-technical-frameworks] -->|research| B[skill-creator]
+    B -->|generated skill| C[agent-router-pattern-validator]
+    C -->|compliance OK| D[audit-architecture-consensus]
+    D -->|audit OK| E[✅ Production]
+    C -->|deviations| FIX[Fix]
     FIX --> C
 ```
 
-Ver: [Fluxo de Criação de Projeto](../fluxos/fluxo-criacao-projeto.md) para detalhes completos.
+See: [Project Creation Flow](../fluxos/fluxo-criacao-projeto.md) for full details.

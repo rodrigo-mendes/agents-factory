@@ -240,13 +240,13 @@ Source: [Official security/compliance documentation URL]
 
 ## Research Scope §3–10 — Patterns, Security, Networking & Reference
 
-Cloud-native design, segurança, operações, migração, networking, landing zones, service equivalence map e diferenciais por provider (AWS/GCP/Azure/OCI). Detalhes em [Cloud Patterns & Reference](./blueprints/research-scope-patterns.md).
+Cloud-native design, security, operations, migration, networking, landing zones, service equivalence map, and per-provider differentiators (AWS/GCP/Azure/OCI). Details in [Cloud Patterns & Reference](./blueprints/research-scope-patterns.md).
 
 ---
 
 # Output Format
 
-Template de saída (Metadata, Executive Summary, Glossary, Architecture Guardrails, design patterns, reference architectures, service map, differentiators, scenario coverage). Estrutura completa em [Output Template](./blueprints/output-format.md).
+Output template (Metadata, Executive Summary, Glossary, Architecture Guardrails, design patterns, reference architectures, service map, differentiators, scenario coverage). Full structure in [Output Template](./blueprints/output-format.md).
 
 ---
 

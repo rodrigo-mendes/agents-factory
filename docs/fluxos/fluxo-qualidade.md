@@ -1,149 +1,149 @@
-# Fluxo: Qualidade
+# Flow: Quality
 
-Pipeline de validação completa para garantir qualidade de artefatos e projetos.
+Complete validation pipeline to ensure artifact and project quality.
 
 ---
 
-## Diagrama
+## Diagram
 
 ```mermaid
 flowchart TD
-    START([Artefato/Projeto a validar]) --> S1[Step 1: copilot-compatibility-review<br/>Compatibilidade técnica]
+    START([Artifact/Project to validate]) --> S1[Step 1: copilot-compatibility-review<br/>Technical compatibility]
     
-    S1 -->|❌ incompatível| FIX1[Corrigir YAML/frontmatter]
+    S1 -->|❌ incompatible| FIX1[Fix YAML/frontmatter]
     FIX1 --> S1
     
-    S1 -->|✅ compatível| S2{Tipo de artefato?}
+    S1 -->|✅ compatible| S2{Artifact type?}
     
     S2 -->|.instructions.md| S2A[Step 2a: instructions-best-practices-validator]
     S2 -->|SKILL.md| S2B[Step 2b: skill-best-practices-validator]
-    S2 -->|Ambos| S2C[Executar 2a + 2b]
+    S2 -->|Both| S2C[Run 2a + 2b]
     
     S2A --> S3
     S2B --> S3
     S2C --> S3
     
-    S3[Step 3: project-analysis-validator<br/>Qualidade holística] -->|issues| FIX3[Melhorar]
+    S3[Step 3: project-analysis-validator<br/>Holistic quality] -->|issues| FIX3[Improve]
     FIX3 --> S3
     
-    S3 -->|✅ OK| S4{Auditoria<br/>necessária?}
+    S3 -->|✅ OK| S4{Audit<br/>required?}
     
-    S4 -->|Sim — alvo .claude/| S5CC[Step 4: audit-cc-architecture-consensus<br/>Auditoria 3 modelos CC]
-    S4 -->|Sim — alvo .github/| S5CP[Step 4: audit-architecture-consensus<br/>Auditoria 3 modelos Copilot]
-    S4 -->|Não - check rotineiro| DONE([✅ Qualidade OK])
+    S4 -->|Yes — target .claude/| S5CC[Step 4: audit-cc-architecture-consensus<br/>3-model CC Audit]
+    S4 -->|Yes — target .github/| S5CP[Step 4: audit-architecture-consensus<br/>3-model Copilot Audit]
+    S4 -->|No - routine check| DONE([✅ Quality OK])
     
-    S5CC -->|issues| FIX5[Remediar]
+    S5CC -->|issues| FIX5[Remediate]
     S5CP -->|issues| FIX5
     FIX5 --> S5CC
     
-    S5CC -->|✅ aprovado| DONE
-    S5CP -->|✅ aprovado| DONE
+    S5CC -->|✅ approved| DONE
+    S5CP -->|✅ approved| DONE
 ```
 
 ---
 
-## Etapas Detalhadas
+## Detailed Steps
 
-### Step 1: Compatibilidade Técnica
+### Step 1: Technical Compatibility
 
 **Prompt**: `/copilot-compatibility-review`
 
-**O que verifica**:
-- YAML frontmatter válido
-- Campos dentro dos limites (name ≤64, description ≤1024)
-- Tools declarados corretamente
-- applyTo com globs válidos
+**What it checks**:
+- Valid YAML frontmatter
+- Fields within limits (name ≤64, description ≤1024)
+- Tools declared correctly
+- applyTo with valid globs
 
-**Por que primeiro**: Se o YAML está malformado, o Copilot ignora o arquivo silenciosamente. Nada mais importa se isso falhar.
+**Why first**: If the YAML is malformed, Copilot silently ignores the file. Nothing else matters if this fails.
 
 ---
 
-### Step 2: Qualidade de Conteúdo
+### Step 2: Content Quality
 
 #### 2a: Instructions
 **Prompt**: `/instructions-best-practices-validator`
 
-**O que verifica**:
-- Clareza e concisão
-- Escopo adequado
-- Sem contradições
-- Padrões de naming
+**What it checks**:
+- Clarity and conciseness
+- Adequate scope
+- No contradictions
+- Naming patterns
 
 #### 2b: Skills
 **Prompt**: `/skill-best-practices-validator`
 
-**O que verifica**:
-- Three-tier completo (✅⚠️🚫)
-- Código em todos os ✅
-- Alternativas em todos os 🚫
-- Version absolutism
-- Blueprints presentes
+**What it checks**:
+- Complete Three-Tier (✅⚠️🚫)
+- Code in all ✅
+- Alternatives in all 🚫
+- Version Absolutism
+- Blueprints present
 
 ---
 
-### Step 3: Qualidade de Projeto
+### Step 3: Project Quality
 
 **Prompt**: `/project-analysis-validator`
 
-**O que verifica**:
-- Consistência entre artefatos
-- Referências íntegras (nada aponta para inexistente)
-- Cobertura de domínio
-- Sem componentes órfãos
+**What it checks**:
+- Consistency between artifacts
+- Intact references (nothing points to non-existent)
+- Domain coverage
+- No orphan components
 
 ---
 
-### Step 4 (opcional): Auditoria Arquitetural
+### Step 4 (optional): Architectural Audit
 
-**Prompt** — escolha pelo runtime alvo:
+**Prompt** — choose by target runtime:
 
-| Alvo | Comando |
+| Target | Command |
 |------|---------|
-| Projeto Claude Code (`.claude/`) | `/audit-cc-architecture-consensus` |
-| Projeto GitHub Copilot (`.github/`) | `/audit-architecture-consensus` |
+| Claude Code project (`.claude/`) | `/audit-cc-architecture-consensus` |
+| GitHub Copilot project (`.github/`) | `/audit-architecture-consensus` |
 
-**O que verifica**:
-- Hierarquia de responsabilidades — Modelo A (G0→G4 para CC; L0→L4 para Copilot)
-- Cadeias de invocação — Modelo B (reachability, dead-ends, orphans)
-- Mecânicas do engine — Modelo C (paths:/applyTo, context budget, frontmatter)
-- Consenso priorizado: 3/3 🔴 Must-Fix, 2/3 🟡 Should-Fix, 1/3 🟢 Consider
+**What it checks**:
+- Responsibility hierarchy — Model A (G0→G4 for CC; L0→L4 for Copilot)
+- Invocation chains — Model B (reachability, dead-ends, orphans)
+- Engine mechanics — Model C (paths:/applyTo, context budget, frontmatter)
+- Prioritized consensus: 3/3 🔴 Must-Fix, 2/3 🟡 Should-Fix, 1/3 🟢 Consider
 
-**Quando incluir Step 4**:
-- Antes de release/produção
-- Após mudanças estruturais significativas
-- Quando algo não funciona e Steps 1-3 não acharam
+**When to include Step 4**:
+- Before release/production
+- After significant structural changes
+- When something is not working and Steps 1-3 did not find it
 
 ---
 
-## Níveis de Validação
+## Validation Levels
 
-| Cenário | Steps | Tempo estimado |
+| Scenario | Steps | Estimated time |
 |---------|:-----:|:-:|
-| Quick check (editei 1 arquivo) | 1 | ~1 min |
-| Nova skill criada | 1-2b | ~3 min |
-| Novas instructions | 1-2a | ~3 min |
-| Projeto pós-bootstrap | 1-3 | ~5 min |
-| Pre-release completo | 1-4 | ~10 min |
+| Quick check (edited 1 file) | 1 | ~1 min |
+| New skill created | 1-2b | ~3 min |
+| New instructions | 1-2a | ~3 min |
+| Post-bootstrap project | 1-3 | ~5 min |
+| Full pre-release | 1-4 | ~10 min |
 
 ---
 
-## Capacidades Envolvidas
+## Capabilities Involved
 
-| Step | Capacidade | Foco |
+| Step | Capability | Focus |
 |:----:|-----------|------|
-| 1 | `copilot-compatibility-review` | Técnico (YAML, limites) |
-| 2a | `instructions-best-practices-validator` | Conteúdo (instructions) |
-| 2b | `skill-best-practices-validator` | Conteúdo (skills) |
-| 3 | `project-analysis-validator` | Holístico (projeto) |
-| 4 | `audit-cc-architecture-consensus` (CC) / `audit-architecture-consensus` (Copilot) | Arquitetural (3 modelos) |
+| 1 | `copilot-compatibility-review` | Technical (YAML, limits) |
+| 2a | `instructions-best-practices-validator` | Content (instructions) |
+| 2b | `skill-best-practices-validator` | Content (skills) |
+| 3 | `project-analysis-validator` | Holistic (project) |
+| 4 | `audit-cc-architecture-consensus` (CC) / `audit-architecture-consensus` (Copilot) | Architectural (3 models) |
 
 ---
 
-## Checklist Rápido
+## Quick Checklist
 
-Antes de commit, pergunte:
+Before committing, ask:
 
-- [ ] YAML válido? (Step 1)
-- [ ] Conteúdo segue best practices? (Step 2)
-- [ ] Projeto é consistente? (Step 3)
-- [ ] Arquitetura é sólida? (Step 4 — se aplicável)
+- [ ] Valid YAML? (Step 1)
+- [ ] Content follows best practices? (Step 2)
+- [ ] Project is consistent? (Step 3)
+- [ ] Architecture is solid? (Step 4 — if applicable)
