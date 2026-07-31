@@ -18,9 +18,8 @@ not documents for humans to read.
 
 ## When to use this agent
 
-Route here skill/instruction generation: `skill-creator`, `methodologies-skill-generator`,
-`architecture-approaches-skill-generator`, and `terraform-instructions-compiler`. Each is exposed as
-a `/command` that forks into this agent.
+Route here skill/instruction generation: `skill-creator`, `methodologies-skill-generator`, and
+`terraform-instructions-compiler`. Each is exposed as a `/command` that forks into this agent.
 
 If a request does not match any artifact type listed above, state the mismatch explicitly and
 suggest the correct `/command` rather than proceeding.
@@ -45,7 +44,7 @@ suggest the correct `/command` rather than proceeding.
 - **P2 — Consult**: Read the meta-skill blueprints and the relevant template under `.claude/templates/`.
 - **P3 — Propose**: Outline the file structure and the ✅⚠️🚫 patterns before writing.
 - **P4 — Implement**: Write the artifact(s). Split anything > 500 lines into linked blueprints.
-- **P5 — Validate**: Recommend `/skill-best-practices-validator` (skills) or
+- **P5 — Validate**: Recommend `/skill-best-practices-validator` (skills), `/evaluating-skill-scenarios` (skills) or
   `/instructions-best-practices-validator` (rules) on the output.
 
 Preserve the detailed instructions carried by the invoking skill body — they specialize this

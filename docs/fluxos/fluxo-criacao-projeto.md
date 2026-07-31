@@ -1,131 +1,131 @@
-# Fluxo: Criação de Projeto
+# Flow: Project Creation
 
-Criar um projeto de agente production-ready do zero, desde o bootstrap até auditoria completa.
+Create a production-ready agent project from scratch, from bootstrap to full audit.
 
 ---
 
-## Diagrama
+## Diagram
 
 ```mermaid
 flowchart TD
-    START([Início]) --> RESEARCH[researching-technical-frameworks<br/>Pesquisar tecnologia]
-    RESEARCH --> SKILL[skill-creator<br/>Gerar SKILL.md]
-    SKILL --> VALID[agent-router-pattern-validator<br/>Verificar estrutura]
+    START([Start]) --> RESEARCH[researching-technical-frameworks<br/>Research technology]
+    RESEARCH --> SKILL[skill-creator<br/>Generate SKILL.md]
+    SKILL --> VALID[agent-router-pattern-validator<br/>Verify structure]
     
-    VALID -->|desvios| FIX[Corrigir desvios]
+    VALID -->|deviations| FIX[Fix deviations]
     FIX --> VALID
     
-    VALID -->|conforme| AUDIT[audit-cc-architecture-consensus<br/>Auditoria 3 modelos — alvo .claude/]
+    VALID -->|compliant| AUDIT[audit-cc-architecture-consensus<br/>3-model Audit — target .claude/]
     
-    AUDIT -->|issues| FIX2[Remediar]
+    AUDIT -->|issues| FIX2[Remediate]
     FIX2 --> AUDIT
     
-    AUDIT -->|✅ aprovado| PROD([✅ Production Ready])
+    AUDIT -->|✅ approved| PROD([✅ Production Ready])
 ```
 
 ---
 
-## Etapas Detalhadas
+## Detailed Steps
 
-### Etapa 1: Pesquisa de Tecnologia
+### Step 1: Technology Research
 
 **Prompt**: `/researching-technical-frameworks <tech>`
 
-**O que acontece**:
-- Pesquisa a tecnologia/framework com fontes oficiais
-- Produz documento de pesquisa source-dated
+**What happens**:
+- Researches the technology/framework with official sources
+- Produces a source-dated research document
 
-**Input**: Nome da tecnologia e versão alvo
-**Output**: Documento de pesquisa validado
+**Input**: Technology name and target version
+**Output**: Validated research document
 
-**Duração típica**: 5-10 minutos
+**Typical duration**: 5-10 minutes
 
 ---
 
-### Etapa 2: Criação de Skill
+### Step 2: Skill Creation
 
 **Prompt**: `/skill-creator`
 
-**O que acontece**:
-- Transforma o documento de pesquisa em SKILL.md operacional
-- Aplica padrões three-tier (✅⚠️🚫) e version absolutism
+**What happens**:
+- Transforms the research document into an operational SKILL.md
+- Applies Three-Tier patterns (✅⚠️🚫) and Version Absolutism
 
-**Input**: Documento de pesquisa da Etapa 1
-**Output**: SKILL.md pronta para uso por agentes
+**Input**: Research document from Step 1
+**Output**: SKILL.md ready for use by agents
 
-**Duração típica**: 3-5 minutos
+**Typical duration**: 3-5 minutes
 
 ---
 
-### Etapa 3: Validação de Estrutura
+### Step 3: Structure Validation
 
 **Prompt**: `/agent-router-pattern-validator`
 
-**O que acontece**:
-- Verifica se Agent Router Pattern está correto
-- Identifica referências quebradas, naming errado, dead-ends
+**What happens**:
+- Verifies that the Agent Router Pattern is correct
+- Identifies broken references, incorrect naming, dead-ends
 
-**Input**: Diretório do projeto gerado
-**Output**: Relatório com score + desvios
+**Input**: Generated project directory
+**Output**: Report with score + deviations
 
-**Se houver desvios**:
-1. Ler relatório
-2. Corrigir cada desvio listado
-3. Re-executar validator
-4. Repetir até score satisfatório
-
----
-
-### Etapa 4: Auditoria Multi-Modelo
-
-**Prompt**: `/audit-cc-architecture-consensus` (alvo `.claude/`)
-
-> Para projetos GitHub Copilot (`.github/`), usar `/audit-architecture-consensus`.
-
-**O que acontece**:
-- Modelo A verifica hierarquia de responsabilidades (G0→G4: CLAUDE.md → agentes → rules → skills)
-- Modelo B verifica cadeias de invocação (reachability, dead-ends, orphans)
-- Modelo C verifica mecânicas do Claude Code engine (paths:, disable-model-invocation, context: fork)
-- Orquestrador compara e prioriza por consenso
-
-**Input**: Nome do agente ou path
-**Output**: Relatório priorizado com remediações
-
-**Se houver issues**:
-1. Focar em issues 3/3 (todos os modelos concordam) primeiro
-2. Depois 2/3
-3. Issues 1/3 podem ser aceitas como risco
+**If there are deviations**:
+1. Read the report
+2. Fix each listed deviation
+3. Re-run the validator
+4. Repeat until score is satisfactory
 
 ---
 
-## Capacidades Envolvidas
+### Step 4: Multi-Model Audit
 
-| Etapa | Capacidade | Tipo |
+**Prompt**: `/audit-cc-architecture-consensus` (target `.claude/`)
+
+> For GitHub Copilot projects (`.github/`), use `/audit-architecture-consensus`.
+
+**What happens**:
+- Model A verifies the responsibility hierarchy (G0→G4: CLAUDE.md → agents → rules → skills)
+- Model B verifies invocation chains (reachability, dead-ends, orphans)
+- Model C verifies Claude Code engine mechanics (paths:, disable-model-invocation, context: fork)
+- Orchestrator compares and prioritizes by consensus
+
+**Input**: Agent name or path
+**Output**: Prioritized report with remediations
+
+**If there are issues**:
+1. Focus on 3/3 issues (all models agree) first
+2. Then 2/3
+3. 1/3 issues may be accepted as risk
+
+---
+
+## Capabilities Involved
+
+| Step | Capability | Type |
 |-------|-----------|------|
-| 1 | `researching-technical-frameworks` | Pesquisa |
-| 2 | `skill-creator` | Compilação |
+| 1 | `researching-technical-frameworks` | Research |
+| 2 | `skill-creator` | Compilation |
 | 3 | `agent-router-pattern-validator` | Framework |
-| 4 | `audit-cc-architecture-scope` | Auditoria CC |
-| 4 | `audit-cc-architecture-flow` | Auditoria CC |
-| 4 | `audit-cc-architecture-engine` | Auditoria CC |
-| 4 | `audit-cc-architecture-consensus` | Auditoria CC |
+| 4 | `audit-cc-architecture-scope` | CC Audit |
+| 4 | `audit-cc-architecture-flow` | CC Audit |
+| 4 | `audit-cc-architecture-engine` | CC Audit |
+| 4 | `audit-cc-architecture-consensus` | CC Audit |
 
 ---
 
-## Pré-requisitos
+## Prerequisites
 
-- Saber qual tecnologia/domínio o agente vai cobrir
-- Ter acesso ao `/researching-technical-frameworks` para pesquisa inicial
+- Know which technology/domain the agent will cover
+- Have access to `/researching-technical-frameworks` for initial research
 
-## Resultado Final
+## Final Result
 
-Projeto com:
-- ✅ Estrutura conforme Agent Router Pattern
-- ✅ Hierarquia de responsabilidades correta
-- ✅ Cadeias de invocação completas
-- ✅ Mecânicas Claude Code engine conformes
+Project with:
+- ✅ Structure compliant with Agent Router Pattern
+- ✅ Correct responsibility hierarchy
+- ✅ Complete invocation chains
+- ✅ Compliant Claude Code engine mechanics
 
-## Próximos Passos
+## Next Steps
 
-Após criar o projeto, as skills geradas são placeholders. Para preenchê-las:
-→ [Fluxo de Base de Conhecimento](fluxo-base-conhecimento.md)
+After creating the project, the generated skills are placeholders. To populate them:
+→ [Knowledge Base Flow](fluxo-base-conhecimento.md)

@@ -1,81 +1,81 @@
-# Como Usar — Onboarding
+# How to Use — Onboarding
 
-## Pré-requisitos
+## Prerequisites
 
-| Requisito | Mínimo |
+| Requirement | Minimum |
 |-----------|--------|
 | Claude Code CLI | [claude.ai/code](https://claude.ai/code) |
-| Git | Qualquer versão recente |
+| Git | Any recent version |
 
 ## Setup
 
-1. Clone ou adicione este repositório ao seu workspace:
+1. Clone or add this repository to your workspace:
    ```bash
    git clone <repo-url> agents-factory
    ```
 
-2. Abra com Claude Code:
+2. Open with Claude Code:
    ```bash
    claude agents-factory
    ```
 
-3. Os comandos ficam disponíveis automaticamente via `/nome-do-comando`
+3. Commands become available automatically via `/command-name`
 
-> **Nota**: Os comandos em `.claude/skills/` são carregados automaticamente pelo Claude Code quando o projeto está aberto.
+> **Note**: Commands in `.claude/skills/` are automatically loaded by Claude Code when the project is open.
 
-## Início Rápido (5 minutos)
+## Quick Start (5 minutes)
 
-> Quer ver o pipeline completo numa única leitura? → [Início Rápido](inicio-rapido.md)
+> Want to see the complete pipeline in a single read? → [Quick Start](inicio-rapido.md)
 
-## Primeiro Uso
+## First Use
 
-Escolha um dos cenários abaixo baseado no seu objetivo:
+Choose one of the scenarios below based on your goal:
 
-### "Quero pesquisar uma tecnologia"
-→ [Pesquisando Tecnologias](pesquisando-tecnologias.md)
+### "I want to research a technology"
+→ [Researching Technologies](pesquisando-tecnologias.md)
 
 ```
 /researching-technical-frameworks
 ```
 
-### "Quero criar uma skill"
-→ [Criando Skills](criando-skills.md)
+### "I want to create a skill"
+→ [Creating Skills](criando-skills.md)
 
 ```
 /skill-creator StoryBeat/research_<Tech>_v<Version>.md
 ```
 
-### "Quero criar um agente completo"
-→ [Criando Agentes](criando-agentes.md)
+### "I want to create a full agent"
+→ [Creating Agents](criando-agentes.md)
 
-Não há um único comando — o processo envolve pesquisar tecnologias, criar skills e depois
-criar manualmente os ficheiros de definição do agente a partir dos templates em
+There is no single command — the process involves researching technologies, creating skills, and then
+manually creating the agent definition files from the templates in
 `.claude/templates/`.
 
-### "Quero validar o que já tenho"
-→ [Validando Artefatos](validando-artefatos.md)
+### "I want to validate what I already have"
+→ [Validating Artifacts](validando-artefatos.md)
 
 ```
 /project-analysis-validator .claude/
 ```
 
-## Conceitos Essenciais
+## Essential Concepts
 
-Antes de mergulhar nos guias, entenda estes 4 conceitos:
+Before diving into the guides, understand these 4 concepts:
 
-| Conceito | Resumo | Detalhe |
+| Concept | Summary | Detail |
 |----------|--------|---------|
-| **Three-Tier** | ✅ Auto-executar / ⚠️ Perguntar / 🚫 Nunca fazer | [Convenções](../referencia/convencoes.md#three-tier) |
-| **P0-P5** | 6 fases obrigatórias de execução de agente | [Convenções](../referencia/convencoes.md#workflow-p0-p5) |
-| **Version Absolutism** | 1 skill = 1 versão específica | [Convenções](../referencia/convencoes.md#version-absolutism) |
-| **Agent Router Pattern** | Prompt → Agent → Skills (separação de concerns) | [Visão Geral](../visao-geral.md) |
+| **Three-Tier** | ✅ Self-execute / ⚠️ Ask first / 🚫 Never do | [Conventions](../referencia/convencoes.md#three-tier) |
+| **P0-P5** | 6 mandatory agent execution phases | [Conventions](../referencia/convencoes.md#workflow-p0-p5) |
+| **Version Absolutism** | 1 skill = 1 specific version | [Conventions](../referencia/convencoes.md#version-absolutism) |
+| **Agent Router Pattern** | Prompt → Agent → Skills (separation of concerns) | [Overview](../visao-geral.md) |
 
-## Próximos Passos
+## Next Steps
 
-| Se você quer... | Leia |
+| If you want to... | Read |
 |-----------------|------|
-| Entender a arquitetura | [Visão Geral](../visao-geral.md) |
-| Ver todas as capacidades | [Catálogo](../capacidades/README.md) |
-| Exemplos de chamadas para cada comando | [Manual de Uso dos Agentes](../manual/README.md) |
-| Entender fluxos combinados | [Fluxos](../fluxos/README.md) |
-| Referência de convenções e termos | [Convenções](../referencia/convencoes.md) · [Glossário](../referencia/glossario.md) |
+| Understand the architecture | [Overview](../visao-geral.md) |
+| See all capabilities | [Catalog](../capacidades/README.md) |
+| Invocation examples for each command | [Agent Usage Manual](../manual/README.md) |
+| Understand combined flows | [Flows](../fluxos/README.md) |
+| Reference for conventions and terms | [Conventions](../referencia/convencoes.md) · [Glossary](../referencia/glossario.md) |

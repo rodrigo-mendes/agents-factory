@@ -3,7 +3,7 @@ name: [verbing-tech-task]
 description: "[Action verb] [what] with [Tech] v[X.Y]+. Use when [trigger context]."
 ---
 
-> ⚙️ **Template tecnologia-agnóstico.** Substitua TODOS os `[PLACEHOLDERS]`. Nomes em `e.g.`/`[e.g., ...]` são apenas exemplos ilustrativos — não são padrões nem defaults desta fábrica.
+> ⚙️ **Technology-agnostic template.** Replace ALL `[PLACEHOLDERS]`. Names in `e.g.`/`[e.g., ...]` are illustrative examples only — they are not standards or defaults of this factory.
 
 ## Function
 Specialist in [SPECIALTY] for [TECHNOLOGY/FRAMEWORK] v[VERSION]
@@ -189,18 +189,18 @@ Pattern counts should be driven by domain needs, not template minimums:
 
 ---
 
-## Claude Code — opções de frontmatter
+## Claude Code — frontmatter options
 
-Skills no Claude Code aceitam campos além de `name`/`description`. Escolha conforme o tipo:
+Skills in Claude Code accept fields beyond `name`/`description`. Choose based on type:
 
-| Campo | Quando usar |
+| Field | When to use |
 |---|---|
-| `allowed-tools:` | Restringir as ferramentas da skill (least-privilege). **Não** use `tools:` (isso é de subagentes). |
-| `argument-hint: "..."` | A skill recebe argumento(s) via `/nome <arg>` (acessível no corpo como `$ARGUMENTS`/`$1`). Cite valores com `:`. |
-| `context: fork` | Rodar a skill num subagente isolado (fluxos longos). Combine com `agent:`. |
-| `agent: <subagente>` | Rotear a execução para um subagente de `.claude/agents/` (fiel ao `agent:` do Copilot). |
-| `disable-model-invocation: true` | Ação deliberada: só roda via `/nome`, fora da auto-listagem (custo ~zero). Skills de conhecimento **omitem** este campo para ficarem auto-invocáveis. |
+| `allowed-tools:` | Restrict the skill's tools (least-privilege). Do **not** use `tools:` (that is for subagents). |
+| `argument-hint: "..."` | The skill receives argument(s) via `/name <arg>` (accessible in the body as `$ARGUMENTS`/`$1`). Quote values containing `:`. |
+| `context: fork` | Run the skill in an isolated subagent (long-running flows). Combine with `agent:`. |
+| `agent: <subagent>` | Route execution to a subagent from `.claude/agents/` (mirrors the `agent:` field from Copilot). |
+| `disable-model-invocation: true` | Deliberate action: only runs via `/name`, excluded from auto-listing (cost ~zero). Knowledge skills **omit** this field to remain auto-invocable. |
 
-**Skill de conhecimento** (auto-invocável): só `name` + `description` (com "Use when…").
-**Comando de ação** (researcher/generator/validator/auditor):
+**Knowledge skill** (auto-invocable): only `name` + `description` (with "Use when…").
+**Action command** (researcher/generator/validator/auditor):
 `name` + `description` + `argument-hint` + `context: fork` + `agent:` + `disable-model-invocation: true`.

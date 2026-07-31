@@ -4,7 +4,7 @@ description: 'Generates quality analysis and best practices adherence report for
 argument-hint: '[directory or file pattern to validate]'
 ---
 
-> ⚙️ **Template tecnologia-agnóstico.** Substitua TODOS os `[PLACEHOLDERS]`. Nomes em `e.g.`/`[e.g., ...]` são apenas exemplos ilustrativos — não são padrões nem defaults desta fábrica.
+> ⚙️ **Technology-agnostic template.** Replace ALL [PLACEHOLDERS]. Names in e.g./[e.g., ...] are illustrative examples only — they are not standards or defaults of this factory.
 
 # Prompt: [ARTIFACT TYPE] Best Practices Validator
 

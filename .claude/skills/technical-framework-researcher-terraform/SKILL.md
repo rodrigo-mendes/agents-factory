@@ -28,6 +28,7 @@ disable-model-invocation: true
 - **[Testing Patterns](./blueprints/terraform-testing-patterns.md)** — fmt/validate/tfsec/terratest examples
 - **[Production Readiness](./blueprints/terraform-production-readiness.md)** — DR, cost, monitoring, upgrade strategy
 - **[Evaluation Scenarios](./blueprints/evaluation-scenarios.md)** — 4 scenarios: canonical research, edge case, misuse, anti-pattern trap
+- **[Research Scope Formats](./blueprints/research-scope-formats.md)** — format templates for ✅/⚠️/🚫 three-tier guardrails (§3)
 - **[External Resources](#external-resources)** — Registry, provider docs, and tooling this skill relies on
 
 ---
@@ -92,15 +93,7 @@ Identify all non-negotiable infrastructure standards — include as many as the 
 - Resource naming conventions and tagging strategy
 - Error handling (depends_on, lifecycle rules)
 
-**Format**:
-```
-Pattern: [Name]
-Why: [Official reason + security/compliance impact]
-Code: [Minimal HCL example]
-Terraform Version: [{{TERRAFORM_VERSION}}+]
-Provider Version: [{{PROVIDER_VERSION}}]
-Source: [Registry link + Provider docs link]
-```
+**Format:** see [Research Scope Formats — Always Do](./blueprints/research-scope-formats.md#always-do)
 
 ### ⚠️ Ask First: Architectural Crossroads
 Identify all valid patterns with infrastructure tradeoffs — include every decision point the domain presents:
@@ -111,18 +104,7 @@ Identify all valid patterns with infrastructure tradeoffs — include every deci
 - Data source vs. external API dependency
 - Resource import vs. resource creation
 
-**Format**:
-```
-Decision: [What to choose]
-Options: [A, B, C]
-Tradeoffs:
-  | Option | Optimizes | Sacrifices | Scaling | State | Drift |
-  |--------|-----------|------------|---------|-------|-------|
-
-When: [Decision factors: scale, team size, CI/CD, multi-region]
-Agent: "Ask user: [specific decision question]"
-Source: [Registry link]
-```
+**Format:** see [Research Scope Formats — Ask First](./blueprints/research-scope-formats.md#ask-first)
 
 ### 🚫 Never Do: Forbidden Patterns
 Identify all anti-patterns, vulnerabilities, and state-corruption risks — include every anti-pattern discovered:
@@ -137,21 +119,7 @@ Identify all anti-patterns, vulnerabilities, and state-corruption risks — incl
 - Unvalidated variable inputs
 - Direct AWS API calls bypassing Terraform (drift)
 
-**Format**:
-```
-Anti-Pattern: [What NOT to do]
-Why: [Security/state-consistency/compliance reason]
-❌ Wrong:
-  # DON'T — [reason]
-  [bad HCL]
-✅ Correct:
-  # DO — [reason]
-  [correct HCL with explanations]
-
-Impact: [state corruption | security breach | unmanaged drift | data loss]
-Severity: [CRITICAL | HIGH | MEDIUM]
-Source: [Registry security advisory link]
-```
+**Format:** see [Research Scope Formats — Never Do](./blueprints/research-scope-formats.md#never-do)
 
 > Every Never Do entry **must** include a side-by-side ❌ wrong HCL / ✅ correct HCL example.
 > For non-HCL anti-patterns (e.g., workflow anti-patterns like manual apply without plan),

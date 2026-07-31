@@ -1,131 +1,131 @@
-# Guia: Validando Artefatos
+# Guide: Validating Artifacts
 
-Como usar os prompts de validação para garantir qualidade dos artefatos.
+How to use the validation prompts to ensure artifact quality.
 
 ---
 
-## Quando Usar
+## When to Use
 
-- Após criar/modificar qualquer artefato
-- Antes de commit/PR
-- Em revisões periódicas de qualidade
-- Quando algo "não funciona" e você não sabe por quê
+- After creating/modifying any artifact
+- Before commit/PR
+- In periodic quality reviews
+- When something "doesn't work" and you don't know why
 
-## Escolha o Validator Certo
+## Choose the Right Validator
 
-| O que você tem | Validator |
+| What you have | Validator |
 |---------------|-----------|
-| Qualquer artefato (agente, comando, etc.) | `copilot-compatibility-review` |
-| Arquivo de rules (`.claude/rules/`) | `instructions-best-practices-validator` |
-| Arquivo `SKILL.md` | `skill-best-practices-validator` |
-| Projeto de agente completo | `project-analysis-validator .claude/` |
-| Estrutura de routing | `agent-router-pattern-validator` |
-| Arquitetura completa — projeto `.claude/` | `audit-cc-architecture-consensus` |
-| Arquitetura completa — projeto `.github/` | `audit-architecture-consensus` |
+| Any artifact (agent, command, etc.) | `copilot-compatibility-review` |
+| Rules file (`.claude/rules/`) | `instructions-best-practices-validator` |
+| `SKILL.md` file | `skill-best-practices-validator` |
+| Complete agent project | `project-analysis-validator .claude/` |
+| Routing structure | `agent-router-pattern-validator` |
+| Full architecture — `.claude/` project | `audit-cc-architecture-consensus` |
+| Full architecture — `.github/` project | `audit-architecture-consensus` |
 
-## Pipeline Recomendado
+## Recommended Pipeline
 
-Para validação completa, execute nesta ordem:
+For complete validation, run in this order:
 
-### Step 1: Compatibilidade técnica
+### Step 1: Technical compatibility
 ```
 /copilot-compatibility-review
 ```
-> Verifica se o YAML é válido, campos estão corretos, limites respeitados.
+> Verifies the YAML is valid, fields are correct, limits are respected.
 
-### Step 2: Qualidade de conteúdo
+### Step 2: Content quality
 ```
 /instructions-best-practices-validator
 /skill-best-practices-validator
 ```
-> Verifica se o conteúdo segue best practices (estrutura, clareza, completude).
+> Verifies the content follows best practices (structure, clarity, completeness).
 
-### Step 3: Qualidade de projeto
+### Step 3: Project quality
 ```
 /project-analysis-validator .claude/
 ```
-> Visão holística: estrutura de diretórios, precisão do CLAUDE.md, consistência do router,
-> frontmatter, naming, progressive disclosure e cobertura de rules.
+> Holistic view: directory structure, CLAUDE.md accuracy, router consistency,
+> frontmatter, naming, progressive disclosure and rules coverage.
 
-### Step 4 (opcional): Auditoria arquitetural
+### Step 4 (optional): Architectural audit
 
-Para projetos **Claude Code** (`.claude/`):
+For **Claude Code** projects (`.claude/`):
 ```
 /audit-cc-architecture-consensus
 ```
 
-Para projetos **GitHub Copilot** (`.github/`):
+For **GitHub Copilot** projects (`.github/`):
 ```
 /audit-architecture-consensus
 ```
 
-> Análise multi-modelo completa (scope + flow + engine). Corre 3 lentes em paralelo e prioriza
-> findings por consenso: 3/3 = Must-Fix 🔴, 2/3 = Should-Fix 🟡, 1/3 = Consider 🟢.
+> Complete multi-model analysis (scope + flow + engine). Runs 3 lenses in parallel and prioritizes
+> findings by consensus: 3/3 = Must-Fix 🔴, 2/3 = Should-Fix 🟡, 1/3 = Consider 🟢.
 
 ---
 
-## Quando Usar Cada Nível
+## When to Use Each Level
 
-| Cenário | Até que step |
+| Scenario | Up to step |
 |---------|:---:|
-| Editei um arquivo | Step 1 |
-| Criei skill nova | Steps 1-2 |
-| Criei projeto novo | Steps 1-3 |
-| Pre-release / produção | Steps 1-4 |
-| Debug ("por que não funciona?") | Steps 1 + 4 (engine) |
+| I edited a file | Step 1 |
+| I created a new skill | Steps 1-2 |
+| I created a new project | Steps 1-3 |
+| Pre-release / production | Steps 1-4 |
+| Debug ("why doesn't it work?") | Steps 1 + 4 (engine) |
 
 ---
 
-## O que Cada Validator Detecta
+## What Each Validator Detects
 
 ### copilot-compatibility-review
-- ❌ YAML malformado
-- ❌ Campo `name` > 64 caracteres
-- ❌ Campo `description` > 1024 caracteres
-- ❌ `tools` inválido
-- ❌ `applyTo` com glob inválido
+- ❌ Malformed YAML
+- ❌ `name` field > 64 characters
+- ❌ `description` field > 1024 characters
+- ❌ Invalid `tools`
+- ❌ `applyTo` with invalid glob
 
 ### instructions-best-practices-validator
-- ❌ Instructions sem escopo claro
-- ❌ Contradições entre instructions
-- ❌ Informação duplicada
-- ❌ Escopo muito amplo ou restrito
+- ❌ Instructions without clear scope
+- ❌ Contradictions between instructions
+- ❌ Duplicate information
+- ❌ Scope too broad or too narrow
 
 ### skill-best-practices-validator
-- ❌ Falta seção ✅ ou 🚫
-- ❌ ✅ sem código de exemplo
-- ❌ 🚫 sem alternativa
-- ❌ Versões misturadas
-- ❌ Falta blueprints/
+- ❌ Missing ✅ or 🚫 section
+- ❌ ✅ without example code
+- ❌ 🚫 without alternative
+- ❌ Mixed versions
+- ❌ Missing blueprints/
 
 ### project-analysis-validator .claude/
-- ❌ Estrutura de diretórios fora do padrão `.claude/`
-- ❌ CLAUDE.md impreciso ou desatualizado
-- ❌ Inconsistências na routing table do agente
-- ❌ Frontmatter inválido ou ausente
-- ❌ Nomes de artefatos fora da convenção kebab-case
-- ❌ Progressive disclosure violada (conteúdo inline em vez de blueprints)
-- ❌ Cobertura de rules incompleta para o domínio
-- ❌ Componentes órfãos (nunca referenciados)
-- ❌ Referências quebradas (aponta para arquivo inexistente)
+- ❌ Directory structure outside the `.claude/` standard
+- ❌ CLAUDE.md inaccurate or outdated
+- ❌ Inconsistencies in the agent routing table
+- ❌ Invalid or missing frontmatter
+- ❌ Artifact names outside the kebab-case convention
+- ❌ Progressive disclosure violated (inline content instead of blueprints)
+- ❌ Incomplete rules coverage for the domain
+- ❌ Orphaned components (never referenced)
+- ❌ Broken references (points to non-existent file)
 
 ---
 
-## Dicas
+## Tips
 
-- **Comece sempre pelo Step 1**: Problemas de YAML/compatibilidade causam erros silenciosos — o Claude Code pode ignorar o arquivo sem avisar.
-- **Não ignore warnings**: Warnings de hoje viram bugs de amanhã.
-- **Valide iterativamente**: Corrija → re-valide → corrija → re-valide até limpo.
+- **Always start with Step 1**: YAML/compatibility issues cause silent errors — Claude Code may ignore the file without warning.
+- **Don't ignore warnings**: Today's warnings become tomorrow's bugs.
+- **Validate iteratively**: Fix → re-validate → fix → re-validate until clean.
 
-## Armadilhas Comuns
+## Common Pitfalls
 
-| Armadilha | Solução |
+| Pitfall | Solution |
 |-----------|---------|
-| Não validar nunca | Incluir validação no workflow antes de commit |
-| Só validar no final | Validar após cada artefato criado |
-| Ignorar relatório "tudo OK" em projeto incompleto | "OK" significa conforme padrão, não significa completo |
-| Confiar só no validator sem revisar manualmente | Validators detectam estrutura, não semântica |
+| Never validating | Include validation in the workflow before commit |
+| Validating only at the end | Validate after each artifact created |
+| Ignoring "all OK" report on an incomplete project | "OK" means conformant, not complete |
+| Relying solely on the validator without manual review | Validators detect structure, not semantics |
 
-## Fluxo Completo
+## Full Flow
 
-Ver: [Fluxo de Qualidade](../fluxos/fluxo-qualidade.md)
+See: [Quality Flow](../fluxos/fluxo-qualidade.md)

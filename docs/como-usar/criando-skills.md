@@ -1,105 +1,105 @@
-# Guia: Criando Skills
+# Guide: Creating Skills
 
-Como criar uma SKILL.md que segue todos os padrões do framework.
+How to create a SKILL.md that follows all framework patterns.
 
 ---
 
-## Quando Usar
+## When to Use
 
-- Após pesquisar uma tecnologia (output do researcher)
-- Para encapsular conhecimento de domínio específico
-- Para fornecer guardrails a agentes
+- After researching a technology (researcher output)
+- To encapsulate specific domain knowledge
+- To provide guardrails to agents
 
-## Passo a Passo
+## Step by Step
 
-### 1. Tenha a pesquisa pronta
+### 1. Have the research ready
 
-Uma skill precisa de conteúdo validado. Se ainda não tem:
+A skill needs validated content. If you don't have it yet:
 ```
 /researching-technical-frameworks
 ```
-Ver: [Pesquisando Tecnologias](pesquisando-tecnologias.md)
+See: [Researching Technologies](pesquisando-tecnologias.md)
 
-### 2. Execute o skill-creator
+### 2. Run the skill-creator
 
 ```
 /skill-creator
 ```
 
-Forneça o caminho para o documento de pesquisa quando solicitado.
+Provide the path to the research document when prompted.
 
-### 3. O que o skill-creator faz internamente
+### 3. What the skill-creator does internally
 
-1. Aplica os padrões integrados de autoria (three-tier, YAML, blueprints)
-2. Lê seu documento de pesquisa
-3. Estrutura em three-tier:
-   - **✅ Always Do**: Padrões obrigatórios com código completo
-   - **⚠️ Ask First**: Decisões arquiteturais (apresenta trade-offs)
-   - **🚫 Never Do**: Anti-padrões com alternativa e impacto
-4. Gera YAML frontmatter correto
-5. Cria blueprints auxiliares
+1. Applies built-in authoring patterns (three-tier, YAML, blueprints)
+2. Reads your research document
+3. Structures in three-tier:
+   - **✅ Always Do**: Mandatory patterns with complete code
+   - **⚠️ Ask First**: Architectural decisions (presents trade-offs)
+   - **🚫 Never Do**: Anti-patterns with alternative and impact
+4. Generates correct YAML frontmatter
+5. Creates auxiliary blueprints
 
-### 4. Resultado esperado
+### 4. Expected result
 
 ```
 skill-name/
-├── SKILL.md              ← Skill principal
+├── SKILL.md              ← Main skill
 └── blueprints/
-    ├── always-do-patterns.md   ← Padrões com código
-    └── never-do-patterns.md    ← Anti-padrões com alternativas
+    ├── always-do-patterns.md   ← Patterns with code
+    └── never-do-patterns.md    ← Anti-patterns with alternatives
 ```
 
-### 5. Valide a skill
+### 5. Validate the skill
 
 ```
 /skill-best-practices-validator
 ```
 
-### 6. Checklist de qualidade
+### 6. Quality checklist
 
-Antes de considerar pronta, verifique:
+Before considering it done, check:
 
-- [ ] YAML frontmatter com `name` (≤64 chars, kebab-case)
-- [ ] YAML `description` com "Use when..." (≤1024 chars)
-- [ ] Seção ✅ Always Do com código de exemplo em TODOS os padrões
-- [ ] Seção ⚠️ Ask First com trade-off matrix
-- [ ] Seção 🚫 Never Do com alternativa E impacto
-- [ ] `blueprints/` com always-do e never-do
-- [ ] Versão específica declarada (version absolutism)
-- [ ] Nenhuma informação de versão diferente misturada
+- [ ] YAML frontmatter with `name` (≤64 chars, kebab-case)
+- [ ] YAML `description` with "Use when..." (≤1536 chars)
+- [ ] ✅ Always Do section with example code in ALL patterns
+- [ ] ⚠️ Ask First section with trade-off matrix
+- [ ] 🚫 Never Do section with alternative AND impact
+- [ ] `blueprints/` with always-do and never-do
+- [ ] Specific version declared (version absolutism)
+- [ ] No information from different versions mixed in
 
 ---
 
-## Compilers Alternativos
+## Alternative Compilers
 
-Se sua pesquisa é de um domínio específico, use o compiler especializado:
+If your research is from a specific domain, use the specialized compiler:
 
-| Domínio da pesquisa | Usar |
+| Research domain | Use |
 |---------------------|------|
-| Genérico | `skill-creator` |
-| Serviço cloud + Terraform (`technical-framework-researcher-terraform`) | `skill-creator` |
-| Arquitetura (C4, DDD, TOGAF) | `architecture-approaches-skill-generator` |
-| Metodologias (Scrum, SAFe) | `methodologies-skill-generator` |
-| Práticas Terraform (`terraform-engineering-best-practices-researcher`) | `terraform-instructions-compiler` (gera .instructions.md, não SKILL.md) |
+| Generic | `skill-creator` |
+| Cloud service + Terraform (`technical-framework-researcher-terraform`) | `skill-creator` |
+| Architecture (C4, DDD, TOGAF) | `architecture-approaches-skill-generator` |
+| Methodologies (Scrum, SAFe) | `methodologies-skill-generator` |
+| Terraform practices (`terraform-engineering-best-practices-researcher`) | `terraform-instructions-compiler` (generates .instructions.md, not SKILL.md) |
 
 ---
 
-## Dicas
+## Tips
 
-- **Código obrigatório nos ✅**: Cada "Always Do" DEVE ter um bloco de código funcional. Sem código = skill incompleta.
-- **Alternativas nos 🚫**: Cada "Never Do" deve dizer O QUE fazer ao invés. "Não faça X" sem alternativa não ajuda.
-- **Progressive disclosure**: Informação básica primeiro, detalhes avançados depois. Não frontload tudo.
+- **Code is mandatory in ✅**: Each "Always Do" MUST have a working code block. No code = incomplete skill.
+- **Alternatives in 🚫**: Each "Never Do" must say WHAT to do instead. "Don't do X" without an alternative is unhelpful.
+- **Progressive disclosure**: Basic information first, advanced details later. Don't frontload everything.
 
-## Armadilhas Comuns
+## Common Pitfalls
 
-| Armadilha | Solução |
+| Pitfall | Solution |
 |-----------|---------|
-| Criar skill sem pesquisa prévia | Sempre pesquisar primeiro — evita alucinações |
-| Misturar versões na mesma skill | Uma skill = uma versão. Separar. |
-| ✅ sem código | Adicionar bloco de código funcional |
-| 🚫 sem alternativa | Sempre incluir "Ao invés, faça Y" |
-| Nome genérico ("utils", "helpers") | Usar gerund-form descritivo (ex: `provisioning-oci-functions`) |
+| Creating a skill without prior research | Always research first — avoids hallucinations |
+| Mixing versions in the same skill | One skill = one version. Keep separate. |
+| ✅ without code | Add a working code block |
+| 🚫 without alternative | Always include "Instead, do Y" |
+| Generic name ("utils", "helpers") | Use descriptive gerund form (e.g., `provisioning-oci-functions`) |
 
-## Fluxo Completo
+## Full Flow
 
-Ver: [Fluxo de Base de Conhecimento](../fluxos/fluxo-base-conhecimento.md)
+See: [Knowledge Base Flow](../fluxos/fluxo-base-conhecimento.md)

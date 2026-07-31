@@ -2,7 +2,7 @@
 description: 'Extracts [DOMAIN] best practices from research files and generates targeted [OUTPUT FILE TYPE] files for GitHub Copilot, with user interview and planning phases.'
 ---
 
-> ⚙️ **Template tecnologia-agnóstico.** Substitua TODOS os `[PLACEHOLDERS]`. Nomes em `e.g.`/`[e.g., ...]` são apenas exemplos ilustrativos — não são padrões nem defaults desta fábrica.
+> ⚙️ **Technology-agnostic template.** Replace ALL [PLACEHOLDERS]. Names in e.g./[e.g., ...] are illustrative examples only — they are not standards or defaults of this factory.
 
 # Prompt: [DOMAIN] Best Practices → [OUTPUT TYPE] Generator
 

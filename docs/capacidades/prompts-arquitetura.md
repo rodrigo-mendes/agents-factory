@@ -1,16 +1,16 @@
-# Prompts de Auditoria de Arquitetura
+# Architecture Auditing Prompts
 
-8 prompts que formam um sistema de auditoria multi-modelo para projetos de agente — disponível em duas variantes: **Copilot** (alvo `.github/`) e **Claude Code** (alvo `.claude/`).
+8 prompts that form a multi-model auditing system for agent projects — available in two variants: **Copilot** (target `.github/`) and **Claude Code** (target `.claude/`).
 
 ---
 
-## Visão Geral
+## Overview
 
-O sistema de auditoria usa **3 modelos independentes** que analisam perspectivas diferentes em paralelo, depois um **orquestrador** compara findings e gera um relatório de consenso.
+The auditing system uses **3 independent models** that analyze different perspectives in parallel, then an **orchestrator** compares findings and generates a consensus report.
 
 ```mermaid
 graph TD
-    subgraph "Copilot (alvo .github/)"
+    subgraph "Copilot (target .github/)"
         OC[audit-architecture-consensus] --> AC[audit-architecture-scope]
         OC --> BC[audit-architecture-flow]
         OC --> CC[audit-architecture-engine]
@@ -18,7 +18,7 @@ graph TD
         BC -->|findings| OC
         CC -->|findings| OC
     end
-    subgraph "Claude Code (alvo .claude/)"
+    subgraph "Claude Code (target .claude/)"
         OCC[audit-cc-architecture-consensus] --> ACC[audit-cc-architecture-scope]
         OCC --> BCC[audit-cc-architecture-flow]
         OCC --> CCC[audit-cc-architecture-engine]
@@ -26,225 +26,225 @@ graph TD
         BCC -->|findings| OCC
         CCC -->|findings| OCC
     end
-    OC --> R[Relatório Priorizado]
+    OC --> R[Prioritized Report]
     OCC --> R
 ```
 
-| Modelo | Perspectiva | Foco |
+| Model | Perspective | Focus |
 |--------|-------------|------|
-| **A (Scope)** | Hierarquia de responsabilidades | Separação por camada L0→L4 |
-| **B (Flow)** | Cadeias de invocação | Reachability, dead-ends, ciclos |
-| **C (Engine)** | Mecânicas do engine | applyTo/paths, context, frontmatter |
-| **Consensus** | Consolidação | Priorização por consenso |
+| **A (Scope)** | Responsibility hierarchy | Layer separation L0→L4 |
+| **B (Flow)** | Invocation chains | Reachability, dead-ends, cycles |
+| **C (Engine)** | Engine mechanics | applyTo/paths, context, frontmatter |
+| **Consensus** | Consolidation | Prioritization by consensus |
 
 ---
 
-## 1. audit-architecture-consensus (Orquestrador)
+## 1. audit-architecture-consensus (Orchestrator)
 
-> **Arquivo**: `.claude/skills/audit-architecture-consensus/SKILL.md`
+> **File**: `.claude/skills/audit-architecture-consensus/SKILL.md`
 
-### Descrição
-Orquestra auditoria completa: executa Modelos A, B e C em paralelo, compara findings, e produz relatório priorizado por consenso.
+### Description
+Orchestrates full audit: executes Models A, B, and C in parallel, compares findings, and produces a consensus-prioritized report.
 
-### Invocação
+### Invocation
 ```
 audit-architecture-consensus
 ```
 
-### Workflow Interno
-1. Identifica target (agente a auditar)
-2. Executa `audit-architecture-scope` (Modelo A)
-3. Executa `audit-architecture-flow` (Modelo B)
-4. Executa `audit-architecture-engine` (Modelo C)
-5. Compara findings dos 3 modelos
-6. Prioriza: issue encontrada por 3 modelos > 2 > 1
-7. Gera relatório de remediação
+### Internal Workflow
+1. Identifies target (agent to audit)
+2. Executes `audit-architecture-scope` (Model A)
+3. Executes `audit-architecture-flow` (Model B)
+4. Executes `audit-architecture-engine` (Model C)
+5. Compares findings from all 3 models
+6. Prioritizes: issue found by 3 models > 2 > 1
+7. Generates remediation report
 
-### Input Esperado
-- Nome do agente ou caminho para `.github/`
+### Expected Input
+- Agent name or path to `.github/`
 
-### Output Produzido
-- Relatório markdown com:
-  - Score de conformidade
-  - Issues priorizadas por consenso (3/3, 2/3, 1/3)
-  - Plano de remediação ordenado por impacto
+### Produced Output
+- Markdown report with:
+  - Compliance score
+  - Issues prioritized by consensus (3/3, 2/3, 1/3)
+  - Remediation plan ordered by impact
 
-### Tools Necessários
+### Required Tools
 - `read`, `search`, `create`
 
-### Quando Usar
-- Auditoria completa de um projeto de agente
-- Antes de "production readiness"
-- Como step final do [Fluxo de Criação de Projeto](../fluxos/fluxo-criacao-projeto.md)
+### When to Use
+- Full audit of an agent project
+- Before "production readiness"
+- As the final step of the [Project Creation Flow](../fluxos/fluxo-criacao-projeto.md)
 
 ---
 
-## 2. audit-architecture-scope (Modelo A)
+## 2. audit-architecture-scope (Model A)
 
-> **Arquivo**: `.claude/skills/audit-architecture-scope/SKILL.md`
+> **File**: `.claude/skills/audit-architecture-scope/SKILL.md`
 
-### Descrição
-Audita hierarquia de responsabilidades por camada (L0→L4), detecta vazamento de responsabilidade entre camadas.
+### Description
+Audits the responsibility hierarchy by layer (L0→L4), detecting responsibility leakage between layers.
 
-### Invocação
+### Invocation
 ```
 audit-architecture-scope
 ```
 
-### O que Verifica
+### What It Verifies
 
-| Camada | Responsabilidade | Violação típica |
+| Layer | Responsibility | Typical Violation |
 |--------|-----------------|-----------------|
-| **L0** | Configuração global (.vscode/settings) | Lógica de negócio em settings |
-| **L1** | Instructions (projeto-wide) | Código em instructions |
-| **L2** | Skills (domínio-specific) | Skill fazendo routing |
-| **L3** | Agents (orquestração) | Agent sem skill, "hardcoded knowledge" |
-| **L4** | Prompts (entry-point) | Prompt com lógica de implementação |
+| **L0** | Global configuration (.vscode/settings) | Business logic in settings |
+| **L1** | Instructions (project-wide) | Code in instructions |
+| **L2** | Skills (domain-specific) | Skill doing routing |
+| **L3** | Agents (orchestration) | Agent without skill, "hardcoded knowledge" |
+| **L4** | Prompts (entry-point) | Prompt with implementation logic |
 
-### Output Produzido
-- Score por camada (compliance %)
-- Violações de vazamento detectadas
-- Sugestões de reorganização
+### Produced Output
+- Score per layer (compliance %)
+- Detected leakage violations
+- Reorganization suggestions
 
-### Tools Necessários
+### Required Tools
 - `read`, `search`, `create`
 
 ---
 
-## 3. audit-architecture-flow (Modelo B)
+## 3. audit-architecture-flow (Model B)
 
-> **Arquivo**: `.claude/skills/audit-architecture-flow/SKILL.md`
+> **File**: `.claude/skills/audit-architecture-flow/SKILL.md`
 
-### Descrição
-Audita cadeias de invocação (prompt → agent → instructions → skills), validando que todo entry-point tem cadeia completa.
+### Description
+Audits invocation chains (prompt → agent → instructions → skills), validating that every entry-point has a complete chain.
 
-### Invocação
+### Invocation
 ```
 audit-architecture-flow
 ```
 
-### O que Verifica
-- **Reachability**: Todo componente é alcançável por algum prompt
-- **Completude**: Toda cadeia prompt→agent→skill é completa (sem elos faltando)
-- **Dead-ends**: Componentes referenciados mas inexistentes
-- **Ciclos**: Dependências circulares
-- **Orphans**: Componentes que ninguém referencia
+### What It Verifies
+- **Reachability**: Every component is reachable from some prompt
+- **Completeness**: Every prompt→agent→skill chain is complete (no missing links)
+- **Dead-ends**: Components referenced but non-existent
+- **Cycles**: Circular dependencies
+- **Orphans**: Components that nobody references
 
-### Output Produzido
-- Grafo de invocação (textual)
-- Lista de broken chains
-- Lista de componentes órfãos
-- Sugestões de ligação
+### Produced Output
+- Invocation graph (textual)
+- List of broken chains
+- List of orphan components
+- Linking suggestions
 
-### Tools Necessários
+### Required Tools
 - `read`, `search`
 
 ---
 
-## 4. audit-architecture-engine (Modelo C)
+## 4. audit-architecture-engine (Model C)
 
-> **Arquivo**: `.claude/skills/audit-architecture-engine/SKILL.md`
+> **File**: `.claude/skills/audit-architecture-engine/SKILL.md`
 
-### Descrição
-Audita mecânicas do VS Code engine — valida applyTo, context budget, frontmatter, deduplicação, conflitos.
+### Description
+Audits VS Code engine mechanics — validates applyTo, context budget, frontmatter, deduplication, conflicts.
 
-### Invocação
+### Invocation
 ```
 audit-architecture-engine
 ```
 
-### O que Verifica
-- **applyTo**: Padrões glob corretos, sem overlap excessivo
-- **Context budget**: Instructions não excedem limites úteis
-- **Frontmatter**: YAML válido, campos obrigatórios presentes
-- **Deduplicação**: Mesmo conteúdo não injetado múltiplas vezes
-- **Conflitos**: Instructions contraditórias no mesmo escopo
-- **Active vs Passive**: Caminhos de ativação corretos
+### What It Verifies
+- **applyTo**: Correct glob patterns, no excessive overlap
+- **Context budget**: Instructions do not exceed useful limits
+- **Frontmatter**: Valid YAML, mandatory fields present
+- **Deduplication**: Same content not injected multiple times
+- **Conflicts**: Contradictory instructions in the same scope
+- **Active vs Passive**: Correct activation paths
 
-### Output Produzido
-- Relatório de mecanismos técnicos
-- Warnings de context pollution
-- Conflitos detectados com sugestão de resolução
+### Produced Output
+- Technical mechanisms report
+- Context pollution warnings
+- Detected conflicts with resolution suggestions
 
-### Tools Necessários
+### Required Tools
 - `read`, `search`
 
 ---
 
 ---
 
-## Variante Claude Code (alvo `.claude/`)
+## Claude Code Variant (target `.claude/`)
 
-Os quatro prompts abaixo são idênticos em lógica mas auditam projetos **Claude Code** (`.claude/`), verificando convenções específicas do CC engine: `paths:` globs, `disable-model-invocation`, `context: fork`, `allowed-tools` vs `tools`, e as 4 camadas CLAUDE.md → subagente → rules → skills.
+The four prompts below are identical in logic but audit **Claude Code** projects (`.claude/`), checking CC engine-specific conventions: `paths:` globs, `disable-model-invocation`, `context: fork`, `allowed-tools` vs `tools`, and the 4 CLAUDE.md → subagent → rules → skills layers.
 
-### 5. audit-cc-architecture-consensus (Orquestrador CC)
+### 5. audit-cc-architecture-consensus (CC Orchestrator)
 
-> **Arquivo**: `.claude/skills/audit-cc-architecture-consensus/SKILL.md`
+> **File**: `.claude/skills/audit-cc-architecture-consensus/SKILL.md`
 
-### Descrição
-Orquestra auditoria multi-modelo Claude Code: executa Scope + Flow + Engine em paralelo via tool `Agent` e produz relatório de consenso priorizado por 3/3, 2/3, 1/3 concordância.
+### Description
+Orchestrates multi-model Claude Code audit: executes Scope + Flow + Engine in parallel via `Agent` tool and produces a consensus report prioritized by 3/3, 2/3, 1/3 agreement.
 
-### Invocação
+### Invocation
 ```
 audit-cc-architecture-consensus
 ```
 
-### Input Esperado
-- Caminho para `.claude/` ou raiz do projeto
+### Expected Input
+- Path to `.claude/` or project root
 
-### Output Produzido
-- Relatório de consenso com score, issues priorizadas e plano de remediação
+### Produced Output
+- Consensus report with score, prioritized issues, and remediation plan
 
 ---
 
-### 6. audit-cc-architecture-scope (Modelo A — CC)
+### 6. audit-cc-architecture-scope (Model A — CC)
 
-> **Arquivo**: `.claude/skills/audit-cc-architecture-scope/SKILL.md`
+> **File**: `.claude/skills/audit-cc-architecture-scope/SKILL.md`
 
-### Descrição
-Audita hierarquia de responsabilidades em projeto Claude Code: CLAUDE.md → subagente → rules → skills, detectando vazamento de responsabilidade entre camadas.
+### Description
+Audits responsibility hierarchy in a Claude Code project: CLAUDE.md → subagent → rules → skills, detecting responsibility leakage between layers.
 
-### Invocação
+### Invocation
 ```
 audit-cc-architecture-scope
 ```
 
 ---
 
-### 7. audit-cc-architecture-flow (Modelo B — CC)
+### 7. audit-cc-architecture-flow (Model B — CC)
 
-> **Arquivo**: `.claude/skills/audit-cc-architecture-flow/SKILL.md`
+> **File**: `.claude/skills/audit-cc-architecture-flow/SKILL.md`
 
-### Descrição
-Audita cadeias de invocação `/comando → subagente fork → rules → skills`, validando reachability e ausência de dead-ends ou orphans em projeto Claude Code.
+### Description
+Audits invocation chains `/command → subagent fork → rules → skills`, validating reachability and absence of dead-ends or orphans in a Claude Code project.
 
-### Invocação
+### Invocation
 ```
 audit-cc-architecture-flow
 ```
 
 ---
 
-### 8. audit-cc-architecture-engine (Modelo C — CC)
+### 8. audit-cc-architecture-engine (Model C — CC)
 
-> **Arquivo**: `.claude/skills/audit-cc-architecture-engine/SKILL.md`
+> **File**: `.claude/skills/audit-cc-architecture-engine/SKILL.md`
 
-### Descrição
-Audita mecânicas do Claude Code engine: `paths:` glob firing, budget de skills sem `disable-model-invocation`, isolamento de `context: fork`, `allowed-tools` vs `tools`, validade de `name`/`model`/`description`.
+### Description
+Audits Claude Code engine mechanics: `paths:` glob firing, skills budget without `disable-model-invocation`, `context: fork` isolation, `allowed-tools` vs `tools`, validity of `name`/`model`/`description`.
 
-### Invocação
+### Invocation
 ```
 audit-cc-architecture-engine
 ```
 
 ---
 
-## Uso Individual vs. Completo
+## Individual vs. Full Use
 
-| Cenário | Alvo Copilot | Alvo Claude Code |
+| Scenario | Copilot Target | Claude Code Target |
 |---------|-------------|-----------------|
-| Auditoria completa pre-release | `audit-architecture-consensus` | `audit-cc-architecture-consensus` |
-| Verificar só se as cadeias funcionam | `audit-architecture-flow` | `audit-cc-architecture-flow` |
-| Verificar só mecânicas técnicas | `audit-architecture-engine` | `audit-cc-architecture-engine` |
-| Verificar só separação de responsabilidades | `audit-architecture-scope` | `audit-cc-architecture-scope` |
-| Debug: "por que minha skill não carrega?" | `audit-architecture-flow` + `audit-architecture-engine` | `audit-cc-architecture-flow` + `audit-cc-architecture-engine` |
+| Full pre-release audit | `audit-architecture-consensus` | `audit-cc-architecture-consensus` |
+| Check only whether chains work | `audit-architecture-flow` | `audit-cc-architecture-flow` |
+| Check only technical mechanics | `audit-architecture-engine` | `audit-cc-architecture-engine` |
+| Check only responsibility separation | `audit-architecture-scope` | `audit-cc-architecture-scope` |
+| Debug: "why isn't my skill loading?" | `audit-architecture-flow` + `audit-architecture-engine` | `audit-cc-architecture-flow` + `audit-cc-architecture-engine` |

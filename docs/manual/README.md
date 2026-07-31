@@ -1,83 +1,90 @@
-# Manual de Uso dos Agentes — Agents Factory
+# Agent Usage Manual — Agents Factory
 
-Referência completa dos 4 subagentes e dos 24 comandos que os invocam.
+Complete reference for the 5 sub-agents and the 25 commands that invoke them.
 
 ---
 
-## Navegação por Agente
+## Navigation by Agent
 
-| Agente | Modelo | Comandos | Arquivo |
+| Agent | Model | Commands | File |
 |--------|--------|:--------:|---------|
-| [framework-researcher](framework-researcher.md) | opus | 7 | Pesquisa de tecnologias, frameworks, domínios, arquiteturas |
-| [skill-author](skill-author.md) | sonnet | 4 | Geração de SKILL.md e .instructions.md |
-| [architecture-auditor](architecture-auditor.md) | opus | 8 | Auditoria multi-modelo de arquitetura de agentes |
-| [quality-validator](quality-validator.md) | sonnet | 5 | Validação de qualidade e conformidade de artefatos |
+| [framework-researcher](framework-researcher.md) | opus | 7 | Research on technologies, frameworks, domains, architectures |
+| [skill-author](skill-author.md) | sonnet | 4 | Generation of SKILL.md and .instructions.md |
+| [architecture-auditor](architecture-auditor.md) | opus | 8 | Multi-model audit of agent architecture |
+| [quality-validator](quality-validator.md) | sonnet | 5 | Quality and compliance validation of artifacts |
+| [skill-evaluator](skill-evaluator.md) | sonnet | 1 | Behavioral evaluation of skills via LLM-as-judge |
 
 ---
 
-## Quick Reference — Todos os 24 Comandos
+## Quick Reference — All 25 Commands
 
-### Pesquisa (`framework-researcher`)
-
-```
-/researching-technical-frameworks            # Pesquisa tecnologia/framework por versão
-/technical-framework-researcher-terraform    # Pesquisa serviço cloud + Terraform (IaC)
-/cloud-architecture-researcher               # Pesquisa framework cloud (AWS WAF, Azure CAF, OCI)
-/business-domain-researcher                  # Pesquisa domínio organizacional (Finance, Legal, HR)
-/requirements-methodology-researcher         # Pesquisa framework de requisitos (Scrum, SAFe)
-/architecture-methodology-researcher         # Pesquisa metodologia de arquitetura (C4, DDD, TOGAF)
-/terraform-engineering-best-practices-researcher  # Pesquisa práticas de engenharia Terraform
-```
-
-### Geração (`skill-author`)
+### Research (`framework-researcher`)
 
 ```
-/skill-creator <caminho-para-research-file>        # Cria SKILL.md de qualquer research file
-/methodologies-skill-generator <metodologia>       # Pesquisa + gera skill de metodologia (tudo-em-um)
-/architecture-approaches-skill-generator <tema>    # Pesquisa + gera skill de arquitetura (tudo-em-um)
-/terraform-instructions-compiler <research-file>   # Gera .instructions.md de pesquisa Terraform
+/researching-technical-frameworks            # Research technology/framework by version
+/technical-framework-researcher-terraform    # Research cloud service + Terraform (IaC)
+/cloud-architecture-researcher               # Research cloud framework (AWS WAF, Azure CAF, OCI)
+/business-domain-researcher                  # Research organizational domain (Finance, Legal, HR)
+/requirements-methodology-researcher         # Research requirements framework (Scrum, SAFe)
+/architecture-methodology-researcher         # Research architecture methodology (C4, DDD, TOGAF)
+/terraform-engineering-best-practices-researcher  # Research Terraform engineering practices
 ```
 
-### Auditoria — Claude Code (`architecture-auditor`)
+### Generation (`skill-author`)
 
 ```
-/audit-cc-architecture-consensus <alvo>    # Auditoria completa 3 lentes em paralelo (recomendado)
-/audit-cc-architecture-scope <alvo>        # Lente A: hierarquia de responsabilidades
-/audit-cc-architecture-flow <alvo>         # Lente B: cadeias de invocação
-/audit-cc-architecture-engine <alvo>       # Lente C: mecânicas do engine CC
+/skill-creator <path-to-research-file>             # Creates SKILL.md from any research file
+/methodologies-skill-generator <methodology>       # Research + generates methodology skill (all-in-one)
+/architecture-approaches-skill-generator <topic>   # Research + generates architecture skill (all-in-one)
+/terraform-instructions-compiler <research-file>   # Generates .instructions.md from Terraform research
 ```
 
-### Auditoria — Copilot (`architecture-auditor`)
+### Audit — Claude Code (`architecture-auditor`)
 
 ```
-/audit-architecture-consensus <alvo>      # Auditoria completa 3 lentes em paralelo
-/audit-architecture-scope <alvo>          # Lente A: hierarquia L0→L4
-/audit-architecture-flow <alvo>           # Lente B: cadeias de invocação
-/audit-architecture-engine <alvo>         # Lente C: mecânicas VS Code engine
+/audit-cc-architecture-consensus <target>    # Full audit 3 lenses in parallel (recommended)
+/audit-cc-architecture-scope <target>        # Lens A: responsibility hierarchy
+/audit-cc-architecture-flow <target>         # Lens B: invocation chains
+/audit-cc-architecture-engine <target>       # Lens C: CC engine mechanics
 ```
 
-### Validação (`quality-validator`)
+### Audit — Copilot (`architecture-auditor`)
 
 ```
-/skill-best-practices-validator .claude/skills/        # Valida SKILL.md contra best practices
-/instructions-best-practices-validator .claude/rules/  # Valida rules contra best practices
-/agent-router-pattern-validator                         # Valida padrão de roteamento do projeto
-/copilot-compatibility-review                           # Verifica compatibilidade com docs Copilot
-/project-analysis-validator .claude/                   # Análise holística de saúde do projeto
+/audit-architecture-consensus <target>      # Full audit 3 lenses in parallel
+/audit-architecture-scope <target>          # Lens A: L0→L4 hierarchy
+/audit-architecture-flow <target>           # Lens B: invocation chains
+/audit-architecture-engine <target>         # Lens C: VS Code engine mechanics
+```
+
+### Validation (`quality-validator`)
+
+```
+/skill-best-practices-validator .claude/skills/        # Validates SKILL.md against best practices
+/instructions-best-practices-validator .claude/rules/  # Validates rules against best practices
+/agent-router-pattern-validator                         # Validates project routing pattern
+/copilot-compatibility-review                           # Checks Copilot documentation compatibility
+/project-analysis-validator .claude/                   # Holistic project health analysis
+```
+
+### Evaluation (`skill-evaluator`)
+
+```
+/evaluating-skill-scenarios <skill-name>            # Runs LLM-as-judge scenarios for the skill
 ```
 
 ---
 
-## Como Escolher o Agente
+## How to Choose the Agent
 
 ```mermaid
 flowchart TD
-    START{O que você quer fazer?}
+    START{What do you want to do?}
 
-    START --> P[Pesquisar uma tecnologia<br/>ou domínio]
-    START --> G[Gerar um artefato<br/>SKILL.md ou instructions]
-    START --> A[Auditar arquitetura<br/>de um projeto de agente]
-    START --> V[Validar qualidade<br/>de artefatos existentes]
+    START --> P[Research a technology<br/>or domain]
+    START --> G[Generate an artifact<br/>SKILL.md or instructions]
+    START --> A[Audit the architecture<br/>of an agent project]
+    START --> V[Validate the quality<br/>of existing artifacts]
 
     P --> P1[/researching-technical-frameworks/]
     P --> P2[/terraform-engineering-best-practices-researcher/]
@@ -86,16 +93,16 @@ flowchart TD
     P --> P5[/requirements-methodology-researcher/]
     P --> P6[/architecture-methodology-researcher/]
 
-    G --> G1{Tenho research file?}
-    G1 -->|Sim| G2[/skill-creator path/to/research.md/]
-    G1 -->|Não — metodologia| G3[/methodologies-skill-generator/]
-    G1 -->|Não — arquitetura| G4[/architecture-approaches-skill-generator/]
-    G1 -->|Não — Terraform rules| G5[/terraform-instructions-compiler/]
+    G --> G1{Do I have a research file?}
+    G1 -->|Yes| G2[/skill-creator path/to/research.md/]
+    G1 -->|No — methodology| G3[/methodologies-skill-generator/]
+    G1 -->|No — architecture| G4[/architecture-approaches-skill-generator/]
+    G1 -->|No — Terraform rules| G5[/terraform-instructions-compiler/]
 
-    A --> A1{Qual plataforma?}
-    A1 -->|Claude Code .claude/| A2[/audit-cc-architecture-consensus alvo/]
-    A1 -->|Copilot .github/| A3[/audit-architecture-consensus alvo/]
-    A1 -->|Só uma perspectiva| A4[scope / flow / engine individualmente]
+    A --> A1{Which platform?}
+    A1 -->|Claude Code .claude/| A2[/audit-cc-architecture-consensus target/]
+    A1 -->|Copilot .github/| A3[/audit-architecture-consensus target/]
+    A1 -->|Only one perspective| A4[scope / flow / engine individually]
 
     V --> V1[/project-analysis-validator .claude//]
     V --> V2[/skill-best-practices-validator/]
@@ -104,7 +111,7 @@ flowchart TD
 
 ---
 
-## Fluxo Típico de Ponta-a-Ponta
+## Typical End-to-End Flow
 
 ```
 1. /researching-technical-frameworks
@@ -114,7 +121,7 @@ flowchart TD
         │ → .claude/skills/fastapi-async-api/SKILL.md
         ↓
 3. /skill-best-practices-validator .claude/skills/fastapi-async-api/
-        │ → relatório de qualidade
+        │ → quality report
         ↓
 4. /project-analysis-validator .claude/
         │ → .claude/project-analysis-report.md
@@ -125,9 +132,9 @@ flowchart TD
 
 ---
 
-## Links para Referência
+## Reference Links
 
-- [Como Usar → Workflows completos](../como-usar/README.md)
-- [Catálogo de Capacidades](../capacidades/README.md)
-- [Mapeamento .github/ ↔ .claude/](../referencia/mapeamento-github-claude.md)
-- [Convenções e Padrões](../referencia/convencoes.md)
+- [How to Use → Complete workflows](../como-usar/README.md)
+- [Capabilities Catalog](../capacidades/README.md)
+- [Mapping .github/ ↔ .claude/](../referencia/mapeamento-github-claude.md)
+- [Conventions and Standards](../referencia/convencoes.md)

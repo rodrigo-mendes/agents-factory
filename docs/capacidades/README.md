@@ -1,77 +1,79 @@
-# Catálogo de Capacidades
+# Capabilities Catalog
 
-Todas as capacidades do Agents Factory organizadas por categoria.
+All Agents Factory capabilities organized by category.
 
-## Resumo
+## Summary
 
-| Categoria | Qtd | Propósito |
+| Category | Count | Purpose |
 |-----------|:---:|-----------|
-| [Skills](skills.md) | 1 | Skill de pesquisa com version absolutism; padrões de autoria integrados ao `skill-creator` |
-| [Templates](templates.md) | 14 | Scaffolding para criar qualquer artefato |
-| [Pesquisa](prompts-pesquisa.md) | 7 | Construir bases de conhecimento validadas |
-| [Compilação](prompts-compilacao.md) | 4 | Transformar pesquisa em skills/instructions |
-| [Validação](prompts-validacao.md) | 4 | Verificar qualidade de artefatos |
-| [Auditoria](prompts-arquitetura.md) | 8 | Auditar arquitetura multi-modelo |
-| [Framework](prompts-framework.md) | 1 | Validar projetos de agente |
+| [Skills](skills.md) | 1 | Research skill with version absolutism; authoring patterns integrated into `skill-creator` |
+| [Templates](templates.md) | 14 | Scaffolding to create any artifact |
+| [Research](prompts-pesquisa.md) | 7 | Build validated knowledge bases |
+| [Compilation](prompts-compilacao.md) | 4 | Transform research into skills/instructions |
+| [Validation](prompts-validacao.md) | 4 | Verify artifact quality |
+| [Auditing](prompts-arquitetura.md) | 8 | Multi-model architecture auditing |
+| [Framework](prompts-framework.md) | 1 | Validate agent projects |
+| [Evaluation](prompts-avaliacao.md) | 1 | Test skill behavior via LLM-as-judge |
 
 ---
 
-## Tabela Completa
+## Full Table
 
-| # | Nome | Tipo | Categoria | Descrição |
+| # | Name | Type | Category | Description |
 |:-:|------|------|-----------|-----------|
-| 1 | `researching-technical-frameworks` | Skill | Pesquisa | Pesquisa tecnologias/frameworks com version absolutism |
-| 2 | `agent-router-pattern-validator` | Prompt | Framework | Análise de conformidade com Agent Router Pattern |
-| 3 | `technical-framework-researcher-terraform` | Prompt | Pesquisa | Pesquisa serviços cloud + Terraform |
-| 5 | `terraform-engineering-best-practices-researcher` | Prompt | Pesquisa | Pesquisa práticas de engenharia Terraform |
-| 6 | `architecture-methodology-researcher` | Prompt | Pesquisa | Pesquisa metodologias de arquitetura (C4, TOGAF, DDD) |
-| 7 | `cloud-architecture-researcher` | Prompt | Pesquisa | Pesquisa frameworks de arquitetura cloud (WAF, CAF) |
-| 8 | `business-domain-researcher` | Prompt | Pesquisa | Pesquisa domínios organizacionais e regulatórios |
-| 9 | `requirements-methodology-researcher` | Prompt | Pesquisa | Pesquisa frameworks de requisitos (Scrum, SAFe) |
-| 10 | `skill-creator` | Prompt | Compilação | Gera SKILL.md a partir de pesquisa; incorpora padrões de autoria (three-tier, YAML, blueprints) |
-| 11 | `terraform-instructions-compiler` | Prompt | Compilação | Compila pesquisa Terraform em .instructions.md |
-| 12 | `architecture-approaches-skill-generator` | Prompt | Compilação | Gera SKILL.md de metodologia de arquitetura |
-| 13 | `methodologies-skill-generator` | Prompt | Compilação | Gera SKILL.md de metodologia de engenharia |
-| 14 | `copilot-compatibility-review` | Prompt | Validação | Verifica compatibilidade com docs oficiais do Copilot |
-| 15 | `instructions-best-practices-validator` | Prompt | Validação | Valida .instructions.md contra best practices |
-| 16 | `skill-best-practices-validator` | Prompt | Validação | Valida SKILL.md contra Claude best practices |
-| 17 | `project-analysis-validator` | Prompt | Validação | Análise de qualidade geral do projeto |
-| 18 | `audit-architecture-consensus` | Prompt | Auditoria | Orquestra 3 modelos em paralelo + consenso (alvo Copilot) |
-| 19 | `audit-architecture-scope` | Prompt | Auditoria | Modelo A: hierarquia de responsabilidades L0→L4 (alvo Copilot) |
-| 20 | `audit-architecture-flow` | Prompt | Auditoria | Modelo B: cadeias de invocação prompt→agent→skill (alvo Copilot) |
-| 21 | `audit-architecture-engine` | Prompt | Auditoria | Modelo C: mecânicas do VS Code engine (alvo Copilot) |
-| 22 | `audit-cc-architecture-consensus` | Prompt | Auditoria | Orquestra 3 modelos em paralelo + consenso (alvo Claude Code) |
-| 23 | `audit-cc-architecture-scope` | Prompt | Auditoria | Modelo A: hierarquia de responsabilidades G0→G4 (alvo Claude Code) |
-| 24 | `audit-cc-architecture-flow` | Prompt | Auditoria | Modelo B: cadeias de invocação prompt→agent→skill (alvo Claude Code) |
-| 25 | `audit-cc-architecture-engine` | Prompt | Auditoria | Modelo C: mecânicas do Claude Code engine (alvo Claude Code) |
+| 1 | `researching-technical-frameworks` | Skill | Research | Researches technologies/frameworks with version absolutism |
+| 2 | `agent-router-pattern-validator` | Prompt | Framework | Agent Router Pattern compliance analysis |
+| 3 | `technical-framework-researcher-terraform` | Prompt | Research | Researches cloud services + Terraform |
+| 4 | `terraform-engineering-best-practices-researcher` | Prompt | Research | Researches Terraform engineering practices |
+| 5 | `architecture-methodology-researcher` | Prompt | Research | Researches architecture methodologies (C4, TOGAF, DDD) |
+| 6 | `cloud-architecture-researcher` | Prompt | Research | Researches cloud architecture frameworks (WAF, CAF) |
+| 7 | `business-domain-researcher` | Prompt | Research | Researches organizational and regulatory domains |
+| 8 | `requirements-methodology-researcher` | Prompt | Research | Researches requirements frameworks (Scrum, SAFe) |
+| 9 | `skill-creator` | Prompt | Compilation | Generates SKILL.md from research; incorporates authoring patterns (three-tier, YAML, blueprints) |
+| 10 | `terraform-instructions-compiler` | Prompt | Compilation | Compiles Terraform research into .instructions.md |
+| 11 | `architecture-approaches-skill-generator` | Prompt | Compilation | Generates SKILL.md for architecture methodology |
+| 12 | `methodologies-skill-generator` | Prompt | Compilation | Generates SKILL.md for engineering methodology |
+| 13 | `copilot-compatibility-review` | Prompt | Validation | Verifies compatibility with official Copilot docs |
+| 14 | `instructions-best-practices-validator` | Prompt | Validation | Validates .instructions.md against best practices |
+| 15 | `skill-best-practices-validator` | Prompt | Validation | Validates SKILL.md against Claude best practices |
+| 16 | `project-analysis-validator` | Prompt | Validation | Overall project quality analysis |
+| 17 | `audit-architecture-consensus` | Prompt | Auditing | Orchestrates 3 models in parallel + consensus (Copilot target) |
+| 18 | `audit-architecture-scope` | Prompt | Auditing | Model A: responsibility hierarchy L0→L4 (Copilot target) |
+| 19 | `audit-architecture-flow` | Prompt | Auditing | Model B: invocation chains prompt→agent→skill (Copilot target) |
+| 20 | `audit-architecture-engine` | Prompt | Auditing | Model C: VS Code engine mechanics (Copilot target) |
+| 21 | `audit-cc-architecture-consensus` | Prompt | Auditing | Orchestrates 3 models in parallel + consensus (Claude Code target) |
+| 22 | `audit-cc-architecture-scope` | Prompt | Auditing | Model A: responsibility hierarchy G0→G4 (Claude Code target) |
+| 23 | `audit-cc-architecture-flow` | Prompt | Auditing | Model B: invocation chains prompt→agent→skill (Claude Code target) |
+| 24 | `audit-cc-architecture-engine` | Prompt | Auditing | Model C: Claude Code engine mechanics (Claude Code target) |
+| 25 | `evaluating-skill-scenarios` | Prompt | Evaluation | Executes LLM-as-judge scenarios and judges skill behavior |
 
 ---
 
-## Como Escolher
+## How to Choose
 
 ```mermaid
 flowchart TD
-    START{O que você quer fazer?} --> Q1{Pesquisar algo?}
-    START --> Q2{Criar artefato?}
-    START --> Q3{Validar qualidade?}
-    START --> Q4{Auditar arquitetura?}
+    START{What do you want to do?} --> Q1{Research something?}
+    START --> Q2{Create an artifact?}
+    START --> Q3{Validate quality?}
+    START --> Q4{Audit architecture?}
     
-    Q1 -->|Tecnologia| R1[researching-technical-frameworks]
+    Q1 -->|Technology| R1[researching-technical-frameworks]
     Q1 -->|Terraform| R2[terraform-engineering-best-practices-researcher]
-    Q1 -->|Arquitetura| R3[architecture-methodology-researcher]
+    Q1 -->|Architecture| R3[architecture-methodology-researcher]
     Q1 -->|Cloud| R4[cloud-architecture-researcher]
-    Q1 -->|Domínio| R5[business-domain-researcher]
-    Q1 -->|Requisitos| R6[requirements-methodology-researcher]
+    Q1 -->|Domain| R5[business-domain-researcher]
+    Q1 -->|Requirements| R6[requirements-methodology-researcher]
     
     Q2 -->|Skill| C1[skill-creator]
     Q2 -->|Instructions| C2[terraform-instructions-compiler]
     
-    Q3 -->|Compatibilidade| V1[copilot-compatibility-review]
+    Q3 -->|Compatibility| V1[copilot-compatibility-review]
     Q3 -->|Instructions| V2[instructions-best-practices-validator]
     Q3 -->|Skills| V3[skill-best-practices-validator]
-    Q3 -->|Projeto todo| V4[project-analysis-validator]
+    Q3 -->|Whole project| V4[project-analysis-validator]
     
-    Q4 -->|Projeto .claude/ — completa| A1CC[audit-cc-architecture-consensus]
-    Q4 -->|Projeto .github/ — completa| A1[audit-architecture-consensus]
-    Q4 -->|Lentes individuais| AIND[Ver prompts-arquitetura.md]
+    Q4 -->|.claude/ project — full| A1CC[audit-cc-architecture-consensus]
+    Q4 -->|.github/ project — full| A1[audit-architecture-consensus]
+    Q4 -->|Individual lenses| AIND[See prompts-arquitetura.md]
 ```

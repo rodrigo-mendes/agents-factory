@@ -1,175 +1,175 @@
-# Prompts de Validação
+# Validation Prompts
 
-4 prompts dedicados a verificar qualidade e conformidade de artefatos do framework.
+4 prompts dedicated to verifying quality and compliance of framework artifacts.
 
-Todos seguem o padrão do `TEMPLATE.VALIDATION.prompt.md`.
+All follow the `TEMPLATE.VALIDATION.prompt.md` pattern.
 
 ---
 
-## Visão Geral
+## Overview
 
-| Prompt | Valida | Contra | Output |
+| Prompt | Validates | Against | Output |
 |--------|--------|--------|--------|
-| `copilot-compatibility-review` | Qualquer artefato Copilot | Docs oficiais GitHub + convenções ECI | Relatório de compatibilidade |
-| `instructions-best-practices-validator` | `.instructions.md` | Docs GitHub/VS Code + convenções time | Análise de qualidade |
-| `skill-best-practices-validator` | `SKILL.md` | Claude best practices + `skill-creator` | Análise de qualidade |
-| `project-analysis-validator` | Projeto inteiro | Quality framework + three-tier | Score + roadmap |
+| `copilot-compatibility-review` | Any Copilot artifact | Official GitHub docs + ECI conventions | Compatibility report |
+| `instructions-best-practices-validator` | `.instructions.md` | GitHub/VS Code docs + team conventions | Quality analysis |
+| `skill-best-practices-validator` | `SKILL.md` | Claude best practices + `skill-creator` | Quality analysis |
+| `project-analysis-validator` | Entire project | Quality framework + three-tier | Score + roadmap |
 
 ---
 
 ## 1. copilot-compatibility-review
 
-> **Arquivo**: `.claude/skills/copilot-compatibility-review/SKILL.md`
+> **File**: `.claude/skills/copilot-compatibility-review/SKILL.md`
 
-### Descrição
-Verifica compatibilidade de artefatos GitHub Copilot (`.agent.md`, `.instructions.md`, `.prompt.md`, `SKILL.md`) contra documentação oficial.
+### Description
+Verifies compatibility of GitHub Copilot artifacts (`.agent.md`, `.instructions.md`, `.prompt.md`, `SKILL.md`) against official documentation.
 
-### Invocação
+### Invocation
 ```
 copilot-compatibility-review
 ```
 
-### O que Verifica
-- YAML frontmatter correto (campos, limites de caracteres)
-- Compatibilidade com engine do VS Code
-- Uso correto de `applyTo`, `tools`, `agent`
-- Aderência a limites documentados
+### What It Verifies
+- Correct YAML frontmatter (fields, character limits)
+- Compatibility with the VS Code engine
+- Correct use of `applyTo`, `tools`, `agent`
+- Adherence to documented limits
 
-### Input Esperado
-- Caminho para repositório/pasta com artefatos Copilot
+### Expected Input
+- Path to repository/folder with Copilot artifacts
 
-### Output Produzido
-- Relatório markdown com violações categorizadas por severidade
+### Produced Output
+- Markdown report with violations categorized by severity
 
-### Dependências
-- Nenhuma skill (auto-contido)
+### Dependencies
+- No skill (self-contained)
 
-### Quando Usar
-- Primeiro check após criar qualquer artefato novo
-- Antes de commit/PR de artefatos Copilot
-- Como step 1 do [Fluxo de Qualidade](../fluxos/fluxo-qualidade.md)
+### When to Use
+- First check after creating any new artifact
+- Before committing/PRing Copilot artifacts
+- As step 1 of the [Quality Flow](../fluxos/fluxo-qualidade.md)
 
 ---
 
 ## 2. instructions-best-practices-validator
 
-> **Arquivo**: `.claude/skills/instructions-best-practices-validator/SKILL.md`
+> **File**: `.claude/skills/instructions-best-practices-validator/SKILL.md`
 
-### Descrição
-Valida arquivos `.instructions.md` contra best practices oficiais de GitHub/VS Code e convenções do time.
+### Description
+Validates `.instructions.md` files against official GitHub/VS Code best practices and team conventions.
 
-### Invocação
+### Invocation
 ```
 instructions-best-practices-validator
 ```
 
-### O que Verifica
-- Estrutura do arquivo (seções obrigatórias)
-- Clareza e concisão das instruções
-- Ausência de contradições
-- Aderência a padrões de naming
-- Escopo adequado (não muito amplo, não muito restrito)
+### What It Verifies
+- File structure (mandatory sections)
+- Clarity and conciseness of instructions
+- Absence of contradictions
+- Adherence to naming standards
+- Appropriate scope (not too broad, not too narrow)
 
-### Input Esperado
-- Caminho para diretório contendo `.instructions.md`
+### Expected Input
+- Path to directory containing `.instructions.md`
 
-### Output Produzido
-- Análise de qualidade com sugestões de melhoria priorizadas
+### Produced Output
+- Quality analysis with prioritized improvement suggestions
 
-### Dependências
-- Nenhuma skill (valida contra docs oficiais internamente)
+### Dependencies
+- No skill (validates against official docs internally)
 
-### Quando Usar
-- Após `terraform-instructions-compiler` gerar instructions
-- Ao revisar instructions existentes
-- Como step 2 do [Fluxo de Qualidade](../fluxos/fluxo-qualidade.md)
+### When to Use
+- After `terraform-instructions-compiler` generates instructions
+- When reviewing existing instructions
+- As step 2 of the [Quality Flow](../fluxos/fluxo-qualidade.md)
 
 ---
 
 ## 3. skill-best-practices-validator
 
-> **Arquivo**: `.claude/skills/skill-best-practices-validator/SKILL.md`
+> **File**: `.claude/skills/skill-best-practices-validator/SKILL.md`
 
-### Descrição
-Valida `SKILL.md` contra Claude best practices oficiais e o padrão definido em `skill-creator`.
+### Description
+Validates `SKILL.md` against official Claude best practices and the pattern defined in `skill-creator`.
 
-### Invocação
+### Invocation
 ```
 skill-best-practices-validator
 ```
 
-### O que Verifica
-- Three-tier correto (✅⚠️🚫 — presença e conteúdo)
-- YAML frontmatter (name ≤64 chars, description ≤1024 chars)
-- Version absolutism (uma versão por skill)
-- Blueprints presentes e completos
-- Código de exemplo em todos os ✅ Always Do
-- Alternativas em todos os 🚫 Never Do
-- Progressive disclosure (informação em camadas)
+### What It Verifies
+- Correct three-tier (✅⚠️🚫 — presence and content)
+- YAML frontmatter (name ≤64 chars, description ≤1536 chars)
+- Version absolutism (one version per skill)
+- Blueprints present and complete
+- Example code in all ✅ Always Do
+- Alternatives in all 🚫 Never Do
+- Progressive disclosure (layered information)
 
-### Input Esperado
-- Caminho para diretório de skills
+### Expected Input
+- Path to skills directory
 
-### Output Produzido
-- Análise de qualidade com score e itens de melhoria
+### Produced Output
+- Quality analysis with score and improvement items
 
-### Dependências
-- Padrões de autoria do `skill-creator` (baseline de validação)
+### Dependencies
+- Authoring patterns from `skill-creator` (validation baseline)
 
-### Quando Usar
-- Após `skill-creator` ou generators produzirem SKILL.md
-- Ao revisar skills existentes
-- Como step 3 do [Fluxo de Qualidade](../fluxos/fluxo-qualidade.md)
+### When to Use
+- After `skill-creator` or generators produce SKILL.md
+- When reviewing existing skills
+- As step 3 of the [Quality Flow](../fluxos/fluxo-qualidade.md)
 
 ---
 
 ## 4. project-analysis-validator
 
-> **Arquivo**: `.claude/skills/project-analysis-validator/SKILL.md`
+> **File**: `.claude/skills/project-analysis-validator/SKILL.md`
 
-### Descrição
-Análise holística de projetos de agente Claude Code (`.claude/`) e GitHub Copilot (`.github/`) — detecta drift de CLAUDE.md, frontmatter inválido, routing quebrado e componentes órfãos. Emite score e roadmap de remediação priorizados.
+### Description
+Holistic analysis of Claude Code agent projects (`.claude/`) and GitHub Copilot (`.github/`) — detects CLAUDE.md drift, invalid frontmatter, broken routing, and orphan components. Emits a prioritized score and remediation roadmap.
 
-### Invocação
+### Invocation
 ```
 project-analysis-validator
 ```
 
-### O que Verifica
-- Completude do projeto (todos os artefatos necessários presentes)
-- Consistência entre artefatos (agent referencia skills que existem, etc.)
-- Qualidade geral (sem dead-ends, sem referências quebradas)
-- Aderência ao Agent Router Pattern
-- Cobertura de skills (domínio coberto adequadamente)
+### What It Verifies
+- Project completeness (all necessary artifacts present)
+- Consistency between artifacts (agent references skills that exist, etc.)
+- Overall quality (no dead-ends, no broken references)
+- Adherence to Agent Router Pattern
+- Skills coverage (domain adequately covered)
 
-### Input Esperado
-- Caminho para diretório do projeto de agente
+### Expected Input
+- Path to agent project directory
 
-### Output Produzido
-- Score de qualidade (0-100)
-- Roadmap de melhorias priorizado
-- Quick wins identificados
+### Produced Output
+- Quality score (0-100)
+- Prioritized improvement roadmap
+- Identified quick wins
 
-### Dependências
-- Nenhuma skill (análise holística)
+### Dependencies
+- No skill (holistic analysis)
 
-### Quando Usar
-- Validação final antes de "produção"
-- Review periódica de projetos existentes
-- Como step 4 (final) do [Fluxo de Qualidade](../fluxos/fluxo-qualidade.md)
+### When to Use
+- Final validation before "production"
+- Periodic review of existing projects
+- As step 4 (final) of the [Quality Flow](../fluxos/fluxo-qualidade.md)
 
 ---
 
-## Pipeline de Validação Recomendado
+## Recommended Validation Pipeline
 
 ```mermaid
 graph LR
-    A[copilot-compatibility-review] -->|compatível| B[instructions-best-practices-validator]
-    A -->|compatível| C[skill-best-practices-validator]
+    A[copilot-compatibility-review] -->|compatible| B[instructions-best-practices-validator]
+    A -->|compatible| C[skill-best-practices-validator]
     B --> D[project-analysis-validator]
     C --> D
 ```
 
-Executar nesta ordem garante: primeiro compatibilidade técnica, depois qualidade de conteúdo, por fim consistência holística.
+Running in this order ensures: first technical compatibility, then content quality, and finally holistic consistency.
 
-Ver: [Fluxo de Qualidade](../fluxos/fluxo-qualidade.md) para detalhes completos.
+See: [Quality Flow](../fluxos/fluxo-qualidade.md) for full details.

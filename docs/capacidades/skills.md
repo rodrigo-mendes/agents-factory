@@ -1,90 +1,90 @@
-# Skills — Capacidades Base do Framework
+# Skills — Framework Base Capabilities
 
-O Agents Factory possui **2 skills base** no Claude Code: `skill-creator` (padrões de autoria) e `researching-technical-frameworks` (metodologia de pesquisa, agora um comando fork). No Copilot, `authoring-agent-skills` é a skill equivalente ao `skill-creator`.
+The Agents Factory has **2 base skills** in Claude Code: `skill-creator` (authoring patterns) and `researching-technical-frameworks` (research methodology, now a fork command). In Copilot, `authoring-agent-skills` is the skill equivalent to `skill-creator`.
 
 ---
 
-## 1. skill-creator (padrões de autoria integrados)
+## 1. skill-creator (integrated authoring patterns)
 
-> **Arquivo Claude Code**: `.claude/skills/skill-creator/SKILL.md`  
-> **Equivalente Copilot**: `.github/skills/authoring-agent-skills/SKILL.md` *(Copilot mantém skill separada)*
+> **Claude Code file**: `.claude/skills/skill-creator/SKILL.md`  
+> **Copilot equivalent**: `.github/skills/authoring-agent-skills/SKILL.md` *(Copilot keeps a separate skill)*
 
-### Propósito
-No Claude Code, o `skill-creator` absorveu os padrões de autoria (`authoring-agent-skills`) — ele define **como** criar skills (três tiers, YAML, blueprints) e **executa** a geração a partir de um research file, em um único artefato.
+### Purpose
+In Claude Code, `skill-creator` absorbed the authoring patterns (`authoring-agent-skills`) — it defines **how** to create skills (three tiers, YAML, blueprints) and **executes** generation from a research file, in a single artifact.
 
-### Quando Usar
-- Ao criar uma nova SKILL.md a partir de um research file
-- Ao revisar/melhorar uma skill existente (padrões embutidos)
-- Ao validar se uma skill segue os padrões (via `skill-best-practices-validator`, que referencia este skill)
+### When to Use
+- When creating a new SKILL.md from a research file
+- When reviewing/improving an existing skill (built-in patterns)
+- When validating whether a skill follows the standards (via `skill-best-practices-validator`, which references this skill)
 
-### Conteúdo Principal
+### Main Content
 
-| Seção | Descrição |
+| Section | Description |
 |-------|-----------|
 | Authoring Standards | Core Principles, YAML rules, Three-Tier, Progressive Disclosure, Quality Checklist |
-| Blueprints & Guardrails | Regras operacionais ✅⚠️🚫 do próprio gerador |
-| Execution Workflow | 6 passos de geração a partir do research file |
-| Three-Tier Architecture | Sistema ✅⚠️🚫 obrigatório (blueprint) |
-| Evaluation & Iteration | Metodologia de iteração com Claude A/B (blueprint) |
+| Blueprints & Guardrails | Operational rules ✅⚠️🚫 for the generator itself |
+| Execution Workflow | 6 generation steps from the research file |
+| Three-Tier Architecture | Mandatory ✅⚠️🚫 system (blueprint) |
+| Evaluation & Iteration | Iteration methodology with Claude A/B (blueprint) |
 
 ### Blueprints
-- `blueprints/three-tier-architecture.md` — Framework ✅⚠️🚫 com exemplos de código
-- `blueprints/evaluation-iteration.md` — Metodologia de avaliação e iteração (oficial)
-- `blueprints/evaluation-scenarios.md` — 6 cenários de teste (generator + authoring standards)
+- `blueprints/three-tier-architecture.md` — ✅⚠️🚫 framework with code examples
+- `blueprints/evaluation-iteration.md` — Evaluation and iteration methodology (official)
+- `blueprints/evaluation-scenarios.md` — 6 test scenarios (generator + authoring standards)
 
-### Usado por
-- `skill-best-practices-validator` — Usa como baseline de validação
-- `architecture-approaches-skill-generator` — Segue o padrão
-- `methodologies-skill-generator` — Segue o padrão
-- `skill-author` (subagente) — Carrega em P0 antes de gerar qualquer SKILL.md
+### Used by
+- `skill-best-practices-validator` — Uses as validation baseline
+- `architecture-approaches-skill-generator` — Follows the pattern
+- `methodologies-skill-generator` — Follows the pattern
+- `skill-author` (subagent) — Loads at P0 before generating any SKILL.md
 
 ---
 
 ## 2. researching-technical-frameworks
 
-> **Arquivo Claude Code**: `.claude/skills/researching-technical-frameworks/SKILL.md`  
-> **Arquivo Copilot**: `.github/skills/researching-technical-frameworks/SKILL.md`
+> **Claude Code file**: `.claude/skills/researching-technical-frameworks/SKILL.md`  
+> **Copilot file**: `.github/skills/researching-technical-frameworks/SKILL.md`
 
-### Propósito
-Comando de pesquisa anti-alucinação: define a metodologia e executa a pesquisa (forks para `framework-researcher`). Produz bases de conhecimento validadas contra fontes oficiais com versionamento rigoroso.
+### Purpose
+Anti-hallucination research command: defines the methodology and executes research (forks to `framework-researcher`). Produces knowledge bases validated against official sources with strict versioning.
 
-### Quando Usar
-- `/researching-technical-frameworks <tech> <version>` — pesquisar qualquer tecnologia/framework
-- Ao criar base de conhecimento para um domínio (inclui SDK, Terraform, metodologias via variantes)
-- Como fonte de metodologia para todos os outros researchers
+### When to Use
+- `/researching-technical-frameworks <tech> <version>` — research any technology/framework
+- When building a knowledge base for a domain (includes SDK, Terraform, methodologies via variants)
+- As a methodology source for all other researchers
 
-### Conteúdo Principal
+### Main Content
 
-| Seção | Descrição |
+| Section | Description |
 |-------|-----------|
-| Research Methodology | Etapas obrigatórias da pesquisa |
-| Version Absolutism | Uma skill = uma versão. Nunca conflitar. |
+| Research Methodology | Mandatory research steps |
+| Version Absolutism | One skill = one version. Never conflict. |
 | Decision Matrices | Breadth vs Depth, Cloud Provider Selection |
-| Verification Loops | Como validar informações contra fontes |
-| Output Structure | Formato do documento de pesquisa |
+| Verification Loops | How to validate information against sources |
+| Output Structure | Research document format |
 
 ### Blueprints
-- `blueprints/always-do-patterns.md` — Padrões de pesquisa obrigatórios
-- `blueprints/ask-first-decisions.md` — Decisões de escopo e cloud provider
-- `blueprints/never-do-patterns.md` — Anti-padrões de pesquisa
-- `blueprints/integration-patterns.md` — Template SDK/library
-- `blueprints/output-format-template.md` — Estrutura completa do documento de saída
-- `blueprints/evaluation-scenarios.md` — 8 cenários de teste
+- `blueprints/always-do-patterns.md` — Mandatory research patterns
+- `blueprints/ask-first-decisions.md` — Scope and cloud provider decisions
+- `blueprints/never-do-patterns.md` — Research anti-patterns
+- `blueprints/integration-patterns.md` — SDK/library template
+- `blueprints/output-format-template.md` — Complete output document structure
+- `blueprints/evaluation-scenarios.md` — 8 test scenarios
 
-### Referenciado por
-- `framework-researcher` (agente) — carrega como skill em P0
-- `technical-framework-researcher-terraform` — referencia como metodologia base
-- Todos os outros researchers (`cloud-architecture-researcher`, `business-domain-researcher`, etc.) — seguem a mesma metodologia
+### Referenced by
+- `framework-researcher` (agent) — loads as skill at P0
+- `technical-framework-researcher-terraform` — references as base methodology
+- All other researchers (`cloud-architecture-researcher`, `business-domain-researcher`, etc.) — follow the same methodology
 
 ---
 
-## Relação entre as Skills
+## Relationship Between Skills
 
 ```mermaid
 graph LR
-    R[researching-technical-frameworks] -->|produz pesquisa para| A[skill-creator]
-    A -->|define padrões e gera| SK[SKILL.md gerada]
-    R -->|valida conteúdo de| SK
+    R[researching-technical-frameworks] -->|produces research for| A[skill-creator]
+    A -->|defines patterns and generates| SK[generated SKILL.md]
+    R -->|validates content of| SK
 ```
 
-A skill de **pesquisa** garante que o conteúdo é correto (fontes, versões). O **skill-creator** incorpora tanto os padrões de autoria (three-tier, YAML, blueprints) quanto a geração em si. Juntos formam o pipeline: pesquisa → compilação → skill validada.
+The **research** skill ensures content is correct (sources, versions). The **skill-creator** incorporates both the authoring patterns (three-tier, YAML, blueprints) and the generation itself. Together they form the pipeline: research → compilation → validated skill.

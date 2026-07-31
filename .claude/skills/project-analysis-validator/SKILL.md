@@ -21,6 +21,7 @@ covers seven dimensions (P1–P7) and emits one consolidated report with graded 
 
 - **[Evaluation Checklist](./blueprints/evaluation-checklist.md)** — full dimension rubric P1–P7
   with pass/warn/fail criteria
+- **[Evaluation Scenarios](./blueprints/evaluation-scenarios.md)** — 3 test cases (canonical, edge, misuse)
 - **[Execution Instructions](#execution-instructions)** — 4-step workflow
 - **[Dimensions Summary](#dimensions-summary)** — P1–P7 overview
 - **[Anti-Pattern Detection](#anti-pattern-detection)** — 9 detection rules

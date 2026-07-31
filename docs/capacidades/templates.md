@@ -1,184 +1,184 @@
-# Templates — Scaffolding de Artefatos
+# Templates — Artifact Scaffolding
 
-14 templates disponíveis para criar qualquer tipo de artefato do framework.
+14 templates available to create any type of framework artifact.
 
-> **Coexistência de sistemas**: Os templates existem em duas localizações espelhadas — `.github/templates/` (GitHub Copilot) e `.claude/templates/` (Claude Code). A única diferença estrutural é que `.github/` usa `instructions/` enquanto `.claude/` usa `rules/` para os templates de instrução de escopo.
-
----
+> **System coexistence**: Templates exist in two mirrored locations — `.github/templates/` (GitHub Copilot) and `.claude/templates/` (Claude Code). The only structural difference is that `.github/` uses `instructions/` while `.claude/` uses `rules/` for scope instruction templates.
 
 ---
 
-## Resumo por Categoria
+---
 
-| Categoria | Templates | Propósito |
+## Summary by Category
+
+| Category | Templates | Purpose |
 |-----------|:---------:|-----------|
-| Agent | 3 | Criar agentes (Implementation, Advisory, Orchestrator) |
-| Prompt | 6 | Criar prompts por tipo de operação |
-| Skill | 1 | Criar skills versionadas |
-| Instruction | 3 | Criar instructions (Config, Standards, Skills-routing) |
-| Report | 1 | Relatórios pós-incidente |
+| Agent | 3 | Create agents (Implementation, Advisory, Orchestrator) |
+| Prompt | 6 | Create prompts by operation type |
+| Skill | 1 | Create versioned skills |
+| Instruction | 3 | Create instructions (Config, Standards, Skills-routing) |
+| Report | 1 | Post-incident reports |
 
 ---
 
-## Templates de Agent
+## Agent Templates
 
 ### TEMPLATE.AGENT.md
-> **Arquivo**: `.github/templates/agents/TEMPLATE.AGENT.md`
+> **File**: `.github/templates/agents/TEMPLATE.AGENT.md`
 
-| Campo | Valor |
+| Field | Value |
 |-------|-------|
-| **Padrão** | Implementation (P0-P5 completo) |
-| **Gera código?** | ✅ Sim |
-| **Quando usar** | Criar agente que implementa/gera código seguindo skills |
-| **Referenciado por** | Nenhum prompt explicitamente (usar como referência manual ao criar novos agentes) |
-| **Exemplo real** | `templates/examples/agents/oci-terraform.agent.md` |
+| **Pattern** | Implementation (full P0-P5) |
+| **Generates code?** | ✅ Yes |
+| **When to use** | Create an agent that implements/generates code following skills |
+| **Referenced by** | No prompt explicitly (use as manual reference when creating new agents) |
+| **Real example** | `templates/examples/agents/oci-terraform.agent.md` |
 
 ### TEMPLATE.ADVISORY-AGENT.md
-> **Arquivo**: `.github/templates/agents/TEMPLATE.ADVISORY-AGENT.md`
+> **File**: `.github/templates/agents/TEMPLATE.ADVISORY-AGENT.md`
 
-| Campo | Valor |
+| Field | Value |
 |-------|-------|
-| **Padrão** | Advisory (P0-P5 read-only) |
-| **Gera código?** | ❌ Não — produz designs, ADRs, diagramas |
-| **Quando usar** | Criar agente de design/revisão que delega implementação |
-| **Referenciado por** | Nenhum prompt explicitamente |
-| **Exemplo real** | `templates/examples/agents/oci-serverless-architect.agent.md` |
+| **Pattern** | Advisory (P0-P5 read-only) |
+| **Generates code?** | ❌ No — produces designs, ADRs, diagrams |
+| **When to use** | Create a design/review agent that delegates implementation |
+| **Referenced by** | No prompt explicitly |
+| **Real example** | `templates/examples/agents/oci-serverless-architect.agent.md` |
 
 ### TEMPLATE.ORCHESTRATOR-AGENT.md
-> **Arquivo**: `.github/templates/agents/TEMPLATE.ORCHESTRATOR-AGENT.md`
+> **File**: `.github/templates/agents/TEMPLATE.ORCHESTRATOR-AGENT.md`
 
-| Campo | Valor |
+| Field | Value |
 |-------|-------|
-| **Padrão** | Orchestrator (P0-P5 cross-domain) |
-| **Gera código?** | ✅ Sim — coordena múltiplos domínios |
-| **Quando usar** | Criar agente que orquestra Java + Terraform, ou múltiplas skills |
-| **Referenciado por** | Nenhum prompt explicitamente |
-| **Exemplo real** | `templates/examples/agents/oci-serverless-stack.agent.md` |
+| **Pattern** | Orchestrator (P0-P5 cross-domain) |
+| **Generates code?** | ✅ Yes — coordinates multiple domains |
+| **When to use** | Create an agent that orchestrates Java + Terraform, or multiple skills |
+| **Referenced by** | No prompt explicitly |
+| **Real example** | `templates/examples/agents/oci-serverless-stack.agent.md` |
 
 ---
 
-## Templates de Prompt
+## Prompt Templates
 
 ### TEMPLATE.RESEARCH.prompt.md
-> **Arquivo**: `.github/templates/prompts/TEMPLATE.RESEARCH.prompt.md`
+> **File**: `.github/templates/prompts/TEMPLATE.RESEARCH.prompt.md`
 
-| Campo | Valor |
+| Field | Value |
 |-------|-------|
-| **Categoria** | Construção de conhecimento |
-| **Quando usar** | Criar prompt que pesquisa tecnologia/metodologia |
-| **Referenciado por** | Nenhum explicitamente |
-| **Implementações que seguem** | `researching-technical-frameworks`, `terraform-engineering-best-practices-researcher`, `architecture-methodology-researcher`, `cloud-architecture-researcher`, `business-domain-researcher`, `requirements-methodology-researcher`, `technical-framework-researcher-terraform` |
+| **Category** | Knowledge building |
+| **When to use** | Create a prompt that researches a technology/methodology |
+| **Referenced by** | None explicitly |
+| **Implementations that follow** | `researching-technical-frameworks`, `terraform-engineering-best-practices-researcher`, `architecture-methodology-researcher`, `cloud-architecture-researcher`, `business-domain-researcher`, `requirements-methodology-researcher`, `technical-framework-researcher-terraform` |
 
 ### TEMPLATE.GENERATOR.prompt.md
-> **Arquivo**: `.github/templates/prompts/TEMPLATE.GENERATOR.prompt.md`
+> **File**: `.github/templates/prompts/TEMPLATE.GENERATOR.prompt.md`
 
-| Campo | Valor |
+| Field | Value |
 |-------|-------|
-| **Categoria** | Compilação pesquisa → artefato |
-| **Quando usar** | Criar prompt que transforma pesquisa em SKILL.md ou .instructions.md |
-| **Referenciado por** | Nenhum explicitamente |
-| **Implementações que seguem** | `skill-creator`, `architecture-approaches-skill-generator`, `methodologies-skill-generator`, `terraform-instructions-compiler` |
+| **Category** | Research → artifact compilation |
+| **When to use** | Create a prompt that transforms research into SKILL.md or .instructions.md |
+| **Referenced by** | None explicitly |
+| **Implementations that follow** | `skill-creator`, `architecture-approaches-skill-generator`, `methodologies-skill-generator`, `terraform-instructions-compiler` |
 
 ### TEMPLATE.VALIDATION.prompt.md
-> **Arquivo**: `.github/templates/prompts/TEMPLATE.VALIDATION.prompt.md`
+> **File**: `.github/templates/prompts/TEMPLATE.VALIDATION.prompt.md`
 
-| Campo | Valor |
+| Field | Value |
 |-------|-------|
-| **Categoria** | Avaliação de qualidade |
-| **Quando usar** | Criar prompt que valida artefatos contra padrões |
-| **Referenciado por** | Nenhum explicitamente |
-| **Implementações que seguem** | `copilot-compatibility-review`, `instructions-best-practices-validator`, `skill-best-practices-validator`, `project-analysis-validator` |
+| **Category** | Quality assessment |
+| **When to use** | Create a prompt that validates artifacts against standards |
+| **Referenced by** | None explicitly |
+| **Implementations that follow** | `copilot-compatibility-review`, `instructions-best-practices-validator`, `skill-best-practices-validator`, `project-analysis-validator` |
 
 ### TEMPLATE.ENTRY-POINT.prompt.md
-> **Arquivo**: `.github/templates/prompts/TEMPLATE.ENTRY-POINT.prompt.md`
+> **File**: `.github/templates/prompts/TEMPLATE.ENTRY-POINT.prompt.md`
 
-| Campo | Valor |
+| Field | Value |
 |-------|-------|
-| **Categoria** | Roteamento para agente |
-| **Quando usar** | Criar prompt que coleta contexto e roteia para um agente |
-| **Referenciado por** | Nenhum explicitamente |
-| **Implementações que seguem** | Prompts com campo `agent:` no YAML (entry-points para agentes) |
+| **Category** | Routing to agent |
+| **When to use** | Create a prompt that collects context and routes to an agent |
+| **Referenced by** | None explicitly |
+| **Implementations that follow** | Prompts with `agent:` field in YAML (entry-points for agents) |
 
 ### TEMPLATE.FEATURE-ADD.prompt.md
-> **Arquivo**: `.github/templates/prompts/TEMPLATE.FEATURE-ADD.prompt.md`
+> **File**: `.github/templates/prompts/TEMPLATE.FEATURE-ADD.prompt.md`
 
-| Campo | Valor |
+| Field | Value |
 |-------|-------|
-| **Categoria** | Implementação guiada |
-| **Quando usar** | Criar prompt que guia adição de feature específica |
-| **Referenciado por** | Nenhum explicitamente |
-| **Implementações que seguem** | Prompts de adição de funcionalidade (ex: `add-oci-function` nos exemplos) |
+| **Category** | Guided implementation |
+| **When to use** | Create a prompt that guides adding a specific feature |
+| **Referenced by** | None explicitly |
+| **Implementations that follow** | Feature addition prompts (e.g., `add-oci-function` in examples) |
 
 ### TEMPLATE.DESIGN.prompt.md
-> **Arquivo**: `.github/templates/prompts/TEMPLATE.DESIGN.prompt.md`
+> **File**: `.github/templates/prompts/TEMPLATE.DESIGN.prompt.md`
 
-| Campo | Valor |
+| Field | Value |
 |-------|-------|
-| **Categoria** | Design de arquitetura |
-| **Quando usar** | Criar prompt que coleta contexto para agente advisory |
-| **Referenciado por** | Nenhum explicitamente |
-| **Implementações que seguem** | Prompts de design (ex: `design-api-gateway` nos exemplos) |
+| **Category** | Architecture design |
+| **When to use** | Create a prompt that collects context for an advisory agent |
+| **Referenced by** | None explicitly |
+| **Implementations that follow** | Design prompts (e.g., `design-api-gateway` in examples) |
 
 ---
 
-## Template de Skill
+## Skill Template
 
 ### TEMPLATE.SKILL.md
-> **Arquivo**: `.github/templates/skills/TEMPLATE.SKILL.md`
+> **File**: `.github/templates/skills/TEMPLATE.SKILL.md`
 
-| Campo | Valor |
+| Field | Value |
 |-------|-------|
-| **Quando usar** | Criar qualquer nova SKILL.md |
-| **Referenciado por** | ✅ `researching-technical-frameworks/SKILL.md` (L459) — "Structure reference" |
-| **Implementações que seguem** | Todas as skills geradas pelos compilers |
+| **When to use** | Create any new SKILL.md |
+| **Referenced by** | ✅ `researching-technical-frameworks/SKILL.md` (L459) — "Structure reference" |
+| **Implementations that follow** | All skills generated by compilers |
 
 ---
 
-## Templates de Instruction
+## Instruction Templates
 
 ### TEMPLATE.CONFIG.instructions.md
-> **Arquivo**: `.github/templates/instructions/TEMPLATE.CONFIG.instructions.md`
+> **File**: `.github/templates/instructions/TEMPLATE.CONFIG.instructions.md`
 
-| Campo | Valor |
+| Field | Value |
 |-------|-------|
-| **Propósito** | Setup de projeto, dependências, estrutura |
-| **Referenciado por** | ✅ `terraform-instructions-compiler.prompt.md` (L55) |
-| **Quando usar** | Criar instruction de configuração de projeto |
+| **Purpose** | Project setup, dependencies, structure |
+| **Referenced by** | ✅ `terraform-instructions-compiler.prompt.md` (L55) |
+| **When to use** | Create a project configuration instruction |
 
 ### TEMPLATE.STANDARDS.instructions.md
-> **Arquivo**: `.github/templates/instructions/TEMPLATE.STANDARDS.instructions.md`
+> **File**: `.github/templates/instructions/TEMPLATE.STANDARDS.instructions.md`
 
-| Campo | Valor |
+| Field | Value |
 |-------|-------|
-| **Propósito** | Padrões de código, naming, qualidade |
-| **Referenciado por** | ✅ `terraform-instructions-compiler.prompt.md` (L54) |
-| **Quando usar** | Criar instruction de coding standards |
+| **Purpose** | Code standards, naming, quality |
+| **Referenced by** | ✅ `terraform-instructions-compiler.prompt.md` (L54) |
+| **When to use** | Create a coding standards instruction |
 
 ### TEMPLATE.SKILLS.instructions.md
-> **Arquivo**: `.github/templates/instructions/TEMPLATE.SKILLS.instructions.md`
+> **File**: `.github/templates/instructions/TEMPLATE.SKILLS.instructions.md`
 
-| Campo | Valor |
+| Field | Value |
 |-------|-------|
-| **Propósito** | Roteamento de skills (quais skills carregar por keyword) |
-| **Referenciado por** | ✅ `terraform-instructions-compiler.prompt.md` (L56) |
-| **Quando usar** | Criar instruction que mapeia keywords → skills |
+| **Purpose** | Skills routing (which skills to load per keyword) |
+| **Referenced by** | ✅ `terraform-instructions-compiler.prompt.md` (L56) |
+| **When to use** | Create an instruction that maps keywords → skills |
 
 ---
 
-## Template de Report
+## Report Template
 
 ### POST_MORTEM_TEMPLATE.md
-> **Arquivo**: `.github/templates/reports/POST_MORTEM_TEMPLATE.md`
+> **File**: `.github/templates/reports/POST_MORTEM_TEMPLATE.md`
 
-| Campo | Valor |
+| Field | Value |
 |-------|-------|
-| **Propósito** | Análise pós-incidente |
-| **Referenciado por** | ❌ Nenhum (órfão) |
-| **Quando usar** | Documentar post-mortem de incidentes |
+| **Purpose** | Post-incident analysis |
+| **Referenced by** | ❌ None (orphan) |
+| **When to use** | Document incident post-mortems |
 
 ---
 
-## Rastreabilidade: Template → Implementações
+## Traceability: Template → Implementations
 
 ```mermaid
 graph TD
@@ -198,11 +198,11 @@ graph TD
         TKI[TEMPLATE.SKILLS.instructions]
     end
 
-    subgraph "Implementações"
-        TR --> P1[7 prompts de pesquisa]
-        TG --> P2[4 prompts de compilação]
-        TV --> P3[4 prompts de validação]
-        TS --> SK[Skills geradas]
+    subgraph "Implementations"
+        TR --> P1[7 research prompts]
+        TG --> P2[4 compilation prompts]
+        TV --> P3[4 validation prompts]
+        TS --> SK[Generated skills]
         TCI --> I1[*.config.instructions.md]
         TSI --> I2[*.standards.instructions.md]
         TKI --> I3[*.skills.instructions.md]
@@ -216,14 +216,14 @@ graph TD
     style TD fill:#fff3cd
 ```
 
-> ⚠️ **Templates em amarelo**: Sem implementações explícitas encontradas no repositório. São usados como referência manual ao criar novos artefatos.
+> ⚠️ **Templates in yellow**: No explicit implementations found in the repository. They are used as manual references when creating new artifacts.
 
 ---
 
-## Discrepâncias Identificadas
+## Identified Discrepancies
 
-| Issue | Descrição | Ação Sugerida |
+| Issue | Description | Suggested Action |
 |-------|-----------|---------------|
-| README fantasma | `templates/README.md` menciona `TEMPLATE.COMPILER.prompt.md` — arquivo não existe | Verificar se foi renomeado para `TEMPLATE.GENERATOR.prompt.md` |
-| README fantasma | `templates/README.md` menciona `TEMPLATE.SCAFFOLDING.prompt.md` — arquivo não existe | Verificar se foi renomeado ou removido |
-| Órfão | `POST_MORTEM_TEMPLATE.md` sem nenhuma referência | Considerar integrar em algum fluxo ou remover |
+| Ghost README | `templates/README.md` mentions `TEMPLATE.COMPILER.prompt.md` — file does not exist | Verify if it was renamed to `TEMPLATE.GENERATOR.prompt.md` |
+| Ghost README | `templates/README.md` mentions `TEMPLATE.SCAFFOLDING.prompt.md` — file does not exist | Verify if it was renamed or removed |
+| Orphan | `POST_MORTEM_TEMPLATE.md` with no references | Consider integrating into a flow or removing |

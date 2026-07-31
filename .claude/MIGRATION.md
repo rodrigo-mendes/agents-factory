@@ -1,32 +1,32 @@
-# Migração GitHub Copilot → Claude Code — Notas & Decommission
+# Migration GitHub Copilot → Claude Code — Notes & Decommission
 
-Estado: **`.claude/` criado ao lado de `.github/` (coexistência)**. O Copilot continua funcional;
-o decommission é uma fase final, executada **só após validação em uso real**.
+Status: **`.claude/` created alongside `.github/` (coexistence)**. Copilot remains functional;
+decommission is a final phase, executed **only after validation in real use**.
 
-## O que foi migrado
+## What was migrated
 
-| Item | Resultado |
+| Item | Result |
 |---|---|
-| `CLAUDE.md` (raiz) | novo — princípios, convenções, tabela de roteamento, dual-target |
-| Subagentes | 4 reais em `.claude/agents/` (framework-researcher, skill-author, architecture-auditor, quality-validator) |
-| Prompts operacionais | 23 → `.claude/skills/<n>/SKILL.md` (`context: fork` + `agent:` + `disable-model-invocation: true`) |
-| Meta-skills | 2 → `.claude/skills/` (wording neutralizado) |
-| Rules | `skill-frontmatter` (ativa, `paths:`) + templates de instructions → `templates/rules/` |
-| Templates/examples | variantes Claude Code (tools traduzidos, `applyTo:`→`paths:`, `.agent.md`/`.instructions.md`→`.md`) |
-| settings/gitignore | `.claude/settings.json` (permissões) + `.gitignore` (arquivos locais, `StoryBeat/`) |
+| `CLAUDE.md` (root) | new — principles, conventions, routing table, dual-target |
+| Subagents | 4 real ones in `.claude/agents/` (framework-researcher, skill-author, architecture-auditor, quality-validator) |
+| Operational prompts | 23 → `.claude/skills/<n>/SKILL.md` (`context: fork` + `agent:` + `disable-model-invocation: true`) |
+| Meta-skills | 2 → `.claude/skills/` (wording neutralized) |
+| Rules | `skill-frontmatter` (active, `paths:`) + instructions templates → `templates/rules/` |
+| Templates/examples | Claude Code variants (tools translated, `applyTo:`→`paths:`, `.agent.md`/`.instructions.md`→`.md`) |
+| settings/gitignore | `.claude/settings.json` (permissions) + `.gitignore` (local files, `StoryBeat/`) |
 
-## Melhorias aplicadas
-1. **4 subagentes reais** com least-privilege e gatilho "Use when…" (não existiam).
-2. **WebSearch/WebFetch** no `framework-researcher` → anti-alucinação real (antes dependia do usuário colar docs).
-3. **Auditoria multi-modelo como orquestração paralela nativa**: `architecture-auditor` recebe a tool `Agent`
-   e dispara scope/flow/engine em paralelo, sintetizando consenso (antes era só instrução em texto).
-4. **`disable-model-invocation: true`** nos 23 comandos → custo de auto-listagem ~zero; só as 2 meta-skills auto-invocáveis.
-5. **Frontmatter corrigido** em ~10 prompts que não tinham `name`/`description` válidos.
+## Improvements applied
+1. **4 real subagents** with least-privilege and "Use when…" trigger (did not exist before).
+2. **WebSearch/WebFetch** in `framework-researcher` → real anti-hallucination (previously depended on the user pasting docs).
+3. **Multi-model audit as native parallel orchestration**: `architecture-auditor` receives the `Agent` tool
+   and fires scope/flow/engine in parallel, synthesizing consensus (previously was just text instruction).
+4. **`disable-model-invocation: true`** on the 23 commands → auto-listing cost ~zero; only the 2 meta-skills are auto-invocable.
+5. **Frontmatter fixed** on ~10 prompts that lacked valid `name`/`description`.
 
-## Fase 2 — limpeza & progressive disclosure (feita)
-- **Progressive disclosure** aplicada nas 6 skills > 500 linhas (conteúdo movido verbatim para `blueprints/`,
-  SKILL.md com resumo + link no ponto de uso):
-  | Skill | Antes → depois | Blueprints |
+## Phase 2 — cleanup & progressive disclosure (done)
+- **Progressive disclosure** applied to the 6 skills > 500 lines (content moved verbatim to `blueprints/`,
+  SKILL.md with summary + link at point of use):
+  | Skill | Before → after | Blueprints |
   |---|---|---|
   | `technical-framework-researcher-terraform` | 1051 → 434 | 7 |
   | `terraform-engineering-best-practices-researcher` | 766 → 189 | 5 |
@@ -34,45 +34,45 @@ o decommission é uma fase final, executada **só após validação em uso real*
   | `audit-architecture-scope` | 605 → 336 | 2 |
   | `terraform-instructions-compiler` | 599 → 247 | 2 |
   | `architecture-approaches-skill-generator` | 587 → 309 | 1 |
-  Todas < 500 linhas; 0 links quebrados; frontmatter inalterado.
-- **`examples/` removido** das duas árvores (`.claude/templates/`, `.github/templates/`) — 71% da árvore,
-  OCI/Terraform hardcoded. READMEs passam a apontar para os artefatos vivos (`.claude/agents/`, `.claude/skills/`).
-- **Banner tecnologia-agnóstico** adicionado aos 26 `TEMPLATE.*` (13 em cada árvore).
+  All < 500 lines; 0 broken links; frontmatter unchanged.
+- **`examples/` removed** from both trees (`.claude/templates/`, `.github/templates/`) — 71% of the tree,
+  OCI/Terraform hardcoded. READMEs now point to live artifacts (`.claude/agents/`, `.claude/skills/`).
+- **Technology-agnostic banner** added to the 26 `TEMPLATE.*` files (13 in each tree).
 
-## Validação por dogfooding (feita)
-Rodados os próprios validadores/auditor da fábrica contra `.claude/`:
-- **architecture-auditor** (consenso scope+flow+engine): **PASS 9.4/10**, 0 P0/P1. Contagens todas confirmadas
-  (4 subagentes, 25 skills, 23 comandos, 0 refs `agent:` quebradas, 0 órfãos).
-- **quality-validator** (skill-best-practices + agent-router): 0 P0. Os 8 P1 apontaram **resíduo Copilot no corpo**
-  das skills de auditoria/validação (instruções de runtime lendo `.github/agents/*.agent.md`,
-  `.github/copilot-instructions.md`, `*.prompt.md`, `.github/instructions/`). **Corrigidos**: agora apontam para
-  `.claude/agents/*.md`, `CLAUDE.md`, `.claude/skills/*/SKILL.md`, `.claude/rules/` (validators/compiler ficaram
-  dual-target). Também: `skill-author` ganhou `model: sonnet`; links de exemplo Copilot em skill-creator/
-  authoring-agent-skills/researching-technical-frameworks corrigidos para `.claude/rules|skills`.
+## Validation by dogfooding (done)
+Ran the factory's own validators/auditor against `.claude/`:
+- **architecture-auditor** (scope+flow+engine consensus): **PASS 9.4/10**, 0 P0/P1. All counts confirmed
+  (4 subagents, 25 skills, 23 commands, 0 broken `agent:` refs, 0 orphans).
+- **quality-validator** (skill-best-practices + agent-router): 0 P0. The 8 P1s pointed to **Copilot residue in the body**
+  of the audit/validation skills (runtime instructions reading `.github/agents/*.agent.md`,
+  `.github/copilot-instructions.md`, `*.prompt.md`, `.github/instructions/`). **Fixed**: they now point to
+  `.claude/agents/*.md`, `CLAUDE.md`, `.claude/skills/*/SKILL.md`, `.claude/rules/` (validators/compiler kept
+  dual-target). Also: `skill-author` gained `model: sonnet`; Copilot example links in skill-creator/
+  authoring-agent-skills/researching-technical-frameworks fixed to `.claude/rules|skills`.
 
-## Follow-ups opcionais (não bloqueiam)
-- **Vocabulário conceitual Copilot** ainda presente nos rubrics de auditoria (rótulos "Layer L0–L4", `.agent.md`
-  em tabelas de critério, `report-template.md`) — é o modelo conceitual, não caminho de runtime; reescrever
-  para vocabulário Claude Code é doc-only (R1).
-- **Typo** `architecture-approaches-skill-generator` → renomear muda o nome do comando `/...`; decidir em separado.
-- **Variáveis de prompt** (`{{VAR}}`, seções INPUT VARIABLES) foram preservadas; o subagente as coleta.
-  Onde fizer sentido um argumento único, usar `$ARGUMENTS`/`$1`.
+## Optional follow-ups (non-blocking)
+- **Copilot conceptual vocabulary** still present in the audit rubrics (labels "Layer L0–L4", `.agent.md`
+  in criterion tables, `report-template.md`) — this is the conceptual model, not runtime paths; rewriting
+  to Claude Code vocabulary is doc-only (R1).
+- **Typo** `architecture-approaches-skill-generator` → renaming changes the `/...` command name; decide separately.
+- **Prompt variables** (`{{VAR}}`, INPUT VARIABLES sections) were preserved; the subagent collects them.
+  Where a single argument makes sense, use `$ARGUMENTS`/`$1`.
 
-## Verificação já feita (estrutural)
-`scratchpad/verify.py`: 4 agents · 21 skills · 1 rule · 0 refs quebradas · 0 `runSubagent`/`list_dir` ·
-`name`=pasta em todas · `agent:` aponta para subagente existente · YAML sem `:` não-citado.
+## Verification already done (structural)
+`scratchpad/verify.py`: 4 agents · 21 skills · 1 rule · 0 broken refs · 0 `runSubagent`/`list_dir` ·
+`name`=folder in all · `agent:` points to existing subagent · YAML without unquoted `:`.
 
-## Verificação funcional pendente (interativa, no Claude Code)
-- `/memory` → confirmar que `CLAUDE.md` carrega.
-- `/technical-framework-researcher <tech> <versão>` → roda via `framework-researcher`, usa WebFetch.
-- `/skill-creator` → roda via `skill-author`.
-- `/audit-architecture-consensus <alvo>` → dispara os 3 subagentes em paralelo.
-- `/skill-best-practices-validator .claude/skills/` → relatório de qualidade.
+## Pending functional verification (interactive, in Claude Code)
+- `/memory` → confirm that `CLAUDE.md` loads.
+- `/technical-framework-researcher <tech> <version>` → runs via `framework-researcher`, uses WebFetch.
+- `/skill-creator` → runs via `skill-author`.
+- `/audit-architecture-consensus <target>` → fires the 3 subagents in parallel.
+- `/skill-best-practices-validator .claude/skills/` → quality report.
 
-## Decommission do Copilot (fase FINAL — NÃO executar agora)
-Rodar como PR próprio, após a equipe validar `.claude/` em uso real:
-1. Remover `.github/prompts/`, `.github/skills/` (e `.github/agents/` se existir).
-2. Ajustar `README.md` e `docs/adopcion/` (programa Copilot) para refletir Claude-Code-only, ou arquivá-los.
-3. **Manter** `.github/workflows/` (CI) e qualquer coisa não relacionada ao Copilot.
-4. Remover a linha `ask: Write(./.github/**)` de `.claude/settings.json` (não haverá mais o quê proteger).
-5. Rodar `scratchpad/verify.py` novamente e confirmar contagens.
+## Copilot Decommission (FINAL phase — DO NOT execute now)
+Run as its own PR, after the team validates `.claude/` in real use:
+1. Remove `.github/prompts/`, `.github/skills/` (and `.github/agents/` if it exists).
+2. Adjust `README.md` and `docs/adopcion/` (Copilot program) to reflect Claude-Code-only, or archive them.
+3. **Keep** `.github/workflows/` (CI) and anything unrelated to Copilot.
+4. Remove the `ask: Write(./.github/**)` line from `.claude/settings.json` (there will be nothing left to protect).
+5. Run `scratchpad/verify.py` again and confirm counts.
