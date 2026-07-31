@@ -12,7 +12,7 @@ Todos seguem o padrão do `TEMPLATE.VALIDATION.prompt.md`.
 |--------|--------|--------|--------|
 | `copilot-compatibility-review` | Qualquer artefato Copilot | Docs oficiais GitHub + convenções ECI | Relatório de compatibilidade |
 | `instructions-best-practices-validator` | `.instructions.md` | Docs GitHub/VS Code + convenções time | Análise de qualidade |
-| `skill-best-practices-validator` | `SKILL.md` | Claude best practices + `authoring-agent-skills` | Análise de qualidade |
+| `skill-best-practices-validator` | `SKILL.md` | Claude best practices + `skill-creator` | Análise de qualidade |
 | `project-analysis-validator` | Projeto inteiro | Quality framework + three-tier | Score + roadmap |
 
 ---
@@ -91,7 +91,7 @@ instructions-best-practices-validator
 > **Arquivo**: `.claude/skills/skill-best-practices-validator/SKILL.md`
 
 ### Descrição
-Valida `SKILL.md` contra Claude best practices oficiais e o padrão definido em `authoring-agent-skills`.
+Valida `SKILL.md` contra Claude best practices oficiais e o padrão definido em `skill-creator`.
 
 ### Invocação
 ```
@@ -114,7 +114,7 @@ skill-best-practices-validator
 - Análise de qualidade com score e itens de melhoria
 
 ### Dependências
-- Skill: `authoring-agent-skills` (baseline de validação)
+- Padrões de autoria do `skill-creator` (baseline de validação)
 
 ### Quando Usar
 - Após `skill-creator` ou generators produzirem SKILL.md

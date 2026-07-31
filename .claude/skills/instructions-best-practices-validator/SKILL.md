@@ -1,4 +1,4 @@
----
+﻿---
 name: instructions-best-practices-validator
 description: Analyzes instruction/rule files for quality and adherence to official (GitHub/VS Code) best practices and team conventions. Use when validating instruction or .claude/rules files.
 argument-hint: "Directory of instructions/rules to validate"
@@ -354,7 +354,7 @@ Before saving the report, the validator MUST self-verify:
 
 ### Team Conventions
 - [skill-frontmatter rules](./../../rules/skill-frontmatter.md) — frontmatter rules for `.claude/rules/` and `.claude/agents/`
-- [authoring-agent-skills SKILL.md](./../authoring-agent-skills/SKILL.md) — skills ecosystem context
+- [skill-creator SKILL.md](./../skill-creator/SKILL.md) — skills ecosystem context
 
 ---
 

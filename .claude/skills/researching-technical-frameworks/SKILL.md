@@ -1,6 +1,10 @@
----
+﻿---
 name: researching-technical-frameworks
 description: "Researches technologies, frameworks, and SDKs to produce hallucination-proof research_[TECH]_v[VERSION].md documents. Use when starting technical research for a new skill, researching a version migration, or researching an SDK integration (e.g., Stripe Java SDK, Terraform AWS provider)."
+argument-hint: "<tech> <version> (e.g. FastAPI 0.115)"
+context: fork
+agent: framework-researcher
+disable-model-invocation: true
 ---
 
 ## Function
@@ -12,13 +16,21 @@ Transform vague technology requirements into **research_[TECH]_v[VERSION].md** d
 - Provide executable verification commands
 - Supply sufficient detail for downstream skill authoring
 
+## Input Variables
+
+- `SYSTEM_OR_TECH_NAME`: specific name — e.g., "FastAPI", "Redis", "Next.js" (never generic like "database")
+- `TARGET_VERSION`: semantic version — e.g., "0.100", "7.2", "14.0" (never "latest" or unspecified)
+- `OFFICIAL_URL_IF_KNOWN`: optional — primary docs URL if known
+- `INTEGRATION_PARTNERS_LIST`: comma-separated — e.g., "PostgreSQL, JWT, pytest"
+
 ## Quick Navigation
 
 - **[Always Do Patterns](./blueprints/always-do-patterns.md)** — Mandatory implementation patterns
 - **[Ask First](./blueprints/ask-first-decisions.md)** — Architectural decisions requiring context
 - **[Never Do Patterns](./blueprints/never-do-patterns.md)** — Anti-patterns with alternatives
 - **[Integration Patterns](./blueprints/integration-patterns.md)** — SDK/library integration template
-- **[Evaluation Scenarios](./blueprints/evaluation-scenarios.md)** — Test cases: standard, edge, misuse
+- **[Output Format Template](./blueprints/output-format-template.md)** — Full output document structure with all sections
+- **[Evaluation Scenarios](./blueprints/evaluation-scenarios.md)** — Test cases: canonical path, edge cases, misuse, anti-pattern traps
 - **[Research Execution Workflow](#research-execution-workflow)** — Phase-by-phase research process
 - **[Verification Loop](#verification-loop)** — Validation commands and expected outputs
 - **[External Resources](#external-resources)** — Official documentation links
@@ -150,50 +162,83 @@ Official Repo: https://github.com/hashicorp/terraform-provider-aws
 Blog: https://www.hashicorp.com/blog/
 ```
 
-### Phase 3: Deep Pattern Extraction (2-4 hours)
+### Phase 3: Research Scope (2-4 hours)
+
+**1. Authority & Versioning** — Locate primary official documentation; reject patterns not validated for `{{TARGET_VERSION}}`; identify release date and support/EOL timeline.
+
+**2. Domain Complexity Assessment** — Assess before extracting patterns:
+
+| Tier | Description | Always Do | Ask First | Never Do | Indicators |
+|------|-------------|-----------|-----------|----------|------------|
+| **Foundational** | Single-concern, wrapper | 3-4 | 2-3 | 2-3 | Single integration, limited config surface |
+| **Standard** | Multi-concern, moderate config | 5-6 | 3-4 | 4-5 | Multiple integrations, security considerations |
+| **Complex** | Security-critical, multi-layer | 7-9 | 4-6 | 5-7 | Auth, encryption, multi-service, compliance |
+
+Quality rule: let domain complexity drive the count. Never pad or cap artificially.
+
+**3. Three-Tier Operational Guardrails**
+
+✅ **Always Do** (mandatory patterns — security configs, lifecycle, type safety):
 ```
-For each section of the Technical Framework Researcher prompt:
-
-1. Authority & Versioning
-   → Confirm release date, support status, EOL timeline
-
-2. Three-Tier Guardrails
-   → Extract mandatory patterns (count driven by domain complexity — see tiers below)
-   → Extract conditional patterns with tradeoff matrices
-   → Extract anti-patterns with corrected code
-   
-   Domain Complexity Tiers (guides expected pattern counts):
-   - Foundational (single-concern): ~3-4 always / 2-3 ask-first / 2-3 never
-   - Standard (multi-concern): ~5-6 always / 3-4 ask-first / 4-5 never
-   - Complex (security-critical): ~7-9 always / 4-6 ask-first / 5-7 never
-   Quality rule: Include every pattern the domain requires. Never pad or cap artificially.
-
-3. Migration Considerations
-   → Document breaking changes
-   → Create step-by-step upgrade path
-
-4. Ecosystem Interoperability
-   → For each INTEGRATION_PARTNERS_LIST item:
-      * Create installation instructions
-      * Working integration example
-      * Known gotchas
-
-5. Executable Verification
-   → Test every CLI command locally
-   → Document expected output
-   → Note common errors and fixes
-
-6. Testing / Mocking
-   → Official test framework
-   → Mocking patterns for external deps
-   → Example test with isolation
-
-7. Production Considerations
-   → Performance boundaries
-   → Scalability limits
-   → Monitoring checklist
-   → Security hardening
+Pattern: [Name]
+Why: [Official reason]
+Code: [Minimal example]
+Source: [Dated link]
 ```
+
+⚠️ **Ask First** (architectural crossroads — multiple valid approaches exist):
+```
+Decision: [What to choose]
+Options: [A, B, C]
+Tradeoffs: [Each optimizes/sacrifices what]
+When: [Decision factors]
+Source: [Dated link]
+```
+
+🚫 **Never Do** (forbidden patterns — deprecated methods, CVEs, data loss patterns):
+```
+Anti-Pattern: [What NOT to do]
+Why: [Security/stability reason]
+❌ Wrong: [Bad code or concrete artifact example]
+✅ Correct: [Right code or concrete artifact example]
+Impact: [What breaks]
+Source: [Dated link]
+```
+> Every Never Do **must** include a side-by-side ❌/✅ example. For non-code domains use concrete artifact examples (wrong-source vs correct-source) — not prose only.
+
+**4. Migration Considerations** — Breaking changes from previous version, upgrade path with exact commands, compatibility matrix, deprecation warnings.
+
+**5. Ecosystem Interoperability** — For each `{{INTEGRATION_PARTNERS_LIST}}` item:
+```
+Integration: [System ↔ Partner]
+Approach: [Library/pattern]
+Install: [Commands]
+Example: [Working code]
+Versions: [Compatibility]
+Issues: [Gotchas]
+Source: [Dated link]
+```
+
+**6. Executable Verification** — All command blocks marked `# Representative — adapt to your environment`:
+```bash
+# Representative — adapt to your environment
+# Project Init:  [command with flags]
+# Validation:    [lint/type-check command]
+# Testing:       [run tests + coverage]
+# Health Check:  [start service + health endpoint + logs]
+# Expected: [success output or criteria]
+```
+
+**7. Isolation & Mocking**:
+```
+Framework: [Name + version]
+Mocking: [Library/pattern]
+Example: [Test mocking external dependency]
+Guarantee: [Test independence method]
+Source: [Dated link]
+```
+
+**8. Production Considerations** — Scalability boundaries, gotchas at scale, monitoring metrics, security hardening checklist.
 
 ### Phase 4: Source Documentation (30-45 mins)
 ```markdown
@@ -230,102 +275,19 @@ For each section of the Technical Framework Researcher prompt:
 
 ## Output Format
 
-### Standard Output Naming
-```
-research_[SYSTEM_NAME]_v[TARGET_VERSION].md
+Full document structure, section order, field definitions, Completion Checklist, and Research Gaps format are in **[Output Format Template](./blueprints/output-format-template.md)**.
 
-Examples:
-- research_FastAPI_v0.100.md
-- research_PostgreSQL_v15.md
-- research_Terraform_AWS_v5.45.md
-- research_Kafka_v3.5.md
-```
-
-### Mandatory Structure (from prompt template)
-
-```markdown
----
-Full_Name: [Official Name]
-Target_Version: [Version]
-Release_Date: [Date]
-Support_Status: [Active/LTS/EOL]
-Primary_Docs: [URL]
-Official_Repo: [URL]
-Research_Date: [Today]
-Domain_Complexity: [Foundational/Standard/Complex]
----
-
-# Executive Summary
-[2-3 paragraphs]
-
-# Architectural Guardrails
-
-## ✅ Mandatory Patterns
-[Patterns with code examples — count driven by domain complexity]
-
-## ⚠️ Conditional Patterns
-[Decisions with tradeoff matrices — count driven by domain complexity]
-
-## 🚫 Forbidden Patterns
-[Anti-patterns with correct alternatives — count driven by domain complexity]
-
-# Migration Guide
-[Breaking changes + upgrade steps]
-
-# Implementation Blueprint
-[Lifecycle code + integration examples]
-
-# Quality Control
-[Verification commands with expected outputs]
-
-# Production Readiness
-[Performance, scalability, monitoring, security]
-
-# Source Bibliography
-[Organized, dated links]
-
-# Agent Operation Notes
-[Confidence levels for skill authoring]
-```
+Save as `research_{{SYSTEM_OR_TECH_NAME}}_v{{TARGET_VERSION}}.md`.
 
 ---
 
-## Integration with Skill Authoring Pipeline
+## Output Priorities
 
-### Input to This Skill
-```
-User Request: 
-"I need a Terraform skill for AWS RDS with PostgreSQL"
-
-User Provides:
-- CLOUD_PROVIDER: AWS
-- SERVICE_NAME: RDS PostgreSQL
-- TERRAFORM_VERSION: 1.7
-- PROVIDER_VERSION: aws v5.x
-- INTEGRATION_PARTNERS_LIST: VPC, Security Groups, Secrets Manager
-```
-
-### This Skill's Output
-```
-research_AWS_RDS_PostgreSQL_v5.45.md
-├─ Metadata (versions, dates, support)
-├─ Executive summary
-├─ Mandatory patterns (Terraform block, provider, encryption)
-├─ Conditional patterns (local state vs S3)
-├─ Forbidden patterns (hardcoded credentials, public RDS)
-├─ Integration examples (RDS ↔ VPC, RDS ↔ Secrets Manager)
-├─ Verification commands (terraform validate, tfsec, etc.)
-└─ Source bibliography (Registry docs, AWS docs, etc.)
-```
-
-### Input to Skill Author Specialist
-```
-research_AWS_RDS_PostgreSQL_v5.45.md
-    ↓ (Skill Author transforms)
-.claude/skills/terraform-aws-rds/SKILL.md
-    ↓ (the agent uses)
-/create Terraform RDS setup following terraform-aws-rds skill
-```
+1. Security vulnerabilities & anti-patterns
+2. Mandatory patterns
+3. Version-specific pitfalls
+4. Performance optimization
+5. Advanced patterns
 
 ---
 
@@ -371,6 +333,15 @@ grep -c '```' research_[TECH]_v[VERSION].md
 grep -c "# ✅\|# DO" research_[TECH]_v[VERSION].md
 # Exit code: 0 (match found) | 1 (no match)
 # Expected: Same count as "# 🚫\|# DON'T"
+
+# 6. Confirm mandatory output sections are present
+grep -E "^## (Mandatory_Patterns|Conditional_Patterns|Forbidden_Patterns|Version_Context|Source_Bibliography)" \
+  research_*.md
+# Expected: all section headers appear in the research output file
+
+# 7. Confirm every Never-Do entry has a correct alternative
+grep -c "✅ Correct" research_*.md
+# Expected: count equals or exceeds the number of anti-pattern entries
 ```
 
 ### Manual Validation Checklist
@@ -412,13 +383,11 @@ grep -c "# ✅\|# DO" research_[TECH]_v[VERSION].md
 
 ## External Resources
 
-### Downstream Commands
-These commands invoke this skill and consume its `research_[TECH]_v[VERSION].md` output — they are not reference inputs to this skill.
-- [Technical Framework Researcher](../technical-framework-researcher/SKILL.md) - Generic research entry point
-- [Technical Framework Researcher - Terraform](../technical-framework-researcher-terraform/SKILL.md) - IaC research entry point
+### Related Commands
+- [Technical Framework Researcher — Terraform](../technical-framework-researcher-terraform/SKILL.md) — IaC variant for Terraform/provider research
 
 ### Skill Authoring
-- [Skill Author Specialist](../authoring-agent-skills/SKILL.md) - Transforms research into skills
+- [Skill Author Specialist](../skill-creator/SKILL.md) - Transforms research into skills
 - [SKILL Template](../../templates/skills/TEMPLATE.SKILL.md) - Structure reference
 
 
@@ -464,4 +433,4 @@ These commands invoke this skill and consume its `research_[TECH]_v[VERSION].md`
 ## Next Steps After This Skill
 
 1. **Complete Research**: This skill outputs `research_[TECH]_v[VERSION].md`
-2. **Author Skill**: Pass output to [Skill Author Specialist](../authoring-agent-skills/SKILL.md)
+2. **Author Skill**: Pass output to [Skill Author Specialist](../skill-creator/SKILL.md)

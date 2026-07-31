@@ -35,7 +35,7 @@ Standard → research_FastAPI_v0.100.md                 (~20 pages)
 Comprehensive → research_FastAPI_Migration_v0.99_to_v0.100.md  (~40 pages)
 ```
 
-**Source**: [Technical Framework Researcher](../../technical-framework-researcher/SKILL.md)
+**Source**: [Researching Technical Frameworks](../SKILL.md)
 
 ---
 

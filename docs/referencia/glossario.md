@@ -26,7 +26,7 @@ Termos do framework Agents Factory.
 | **Implementation Agent** | Tipo de agent que segue P0-P5 completo e gera/modifica código. |
 | **Instruction** | Artefato `.instructions.md` (Copilot) com configuração project-wide (setup, padrões, routing). Equivalente CC: `.claude/rules/*.md`. |
 | **L0→L4** | Hierarquia de responsabilidades de projecto GitHub Copilot: L0 settings → L1 instructions → L2 skills → L3 agents → L4 prompts. |
-| **Meta-skill** | Skill auto-invocável (sem `context: fork` e sem `disable-model-invocation`) que define padrões base do framework. Carregada pelo subagente em P0. Ex: `authoring-agent-skills`, `researching-technical-frameworks`. |
+| **Meta-skill** | Skill auto-invocável (sem `context: fork` e sem `disable-model-invocation`) que define padrões base do framework. Carregada pelo subagente em P0. Ex: `researching-technical-frameworks`. |
 | **Never Do (🚫)** | Tier 3 do three-tier: anti-padrão que o agente bloqueia automaticamente, oferecendo alternativa inline e impacto. |
 | **Orchestrator Agent** | Tipo de agent que coordena implementação em múltiplos domínios com ordem de dependência. |
 | **Orphan** | Componente que existe no projeto mas não é referenciado por nenhum outro componente. |

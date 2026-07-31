@@ -21,7 +21,7 @@ Como criar um projeto de agente completo no Claude Code.
 Antes de criar qualquer artefato, pesquise as tecnologias que o agente precisará conhecer:
 
 ```
-/technical-framework-researcher
+/researching-technical-frameworks
 ```
 
 ### 2. Crie cada skill com o skill-creator
@@ -119,7 +119,7 @@ As skills geradas pelo `/skill-creator` ficam como ponto de partida. Próximos p
 
 | Armadilha | Solução |
 |-----------|---------|
-| Criar skills sem pesquisa prévia | Pesquise primeiro com `/technical-framework-researcher` — evita alucinações |
+| Criar skills sem pesquisa prévia | Pesquise primeiro com `/researching-technical-frameworks` — evita alucinações |
 | Agente sem skills (hardcoded knowledge) | Sempre externalizar conhecimento em skills |
 | Skill genérica demais ("cloud-stuff") | Uma skill por serviço/conceito específico |
 | Não validar após criar | Executar `/agent-router-pattern-validator` e `/project-analysis-validator .claude/` |

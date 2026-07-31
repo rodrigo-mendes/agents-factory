@@ -16,7 +16,7 @@ O Agents Factory é uma fábrica de artefatos de IA que oferece:
 ### Claude Code (recomendado)
 
 ```
-/technical-framework-researcher
+/researching-technical-frameworks
 ```
 > Pesquisa a tecnologia com version absolutism, produzindo uma base de conhecimento livre de alucinações.
 
@@ -33,7 +33,7 @@ O Agents Factory é uma fábrica de artefatos de IA que oferece:
 ### GitHub Copilot
 
 ```
-@workspace /technical-framework-researcher
+@workspace /researching-technical-frameworks
 ```
 
 ```

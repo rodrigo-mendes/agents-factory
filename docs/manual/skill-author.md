@@ -3,7 +3,7 @@
 > **Modelo:** `sonnet` | **Tools:** Read, Grep, Glob, Write, Edit
 > **Papel:** Skill & Instructions Author — converte pesquisa validada em artefatos operacionais (SKILL.md e rules/instructions) prontos para uso por agentes.
 
-**O que faz:** Lê um documento de pesquisa gerado por `framework-researcher`, aplica os padrões de `authoring-agent-skills` (three-tier, progressive disclosure, YAML correto) e produz um ou mais arquivos de skill ou instrução.
+**O que faz:** Lê um documento de pesquisa gerado por `framework-researcher`, aplica os padrões de autoria integrados ao `skill-creator` (three-tier, progressive disclosure, YAML correto) e produz um ou mais arquivos de skill ou instrução.
 
 **O que NÃO faz:** Pesquisar tecnologias na web, auditar arquitetura, validar qualidade de artefatos existentes.
 
@@ -25,7 +25,7 @@ Use após ter um `research_<Tech>_v<Version>.md` de qualquer researcher e querer
 
 - Arquivo de pesquisa deve existir: `research_<TechName>_v<Version>.md`
 - O arquivo deve conter Source Bibliography com fontes datadas
-- Se o arquivo não existir → rodar `/technical-framework-researcher` primeiro
+- Se o arquivo não existir → rodar `/researching-technical-frameworks` primeiro
 
 ### Inputs
 
@@ -46,7 +46,7 @@ O agente vai derivar automaticamente do arquivo:
 
 ### Workflow Interno (7 passos)
 
-1. Carrega `authoring-agent-skills/SKILL.md` (baseline de qualidade)
+1. Aplica padrões integrados de autoria do `skill-creator` (baseline de qualidade)
 2. Lê o research file em `$ARGUMENTS`
 3. Mapeia seções da pesquisa para estrutura da skill
 4. Aplica regras de frontmatter (name ≤ 64 chars, description com "Use when…")

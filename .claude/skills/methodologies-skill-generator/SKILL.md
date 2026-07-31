@@ -1,4 +1,4 @@
----
+﻿---
 name: methodologies-skill-generator
 description: Researches an engineering/process methodology and generates an operational SKILL.md for producing correct artifacts. Use when turning a methodology into a skill.
 argument-hint: "<methodology> (e.g. TDD, scrum, kanban)"
@@ -348,6 +348,6 @@ Expected output:
 - [Shape Up](https://basecamp.com/shapeup) — Basecamp / Ryan Singer
 
 ### Skill Authoring Standards
-- [authoring-agent-skills SKILL.md](../authoring-agent-skills/SKILL.md) — House conventions for generated SKILL.md files
+- [skill-creator SKILL.md](../skill-creator/SKILL.md) — House conventions for generated SKILL.md files
 - [TEMPLATE.SKILL.md](../../templates/skills/TEMPLATE.SKILL.md) — Canonical scaffold for generated output
 - [skill-frontmatter rules](../../rules/skill-frontmatter.md) — YAML frontmatter requirements

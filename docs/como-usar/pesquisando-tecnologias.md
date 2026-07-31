@@ -16,7 +16,7 @@ Como usar os prompts de pesquisa para construir bases de conhecimento validadas.
 
 | Domínio | Prompt |
 |---------|--------|
-| Framework/lib (FastAPI, Redis, Spring) | `technical-framework-researcher` |
+| Framework/lib (FastAPI, Redis, Spring) | `researching-technical-frameworks` |
 | Serviço cloud + Terraform | `technical-framework-researcher-terraform` |
 | Práticas Terraform (org, CI/CD, test) | `terraform-engineering-best-practices-researcher` |
 | Metodologia de arquitetura (C4, DDD) | `architecture-methodology-researcher` |
@@ -27,7 +27,7 @@ Como usar os prompts de pesquisa para construir bases de conhecimento validadas.
 ### 2. Execute o prompt
 
 ```
-/technical-framework-researcher
+/researching-technical-frameworks
 ```
 
 ### 3. Forneça os inputs

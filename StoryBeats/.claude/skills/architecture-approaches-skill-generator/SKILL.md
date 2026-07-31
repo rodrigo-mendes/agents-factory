@@ -1,4 +1,4 @@
----
+﻿---
 name: architecture-approaches-skill-generator
 description: Researches a system-architecture methodology/notation and generates an operational SKILL.md for producing correct architecture artifacts. Use when turning architecture research into a skill.
 argument-hint: "<approach> (e.g. event-driven, microservices)"
@@ -394,6 +394,6 @@ discipline, tooling validation, and ADR triggers for breaking changes.
 - [Domain Language / DDD](https://domainlanguage.com/ddd/) — Eric Evans
 
 ### Skill Authoring Standards
-- [authoring-agent-skills SKILL.md](../authoring-agent-skills/SKILL.md) — House conventions for generated SKILL.md files
+- [skill-creator SKILL.md](../skill-creator/SKILL.md) — House conventions for generated SKILL.md files
 - [TEMPLATE.SKILL.md](../../templates/skills/TEMPLATE.SKILL.md) — Canonical scaffold for generated output
 - [skill-frontmatter rules](../../rules/skill-frontmatter.md) — YAML frontmatter requirements

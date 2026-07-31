@@ -60,7 +60,7 @@ Analisa qualquer projeto de agente Claude Code e gera relatório de conformidade
 
 ```mermaid
 graph LR
-    A[technical-framework-researcher] -->|pesquisa| B[skill-creator]
+    A[researching-technical-frameworks] -->|pesquisa| B[skill-creator]
     B -->|skill gerada| C[agent-router-pattern-validator]
     C -->|conformidade OK| D[audit-architecture-consensus]
     D -->|auditoria OK| E[✅ Produção]

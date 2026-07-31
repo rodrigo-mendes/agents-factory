@@ -1,4 +1,4 @@
----
+﻿---
 name: technical-framework-researcher-terraform
 description: Researches a Terraform provider/module for a pinned Terraform and provider version into a hallucination-proof IaC knowledge base. Use when researching Terraform/IaC for a skill.
 argument-hint: "<provider> <version> (e.g. aws 5.x)"
@@ -481,5 +481,5 @@ grep -c "{{TERRAFORM_VERSION}}\|v1\.[0-9]" research_Terraform_*.md
 
 ### Meta-Skills
 
-- [authoring-agent-skills SKILL.md](../authoring-agent-skills/SKILL.md) — Three-tier pattern conventions
+- [skill-creator SKILL.md](../skill-creator/SKILL.md) — Three-tier pattern conventions
 - [researching-technical-frameworks SKILL.md](../researching-technical-frameworks/SKILL.md) — Anti-hallucination methodology

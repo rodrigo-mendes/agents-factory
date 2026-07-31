@@ -23,7 +23,7 @@ Claude Code**: os prompts operacionais são expostos como skills/comandos que fo
 | Artefato | Padrão | Exemplo |
 |---|---|---|
 | Skill | `gerund-noun` | `researching-technical-frameworks` |
-| Comando/Prompt | `action-noun` | `technical-framework-researcher` |
+| Comando/Prompt | `action-noun` | `cloud-architecture-researcher` |
 | Subagente | `domain-role` | `framework-researcher` |
 | Rule | `scope-noun` | `skill-frontmatter` |
 
@@ -34,20 +34,16 @@ Os comandos operacionais forkam (`context: fork`) para um subagente. Os 4 subage
 
 | Subagente | Faz | Comandos que roteia |
 |---|---|---|
-| [framework-researcher](.claude/agents/framework-researcher.md) | pesquisa anti-alucinação (usa WebSearch/WebFetch) | `technical-framework-researcher`(+`-terraform`), `cloud-architecture-researcher`, `business-domain-researcher`, `requirements-methodology-researcher`, `architecture-methodology-researcher`, `terraform-engineering-best-practices-researcher` |
+| [framework-researcher](.claude/agents/framework-researcher.md) | pesquisa anti-alucinação (usa WebSearch/WebFetch) | `researching-technical-frameworks`(+`-terraform`), `cloud-architecture-researcher`, `business-domain-researcher`, `requirements-methodology-researcher`, `architecture-methodology-researcher`, `terraform-engineering-best-practices-researcher` |
 | [skill-author](.claude/agents/skill-author.md) | gera SKILL.md / rules | `skill-creator`, `methodologies-skill-generator`, `architecture-approaches-skill-generator`, `terraform-instructions-compiler` |
 | [architecture-auditor](.claude/agents/architecture-auditor.md) | audita arquitetura (consensus = 3 lentes em paralelo via tool Agent) | `audit-architecture-scope`/`flow`/`engine`/`consensus` (alvo Copilot) · `audit-cc-architecture-scope`/`flow`/`engine`/`consensus` (alvo Claude Code) |
 | [quality-validator](.claude/agents/quality-validator.md) | valida qualidade/aderência | `skill-best-practices-validator`, `instructions-best-practices-validator`, `agent-router-pattern-validator`, `copilot-compatibility-review`, `project-analysis-validator` |
-
-**Meta-skills** (auto-invocáveis, conhecimento base):
-[researching-technical-frameworks](.claude/skills/researching-technical-frameworks/SKILL.md) ·
-[authoring-agent-skills](.claude/skills/authoring-agent-skills/SKILL.md).
 
 ## Como rodar (não há build)
 
 Não é código compilado — os artefatos rodam **no Claude Code** via `/<comando>`:
 
-- Pesquisar tecnologia: `/technical-framework-researcher <tech> <versão>`
+- Pesquisar tecnologia: `/researching-technical-frameworks <tech> <versão>`
 - Criar skill a partir de research file: `/skill-creator StoryBeat/research_X_v1.md`
 - Criar skill de metodologia (tudo-em-um): `/methodologies-skill-generator <metodologia>`
 - Auditar projeto Claude Code (consenso): `/audit-cc-architecture-consensus <alvo>`
@@ -56,14 +52,14 @@ Não é código compilado — os artefatos rodam **no Claude Code** via `/<coman
 - Auditar saúde do projeto completo: `/project-analysis-validator .claude/`
 
 Os 24 comandos usam `disable-model-invocation: true` (ações deliberadas) — acessíveis por `/nome`,
-sem custo de auto-listagem. As 2 meta-skills ficam auto-invocáveis (2 no total).
+sem custo de auto-listagem.
 
 ## Estrutura
 
 ```
 .claude/
 ├── agents/     ← 4 subagentes (framework-researcher, skill-author, architecture-auditor, quality-validator)
-├── skills/     ← 2 meta-skills + 24 comandos operacionais (fork → subagente)
+├── skills/     ← 24 comandos operacionais (fork → subagente)
 ├── rules/      ← rules por caminho (paths:) + templates
 ├── templates/  ← scaffolding: agents/, skills/, rules/, prompts/, reports/
 ├── MIGRATION.md ← histórico da migração Copilot → Claude Code
