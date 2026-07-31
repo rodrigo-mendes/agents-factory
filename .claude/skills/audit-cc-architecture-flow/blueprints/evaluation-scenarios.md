@@ -46,9 +46,9 @@ and does not mis-flag description-reachable knowledge skills as orphans.
 ```json
 {
   "skills": ["audit-cc-architecture-flow"],
-  "query": "Audit the invocation flow. One knowledge skill (authoring-agent-skills) has no /command forking to it — is it an orphan?",
+  "query": "Audit the invocation flow. One knowledge skill (researching-technical-frameworks) has no /command forking to it — is it an orphan?",
   "expected_behavior": [
-    "Confirms authoring-agent-skills has NO disable-model-invocation → it is auto-invocable (PATH 3)",
+    "Confirms researching-technical-frameworks has NO disable-model-invocation → it is auto-invocable (PATH 3)",
     "Checks its description 'Use when' trigger is specific enough to be reached by description match",
     "Records it as REACHABLE via PATH 3, NOT as an orphan",
     "Reserves 'orphan' for files reachable by none of the three paths (e.g. a command whose agent: points to a missing subagent)",

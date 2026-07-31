@@ -31,4 +31,4 @@ Ao criar ou editar skills/subagentes neste repositório, siga:
 - Valores contendo `:` **precisam de aspas** (ex.: `argument-hint: "Scope: new / review"`).
 - Nomes em kebab-case; `name` deve casar com o nome da pasta (skills) / arquivo (agents).
 
-Referência completa: [authoring-agent-skills](../skills/authoring-agent-skills/SKILL.md).
+Referência completa: [skill-creator](../skills/skill-creator/SKILL.md).

@@ -1,21 +1,25 @@
 ---
 name: skill-creator
-description: "Guides generation of an Agent Skill from a pre-existing research file using the authoring-agent-skills standard. Use when creating a new skill from a research_[TECH]_v[VERSION].md produced by a researcher skill (e.g. /technical-framework-researcher). For all-in-one research + skill generation, use /methodologies-skill-generator or /architecture-approaches-skill-generator instead."
+description: "Creates Agent Skills (SKILL.md) from a research_[TECH]_v[VERSION].md file following official Claude best practices and team conventions. Use when authoring a new skill from a completed research file produced by a researcher skill (e.g. /researching-technical-frameworks). For all-in-one research + skill, use /methodologies-skill-generator or /architecture-approaches-skill-generator instead."
 argument-hint: "Path to research file (e.g. StoryBeat/research_FastAPI_v0.115.md)"
 context: fork
 agent: skill-author
 disable-model-invocation: true
 ---
+
 # PROMPT: Skill Generator for Programming Agents
 
 ## Quick Navigation
 
-- **[Blueprints & Guardrails](#blueprints--guardrails)** — Three-tier rules for this skill's own operation
-- **[Critical Requirements](#critical-requirements)** — Three-tier + Essential Sections mandates for generated output
-- **[Evaluation Scenarios](./blueprints/evaluation-scenarios.md)** — 3 scenarios: canonical, edge, misuse
+- **[Blueprints & Guardrails](#blueprints--guardrails)** — Operational three-tier rules for this skill
+- **[Authoring Standards](#authoring-standards)** — Core principles, YAML rules, quality checklist
+- **[Execution Workflow](#execution-workflow)** — 6-step generation process
 - **[Quality Gates](#quality-gates-final-checklist)** — Final checklist before delivering output
 - **[Verification Loop](#verification-loop)** — Post-generation self-check commands
+- **[Evaluation Scenarios](./blueprints/evaluation-scenarios.md)** — 6 test cases (generator + authoring standards)
 - **[External Resources](#external-resources)** — Reference links
+
+**Reference**: https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices
 
 ---
 
@@ -23,11 +27,11 @@ disable-model-invocation: true
 
 ### ✅ Always Do
 
-- **Load `authoring-agent-skills` before generating** — Read `.claude/skills/authoring-agent-skills/SKILL.md` as Step 1. It is the authoritative reference for naming rules, three-tier structure, and quality checklist.
-- **Verify the research file exists before proceeding** — If `$ARGUMENTS` is missing or unreadable, stop and display the error message. Do not generate from memory.
+- **Verify the research file exists before proceeding** — If `$ARGUMENTS` is missing or unreadable, stop and report the error. Do not generate from memory.
 - **Start from `TEMPLATE.SKILL.md`** — Use `.claude/templates/skills/TEMPLATE.SKILL.md` as the scaffold. Populate every section placeholder; never invent new sections or skip existing ones.
-- **Create `blueprints/evaluation-scenarios.md`** — Generate at least 3 evaluation scenarios and save them as part of the output. This is always required, not optional.
-- **Stay under 500 lines** — Monitor line count during generation; if approaching 500, extract the largest content block to `blueprints/` before writing further inline content.
+- **Create `blueprints/evaluation-scenarios.md`** — Generate at least 3 evaluation scenarios and save them as part of the output. Always required, not optional.
+- **Stay under 500 lines** — Monitor line count; if approaching 500, extract the largest content block to `blueprints/` before writing further inline content.
+- **Apply authoring standards** — Use the [Authoring Standards](#authoring-standards) below as the authoritative reference for naming, three-tier structure, and quality checklist.
 
 ### ⚠️ Ask First
 
@@ -39,184 +43,177 @@ disable-model-invocation: true
 
 | ❌ Incorrect | ✅ Correct |
 |---|---|
-| Generate a SKILL.md without reading a research file | Run `/technical-framework-researcher` or an equivalent first; pass the output as `$ARGUMENTS` |
-| Skip creating `blueprints/evaluation-scenarios.md` | Always produce at least 3 scenarios — this is a mandatory artifact, not optional |
+| Generate a SKILL.md without reading a research file | Run `/researching-technical-frameworks` or equivalent first; pass the output as `$ARGUMENTS` |
+| Skip creating `blueprints/evaluation-scenarios.md` | Always produce at least 3 scenarios — mandatory artifact, not optional |
 | Use absolute or Windows-style paths in the generated SKILL.md | Use relative paths only (`./blueprints/file.md`, `../../rules/skill-frontmatter.md`) |
 | Duplicate large documentation blocks inline | Move blocks > 30 lines to `blueprints/` and link from SKILL.md |
+| Author from an unverified/opinion source without flagging | Mark output as `UNVERIFIED`; offer to run `/researching-technical-frameworks` first |
 
 ---
 
-## How This Prompt Works with authoring-agent-skills
+## Authoring Standards
 
-This is an **orchestration prompt** for agents. It guides you through the workflow of:
-1. Loading the `authoring-agent-skills` SKILL.md (the technical standard)
-2. Reading a research file (input)
-3. Applying the standard to create a new SKILL.md (output)
+> Authoritative reference for naming rules, three-tier structure, and quality checklist. Detailed examples in [Three-Tier Architecture](./blueprints/three-tier-architecture.md) and [Evaluation & Iteration](./blueprints/evaluation-iteration.md).
 
-### Key References
-- **Technical Standard**: [authoring-agent-skills SKILL.md](../../skills/authoring-agent-skills/SKILL.md)
-  - Contains all architectural patterns (✅⚠️🚫)
-  - Provides real code examples
-  - Includes quality checklist
-  
-- **This Prompt Adds**:
-  - Workflow orchestration
-  - Agent step-by-step instructions
-  - Generation-specific validation
-  - Examples and templates
+### Core Principles
+
+The context window is a shared resource. Challenge every piece of content: "Does Claude really need this?" · "Can I assume Claude knows this?" · "Does this justify its token cost?"
+
+**Keep SKILL.md body under 500 lines.** Use progressive disclosure (linked `blueprints/*.md`) for everything else.
+
+**Degrees of freedom** — match specificity to fragility:
+
+| Freedom | Use When | Example |
+|---|---|---|
+| **High** (text instructions) | Multiple valid approaches | Code review guidelines |
+| **Medium** (pseudocode/templates) | Preferred pattern exists | Report generation template |
+| **Low** (exact scripts) | Fragile, consistency critical | Database migration commands |
+
+**Test with multiple models** — what works for Opus may need more detail for Haiku.
+
+### YAML Frontmatter
+
+**`name`**: max 64 chars, lowercase/numbers/hyphens only, no reserved words (`anthropic`, `claude`). Prefer gerund form: `processing-pdfs`, `provisioning-oci-functions`. Folder name = YAML `name` = kebab-case.
+
+**`description`**: max 1536 chars, third-person (not "I can help"), includes what + when.
+```yaml
+description: "[Action verb] [what] with [Tech] v[X.Y]+. Use when [trigger context]."
+```
+✅ `"Builds async REST APIs with FastAPI v0.100+. Use when creating high-performance Python APIs."`
+❌ `"Helps with FastAPI"` · `"I can help you process Excel files"` · `"Useful for building APIs"`
+
+### Three-Tier Architecture
+
+> **Team Convention** — see [Three-Tier Architecture](./blueprints/three-tier-architecture.md) for complete rules, required structure, and code examples.
+
+- **✅ Always Do**: Mandatory patterns — auto-execute, full code examples, at least 2 per skill
+- **⚠️ Ask First**: Architectural crossroads — options table + tradeoff matrix, wait for user decision
+- **🚫 Never Do**: Anti-patterns — wrong code + correct alternative side-by-side, real-world impact
+
+Include `## Version Context` (version-specific skills) and `## Verification Loop` (code-generating skills).
+
+### Progressive Disclosure
+
+- Extract to `blueprints/` when: SKILL.md > 500 lines, > 3 large examples (> 50 lines each)
+- Keep references one level deep from SKILL.md; name files descriptively
+- Use forward slashes in all paths; never absolute paths, never dangling links
+
+### Content Guidelines
+
+- **Time-sensitive info** → use `## Version Context` with explicit version lock instead
+- **Consistent terminology** → choose one term throughout ("API endpoint", not mixing "URL"/"route"/"path")
+- **Offer one default** → `"Use pdfplumber. For OCR, use pdf2image instead."` — not a list of equals
+
+### Quality Checklist
+
+**Core (Official)**:
+- [ ] Description: third-person, specific, includes what + when, ≤ 1536 chars
+- [ ] SKILL.md body < 500 lines; details in linked `blueprints/` files
+- [ ] No time-sensitive info (or in `## Version Context`); consistent terminology
+- [ ] File references one level deep; all forward slashes; no Windows-style paths
+
+**Team Conventions**:
+- [ ] YAML `name` = folder name = kebab-case (gerund preferred)
+- [ ] All three tiers (✅⚠️🚫) populated; every 🚫 item has inline ✅ alternative
+- [ ] Version Context section present (if version-specific)
+- [ ] Verification Loop commands present, executable, with expected output
+- [ ] `## External Resources` with at least one dated official link
+- [ ] At least 3 evaluation scenarios in `blueprints/evaluation-scenarios.md`, linked from Quick Navigation
+
+### Skill Template
+
+Start from [TEMPLATE.SKILL.md](../../templates/skills/TEMPLATE.SKILL.md). Sections provided: Frontmatter, `## Function`, `## Version Context`, `## Quick Navigation`, `## Blueprints & Guardrails` (✅⚠️🚫), `## Integration Patterns`, `## Verification Loop`, `## Quick Reference`, `## Blueprints Directory Structure`, `## External Resources`.
+
+### Common Mistakes
+
+| Aspect | ❌ Incorrect | ✅ Correct |
+|---|---|---|
+| Description | `"Helps with FastAPI"` | `"Builds async REST APIs with FastAPI v0.100+. Use when…"` |
+| POV | `"I can help you process files"` | `"Processes Excel files and generates reports. Use when…"` |
+| Anti-pattern | `"Don't use sync"` | Side-by-side: `# 🚫 WRONG` + `# ✅ CORRECT` |
+| Paths | `scripts\helper.py` | `scripts/helper.py` |
+| Options | `"Use pypdf, or pdfplumber, or PyMuPDF"` | `"Use pdfplumber. For OCR, use pdf2image instead."` |
+
+### Research → Skill Mapping
+
+```
+Mandatory_Patterns     → ✅ Always Do
+Conditional_Patterns   → ⚠️ Ask First
+Forbidden_Patterns     → 🚫 Never Do
+Verification_Commands  → ## Verification Loop
+Mocking_Protocol       → Verification Loop → "### 2. Unit Tests"
+Source_Bibliography    → ## External Resources
+Metadata.Target_Version → ## Version Context
+```
 
 ---
-
-## Role
-Skill Author
 
 ## Context
-You have received technical documentation in the research file provided as `$ARGUMENTS`. Derive the technology name, target version, and skill name from the research file path and its frontmatter (by convention: `research_<TechName>_<Version>.md`). Your mission is to transform this research into a production-grade Claude Code Agent Skill following the [official Claude best practices](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices) and the team conventions in **authoring-agent-skills**.
+
+You have received technical documentation in the research file at `$ARGUMENTS`. Derive technology name, target version, and skill name from the file path and frontmatter (convention: `research_<TechName>_<Version>.md`). Transform this research into a production-grade Claude Code Agent Skill following the [official Claude best practices](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices) and the [Authoring Standards](#authoring-standards) above.
 
 **Input**: Research file at `$ARGUMENTS`
-**Output**: Complete `SKILL.md` saved at `.claude/skills/<skill-name>/SKILL.md`
-
-### Key Principle: Conciseness
-The context window is a shared resource. For every piece of content, ask:
-- "Does Claude really need this explanation?"
-- "Can I assume Claude knows this?"
-- "Does this paragraph justify its token cost?"
-
-**Keep SKILL.md body under 500 lines.** Use progressive disclosure (separate files) when approaching this limit.
+**Output**: `.claude/skills/<skill-name>/SKILL.md` + `./blueprints/evaluation-scenarios.md`
 
 ---
 
 ## Execution Workflow
 
-### Step 1: Load Authoring Skill (REQUIRED)
+### Step 1: Process Research File
 
-Read `.claude/skills/authoring-agent-skills/SKILL.md` before proceeding.
+Load `$ARGUMENTS` and map sections using [Research → Skill Mapping](#research--skill-mapping).
 
-**Check that you have loaded**:
-- [ ] Core principles (conciseness, degrees of freedom)
-- [ ] YAML frontmatter rules (name: max 64 chars, lowercase/numbers/hyphens; description: third-person, max 1536 chars)
-- [ ] Three-level structure (✅⚠️🚫) — team convention
-- [ ] Progressive disclosure patterns
-- [ ] Quality checklist (official + team)
-
-### Step 2: Process Research File
-Load `$ARGUMENTS` and map:
-- "Mandatory Patterns" → ✅ Always Do
-- "Conditional Patterns" → ⚠️ Ask First  
-- "Forbidden Patterns" → 🚫 Never Do
-- "Verification Commands" → Verification Loop
-- "Source Bibliography" → External Resources
-
-**Domain Complexity Assessment**: Check if the research file includes a `Domain_Complexity` field in its metadata. If present, use it to validate that pattern counts align with the appropriate tier:
+**Domain Complexity Assessment**: Check for `Domain_Complexity` in metadata. Use to validate pattern counts:
 - **Foundational** (3-4 / 2-3 / 2-3): Single-concern, wrapper, orchestrator
 - **Standard** (5-6 / 3-4 / 4-5): Multi-concern integration
 - **Complex** (7-9 / 4-6 / 5-7): Security-critical, multi-layer
 
-If not present, assess complexity from the research content itself. Include every pattern the domain requires — never pad to reach a count, never omit to fit under a cap.
+If absent, assess from content. Never pad to reach a count; never omit to fit a cap. For each pattern, determine degree of freedom: High / Medium / Low.
 
-For each pattern, determine the appropriate **degree of freedom**:
-- **High freedom** (text instructions): multiple valid approaches, context-dependent
-- **Medium freedom** (pseudocode/templates): preferred pattern exists, some variation OK
-- **Low freedom** (exact scripts): fragile operations, consistency critical
+### Step 2: Generate SKILL.md
 
-### Step 3: Generate SKILL.md
-Apply the authoring-agent-skills standards (see [File Structure](../../skills/authoring-agent-skills/SKILL.md#file-structure--three-tier-architecture)) to create the file.
+1. Start from [TEMPLATE.SKILL.md](../../templates/skills/TEMPLATE.SKILL.md)
+2. Populate every section following [Authoring Standards](#authoring-standards)
+3. Replace all `[placeholder]` values with research-derived content
+4. Apply progressive disclosure: move content > 30 lines to `blueprints/` if approaching 500 lines
 
-### Step 4: Create Evaluation Scenarios
-Create at least 3 evaluation scenarios to test the skill. Derive `<skill-name>` from the research file metadata (folder name = YAML `name`).
+Output: `.claude/skills/<skill-name>/SKILL.md`
+
+### Step 3: Create Evaluation Scenarios
+
+Generate at least 3 scenarios (canonical, edge, misuse). Derive `<skill-name>` from the research file metadata.
 
 ```json
 {
   "skills": ["<skill-name>"],
   "query": "[representative task]",
-  "expected_behavior": ["[specific expected outcome 1]", "[specific expected outcome 2]"]
+  "expected_behavior": ["[outcome 1]", "[outcome 2]"]
 }
 ```
 
-Save scenarios as `.claude/skills/<skill-name>/blueprints/evaluation-scenarios.md`. Add a Quick Navigation link in SKILL.md: `[Evaluation Scenarios](./blueprints/evaluation-scenarios.md)`.
+Save as `.claude/skills/<skill-name>/blueprints/evaluation-scenarios.md`. Add Quick Navigation link in SKILL.md.
 
----
+### Step 4: Quality Gate Self-Check
 
-## Critical Requirements
+Verify all [Quality Checklist](#quality-checklist) items pass before proceeding.
 
-### 1. Follow authoring-agent-skills Standards
-All skills MUST follow the patterns documented in [authoring-agent-skills](../../skills/authoring-agent-skills/SKILL.md). Key points:
+### Step 5: Verification Loop
 
-- **Naming**: `lowercase-kebab-case`, gerund form preferred (folder = YAML name)
-- **Name constraints**: max 64 chars, lowercase letters/numbers/hyphens only, no reserved words (`anthropic`, `claude`)
-- **File**: Exactly `.claude/skills/<skill-name>/SKILL.md` (derive `<skill-name>` from research file)
-- **YAML `description`**: third-person, max 1536 chars. Format: `"[Action verb] [what] with [Tech]. Use when [trigger]."`
+Run all checks in [Verification Loop](#verification-loop) below.
 
-### 2. Three-Level Architecture (✅⚠️🚫)
-See [Three-Tier Architecture](../../skills/authoring-agent-skills/SKILL.md#file-structure--three-tier-architecture) in authoring-agent-skills for complete details.
+### Step 6: Deliver Artifacts
 
-**Quick mapping from research**:
-- "Mandatory Patterns" → ✅ Always Do (concise examples with code — include all patterns the domain requires)
-- "Conditional Patterns" → ⚠️ Ask First (decisions with tradeoff matrix — include all decision points)
-- "Forbidden Patterns" → 🚫 Never Do (anti-patterns with correct alternatives — include all anti-patterns discovered)
-
-### 3. Essential Sections (Team Conventions)
-- **Version Context**: Technology, target version, release date, support status, breaking changes
-- **Verification Loop**: Adapted to the technology (lint, tests, health checks)
-- **Integration Patterns**: For each technology partner
-- **External Resources**: Links to official documentation
-
-### 4. Progressive Disclosure & Context Efficiency
-- Keep SKILL.md under 500 lines — split into `blueprints/` files when approaching this limit
-- Use relative links: `[Skill Frontmatter Rule](../../rules/skill-frontmatter.md)`
-- Link to official external documentation
-- Keep file references one level deep from SKILL.md
-- Use forward slashes in all paths
-
-| ❌ Don't | ✅ Do instead |
-|---|---|
-| Duplicate large documentation blocks inline | Move to `blueprints/` and link from SKILL.md |
-| Use absolute or Windows-style paths | Use relative paths: `./blueprints/file.md`, `../../rules/file.md` |
-| Link to files that don't exist yet | Create the target file first, then add the link |
-| Include time-sensitive information (release dates, "new in v1.x") | Move to a `## Version Context` section with explicit version lock |
-
----
-
-## Output Structure
-
-The output is a complete `SKILL.md` file ready to save at `.claude/skills/<skill-name>/SKILL.md` (derive `<skill-name>` from the research file path and frontmatter).
-
-**How to produce it**:
-1. Start from the canonical scaffold: [TEMPLATE.SKILL.md](../../templates/skills/TEMPLATE.SKILL.md) — it defines every required section with placeholders. Do not invent sections or omit existing ones.
-2. Populate each section following the conventions in [authoring-agent-skills/SKILL.md](../../skills/authoring-agent-skills/SKILL.md): naming rules, three-tier guardrails (✅⚠️🚫), version lock, degrees of freedom. That skill is the authoritative reference for *how* to write each section.
-3. Replace all `[placeholder]` values with content derived from the research file mapping (Step 2 above).
-4. Apply progressive disclosure: if the file approaches 500 lines, move large code examples to `blueprints/*.md` and link from SKILL.md.
-
-> The template defines **what** to include. The skill defines **how** to write it. This prompt defines **when and in what order**.
+Confirm two mandatory artifacts exist:
+- `.claude/skills/<skill-name>/SKILL.md`
+- `.claude/skills/<skill-name>/blueprints/evaluation-scenarios.md`
 
 ---
 
 ## Quality Gates (Final Checklist)
 
-Before generating output, verify against the [Quality Checklist](../../skills/authoring-agent-skills/SKILL.md#quality-checklist) in authoring-agent-skills:
+Verify all [Quality Checklist](#quality-checklist) items pass, plus:
 
-**Core Quality (Official)**:
-- [ ] Description is third-person, specific, includes what + when
-- [ ] SKILL.md body under 500 lines
-- [ ] No time-sensitive information
-- [ ] Consistent terminology throughout
-- [ ] File references one level deep
-- [ ] No Windows-style paths
-
-**Team Conventions**:
-- [ ] YAML `name` = folder name = kebab-case (gerund preferred)
-- [ ] All three tiers (✅⚠️🚫) populated with research data — no tier may be empty
-- [ ] Every 🚫 Never Do item has an inline ✅ correct alternative (not just "don't do X")
-- [ ] Version Context section present
-- [ ] Anti-patterns have correct alternatives in code
-- [ ] Code examples are copy-paste executable
-- [ ] No absolute paths (only relative or URLs)
-- [ ] All links tested (no 404s)
-- [ ] `## External Resources` section present with at least one dated official link
-- [ ] Research bibliography linked under External Resources
-
-**Evaluation**:
-- [ ] At least 3 evaluation scenarios created and saved as `blueprints/evaluation-scenarios.md`
+- [ ] At least 3 evaluation scenarios in `blueprints/evaluation-scenarios.md`
 - [ ] Quick Navigation in SKILL.md links to `./blueprints/evaluation-scenarios.md`
 - [ ] Scenarios cover: canonical use, edge case, and misuse/anti-pattern trap
 
@@ -224,29 +221,27 @@ Before generating output, verify against the [Quality Checklist](../../skills/au
 
 ## Verification Loop
 
-After generating the SKILL.md and evaluation scenarios, run these checks:
-
 ```bash
-# 1. Line count must stay under 500
+# 1. Line count ≤ 500
 wc -l ".claude/skills/<skill-name>/SKILL.md"
-# Expected: ≤ 500
 
-# 2. All three tiers present
+# 2. Frontmatter required fields present
+grep -E "^name:|^description:" ".claude/skills/<skill-name>/SKILL.md" | head -5
+
+# 3. All three tiers present
 grep -c "### ✅ Always Do\|### ⚠️ Ask First\|### 🚫 Never Do" ".claude/skills/<skill-name>/SKILL.md"
 # Expected: 3
 
-# 3. Evaluation scenarios created
+# 4. Evaluation scenarios created
 test -f ".claude/skills/<skill-name>/blueprints/evaluation-scenarios.md" && echo "OK" || echo "MISSING"
-# Expected: OK
 
-# 4. All blueprint links resolve
+# 5. All blueprint links resolve
 grep -oE '\./blueprints/[^)]+' ".claude/skills/<skill-name>/SKILL.md" | while read f; do
   [ -f ".claude/skills/<skill-name>/$f" ] && echo "OK: $f" || echo "MISSING: $f"
 done
-# Expected: all OK
 
-# 5. No absolute paths
-grep -nE "(C:\\\\|/Users/|/home/)" ".claude/skills/<skill-name>/SKILL.md"
+# 6. No absolute paths
+grep -nE "(C:\\\\|/Users/|/home/|/root/)" ".claude/skills/<skill-name>/SKILL.md"
 # Expected: no output
 ```
 
@@ -256,14 +251,9 @@ grep -nE "(C:\\\\|/Users/|/home/)" ".claude/skills/<skill-name>/SKILL.md"
 
 ## Expected Input Format
 
-The `$ARGUMENTS` file (research file path) should be the output of the research protocol containing:
-
 ```yaml
 Metadata:
-  - Full_Name
-  - Target_Version
-  - Release_Date
-  - Primary_Docs
+  - Full_Name, Target_Version, Release_Date, Primary_Docs
 
 Architectural Guardrails:
   - ✅ Mandatory Patterns (with code)
@@ -271,50 +261,29 @@ Architectural Guardrails:
   - 🚫 Forbidden Patterns (with alternatives)
 
 Implementation Blueprint:
-  - Connection/Session Lifecycle
-  - Integration Examples
+  - Connection/Session Lifecycle, Integration Examples
 
 Quality Control:
-  - Verification Commands (bash)
-  - Mocking Protocol
+  - Verification Commands (bash), Mocking Protocol
 
 Production Readiness:
-  - Performance Baseline
-  - Monitoring Checklist
+  - Performance Baseline, Monitoring Checklist
 
 Source Bibliography:
-  - Primary Sources (URLs with dates)
-  - Organized Deep Links
+  - Primary Sources (URLs with dates), Organized Deep Links
 ```
-
----
-
-## Instructions for the Agent
-
-1. **FIRST**: Load `.claude/skills/authoring-agent-skills/SKILL.md`
-2. **SECOND**: Read the research file at `$ARGUMENTS` thoroughly; derive `<skill-name>`, tech name, and version from its path and frontmatter
-3. **THIRD**: Map the sections of the research to the skill structure (consider degrees of freedom for each pattern)
-4. **FOURTH**: Apply authoring-agent-skills rules (official + team conventions)
-5. **FIFTH**: Generate concise, production-ready `SKILL.md` at `.claude/skills/<skill-name>/SKILL.md` (under 500 lines)
-6. **SIXTH**: Create 3 evaluation scenarios; save as `.claude/skills/<skill-name>/blueprints/evaluation-scenarios.md`; add Quick Navigation link in SKILL.md
-7. **SEVENTH**: Perform self-verification against the quality checklist
-
-**Final Output** (two mandatory artifacts):
-- `.claude/skills/<skill-name>/SKILL.md`
-- `.claude/skills/<skill-name>/blueprints/evaluation-scenarios.md`
 
 ---
 
 ## Invocation Example
 
-**Command (via `/skill-creator`):**
 ```
 /skill-creator StoryBeat/research_FastAPI_v0.104.1.md
 ```
 
-The agent derives from the path: tech = `FastAPI`, version = `0.104.1`, skill name = `fastapi-async-api`.
+Derived: tech = `FastAPI`, version = `0.104.1`, skill name = `fastapi-async-api`.
 
-**Expected output** (two artifacts):
+Output:
 - `.claude/skills/fastapi-async-api/SKILL.md`
 - `.claude/skills/fastapi-async-api/blueprints/evaluation-scenarios.md`
 
@@ -322,11 +291,11 @@ The agent derives from the path: tech = `FastAPI`, version = `0.104.1`, skill na
 
 ## External Resources
 
-### Claude Code Skill Authoring
-- [Claude Code — Agent Skills best practices](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices) — Anthropic official (current)
-- [authoring-agent-skills SKILL.md](../../skills/authoring-agent-skills/SKILL.md) — House conventions: three-tier architecture, progressive disclosure, quality checklist
-- [TEMPLATE.SKILL.md](../../templates/skills/TEMPLATE.SKILL.md) — Canonical scaffold for generated SKILL.md files
-- [skill-frontmatter rules](../../rules/skill-frontmatter.md) — YAML frontmatter requirements (name, description, allowed-tools, context, agent)
-
-### Research Input Standard
-- [researching-technical-frameworks SKILL.md](../researching-technical-frameworks/SKILL.md) — Research protocol that produces the `$ARGUMENTS` input file
+- [Official: Skill Authoring Best Practices](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices) — Primary reference
+- [Official: Skills Overview](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview) — Architecture and structure
+- [Three-Tier Architecture (Team)](./blueprints/three-tier-architecture.md) — ✅⚠️🚫 framework with examples
+- [Evaluation & Iteration (Official)](./blueprints/evaluation-iteration.md) — Testing and improving skills
+- [Evaluation Scenarios (Team)](./blueprints/evaluation-scenarios.md) — 6 test cases
+- [TEMPLATE.SKILL.md](../../templates/skills/TEMPLATE.SKILL.md) — Canonical scaffold
+- [skill-frontmatter rules](../../rules/skill-frontmatter.md) — YAML frontmatter requirements
+- [researching-technical-frameworks](../researching-technical-frameworks/SKILL.md) — Research protocol producing `$ARGUMENTS`

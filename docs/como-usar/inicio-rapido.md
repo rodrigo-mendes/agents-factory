@@ -8,7 +8,7 @@ Tempo estimado: 15-20 minutos. Sem pré-condições além do Claude Code aberto 
 ## O que vai acontecer
 
 ```
-Passo 1: /technical-framework-researcher
+Passo 1: /researching-technical-frameworks
          → agente pede: tecnologia, versão, URL oficial, parceiros
          → produz: StoryBeat/research_FastAPI_v0.115.md
 
@@ -29,7 +29,7 @@ Passo 3: /skill-best-practices-validator .claude/skills/fastapi-async-api/
 ## Passo 1 — Pesquisar a Tecnologia
 
 ```
-/technical-framework-researcher
+/researching-technical-frameworks
 ```
 
 O agente vai pedir (interactivamente):

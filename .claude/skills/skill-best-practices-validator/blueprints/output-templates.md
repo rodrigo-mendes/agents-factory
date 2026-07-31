@@ -1,4 +1,4 @@
-# Output Templates — skill-best-practices-validator
+﻿# Output Templates — skill-best-practices-validator
 
 Copy these structures verbatim when generating validation output. Two artifacts:
 the **per-skill review file** and the **consolidated summary**.
@@ -21,7 +21,7 @@ Write one per evaluated skill at `.claude/skills/[skill-name]/[skill-name]-best-
 **File**: `.claude/skills/[skill-name]/SKILL.md`
 **Lines**: [N]
 **Official Reference**: https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices
-**Team Reference**: .claude/skills/authoring-agent-skills/SKILL.md
+**Team Reference**: .claude/skills/skill-creator/SKILL.md
 
 ---
 

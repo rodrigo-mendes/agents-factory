@@ -16,7 +16,7 @@ Como criar uma SKILL.md que segue todos os padrões do framework.
 
 Uma skill precisa de conteúdo validado. Se ainda não tem:
 ```
-/technical-framework-researcher
+/researching-technical-frameworks
 ```
 Ver: [Pesquisando Tecnologias](pesquisando-tecnologias.md)
 
@@ -30,7 +30,7 @@ Forneça o caminho para o documento de pesquisa quando solicitado.
 
 ### 3. O que o skill-creator faz internamente
 
-1. Carrega o padrão `authoring-agent-skills/SKILL.md`
+1. Aplica os padrões integrados de autoria (three-tier, YAML, blueprints)
 2. Lê seu documento de pesquisa
 3. Estrutura em three-tier:
    - **✅ Always Do**: Padrões obrigatórios com código completo

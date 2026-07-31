@@ -34,7 +34,7 @@ flowchart TD
 
 ```mermaid
 graph LR
-    A[technical-framework-researcher] --> B[skill-creator] --> C[agent-router-pattern-validator] --> D[audit-architecture-consensus] --> E[✅ Produção]
+    A[researching-technical-frameworks] --> B[skill-creator] --> C[agent-router-pattern-validator] --> D[audit-architecture-consensus] --> E[✅ Produção]
 ```
 
 **Capacidades envolvidas**: 1 de framework + 4 de auditoria + pesquisa + compilação

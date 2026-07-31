@@ -22,7 +22,7 @@ Todos seguem o padrão do `TEMPLATE.GENERATOR.prompt.md`.
 > **Arquivo**: `.claude/skills/skill-creator/SKILL.md`
 
 ### Descrição
-Orquestra a geração de uma SKILL.md a partir de qualquer documento de pesquisa, aplicando o padrão `authoring-agent-skills`.
+Orquestra a geração de uma SKILL.md a partir de qualquer documento de pesquisa, aplicando os padrões de autoria integrados ao `skill-creator`.
 
 ### Invocação
 ```
@@ -30,7 +30,7 @@ skill-creator
 ```
 
 ### Workflow Interno
-1. Carrega padrão `authoring-agent-skills/SKILL.md`
+1. Aplica padrões integrados de autoria (three-tier, YAML, blueprints)
 2. Lê documento de pesquisa fornecido
 3. Aplica three-tier architecture (✅⚠️🚫)
 4. Gera SKILL.md com YAML frontmatter correto
@@ -49,7 +49,7 @@ skill-name/
 ```
 
 ### Dependências
-- Skill: `authoring-agent-skills` (padrão de estrutura)
+- Padrões de autoria integrados ao `skill-creator`
 - Template: `TEMPLATE.SKILL.md` (referência implícita)
 
 ### Complementa
@@ -128,7 +128,7 @@ architecture-approaches-skill-generator
 ```
 
 ### Workflow Interno
-1. Carrega padrão `authoring-agent-skills/SKILL.md`
+1. Aplica padrões integrados de autoria (three-tier, YAML, blueprints)
 2. Lê pesquisa de metodologia de arquitetura
 3. Identifica decisões arquiteturais → mapeia para ⚠️ Ask First
 4. Identifica padrões obrigatórios → mapeia para ✅ Always Do
@@ -142,7 +142,7 @@ architecture-approaches-skill-generator
 - `SKILL.md` com decisões arquiteturais estruturadas em three-tier
 
 ### Dependências
-- Skill: `authoring-agent-skills` (padrão de estrutura)
+- Padrões de autoria integrados ao `skill-creator`
 
 ### Complementa
 - `architecture-methodology-researcher` (input)
@@ -163,7 +163,7 @@ methodologies-skill-generator
 ```
 
 ### Workflow Interno
-1. Carrega padrão `authoring-agent-skills/SKILL.md`
+1. Aplica padrões integrados de autoria (three-tier, YAML, blueprints)
 2. Lê pesquisa de metodologia
 3. Estrutura práticas obrigatórias, opcionais e proibidas
 4. Gera SKILL.md com exemplos de aplicação
@@ -175,7 +175,7 @@ methodologies-skill-generator
 - `SKILL.md` com práticas de metodologia em three-tier
 
 ### Dependências
-- Skill: `authoring-agent-skills` (padrão de estrutura)
+- Padrões de autoria integrados ao `skill-creator`
 
 ### Complementa
 - `requirements-methodology-researcher` (input)
@@ -187,7 +187,7 @@ methodologies-skill-generator
 
 | Researcher | Compiler Recomendado |
 |-----------|---------------------|
-| `technical-framework-researcher` | `skill-creator` |
+| `researching-technical-frameworks` | `skill-creator` |
 | `technical-framework-researcher-terraform` | `terraform-instructions-compiler` |
 | `terraform-engineering-best-practices-researcher` | `terraform-instructions-compiler` |
 | `architecture-methodology-researcher` | `architecture-approaches-skill-generator` |

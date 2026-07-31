@@ -130,7 +130,7 @@ grep -c "🚫\|⚠️\|✅" .claude/project-analysis-report.md
 
 ### Quando Usar
 
-Use após `/skill-creator` ou qualquer generator para verificar se o SKILL.md gerado segue as best practices de `authoring-agent-skills`.
+Use após `/skill-creator` ou qualquer generator para verificar se o SKILL.md gerado segue as best practices integradas ao `skill-creator`.
 
 **Palavras-gatilho:** "validar skill", "checar SKILL.md", "quality check da skill", "verificar three-tier", "skill está correta?".
 

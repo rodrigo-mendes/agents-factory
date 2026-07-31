@@ -73,7 +73,7 @@ Toda skill organiza guardrails em 3 camadas:
 ### Prompts
 - **Formato**: `noun-noun-action` ou `action-noun` (kebab-case)
 - **Exemplos**:
-  - ✅ `technical-framework-researcher`
+  - ✅ `cloud-architecture-researcher`
   - ✅ `skill-best-practices-validator`
   - ✅ `agent-router-pattern-validator`
 
@@ -195,7 +195,7 @@ Padrão de separação de concerns para projetos de agente.
 ```
 /comando-skill (context: fork — G3)
   → subagente .claude/agents/*.md (P0-P5 — G1)
-    → meta-skills authoring-agent-skills + researching-technical-frameworks (P0 — G4)
+    → meta-skill `researching-technical-frameworks` + padrões de autoria integrados ao `skill-creator` (P0 — G4)
     → rules .claude/rules/*.md (injectadas automaticamente por paths: — G2)
     → output (código / relatório / SKILL.md)
 ```

@@ -10,7 +10,7 @@ Pesquisar uma tecnologia/metodologia e transformar em artefato operacional (SKIL
 flowchart TD
     START([Início]) --> CHOOSE{Que tipo de<br/>conhecimento?}
     
-    CHOOSE -->|Tecnologia/Framework| R1[technical-framework-researcher]
+    CHOOSE -->|Tecnologia/Framework| R1[researching-technical-frameworks]
     CHOOSE -->|Terraform + Cloud| R2[technical-framework-researcher-terraform]
     CHOOSE -->|Práticas Terraform| R3[terraform-engineering-best-practices-researcher]
     CHOOSE -->|Arquitetura| R4[architecture-methodology-researcher]
@@ -56,7 +56,7 @@ flowchart TD
 
 | Se você precisa de... | Use |
 |----------------------|-----|
-| Padrões de FastAPI v0.100 | `technical-framework-researcher` |
+| Padrões de FastAPI v0.100 | `researching-technical-frameworks` |
 | Resources Terraform do OCI Functions | `technical-framework-researcher-terraform` |
 | Estrutura de projeto Terraform | `terraform-engineering-best-practices-researcher` |
 | Padrões C4 Model ou DDD | `architecture-methodology-researcher` |
@@ -104,7 +104,7 @@ flowchart TD
 
 ### Variante A: Skill de tecnologia
 ```
-technical-framework-researcher → skill-creator → skill-best-practices-validator
+researching-technical-frameworks → skill-creator → skill-best-practices-validator
 ```
 
 ### Variante B: Instructions Terraform

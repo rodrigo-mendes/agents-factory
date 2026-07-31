@@ -10,7 +10,7 @@ Todos seguem a metodologia definida na skill `researching-technical-frameworks` 
 
 | Prompt | Domínio | Input Esperado |
 |--------|---------|---------------|
-| `technical-framework-researcher` | Tecnologias (FastAPI, Redis, Next.js...) | Tecnologia + versão + parceiros de integração |
+| `researching-technical-frameworks` | Tecnologias (FastAPI, Redis, Next.js...) | Tecnologia + versão + parceiros de integração |
 | `technical-framework-researcher-terraform` | Cloud + Terraform | Provider + serviço + versão Terraform |
 | `terraform-engineering-best-practices-researcher` | Práticas de engenharia Terraform | Versão TF + provider + tamanho time + escala |
 | `architecture-methodology-researcher` | Metodologias de arquitetura | Metodologia + edição + contexto |
@@ -20,16 +20,16 @@ Todos seguem a metodologia definida na skill `researching-technical-frameworks` 
 
 ---
 
-## 1. technical-framework-researcher
+## 1. researching-technical-frameworks
 
-> **Arquivo**: `.claude/skills/technical-framework-researcher/SKILL.md`
+> **Arquivo**: `.claude/skills/researching-technical-frameworks/SKILL.md`
 
 ### Descrição
 Pesquisa tecnologias e frameworks de software com version absolutism, produzindo base de conhecimento validada contra documentação oficial.
 
 ### Invocação
 ```
-technical-framework-researcher
+researching-technical-frameworks
 ```
 
 ### Input Variables

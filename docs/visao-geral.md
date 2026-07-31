@@ -91,7 +91,7 @@ flowchart TD
 mindmap
   root((Agents Factory))
     Pesquisa
-      technical-framework-researcher
+      researching-technical-frameworks
       technical-framework-researcher-terraform
       cloud-architecture-researcher
       architecture-methodology-researcher

@@ -1,4 +1,4 @@
----
+﻿---
 name: terraform-engineering-best-practices-researcher
 description: Researches Terraform engineering best practices (project layout, module design, CI/CD, testing, governance) into a source-backed knowledge base. Use when researching Terraform engineering practices for a skill or rules.
 argument-hint: "<topic> (e.g. module-design, CI/CD, testing)"
@@ -264,5 +264,5 @@ grep -c "v{{TERRAFORM_VERSION}}\|v1\.[0-9]" research_Terraform_Engineering_*.md
 
 ### Meta-Skills
 
-- [authoring-agent-skills SKILL.md](../authoring-agent-skills/SKILL.md) — Three-tier pattern conventions
+- [skill-creator SKILL.md](../skill-creator/SKILL.md) — Three-tier pattern conventions
 - [researching-technical-frameworks SKILL.md](../researching-technical-frameworks/SKILL.md) — Anti-hallucination research methodology

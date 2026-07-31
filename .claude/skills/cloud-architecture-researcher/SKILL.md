@@ -1,4 +1,4 @@
----
+﻿---
 name: cloud-architecture-researcher
 description: Researches a cloud provider's architecture framework/patterns (AWS WAF, Azure CAF, GCP, OCI) into a hallucination-proof, version-absolute knowledge base. Use when researching cloud architecture best practices for a skill.
 argument-hint: "<cloud-provider> (e.g. AWS, Azure, GCP, OCI)"
@@ -313,5 +313,5 @@ grep -c "{{TARGET_EDITION}}\|WAF 20\|CAF v\|Architecture Framework 20" research_
 
 ### Meta-Skills
 
-- [authoring-agent-skills SKILL.md](../authoring-agent-skills/SKILL.md) — Three-tier pattern conventions
+- [skill-creator SKILL.md](../skill-creator/SKILL.md) — Three-tier pattern conventions
 - [researching-technical-frameworks SKILL.md](../researching-technical-frameworks/SKILL.md) — Anti-hallucination research methodology

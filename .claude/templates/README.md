@@ -114,7 +114,7 @@ Esta fábrica é **tecnologia-agnóstica** — não mantemos implementações co
 `templates/`. Para ver artefatos reais como referência, olhe os **artefatos vivos** do próprio repo:
 
 - **Subagentes** — `.claude/agents/` (ex.: `framework-researcher.md`, `architecture-auditor.md`)
-- **Skills / comandos** — `.claude/skills/` (ex.: `technical-framework-researcher/`, `audit-architecture-scope/`)
+- **Skills / comandos** — `.claude/skills/` (ex.: `researching-technical-frameworks/`, `audit-architecture-scope/`)
 - **Rules** — `.claude/rules/` (ex.: `skill-frontmatter.md`)
 
 Esses são a fonte da verdade e evoluem com o repo — use-os como modelo, e os `TEMPLATE.*` acima como

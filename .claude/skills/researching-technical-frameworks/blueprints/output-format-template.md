@@ -1,4 +1,4 @@
-# Output Format Template — technical-framework-researcher
+# Output Format Template — researching-technical-frameworks
 
 Save the research document as `research_{{SYSTEM_NAME}}_v{{TARGET_VERSION}}.md`.
 

@@ -11,7 +11,7 @@
 
 ---
 
-## /technical-framework-researcher
+## /researching-technical-frameworks
 
 > **Agente:** `framework-researcher` | **Contexto:** fork | **Modelo invocation:** desabilitado
 
@@ -39,10 +39,10 @@ Nenhuma — é o ponto de entrada do pipeline de pesquisa.
 ### Exemplo de Chamada
 
 ```
-/technical-framework-researcher
+/researching-technical-frameworks FastAPI 0.115
 ```
 
-O agente vai pedir interativamente:
+O agente vai processar com:
 ```
 Tecnologia: FastAPI
 Versão: 0.115

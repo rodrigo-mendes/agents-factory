@@ -20,7 +20,7 @@ Referência completa dos 4 subagentes e dos 24 comandos que os invocam.
 ### Pesquisa (`framework-researcher`)
 
 ```
-/technical-framework-researcher              # Pesquisa tecnologia/framework por versão
+/researching-technical-frameworks            # Pesquisa tecnologia/framework por versão
 /technical-framework-researcher-terraform    # Pesquisa serviço cloud + Terraform (IaC)
 /cloud-architecture-researcher               # Pesquisa framework cloud (AWS WAF, Azure CAF, OCI)
 /business-domain-researcher                  # Pesquisa domínio organizacional (Finance, Legal, HR)
@@ -79,7 +79,7 @@ flowchart TD
     START --> A[Auditar arquitetura<br/>de um projeto de agente]
     START --> V[Validar qualidade<br/>de artefatos existentes]
 
-    P --> P1[/technical-framework-researcher/]
+    P --> P1[/researching-technical-frameworks/]
     P --> P2[/terraform-engineering-best-practices-researcher/]
     P --> P3[/cloud-architecture-researcher/]
     P --> P4[/business-domain-researcher/]
@@ -107,7 +107,7 @@ flowchart TD
 ## Fluxo Típico de Ponta-a-Ponta
 
 ```
-1. /technical-framework-researcher
+1. /researching-technical-frameworks
         │ → research_FastAPI_v0.115.md
         ↓
 2. /skill-creator StoryBeat/research_FastAPI_v0.115.md

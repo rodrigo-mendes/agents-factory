@@ -8,7 +8,7 @@ Criar um projeto de agente production-ready do zero, desde o bootstrap até audi
 
 ```mermaid
 flowchart TD
-    START([Início]) --> RESEARCH[technical-framework-researcher<br/>Pesquisar tecnologia]
+    START([Início]) --> RESEARCH[researching-technical-frameworks<br/>Pesquisar tecnologia]
     RESEARCH --> SKILL[skill-creator<br/>Gerar SKILL.md]
     SKILL --> VALID[agent-router-pattern-validator<br/>Verificar estrutura]
     
@@ -29,7 +29,7 @@ flowchart TD
 
 ### Etapa 1: Pesquisa de Tecnologia
 
-**Prompt**: `/technical-framework-researcher <tech>`
+**Prompt**: `/researching-technical-frameworks <tech>`
 
 **O que acontece**:
 - Pesquisa a tecnologia/framework com fontes oficiais
@@ -102,7 +102,7 @@ flowchart TD
 
 | Etapa | Capacidade | Tipo |
 |-------|-----------|------|
-| 1 | `technical-framework-researcher` | Pesquisa |
+| 1 | `researching-technical-frameworks` | Pesquisa |
 | 2 | `skill-creator` | Compilação |
 | 3 | `agent-router-pattern-validator` | Framework |
 | 4 | `audit-cc-architecture-scope` | Auditoria CC |
@@ -115,7 +115,7 @@ flowchart TD
 ## Pré-requisitos
 
 - Saber qual tecnologia/domínio o agente vai cobrir
-- Ter acesso ao `/technical-framework-researcher` para pesquisa inicial
+- Ter acesso ao `/researching-technical-frameworks` para pesquisa inicial
 
 ## Resultado Final
 

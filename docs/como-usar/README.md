@@ -35,7 +35,7 @@ Escolha um dos cenários abaixo baseado no seu objetivo:
 → [Pesquisando Tecnologias](pesquisando-tecnologias.md)
 
 ```
-/technical-framework-researcher
+/researching-technical-frameworks
 ```
 
 ### "Quero criar uma skill"

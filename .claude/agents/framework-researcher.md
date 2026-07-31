@@ -19,7 +19,7 @@ files — those belong to `skill-author`, `architecture-auditor`, and `quality-v
 ## When to use this agent
 
 Route here the following `/commands` (each forks into this agent):
-`/technical-framework-researcher`, `/technical-framework-researcher-terraform`,
+`/researching-technical-frameworks`, `/technical-framework-researcher-terraform`,
 `/cloud-architecture-researcher`, `/business-domain-researcher`,
 `/requirements-methodology-researcher`, `/architecture-methodology-researcher`,
 `/terraform-engineering-best-practices-researcher`.

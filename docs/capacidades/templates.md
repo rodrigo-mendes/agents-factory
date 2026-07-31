@@ -67,7 +67,7 @@
 | **Categoria** | Construção de conhecimento |
 | **Quando usar** | Criar prompt que pesquisa tecnologia/metodologia |
 | **Referenciado por** | Nenhum explicitamente |
-| **Implementações que seguem** | `technical-framework-researcher`, `terraform-engineering-best-practices-researcher`, `architecture-methodology-researcher`, `cloud-architecture-researcher`, `business-domain-researcher`, `requirements-methodology-researcher`, `technical-framework-researcher-terraform` |
+| **Implementações que seguem** | `researching-technical-frameworks`, `terraform-engineering-best-practices-researcher`, `architecture-methodology-researcher`, `cloud-architecture-researcher`, `business-domain-researcher`, `requirements-methodology-researcher`, `technical-framework-researcher-terraform` |
 
 ### TEMPLATE.GENERATOR.prompt.md
 > **Arquivo**: `.github/templates/prompts/TEMPLATE.GENERATOR.prompt.md`

@@ -12,7 +12,7 @@ artefatos nativos de cada plataforma.
 
 | # | Prompt Copilot (`.github/prompts/`) | Skill Claude Code (`.claude/skills/`) | Categoria | Status |
 |:-:|-------------------------------------|---------------------------------------|-----------|--------|
-| 1 | `technical-framework-researcher.prompt.md` | `technical-framework-researcher/SKILL.md` | Pesquisa | ✅ Equivalente |
+| 1 | `technical-framework-researcher.prompt.md` | `researching-technical-frameworks/SKILL.md` | Pesquisa | ✅ Equivalente |
 | 2 | `technical-framework-researcher-terraform.prompt.md` | `technical-framework-researcher-terraform/SKILL.md` | Pesquisa | ✅ Equivalente |
 | 3 | `terraform-engineering-best-practices-researcher.prompt.md` | `terraform-engineering-best-practices-researcher/SKILL.md` | Pesquisa | ✅ Equivalente |
 | 4 | `architecture-methodology-researcher.prompt.md` | `architecture-methodology-researcher/SKILL.md` | Pesquisa | ✅ Equivalente |
@@ -53,12 +53,12 @@ especificamente a arquitetura de projetos Claude Code.
 
 | Meta-Skill | Copilot | Claude Code |
 |------------|---------|-------------|
-| `authoring-agent-skills` | `.github/skills/authoring-agent-skills/SKILL.md` | `.claude/skills/authoring-agent-skills/SKILL.md` |
+| `authoring-agent-skills` | `.github/skills/authoring-agent-skills/SKILL.md` | *(integrado ao `skill-creator`)* |
 | `researching-technical-frameworks` | `.github/skills/researching-technical-frameworks/SKILL.md` | `.claude/skills/researching-technical-frameworks/SKILL.md` |
 
-> **Nota de descrição**: A versão `.github/` da `authoring-agent-skills` menciona "GitHub Copilot
-> Agent Skills" na descrição. A versão `.claude/` usa "Agent Skills" (platform-agnostic). O conteúdo
-> operacional é idêntico.
+> **Divergência**: No Claude Code, os padrões de autoria do `authoring-agent-skills` foram
+> incorporados diretamente ao `skill-creator`, eliminando a indireção. O Copilot mantém as duas
+> skills separadas.
 
 ---
 
@@ -100,6 +100,6 @@ especificamente a arquitetura de projetos Claude Code.
 | Sistema | Prompts/Skills operacionais | Meta-skills | Agents | Templates | Rules/Instructions |
 |---------|:--:|:--:|:--:|:--:|:--:|
 | `.github/` (Copilot) | 20 | 2 | 0 | 15 | 0 |
-| `.claude/` (Claude Code) | 24 | 2 | 4 | 14 | 1 |
+| `.claude/` (Claude Code) | 24 | 1 | 4 | 14 | 1 |
 
 > `.github/` tem 15 templates (inclui `README.md`); `.claude/` tem 14 (sem README interno).

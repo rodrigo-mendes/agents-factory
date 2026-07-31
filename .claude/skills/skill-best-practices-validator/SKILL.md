@@ -11,7 +11,7 @@ disable-model-invocation: true
 ## Objective
 Generate a quality and best-practices adherence analysis of Agent Skills based on:
 - **Official**: https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices
-- **Team**: `.claude/skills/authoring-agent-skills/SKILL.md`
+- **Team**: `.claude/skills/skill-creator/SKILL.md`
 
 ## Quick Navigation
 
@@ -28,7 +28,7 @@ Generate a quality and best-practices adherence analysis of Agent Skills based o
 ## Agent Instructions
 
 Act as an Agent Skills Quality Specialist. Evaluate each skill against the official Claude criteria
-and the team conventions documented in `authoring-agent-skills`.
+and the team conventions documented in `skill-creator`.
 
 ---
 
@@ -36,8 +36,8 @@ and the team conventions documented in `authoring-agent-skills`.
 
 ### ✅ Always Do
 
-- **Read reference files before evaluating** — read `.claude/skills/authoring-agent-skills/SKILL.md`
-  and `.claude/skills/authoring-agent-skills/blueprints/three-tier-architecture.md` before emitting
+- **Read reference files before evaluating** — read `.claude/skills/skill-creator/SKILL.md`
+  and `.claude/skills/skill-creator/blueprints/three-tier-architecture.md` before emitting
   any criterion.
 - **Confirm counts with real filesystem inspection** — use `ls`/`Glob` to enumerate the SKILL.md
   files present; never rely on self-reported counts or assume which files exist.
@@ -102,8 +102,8 @@ The format of each finding is the validator's primary output. Contrast:
 ### Step 1: Load Reference Criteria
 
 Read the following files before evaluating:
-1. `.claude/skills/authoring-agent-skills/SKILL.md` — Team standard
-2. `.claude/skills/authoring-agent-skills/blueprints/three-tier-architecture.md` — Three-tier architecture
+1. `.claude/skills/skill-creator/SKILL.md` — Team standard
+2. `.claude/skills/skill-creator/blueprints/three-tier-architecture.md` — Three-tier architecture
 
 ### Step 2: Discover and Analyze Skills
 
@@ -261,8 +261,8 @@ All commands must exit with code `0` and no `MISSING:` / `NO-CRITERIA:` lines be
 - [Claude Agent Skills Overview](https://platform.claude.com/docs/en/agents-and-tools/agent-skills) — skill definition and valid frontmatter
 
 ### Team Conventions
-- [authoring-agent-skills SKILL.md](./../authoring-agent-skills/SKILL.md) — team standard (D criteria)
-- [authoring-agent-skills — three-tier-architecture](./../authoring-agent-skills/blueprints/three-tier-architecture.md) — three-tier architecture
+- [skill-creator SKILL.md](./../skill-creator/SKILL.md) — team standard (D criteria)
+- [skill-creator — three-tier-architecture](./../skill-creator/blueprints/three-tier-architecture.md) — three-tier architecture
 - [skill-frontmatter rules](./../../rules/skill-frontmatter.md) — frontmatter limits (description max 1536 chars, `allowed-tools` vs `tools`, etc.)
 
 ---

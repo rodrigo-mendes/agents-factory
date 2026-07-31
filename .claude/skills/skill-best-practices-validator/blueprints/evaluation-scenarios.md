@@ -1,4 +1,4 @@
-# Evaluation Scenarios — skill-best-practices-validator
+﻿# Evaluation Scenarios — skill-best-practices-validator
 
 Used to verify that the validator correctly identifies compliant, partially compliant, and violating
 Agent Skills — and that it generates accurate, criterion-cited output without hallucinating findings.
@@ -32,7 +32,7 @@ Agent Skills — and that it generates accurate, criterion-cited output without 
     "name_matches_folder": true
   },
   "expected_behavior": [
-    "Reads authoring-agent-skills/SKILL.md and blueprints/three-tier-architecture.md before evaluating",
+    "Reads skill-creator/SKILL.md and blueprints/three-tier-architecture.md before evaluating",
     "Confirms SKILL.md line count by reading the file (not estimating)",
     "Marks A1 as compliant: name is kebab-case, description is under 1536 chars and includes 'Use when'",
     "Marks A2 as compliant: body under 500 lines",

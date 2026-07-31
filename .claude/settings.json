@@ -12,7 +12,7 @@
       "Bash(cat *)",
       "Bash(git status *)",
       "Bash(git diff *)",
-      "Write(./StoryBeat/**)",
+      "Write(./StoryBeats/**)",
       "Write(./.claude/**)",
       "Edit(./.claude/**)",
       "Agent"

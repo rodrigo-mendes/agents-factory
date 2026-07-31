@@ -1,4 +1,4 @@
----
+﻿---
 name: agent-router-pattern-validator
 description: Analyzes an agent project and reports Agent Router Pattern compliance — deviations and concrete improvements; technology-agnostic. Use when checking whether a project's command to agent to skill delegation is well-formed.
 argument-hint: "Optional: path to the agent project directory (defaults to .github/)"
@@ -298,5 +298,5 @@ This prompt focuses exclusively on **Agent Router Pattern compliance**. For comp
 - [GitHub Copilot custom instructions](https://docs.github.com/en/copilot/how-tos/configure-custom-instructions) — `.instructions.md` / `applyTo` behavior
 
 ### Team Conventions
-- [authoring-agent-skills SKILL.md](./../authoring-agent-skills/SKILL.md) — three-tier guardrail standards, frontmatter rules, progressive disclosure
+- [skill-creator SKILL.md](./../skill-creator/SKILL.md) — three-tier guardrail standards, frontmatter rules, progressive disclosure
 - [skill-frontmatter rules](./../../rules/skill-frontmatter.md) — `allowed-tools`, `context: fork`, `agent:` usage

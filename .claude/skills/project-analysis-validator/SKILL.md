@@ -1,4 +1,4 @@
----
+﻿---
 name: project-analysis-validator
 description: >
   Validates an entire agent project for structural integrity, CLAUDE.md accuracy, router
@@ -259,7 +259,7 @@ Report saved to `.claude/project-analysis-report.md`:
 
 - [Claude Agent Skills](https://platform.claude.com/docs/en/agents-and-tools/agent-skills) — frontmatter fields and validation rules
 - [Claude Subagents](https://platform.claude.com/docs/en/agents-and-tools/claude-code-subagents) — agent conventions
-- [authoring-agent-skills SKILL.md](./../authoring-agent-skills/SKILL.md) — team standard
+- [skill-creator SKILL.md](./../skill-creator/SKILL.md) — team standard
 - [skill-frontmatter rules](./../../rules/skill-frontmatter.md) — active frontmatter conventions
 
 ---
