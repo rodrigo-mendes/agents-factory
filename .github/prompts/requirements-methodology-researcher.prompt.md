@@ -1,5 +1,7 @@
 ---
-description: Senior Requirements Researcher specializing in agile product frameworks, user story practices, and requirements artifact methodologies.
+name: requirements-methodology-researcher
+description: Senior Requirements Researcher specializing in agile product frameworks, user story practices, and requirements artifact methodologies. Use when researching a requirements or agile methodology (e.g. Scrum, SAFe, BDD).
+argument-hint: "Methodology name and version (e.g. SAFe 6.0, Scrum Guide 2020)"
 ---
 
 # INPUT VARIABLES

@@ -1,5 +1,7 @@
 ---
-description: Senior Technical Researcher and Software Architect.
+name: technical-framework-researcher
+description: Senior Technical Researcher and Software Architect. Builds hallucination-proof, version-absolute knowledge bases from official docs. Use when researching a technology or framework for a pinned version.
+argument-hint: "Tech name and version (e.g. FastAPI 0.115, Redis 7.2)"
 ---
 
 # INPUT VARIABLES
