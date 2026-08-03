@@ -3,7 +3,9 @@ name: researching-technical-frameworks
 description: Researches technologies and frameworks to create comprehensive, hallucination-proof knowledge bases enabling skill authoring. Use when starting technical research for a new skill.
 ---
 
-## Core Mission
+## Function
+Produces hallucination-proof `research_[TECH]_v[VERSION].md` documents by enforcing version absolutism, source hierarchy, and three-tier guardrails for downstream skill authoring.
+
 Transform vague technology requirements into **research_[TECH]_v[VERSION].md** documents that:
 - Prevent hallucination through official documentation validation
 - Enforce version-specific patterns
@@ -13,8 +15,9 @@ Transform vague technology requirements into **research_[TECH]_v[VERSION].md** d
 ## Quick Navigation
 
 - **[Always Do Patterns](./blueprints/always-do-patterns.md)** — Mandatory implementation patterns
-- **[Ask First](#ask-first)** — Architectural decisions requiring context
+- **[Ask First](./blueprints/ask-first-decisions.md)** — Architectural decisions requiring context
 - **[Never Do Patterns](./blueprints/never-do-patterns.md)** — Anti-patterns with alternatives
+- **[Integration Patterns](./blueprints/integration-patterns.md)** — SDK/library integration template
 - **[Research Execution Workflow](#research-execution-workflow)** — Phase-by-phase research process
 - **[Verification Loop](#verification-loop)** — Validation commands and expected outputs
 - **[External Resources](#external-resources)** — Official documentation links

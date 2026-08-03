@@ -1,8 +1,8 @@
 ---
 name: audit-architecture-consensus
-description: 'Orchestrates a multi-model architecture audit by running Model A (Scope), Model B (Flow), and Model C (Engine) in parallel against a target agent, then compares findings to produce a consensus-based compliance report with prioritized remediation.'
-tools: ['read', 'search', 'create']
-argument-hint: 'Agent name to audit (e.g. oci-terraform) or path to .github/ directory'
+description: 'Orchestrates a multi-model architecture audit by running Model A (Scope), Model B (Flow), and Model C (Engine) sequentially against a target agent, then compares findings to produce a consensus-based compliance report with prioritized remediation.'
+tools: ['read', 'search', 'createFile']
+argument-hint: 'Agent name to audit (e.g. framework-researcher, skill-author) or path to .github/ directory'
 ---
 
 # Architecture Audit Orchestrator

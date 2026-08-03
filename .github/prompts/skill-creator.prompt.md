@@ -1,5 +1,7 @@
 ---
-description: Orchestration prompt to guide agents in generating GitHub Copilot Skills using the authoring-agent-skills technical standard
+name: skill-creator
+description: Orchestration prompt to guide agents in generating GitHub Copilot Skills using the authoring-agent-skills technical standard. Use when creating a new SKILL.md from an existing validated research file.
+argument-hint: "Path to research file (e.g. StoryBeat/research_FastAPI_v0.115.md)"
 ---
 
 # PROMPT: Skill Generator for Programming Agents

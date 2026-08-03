@@ -2,7 +2,7 @@
 name: audit-architecture-engine
 description: 'Audits agent architecture from the VS Code engine perspective — validates applyTo injection mechanics, context budget, frontmatter deduplication, active vs passive path correctness, and instruction conflict detection. Model C of the multi-model audit system.'
 tools: ['read', 'search']
-argument-hint: 'Agent name to audit (e.g. oci-terraform) or path to .github/ directory'
+argument-hint: 'Agent name to audit (e.g. framework-researcher, skill-author) or path to .github/ directory'
 ---
 
 # Technical Mechanisms Auditor (Model C)
