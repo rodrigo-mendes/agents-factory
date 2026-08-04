@@ -12,6 +12,7 @@ description: Creates, documents, and refines GitHub Copilot Agent Skills (SKILL.
 - **[Workflows & Feedback Loops](#workflows--feedback-loops)** — Sequential steps and validation loops (Official)
 - **[Content Guidelines](#content-guidelines)** — Terminology, templates, anti-patterns to avoid (Official)
 - **[Evaluation & Iteration](#evaluation--iteration)** — Testing and improving skills (Official)
+- **[Evaluation Scenarios](./blueprints/evaluation-scenarios.md)** — Test cases to verify skill correctness
 - **[Quality Checklist](#quality-checklist)** — Validation before sharing
 - **[Template](#skill-template)** — Copy-paste starting point
 - **[Common Mistakes](#common-mistakes-vs-correct-usage)** — What to avoid

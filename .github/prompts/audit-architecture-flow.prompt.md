@@ -2,7 +2,7 @@
 name: audit-architecture-flow
 description: 'Audits agent architecture from the invocation flow perspective (prompt → agent → instructions → skills), validating that every user entry point has a complete delegation chain, no dead-ends, no circular dependencies, and all components are reachable at runtime. Model B of the multi-model audit system.'
 tools: ['read', 'search']
-argument-hint: 'Agent name to audit (e.g. oci-terraform) or path to .github/ directory'
+argument-hint: 'Agent name to audit (e.g. framework-researcher, skill-author) or path to .github/ directory'
 ---
 
 # Invocation Flow Auditor (Model B)

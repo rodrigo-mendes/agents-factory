@@ -1,3 +1,9 @@
+---
+name: architecture-approaches-skill-generator
+description: Architecture Approach SKILL.md Generator — converts a validated architecture approach or design pattern research file into an operational SKILL.md with ✅⚠️🚫 patterns. Use when generating a skill from an architecture approach research base (e.g. C4 Model, Hexagonal Architecture).
+argument-hint: "Path to architecture research file (e.g. StoryBeat/research_C4_Model_2024.md)"
+---
+
 # Meta-Prompt: Architecture Research → SKILL.md Generator
 
 ---

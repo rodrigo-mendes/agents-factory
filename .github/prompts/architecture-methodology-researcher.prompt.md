@@ -1,3 +1,9 @@
+---
+name: architecture-methodology-researcher
+description: Architecture Methodology Researcher — researches architecture methodologies and patterns (C4, UML, ADR, TOGAF, arc42). Use when researching an architecture methodology or notation standard for skill authoring.
+argument-hint: "Methodology and version (e.g. C4 Model 2024, TOGAF 10, arc42 8.x)"
+---
+
 # Architecture Research & Design Skill Prompt
 
 ---

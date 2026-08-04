@@ -1,5 +1,7 @@
 ---
-description: Senior Infrastructure Engineer researching Terraform engineering best practices for project organization, module design, CI/CD, testing, and governance.
+name: terraform-engineering-best-practices-researcher
+description: Senior Infrastructure Engineer researching Terraform engineering best practices for project organization, module design, CI/CD, testing, and governance. Use when researching Terraform best practices for a provider and version.
+argument-hint: "Provider and version (e.g. AWS provider v5.x, Terraform 1.8)"
 ---
 
 # INPUT VARIABLES
