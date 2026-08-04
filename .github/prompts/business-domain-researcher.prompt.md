@@ -1,5 +1,7 @@
 ---
-description: Senior Business Domain Researcher and Organizational Process Architect.
+name: business-domain-researcher
+description: Senior Business Domain Researcher and Organizational Process Architect. Use when researching a business domain to produce a structured knowledge base for skill authoring.
+argument-hint: "Domain name and context (e.g. e-commerce checkout, healthcare scheduling)"
 ---
 
 # INPUT VARIABLES

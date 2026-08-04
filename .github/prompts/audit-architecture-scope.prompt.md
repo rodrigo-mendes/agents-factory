@@ -1,8 +1,8 @@
 ---
 name: audit-architecture-scope
 description: 'Audits agent architecture from the scope hierarchy perspective (L0→L4), validates responsibility separation per layer, detects responsibility leakage, and generates a compliance report with scoring and remediation plan. Model A of the multi-model audit system.'
-tools: ['read', 'search', 'create']
-argument-hint: 'Agent name to audit (e.g. oci-terraform) or path to .github/ directory'
+tools: ['read', 'search', 'createFile']
+argument-hint: 'Agent name to audit (e.g. framework-researcher, skill-author) or path to .github/ directory'
 ---
 
 # Agent Architecture Compliance Auditor

@@ -1,3 +1,9 @@
+---
+name: technical-framework-researcher-terraform
+description: Terraform provider researcher — builds hallucination-proof, version-absolute knowledge bases for Terraform providers and IaC patterns. Use when researching a Terraform provider or module for a pinned version.
+argument-hint: "Provider and version (e.g. aws v5.x with Terraform 1.8)"
+---
+
 # INPUT VARIABLES
 - `CLOUD_PROVIDER`: [e.g., "AWS", "Google Cloud", "Azure"]
 - `SERVICE_NAME`: [e.g., "S3", "RDS", "EC2", "CloudFront"]

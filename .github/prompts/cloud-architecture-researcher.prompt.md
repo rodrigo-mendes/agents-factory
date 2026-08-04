@@ -1,3 +1,9 @@
+---
+name: cloud-architecture-researcher
+description: Cloud Architecture Researcher — researches cloud WAF/CAF/architecture patterns for a provider and service. Use when researching cloud architecture best practices, Well-Architected Framework pillars, or service-specific architecture patterns.
+argument-hint: "Provider and service/pattern (e.g. AWS S3 architecture, GCP VPC networking)"
+---
+
 # Cloud Architecture Research Prompt
 
 ---

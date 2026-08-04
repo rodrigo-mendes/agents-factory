@@ -1,3 +1,9 @@
+---
+name: methodologies-skill-generator
+description: Methodology SKILL.md Generator — converts a validated methodology research file into an operational SKILL.md with ✅⚠️🚫 patterns. Use when generating a skill from a requirements or architecture methodology research base.
+argument-hint: "Path to methodology research file (e.g. StoryBeat/research_SAFe_v6.md)"
+---
+
 # Meta-Prompt: Methodology Research → SKILL.md Generator
 
 ---

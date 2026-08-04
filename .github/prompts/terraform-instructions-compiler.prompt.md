@@ -1,5 +1,7 @@
 ---
-description: Interactive compiler that extracts Terraform best practices from research files, interviews the user about project context, and compiles targeted .instructions.md files for GitHub Copilot.
+name: terraform-instructions-compiler
+description: Interactive compiler that extracts Terraform best practices from research files, interviews the user about project context, and compiles targeted .instructions.md files for GitHub Copilot. Use when converting Terraform research into scoped instruction files.
+argument-hint: "Path to Terraform research file (e.g. StoryBeat/terraform/research_terraform_aws_v5.md)"
 ---
 
 # Prompt: Terraform Best Practices → Instructions Compiler
