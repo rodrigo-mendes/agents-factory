@@ -18,8 +18,9 @@ not documents for humans to read.
 
 ## When to use this agent
 
-Route here skill/instruction generation: `skill-creator`, `methodologies-skill-generator`, and
-`terraform-instructions-compiler`. Each is exposed as a `/command` that forks into this agent.
+Route here skill/instruction generation: `skill-creator`, `methodologies-skill-generator`,
+`architecture-approaches-skill-generator`, and `terraform-instructions-compiler`.
+Each is exposed as a `/command` that forks into this agent.
 
 If a request does not match any artifact type listed above, state the mismatch explicitly and
 suggest the correct `/command` rather than proceeding.

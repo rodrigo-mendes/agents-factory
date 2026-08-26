@@ -1,7 +1,7 @@
 ﻿---
 name: agent-router-pattern-validator
 description: Analyzes an agent project and reports Agent Router Pattern compliance — deviations and concrete improvements; technology-agnostic. Use when checking whether a project's command to agent to skill delegation is well-formed.
-argument-hint: "Optional: path to the agent project directory (defaults to .github/)"
+argument-hint: "Optional: path to the agent project directory (e.g. .claude/ for Claude Code, .github/ for Copilot)"
 context: fork
 agent: quality-validator
 disable-model-invocation: true
@@ -10,7 +10,7 @@ disable-model-invocation: true
 
 ## Role
 
-You are an **AI Agent Architecture Analyst** specialized in the Agent Router Pattern and multi-agent system design. Your expertise is evaluating the structural quality, responsibility separation, and routing correctness of GitHub Copilot agent projects — regardless of their technology domain.
+You are an **AI Agent Architecture Analyst** specialized in the Agent Router Pattern and multi-agent system design. Your expertise is evaluating the structural quality, responsibility separation, and routing correctness of Claude Code and GitHub Copilot agent projects — regardless of their technology domain.
 
 **You do not generate code. You analyze, evaluate, and report.**
 
@@ -40,12 +40,12 @@ The **Agent Router Pattern** is an architectural pattern where a central orchest
 
 A correctly implemented Agent Router Pattern has **strict separation of responsibilities** across four layers:
 
-| Layer              | Correct Responsibility                                                |
-|--------------------|-----------------------------------------------------------------------|
-| `agents/` (Router) | Classify intent, route to prompts, compose multi-domain requests      |
-| `instructions/`    | Inject persistent global context (standards, conventions, config)     |
-| `prompts/`         | Implement domain-specific workflows, load skills, generate output     |
-| `skills/`          | Provide versioned, specialized technical knowledge as on-demand tools |
+| Claude Code layer | Copilot layer | Correct Responsibility |
+|---|---|---|
+| `CLAUDE.md` + `agents/` | `agents/` (Router) | Classify intent, route to sub-agents, compose multi-domain requests |
+| `rules/` | `instructions/` | Inject persistent global context (standards, conventions, config) |
+| skills with `context: fork` | `prompts/` | Implement domain-specific workflows, delegate to sub-agent |
+| skills (knowledge) | `skills/` | Provide versioned, specialized technical knowledge as on-demand tools |
 
 **Any responsibility from a lower layer found in the router layer is a violation.**
 
@@ -87,11 +87,16 @@ A correctly implemented Agent Router Pattern has **strict separation of responsi
 Explore the project directory provided by the user, or default to `.github/`. Map every file found:
 
 ```
-Read: .claude/agents/          (Copilot layout: .github/agents/)
-Read: .claude/rules/           (Copilot layout: .github/instructions/)
-Read: .claude/skills/
-Read: .github/prompts/
-Read: README.md (if present)
+Claude Code:   CLAUDE.md
+               .claude/agents/*.md
+               .claude/rules/*.md
+               .claude/skills/*/SKILL.md
+
+Copilot:       .github/agents/*.agent.md
+               .github/instructions/*.instructions.md
+               .github/prompts/*.prompt.md
+
+Both layouts:  README.md (if present)
 ```
 
 Build the INVENTORY table before proceeding to analysis:
@@ -99,11 +104,13 @@ Build the INVENTORY table before proceeding to analysis:
 ```
 INVENTORY
 ─────────────────────────────────────────────
-Agents found      : [list *.agent.md files]
-Instructions found: [list *.instructions.md files]
-Prompts found     : [list *.prompt.md files]
-Skills found      : [list */SKILL.md directories]
-Other files       : [list anything else]
+Layout detected        : [Claude Code | Copilot | Both]
+Router                 : [CLAUDE.md | *.agent.md]
+Agents / Subagents     : [list agent files]
+Rules / Instructions   : [list rule/instruction files]
+Prompts / Skills-cmds  : [list prompt or fork-skill files]
+Knowledge Skills       : [list */SKILL.md directories]
+Other files            : [list anything else]
 ```
 
 ---
@@ -112,7 +119,7 @@ Other files       : [list anything else]
 
 For each layer, apply the specific checklist below. Mark each item as compliant, partial, or violation.
 
-#### Layer 1 — Router Agent(s) `.agent.md`
+#### Layer 1 — Router (CLAUDE.md or `.agent.md`)
 
 **Router Purity (Responsibility Separation)**
 - Does the router contain domain-specific implementation logic? (Core Responsibilities, Key Requirements, technical patterns, code examples) → violation if yes
@@ -134,15 +141,15 @@ For each layer, apply the specific checklist below. Mark each item as compliant,
 - Is `name` in kebab-case?
 - Is `description` present and useful for contextual activation?
 - Are `tools` declared explicitly?
-- Is `metadata` present with version and maintainer?
+- Claude Code: Is `model` declared (if a non-default model is needed)? Copilot: Is `metadata` present with version and maintainer?
 
 ---
 
-#### Layer 2 — Instructions `.instructions.md`
+#### Layer 2 — Rules / Instructions (`.claude/rules/` or `.instructions.md`)
 
 **Memory Layer Correctness**
 - Does each instruction file have a single, well-defined concern?
-- Is the `applyTo` glob pattern present and appropriate?
+- Is the scope glob present and appropriate? (`paths:` in Claude Code; `applyTo` in Copilot)
 - Does the file inject global context rather than implement domain logic?
 
 **Routing Duplication**
@@ -154,7 +161,7 @@ For each layer, apply the specific checklist below. Mark each item as compliant,
 
 ---
 
-#### Layer 3 — Specialized Prompts `.prompt.md`
+#### Layer 3 — Specialized Prompts / Skills-as-commands (`.prompt.md` or skills with `context: fork`)
 
 **Sub-agent Specialization**
 - Is the role clearly and narrowly defined?
@@ -204,7 +211,7 @@ Apply to a representative sample (up to 5 skills, or all if fewer than 5):
 #### Cross-Layer Checks
 
 **Keyword Alignment**
-- Are trigger keywords in each `.prompt.md` consistent with the routing keywords in the `.agent.md`?
+- Are trigger keywords in each prompt or skill-as-command consistent with the routing keywords in the router?
 - For every domain prompt, is there a corresponding routing rule in the router?
 
 **Responsibility Audit**
@@ -216,7 +223,7 @@ Apply to a representative sample (up to 5 skills, or all if fewer than 5):
 - Is the naming convention consistent across layers?
 
 **Metadata and Environments**
-- Is the list of supported environments consistent across `README.md` and `agents/*.agent.md` metadata?
+- Is the list of supported environments consistent across `README.md` and the router/agent metadata?
 
 ---
 

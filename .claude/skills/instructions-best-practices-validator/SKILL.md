@@ -9,7 +9,7 @@ disable-model-invocation: true
 # Prompt: Custom Instructions Best Practices Validator
 
 ## Objective
-Generate a quality and best-practices adherence analysis of `.instructions.md` files based on:
+Generate a quality and best-practices adherence analysis of instruction/rule files (Copilot: `.instructions.md`; Claude Code: `.claude/rules/*.md`) based on:
 - **Official GitHub**: https://docs.github.com/en/copilot/customizing-copilot/adding-repository-custom-instructions-for-github-copilot
 - **Official VS Code**: https://code.visualstudio.com/docs/copilot/customization/custom-instructions
 - **Examples Library**: https://docs.github.com/en/copilot/tutorials/customization-library/custom-instructions
@@ -25,7 +25,7 @@ Generate a quality and best-practices adherence analysis of `.instructions.md` f
 
 ## Agent Instructions
 
-Act as a Custom Instructions Quality Specialist. Evaluate each `.instructions.md` against the official GitHub/VS Code criteria and team conventions.
+Act as a Custom Instructions Quality Specialist. Evaluate each instruction/rule file (Copilot: `.instructions.md`; Claude Code: `.claude/rules/*.md`) against the official GitHub/VS Code criteria and team conventions.
 
 ---
 
@@ -34,7 +34,7 @@ Act as a Custom Instructions Quality Specialist. Evaluate each `.instructions.md
 ### ✅ Always Do
 
 - **Read at least 3 existing instruction files as style references** before issuing any findings — establish the team conventions baseline.
-- **Confirm `applyTo` exists in every file** — its absence is the most critical issue; without it, instructions are never applied automatically.
+- **Confirm the scope field exists in every file** — `applyTo` for Copilot; `paths:` for Claude Code. Its absence is the most critical issue; without it, instructions are never applied automatically.
 - **Cite the exact criterion and file in every finding** — each issue must reference the criterion (A1, B2, E3, etc.) and the affected filename.
 - **Analyze overlaps and gaps in `applyTo` patterns** — pattern coverage analysis is a mandatory section of the report.
 - **Differentiate official criteria (A-D) from team conventions (E)** in separate tables — enables correct prioritization.
@@ -42,14 +42,14 @@ Act as a Custom Instructions Quality Specialist. Evaluate each `.instructions.md
 
 ### ⚠️ Ask First
 
-- **Global `applyTo: "**"` pattern** — if an excessively broad pattern is detected, ask whether it is intentional (e.g., global project instructions) before marking it as a violation.
+- **Overly broad scope pattern** — if a global `applyTo: "**"` (Copilot) or broad `paths:` entry (Claude Code) is detected, ask whether it is intentional (e.g., global project instructions) before marking it as a violation.
 - **Mixed-language instructions** — if the repository has instructions in multiple languages, ask what the canonical language is before evaluating consistency.
 - **Files with >300 lines** — when a file exceeds 300 lines, ask whether the user wants only the diagnosis or also a split proposal.
 - **Conflicts between files with the same `applyTo`** — before marking as a violation, ask whether the conflicting instructions are intentional (e.g., one overrides the other by load order).
 
 ### 🚫 Never Do
 
-- **Never omit the `applyTo` analysis** — it is the most critical field; a file without `applyTo` never activates automatically. ✅ Always verify presence, glob validity, and pattern specificity.
+- **Never omit the scope field analysis** — `applyTo` (Copilot) or `paths:` (Claude Code) is the most critical field; a file without it never activates automatically. ✅ Always verify presence, glob validity, and pattern specificity.
 - **Never mark a rule as good just because it exists** — quality requires that it include the reasoning ("Use X because Y"). ✅ Verify that each rule explains WHY it exists.
 - **Never report a violation without citing the file and section** — produces unactionable output. ✅ Name the exact file (e.g., `terraform-standards.instructions.md`) and the section or line.
 - **Never ignore conflicts between files** — conflicting instructions with the same `applyTo` produce non-deterministic behavior. ✅ List every conflicting pair with their patterns and the rules that contradict each other.
@@ -67,7 +67,7 @@ Read the following before evaluating:
 
 ### Step 2: Discover and Analyze Instructions
 
-Explore `.claude/rules/*.md` (Claude Code) or `.github/instructions/*.instructions.md` (Copilot) and evaluate each file against the criteria below.
+Detect the layout in use. For Claude Code: enumerate `.claude/rules/*.md`. For Copilot: enumerate `.github/instructions/*.instructions.md`. If both exist, analyze both and note the dual-target setup. Evaluate each file against the criteria below.
 
 ---
 
@@ -88,14 +88,14 @@ Explore `.claude/rules/*.md` (Claude Code) or `.github/instructions/*.instructio
 - Third person (not "I help" or "You can")
 - Specific enough for semantic matching
 
-**A3. `applyTo` field**
-- Present (if absent, instructions are NEVER applied automatically)
+**A3. Scope field (`applyTo` in Copilot; `paths:` in Claude Code)**
+- Present — `applyTo` for Copilot, `paths:` for Claude Code (if absent, instructions are NEVER applied automatically)
 - Valid glob pattern with forward slashes only
 - Path relative to workspace root
 - Specific (does not use `**` unless intentionally global)
 - Multiple patterns comma-separated when applicable
 
-**A4. `excludeAgent` field (optional)**
+**A4. `excludeAgent` field (optional, Copilot-specific — not applicable to Claude Code rules)**
 - If present, valid value: `"code-review"` or `"cloud-agent"`
 
 ### B. Content and Structure (Official — VS Code Best Practices)
@@ -302,7 +302,7 @@ Create a file `INSTRUCTIONS_BEST_PRACTICES_REVIEW.md` with the following structu
 
 The validator must detect and report:
 
-1. **Missing `applyTo`** — the file is NEVER applied automatically (manual attachment only)
+1. **Missing scope field** (`applyTo` for Copilot; `paths:` for Claude Code) — the file is NEVER applied automatically (manual attachment only)
 2. **Overly broad `applyTo`** — `"**"` or `"**/*"` without clear justification
 3. **Vague description** — "Helps with code" → correct to a specific description with trigger
 4. **First-person description** — "I help you with..." → third person
