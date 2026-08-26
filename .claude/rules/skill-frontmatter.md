@@ -1,5 +1,6 @@
 ---
 name: skill-frontmatter
+description: "Frontmatter schema for skill files (.claude/skills/**/SKILL.md). Use when creating or editing a skill definition."
 paths:
   - ".claude/skills/**/SKILL.md"
   - ".claude/templates/skills/*.md"

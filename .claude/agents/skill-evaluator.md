@@ -16,6 +16,14 @@ to their own evaluation scenarios — the LLM-as-judge pattern applied to Claude
 belongs to `quality-validator`. Does not research technologies, generate skills, or rewrite the
 skill under test.
 
+## When to use this agent
+
+Route here skill behavioral evaluation: `evaluating-skill-scenarios`.
+This command forks into this agent.
+
+If a request does not match this command, state the mismatch explicitly and
+suggest the correct `/command` rather than proceeding.
+
 ## Method
 
 ### P0 — Load Rubric

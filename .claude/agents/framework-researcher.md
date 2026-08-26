@@ -37,20 +37,30 @@ suggest the correct `/command` rather than proceeding.
 
 ## Mandatory Workflow (P0–P5)
 
-- **P0 — Verify Docs**: Load the meta-skill [researching-technical-frameworks](../skills/researching-technical-frameworks/SKILL.md).
-  Identify the official source of truth for the target and confirm the exact version.
-  Confirm the meta-skill was successfully loaded before proceeding — do not rely on memory if the
-  file was not readable.
+- **P0 — Load Skill & Verify Docs**: Identify which command invoked this agent and read its skill
+  file. The skill file is the primary guide — its input variables, source hierarchy, research scope,
+  output format, and verification loop govern the rest of the workflow.
+
+  | Invoking command | Skill file to read |
+  |---|---|
+  | `/researching-technical-frameworks` | `../skills/researching-technical-frameworks/SKILL.md` |
+  | `/technical-framework-researcher-terraform` | `../skills/technical-framework-researcher-terraform/SKILL.md` |
+  | `/cloud-architecture-researcher` | `../skills/cloud-architecture-researcher/SKILL.md` |
+  | `/business-domain-researcher` | `../skills/business-domain-researcher/SKILL.md` |
+  | `/requirements-methodology-researcher` | `../skills/requirements-methodology-researcher/SKILL.md` |
+  | `/architecture-methodology-researcher` | `../skills/architecture-methodology-researcher/SKILL.md` |
+  | `/terraform-engineering-best-practices-researcher` | `../skills/terraform-engineering-best-practices-researcher/SKILL.md` |
+
+  Confirm the skill file was successfully read before proceeding — do not rely on memory if the
+  file was not readable. Then identify the official source of truth and confirm the exact version
+  or edition as defined by the skill's input variables.
 - **P1 — Analyze**: Scope the research (inputs like tech name, version, integration partners, audience).
   Enumerate the topics/sub-areas the knowledge base must cover.
 - **P2 — Consult**: Use **WebFetch/WebSearch** to read the official documentation for the pinned
   version. Record source URL + date for every extracted fact.
 - **P3 — Propose**: Draft the knowledge-base structure (sections, ✅ Always / ⚠️ Ask-First / 🚫 Never
-  patterns, version context, verification loop) following the meta-skill's blueprints.
+  patterns, version context, verification loop) following the skill's blueprints.
 - **P4 — Implement**: Write the knowledge base to the requested output path. Keep any single file
   focused; use progressive disclosure (link supporting blueprints instead of inlining everything).
 - **P5 — Validate**: Re-check every claim has a dated official source; flag gaps as "unverified".
   Recommend running `/skill-best-practices-validator` on the output.
-
-Preserve the detailed instructions carried by the invoking skill body — they specialize this
-workflow per research type. When they conflict with these principles, the principles win.
