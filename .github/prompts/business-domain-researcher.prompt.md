@@ -9,6 +9,16 @@ argument-hint: "Domain name and context (e.g. e-commerce checkout, healthcare sc
 - `ORGANIZATIONAL_CONTEXT`: [e.g., "Brazilian Fintech startup with 80 employees", "B2B SaaS company operating in the EU", "Healthcare operator under ANVISA regulation"]
 - `REGULATORY_BODY_URL_IF_KNOWN`: [optional, e.g., "https://www.bcb.gov.br", "https://www.cvm.gov.br", "https://gdpr.eu"]
 - `STAKEHOLDER_SYSTEMS_LIST`: [e.g., "Legal, Finance, CRM (Salesforce), Helpdesk (Zendesk), HRIS (Workday)"]
+- `RESEARCH_DEPTH` — Depth of research: `quick` / `standard` / `deep` / `exhaustive` (default: `exhaustive`)
+- `MAX_ITERATIONS` — Maximum gap-filling iterations, integer (default: `5`)
+
+## Domain Complexity Assessment
+
+| Tier | Examples | Always-Do | Ask-First | Never-Do |
+|------|----------|-----------|-----------|----------|
+| Foundational | Simple CRUD, basic auth | ~3-4 | ~2-3 | ~2-3 |
+| Standard | REST APIs, ORMs, CI tools | ~5-6 | ~3-4 | ~4-5 |
+| Complex (security-critical) | Auth systems, IaC, distributed | ~7-9 | ~4-6 | ~5-7 |
 
 ---
 
@@ -183,6 +193,13 @@ Internal_Policy_Version: [Version and effective date if available]
 Jurisdiction: [Country/Region]
 Research_Date: [Date]
 Currency_Threshold: [Date after which this research must be reviewed]
+Research_Depth: [quick/standard/deep/exhaustive]
+Max_Iterations: [N]
+Gap_Loop_Ran: [true/false]
+Iterations_Used: [N of MAX_ITERATIONS]
+Triangulated_Count: [N]
+Unverified_Count: [N]
+Research_Quality_Score: [N%]
 ```
 
 ## Executive Summary
@@ -303,6 +320,18 @@ Workaround: [Temporary conservative approach]
 Follow-up: [Where to obtain this information — role, document, body]
 ```
 
+### §7 — Research Iteration Changelog
+
+> Mandatory when RESEARCH_DEPTH is `standard`, `deep`, or `exhaustive`. Omit for `quick`.
+
+| Iteration | Section | Item | Action | Source |
+|-----------|---------|------|--------|--------|
+| 1 | [Section name] | [Claim or pattern] | Added / Resolved / Updated | [URL] (DATE) |
+| 2 | [Section name] | [Claim or pattern] | ⚠️ IRRESOLVABLE — [one-line rationale] | — |
+
+> Add one row per gap-loop resolution. Rows are appended in order; do not reorder.
+> `IRRESOLVABLE` rows remain in the table permanently as an audit trail.
+
 ## Agent Delegation Notes
 - **High Confidence**: [Actions agent can execute autonomously — e.g., providing documented information, completing standard checklists]
 - **Medium Confidence**: [Actions agent should validate before executing — e.g., applying a policy to a non-standard case]
@@ -311,6 +340,15 @@ Follow-up: [Where to obtain this information — role, document, body]
 - **Emergency Stop**: [Conditions under which the agent must immediately halt and alert a human — e.g., potential regulatory breach, customer distress signals, conflict of interest detected]
 
 ---
+
+## Scope Rejection Format
+
+When a request is outside this prompt's scope, respond exactly:
+
+> **Out of scope for business-domain-researcher.**
+> This prompt handles: researching a business domain to produce a structured knowledge base for skill authoring.
+> Your request ("...") matches: `[correct-prompt]` — [one-line description].
+> Run `[correct-prompt] [args]` to proceed.
 
 # Output Priorities
 1. 🚨 Regulatory prohibitions and legal liability risks

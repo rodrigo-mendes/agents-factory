@@ -34,3 +34,22 @@ When creating or editing skills, agents, or prompts in this repository, follow:
 - Values containing `:` **must be quoted** (e.g., `argument-hint: "Scope: new / review"`).
 - Names in kebab-case; `name` must match the folder name (skills) or filename stem (agents/prompts).
 - No duplicate frontmatter fields.
+
+## Coupled Fields
+
+For prompts that route to an agent, `agent:` and `argument-hint:` are **always paired** —
+both must be present or both must be absent.
+
+| If you set | You must also set |
+|---|---|
+| `agent:` | `argument-hint:` |
+| `argument-hint:` | `agent:` |
+
+A prompt with `agent:` but without `argument-hint:` will confuse users about what arguments
+to provide. A prompt with `argument-hint:` but without `agent:` will silently do nothing.
+
+## YAML Quoting
+
+- `applyTo:` values containing `:` **require quotes** (e.g. `applyTo: "**/*.ts"`).
+- `description:` values containing `:` require quotes.
+- `name:` values must be pure kebab-case — no quotes needed unless they contain special characters.

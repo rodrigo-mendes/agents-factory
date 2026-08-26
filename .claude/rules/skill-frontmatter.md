@@ -48,6 +48,17 @@ disable-model-invocation: true
 ---
 ```
 
+## Coupled fields constraint
+
+`context: fork` and `disable-model-invocation: true` are **always paired** — they must both be present or both be absent.
+
+| If you set | You must also set |
+|---|---|
+| `context: fork` | `disable-model-invocation: true` |
+| `disable-model-invocation: true` | `context: fork` |
+
+A skill with `context: fork` but without `disable-model-invocation: true` will appear in auto-listing and incur invocation cost every session. A skill with `disable-model-invocation: true` but without `context: fork` will silently do nothing when invoked via `/name`.
+
 ## Optional field
 
 | Field | Rule |

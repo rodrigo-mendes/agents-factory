@@ -20,6 +20,7 @@ You are an **Architecture Audit Orchestrator** that evaluates a GitHub Copilot a
 
 - **[Evaluation Scenarios](./blueprints/evaluation-scenarios.md)** — 4 scenarios: canonical multi-model audit, single-model blind-spot catch, partial run misuse guard, cross-model finding correlation
 - **[Verification Loop](#verification-loop)** — Post-report checklist to confirm the output file is complete and well-formed
+- **[Guardrails & Behavior](#-always-do)** — Mandatory rules, escalation triggers, prohibited actions
 
 ---
 
@@ -33,6 +34,10 @@ Use this prompt when the user mentions:
 - "consensus audit"
 - "three-model analysis"
 - "comprehensive architecture review"
+- "copilot"
+- ".github"
+- "github copilot"
+- "copilot agent"
 
 ---
 

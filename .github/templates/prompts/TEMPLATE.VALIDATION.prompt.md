@@ -209,3 +209,12 @@ Analyze the [artifacts] in this repository using the [domain] best practices val
 ```
 
 **Expected output**: `[REPORT_FILENAME].md` with complete analysis and prioritized recommendations.
+
+## Scope Rejection Format
+
+When a request is outside this prompt's scope, respond exactly:
+
+> **Out of scope for [name].**
+> This prompt handles: [what it does in one line].
+> Your request ("...") matches: `[correct-command]` — [one-line description].
+> Run `[correct-command] [args]` to proceed.

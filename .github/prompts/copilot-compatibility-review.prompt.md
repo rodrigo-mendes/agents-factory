@@ -190,6 +190,15 @@ NO incluyas ejemplos de código corregido en el informe. Solo identifica problem
 
 ---
 
+## Scope Rejection Format
+
+When a request is outside this prompt's scope, respond exactly:
+
+> **Out of scope for copilot-compatibility-review.**
+> This prompt handles: generating an exhaustive compatibility analysis of GitHub Copilot assets against official standards.
+> Your request ("...") matches: `[correct-prompt]` — [one-line description].
+> Run `[correct-prompt] [args]` to proceed.
+
 **Nota**: Este prompt está diseñado para ser ejecutado en GitHub Copilot Chat. Invócalo con:
 ```
 /copilot-compatibility-review

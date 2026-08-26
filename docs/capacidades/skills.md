@@ -1,6 +1,6 @@
 # Skills — Framework Base Capabilities
 
-The Agents Factory has **2 base skills** in Claude Code: `skill-creator` (authoring patterns) and `researching-technical-frameworks` (research methodology, now a fork command). In Copilot, `authoring-agent-skills` is the skill equivalent to `skill-creator`.
+The Agents Factory has **25 commands, built on 2 foundation skills**: `skill-creator` (authoring patterns) and `researching-technical-frameworks` (research methodology, now a fork command). These 2 foundation skills define the patterns all other skills follow. In Copilot, `authoring-agent-skills` is the skill equivalent to `skill-creator`.
 
 ---
 

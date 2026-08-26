@@ -20,6 +20,7 @@ disable-model-invocation: true
 
 ## Quick Navigation
 
+- **[Blueprints & Guardrails](#blueprints--guardrails)** — Mandatory patterns, decisions, anti-patterns
 - **[Terraform CLI Commands](./blueprints/terraform-cli-commands.md)** — init/fmt/validate/tfsec/plan/apply/state/destroy with expected outputs
 - **[Output Template](./blueprints/terraform-output-template.md)** — Full research document structure
 - **[State Patterns](./blueprints/terraform-state-patterns.md)** — Local vs remote (S3+DynamoDB), encryption, isolation
@@ -30,6 +31,43 @@ disable-model-invocation: true
 - **[Evaluation Scenarios](./blueprints/evaluation-scenarios.md)** — 4 scenarios: canonical research, edge case, misuse, anti-pattern trap
 - **[Research Scope Formats](./blueprints/research-scope-formats.md)** — format templates for ✅/⚠️/🚫 three-tier guardrails (§3)
 - **[External Resources](#external-resources)** — Registry, provider docs, and tooling this skill relies on
+
+---
+
+## Blueprints & Guardrails
+
+### ✅ Always Do — Summary
+- Terraform block configuration (version, required_providers, cloud/backend)
+- State file isolation and locking strategy
+- Variable validation and type constraints
+- Output definitions for stack interdependencies
+- Security group default-deny approach
+- IAM least-privilege patterns
+- Encryption at rest and in transit
+- Resource naming conventions and tagging strategy
+- Error handling (depends_on, lifecycle rules)
+
+### ⚠️ Ask First — Summary
+- Module vs. inline resource organization
+- Local state vs. remote backend (S3/TFC)
+- Count vs. for_each vs. dynamic blocks
+- Single environment (local state) vs. multi-environment (workspaces)
+- Data source vs. external API dependency
+- Resource import vs. resource creation
+
+### 🚫 Never Do — Summary
+- Hardcoded secrets/credentials in code
+- Publicly accessible buckets/databases
+- Missing state file encryption
+- Local state in shared repos
+- Untagged resources
+- Security group 0.0.0.0/0 in production
+- Missing backup/destroy protection
+- Deprecated resource types
+- Unvalidated variable inputs
+- Direct AWS API calls bypassing Terraform (drift)
+
+> Full details in [Research Scope Formats — Three-Tier Guardrails (§3)](./blueprints/research-scope-formats.md)
 
 ---
 

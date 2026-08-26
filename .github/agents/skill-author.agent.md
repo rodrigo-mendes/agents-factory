@@ -28,6 +28,7 @@ a prompt command that invokes this agent.
 
 - **P0 — Verify Docs**: Load `.github/skills/authoring-agent-skills/SKILL.md`.
   Confirm the research base exists and is source-dated (do not author from unverified input).
+  > If the file cannot be read, halt immediately and inform the user with the exact path that failed — do not proceed from memory.
 - **P1 — Analyze**: Identify the artifact type (skill vs instructions) and its consumers.
 - **P2 — Consult**: Read the meta-skill blueprints and the relevant template under `.github/templates/`.
 - **P3 — Propose**: Outline the file structure and the ✅⚠️🚫 patterns before writing.

@@ -193,6 +193,13 @@ Use this structure:
 
 These issues were independently detected by all three analytical perspectives. They represent confirmed architectural problems.
 
+> **Confidence legend**: 🟢 High (2+ official sources, dated ≤12mo) | 🟡 Medium (1 source or dated 12–24mo) | 🔴 Low (community source or dated >24mo)
+> **Severity tags**: `Critical` | `High` | `Medium` | `Low`
+
+Each finding must include:
+- Confidence: 🟢/🟡/🔴
+- Severity: Critical/High/Medium/Low
+
 | # | Issue | Model A Criterion | Model B Criterion | Model C Criterion | File(s) |
 |---|---|---|---|---|---|
 | CF-1 | [description] | [L*.N] | [B.N] | [C.N] | [files] |
@@ -393,5 +400,14 @@ Each model prompt can be used independently:
 | `/audit-architecture-consensus` | Full audit before release, quarterly review, or after major changes |
 
 ---
+
+## Scope Rejection Format
+
+When a request is outside this prompt's scope, respond exactly:
+
+> **Out of scope for audit-architecture-consensus.**
+> This prompt handles: orchestrating a multi-model architecture audit (Scope + Flow + Engine) and producing a consensus-based compliance report.
+> Your request ("...") matches: `[correct-prompt]` — [one-line description].
+> Run `[correct-prompt] [args]` to proceed.
 
 **CRITICAL**: Read every file in the agent's dependency graph before applying ANY model's criteria. All three models require complete file reading. A report based on partial reading will produce false correlations and incorrect consensus levels.

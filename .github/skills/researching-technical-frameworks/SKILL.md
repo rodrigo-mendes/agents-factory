@@ -18,9 +18,26 @@ Transform vague technology requirements into **research_[TECH]_v[VERSION].md** d
 - **[Ask First](./blueprints/ask-first-decisions.md)** — Architectural decisions requiring context
 - **[Never Do Patterns](./blueprints/never-do-patterns.md)** — Anti-patterns with alternatives
 - **[Integration Patterns](./blueprints/integration-patterns.md)** — SDK/library integration template
+- **[Output Format Template](./blueprints/output-format-template.md)** — Full output structure with metadata and §7 changelog
 - **[Research Execution Workflow](#research-execution-workflow)** — Phase-by-phase research process
 - **[Verification Loop](#verification-loop)** — Validation commands and expected outputs
 - **[External Resources](#external-resources)** — Official documentation links
+
+---
+
+## Research Parameters
+
+These parameters control research depth and can be passed in the invocation arguments:
+
+| Parameter | Default | Valid values | Effect |
+|---|---|---|---|
+| `RESEARCH_DEPTH` | `exhaustive` | `quick` / `standard` / `deep` / `exhaustive` | Controls gap-loop, triangulation, parallel investigation |
+| `MAX_ITERATIONS` | `5` | Integer ≥ 1 | Maximum gap-filling iterations per unverified claim |
+
+See [Output Format Template](./blueprints/output-format-template.md) for the full output structure
+including §7 Iteration Changelog and Research_Quality_Score metadata.
+
+See [Ask-First Decisions](./blueprints/ask-first-decisions.md) Decision 3 for the depth/time tradeoff matrix.
 
 ---
 

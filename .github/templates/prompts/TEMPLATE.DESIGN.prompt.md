@@ -33,3 +33,12 @@ argument-hint: '[HINT about what context the user should provide]'
 - [DELIVERABLE 4 — e.g., recommendation with rationale]
 - [DELIVERABLE 5 — e.g., implementation guidance with agent delegation]
 - Implementation guidance with `@[implementation-agent]` for [action]
+
+## Scope Rejection Format
+
+When a request is outside this prompt's scope, respond exactly:
+
+> **Out of scope for [name].**
+> This prompt handles: [what it does in one line].
+> Your request ("...") matches: `[correct-command]` — [one-line description].
+> Run `[correct-command] [args]` to proceed.

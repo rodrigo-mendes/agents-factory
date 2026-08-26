@@ -11,6 +11,16 @@ argument-hint: "Methodology name and version (e.g. SAFe 6.0, Scrum Guide 2020)"
 - `TEAM_CONTEXT`: [e.g., "5-person product team building B2B SaaS", "scaled org with 3 squads under SAFe", "startup pre-product-market fit", "regulated healthcare product team"]
 - `OFFICIAL_SOURCE_IF_KNOWN`: [optional — e.g., "https://scrumguides.org", "https://scaledagileframework.com", "https://basecamp.com/shapeup"]
 - `INTEGRATION_TOOLS_LIST`: [e.g., "Jira, Confluence, Cucumber/Gherkin, GitHub Issues, Miro"]
+- `RESEARCH_DEPTH` — Depth of research: `quick` / `standard` / `deep` / `exhaustive` (default: `exhaustive`)
+- `MAX_ITERATIONS` — Maximum gap-filling iterations, integer (default: `5`)
+
+## Domain Complexity Assessment
+
+| Tier | Examples | Always-Do | Ask-First | Never-Do |
+|------|----------|-----------|-----------|----------|
+| Foundational | Simple CRUD, basic auth | ~3-4 | ~2-3 | ~2-3 |
+| Standard | REST APIs, ORMs, CI tools | ~5-6 | ~3-4 | ~4-5 |
+| Complex (security-critical) | Auth systems, IaC, distributed | ~7-9 | ~4-6 | ~5-7 |
 
 ---
 
@@ -224,6 +234,13 @@ Recognized_Authors: [Key authors/practitioners for this framework]
 Team_Context: [Description of target team — size, sector, product stage]
 Research_Date: [Date]
 Currency_Threshold: [Date after which this research should be reviewed]
+Research_Depth: [quick/standard/deep/exhaustive]
+Max_Iterations: [N]
+Gap_Loop_Ran: [true/false]
+Iterations_Used: [N of MAX_ITERATIONS]
+Triangulated_Count: [N]
+Unverified_Count: [N]
+Research_Quality_Score: [N%]
 ```
 
 ## Executive Summary
@@ -405,6 +422,18 @@ Workaround: [Conservative default — most restrictive valid interpretation]
 Follow-up: [Where to find the answer — guide section, recognized author, community]
 ```
 
+### §7 — Research Iteration Changelog
+
+> Mandatory when RESEARCH_DEPTH is `standard`, `deep`, or `exhaustive`. Omit for `quick`.
+
+| Iteration | Section | Item | Action | Source |
+|-----------|---------|------|--------|--------|
+| 1 | [Section name] | [Claim or pattern] | Added / Resolved / Updated | [URL] (DATE) |
+| 2 | [Section name] | [Claim or pattern] | ⚠️ IRRESOLVABLE — [one-line rationale] | — |
+
+> Add one row per gap-loop resolution. Rows are appended in order; do not reorder.
+> `IRRESOLVABLE` rows remain in the table permanently as an audit trail.
+
 ## Agent Operation Notes
 - **High Confidence**: [Artifacts the agent can produce autonomously — e.g., standard user story from a clear feature description with known persona]
 - **Medium Confidence**: [Artifacts requiring context from the Product Owner or team before authoring — e.g., epic decomposition, acceptance criteria for complex business rules]
@@ -413,6 +442,15 @@ Follow-up: [Where to find the answer — guide section, recognized author, commu
 - **Emergency Stop**: [Conditions requiring human review before proceeding — e.g., story touches compliance or security domain, acceptance criteria reference personal data handling, story implies architectural decision not yet made]
 
 ---
+
+## Scope Rejection Format
+
+When a request is outside this prompt's scope, respond exactly:
+
+> **Out of scope for requirements-methodology-researcher.**
+> This prompt handles: researching a requirements or agile methodology (e.g. Scrum, SAFe, BDD) for skill authoring.
+> Your request ("...") matches: `[correct-prompt]` — [one-line description].
+> Run `[correct-prompt] [args]` to proceed.
 
 # Output Priorities
 1. 🚨 Testability violations (stories without verifiable acceptance criteria)

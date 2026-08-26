@@ -9,6 +9,8 @@ argument-hint: "Tech name and version (e.g. FastAPI 0.115, Redis 7.2)"
 - `TARGET_VERSION`: [e.g., "3.11", "7.2", "14.0"]
 - `OFFICIAL_URL_IF_KNOWN`: [optional]
 - `INTEGRATION_PARTNERS_LIST`: [e.g., "PostgreSQL, JWT, pytest"]
+- `RESEARCH_DEPTH` — Depth of research: `quick` / `standard` / `deep` / `exhaustive` (default: `exhaustive`)
+- `MAX_ITERATIONS` — Maximum gap-filling iterations, integer (default: `5`)
 
 ---
 
@@ -184,6 +186,13 @@ Primary_Docs: [URL]
 Official_Repo: [URL]
 Research_Date: [Date]
 Domain_Complexity: [Foundational/Standard/Complex]
+Research_Depth: [quick/standard/deep/exhaustive]
+Max_Iterations: [N]
+Gap_Loop_Ran: [true/false]
+Iterations_Used: [N of MAX_ITERATIONS]
+Triangulated_Count: [N]
+Unverified_Count: [N]
+Research_Quality_Score: [N%]
 ```
 
 ## Executive Summary
@@ -288,6 +297,18 @@ Workaround: [Temporary approach]
 Follow-up: [Where to check]
 ```
 
+### §7 — Research Iteration Changelog
+
+> Mandatory when RESEARCH_DEPTH is `standard`, `deep`, or `exhaustive`. Omit for `quick`.
+
+| Iteration | Section | Item | Action | Source |
+|-----------|---------|------|--------|--------|
+| 1 | [Section name] | [Claim or pattern] | Added / Resolved / Updated | [URL] (DATE) |
+| 2 | [Section name] | [Claim or pattern] | ⚠️ IRRESOLVABLE — [one-line rationale] | — |
+
+> Add one row per gap-loop resolution. Rows are appended in order; do not reorder.
+> `IRRESOLVABLE` rows remain in the table permanently as an audit trail.
+
 ## Agent Operation Notes
 - **High Confidence**: [Can execute without asking]
 - **Medium**: [Should validate]
@@ -296,6 +317,15 @@ Follow-up: [Where to check]
 - **Emergency Stop**: [Halt conditions]
 
 ---
+
+## Scope Rejection Format
+
+When a request is outside this prompt's scope, respond exactly:
+
+> **Out of scope for technical-framework-researcher.**
+> This prompt handles: researching a technology or framework for a pinned version to build a hallucination-proof knowledge base.
+> Your request ("...") matches: `[correct-prompt]` — [one-line description].
+> Run `[correct-prompt] [args]` to proceed.
 
 # Output Priorities
 1. 🚨 Security vulnerabilities & anti-patterns

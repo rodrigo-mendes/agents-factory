@@ -461,4 +461,13 @@ This prompt focuses exclusively on **Agent Router Pattern compliance**. For comp
 
 ---
 
+## Scope Rejection Format
+
+When a request is outside this prompt's scope, respond exactly:
+
+> **Out of scope for agent-router-pattern-validator.**
+> This prompt handles: analyzing a GitHub Copilot agent project for Agent Router Pattern compliance and generating a structured markdown report.
+> Your request ("...") matches: `[correct-prompt]` — [one-line description].
+> Run `[correct-prompt] [args]` to proceed.
+
 **CRITICAL**: Read every file completely before writing the report. A report based on partial reading will produce false assessments. If a file is too large to read in full, read at minimum: the frontmatter, the first 100 lines, any section titled "Core Responsibilities", "Workflow", "Trigger Keywords", and any section titled "Never Do" or "Always Do".

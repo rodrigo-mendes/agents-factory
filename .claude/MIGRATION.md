@@ -9,18 +9,18 @@ decommission is a final phase, executed **only after validation in real use**.
 |---|---|
 | `CLAUDE.md` (root) | new — principles, conventions, routing table, dual-target |
 | Subagents | 4 real ones in `.claude/agents/` (framework-researcher, skill-author, architecture-auditor, quality-validator) |
-| Operational prompts | 23 → `.claude/skills/<n>/SKILL.md` (`context: fork` + `agent:` + `disable-model-invocation: true`) |
+| Operational prompts | 25 operational commands → `.claude/skills/<n>/SKILL.md` (`context: fork` + `agent:` + `disable-model-invocation: true`) |
 | Meta-skills | 2 → `.claude/skills/` (wording neutralized) |
 | Rules | `skill-frontmatter` (active, `paths:`) + instructions templates → `templates/rules/` |
 | Templates/examples | Claude Code variants (tools translated, `applyTo:`→`paths:`, `.agent.md`/`.instructions.md`→`.md`) |
 | settings/gitignore | `.claude/settings.json` (permissions) + `.gitignore` (local files, `StoryBeat/`) |
 
 ## Improvements applied
-1. **4 real subagents** with least-privilege and "Use when…" trigger (did not exist before).
+1. **5 real subagents** with least-privilege and "Use when…" trigger (did not exist before).
 2. **WebSearch/WebFetch** in `framework-researcher` → real anti-hallucination (previously depended on the user pasting docs).
 3. **Multi-model audit as native parallel orchestration**: `architecture-auditor` receives the `Agent` tool
    and fires scope/flow/engine in parallel, synthesizing consensus (previously was just text instruction).
-4. **`disable-model-invocation: true`** on the 23 commands → auto-listing cost ~zero; only the 2 meta-skills are auto-invocable.
+4. **`disable-model-invocation: true`** on the 25 commands → auto-listing cost ~zero; only the 2 meta-skills are auto-invocable.
 5. **Frontmatter fixed** on ~10 prompts that lacked valid `name`/`description`.
 
 ## Phase 2 — cleanup & progressive disclosure (done)
@@ -42,7 +42,7 @@ decommission is a final phase, executed **only after validation in real use**.
 ## Validation by dogfooding (done)
 Ran the factory's own validators/auditor against `.claude/`:
 - **architecture-auditor** (scope+flow+engine consensus): **PASS 9.4/10**, 0 P0/P1. All counts confirmed
-  (4 subagents, 25 skills, 23 commands, 0 broken `agent:` refs, 0 orphans).
+  (5 subagents, 25 skills, 25 commands, 0 broken `agent:` refs, 0 orphans).
 - **quality-validator** (skill-best-practices + agent-router): 0 P0. The 8 P1s pointed to **Copilot residue in the body**
   of the audit/validation skills (runtime instructions reading `.github/agents/*.agent.md`,
   `.github/copilot-instructions.md`, `*.prompt.md`, `.github/instructions/`). **Fixed**: they now point to
@@ -76,3 +76,11 @@ Run as its own PR, after the team validates `.claude/` in real use:
 3. **Keep** `.github/workflows/` (CI) and anything unrelated to Copilot.
 4. Remove the `ask: Write(./.github/**)` line from `.claude/settings.json` (there will be nothing left to protect).
 5. Run `scratchpad/verify.py` again and confirm counts.
+
+## Phase 3 — skill-evaluator addition (post-migration)
+
+After the main migration, a fifth subagent was added:
+- **`skill-evaluator`** — Skill Behavioral Evaluator; executes evaluation-scenarios.md test suites via LLM-as-judge
+- **`evaluating-skill-scenarios`** — the corresponding slash command that forks to skill-evaluator
+
+The project now has **25 commands** and **5 subagents**.

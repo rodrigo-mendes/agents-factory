@@ -368,6 +368,13 @@ Use this structure:
 
 ## 6. Flow Issues
 
+> **Confidence legend**: 🟢 High (2+ official sources, dated ≤12mo) | 🟡 Medium (1 source or dated 12–24mo) | 🔴 Low (community source or dated >24mo)
+> **Severity tags**: `Critical` | `High` | `Medium` | `Low`
+
+Each finding must include:
+- Confidence: 🟢/🟡/🔴
+- Severity: Critical/High/Medium/Low
+
 | # | Severity | Issue | Chain Affected | Impact |
 |---|---|---|---|---|
 | F1 | 🔴 Critical | [description] | [chain] | [what user can't do] |
@@ -433,5 +440,14 @@ Use this structure:
 - `/audit-architecture-scope` → Model A: Scope hierarchy and responsibility leakage
 - `/audit-architecture-engine` → Model C: VS Code engine mechanics and passive injection
 - `/audit-architecture-consensus` → Runs all 3 models and produces comparison report
+
+## Scope Rejection Format
+
+When a request is outside this prompt's scope, respond exactly:
+
+> **Out of scope for audit-architecture-flow.**
+> This prompt handles: auditing agent architecture from the invocation flow perspective, validating delegation chains, and detecting dead-ends or unreachable components.
+> Your request ("...") matches: `[correct-prompt]` — [one-line description].
+> Run `[correct-prompt] [args]` to proceed.
 
 **CRITICAL**: Read every file referenced in the agent's routing table. A reachability report based on file existence alone (without verifying internal references) will produce false positives.

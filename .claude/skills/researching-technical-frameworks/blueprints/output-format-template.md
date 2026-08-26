@@ -15,6 +15,14 @@ Primary_Docs: [URL]
 Official_Repo: [URL]
 Research_Date: [Date]
 Domain_Complexity: [Foundational/Standard/Complex]
+Research_Depth: [quick/standard/deep/exhaustive]
+Max_Iterations: [N]
+Gap_Loop_Ran: [true/false]
+Iterations_Used: [N of MAX_ITERATIONS]
+Triangulated_Count: [N]       # Always-Do patterns with ✓✓ badge
+Unverified_Count: [N]         # Claims still marked "unverified" after gap loop
+Irresolvable_Count: [N]       # Items marked IRRESOLVABLE
+Research_Quality_Score: [N%]  # = (total_claims - unverified - irresolvable) / total_claims * 100
 ```
 
 ---
@@ -28,19 +36,23 @@ and why that tier was assigned]
 
 ## Architectural Guardrails
 
+> Confidence legend: 🟢 High (2+ official sources, dated ≤12mo) | 🟡 Medium (1 source or dated 12–24mo) | 🔴 Low (community source or dated >24mo — verify before use)
+
 ### ✅ Mandatory Patterns
 
 **[Pattern Name]**
+> Confidence: 🟢 High | [✓✓ Triangulated | Source A (DATE) + Source B (DATE)]
 - Why: [Reason]
 - Code:
   ```[language]
   [example]
   ```
-- Source: [Link]
+- Source: [URL] (DATE)
 
 ### ⚠️ Conditional Patterns
 
 **[Decision Point]**
+> Confidence: 🟡 Medium
 - Options: [A, B, C]
 - Tradeoffs:
 
@@ -48,29 +60,30 @@ and why that tier was assigned]
   |--------|-----------|------------|-----------|
 
 - Agent: "Ask user [decision based on factors]"
-- Source: [Link]
+- Source: [URL] (DATE)
 
 ### 🚫 Forbidden Patterns
 
-**[Anti-Pattern]**
-
-```[language]
-// DON'T
-[bad code]
-```
-
+**[Anti-Pattern Name]**
+> Severity: Critical | High | Medium
+> Confidence: 🟢 High
 - Why: [Reason]
-- Instead:
+- Impact: [What breaks]
+- ❌ Wrong:
   ```[language]
-  // DO
+  [bad code]
+  ```
+- ✅ Correct:
+  ```[language]
   [good code]
   ```
-- Impact: [What breaks]
-- Source: [Link]
+- Source: [URL] (DATE)
 
 ---
 
 ## Migration Guide
+
+> Confidence: 🟢 High | Sources: [changelog URL] (DATE) + [migration guide URL] (DATE)
 
 **Breaking Changes**: [List]
 
@@ -84,6 +97,8 @@ and why that tier was assigned]
 ---
 
 ## Implementation Blueprint
+
+> Confidence: 🟢 High | [✓✓ Triangulated | official example + official docs]
 
 **Lifecycle**:
 ```[language]
@@ -139,6 +154,34 @@ and why that tier was assigned]
 
 ---
 
+## Research Gaps
+
+> Every gap that survives all gap-loop iterations must also appear as an IRRESOLVABLE row in §7.
+
+```
+Gap: [What's missing]
+Impact: [Effect on safety]
+Workaround: [Temporary approach]
+Follow-up: [Where to check]
+§7-ref: Iteration [N] — IRRESOLVABLE
+```
+
+---
+
+## §7 — Research Iteration Changelog
+
+> Mandatory when `RESEARCH_DEPTH` is `standard`, `deep`, or `exhaustive`. Omit for `quick`.
+
+| Iteration | Section | Item | Action | Source |
+|-----------|---------|------|--------|--------|
+| 1 | [Section name] | [Claim or pattern] | Added / Resolved / Updated | [URL] (DATE) |
+| 2 | [Section name] | [Claim or pattern] | ⚠️ IRRESOLVABLE — [one-line rationale] | — |
+
+> Add one row per gap-loop resolution. Rows are appended in order; do not reorder.
+> `IRRESOLVABLE` rows remain in the table permanently as an audit trail.
+
+---
+
 ## Completion Checklist
 
 - [ ] Domain complexity tier assessed and documented
@@ -150,24 +193,18 @@ and why that tier was assigned]
 - [ ] Sources dated and linked
 - [ ] Security documented
 - [ ] 1+ copy-paste working example
-
----
-
-## Research Gaps
-
-```
-Gap: [What's missing]
-Impact: [Effect on safety]
-Workaround: [Temporary approach]
-Follow-up: [Where to check]
-```
+- [ ] Confidence badge applied to every pattern entry
+- [ ] All Always-Do patterns triangulated (deep/exhaustive) or downgraded to 🟡 Medium
+- [ ] §7 Iteration Changelog present and complete
+- [ ] Research_Quality_Score calculated and added to Metadata
+- [ ] Every Research Gap cross-referenced in §7
 
 ---
 
 ## Agent Operation Notes
 
-- **High Confidence**: [Can execute without asking]
-- **Medium**: [Should validate]
-- **Low**: [Must ask human]
-- **Edge Cases**: [When to pause]
-- **Emergency Stop**: [Halt conditions]
+- **High Confidence (execute without asking)**: claims marked 🟢 High with ✓✓ Triangulated badge
+- **Medium Confidence (validate with user)**: claims marked 🟡 Medium; single-source Always-Do patterns
+- **Low Confidence (must ask human)**: claims marked 🔴 Low; IRRESOLVABLE items
+- **Edge Cases (pause)**: version released <30 days ago; active CVE; EOL technology
+- **Emergency Stop**: all sources community-only; version EOL and replacement exists

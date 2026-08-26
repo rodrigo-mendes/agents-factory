@@ -1,7 +1,10 @@
 ---
+name: [action-noun]
 description: '[Brief description of what this prompt implements]'
 agent: [agent-name]
 argument-hint: '[Suggested argument: e.g., "Choose the [FEATURE] strategy"]'
+context: fork
+disable-model-invocation: true
 ---
 
 > ⚙️ **Technology-agnostic template.** Replace ALL [PLACEHOLDERS]. Names in e.g./[e.g., ...] are illustrative examples only — they are not standards or defaults of this factory.
@@ -180,6 +183,18 @@ When [specific context], combine patterns from [skill1] and [skill2].
 
 ---
 
+## Step 5: Verify & Fix Loop
+
+After generating the implementation, run the verification checklist below. For any item that fails:
+
+1. Apply a targeted fix (Edit tool, not a full rewrite)
+2. Re-run the specific failing check
+3. If still failing: mark as `⚠️ UNRESOLVED`
+4. Repeat up to 3 times total per failing item
+5. After all fix attempts: report `⚠️ UNRESOLVED` items to the user
+
+See `.claude/skills/[primary-skill-name]/SKILL.md` → Verification Loop section for the exact commands.
+
 ## Verification Checklist
 
 Reference: `.claude/skills/[primary-skill-name]/SKILL.md`
@@ -189,3 +204,16 @@ Reference: `.claude/skills/[primary-skill-name]/SKILL.md`
 - [ ] [Requirement 3] — [Description]
 - [ ] [Requirement 4] — [Description]
 - [ ] [Requirement 5] — [Description]
+
+---
+
+## Scope Rejection Format
+
+When a user request is outside this skill's scope, respond exactly:
+
+> **Out of scope for [skill name].**
+> This skill handles: [one-line description of what it does].
+> Your request appears to match: `/[correct-command]` — [one-line description of that command].
+> Run `/[correct-command] [args]` to proceed.
+
+Never attempt to fulfill an out-of-scope request inline — always route to the correct command.

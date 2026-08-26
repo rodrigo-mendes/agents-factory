@@ -28,6 +28,7 @@ You are an **Agent Architecture Compliance Auditor** specialized in evaluating l
 - **[Report Template](./blueprints/report-template.md)** — Full output structure: Executive Summary, Dependency Graph, Per-Layer Analysis, Cross-Layer Validation, Violations, Remediation Plan, Conclusion
 - **[Evaluation Scenarios](./blueprints/evaluation-scenarios.md)** — 4 scenarios: canonical audit, minimal architecture, misuse guard, keyword misalignment
 - **[Verification Loop](#verification-loop)** — Post-report checklist to confirm the output file is complete and well-formed
+- **[Guardrails & Behavior](#-always-do)** — Mandatory rules, escalation triggers, prohibited actions
 
 ---
 

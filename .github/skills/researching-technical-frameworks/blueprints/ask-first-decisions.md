@@ -77,3 +77,32 @@ Comprehensive → research_FastAPI_Migration_v0.99_to_v0.100.md  (~40 pages)
 **Note**: If the skill is for a generic IaC pattern (e.g., "state management", "module design"), choose AWS as the reference provider and note that patterns are transferable to other providers with minor adjustments.
 
 **Source**: [Terraform Registry Providers](https://registry.terraform.io/browse/providers)
+
+---
+
+## Decision 3: Research Depth and Iteration Trade-off
+
+### When this decision arises
+When the user invokes a research command without specifying `RESEARCH_DEPTH` or `MAX_ITERATIONS`.
+Present this decision before starting research so the user can calibrate quality vs time.
+
+### Tradeoff matrix
+
+| RESEARCH_DEPTH | Approx. time | Quality level | When to choose |
+|---|---|---|---|
+| `quick` | ~5 min | Overview only — no gap-loop, no triangulation | Spike, POC, already-known tech |
+| `standard` | ~15 min | Production baseline — gap-loop active, single-source OK | Most new integrations |
+| `deep` | ~30 min | High confidence — triangulation required, gap-loop active | Security-critical, complex migrations |
+| `exhaustive` | ~60 min | Maximum confidence — parallel investigation (simulated), full triangulation | Greenfield architecture decisions |
+
+### Default
+If the user does not specify, use `exhaustive` (default per P1.parse). Ask only if there are
+signs the user wants a quick answer (short question, spike context, "just a quick look").
+
+### Ask-First format
+> "I'll use **exhaustive** depth (≈60 min, maximum confidence) by default.
+> If you'd prefer faster results at lower confidence:
+> - `standard` — ~15 min, production baseline
+> - `quick` — ~5 min, overview only
+>
+> Reply with your preferred depth or 'proceed' to use exhaustive."

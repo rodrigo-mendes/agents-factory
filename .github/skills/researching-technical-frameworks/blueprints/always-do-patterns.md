@@ -156,3 +156,42 @@ Skills written from research contain version-incompatible patterns → runtime f
 
 ---
 
+## Pattern: Multi-Source Triangulation
+
+Every Always-Do pattern must be confirmed by **at least 2 independent official sources** before
+it can be tagged as High confidence.
+
+### Rule
+- Sources must be independent (not the same docs page + a blog post referencing the same page)
+- Acceptable source pairs: official docs + official changelog; official docs + official example repo; two separate official docs sections
+- A single official source → downgrade to 🟡 Medium confidence
+
+### Tagging
+Tag triangulated patterns with:
+```
+[✓✓ Triangulated | Source A (DATE) + Source B (DATE)]
+```
+
+Single-source patterns use:
+```
+[Single source — 🟡 Medium confidence | Source A (DATE)]
+```
+
+### ✅ Correct examples
+
+**Two-source claim (High confidence)**:
+```markdown
+**[Pattern Name]**
+> Confidence: 🟢 High | [✓✓ Triangulated | https://docs.example.com/auth (2025-03) + https://github.com/example/examples/auth.py (2025-01)]
+```
+
+**Single-source claim (Medium confidence)**:
+```markdown
+**[Pattern Name]**
+> Confidence: 🟡 Medium | [Single source — https://docs.example.com/rate-limits (2024-11)]
+```
+
+### ❌ Anti-pattern
+Presenting a pattern as High confidence with only a single source — this masks the verification
+gap and may mislead a downstream skill author into shipping unverified guidance.
+

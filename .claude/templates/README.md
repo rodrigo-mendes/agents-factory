@@ -51,9 +51,9 @@ What are you creating?
 
 | Template | Pattern | Tools | Use When |
 |----------|---------|-------|----------|
-| `TEMPLATE.AGENT.md` | Implementation (P0-P5) | read, editFiles, createFile, runInTerminal, search | Creating an agent that generates code/files |
-| `TEMPLATE.ADVISORY-AGENT.md` | Advisory (P0-P5) | read, search | Creating an agent that only recommends (no edits) |
-| `TEMPLATE.ORCHESTRATOR-AGENT.md` | Orchestrator (P0-P5) | read, editFiles, createFile, runInTerminal, search | Creating an agent that coordinates across domains |
+| `TEMPLATE.AGENT.md` | Implementation (P0-P5) | Read, Edit, Write, Bash, Grep, Glob | Creating an agent that generates code/files |
+| `TEMPLATE.ADVISORY-AGENT.md` | Advisory (P0-P5) | Read, Grep, Glob | Creating an agent that only recommends (no edits) |
+| `TEMPLATE.ORCHESTRATOR-AGENT.md` | Orchestrator (P0-P5) | Read, Edit, Write, Bash, Grep, Glob | Creating an agent that coordinates across domains |
 
 ### Prompts (`templates/prompts/`)
 

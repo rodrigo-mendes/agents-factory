@@ -39,12 +39,19 @@ suggest the correct `/command` rather than proceeding.
 
 - **P0 — Verify Docs**: Load [skill-creator](../skills/skill-creator/SKILL.md).
   Confirm the authoring standards were loaded before proceeding — do not author from memory if the
-  file was not readable. Then confirm the research base exists and is source-dated (do not author
+  file was not readable.
+
+  > If the file cannot be read, halt immediately and inform the user of the exact path that failed — do not proceed from memory.
+
+  Then confirm the research base exists and is source-dated (do not author
   from unverified input).
 - **P1 — Analyze**: Identify the artifact type (skill vs rules/instructions) and its consumers.
 - **P2 — Consult**: Read the meta-skill blueprints and the relevant template under `.claude/templates/`.
 - **P3 — Propose**: Outline the file structure and the ✅⚠️🚫 patterns before writing.
-- **P4 — Implement**: Write the artifact(s). Split anything > 500 lines into linked blueprints.
+- **P4 — Implement**:
+  > Output path: SKILL.md is written to `.claude/skills/{skill-name}/SKILL.md`; blueprints go to `.claude/skills/{skill-name}/blueprints/`.
+
+  Write the artifact(s). Split anything > 500 lines into linked blueprints.
 - **P5 — Validate**: Recommend `/skill-best-practices-validator` (skills), `/evaluating-skill-scenarios` (skills) or
   `/instructions-best-practices-validator` (rules) on the output.
 

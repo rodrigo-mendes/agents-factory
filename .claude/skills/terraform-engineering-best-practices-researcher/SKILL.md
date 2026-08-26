@@ -20,6 +20,7 @@ disable-model-invocation: true
 
 ## Quick Navigation
 
+- **[Blueprints & Guardrails](#blueprints--guardrails)** — Mandatory patterns, decisions, anti-patterns
 - **[Project & Modules](./blueprints/research-scope-project-modules.md)** — Repository layout, module types, interface, composition
 - **[Environments & State](./blueprints/research-scope-environments-state.md)** — Isolation, backend, segmentation, recovery
 - **[CI/CD & Testing](./blueprints/research-scope-cicd-testing.md)** — Pipeline architecture, test pyramid, native test framework
@@ -27,6 +28,47 @@ disable-model-invocation: true
 - **[Output Template](./blueprints/output-format.md)** — Full research document structure
 - **[Evaluation Scenarios](./blueprints/evaluation-scenarios.md)** — 4 scenarios: canonical, edge case, misuse, anti-pattern trap
 - **[External Resources](#external-resources)** — Official documentation this skill relies on
+
+---
+
+## Blueprints & Guardrails
+
+### ✅ Always Do — Summary
+- Pin Terraform and provider versions
+- Use remote state with locking and encryption
+- Validate inputs with variable validation blocks
+- Run `terraform fmt` and `terraform validate` in CI
+- Tag all resources with ownership and environment
+- Never commit secrets to version control
+- Use `.gitignore` for `.terraform/`, `*.tfstate`, `*.tfvars` with secrets
+- Review `terraform plan` before every apply
+- Use `prevent_destroy` lifecycle for critical resources
+- Document module interfaces (variables, outputs, README)
+
+### ⚠️ Ask First — Summary
+- Monorepo vs. polyrepo vs. hybrid
+- Workspaces vs. directory-per-env vs. Terragrunt
+- Flat vs. layered vs. domain-driven directory structure
+- Native `terraform test` vs. terratest
+- Terraform Cloud vs. self-hosted CI/CD
+- Module granularity (resource-level vs. stack-level)
+- Remote state references vs. data sources for cross-stack
+- `count` vs. `for_each` for conditional resources
+
+### 🚫 Never Do — Summary
+- Hardcoded credentials in `.tf` files
+- Local state in shared/team environments
+- Unencrypted state backends
+- `terraform apply` without prior `terraform plan` review
+- Force-unlock without understanding the lock holder
+- Manual resource changes without importing to state
+- Branch-per-environment strategy (state divergence risk)
+- Committing `.tfstate` files to version control
+- Using `terraform taint` (deprecated — use `-replace`)
+- Skipping CI/CD validation steps (`--no-verify` equivalents)
+- Applying plan files generated from a different code version
+
+> Full details in [Three-Tier Operational Guardrails Summary](#three-tier-operational-guardrails-summary)
 
 ---
 
@@ -79,7 +121,7 @@ Pipeline architecture and security, tooling, testing pyramid, native test framew
 ## Research Scope §7–9 — Code Quality, Advanced Patterns & Governance
 
 Naming, DRY, code review; multi-account/scale/refactoring; change control, compliance-as-code, and documentation. Details in [Quality, Advanced & Governance](./blueprints/research-scope-quality-advanced-governance.md).
-# Three-Tier Operational Guardrails Summary
+## Three-Tier Operational Guardrails Summary
 
 ## ✅ Always Do: Mandatory Patterns
 Non-negotiable practices regardless of scale:

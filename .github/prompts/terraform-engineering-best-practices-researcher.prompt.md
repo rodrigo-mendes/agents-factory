@@ -13,6 +13,16 @@ argument-hint: "Provider and version (e.g. AWS provider v5.x, Terraform 1.8)"
 - `TOOLING_PREFERENCES`: [optional — e.g., "Terragrunt", "Terraform Stacks", "Terraform Cloud", "Spacelift", "Atlantis", "GitHub Actions", "GitLab CI"]
 - `COMPLIANCE_REQUIREMENTS`: [optional — e.g., "SOC2", "HIPAA", "PCI-DSS", "LGPD", "internal-policy-only"]
 - `OFFICIAL_URL_IF_KNOWN`: [optional — e.g., "https://developer.hashicorp.com/terraform"]
+- `RESEARCH_DEPTH` — Depth of research: `quick` / `standard` / `deep` / `exhaustive` (default: `exhaustive`)
+- `MAX_ITERATIONS` — Maximum gap-filling iterations, integer (default: `5`)
+
+## Domain Complexity Assessment
+
+| Tier | Examples | Always-Do | Ask-First | Never-Do |
+|------|----------|-----------|-----------|----------|
+| Foundational | Simple CRUD, basic auth | ~3-4 | ~2-3 | ~2-3 |
+| Standard | REST APIs, ORMs, CI tools | ~5-6 | ~3-4 | ~4-5 |
+| Complex (security-critical) | Auth systems, IaC, distributed | ~7-9 | ~4-6 | ~5-7 |
 
 ---
 
@@ -661,6 +671,13 @@ Environment_Count: "{{ENVIRONMENT_COUNT}}"
 Tooling: "{{TOOLING_PREFERENCES}}"
 Research_Date: "[Today's date]"
 Sources_Count: "[Number of verified sources]"
+Research_Depth: "[quick/standard/deep/exhaustive]"
+Max_Iterations: "[N]"
+Gap_Loop_Ran: "[true/false]"
+Iterations_Used: "[N of MAX_ITERATIONS]"
+Triangulated_Count: "[N]"
+Unverified_Count: "[N]"
+Research_Quality_Score: "[N%]"
 ```
 
 ## Executive Summary
@@ -738,6 +755,18 @@ Workaround: [Temporary guidance]
 Follow-up: [Where to verify]
 ```
 
+### §7 — Research Iteration Changelog
+
+> Mandatory when RESEARCH_DEPTH is `standard`, `deep`, or `exhaustive`. Omit for `quick`.
+
+| Iteration | Section | Item | Action | Source |
+|-----------|---------|------|--------|--------|
+| 1 | [Section name] | [Claim or pattern] | Added / Resolved / Updated | [URL] (DATE) |
+| 2 | [Section name] | [Claim or pattern] | ⚠️ IRRESOLVABLE — [one-line rationale] | — |
+
+> Add one row per gap-loop resolution. Rows are appended in order; do not reorder.
+> `IRRESOLVABLE` rows remain in the table permanently as an audit trail.
+
 ## Agent Operation Notes
 - **High Confidence**: [Patterns that can be applied without asking — official best practices]
 - **Medium Confidence**: [Patterns that should be validated — community-adopted but not officially blessed]
@@ -746,6 +775,15 @@ Follow-up: [Where to verify]
 - **Emergency Stop**: [When to halt — state corruption risk, security exposure, compliance violation]
 
 ---
+
+## Scope Rejection Format
+
+When a request is outside this prompt's scope, respond exactly:
+
+> **Out of scope for terraform-engineering-best-practices-researcher.**
+> This prompt handles: researching Terraform engineering best practices for project organization, module design, CI/CD, testing, and governance.
+> Your request ("...") matches: `[correct-prompt]` — [one-line description].
+> Run `[correct-prompt] [args]` to proceed.
 
 # Output Priorities
 1. 🚨 State corruption and security anti-patterns

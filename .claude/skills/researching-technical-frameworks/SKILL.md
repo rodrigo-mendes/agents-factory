@@ -1,7 +1,7 @@
 ﻿---
 name: researching-technical-frameworks
 description: "Researches technologies, frameworks, and SDKs to produce hallucination-proof research_[TECH]_v[VERSION].md documents. Use when starting technical research for a new skill, researching a version migration, or researching an SDK integration (e.g., Stripe Java SDK, Terraform AWS provider)."
-argument-hint: "<tech> <version> (e.g. FastAPI 0.115)"
+argument-hint: "<tech> <version> [depth=exhaustive] [iterations=5] (e.g. FastAPI 0.115 depth=deep iterations=3)"
 context: fork
 agent: framework-researcher
 disable-model-invocation: true
@@ -22,9 +22,12 @@ Transform vague technology requirements into **research_[TECH]_v[VERSION].md** d
 - `TARGET_VERSION`: semantic version — e.g., "0.100", "7.2", "14.0" (never "latest" or unspecified)
 - `OFFICIAL_URL_IF_KNOWN`: optional — primary docs URL if known
 - `INTEGRATION_PARTNERS_LIST`: comma-separated — e.g., "PostgreSQL, JWT, pytest"
+- `RESEARCH_DEPTH`: research strategy — `quick` | `standard` | `deep` | `exhaustive` (default: **exhaustive**)
+- `MAX_ITERATIONS`: gap-filling loop limit — any positive integer (default: **5**; ignored when depth=quick)
 
 ## Quick Navigation
 
+- **[Blueprints & Guardrails](#blueprints--guardrails)** — Mandatory patterns, decisions, anti-patterns
 - **[Always Do Patterns](./blueprints/always-do-patterns.md)** — Mandatory implementation patterns
 - **[Ask First](./blueprints/ask-first-decisions.md)** — Architectural decisions requiring context
 - **[Never Do Patterns](./blueprints/never-do-patterns.md)** — Anti-patterns with alternatives
@@ -53,6 +56,8 @@ Do NOT conflate versions. Terraform 1.6 ≠ 1.7. PostgreSQL 14 ≠ 15.
 Each version requires dedicated research output.
 
 ---
+
+## Blueprints & Guardrails
 
 ## ✅ Always Do
 
@@ -377,7 +382,7 @@ grep -c "✅ Correct" research_*.md
 | **Output naming** | `research_<Tech>_<Context>_v<X.Y>.md` |
 | **Source priority** | Official docs > GitHub releases > API reference > Stack Overflow (filtered) |
 | **Version absolutism** | Target version mentioned 5+ times: title, context, code comments, anti-patterns, final warning |
-| **Research depth** | Scope-dependent: Minimal 5-10 / Standard 15-25 / Comprehensive 30-50 — confirm via Ask First Decision 1 |
+| **Research depth** | `exhaustive` (default) / `deep` / `standard` / `quick` — see Ask First Decision 3; gap loop runs up to `MAX_ITERATIONS` (default 5) |
 | **Code examples** | 3+ working, commented, version-tagged |
 | **Every claim** | Must trace to official source with publication date |
 

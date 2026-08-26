@@ -30,6 +30,7 @@ When used as part of the multi-model orchestrator (`/audit-architecture-consensu
 
 - **[Evaluation Scenarios](./blueprints/evaluation-scenarios.md)** — 4 scenarios: canonical injection audit, global applyTo edge case, misuse guard, context budget pile-up
 - **[Verification Loop](#verification-loop)** — Post-report checklist to confirm the output file is complete and well-formed
+- **[Guardrails & Behavior](#-always-do)** — Mandatory rules, escalation triggers, prohibited actions
 
 ---
 

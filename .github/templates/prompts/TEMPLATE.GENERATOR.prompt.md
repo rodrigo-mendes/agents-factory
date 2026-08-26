@@ -354,3 +354,12 @@ For any unanswered question, use the research file's recommended default and add
 
 ### If Templates Are Missing
 Generate files using the patterns documented in this prompt directly. Templates are preferred but not required.
+
+## Scope Rejection Format
+
+When a request is outside this prompt's scope, respond exactly:
+
+> **Out of scope for [name].**
+> This prompt handles: [what it does in one line].
+> Your request ("...") matches: `[correct-command]` — [one-line description].
+> Run `[correct-command] [args]` to proceed.

@@ -189,3 +189,12 @@ Reference: `.github/skills/[primary-skill-name]/SKILL.md`
 - [ ] [Requirement 3] — [Description]
 - [ ] [Requirement 4] — [Description]
 - [ ] [Requirement 5] — [Description]
+
+## Scope Rejection Format
+
+When a request is outside this prompt's scope, respond exactly:
+
+> **Out of scope for [name].**
+> This prompt handles: [what it does in one line].
+> Your request ("...") matches: `[correct-command]` — [one-line description].
+> Run `[correct-command] [args]` to proceed.
