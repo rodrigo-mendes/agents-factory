@@ -404,6 +404,15 @@ Produce the following output, in this order:
    > Follow-up: [Where to find the authoritative answer]
    > ```
 
+## Scope Rejection Format
+
+When a request is outside this prompt's scope, respond exactly:
+
+> **Out of scope for methodologies-skill-generator.**
+> This prompt handles: converting a validated methodology research file into an operational SKILL.md with ✅⚠️🚫 patterns.
+> Your request ("...") matches: `[correct-prompt]` — [one-line description].
+> Run `[correct-prompt] [args]` to proceed.
+
 ---
 
 ## USAGE EXAMPLE

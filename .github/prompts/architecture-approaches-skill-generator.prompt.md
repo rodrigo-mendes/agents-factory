@@ -584,3 +584,12 @@ Expected: Classification as API Specification. SKILL.md emphasizes required fiel
 (info, paths, components), schema correctness, versioning strategy, contract-first
 discipline, tooling validation, and ADR triggers for breaking changes.
 ```
+
+## Scope Rejection Format
+
+When a request is outside this prompt's scope, respond exactly:
+
+> **Out of scope for architecture-approaches-skill-generator.**
+> This prompt handles: converting a validated architecture approach or design pattern research file into an operational SKILL.md with ✅⚠️🚫 patterns.
+> Your request ("...") matches: `[correct-prompt]` — [one-line description].
+> Run `[correct-prompt] [args]` to proceed.

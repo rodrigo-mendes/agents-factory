@@ -73,6 +73,29 @@ Execute in dependency order:
    - [CONSISTENCY CHECK 3 — e.g., access policies match code requirements]
 4. Report results to the user
 
+## Agent Loop Protocol
+
+### Fix Loop (P4 ↔ P5)
+When P5 validation reveals failures, do NOT report and stop — enter the fix loop:
+
+1. For each failing check: apply a targeted fix using the **Edit** tool (not a full rewrite)
+2. Re-run the failing validation command
+3. If the check passes: move to the next failure
+4. If the check still fails after the fix: mark as `⚠️ UNRESOLVED` and continue
+5. After all fixes attempted: re-run the full P5 suite once more
+6. Repeat up to `MAX_FIX_ITERATIONS` (default: **3**)
+7. After `MAX_FIX_ITERATIONS`: stop the loop, report all `⚠️ UNRESOLVED` items to the user
+
+### Loop Termination Conditions
+- **Success**: all P5 checks pass → deliver output
+- **Budget exhausted**: reached `MAX_FIX_ITERATIONS` → deliver with UNRESOLVED list
+- **Blocker hit**: a fix requires a decision only the user can make → pause, ask, resume
+
+### Rollback
+If the loop budget is exhausted and the artifact is in a worse state than before P4 started,
+restore the original file from the pre-P4 snapshot (re-read the original and write it back)
+before reporting to the user.
+
 ## What You Do
 
 - Orchestrate end-to-end [CAPABILITY] creation ([DOMAIN A] + [DOMAIN B])
@@ -92,3 +115,24 @@ Execute in dependency order:
 | [integrated keywords] | `[integrated-skill]/SKILL.md` |
 | [domain-a keywords] | `[domain-a-skill]/SKILL.md` |
 | Additional capabilities loaded based on requirements (same as `@[domain-a-agent]` and `@[domain-b-agent]` skill tables) |
+
+## Context Engineering
+
+### Load Order (priority, not volume)
+1. **Eager** (load at P0, always): core skill SKILL.md for the request type, security rules
+2. **Lazy** (load at the step that needs it): blueprint files, integration examples, migration guides
+3. **On-demand** (load only if the user triggers the path): conditional skills, secondary integrations
+
+### Context Budget Rule
+If loading all identified skills would fill the context window:
+- Keep the primary skill fully loaded
+- Summarise secondary skills to their ✅/🚫 summary sections only (skip blueprint code examples)
+- Defer blueprint files until the specific pattern is being actively implemented
+
+### Sub-Agent Context Handoff (when using the Agent tool)
+Include in every sub-agent prompt:
+- The exact skill file path and the relevant section title (not the full file content)
+- The input variables that govern the task
+- The output file path and naming convention
+- The specific question or section the sub-agent must resolve
+Do NOT pass the entire conversation history — give the sub-agent a focused brief.

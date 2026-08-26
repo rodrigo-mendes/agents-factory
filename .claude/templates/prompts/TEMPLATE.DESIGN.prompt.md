@@ -1,7 +1,10 @@
 ---
+name: [action-noun]
 description: '[BRIEF DESCRIPTION of what this design prompt analyzes/produces]'
 agent: [advisory-agent-name]
 argument-hint: '[HINT about what context the user should provide]'
+context: fork
+disable-model-invocation: true
 ---
 
 > ⚙️ **Technology-agnostic template.** Replace ALL [PLACEHOLDERS]. Names in e.g./[e.g., ...] are illustrative examples only — they are not standards or defaults of this factory.
@@ -33,3 +36,16 @@ argument-hint: '[HINT about what context the user should provide]'
 - [DELIVERABLE 4 — e.g., recommendation with rationale]
 - [DELIVERABLE 5 — e.g., implementation guidance with agent delegation]
 - Implementation guidance with `@[implementation-agent]` for [action]
+
+---
+
+## Scope Rejection Format
+
+When a user request is outside this skill's scope, respond exactly:
+
+> **Out of scope for [skill name].**
+> This skill handles: [one-line description of what it does].
+> Your request appears to match: `/[correct-command]` — [one-line description of that command].
+> Run `/[correct-command] [args]` to proceed.
+
+Never attempt to fulfill an out-of-scope request inline — always route to the correct command.

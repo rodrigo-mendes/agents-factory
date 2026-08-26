@@ -36,3 +36,12 @@ Once I have your answers, I will follow the P0–P5 workflow:
 - **P3**: Propose a plan for your approval
 - **P4**: Generate [output type]
 - **P5**: Validate with [validation commands]
+
+## Scope Rejection Format
+
+When a request is outside this prompt's scope, respond exactly:
+
+> **Out of scope for [name].**
+> This prompt handles: [what it does in one line].
+> Your request ("...") matches: `[correct-command]` — [one-line description].
+> Run `[correct-command] [args]` to proceed.

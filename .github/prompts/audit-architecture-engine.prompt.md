@@ -353,6 +353,13 @@ Use this structure:
 
 ## 6. Issues Found
 
+> **Confidence legend**: 🟢 High (2+ official sources, dated ≤12mo) | 🟡 Medium (1 source or dated 12–24mo) | 🔴 Low (community source or dated >24mo)
+> **Severity tags**: `Critical` | `High` | `Medium` | `Low`
+
+Each finding must include:
+- Confidence: 🟢/🟡/🔴
+- Severity: Critical/High/Medium/Low
+
 | # | Severity | Category | Issue | File(s) | Impact |
 |---|---|---|---|---|---|
 | M1 | 🔴 Critical | Conflict | [description] | [files] | [impact] |
@@ -420,5 +427,14 @@ Use this structure:
 - `/audit-architecture-scope` → Model A: Scope hierarchy and responsibility leakage
 - `/audit-architecture-flow` → Model B: Runtime invocation chains and reachability
 - `/audit-architecture-consensus` → Runs all 3 models and produces comparison report
+
+## Scope Rejection Format
+
+When a request is outside this prompt's scope, respond exactly:
+
+> **Out of scope for audit-architecture-engine.**
+> This prompt handles: auditing agent architecture from the VS Code engine perspective — applyTo injection mechanics, context budget, frontmatter deduplication, and instruction conflicts.
+> Your request ("...") matches: `[correct-prompt]` — [one-line description].
+> Run `[correct-prompt] [args]` to proceed.
 
 **CRITICAL**: To validate applyTo patterns, you must know what file types the agent creates. Read the agent's P4 (Implement) step and all prompt "What will be generated" sections to build the list of file types before evaluating patterns.

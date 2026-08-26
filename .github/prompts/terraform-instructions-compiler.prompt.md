@@ -596,3 +596,12 @@ For any unanswered question, use the research file's recommended default and add
 
 ### If Templates Are Missing
 Generate instruction files using the patterns documented in this prompt directly. The templates are preferred but not required.
+
+## Scope Rejection Format
+
+When a request is outside this prompt's scope, respond exactly:
+
+> **Out of scope for terraform-instructions-compiler.**
+> This prompt handles: compiling Terraform engineering best practices from a research file into `.instructions.md` files following GitHub Copilot conventions.
+> Your request ("...") matches: `[correct-prompt]` — [one-line description].
+> Run `[correct-prompt] [args]` to proceed.

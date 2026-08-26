@@ -1,7 +1,10 @@
 ---
+name: [action-noun]
 description: 'Generic entry point for [DOMAIN]. Collects context and requirements, then routes to the [agent-name] agent.'
 agent: [agent-name]
 argument-hint: 'Describe what [DOMAIN ARTIFACT] you need'
+context: fork
+disable-model-invocation: true
 ---
 
 > ⚙️ **Technology-agnostic template.** Replace ALL [PLACEHOLDERS]. Names in e.g./[e.g., ...] are illustrative examples only — they are not standards or defaults of this factory.
@@ -36,3 +39,16 @@ Once I have your answers, I will follow the P0–P5 workflow:
 - **P3**: Propose a plan for your approval
 - **P4**: Generate [output type]
 - **P5**: Validate with [validation commands]
+
+---
+
+## Scope Rejection Format
+
+When a user request is outside this skill's scope, respond exactly:
+
+> **Out of scope for [skill name].**
+> This skill handles: [one-line description of what it does].
+> Your request appears to match: `/[correct-command]` — [one-line description of that command].
+> Run `/[correct-command] [args]` to proceed.
+
+Never attempt to fulfill an out-of-scope request inline — always route to the correct command.

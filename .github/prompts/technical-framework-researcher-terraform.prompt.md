@@ -13,6 +13,8 @@ argument-hint: "Provider and version (e.g. aws v5.x with Terraform 1.8)"
 - `INTEGRATION_PARTNERS_LIST`: [e.g., "VPC, Security Groups, IAM, Secrets Manager, CloudWatch"]
 - `USE_MODULES`: [yes/no - module-based approach]
 - `USE_WORKSPACES`: [yes/no - multi-environment support]
+- `RESEARCH_DEPTH` — Depth of research: `quick` / `standard` / `deep` / `exhaustive` (default: `exhaustive`)
+- `MAX_ITERATIONS` — Maximum gap-filling iterations, integer (default: `5`)
 
 ---
 
@@ -375,6 +377,13 @@ Support_Status: "[Active | Deprecated | EOL]"
 Last_Updated: "[Date]"
 Research_Date: "[Today's date]"
 Domain_Complexity: "[Foundational/Standard/Complex]"
+Research_Depth: "[quick/standard/deep/exhaustive]"
+Max_Iterations: "[N]"
+Gap_Loop_Ran: "[true/false]"
+Iterations_Used: "[N of MAX_ITERATIONS]"
+Triangulated_Count: "[N]"
+Unverified_Count: "[N]"
+Research_Quality_Score: "[N%]"
 ```
 
 ## Executive Summary
@@ -993,6 +1002,18 @@ Follow-up: [Where to check next time - GitHub issue/docs link]
 
 ---
 
+### §7 — Research Iteration Changelog
+
+> Mandatory when RESEARCH_DEPTH is `standard`, `deep`, or `exhaustive`. Omit for `quick`.
+
+| Iteration | Section | Item | Action | Source |
+|-----------|---------|------|--------|--------|
+| 1 | [Section name] | [Claim or pattern] | Added / Resolved / Updated | [URL] (DATE) |
+| 2 | [Section name] | [Claim or pattern] | ⚠️ IRRESOLVABLE — [one-line rationale] | — |
+
+> Add one row per gap-loop resolution. Rows are appended in order; do not reorder.
+> `IRRESOLVABLE` rows remain in the table permanently as an audit trail.
+
 ## Agent Operation Notes
 
 ### High Confidence (Execute without asking)
@@ -1027,6 +1048,15 @@ Follow-up: [Where to check next time - GitHub issue/docs link]
 - Halt if insufficient IAM permissions detected
 
 ---
+
+## Scope Rejection Format
+
+When a request is outside this prompt's scope, respond exactly:
+
+> **Out of scope for technical-framework-researcher-terraform.**
+> This prompt handles: researching a Terraform provider or module for a pinned version to build a hallucination-proof IaC knowledge base.
+> Your request ("...") matches: `[correct-prompt]` — [one-line description].
+> Run `[correct-prompt] [args]` to proceed.
 
 # Output Priorities
 1. 🚨 State corruption risks & secret exposure patterns

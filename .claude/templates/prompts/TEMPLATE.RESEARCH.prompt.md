@@ -1,5 +1,10 @@
 ---
+name: [gerund-noun-researcher]
 description: 'Senior Technical Researcher building a hallucination-proof knowledge base for [SYSTEM_OR_TECH_NAME] v[TARGET_VERSION].'
+argument-hint: "<tech> <version> [depth=exhaustive] [iterations=5]"
+context: fork
+agent: framework-researcher
+disable-model-invocation: true
 ---
 
 > ⚙️ **Technology-agnostic template.** Replace ALL [PLACEHOLDERS]. Names in e.g./[e.g., ...] are illustrative examples only — they are not standards or defaults of this factory.
@@ -9,6 +14,8 @@ description: 'Senior Technical Researcher building a hallucination-proof knowled
 - `TARGET_VERSION`: [e.g., "3.11", "7.2", "1.1.x"]
 - `OFFICIAL_URL_IF_KNOWN`: [optional — primary documentation URL]
 - `INTEGRATION_PARTNERS_LIST`: [e.g., "PostgreSQL, JWT, pytest"]
+- `RESEARCH_DEPTH`: research strategy — `quick` | `standard` | `deep` | `exhaustive` (default: exhaustive)
+- `MAX_ITERATIONS`: gap-filling loop limit — positive integer (default: 5; ignored when depth=quick)
 
 ---
 
@@ -30,6 +37,16 @@ Senior Technical Researcher & AI Safety Engineer building a hallucination-proof 
 2. Validate via Stack Overflow trends, GitHub issues for {{TARGET_VERSION}}
 3. Flag content older than 12 months
 4. Conflict resolution: Official Docs → Blog → GitHub → Community
+
+## Context Loading Order
+
+Load sources in this order to manage context window efficiently:
+
+1. **P2.changelog first**: Official changelog/migration guide for `{{TARGET_VERSION}}` — extracts breaking changes before fetching feature docs (avoids fetching deprecated patterns)
+2. **Primary API docs**: Official documentation for core patterns
+3. **Integration partner docs**: Load lazily — one partner at a time as each integration section is written
+4. **Community sources**: Load only after official sources are exhausted for a specific claim
+5. **Blueprint files**: Load the output-format-template.md once at P3; do not re-read during P4
 
 ---
 
@@ -139,7 +156,7 @@ Exact CLI commands for:
 
 # Output Format
 
-Save as `research_{{SYSTEM_NAME}}_v{{TARGET_VERSION}}.md`:
+Save as `research_{{SYSTEM_OR_TECH_NAME}}_v{{TARGET_VERSION}}.md`:
 
 ## Metadata
 ```yaml
@@ -151,6 +168,9 @@ Primary_Docs: [URL]
 Official_Repo: [URL]
 Research_Date: [Date]
 Domain_Complexity: [Foundational/Standard/Complex]
+Research_Depth: [quick/standard/deep/exhaustive]
+Max_Iterations: [N]
+Research_Quality_Score: [N%]
 ```
 
 ## Executive Summary
@@ -219,6 +239,14 @@ Workaround: [Temporary approach]
 Follow-up: [Where to check]
 ```
 
+## §7 — Research Iteration Changelog
+> Mandatory for standard/deep/exhaustive depth.
+
+| Iteration | Section | Item | Action | Source |
+|---|---|---|---|---|
+| 1 | [section] | [claim] | Added / Resolved | [URL] (DATE) |
+| 2 | [section] | [claim] | ⚠️ IRRESOLVABLE — [rationale] | — |
+
 ## Agent Operation Notes
 - **High Confidence**: [Can execute without asking]
 - **Medium**: [Should validate]
@@ -242,3 +270,16 @@ Before finalizing:
 3. Forbidden patterns have alternatives
 4. Links tested (no 404s)
 5. Versions explicitly confirmed
+
+---
+
+## Scope Rejection Format
+
+When a user request is outside this skill's scope, respond exactly:
+
+> **Out of scope for [skill name].**
+> This skill handles: [one-line description of what it does].
+> Your request appears to match: `/[correct-command]` — [one-line description of that command].
+> Run `/[correct-command] [args]` to proceed.
+
+Never attempt to fulfill an out-of-scope request inline — always route to the correct command.

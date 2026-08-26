@@ -42,6 +42,7 @@ prioritization.
 - **[Engine Mechanics Contract](./blueprints/engine-mechanics-contract.md)** — The two loading mechanisms, key engine rules, budget-simulation format (evaluation baseline)
 - **[Evaluation Scenarios](./blueprints/evaluation-scenarios.md)** — 4 scenarios: canonical budget audit, over-broad paths edge case, misuse guard, auto-listing pile-up
 - **[Verification Loop](#verification-loop)** — Post-report checklist to confirm the output file is complete and well-formed
+- **[Guardrails & Behavior](#-always-do)** — Mandatory rules, escalation triggers, prohibited actions
 
 ---
 

@@ -9,6 +9,8 @@ description: 'Senior Technical Researcher building a hallucination-proof knowled
 - `TARGET_VERSION`: [e.g., "3.11", "7.2", "1.1.x"]
 - `OFFICIAL_URL_IF_KNOWN`: [optional — primary documentation URL]
 - `INTEGRATION_PARTNERS_LIST`: [e.g., "PostgreSQL, JWT, pytest"]
+- `RESEARCH_DEPTH` — Depth of research: `quick` / `standard` / `deep` / `exhaustive` (default: `exhaustive`)
+- `MAX_ITERATIONS` — Maximum gap-filling iterations, integer (default: `5`)
 
 ---
 
@@ -30,6 +32,15 @@ Senior Technical Researcher & AI Safety Engineer building a hallucination-proof 
 2. Validate via Stack Overflow trends, GitHub issues for {{TARGET_VERSION}}
 3. Flag content older than 12 months
 4. Conflict resolution: Official Docs → Blog → GitHub → Community
+
+---
+
+## Research Context Loading Order
+
+1. **First**: Fetch the official changelog/migration guide for the pinned version
+2. **Then**: Load primary API/feature documentation
+3. **Lazy**: Load integration partner documentation (one per partner, as needed)
+4. **Last resort**: Load community sources only after official sources are exhausted for a section
 
 ---
 
@@ -139,7 +150,7 @@ Exact CLI commands for:
 
 # Output Format
 
-Save as `research_{{SYSTEM_NAME}}_v{{TARGET_VERSION}}.md`:
+Save as `research_{{SYSTEM_OR_TECH_NAME}}_v{{TARGET_VERSION}}.md`:
 
 ## Metadata
 ```yaml
@@ -151,6 +162,9 @@ Primary_Docs: [URL]
 Official_Repo: [URL]
 Research_Date: [Date]
 Domain_Complexity: [Foundational/Standard/Complex]
+Research_Depth: [quick/standard/deep/exhaustive]
+Max_Iterations: [N]
+Research_Quality_Score: [N%]
 ```
 
 ## Executive Summary
@@ -200,6 +214,11 @@ Domain_Complexity: [Foundational/Standard/Complex]
 ## Source Bibliography
 - Primary, Validation, All Deep-Links
 
+## §7 — Research Iteration Changelog
+
+Document each research gap-filling iteration:
+- Iteration N: [what was searched] → [what was found or remained unresolved]
+
 ## Completion Checklist
 - [ ] Domain complexity tier assessed and documented
 - [ ] All scope areas cited
@@ -242,3 +261,12 @@ Before finalizing:
 3. Forbidden patterns have alternatives
 4. Links tested (no 404s)
 5. Versions explicitly confirmed
+
+## Scope Rejection Format
+
+When a request is outside this prompt's scope, respond exactly:
+
+> **Out of scope for [name].**
+> This prompt handles: [what it does in one line].
+> Your request ("...") matches: `[correct-command]` — [one-line description].
+> Run `[correct-command] [args]` to proceed.

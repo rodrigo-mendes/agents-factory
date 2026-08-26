@@ -1,5 +1,10 @@
 ---
-description: 'Extracts [DOMAIN] best practices from research files and generates targeted [OUTPUT FILE TYPE] files for GitHub Copilot, with user interview and planning phases.'
+name: [gerund-noun-generator]
+description: 'Extracts [DOMAIN] best practices from research files and generates targeted [OUTPUT FILE TYPE] files for Claude Code, with user interview and planning phases.'
+argument-hint: "<research-file-path> (e.g. StoryBeat/docs/research_X_v1.md)"
+context: fork
+agent: skill-author
+disable-model-invocation: true
 ---
 
 > ⚙️ **Technology-agnostic template.** Replace ALL [PLACEHOLDERS]. Names in e.g./[e.g., ...] are illustrative examples only — they are not standards or defaults of this factory.
@@ -14,7 +19,7 @@ This is an **extraction, planning, and generation prompt**. Given a [DOMAIN] bes
 2. **Plans** which `[output-file-pattern]` files to generate and their scope
 3. **Generates** production-ready files following the template standards
 
-The output is **NOT a document for humans to read** — it is a set of **operational [OUTPUT TYPE] files for GitHub Copilot agents**, structured to enforce best practices during code generation.
+The output is **NOT a document for humans to read** — it is a set of **operational [OUTPUT TYPE] files for Claude Code agents**, structured to enforce best practices during code generation.
 
 ---
 
@@ -32,10 +37,10 @@ PROJECT_ROOT:           # Where to place generated files
 ---
 
 ## Role
-Copilot Configuration Architect & Senior [DOMAIN] Engineer specializing in [DOMAIN] standards enforcement through GitHub Copilot custom [OUTPUT TYPE].
+AI Artifact Architect & Senior [DOMAIN] Engineer specializing in [DOMAIN] standards enforcement through Claude Code custom [OUTPUT TYPE].
 
 ## Context
-You have received a [DOMAIN] best practices research file. Your mission is to transform this research into actionable `[output-file-pattern]` files that GitHub Copilot will use to enforce standards during code generation, review, and refactoring.
+You have received a [DOMAIN] best practices research file. Your mission is to transform this research into actionable `[output-file-pattern]` files that Claude Code will use to enforce standards during code generation, review, and refactoring.
 
 ---
 
@@ -175,7 +180,7 @@ Based on the interview answers, generate a **plan** before creating any files. T
 
 Evaluate which files are needed based on answers:
 
-| Output File | When to Generate | applyTo / Scope |
+| Output File | When to Generate | paths: / Scope |
 |---|---|---|
 | `[prefix]-standards.[ext]` | **Always** — core standards | `[glob pattern]` |
 | `[prefix]-[domain-1].[ext]` | When [condition from Q answers] | `[glob pattern]` |
@@ -267,7 +272,7 @@ After generating all files, validate each:
 #### 5.1 — Structure Validation
 - [ ] Frontmatter has required fields ([list fields])
 - [ ] Description clearly states what the file enforces
-- [ ] Scope/applyTo pattern is correct
+- [ ] Scope/paths: pattern is correct
 - [ ] File is saved to `{{PROJECT_ROOT}}/[output-directory]/`
 
 #### 5.2 — Content Validation
@@ -354,3 +359,16 @@ For any unanswered question, use the research file's recommended default and add
 
 ### If Templates Are Missing
 Generate files using the patterns documented in this prompt directly. Templates are preferred but not required.
+
+---
+
+## Scope Rejection Format
+
+When a user request is outside this skill's scope, respond exactly:
+
+> **Out of scope for [skill name].**
+> This skill handles: [one-line description of what it does].
+> Your request appears to match: `/[correct-command]` — [one-line description of that command].
+> Run `/[correct-command] [args]` to proceed.
+
+Never attempt to fulfill an out-of-scope request inline — always route to the correct command.

@@ -77,3 +77,40 @@ Comprehensive → research_FastAPI_Migration_v0.99_to_v0.100.md  (~40 pages)
 **Note**: If the skill is for a generic IaC pattern (e.g., "state management", "module design"), choose AWS as the reference provider and note that patterns are transferable to other providers with minor adjustments.
 
 **Source**: [Terraform Registry Providers](https://registry.terraform.io/browse/providers)
+
+---
+
+## Decision 3: Research Depth — Gap-Filling Loop Strategy
+
+**Ask when the caller has not supplied `depth` or `iterations`**:
+> "How deep should this research go?
+> A) quick — 1 source per section, no gap-filling. Fast results.
+> B) standard — 2 sources for critical claims + changelog; gap loop up to MAX_ITERATIONS.
+> C) deep — parallel sub-fetch per section + gap loop up to MAX_ITERATIONS + confidence scoring.
+> D) exhaustive (default) — as deep + GitHub issues/RFCs scanned for caveats; every irresolvable gap documented."
+
+### Tradeoff Matrix
+
+| Option | Sources per Claim | Gap-Filling Loop | Changelog Fetch | Parallelism | Best When |
+|--------|------------------|------------------|-----------------|-------------|-----------|
+| **quick** | 1 primary | Disabled | No | No | Time-constrained spike; well-known stable tech |
+| **standard** | 2 for Always-Do | Up to MAX_ITERATIONS | Yes | No | Normal skill authoring |
+| **deep** | 2+ per claim | Up to MAX_ITERATIONS | Yes | Yes (Agent) | Wide API surface; many integrations |
+| **exhaustive** | 2+ + community caveat scan | Up to MAX_ITERATIONS | Yes | Yes (Agent) | Security-critical; version migration; ambiguous docs |
+
+### Decision Factors
+
+- **Time available**: `quick` if urgent; `exhaustive` if quality matters more than speed
+- **Security criticality**: Always `deep` or `exhaustive` for auth, encryption, secrets
+- **Doc quality**: Sparse/beta docs → `exhaustive` (gap-loop catches more)
+- **MAX_ITERATIONS**: Defaults to 5; lower for faster turnaround, higher for exhaustive coverage
+
+### Iteration Limit Impact
+
+```
+iterations=1 → one pass; remaining gaps marked IRRESOLVABLE immediately
+iterations=5 → default; balances coverage vs. time
+iterations=10 → for deep dives on sparse-doc technologies
+```
+
+**Source**: [researching-technical-frameworks SKILL.md](../SKILL.md) — RESEARCH_DEPTH + MAX_ITERATIONS variables

@@ -40,6 +40,7 @@ prioritization.
 - **[Invocation Flow Contract](./blueprints/invocation-flow-contract.md)** — Canonical chain, the 3 entry paths, Reachability Matrix format (evaluation baseline)
 - **[Evaluation Scenarios](./blueprints/evaluation-scenarios.md)** — 4 scenarios: canonical chain tracing, knowledge-skill reachability, misuse guard, cycle detection
 - **[Verification Loop](#verification-loop)** — Post-report checklist to confirm the output file is complete and well-formed
+- **[Guardrails & Behavior](#-always-do)** — Mandatory rules, escalation triggers, prohibited actions
 
 ---
 

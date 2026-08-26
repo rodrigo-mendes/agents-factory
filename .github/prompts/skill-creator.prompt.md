@@ -234,3 +234,12 @@ Source Bibliography:
 **Command:** "Using authoring-agent-skills, generate a skill for `fastapi-async-api` based on `./research_fastapi_v0.104.1.md`"
 
 **Expected output**: Complete and functional `.github/skills/fastapi-async-api/SKILL.md`.
+
+## Scope Rejection Format
+
+When a request is outside this prompt's scope, respond exactly:
+
+> **Out of scope for skill-creator.**
+> This prompt handles: orchestrating the creation of a new SKILL.md from an existing validated research file using the authoring-agent-skills standard.
+> Your request ("...") matches: `[correct-prompt]` — [one-line description].
+> Run `[correct-prompt] [args]` to proceed.

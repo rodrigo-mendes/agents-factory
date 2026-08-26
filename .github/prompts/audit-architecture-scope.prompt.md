@@ -418,6 +418,13 @@ most critical finding, and recommended immediate action]
 
 ## 5. Violations Summary
 
+> **Confidence legend**: 🟢 High (2+ official sources, dated ≤12mo) | 🟡 Medium (1 source or dated 12–24mo) | 🔴 Low (community source or dated >24mo)
+> **Severity tags**: `Critical` | `High` | `Medium` | `Low`
+
+Each finding must include:
+- Confidence: 🟢/🟡/🔴
+- Severity: Critical/High/Medium/Low
+
 | # | Severity | Criterion | File | Description |
 |---|---|---|---|---|
 | V1 | 🔴 Critical | [L1.2] | [file] | [description] |
@@ -600,5 +607,14 @@ This prompt evaluates architecture from the **scope/persistence perspective**: f
 When used as part of the multi-model orchestrator (`/audit-architecture-consensus`), this prompt's findings are compared with Model B (Invocation Flow) and Model C (Technical Mechanisms) to produce consensus-based prioritization.
 
 ---
+
+## Scope Rejection Format
+
+When a request is outside this prompt's scope, respond exactly:
+
+> **Out of scope for audit-architecture-scope.**
+> This prompt handles: auditing agent architecture from the scope hierarchy perspective (L0→L4), validating responsibility separation per layer, and detecting responsibility leakage.
+> Your request ("...") matches: `[correct-prompt]` — [one-line description].
+> Run `[correct-prompt] [args]` to proceed.
 
 **CRITICAL**: Read every file in the dependency graph completely before writing the report. A report based on partial reading will produce false assessments. If a file is too large to read in full, read at minimum: the frontmatter, the first 100 lines, any section titled "Core Responsibilities", "Workflow", "Trigger Keywords", "Always Do", "Never Do", and the last 20 lines.

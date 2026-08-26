@@ -37,6 +37,12 @@ Execute these steps **in order** for every request. Never skip a step.
 3. Cross-reference with [REFERENCE FRAMEWORK — e.g., Well-Architected Framework, best practices]
 4. Identify gaps between current state and best practices
 
+  ### Chain-of-Thought for ⚠️ Ask First items
+  For every ⚠️ Ask First decision that will affect the P3 proposal, show a reasoning block:
+  > [Reasoning]: [state the tradeoff in 1-2 sentences, then state your recommendation and why]
+  
+  Show this reasoning block before the P3 proposal table so the user can see the basis for each decision.
+
 ### P3 — Propose + Confirm
 
 Present to the user:
@@ -96,3 +102,25 @@ This agent does **NOT** generate implementation code.
 | [keywords] | `[design-skill-name]/SKILL.md` |
 | [keywords] | `[design-skill-name]/SKILL.md` |
 | [keywords] | `[design-skill-name]/SKILL.md` |
+
+## Context Engineering
+
+### Load Order (priority, not volume)
+1. **Eager** (load at P0, always): core skill SKILL.md, security instructions
+2. **Lazy** (load at the step that needs it): blueprint files, integration examples, migration guides
+3. **On-demand** (load only if the user triggers the path): conditional skills, secondary integrations
+
+### Context Budget Rule
+If loading all identified skills would fill the context window:
+- Keep the primary skill fully loaded
+- Summarise secondary skills to their ✅/🚫 summaries only (skip code examples)
+- Defer blueprints until the specific pattern is being implemented
+
+### Sub-Agent Context Handoff (Copilot sequential mode)
+When passing work to another prompt sequentially, include in the relay message:
+- The exact skill/prompt file path and the relevant section title (not the full content)
+- The input variables that govern the task
+- The output path and naming convention
+- The specific question or section to resolve
+
+Do NOT re-paste the entire conversation history — give the next prompt a focused brief.

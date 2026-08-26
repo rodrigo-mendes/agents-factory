@@ -18,11 +18,38 @@ disable-model-invocation: true
 
 ## Quick Navigation
 
+- **[Blueprints & Guardrails](#blueprints--guardrails)** — Mandatory patterns, decisions, anti-patterns
 - **[Research Scope Detail](./blueprints/research-scope.md)** — Format templates for guardrails, stakeholder interoperability, process verification, and scenario sections
 - **[Output Format](./blueprints/output-format.md)** — Full output file structure with all section templates
 - **[Evaluation Scenarios](./blueprints/evaluation-scenarios.md)** — 4 scenarios: canonical research request, edge case (novel legal conflict), out-of-scope misuse (autonomous financial commitment), anti-pattern trap (bypassing escalation under time pressure)
 - **[Verification Loop](#verification-loop)** — Self-check checklist confirming the research output is complete and safe
 - **[External Resources](#external-resources)** — Official regulatory bodies, compliance standards, and domain frameworks
+
+---
+
+## Blueprints & Guardrails
+
+### ✅ Always Do — Summary
+- Obligatory disclosures, record-keeping, and audit trail requirements
+- Consent, privacy, and data handling obligations (LGPD, GDPR, HIPAA, etc. as applicable)
+- Mandatory SLA thresholds and response time commitments
+- Required documentation before, during, and after interactions
+- Escalation triggers that cannot be bypassed
+
+### ⚠️ Ask First — Summary
+- Decisions with financial, legal, or reputational impact above defined thresholds
+- Cases involving ambiguous customer intent or conflicting stakeholder needs
+- Situations not covered by existing policy (novel cases)
+- Actions requiring cross-functional approval (Legal, Finance, Leadership)
+
+### 🚫 Never Do — Summary
+- Autonomous financial commitment without human authorization
+- Bypassing mandatory escalation because of time pressure or workload
+- Communicating binding legal or contractual commitments to third parties
+- Autonomous data deletion or archival outside a defined retention policy
+- Providing regulatory or legal advice without qualified human review
+
+> Full details in [Research Scope Detail — Three-Tier Guardrails (§2)](./blueprints/research-scope.md)
 
 ---
 

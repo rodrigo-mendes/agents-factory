@@ -513,4 +513,13 @@ This tool is designed to complement `/copilot-compatibility-review`:
 
 ---
 
+## Scope Rejection Format
+
+When a request is outside this prompt's scope, respond exactly:
+
+> **Out of scope for project-quality-improvements.**
+> This prompt handles: analyzing implementation quality and generating improvement recommendations for GitHub Copilot agent projects.
+> Your request ("...") matches: `[correct-prompt]` — [one-line description].
+> Run `[correct-prompt] [args]` to proceed.
+
 **Note**: This quality analysis tool complements compatibility reviews by focusing on implementation quality, architectural patterns, and improvement opportunities rather than basic structural compliance.

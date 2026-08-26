@@ -156,5 +156,38 @@ Skills written from research contain version-incompatible patterns → runtime f
 
 **Source**: [FastAPI Migration Guide](https://fastapi.tiangolo.com/migration-guide)
 
+### Pattern: Multi-Source Triangulation (`deep`/`exhaustive` only)
+
+**Confirm every Always-Do pattern with at least 2 independent official sources**
+
+```markdown
+## Triangulation Badge Format
+
+[✓✓ Triangulated | Official Docs (DATE) + Official Changelog (DATE)]
+
+## Example
+
+### Always Do: Use lifespan context manager
+[✓✓ Triangulated | fastapi.tiangolo.com/lifespan (2023-10-05) + github.com/tiangolo/fastapi/releases/0.100.0 (2023-09-23)]
+
+- Source A: https://fastapi.tiangolo.com/advanced/events/ — accessed 2024-01-10
+- Source B: https://github.com/tiangolo/fastapi/releases/tag/0.100.0 — published 2023-09-23
+
+## Downgrade Rule
+
+If only 1 official source exists → do NOT add triangulation badge.
+Instead: mark section confidence as 🟡 Medium and add to gap-loop queue.
+```
+
+**Why mandatory** (for deep/exhaustive):
+A single source can contain errors, be outdated, or contradict the changelog.
+Two independent official sources provide the minimum bar for high-confidence claims.
+
+**Failure if omitted**:
+Always-Do patterns based on a single source may conflict with breaking changes documented
+in the changelog — a common source of "it worked in dev, broke in prod" incidents.
+
+**Source**: Team convention — factory anti-hallucination principle (see CLAUDE.md "Executable Truth")
+
 ---
 

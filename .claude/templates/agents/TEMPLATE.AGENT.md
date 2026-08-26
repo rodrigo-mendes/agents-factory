@@ -38,6 +38,9 @@ Execute these steps **in order** for every request. Never skip a step.
 3. Extract the **🚫 Never Do** patterns — these must be avoided
 4. Note any **⚠️ Ask First** items that require user decision
 5. If multiple skills are involved, plan the **composition order**: [LAYER 1] → [LAYER 2] → [LAYER 3] → [LAYER 4]
+6. For every ⚠️ Ask First item that will affect the P3 proposal, write a reasoning block before finalising your recommendation:
+   > **[Reasoning]**: [state the tradeoff in 1-2 sentences] → **Recommendation**: [your choice and why]
+   Show this block in your P3 response so the user can see the basis for each decision.
 
 ### P3 — Propose + Confirm
 
@@ -49,6 +52,25 @@ Present to the user:
 5. **⚠️ Ask First items** — any decisions from P2 that need user input
 
 **Wait for user approval before proceeding to P4.**
+
+**Use this standard format for every P3 proposal:**
+
+---
+**📋 Plan for your approval**
+
+| # | Deliverable | Approach | Skill source |
+|---|---|---|---|
+| 1 | [what] | [how] | [SKILL.md section anchor] |
+| 2 | [what] | [how] | [SKILL.md section anchor] |
+
+**⚠️ Decisions needed before I start:**
+- [Decision 1 from ⚠️ Ask First]: Option A (`[tradeoff]`) / Option B (`[tradeoff]`) / your preference?
+
+**What I will NOT do:** [out-of-scope boundaries — prevents scope creep]
+
+Reply **"proceed"** to start, or ask me to adjust anything above.
+
+---
 
 ### P4 — Implement
 
@@ -72,6 +94,29 @@ Present to the user:
    - [CRITICAL CHECK 3]
    - [CRITICAL CHECK 4]
 4. Report results to the user
+
+## Agent Loop Protocol
+
+### Fix Loop (P4 ↔ P5)
+When P5 validation reveals failures, do NOT report and stop — enter the fix loop:
+
+1. For each failing check: apply a targeted fix using the **Edit** tool (not a full rewrite)
+2. Re-run the failing validation command
+3. If the check passes: move to the next failure
+4. If the check still fails after the fix: mark as `⚠️ UNRESOLVED` and continue
+5. After all fixes attempted: re-run the full P5 suite once more
+6. Repeat up to `MAX_FIX_ITERATIONS` (default: **3**)
+7. After `MAX_FIX_ITERATIONS`: stop the loop, report all `⚠️ UNRESOLVED` items to the user
+
+### Loop Termination Conditions
+- **Success**: all P5 checks pass → deliver output
+- **Budget exhausted**: reached `MAX_FIX_ITERATIONS` → deliver with UNRESOLVED list
+- **Blocker hit**: a fix requires a decision only the user can make → pause, ask, resume
+
+### Rollback
+If the loop budget is exhausted and the artifact is in a worse state than before P4 started,
+restore the original file from the pre-P4 snapshot (re-read the original and write it back)
+before reporting to the user.
 
 ## What You Do
 
@@ -113,3 +158,24 @@ These instructions are automatically injected when editing [FILE PATTERN] files:
 |---|---|
 | [keywords] | `[design-skill-name]/SKILL.md` |
 | [keywords] | `[design-skill-name]/SKILL.md` |
+
+## Context Engineering
+
+### Load Order (priority, not volume)
+1. **Eager** (load at P0, always): core skill SKILL.md for the request type, security rules
+2. **Lazy** (load at the step that needs it): blueprint files, integration examples, migration guides
+3. **On-demand** (load only if the user triggers the path): conditional skills, secondary integrations
+
+### Context Budget Rule
+If loading all identified skills would fill the context window:
+- Keep the primary skill fully loaded
+- Summarise secondary skills to their ✅/🚫 summary sections only (skip blueprint code examples)
+- Defer blueprint files until the specific pattern is being actively implemented
+
+### Sub-Agent Context Handoff (when using the Agent tool)
+Include in every sub-agent prompt:
+- The exact skill file path and the relevant section title (not the full file content)
+- The input variables that govern the task
+- The output file path and naming convention
+- The specific question or section the sub-agent must resolve
+Do NOT pass the entire conversation history — give the sub-agent a focused brief.

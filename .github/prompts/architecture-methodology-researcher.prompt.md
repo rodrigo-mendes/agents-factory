@@ -16,6 +16,16 @@ argument-hint: "Methodology and version (e.g. C4 Model 2024, TOGAF 10, arc42 8.x
 - `ABSTRACTION_LEVEL`: [e.g., "System Context (C4-L1)", "Container (C4-L2)", "Component (C4-L3)", "Cross-cutting / Enterprise View"]
 - `PRIMARY_AUDIENCE`: [e.g., "Architects and Tech Leads"] — pre-filled based on skill configuration
 - `OFFICIAL_SOURCE_IF_KNOWN`: [optional — e.g., "https://c4model.com", "https://adr.github.io", "https://www.opengroup.org/togaf"]
+- `RESEARCH_DEPTH` — Depth of research: `quick` / `standard` / `deep` / `exhaustive` (default: `exhaustive`)
+- `MAX_ITERATIONS` — Maximum gap-filling iterations, integer (default: `5`)
+
+## Domain Complexity Assessment
+
+| Tier | Examples | Always-Do | Ask-First | Never-Do |
+|------|----------|-----------|-----------|----------|
+| Foundational | Simple CRUD, basic auth | ~3-4 | ~2-3 | ~2-3 |
+| Standard | REST APIs, ORMs, CI tools | ~5-6 | ~3-4 | ~4-5 |
+| Complex (security-critical) | Auth systems, IaC, distributed | ~7-9 | ~4-6 | ~5-7 |
 
 ---
 
@@ -247,6 +257,13 @@ Primary_Audience: Architects and Tech Leads
 Abstraction_Level: [{{ABSTRACTION_LEVEL}}]
 Research_Date: [Date]
 Currency_Threshold: [Date after which this research should be reviewed]
+Research_Depth: [quick/standard/deep/exhaustive]
+Max_Iterations: [N]
+Gap_Loop_Ran: [true/false]
+Iterations_Used: [N of MAX_ITERATIONS]
+Triangulated_Count: [N]
+Unverified_Count: [N]
+Research_Quality_Score: [N%]
 ```
 
 ## Executive Summary
@@ -397,6 +414,18 @@ Workaround: [Conservative default behavior for architects]
 Follow-up: [Where to find the answer — URL, book, specification section]
 ```
 
+### §7 — Research Iteration Changelog
+
+> Mandatory when RESEARCH_DEPTH is `standard`, `deep`, or `exhaustive`. Omit for `quick`.
+
+| Iteration | Section | Item | Action | Source |
+|-----------|---------|------|--------|--------|
+| 1 | [Section name] | [Claim or pattern] | Added / Resolved / Updated | [URL] (DATE) |
+| 2 | [Section name] | [Claim or pattern] | ⚠️ IRRESOLVABLE — [one-line rationale] | — |
+
+> Add one row per gap-loop resolution. Rows are appended in order; do not reorder.
+> `IRRESOLVABLE` rows remain in the table permanently as an audit trail.
+
 ## Architect Operation Notes
 - **High Confidence**: [Artifacts the architect can produce autonomously — well-documented mandatory structures with unambiguous methodology guidance]
 - **Medium Confidence**: [Structures requiring context before generating — e.g., system boundaries, ownership of bounded contexts, build-vs-buy decisions]
@@ -405,6 +434,15 @@ Follow-up: [Where to find the answer — URL, book, specification section]
 - **Emergency Stop**: [Conditions requiring senior architect review — security-critical decisions, regulatory/compliance implications, irreversible architectural choices]
 
 ---
+
+## Scope Rejection Format
+
+When a request is outside this prompt's scope, respond exactly:
+
+> **Out of scope for architecture-methodology-researcher.**
+> This prompt handles: researching architecture methodologies and patterns (C4, UML, ADR, TOGAF, arc42) for skill authoring.
+> Your request ("...") matches: `[correct-prompt]` — [one-line description].
+> Run `[correct-prompt] [args]` to proceed.
 
 # Output Priorities
 1. 🚨 Methodology violations and abstraction-level errors

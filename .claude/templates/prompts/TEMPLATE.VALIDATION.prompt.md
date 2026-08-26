@@ -209,3 +209,16 @@ Analyze the [artifacts] in this repository using the [domain] best practices val
 ```
 
 **Expected output**: `[REPORT_FILENAME].md` with complete analysis and prioritized recommendations.
+
+---
+
+## Scope Rejection Format
+
+When a user request is outside this skill's scope, respond exactly:
+
+> **Out of scope for [skill name].**
+> This skill handles: [one-line description of what it does].
+> Your request appears to match: `/[correct-command]` — [one-line description of that command].
+> Run `/[correct-command] [args]` to proceed.
+
+Never attempt to fulfill an out-of-scope request inline — always route to the correct command.

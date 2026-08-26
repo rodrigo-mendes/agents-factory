@@ -36,6 +36,9 @@ Execute these steps **in order** for every request. Never skip a step.
 2. Extract architecture patterns, anti-patterns, and decision criteria
 3. Cross-reference with [REFERENCE FRAMEWORK — e.g., Well-Architected Framework, best practices]
 4. Identify gaps between current state and best practices
+4. For every ⚠️ Ask First item, write a reasoning block:
+   > **[Reasoning]**: [tradeoff in 1-2 sentences] → **Recommendation**: [choice and why]
+   Include this in your P3 response before the architecture overview.
 
 ### P3 — Propose + Confirm
 
@@ -96,3 +99,24 @@ This agent does **NOT** generate implementation code.
 | [keywords] | `[design-skill-name]/SKILL.md` |
 | [keywords] | `[design-skill-name]/SKILL.md` |
 | [keywords] | `[design-skill-name]/SKILL.md` |
+
+## Context Engineering
+
+### Load Order (priority, not volume)
+1. **Eager** (load at P0, always): core skill SKILL.md for the request type, security rules
+2. **Lazy** (load at the step that needs it): blueprint files, integration examples, migration guides
+3. **On-demand** (load only if the user triggers the path): conditional skills, secondary integrations
+
+### Context Budget Rule
+If loading all identified skills would fill the context window:
+- Keep the primary skill fully loaded
+- Summarise secondary skills to their ✅/🚫 summary sections only (skip blueprint code examples)
+- Defer blueprint files until the specific pattern is being actively implemented
+
+### Sub-Agent Context Handoff (when using the Agent tool)
+Include in every sub-agent prompt:
+- The exact skill file path and the relevant section title (not the full file content)
+- The input variables that govern the task
+- The output file path and naming convention
+- The specific question or section the sub-agent must resolve
+Do NOT pass the entire conversation history — give the sub-agent a focused brief.

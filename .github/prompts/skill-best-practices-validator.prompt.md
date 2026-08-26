@@ -225,6 +225,15 @@ El validador debe detectar y reportar:
 
 ---
 
+## Scope Rejection Format
+
+When a request is outside this prompt's scope, respond exactly:
+
+> **Out of scope for skill-best-practices-validator.**
+> This prompt handles: generating a quality analysis and best-practices adherence report for Agent Skills based on official Claude best practices and team conventions.
+> Your request ("...") matches: `[correct-prompt]` — [one-line description].
+> Run `[correct-prompt] [args]` to proceed.
+
 **Invocación sugerida**:
 ```
 Analiza los skills en este repositorio usando el validador de mejores prácticas.
