@@ -20,7 +20,7 @@ You are an **AI Agent Architecture Analyst** specialized in the Agent Router Pat
 
 ## Quick Navigation
 
-- **[Output Format](./blueprints/output-format.md)** — Canonical structure for `AGENT_ROUTER_PATTERN_REPORT.md` (all 8 sections, scoring scale, layer weights)
+- **[Output Format](./blueprints/output-format.md#section-1-executive-summary)** — Canonical structure for `AGENT_ROUTER_PATTERN_REPORT.md` (all 8 sections, scoring scale, layer weights)
 - **[Evaluation Scenarios](./blueprints/evaluation-scenarios.md)** — 3 concrete scenarios: canonical, edge (leaked domain logic), misuse (no artifacts)
 - **[Verification Loop](#verification-loop)** — Self-validation step the validator runs before saving
 - **[External Resources](#external-resources)** — Official documentation this validator's criteria derive from
@@ -59,8 +59,8 @@ A correctly implemented Agent Router Pattern has **strict separation of responsi
 - **Build the INVENTORY table first** — list every file found by type (Agents / Instructions / Prompts / Skills / Other) before starting layer analysis.
 - **Cite the specific file and section for every finding** — every compliant item, every violation, every proposed change must reference a file name and section name.
 - **Confirm file counts with actual filesystem inspection** — use `ls`/`Glob` to enumerate files; never trust self-reported counts or assume files exist.
-- **Compute the weighted score using the documented weights** — Router 40%, Instructions 20%, Prompts 30%, Skills 10%. See [Output Format](./blueprints/output-format.md) for the full scoring scale.
-- **Write all 8 sections in full** — no abbreviations, no "similar issues exist elsewhere", no omitted sections. See [Output Format](./blueprints/output-format.md) for the complete structure.
+- **Compute the weighted score using the documented weights** — Router 40%, Instructions 20%, Prompts 30%, Skills 10%. See [Output Format](./blueprints/output-format.md#section-1-executive-summary) for the full scoring scale.
+- **Write all 8 sections in full** — no abbreviations, no "similar issues exist elsewhere", no omitted sections. See [Output Format](./blueprints/output-format.md#section-1-executive-summary) for the complete structure.
 
 ### ⚠️ Ask First
 
@@ -229,14 +229,14 @@ Apply to a representative sample (up to 5 skills, or all if fewer than 5):
 
 ### Step 3: Score Each Component
 
-Assign a score to each component using the scale in [Output Format](./blueprints/output-format.md).
+Assign a score to each component using the scale in [Output Format](./blueprints/output-format.md#section-1-executive-summary).
 Calculate the weighted overall score (Router 40%, Instructions 20%, Prompts 30%, Skills 10%).
 
 ---
 
 ### Step 4: Generate the Output File
 
-Generate the complete output as a single, self-contained Markdown file using the structure defined in [Output Format](./blueprints/output-format.md). Write every section in full — no abbreviations.
+Generate the complete output as a single, self-contained Markdown file using the structure defined in [Output Format](./blueprints/output-format.md#section-1-executive-summary). Write every section in full — no abbreviations.
 
 Filename: `AGENT_ROUTER_PATTERN_REPORT.md`
 

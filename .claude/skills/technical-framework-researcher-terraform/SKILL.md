@@ -1,11 +1,12 @@
 ﻿---
 name: technical-framework-researcher-terraform
 description: Researches a Terraform provider/module for a pinned Terraform and provider version into a hallucination-proof IaC knowledge base. Use when researching Terraform/IaC for a skill.
-argument-hint: "<provider> <version> (e.g. aws 5.x)"
+argument-hint: "<provider> <version> [depth=exhaustive] [iterations=5] (e.g. aws 5.x depth=deep iterations=3)"
 context: fork
 agent: framework-researcher
 disable-model-invocation: true
 ---
+
 # INPUT VARIABLES
 - `CLOUD_PROVIDER`: [e.g., "AWS", "Google Cloud", "Azure"]
 - `SERVICE_NAME`: [e.g., "S3", "RDS", "EC2", "CloudFront"]
@@ -15,6 +16,8 @@ disable-model-invocation: true
 - `INTEGRATION_PARTNERS_LIST`: [e.g., "VPC, Security Groups, IAM, Secrets Manager, CloudWatch"]
 - `USE_MODULES`: [yes/no - module-based approach]
 - `USE_WORKSPACES`: [yes/no - multi-environment support]
+- `RESEARCH_DEPTH`: research strategy — `quick` | `standard` | `deep` | `exhaustive` (default: **exhaustive**)
+- `MAX_ITERATIONS`: gap-filling loop limit — any positive integer (default: **5**; ignored when depth=quick)
 
 ---
 
@@ -29,6 +32,7 @@ disable-model-invocation: true
 - **[Testing Patterns](./blueprints/terraform-testing-patterns.md)** — fmt/validate/tfsec/terratest examples
 - **[Production Readiness](./blueprints/terraform-production-readiness.md)** — DR, cost, monitoring, upgrade strategy
 - **[Evaluation Scenarios](./blueprints/evaluation-scenarios.md)** — 4 scenarios: canonical research, edge case, misuse, anti-pattern trap
+- **[Verification Loop](./blueprints/verification-loop.md)** — Gap-filling loop and post-research checklist
 - **[Research Scope Formats](./blueprints/research-scope-formats.md)** — format templates for ✅/⚠️/🚫 three-tier guardrails (§3)
 - **[External Resources](#external-resources)** — Registry, provider docs, and tooling this skill relies on
 
@@ -54,6 +58,7 @@ disable-model-invocation: true
 - Single environment (local state) vs. multi-environment (workspaces)
 - Data source vs. external API dependency
 - Resource import vs. resource creation
+- **Research depth** — if the user does not specify `depth=`, ask whether they need quick validation, standard coverage, deep analysis, or exhaustive research before starting
 
 ### 🚫 Never Do — Summary
 - Hardcoded secrets/credentials in code
@@ -342,7 +347,9 @@ Source: [AWS + TF best practices docs]
 
 # Output Format
 
-The output document follows a template with **Metadata**, **Executive Summary**, and **Architectural Guardrails** (✅/⚠️/🚫) with code examples. Full template and examples in [Output Template](./blueprints/terraform-output-template.md).
+The output document follows a template with **Metadata**, **Executive Summary**, and **Architectural Guardrails** (✅/⚠️/🚫) with code examples. Full template and examples in [Output Template](./blueprints/terraform-output-template.md#output-format).
+
+> **MANDATORY OUTPUT FORMAT:** Always produce the final deliverable using the exact structure defined in [Output Template](./blueprints/terraform-output-template.md#output-format). Never skip, reorder, or abbreviate any section.
 ## State Management (patterns)
 
 Local (dev) vs. remote production (S3 + DynamoDB, versioning, encryption) and sensitive state handling. Examples in [State Patterns](./blueprints/terraform-state-patterns.md).
@@ -429,30 +436,7 @@ above for the full pattern list.
 
 ## Verification Loop
 
-Before finalizing research, confirm:
-1. All HCL code examples are syntactically valid (run `terraform validate`)
-2. All `.tf` files format-checked (`terraform fmt`)
-3. All security anti-patterns include ❌ wrong / ✅ correct HCL side-by-side
-4. All links tested (no 404s, actual documents)
-5. `{{TERRAFORM_VERSION}}` and `{{PROVIDER_VERSION}}` explicitly confirmed in examples
-6. tfsec scan shows no critical findings on example code
-7. CLI command blocks carry `# Representative — adapt to your environment`
-8. Integration examples use variables, not hardcoded values
-
-```bash
-# Confirm mandatory output sections are present
-grep -E "^## (Mandatory_Patterns|Conditional_Patterns|Forbidden_Patterns|Version_Context|Verification_Commands)" \
-  research_Terraform_*.md
-# Expected: section headers appear in the research output file
-
-# Confirm every Never-Do entry has a correct alternative
-grep -c "✅ Correct" research_Terraform_*.md
-# Expected: count equals or exceeds the number of anti-pattern entries
-
-# Confirm version string appears throughout (not only in header)
-grep -c "{{TERRAFORM_VERSION}}\|v1\.[0-9]" research_Terraform_*.md
-# Expected: multiple matches distributed across sections
-```
+See **[blueprints/verification-loop.md](./blueprints/verification-loop.md)** — gap-filling loop (iterative, capped at `MAX_ITERATIONS`) and post-research checklist.
 
 ---
 

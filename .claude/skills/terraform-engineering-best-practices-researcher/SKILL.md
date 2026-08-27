@@ -1,11 +1,12 @@
 ﻿---
 name: terraform-engineering-best-practices-researcher
 description: Researches Terraform engineering best practices (project layout, module design, CI/CD, testing, governance) into a source-backed knowledge base. Use when researching Terraform engineering practices for a skill or rules.
-argument-hint: "<topic> (e.g. module-design, CI/CD, testing)"
+argument-hint: "<topic> [depth=exhaustive] [iterations=5] (e.g. module-design depth=deep iterations=3)"
 context: fork
 agent: framework-researcher
 disable-model-invocation: true
 ---
+
 # INPUT VARIABLES
 - `TERRAFORM_VERSION`: [e.g., "1.8", "1.9", "1.10"]
 - `CLOUD_PROVIDER`: [e.g., "AWS", "OCI", "Azure", "GCP", "Multi-Cloud"]
@@ -15,6 +16,8 @@ disable-model-invocation: true
 - `TOOLING_PREFERENCES`: [optional — e.g., "Terragrunt", "Terraform Stacks", "Terraform Cloud", "Spacelift", "Atlantis", "GitHub Actions", "GitLab CI"]
 - `COMPLIANCE_REQUIREMENTS`: [optional — e.g., "SOC2", "HIPAA", "PCI-DSS", "LGPD", "internal-policy-only"]
 - `OFFICIAL_URL_IF_KNOWN`: [optional — e.g., "https://developer.hashicorp.com/terraform"]
+- `RESEARCH_DEPTH`: research strategy — `quick` | `standard` | `deep` | `exhaustive` (default: **exhaustive**)
+- `MAX_ITERATIONS`: gap-filling loop limit — any positive integer (default: **5**; ignored when depth=quick)
 
 ---
 
@@ -27,6 +30,7 @@ disable-model-invocation: true
 - **[Quality, Advanced & Governance](./blueprints/research-scope-quality-advanced-governance.md)** — Naming, DRY, multi-account, change control, compliance
 - **[Output Template](./blueprints/output-format.md)** — Full research document structure
 - **[Evaluation Scenarios](./blueprints/evaluation-scenarios.md)** — 4 scenarios: canonical, edge case, misuse, anti-pattern trap
+- **[Verification Loop](#verification-loop)** — Gap-filling loop and post-research checklist
 - **[External Resources](#external-resources)** — Official documentation this skill relies on
 
 ---
@@ -54,6 +58,7 @@ disable-model-invocation: true
 - Module granularity (resource-level vs. stack-level)
 - Remote state references vs. data sources for cross-stack
 - `count` vs. `for_each` for conditional resources
+- **Research depth** — if the user does not specify `depth=`, ask whether they need quick validation, standard coverage, deep analysis, or exhaustive research before starting
 
 ### 🚫 Never Do — Summary
 - Hardcoded credentials in `.tf` files
@@ -123,7 +128,7 @@ Pipeline architecture and security, tooling, testing pyramid, native test framew
 Naming, DRY, code review; multi-account/scale/refactoring; change control, compliance-as-code, and documentation. Details in [Quality, Advanced & Governance](./blueprints/research-scope-quality-advanced-governance.md).
 ## Three-Tier Operational Guardrails Summary
 
-## ✅ Always Do: Mandatory Patterns
+### ✅ Always Do: Mandatory Patterns
 Non-negotiable practices regardless of scale:
 - Pin Terraform and provider versions
 - Use remote state with locking and encryption
@@ -136,7 +141,7 @@ Non-negotiable practices regardless of scale:
 - Use `prevent_destroy` lifecycle for critical resources
 - Document module interfaces (variables, outputs, README)
 
-## ⚠️ Ask First: Architectural Crossroads
+### ⚠️ Ask First: Architectural Crossroads
 Valid patterns where choice depends on context:
 - Monorepo vs. polyrepo vs. hybrid
 - Workspaces vs. directory-per-env vs. Terragrunt
@@ -158,7 +163,7 @@ Agent: "Ask user: [specific decision question]"
 Source: [Link]
 ```
 
-## 🚫 Never Do: Forbidden Patterns
+### 🚫 Never Do: Forbidden Patterns
 Anti-patterns that cause state corruption, security breaches, or operational failures:
 - Hardcoded credentials in `.tf` files
 - Local state in shared/team environments
@@ -193,7 +198,9 @@ Source: [Link]
 
 # Output Format
 
-Output template (Metadata, Executive Summary, per-area sections, and Architectural Guardrails). Full structure in [Output Template](./blueprints/output-format.md).
+Output template (Metadata, Executive Summary, per-area sections, and Architectural Guardrails). Full structure in [Output Template](./blueprints/output-format.md#output-format).
+
+> **MANDATORY OUTPUT FORMAT:** Always produce the final deliverable using the exact structure defined in [Output Template](./blueprints/output-format.md#output-format). Never skip, reorder, or abbreviate any section.
 ## Reference Implementations
 - [Official HashiCorp examples with URLs]
 - [Community reference architectures (Cloud Posse, Gruntwork)]
@@ -242,15 +249,25 @@ Follow-up: [Where to verify]
 
 ## Verification Loop
 
-Before finalizing:
-1. Directory structures are complete and consistent
-2. Module examples follow Registry standards
-3. CI/CD pipelines are syntactically valid
-4. All HCL examples pass `terraform fmt` conventions
-5. Every Never Do entry has ❌ wrong / ✅ correct side-by-side (not prose only)
-6. Anti-patterns include severity ratings
-7. Recommendations are proportional to `{{TEAM_SIZE}}` and `{{PROJECT_SCALE}}`
-8. All sources are dated and version-specific to v`{{TERRAFORM_VERSION}}`
+### Gap-Filling Loop (repeat up to `MAX_ITERATIONS` times, skip when `depth=quick`)
+
+1. Run the checklist below.
+2. List every item that fails or is incomplete — these are **gaps**.
+3. If gaps exist and iterations remain: research the missing items, fill them in the output, decrement iteration counter, repeat from step 1.
+4. If no gaps remain or `MAX_ITERATIONS` is reached: proceed to output.
+
+### Checklist
+
+```
+[ ] Directory structures are complete and consistent
+[ ] Module examples follow Registry standards
+[ ] CI/CD pipelines are syntactically valid
+[ ] All HCL examples pass `terraform fmt` conventions
+[ ] Every Never Do entry has ❌ wrong / ✅ correct side-by-side (not prose only)
+[ ] Anti-patterns include severity ratings
+[ ] Recommendations are proportional to {{TEAM_SIZE}} and {{PROJECT_SCALE}}
+[ ] All sources are dated and version-specific to v{{TERRAFORM_VERSION}}
+```
 
 ```bash
 # Confirm mandatory output sections are present

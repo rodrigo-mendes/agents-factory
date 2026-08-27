@@ -224,6 +224,8 @@ Group findings by the **same underlying issue**. Example (a command missing
 
 ### Step 6: Generate the Unified Report
 
+> **MANDATORY OUTPUT FORMAT:** Always produce the final deliverable using the exact structure below. Never skip, reorder, or abbreviate any section.
+
 **Output filename**: `CC_ARCHITECTURE_MULTI_MODEL_REPORT.md`
 
 The report must contain all 8 sections, with consensus findings before lower-priority ones:

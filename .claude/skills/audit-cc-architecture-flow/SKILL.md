@@ -254,6 +254,8 @@ Score scale:
 
 ### Step 6: Generate the Report
 
+> **MANDATORY OUTPUT FORMAT:** Always produce the final deliverable using the exact structure below. Never skip, reorder, or abbreviate any section.
+
 **Output filename**: `CC_INVOCATION_FLOW_AUDIT_REPORT.md`
 
 The report must contain all 8 sections: Executive Summary, Entry Point Registry, Invocation Chain

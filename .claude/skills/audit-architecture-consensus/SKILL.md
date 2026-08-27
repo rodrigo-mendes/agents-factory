@@ -214,6 +214,8 @@ Group findings by the **same underlying issue**:
 
 ### Step 6: Generate the Unified Report
 
+> **MANDATORY OUTPUT FORMAT:** Always produce the final deliverable using the exact structure below. Never skip, reorder, or abbreviate any section.
+
 **Output filename**: `AGENT_ARCHITECTURE_MULTI_MODEL_REPORT.md`
 
 The report must contain all 8 sections: Executive Summary (with Score Comparison table), Consensus Findings (3/3 MUST FIX), Two-Model Findings (2/3 SHOULD FIX), Single-Model Findings (1/3 CONSIDER), Per-Model Detailed Results, Unified Remediation Roadmap, Model Effectiveness Analysis, and Conclusion. Every section must be fully written; consensus findings (Section 2) must appear before lower-priority findings.

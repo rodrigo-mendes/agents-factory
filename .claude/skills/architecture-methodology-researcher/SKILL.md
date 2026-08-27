@@ -1,7 +1,7 @@
 ---
 name: architecture-methodology-researcher
 description: Researches an architecture methodology or notation (C4, UML, ADR, TOGAF, DDD, EDA) into a hallucination-proof knowledge base. Use when researching an architecture methodology to author an architecture skill.
-argument-hint: "<methodology> (e.g. C4, TOGAF, DDD, EDA)"
+argument-hint: "<methodology> [depth=exhaustive] [iterations=5] (e.g. C4 depth=deep iterations=3)"
 context: fork
 agent: framework-researcher
 disable-model-invocation: true
@@ -17,6 +17,8 @@ disable-model-invocation: true
 - `ABSTRACTION_LEVEL`: [e.g., "System Context (C4-L1)", "Container (C4-L2)", "Component (C4-L3)", "Cross-cutting / Enterprise View"]
 - `PRIMARY_AUDIENCE`: [e.g., "Architects and Tech Leads"] — pre-filled based on skill configuration
 - `OFFICIAL_SOURCE_IF_KNOWN`: [optional — e.g., "https://c4model.com", "https://adr.github.io", "https://www.opengroup.org/togaf"]
+- `RESEARCH_DEPTH`: research strategy — `quick` | `standard` | `deep` | `exhaustive` (default: **exhaustive**)
+- `MAX_ITERATIONS`: gap-filling loop limit — any positive integer (default: **5**; ignored when depth=quick)
 
 ---
 
@@ -46,6 +48,7 @@ disable-model-invocation: true
 - **Abstraction scope ambiguity** — if `{{ARCHITECTURE_CONTEXT}}` spans multiple C4 levels or the user hasn't stated which abstraction level to focus on, ask before scoping research to a specific level.
 - **Multiple methodology combinations** — if the user's context mixes methodologies (e.g., C4 + TOGAF), ask which is the primary notation and which is supplemental before researching cross-methodology patterns.
 - **Governance requirements** — if the `{{ARCHITECTURE_CONTEXT}}` mentions enterprise, regulated, or compliance-driven environments, ask before including governance-specific ADR and diagram approval patterns that may not apply to all teams.
+- **Research depth** — if the user does not specify `depth=`, ask whether they need quick validation, standard coverage, deep analysis, or exhaustive research before starting.
 
 ### 🚫 Never Do
 
@@ -167,7 +170,9 @@ See [Research Scope Detail — Scope 6](./blueprints/research-scope.md) for per-
 
 ## Output Format
 
-For the complete output file structure (all section templates), see [Output Format](./blueprints/output-format.md).
+For the complete output file structure (all section templates), see [Output Format](./blueprints/output-format.md#metadata).
+
+> **MANDATORY OUTPUT FORMAT:** Always produce the final deliverable using the exact structure defined in [Output Format](./blueprints/output-format.md#metadata). Never skip, reorder, or abbreviate any section.
 
 Save as `research_{{METHODOLOGY_OR_NOTATION_NAME}}_{{TARGET_VERSION_OR_EDITION}}.md`
 
@@ -182,6 +187,13 @@ Save as `research_{{METHODOLOGY_OR_NOTATION_NAME}}_{{TARGET_VERSION_OR_EDITION}}
 ---
 
 ## Verification Loop
+
+### Gap-Filling Loop (repeat up to `MAX_ITERATIONS` times, skip when `depth=quick`)
+
+1. Run the checklist below.
+2. List every item that fails or is incomplete — these are **gaps**.
+3. If gaps exist and iterations remain: research the missing items, fill them in the output, decrement iteration counter, repeat from step 1.
+4. If no gaps remain or `MAX_ITERATIONS` is reached: proceed to output.
 
 The agent MUST run this checklist before finalizing any research output.
 

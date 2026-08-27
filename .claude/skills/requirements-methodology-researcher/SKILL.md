@@ -1,7 +1,7 @@
 ---
 name: requirements-methodology-researcher
 description: Researches agile/product requirements methodologies (user stories, requirement artifacts) into a source-backed knowledge base. Use when researching requirements practices for a skill.
-argument-hint: "<methodology> (e.g. user-stories, BDD)"
+argument-hint: "<methodology> [depth=exhaustive] [iterations=5] (e.g. user-stories depth=deep iterations=3)"
 context: fork
 agent: framework-researcher
 disable-model-invocation: true
@@ -15,6 +15,8 @@ disable-model-invocation: true
 - `TEAM_CONTEXT`: [e.g., "5-person product team building B2B SaaS", "scaled org with 3 squads under SAFe", "startup pre-product-market fit", "regulated healthcare product team"]
 - `OFFICIAL_SOURCE_IF_KNOWN`: [optional — e.g., "https://scrumguides.org", "https://scaledagileframework.com", "https://basecamp.com/shapeup"]
 - `INTEGRATION_TOOLS_LIST`: [e.g., "Jira, Confluence, Cucumber/Gherkin, GitHub Issues, Miro"]
+- `RESEARCH_DEPTH`: research strategy — `quick` | `standard` | `deep` | `exhaustive` (default: **exhaustive**)
+- `MAX_ITERATIONS`: gap-filling loop limit — any positive integer (default: **5**; ignored when depth=quick)
 
 ---
 
@@ -44,6 +46,7 @@ disable-model-invocation: true
 - **Scale ambiguity** — if `{{TEAM_CONTEXT}}` suggests both team-level and portfolio-level practices may apply (e.g., SAFe with multiple squads), confirm which level is the primary focus before scoping research.
 - **Multiple frameworks in scope** — if the user's context mixes practices from different frameworks (e.g., Scrum + Shape Up), ask which takes precedence before researching cross-framework patterns.
 - **Compliance or regulatory context** — if the `{{TEAM_CONTEXT}}` mentions regulated domains (healthcare, finance), ask before adding compliance-specific artifact requirements that may not apply to all teams.
+- **Research depth** — if the user does not specify `depth=`, ask whether they need quick validation, standard coverage, deep analysis, or exhaustive research before starting.
 
 ### 🚫 Never Do
 
@@ -151,7 +154,9 @@ Standard User Story, Spike Story, Story Too Large, and Missing Acceptance Criter
 
 ## Output Format
 
-For the complete output file structure (all section templates), see [Output Format](./blueprints/output-format.md).
+For the complete output file structure (all section templates), see [Output Format](./blueprints/output-format.md#metadata).
+
+> **MANDATORY OUTPUT FORMAT:** Always produce the final deliverable using the exact structure defined in [Output Format](./blueprints/output-format.md#metadata). Never skip, reorder, or abbreviate any section.
 
 Save as `research_{{FRAMEWORK_NAME}}_{{PRACTICE_OR_ARTIFACT_TYPE}}_{{FRAMEWORK_EDITION}}.md`
 
@@ -166,6 +171,13 @@ Save as `research_{{FRAMEWORK_NAME}}_{{PRACTICE_OR_ARTIFACT_TYPE}}_{{FRAMEWORK_E
 ---
 
 ## Verification Loop
+
+### Gap-Filling Loop (repeat up to `MAX_ITERATIONS` times, skip when `depth=quick`)
+
+1. Run the checklist below.
+2. List every item that fails or is incomplete — these are **gaps**.
+3. If gaps exist and iterations remain: research the missing items, fill them in the output, decrement iteration counter, repeat from step 1.
+4. If no gaps remain or `MAX_ITERATIONS` is reached: proceed to output.
 
 The agent MUST run this checklist before finalizing any research output.
 

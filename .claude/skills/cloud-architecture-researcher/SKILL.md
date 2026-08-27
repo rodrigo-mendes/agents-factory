@@ -1,7 +1,7 @@
 ﻿---
 name: cloud-architecture-researcher
 description: Researches a cloud provider's architecture framework/patterns (AWS WAF, Azure CAF, GCP, OCI) into a hallucination-proof, version-absolute knowledge base. Use when researching cloud architecture best practices for a skill.
-argument-hint: "<cloud-provider> (e.g. AWS, Azure, GCP, OCI)"
+argument-hint: "<cloud-provider> [depth=exhaustive] [iterations=5] (e.g. AWS depth=deep iterations=3)"
 context: fork
 agent: framework-researcher
 disable-model-invocation: true
@@ -18,6 +18,8 @@ disable-model-invocation: true
 - `ARCHITECTURE_CONTEXT`: [e.g., "B2B SaaS with multi-tenant requirements", "real-time IoT platform", "financial services with regulatory constraints", "e-commerce with global distribution"]
 - `PRIMARY_AUDIENCE`: [e.g., "Cloud Architects and Tech Leads"] — pre-filled based on skill configuration
 - `OFFICIAL_SOURCE_IF_KNOWN`: [optional — e.g., "https://docs.aws.amazon.com/wellarchitected/", "https://cloud.google.com/architecture/framework", "https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/", "https://docs.oracle.com/en-us/iaas/Content/cloud-adoption-framework/"]
+- `RESEARCH_DEPTH`: research strategy — `quick` | `standard` | `deep` | `exhaustive` (default: **exhaustive**)
+- `MAX_ITERATIONS`: gap-filling loop limit — any positive integer (default: **5**; ignored when depth=quick)
 
 ---
 
@@ -48,6 +50,7 @@ disable-model-invocation: true
 - **Compliance-specific requirements** — SOC2, HIPAA, PCI-DSS, GDPR patterns depend on the organization's certification scope. Surface the requirement and ask before adding compliance-specific architecture constraints.
 - **Cost optimization decisions** — pricing guidance tied to billing agreements, reserved instances, or committed use discounts is organization-specific. Ask before adding cost prescriptions beyond general optimization patterns.
 - **Scope of Never-Do section** — if the provider framework classifies a pattern as "discouraged" but not explicitly forbidden, ask whether to include it under Never-Do or Ask-First.
+- **Research depth** — if the user does not specify `depth=`, ask whether they need quick validation, standard coverage, deep analysis, or exhaustive research before starting.
 
 ### 🚫 Never Do
 
@@ -246,13 +249,22 @@ Cloud-native design, security, operations, migration, networking, landing zones,
 
 # Output Format
 
-Output template (Metadata, Executive Summary, Glossary, Architecture Guardrails, design patterns, reference architectures, service map, differentiators, scenario coverage). Full structure in [Output Template](./blueprints/output-format.md).
+Output template (Metadata, Executive Summary, Glossary, Architecture Guardrails, design patterns, reference architectures, service map, differentiators, scenario coverage). Full structure in [Output Template](./blueprints/output-format.md#output-format).
+
+> **MANDATORY OUTPUT FORMAT:** Always produce the final deliverable using the exact structure defined in [Output Template](./blueprints/output-format.md#output-format). Never skip, reorder, or abbreviate any section.
 
 ---
 
 ## Verification Loop
 
-Run this checklist before finalizing any research output.
+### Gap-Filling Loop (repeat up to `MAX_ITERATIONS` times, skip when `depth=quick`)
+
+1. Run the checklist below.
+2. List every item that fails or is incomplete — these are **gaps**.
+3. If gaps exist and iterations remain: research the missing items, fill them in the output, decrement iteration counter, repeat from step 1.
+4. If no gaps remain or `MAX_ITERATIONS` is reached: proceed to output.
+
+### Checklist
 
 ```
 [ ] TARGET_EDITION explicitly stated in output metadata and in every major section

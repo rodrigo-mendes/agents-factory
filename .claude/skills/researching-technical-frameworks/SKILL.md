@@ -280,7 +280,9 @@ Source: [Dated link]
 
 ## Output Format
 
-Full document structure, section order, field definitions, Completion Checklist, and Research Gaps format are in **[Output Format Template](./blueprints/output-format-template.md)**.
+Full document structure, section order, field definitions, Completion Checklist, and Research Gaps format are in **[Output Format Template](./blueprints/output-format-template.md#metadata)**.
+
+> **MANDATORY OUTPUT FORMAT:** Always produce the final deliverable using the exact structure defined in [Output Format Template](./blueprints/output-format-template.md#metadata). Never skip, reorder, or abbreviate any section.
 
 Save as `research_{{SYSTEM_OR_TECH_NAME}}_v{{TARGET_VERSION}}.md`.
 

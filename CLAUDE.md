@@ -35,9 +35,11 @@ Operational commands fork (`context: fork`) to a subagent. The 5 subagents live 
 |---|---|---|
 | [framework-researcher](.claude/agents/framework-researcher.md) | anti-hallucination research (uses WebSearch/WebFetch) | `researching-technical-frameworks`, `technical-framework-researcher-terraform`, `cloud-architecture-researcher`, `business-domain-researcher`, `requirements-methodology-researcher`, `architecture-methodology-researcher`, `terraform-engineering-best-practices-researcher` |
 | [skill-author](.claude/agents/skill-author.md) | generates SKILL.md / rules | `skill-creator`, `methodologies-skill-generator`, `architecture-approaches-skill-generator`, `terraform-instructions-compiler` |
-| [architecture-auditor](.claude/agents/architecture-auditor.md) | audits architecture (consensus = 3 lenses in parallel via Agent tool) | `audit-architecture-scope`/`flow`/`engine`/`consensus` (Copilot target) · `audit-cc-architecture-scope`/`flow`/`engine`/`consensus` (Claude Code target) |
+| [architecture-auditor](.claude/agents/architecture-auditor.md) | audits architecture (consensus = 3 lenses in parallel via Agent tool) | `audit-architecture-scope`, `audit-architecture-flow`, `audit-architecture-engine`, `audit-architecture-consensus` (Copilot); `audit-cc-architecture-scope`, `audit-cc-architecture-flow`, `audit-cc-architecture-engine`, `audit-cc-architecture-consensus` (Claude Code) |
 | [quality-validator](.claude/agents/quality-validator.md) | validates quality/adherence | `skill-best-practices-validator`, `instructions-best-practices-validator`, `agent-router-pattern-validator`, `copilot-compatibility-review`, `project-analysis-validator` |
 | [skill-evaluator](.claude/agents/skill-evaluator.md) | evaluates skill behavior via LLM-as-judge (runs evaluation-scenarios.md and verifies real responses) | `evaluating-skill-scenarios` |
+
+**Fallback (no matching command):** If a request does not match any `/command` listed above, respond with the closest matching command and its description. Do not attempt to fulfill the request inline — route or decline.
 
 ## How to run (no build step)
 
@@ -61,10 +63,10 @@ with no auto-listing cost.
 .claude/
 ├── agents/     ← 5 subagents (framework-researcher, skill-author, architecture-auditor, quality-validator, skill-evaluator)
 ├── skills/     ← 25 operational commands (fork → subagent)
-├── rules/      ← rules by path (paths:) + templates
+├── rules/      ← rules by path (paths:)
 ├── templates/  ← scaffolding: agents/, skills/, rules/, prompts/, reports/
 ├── MIGRATION.md ← migration history Copilot → Claude Code
-├── worktrees/  ← temporary Git worktrees (auto-generated; do not edit)
+├── worktrees/  ← temporary Git worktrees (auto-generated; do not edit) [created on demand]
 └── settings.json
 docs/
 ├── capacidades/  ← skills/commands catalog

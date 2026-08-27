@@ -141,6 +141,8 @@ Evaluate which instruction files are needed based on answers:
 
 #### 3.2 — Present Plan to User
 
+> **MANDATORY OUTPUT FORMAT:** Always produce the final deliverable using the exact structure below. Never skip, reorder, or abbreviate any section.
+
 Present the plan in this format:
 
 ```
@@ -210,6 +212,9 @@ After generating all files, validate each instruction file:
 - [ ] Cloud provider specifics match {{CLOUD_PROVIDER}} throughout
 
 #### 5.3 — Coverage Matrix
+
+> **MANDATORY OUTPUT FORMAT:** Always produce the final deliverable using the exact structure below. Never skip, reorder, or abbreviate any section.
+
 Present a final coverage matrix to the user:
 
 ```

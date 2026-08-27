@@ -226,7 +226,7 @@ The SKILL.md must satisfy these non-negotiable requirements:
 - **`## External Resources` section is present** with dated official links
 - **A Verification Loop section is present** with concrete self-check steps
 
-Template reference: [Generated SKILL Structure](./blueprints/generated-skill-structure.md)
+**Mandatory template:** Always use [Generated SKILL Structure](./blueprints/generated-skill-structure.md) as the authoritative scaffold — do not deviate from its section order or omit any section.
 
 ---
 
@@ -279,6 +279,8 @@ USABILITY
 ---
 
 ## PHASE 5 — OUTPUT INSTRUCTION
+
+> **MANDATORY OUTPUT STRUCTURE:** Always generate the artifact using the exact structure below. Never skip, reorder, or abbreviate any section.
 
 Produce the following output, in this order:
 
