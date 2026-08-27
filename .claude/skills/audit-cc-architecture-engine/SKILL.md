@@ -215,6 +215,8 @@ Score scale:
 
 ### Step 8: Generate the Report
 
+> **MANDATORY OUTPUT FORMAT:** Always produce the final deliverable using the exact structure below. Never skip, reorder, or abbreviate any section.
+
 **Output filename**: `CC_ENGINE_MECHANICS_AUDIT_REPORT.md`
 
 The report must contain all 8 sections: Executive Summary, Loading Landscape, Budget Simulation,

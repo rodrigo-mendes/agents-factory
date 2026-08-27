@@ -211,6 +211,8 @@ Content checklist (manual before saving):
 
 ## Output Format
 
+> **MANDATORY OUTPUT FORMAT:** Always produce the final deliverable using the exact structure below. Never skip, reorder, or abbreviate any section.
+
 Report saved to `.claude/project-analysis-report.md`:
 
 ```markdown

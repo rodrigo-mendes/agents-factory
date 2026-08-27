@@ -15,7 +15,7 @@ Generate a quality and best-practices adherence analysis of Agent Skills based o
 
 ## Quick Navigation
 
-- **[Output Templates](./blueprints/output-templates.md)** — individual review + consolidated summary templates
+- **[Output Templates](./blueprints/output-templates.md#per-skill-review-file)** — individual review + consolidated summary templates
 - **[Evaluation Scenarios](./blueprints/evaluation-scenarios.md)** — 3 scenarios: canonical, edge, misuse
 - **[Execution Instructions](#execution-instructions)** — 3-step workflow
 - **[Evaluation Criteria](#evaluation-criteria)** — A1–A6, B, C (official) + D1–D7 (team)
@@ -177,7 +177,7 @@ skill against the criteria below.
 ### Step 3: Generate Validation Files
 
 Generate **two artifacts** following the exact templates in
-**[blueprints/output-templates.md](./blueprints/output-templates.md)**:
+**[blueprints/output-templates.md](./blueprints/output-templates.md#per-skill-review-file)**:
 
 1. **One individual file per skill** —
    `.claude/skills/[skill-name]/[skill-name]-best-practices-review.md`

@@ -28,7 +28,7 @@ remediation.**
 ## Quick Navigation
 
 - **[Architecture Contract](./blueprints/cc-architecture-contract.md)** — G0→G4 scope hierarchy, Responsibility Matrix, field/frontmatter contract (evaluation baseline)
-- **[Report Template](./blueprints/report-template.md)** — Full output structure: Executive Summary, Dependency Graph, Per-Layer Analysis, Cross-Layer Validation, Violations, Remediation Plan, Conclusion
+- **[Report Template](./blueprints/report-template.md#1-executive-summary)** — Full output structure: Executive Summary, Dependency Graph, Per-Layer Analysis, Cross-Layer Validation, Violations, Remediation Plan, Conclusion
 - **[Evaluation Scenarios](./blueprints/evaluation-scenarios.md)** — 4 scenarios: canonical audit, minimal architecture, misuse guard, keyword misalignment
 - **[Verification Loop](#verification-loop)** — Post-report checklist to confirm the output file is complete and well-formed
 - **[Guardrails & Behavior](#-always-do)** — Mandatory rules, escalation triggers, prohibited actions
@@ -287,7 +287,7 @@ or abbreviate — write every section in full.
 
 The report must cover: Executive Summary, File Inventory & Dependency Graph, Per-Layer Analysis,
 Cross-Layer Validation, Violations, Remediation Plan, Recommendations, and Conclusion. The full section
-structure and example content are in [Report Template](./blueprints/report-template.md).
+structure and example content are in [Report Template](./blueprints/report-template.md#1-executive-summary).
 
 ---
 

@@ -1,7 +1,7 @@
 ---
 name: business-domain-researcher
 description: Researches a business domain and its organizational processes into a structured, source-backed knowledge base. Use when researching a business/organizational domain to author a domain skill.
-argument-hint: "<business-domain> (e.g. supply-chain, fintech)"
+argument-hint: "<business-domain> [depth=exhaustive] [iterations=5] (e.g. supply-chain depth=deep iterations=3)"
 context: fork
 agent: framework-researcher
 disable-model-invocation: true
@@ -13,6 +13,8 @@ disable-model-invocation: true
 - `ORGANIZATIONAL_CONTEXT`: [e.g., "Brazilian Fintech startup with 80 employees", "B2B SaaS company operating in the EU", "Healthcare operator under ANVISA regulation"]
 - `REGULATORY_BODY_URL_IF_KNOWN`: [optional, e.g., "https://www.bcb.gov.br", "https://www.cvm.gov.br", "https://gdpr.eu"]
 - `STAKEHOLDER_SYSTEMS_LIST`: [e.g., "Legal, Finance, CRM (Salesforce), Helpdesk (Zendesk), HRIS (Workday)"]
+- `RESEARCH_DEPTH`: research strategy — `quick` | `standard` | `deep` | `exhaustive` (default: **exhaustive**)
+- `MAX_ITERATIONS`: gap-filling loop limit — any positive integer (default: **5**; ignored when depth=quick)
 
 ---
 
@@ -41,6 +43,7 @@ disable-model-invocation: true
 - Cases involving ambiguous customer intent or conflicting stakeholder needs
 - Situations not covered by existing policy (novel cases)
 - Actions requiring cross-functional approval (Legal, Finance, Leadership)
+- **Research depth** — if the user does not specify `depth=`, ask whether they need quick validation, standard coverage, deep analysis, or exhaustive research before starting
 
 ### 🚫 Never Do — Summary
 - Autonomous financial commitment without human authorization
@@ -152,7 +155,9 @@ Exact verification steps for Interaction Initiation, In-Process Compliance, Inte
 
 ## Output Format
 
-For the complete output file structure (all section templates), see [Output Format](./blueprints/output-format.md).
+For the complete output file structure (all section templates), see [Output Format](./blueprints/output-format.md#domain-context).
+
+> **MANDATORY OUTPUT FORMAT:** Always produce the final deliverable using the exact structure defined in [Output Format](./blueprints/output-format.md#domain-context). Never skip, reorder, or abbreviate any section.
 
 Save as `research_{{DOMAIN_OR_FUNCTION_NAME}}_{{ORGANIZATIONAL_CONTEXT}}.md`
 
@@ -167,6 +172,13 @@ Save as `research_{{DOMAIN_OR_FUNCTION_NAME}}_{{ORGANIZATIONAL_CONTEXT}}.md`
 ---
 
 ## Verification Loop
+
+### Gap-Filling Loop (repeat up to `MAX_ITERATIONS` times, skip when `depth=quick`)
+
+1. Run the checklist below.
+2. List every item that fails or is incomplete — these are **gaps**.
+3. If gaps exist and iterations remain: research the missing items, fill them in the output, decrement iteration counter, repeat from step 1.
+4. If no gaps remain or `MAX_ITERATIONS` is reached: proceed to output.
 
 The agent MUST run this checklist before finalizing any research output. This is a skill-level
 self-check — distinct from the process-verification steps in the output document itself.

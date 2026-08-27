@@ -194,6 +194,8 @@ Detect the layout in use. For Claude Code: enumerate `.claude/rules/*.md`. For C
 
 ### Step 3: Generate Validation Report
 
+> **MANDATORY OUTPUT FORMAT:** Always produce the final deliverable using the exact structure below. Never skip, reorder, or abbreviate any section.
+
 Create a file `INSTRUCTIONS_BEST_PRACTICES_REVIEW.md` with the following structure:
 
 ```markdown

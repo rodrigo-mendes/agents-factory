@@ -122,6 +122,8 @@ Include `## Version Context` (version-specific skills) and `## Verification Loop
 
 ### Skill Template
 
+> **MANDATORY OUTPUT STRUCTURE:** Always generate the artifact using the exact structure below. Never skip, reorder, or abbreviate any section.
+
 Start from [TEMPLATE.SKILL.md](../../templates/skills/TEMPLATE.SKILL.md). Sections provided: Frontmatter, `## Function`, `## Version Context`, `## Quick Navigation`, `## Blueprints & Guardrails` (✅⚠️🚫), `## Integration Patterns`, `## Verification Loop`, `## Quick Reference`, `## Blueprints Directory Structure`, `## External Resources`.
 
 ### Common Mistakes

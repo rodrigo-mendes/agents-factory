@@ -186,6 +186,8 @@ The SKILL.md must satisfy these non-negotiable requirements:
 
 ### SKILL.md STRUCTURE
 
+> **MANDATORY OUTPUT STRUCTURE:** Always generate the artifact using the exact structure below. Never skip, reorder, or abbreviate any section.
+
 The generated SKILL.md follows 11 sections: What This Skill Does, When To Use, Methodology Facts,
 Artifact Generation Rules, Three-Tier Guardrails (✅/⚠️/🚫), Flow Metrics (conditional),
 Edition Changes, Integration with Adjacent Methodologies, Scale Boundaries, Confidence Map,

@@ -102,6 +102,8 @@ For each item in `success_criteria.must_not`:
 
 ## Report Format
 
+> **MANDATORY OUTPUT FORMAT:** Always produce the final deliverable using the exact structure below. Never skip, reorder, or abbreviate any section.
+
 Save to: `.claude/skills/{skill-name}/{skill-name}-evaluation-report.md`
 
 ```markdown

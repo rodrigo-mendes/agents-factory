@@ -293,6 +293,8 @@ Score scale:
 
 ### Step 7: Generate the Report
 
+> **MANDATORY OUTPUT FORMAT:** Always produce the final deliverable using the exact structure below. Never skip, reorder, or abbreviate any section.
+
 **Output filename**: `TECHNICAL_MECHANISMS_AUDIT_REPORT.md`
 
 The report must contain all 8 sections: Executive Summary, Injection Landscape, Injection Scenarios (Simulated), Conflict Analysis, Criteria Evaluation, Issues Found, Remediation Plan, and Conclusion. Every section must be fully written — do not abbreviate with "... and so on".

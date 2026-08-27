@@ -125,6 +125,8 @@ For each asset type, verify:
 
 ### Step 3: Generate Compatibility Report
 
+> **MANDATORY OUTPUT FORMAT:** Always produce the final deliverable using the exact structure below. Never skip, reorder, or abbreviate any section.
+
 Create a file `COPILOT_COMPATIBILITY_REVIEW.md` with the following structure:
 
 ```markdown
