@@ -261,11 +261,36 @@ Estimated effort: [X minutes]
 
 Before saving the output file, the validator MUST self-check:
 
-1. **Inventory completeness** — count files listed in the INVENTORY table against files actually read. If any layer has files that were not read, re-read them before finalizing findings.
-2. **Citation audit** — scan every finding in Sections 3 and 4. Any finding that does not cite a specific file name and section header is incomplete — add the citation or remove the finding.
-3. **Score arithmetic** — recompute the weighted overall score manually: `(router_score * 0.40) + (instructions_score * 0.20) + (prompts_score * 0.30) + (skills_score * 0.10)`. Verify the number matches what appears in Section 1.
-4. **Section completeness** — confirm all 8 sections are present and none ends with a placeholder like "[...]" or "TBD".
+1. **Section completeness** — confirm all 10 required sections are present and none ends with a placeholder like "[...]" or "TBD":
+   - `## Section 1: Executive Summary` (with Overall Score table)
+   - `## Section 2: Project Inventory` (with full INVENTORY table)
+   - `## Section 3: Current State Analysis` (with `### 3.1 What is Correct` and `### 3.2 What is Partially Correct`)
+   - `## Section 4: Problems Identified`
+   - `## Section 5: Proposed Changes`
+   - `## Section 6: Proposed Architecture (After Changes)`
+   - `## Section 7: Implementation Roadmap`
+   - `## Section 8: Conclusion`
+   - `## Scoring Scale`
+   - `## Confirmation Message`
+2. **Inventory completeness** — count files listed in the INVENTORY table against files actually read. If any layer has files that were not read, re-read them before finalizing findings.
+3. **Citation audit** — scan every finding in Sections 3 and 4. Any finding that does not cite a specific file name and section header is incomplete — add the citation or remove the finding.
+4. **Score arithmetic** — recompute the weighted overall score manually: `(router_score * 0.40) + (instructions_score * 0.20) + (prompts_score * 0.30) + (skills_score * 0.10)`. Verify the number matches what appears in Section 1.
 5. **Proposed changes coverage** — every problem in Section 4 must have at least one corresponding change in Section 5.
+
+```bash
+# Confirm all required sections are present in the output file
+grep -E "^## (Section 1: Executive Summary|Section 2: Project Inventory|Section 3: Current State Analysis|Section 4: Problems Identified|Section 5: Proposed Changes|Section 6: Proposed Architecture|Section 7: Implementation Roadmap|Section 8: Conclusion|Scoring Scale|Confirmation Message)" \
+  AGENT_ROUTER_PATTERN_REPORT.md
+# Expected: all 10 section headers appear
+
+# Confirm Section 3 subsections are present
+grep -E "^### 3\.[12]" AGENT_ROUTER_PATTERN_REPORT.md
+# Expected: both 3.1 and 3.2 subsections appear
+
+# Confirm score arithmetic field is present
+grep "Overall (weighted)" AGENT_ROUTER_PATTERN_REPORT.md
+# Expected: weighted score row appears in Section 1 table
+```
 
 ---
 

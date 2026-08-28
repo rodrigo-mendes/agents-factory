@@ -71,6 +71,8 @@ Before extracting patterns, assess the domain's inherent complexity:
 
 ## 3. Three-Tier Operational Guardrails
 
+> Confidence legend: 🟢 High (2+ official sources, dated ≤12mo) | 🟡 Medium (1 source or dated 12–24mo) | 🔴 Low (community source or dated >24mo — verify before use)
+
 ### ✅ Always Do: Mandatory Patterns
 Identify all non-negotiable standards the domain requires:
 - Required initialization, security configs, error handling
@@ -84,6 +86,8 @@ Pattern: [Name]
 Why: [Official reason]
 Code: [Minimal example]
 Source: [Link]
+Confidence: [🟢 / 🟡 / 🔴]
+Triangulated: [✓✓ — only if verified via ≥2 independent official sources]
 ```
 
 ### ⚠️ Ask First: Architectural Crossroads
@@ -99,6 +103,7 @@ Options: [A, B, C]
 Tradeoffs: [Each optimizes/sacrifices what]
 When: [Decision factors]
 Source: [Link]
+Confidence: [🟢 / 🟡 / 🔴]
 ```
 
 ### 🚫 Never Do: Forbidden Patterns
@@ -114,6 +119,7 @@ Why: [Security/stability reason]
 Instead: [Correct alternative with code]
 Impact: [What breaks]
 Source: [Link]
+Confidence: [🟢 / 🟡 / 🔴]
 ```
 
 ## 4. Migration Considerations
@@ -171,54 +177,38 @@ Domain_Complexity: [Foundational/Standard/Complex]
 Research_Depth: [quick/standard/deep/exhaustive]
 Max_Iterations: [N]
 Research_Quality_Score: [N%]
+# Research_Quality_Score = (total_claims - unverified - irresolvable) / total_claims * 100
+Gap_Loop_Ran: "[true/false]"
+Iterations_Used: "[N of MAX_ITERATIONS]"
+Triangulated_Count: "[N]"
+Unverified_Count: "[N]"
+Irresolvable_Count: "[N]"
 ```
 
-## Executive Summary
-[2-3 paragraphs: what it does, key changes in version, critical guardrails, domain complexity tier and why]
+> **MANDATORY OUTPUT FORMAT — ASSEMBLY SEQUENCE:**
+> 1. Copy all section headings (skeleton) into the output file **before** populating any content.
+> 2. Populate each section from research findings. Do not deviate from heading names or order.
+> 3. The 15 required sections in order — if any is absent, the output is **incomplete**:
 
-## Architectural Guardrails
+| # | Exact heading | Minimum content |
+|---|---|---|
+| 1 | `## Metadata` | yaml block with all fields including 7 tracking fields |
+| 2 | `## Executive Summary` | 2-3 paragraphs with domain complexity tier |
+| 3 | `## Architectural Guardrails` → `### ✅ Mandatory Patterns` | ≥3 patterns with confidence badge |
+| 4 | `## Architectural Guardrails` → `### ⚠️ Conditional Patterns` | ≥2 decision tables |
+| 5 | `## Architectural Guardrails` → `### 🚫 Forbidden Patterns` | ≥3 anti-patterns with ❌/✅ |
+| 6 | `## Migration Guide` | breaking changes, upgrade steps, compatibility matrix |
+| 7 | `## Implementation Blueprint` | lifecycle example + per-partner integration |
+| 8 | `## Quality Control` | verification commands with expected output |
+| 9 | `## Production Readiness` | perf, scalability, monitoring, security |
+| 10 | `## Reference Implementations` | official examples with URLs |
+| 11 | `## Source Bibliography` | Primary / Validation / All Deep-Links |
+| 12 | `## Completion Checklist` | all items checked |
+| 13 | `## Research Gaps` | Gap/Impact/Workaround/Follow-up per item |
+| 14 | `## Research Iteration Changelog` | one row per gap-loop resolution (omit for depth=quick) |
+| 15 | `## Agent Operation Notes` | High/Medium/Low + Edge Cases + Emergency Stop |
 
-### ✅ Mandatory Patterns
-[Pattern Name]
-- Why: [Reason]
-- Code: ```[language]\n[example]\n```
-- Source: [Link]
-
-### ⚠️ Conditional Patterns
-[Decision Point]
-- Options: [A, B, C]
-- Tradeoffs: table format
-- Agent: "Ask user [decision factors]"
-- Source: [Link]
-
-### 🚫 Forbidden Patterns
-[Anti-Pattern]
-- Why: [Reason]
-- Instead: ```[language]\n[correct code]\n```
-- Impact: [What breaks]
-- Source: [Link]
-
-## Migration Guide
-- Breaking Changes
-- Upgrade Steps (numbered with commands)
-- Compatibility Matrix (table format)
-
-## Implementation Blueprint
-- Lifecycle example (init, usage, cleanup)
-- Integration examples (per partner)
-
-## Quality Control
-- Verification Commands (with expected outputs)
-- Mocking examples
-
-## Production Readiness
-- Performance, Scalability, Monitoring, Security
-
-## Reference Implementations
-- Official examples with URLs
-
-## Source Bibliography
-- Primary, Validation, All Deep-Links
+Full section templates are defined in the skill's `blueprints/output-format-template.md`.
 
 ## Completion Checklist
 - [ ] Domain complexity tier assessed and documented
@@ -230,29 +220,10 @@ Research_Quality_Score: [N%]
 - [ ] Sources dated and linked
 - [ ] Security documented
 - [ ] 1+ copy-paste working example
-
-## Research Gaps
-```
-Gap: [What's missing]
-Impact: [Effect on safety]
-Workaround: [Temporary approach]
-Follow-up: [Where to check]
-```
-
-## §7 — Research Iteration Changelog
-> Mandatory for standard/deep/exhaustive depth.
-
-| Iteration | Section | Item | Action | Source |
-|---|---|---|---|---|
-| 1 | [section] | [claim] | Added / Resolved | [URL] (DATE) |
-| 2 | [section] | [claim] | ⚠️ IRRESOLVABLE — [rationale] | — |
-
-## Agent Operation Notes
-- **High Confidence**: [Can execute without asking]
-- **Medium**: [Should validate]
-- **Low**: [Must ask human]
-- **Edge Cases**: [When to pause]
-- **Emergency Stop**: [Halt conditions]
+- [ ] Confidence badge (🟢/🟡/🔴) applied to every pattern entry
+- [ ] All 🟢 High-Confidence Always-Do patterns triangulated (✓✓) or downgraded to 🟡
+- [ ] Every Research Gap cross-referenced in Research Iteration Changelog
+- [ ] Research Iteration Changelog present and complete (skip for depth=quick)
 
 ---
 
@@ -263,13 +234,54 @@ Follow-up: [Where to check]
 4. 📈 Performance optimization
 5. 🎯 Advanced patterns
 
-# Validation
-Before finalizing:
-1. Code examples syntactically valid
-2. CLI commands specify output/exit codes
-3. Forbidden patterns have alternatives
-4. Links tested (no 404s)
-5. Versions explicitly confirmed
+## Verification Loop
+
+### Gap-Filling Loop (repeat up to `MAX_ITERATIONS` times, skip when `depth=quick`)
+
+1. Run the checklist below.
+2. List every item that fails or is incomplete — these are **gaps**.
+3. If gaps exist and iterations remain: research missing items, fill them in output,
+   decrement iteration counter, repeat from step 1.
+4. If no gaps remain or `MAX_ITERATIONS` is reached: proceed to output.
+
+### Pre-Finalization Checklist
+
+```
+[ ] All 15 required output sections present (see Output Format table above)
+[ ] Architectural Guardrails has all 3 subsections: ✅ Mandatory Patterns, ⚠️ Conditional Patterns, 🚫 Forbidden Patterns
+[ ] Every claim links to official source with date
+[ ] Forbidden patterns have ❌/✅ side-by-side code examples
+[ ] CLI commands include expected output or success criteria
+[ ] All sources dated; >12mo sources flagged with ⚠️ >12mo
+[ ] Confidence badge (🟢/🟡/🔴) applied to every pattern entry
+[ ] Research Iteration Changelog present (skip for depth=quick)
+[ ] Research_Quality_Score calculated and recorded in Metadata
+```
+
+```bash
+# Confirm required top-level sections are present
+grep -E "^## (Executive Summary|Architectural Guardrails|Migration Guide|Implementation Blueprint|Quality Control|Production Readiness|Reference Implementations|Source Bibliography|Completion Checklist|Research Gaps|Research Iteration Changelog|Agent Operation Notes)" \
+  research_*.md
+# Expected: all 12 top-level section headers appear
+
+# Confirm Guardrails subsections
+grep -E "^### (✅ Mandatory Patterns|⚠️ Conditional Patterns|🚫 Forbidden Patterns)" \
+  research_*.md
+# Expected: all 3 subsection headers appear
+
+# Confirm confidence badges are applied
+grep -c "Confidence: 🟢\|Confidence: 🟡\|Confidence: 🔴" research_*.md
+# Expected: count equals or exceeds number of pattern entries
+```
+
+---
+
+## Next Steps
+
+After this research output is complete, create a skill from it:
+```
+/skill-creator [path/to/research_file.md]
+```
 
 ---
 

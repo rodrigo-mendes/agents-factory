@@ -280,9 +280,30 @@ Source: [Dated link]
 
 ## Output Format
 
-Full document structure, section order, field definitions, Completion Checklist, and Research Gaps format are in **[Output Format Template](./blueprints/output-format-template.md#metadata)**.
+Full template: **[Output Format Template](./blueprints/output-format-template.md)**.
 
-> **MANDATORY OUTPUT FORMAT:** Always produce the final deliverable using the exact structure defined in [Output Format Template](./blueprints/output-format-template.md#metadata). Never skip, reorder, or abbreviate any section.
+> **MANDATORY OUTPUT FORMAT — ASSEMBLY SEQUENCE:**
+> 1. Open `./blueprints/output-format-template.md` and copy the skeleton (all section headings, sub-headings, and placeholder markers) into the output file **before** populating content.
+> 2. Populate each section from research findings. Do not deviate from heading names or order.
+> 3. The 13 required sections in order — if any is absent, the output is **incomplete**:
+
+| # | Exact heading | Minimum content |
+|---|---|---|
+| 1 | `## Metadata` | yaml block with version, provider, research date |
+| 2 | `## Executive Summary` | 2–3 paragraphs: what the tech is, what changed in TARGET_VERSION, 3 critical patterns |
+| 3 | `## Architectural Guardrails` → `### ✅ Mandatory Patterns` | ≥3 patterns, each with code example + source URL |
+| 4 | `## Architectural Guardrails` → `### ⚠️ Conditional Patterns` | ≥2 conditional patterns with decision criteria |
+| 5 | `## Architectural Guardrails` → `### 🚫 Forbidden Patterns` | ≥3 anti-patterns with ❌ wrong / ✅ correct side-by-side |
+| 6 | `## Migration Guide` | breaking changes, deprecated APIs, upgrade steps |
+| 7 | `## Implementation Blueprint` | step-by-step setup, version-tagged code samples |
+| 8 | `## Quality Control` | testing approach, linting, type-checking |
+| 9 | `## Production Readiness` | monitoring, error handling, scaling considerations |
+| 10 | `## Reference Implementations` | official + community examples with URLs |
+| 11 | `## Source Bibliography` | all sources with dates |
+| 12 | `## Research Gaps` | unresolved items with follow-up path |
+| 13 | `## Research Iteration Changelog` | iteration log (gap → resolution) |
+| 14 | `## Completion Checklist` | all mandatory items checked |
+| 15 | `## Agent Operation Notes` | High/Medium/Low confidence breakdown |
 
 Save as `research_{{SYSTEM_OR_TECH_NAME}}_v{{TARGET_VERSION}}.md`.
 
@@ -342,17 +363,24 @@ grep -c "# ✅\|# DO" research_[TECH]_v[VERSION].md
 # Expected: Same count as "# 🚫\|# DON'T"
 
 # 6. Confirm mandatory output sections are present
-grep -E "^## (Mandatory_Patterns|Conditional_Patterns|Forbidden_Patterns|Version_Context|Source_Bibliography)" \
+grep -E "^## (Executive Summary|Architectural Guardrails|Migration Guide|Implementation Blueprint|Quality Control|Production Readiness|Reference Implementations|Source Bibliography|Research Gaps|Completion Checklist)" \
   research_*.md
-# Expected: all section headers appear in the research output file
+# Expected: all 10 top-level section headers appear
 
-# 7. Confirm every Never-Do entry has a correct alternative
-grep -c "✅ Correct" research_*.md
-# Expected: count equals or exceeds the number of anti-pattern entries
+# 7. Confirm Architectural Guardrails subsections are present
+grep -E "^### (✅ Mandatory Patterns|⚠️ Conditional Patterns|🚫 Forbidden Patterns)" \
+  research_*.md
+# Expected: all 3 subsection headers appear
+
+# 8. Confirm every Forbidden Pattern has a correct alternative
+grep -c "✅ Correct\|# ✅\|# DO" research_*.md
+# Expected: count equals or exceeds the number of Forbidden Pattern entries
 ```
 
 ### Manual Validation Checklist
 
+- [ ] **All Sections**: All 15 required output sections present (see Output Format table above)?
+- [ ] **Research Iteration Changelog**: Present and complete (skip for depth=quick)?
 - [ ] **Input Variables**: All 4 required inputs provided and specific?
 - [ ] **Version Lock**: Target version mentioned in 5+ places?
 - [ ] **Three Tiers**: ✅ + ⚠️ + 🚫 all present with content?

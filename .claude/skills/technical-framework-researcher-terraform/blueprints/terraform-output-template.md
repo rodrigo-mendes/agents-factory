@@ -17,6 +17,15 @@ Support_Status: "[Active | Deprecated | EOL]"
 Last_Updated: "[Date]"
 Research_Date: "[Today's date]"
 Domain_Complexity: "[Foundational/Standard/Complex]"
+Research_Depth: "[quick/standard/deep/exhaustive]"
+Max_Iterations: "[N]"
+Research_Quality_Score: "[N%]"
+# Research_Quality_Score = (total_claims - unverified - irresolvable) / total_claims * 100
+Gap_Loop_Ran: "[true/false]"
+Iterations_Used: "[N of MAX_ITERATIONS]"
+Triangulated_Count: "[N]"
+Unverified_Count: "[N]"
+Irresolvable_Count: "[N]"
 ```
 
 ## Executive Summary
@@ -28,6 +37,8 @@ Domain_Complexity: "[Foundational/Standard/Complex]"
 - Domain complexity tier and why
 
 ## Architectural Guardrails
+
+> Confidence legend: 🟢 High (2+ official sources, dated ≤12mo) | 🟡 Medium (1 source or dated 12–24mo) | 🔴 Low (community source or dated >24mo — verify before use)
 
 ### ✅ Mandatory Patterns
 
@@ -274,3 +285,15 @@ resource "aws_instance" "app" {
 - Source: [Resource Tagging Strategy](https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
 
 ---
+
+## Research Iteration Changelog
+
+> Mandatory when `RESEARCH_DEPTH` is `standard`, `deep`, or `exhaustive`. Omit for `quick`.
+
+| Iteration | Section | Item | Action | Source |
+|-----------|---------|------|--------|--------|
+| 1 | [Section name] | [Claim or pattern] | Added / Resolved / Updated | [URL] (DATE) |
+| 2 | [Section name] | [Claim or pattern] | ⚠️ IRRESOLVABLE — [one-line rationale] | — |
+
+> Add one row per gap-loop resolution. Rows are appended in order; do not reorder.
+> `IRRESOLVABLE` rows remain in the table permanently as an audit trail.

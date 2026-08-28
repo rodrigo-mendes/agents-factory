@@ -46,7 +46,7 @@ disable-model-invocation: true
 
 ### ⚠️ Ask First
 
-- **Multi-cloud scope** — if `{{CLOUD_PROVIDER}}` covers more than one provider, confirm whether the user wants unified patterns, per-provider sections, or a comparison matrix before proceeding.
+- **Multi-cloud scope** — if `{{CLOUD_PROVIDER}}` covers more than one provider, confirm whether the user wants unified patterns, per-provider sections, or a comparison matrix before proceeding. Once scope is confirmed, all cross-provider comparisons will be marked **Medium Confidence**, with sources cited separately per provider.
 - **Compliance-specific requirements** — SOC2, HIPAA, PCI-DSS, GDPR patterns depend on the organization's certification scope. Surface the requirement and ask before adding compliance-specific architecture constraints.
 - **Cost optimization decisions** — pricing guidance tied to billing agreements, reserved instances, or committed use discounts is organization-specific. Ask before adding cost prescriptions beyond general optimization patterns.
 - **Scope of Never-Do section** — if the provider framework classifies a pattern as "discouraged" but not explicitly forbidden, ask whether to include it under Never-Do or Ask-First.
@@ -249,9 +249,28 @@ Cloud-native design, security, operations, migration, networking, landing zones,
 
 # Output Format
 
-Output template (Metadata, Executive Summary, Glossary, Architecture Guardrails, design patterns, reference architectures, service map, differentiators, scenario coverage). Full structure in [Output Template](./blueprints/output-format.md#output-format).
+Full template: [Output Template](./blueprints/output-format.md).
 
-> **MANDATORY OUTPUT FORMAT:** Always produce the final deliverable using the exact structure defined in [Output Template](./blueprints/output-format.md#output-format). Never skip, reorder, or abbreviate any section.
+> **MANDATORY OUTPUT FORMAT — ASSEMBLY SEQUENCE:**
+> 1. Open `./blueprints/output-format.md` and copy the skeleton (all section headings, sub-headings, and placeholder markers) into the output file **before** populating any content.
+> 2. Populate each section from sub-investigator findings. Do not deviate from the heading names or order.
+> 3. The 13 required sections in order — if any is absent, the output is **incomplete**:
+
+| # | Exact heading | Minimum content |
+|---|---|---|
+| 1 | `## Metadata` | yaml block with all 9 fields |
+| 2 | `## Executive Summary` | 3 paragraphs: what the domain is, what changed in TARGET_EDITION, 3 critical guardrails |
+| 3 | `## Cloud Architecture Glossary` | 10–20 terms, each with Term/Definition/Provider Docs Section/Architect Usage/Common Confusion |
+| 4 | `## Architecture Guardrails` → `### ✅ Mandatory Patterns` | ≥3 patterns, each with Pillar Alignment/Why/Services/Architecture Decision/Verification/Source |
+| 5 | `## Architecture Guardrails` → `### ⚠️ Architectural Decisions` | ≥2 decision tables (Option/Service/Optimizes/Sacrifices/Best When) |
+| 6 | `## Architecture Guardrails` → `### 🚫 Anti-Patterns` | ≥3 anti-patterns, each with Risk Level/Why/Instead/Detection/Impact/Source |
+| 7 | `## Cloud-Native Design Patterns` | ≥2 patterns with Category/Problem/Solution/Trade-offs table |
+| 8 | `## Security Architecture` | ≥1 domain with Services/Architecture/Compliance Alignment/Source |
+| 9 | `## Operational Patterns` | ≥1 pattern with RTO/RPO/Services/Cost Profile/Automation table |
+| 10 | `## Reference Architectures` | ≥1 architecture with Layer/Service/Purpose table + Key Decisions + Scaling Path |
+| 11 | `## Provider Differentiators` | ≥3 unique capabilities with evidence and source URL |
+| 12 | `## Scenario Coverage` | Standard Case + Edge Case + Anti-Pattern Case (all 3 required) |
+| 13 | `## Research Iteration Changelog` | table with Iteration/Section/Item/Action/Source; one row per gap-loop resolution (omit for depth=quick) |
 
 ---
 
@@ -267,29 +286,42 @@ Output template (Metadata, Executive Summary, Glossary, Architecture Guardrails,
 ### Checklist
 
 ```
-[ ] TARGET_EDITION explicitly stated in output metadata and in every major section
-[ ] All 6 mandatory output sections present: Framework Pillars, Always-Do Patterns,
-    Ask-First Decisions, Never-Do Anti-patterns, Service Equivalence Map, Source Bibliography
+[ ] All 13 required output sections present (see Output Format table above)
+[ ] Cloud Architecture Glossary has ≥ 10 terms, each with all 5 sub-fields
+[ ] Architecture Guardrails has all 3 subsections: ✅ Mandatory Patterns, ⚠️ Architectural Decisions, 🚫 Anti-Patterns
+[ ] Every ✅ pattern has: Pillar Alignment, Why (cited), Services, Architecture Decision, Verification, Source URL
+[ ] Every 🚫 anti-pattern has: Risk Level, Why (cited), Instead (named service), Detection, Impact, Source URL
+[ ] Every ⚠️ decision has an Option table with columns: Option/Service/Optimizes/Sacrifices/Best When
+[ ] Reference Architectures has ≥1 Layer/Service/Purpose table + Key Decisions + Scaling Path
+[ ] Scenario Coverage has exactly 3 sub-cases: Standard Case, Edge Case, Anti-Pattern Case
 [ ] Every pattern cites an official provider URL with access date
-[ ] Every Never-Do entry has a side-by-side ❌ Wrong / ✅ Correct example using exact service names
-[ ] All sources dated; sources > 12 months flagged with ⚠️ note
-[ ] Service Equivalence Map covers all service classes researched
+[ ] All sources > 12 months flagged with ⚠️ >12mo note
+[ ] TARGET_EDITION explicitly stated in Metadata yaml block
 [ ] No generic cloud terms where provider-specific names exist
+[ ] Research Iteration Changelog present and complete (skip for depth=quick)
 ```
 
 ```bash
-# Confirm mandatory output sections are present
-grep -E "^## (Framework Pillars|Mandatory Patterns|Architectural Decisions|Anti-Patterns|Service Equivalence|Source Bibliography)" \
-  research_*.md
-# Expected: all 6 headers appear
+# Confirm all required top-level sections are present
+grep -E "^## (Executive Summary|Cloud Architecture Glossary|Architecture Guardrails|Cloud-Native Design Patterns|Security Architecture|Operational Patterns|Reference Architectures|Provider Differentiators|Scenario Coverage)" \
+  research_cloud_*.md
+# Expected: all 9 headings appear
 
-# Confirm every Never-Do entry has a correct alternative
-grep -c "✅ Correct" research_*.md
-# Expected: equals or exceeds the number of anti-pattern entries
+# Confirm Architecture Guardrails has all 3 subsections
+grep -E "^### (✅ Mandatory Patterns|⚠️ Architectural Decisions|🚫 Anti-Patterns)" \
+  research_cloud_*.md
+# Expected: all 3 subsection headings appear
 
-# Confirm version/edition appears throughout (not only in header)
-grep -c "{{TARGET_EDITION}}\|WAF 20\|CAF v\|Architecture Framework 20" research_*.md
-# Expected: multiple matches distributed across sections
+# Confirm structural sub-fields are present
+grep -c "Pillar Alignment:" research_cloud_*.md
+# Expected: ≥ 3 (one per Mandatory Pattern)
+
+grep -c "Risk Level:" research_cloud_*.md
+# Expected: ≥ 3 (one per Anti-Pattern)
+
+# Confirm version/edition appears in Metadata
+grep "Target_Edition:" research_cloud_*.md
+# Expected: one match with a non-empty value
 ```
 
 ---

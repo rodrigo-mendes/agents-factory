@@ -154,9 +154,33 @@ Standard User Story, Spike Story, Story Too Large, and Missing Acceptance Criter
 
 ## Output Format
 
-For the complete output file structure (all section templates), see [Output Format](./blueprints/output-format.md#metadata).
+Full template: [Output Format](./blueprints/output-format.md).
 
-> **MANDATORY OUTPUT FORMAT:** Always produce the final deliverable using the exact structure defined in [Output Format](./blueprints/output-format.md#metadata). Never skip, reorder, or abbreviate any section.
+> **MANDATORY OUTPUT FORMAT — ASSEMBLY SEQUENCE:**
+> 1. Open `./blueprints/output-format.md` and copy the skeleton (all section headings, sub-headings, and placeholder markers) into the output file **before** populating content.
+> 2. Populate each section from research findings. Do not deviate from heading names or order.
+> 3. The 18 required sections in order — if any is absent, the output is **incomplete**:
+
+| # | Exact heading | Minimum content |
+|---|---|---|
+| 1 | `## Metadata` | yaml block with all fields |
+| 2 | `## Executive Summary` | 3 paragraphs: framework overview, what changed in FRAMEWORK_EDITION, 3 critical patterns |
+| 3 | `## Framework Terminology Glossary` | 10–20 terms verbatim from FRAMEWORK_EDITION |
+| 4 | `## Artifact Guardrails` → `### ✅ Mandatory Elements` | ≥3 elements citing specific FRAMEWORK_EDITION guide section |
+| 5 | `## Artifact Guardrails` → `### ⚠️ Team Context Decisions` | ≥2 decision tables (team size, sector, tooling) |
+| 6 | `## Artifact Guardrails` → `### 🚫 Forbidden Patterns` | ≥3 patterns with ❌ wrong example THEN ✅ correct example |
+| 7 | `## Framework Update Guide` | edition-to-edition migration, deprecated practices, superseded guidance |
+| 8 | `## Artifact Library` | minimal valid + production-grade artifacts for TEAM_CONTEXT |
+| 9 | `## Quality Verification Gates` | human-evaluable questions (no CLI commands) |
+| 10 | `## Toolchain Integration` | mapping for all items in INTEGRATION_TOOLS_LIST |
+| 11 | `## Scenario Coverage` | standard + edge (too large, missing value) + anti-pattern cases |
+| 12 | `## Scale & Governance` | team-size and org-scale guidance |
+| 13 | `## Reference Artifacts` | production-ready story/epic/acceptance-criteria examples |
+| 14 | `## Source Bibliography` | all sources with dates; >24mo guidance flagged |
+| 15 | `## Completion Checklist` | all mandatory items checked |
+| 16 | `## Research Gaps` | unresolved items with follow-up path |
+| 17 | `## Agent Operation Notes` | specific confidence categories (no vague entries) |
+| 18 | `## Research Iteration Changelog` | table with Iteration/Section/Item/Action/Source; one row per gap-loop resolution (omit for depth=quick) |
 
 Save as `research_{{FRAMEWORK_NAME}}_{{PRACTICE_OR_ARTIFACT_TYPE}}_{{FRAMEWORK_EDITION}}.md`
 
@@ -184,33 +208,41 @@ The agent MUST run this checklist before finalizing any research output.
 ### Output Completeness Checklist
 
 ```
+[ ] All 18 required output sections present (see Output Format table above)
+[ ] Artifact Guardrails has all 3 subsections: ✅ Mandatory Elements, ⚠️ Team Context Decisions, 🚫 Forbidden Patterns
 [ ] Official framework guide URL identified and edition year confirmed
 [ ] {{FRAMEWORK_EDITION}} explicitly referenced in every major section (not only in metadata header)
 [ ] Practices from superseded editions flagged or excluded
 [ ] Every mandatory element cites a specific section of {{FRAMEWORK_EDITION}} official guide
 [ ] Every acceptance criterion in artifact examples is observable and non-prescriptive
-[ ] Every forbidden pattern has a concrete corrected alternative — wrong example THEN right example
+[ ] Every 🚫 Forbidden Pattern has ❌ wrong example THEN ✅ correct example
 [ ] Minimal valid artifact passes all INVEST criteria
 [ ] Production reference artifact covers {{TEAM_CONTEXT}} specifics (size, sector, tooling)
-[ ] Quality verification gates are phrased as human-evaluable questions (no CLI commands)
+[ ] Quality Verification Gates phrased as human-evaluable questions (no CLI commands)
 [ ] Toolchain mapping complete for all items in {{INTEGRATION_TOOLS_LIST}}
-[ ] Scenarios cover standard, edge (too large, missing value), and anti-pattern cases
+[ ] Scenario Coverage has standard + edge (too large, missing value) + anti-pattern cases
 [ ] Glossary definitions match {{FRAMEWORK_EDITION}} verbatim — no paraphrasing
-[ ] Sources are dated; guidance older than 24 months is flagged with a review note
+[ ] Sources are dated; guidance older than 24 months is flagged with ⚠️ >24mo note
 [ ] Agent Operation Notes are specific — no vague confidence categories
+[ ] Research Iteration Changelog present and complete (skip for depth=quick)
 ```
 
 ### Verification Commands
 
 ```bash
-# Confirm mandatory sections are present in the output file
-grep -E "^## (Executive Summary|Artifact Guardrails|Artifact Library|Quality Verification Gates|Source Bibliography|Completion Checklist)" \
+# Confirm all top-level sections are present
+grep -E "^## (Executive Summary|Framework Terminology Glossary|Artifact Guardrails|Framework Update Guide|Artifact Library|Quality Verification Gates|Toolchain Integration|Scenario Coverage|Scale & Governance|Reference Artifacts|Source Bibliography|Completion Checklist|Research Gaps|Agent Operation Notes)" \
   research_*.md
-# Expected: all 6 section headers appear
+# Expected: all 14 top-level section headers appear
+
+# Confirm Artifact Guardrails subsections are present
+grep -E "^### (✅ Mandatory Elements|⚠️ Team Context Decisions|🚫 Forbidden Patterns)" \
+  research_*.md
+# Expected: all 3 subsection headers appear
 
 # Confirm every forbidden pattern has a corrected alternative
-grep -c "Instead:" research_*.md
-# Expected: count equals the number of Never-Do items
+grep -c "Instead:\|✅ Correct" research_*.md
+# Expected: count equals the number of Forbidden Pattern items
 
 # Confirm edition string appears throughout document (not only in metadata)
 grep -c "Scrum Guide 2020\|SAFe 6\.0\|Shape Up 2019\|{{FRAMEWORK_EDITION}}" research_*.md
