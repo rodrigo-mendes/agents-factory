@@ -168,7 +168,7 @@ Follow-up: [Where to check]
 
 ---
 
-## §7 — Research Iteration Changelog
+## Research Iteration Changelog
 
 > Mandatory when `RESEARCH_DEPTH` is `standard`, `deep`, or `exhaustive`. Omit for `quick`.
 
@@ -195,7 +195,7 @@ Follow-up: [Where to check]
 - [ ] 1+ copy-paste working example
 - [ ] Confidence badge applied to every pattern entry
 - [ ] All Always-Do patterns triangulated (deep/exhaustive) or downgraded to 🟡 Medium
-- [ ] §7 Iteration Changelog present and complete
+- [ ] Research Iteration Changelog present and complete (skip for depth=quick)
 - [ ] Research_Quality_Score calculated and added to Metadata
 - [ ] Every Research Gap cross-referenced in §7
 

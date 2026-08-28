@@ -155,9 +155,31 @@ Exact verification steps for Interaction Initiation, In-Process Compliance, Inte
 
 ## Output Format
 
-For the complete output file structure (all section templates), see [Output Format](./blueprints/output-format.md#domain-context).
+Full template: [Output Format](./blueprints/output-format.md).
 
-> **MANDATORY OUTPUT FORMAT:** Always produce the final deliverable using the exact structure defined in [Output Format](./blueprints/output-format.md#domain-context). Never skip, reorder, or abbreviate any section.
+> **MANDATORY OUTPUT FORMAT — ASSEMBLY SEQUENCE:**
+> 1. Open `./blueprints/output-format.md` and copy the skeleton (all section headings, sub-headings, and placeholder markers) into the output file **before** populating content.
+> 2. Populate each section from research findings. Do not deviate from heading names or order.
+> 3. The 16 required sections in order — if any is absent, the output is **incomplete**:
+
+| # | Exact heading | Minimum content |
+|---|---|---|
+| 1 | `## Domain Context` | domain scope, jurisdiction, and organizational context |
+| 2 | `## Executive Summary` | 3 paragraphs: domain overview, current regulatory landscape, 3 critical guardrails |
+| 3 | `## Domain Terminology Glossary` | 10–20 terms aligned to regulatory definitions |
+| 4 | `## Operational Guardrails` → `### ✅ Mandatory Practices` | ≥3 practices with regulation citation, role, timeframe |
+| 5 | `## Operational Guardrails` → `### ⚠️ Human Validation Required` | ≥2 escalation gates with role + max timeframe |
+| 6 | `## Operational Guardrails` → `### 🚫 Prohibited Actions` | ≥3 prohibitions with concrete correct alternative (process example) |
+| 7 | `## Policy Update Guide` | regulatory change detection, update cadence, migration steps |
+| 8 | `## Process Blueprint` | step-by-step process for the ORGANIZATIONAL_CONTEXT |
+| 9 | `## Process Quality Control` | scenario coverage: high-frequency, edge, prohibited cases |
+| 10 | `## Operational Readiness` | SLAs, risk notes, interoperability protocols |
+| 11 | `## Reference Processes` | validated process templates for the domain |
+| 12 | `## Source Bibliography` | all sources with effective dates; >18mo flagged |
+| 13 | `## Completion Checklist` | all mandatory items checked |
+| 14 | `## Research Gaps` | unresolved items with conservative fallback behavior |
+| 15 | `## Agent Delegation Notes` | specific confidence categories (no vague entries) |
+| 16 | `## Research Iteration Changelog` | table with Iteration/Section/Item/Action/Source; one row per gap-loop resolution (omit for depth=quick) |
 
 Save as `research_{{DOMAIN_OR_FUNCTION_NAME}}_{{ORGANIZATIONAL_CONTEXT}}.md`
 
@@ -186,28 +208,34 @@ self-check — distinct from the process-verification steps in the output docume
 ### Output Completeness Checklist
 
 ```
+[ ] All 16 required output sections present (see Output Format table above)
+[ ] Operational Guardrails has all 3 subsections: ✅ Mandatory Practices, ⚠️ Human Validation Required, 🚫 Prohibited Actions
 [ ] Primary regulatory body identified with URL and jurisdiction confirmed for {{ORGANIZATIONAL_CONTEXT}}
 [ ] All regulatory citations include effective dates (not just URLs)
 [ ] Every mandatory practice cites a specific regulation article, section, or policy document
 [ ] Every escalation path specifies a role (not a name) AND a maximum timeframe
-[ ] Every prohibition has a documented correct alternative (concrete process example)
-[ ] All escalation paths specify roles and timeframes — no vague "escalate to management"
+[ ] Every 🚫 Prohibited Action has a documented correct alternative (concrete process example)
 [ ] Stakeholder interoperability protocols include SLAs and risk notes for each interface
-[ ] Scenarios cover high-frequency, edge, and prohibited cases
-[ ] Agent Delegation Notes are specific — no vague categories (e.g., "High Confidence: anything standard")
-[ ] Organizational context is consistently applied (no generic advice ignoring size, sector, or geography)
+[ ] Process Quality Control: scenarios cover high-frequency, edge, and prohibited cases
+[ ] Agent Delegation Notes are specific — no vague categories
 [ ] Terminology glossary aligns with regulatory definitions, not informal usage
-[ ] Sources are dated; any source older than 18 months is flagged with a review note
+[ ] Sources are dated; any source older than 18 months is flagged with ⚠️ >18mo note
 [ ] Research Gaps documented with conservative fallback behavior
+[ ] Research Iteration Changelog present and complete (skip for depth=quick)
 ```
 
 ### Verification Commands
 
 ```bash
-# Confirm mandatory sections are present in the output file
-grep -E "^## (Executive Summary|Operational Guardrails|Process Blueprint|Source Bibliography|Completion Checklist)" \
+# Confirm all top-level sections are present
+grep -E "^## (Domain Context|Executive Summary|Domain Terminology Glossary|Operational Guardrails|Policy Update Guide|Process Blueprint|Process Quality Control|Operational Readiness|Reference Processes|Source Bibliography|Completion Checklist|Research Gaps|Agent Delegation Notes)" \
   research_*.md
-# Expected: all 5 section headers appear
+# Expected: all 13 top-level section headers appear
+
+# Confirm Operational Guardrails subsections are present
+grep -E "^### (✅ Mandatory Practices|⚠️ Human Validation Required|🚫 Prohibited Actions)" \
+  research_*.md
+# Expected: all 3 subsection headers appear
 
 # Confirm every Prohibited Action has an "Instead" alternative
 grep -c "Instead:" research_*.md

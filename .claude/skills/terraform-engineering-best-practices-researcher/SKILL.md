@@ -198,45 +198,35 @@ Source: [Link]
 
 # Output Format
 
-Output template (Metadata, Executive Summary, per-area sections, and Architectural Guardrails). Full structure in [Output Template](./blueprints/output-format.md#output-format).
+Full template: [Output Template](./blueprints/output-format.md).
 
-> **MANDATORY OUTPUT FORMAT:** Always produce the final deliverable using the exact structure defined in [Output Template](./blueprints/output-format.md#output-format). Never skip, reorder, or abbreviate any section.
-## Reference Implementations
-- [Official HashiCorp examples with URLs]
-- [Community reference architectures (Cloud Posse, Gruntwork)]
-- [Book recommendations with edition/chapter references]
+> **MANDATORY OUTPUT FORMAT — ASSEMBLY SEQUENCE:**
+> 1. Open `./blueprints/output-format.md` and copy the skeleton (all section headings, sub-headings, and placeholder markers) into the output file **before** populating content.
+> 2. Populate each section from research findings. Do not deviate from heading names or order.
+> 3. The 20 required sections in order — if any is absent, the output is **incomplete**:
 
-## Source Bibliography
-**Primary**: [Official docs, HashiCorp Learn, Registry with URLs and dates]
-**Books**: [Title, Author, Edition, relevant chapters]
-**Community**: [GitHub repos, blog posts with star counts and dates]
-**All Deep-Links**: [Complete organized list]
-
-## Completion Checklist
-- [ ] All 9 research scope areas addressed
-- [ ] 3+ code examples for mandatory patterns
-- [ ] Every anti-pattern has a safe alternative
-- [ ] Directory structure examples are complete and copy-pasteable
-- [ ] Module examples include variables.tf, outputs.tf, main.tf
-- [ ] CI/CD pipeline examples match {{TOOLING_PREFERENCES}}
-- [ ] Testing examples use v{{TERRAFORM_VERSION}} features
-- [ ] Sources dated and linked
-- [ ] Recommendations calibrated for {{TEAM_SIZE}} and {{PROJECT_SCALE}}
-
-## Research Gaps
-```
-Gap: [What's missing or uncertain]
-Impact: [Effect on recommendations]
-Workaround: [Temporary guidance]
-Follow-up: [Where to verify]
-```
-
-## Agent Operation Notes
-- **High Confidence**: [Patterns that can be applied without asking — official best practices]
-- **Medium Confidence**: [Patterns that should be validated — community-adopted but not officially blessed]
-- **Low Confidence**: [Patterns that must ask user — organizational, compliance, or preference-dependent]
-- **Scale Sensitivity**: [Patterns that change based on team size / project scale]
-- **Emergency Stop**: [When to halt — state corruption risk, security exposure, compliance violation]
+| # | Exact heading | Minimum content |
+|---|---|---|
+| 1 | `## Metadata` | yaml block with all 9 fields |
+| 2 | `## Executive Summary` | 3 paragraphs: landscape, key recommendations, critical patterns |
+| 3 | `## Project Organization` | repository strategy, directory layout, file conventions |
+| 4 | `## Module Architecture` | module types, interface design, composition, versioning |
+| 5 | `## Environment Strategy` | isolation patterns, variable management |
+| 6 | `## State Management` | backend strategy, isolation, operations |
+| 7 | `## CI/CD Pipeline` | pipeline architecture, security, tooling |
+| 8 | `## Testing Strategy` | testing pyramid, native tests, policy-as-code |
+| 9 | `## Code Quality & Standards` | naming, DRY patterns, code review |
+| 10 | `## Advanced Patterns` | multi-account, scale, refactoring *(conditional: enterprise/platform-team only)* |
+| 11 | `## Governance & Compliance` | change control, compliance-as-code *(conditional: when COMPLIANCE_REQUIREMENTS specified)* |
+| 12 | `## Architectural Guardrails` → `### ✅ Mandatory Patterns` | ≥3 patterns with ❌/✅ code examples |
+| 13 | `## Architectural Guardrails` → `### ⚠️ Conditional Patterns` | ≥2 decision matrices |
+| 14 | `## Architectural Guardrails` → `### 🚫 Forbidden Patterns` | ≥3 anti-patterns with severity rating + ❌/✅ side-by-side |
+| 15 | `## Reference Implementations` | official HashiCorp + community reference architectures with URLs |
+| 16 | `## Source Bibliography` | Primary/Books/Community sources with dates |
+| 17 | `## Completion Checklist` | all 9 research scope areas + per-team-size calibration |
+| 18 | `## Research Gaps` | Gap/Impact/Workaround/Follow-up per unresolved item |
+| 19 | `## Agent Operation Notes` | High/Medium/Low Confidence + Scale Sensitivity + Emergency Stop |
+| 20 | `## Research Iteration Changelog` | table with Iteration/Section/Item/Action/Source; one row per gap-loop resolution (omit for depth=quick) |
 
 ---
 
@@ -259,29 +249,42 @@ Follow-up: [Where to verify]
 ### Checklist
 
 ```
-[ ] Directory structures are complete and consistent
-[ ] Module examples follow Registry standards
-[ ] CI/CD pipelines are syntactically valid
+[ ] All 20 required output sections present (see Output Format table above)
+[ ] Architectural Guardrails has all 3 subsections: ✅ Mandatory Patterns, ⚠️ Conditional Patterns, 🚫 Forbidden Patterns
+[ ] Every 🚫 Forbidden Pattern has ❌ wrong / ✅ correct side-by-side (not prose only)
+[ ] Every 🚫 Forbidden Pattern has a severity rating
+[ ] Directory structures are complete and consistent (copy-pasteable)
+[ ] Module examples follow Registry standards (variables.tf, outputs.tf, main.tf)
+[ ] CI/CD pipelines are syntactically valid for {{TOOLING_PREFERENCES}}
 [ ] All HCL examples pass `terraform fmt` conventions
-[ ] Every Never Do entry has ❌ wrong / ✅ correct side-by-side (not prose only)
-[ ] Anti-patterns include severity ratings
-[ ] Recommendations are proportional to {{TEAM_SIZE}} and {{PROJECT_SCALE}}
+[ ] Recommendations calibrated for {{TEAM_SIZE}} and {{PROJECT_SCALE}}
 [ ] All sources are dated and version-specific to v{{TERRAFORM_VERSION}}
+[ ] Research Iteration Changelog present and complete (skip for depth=quick)
 ```
 
 ```bash
-# Confirm mandatory output sections are present
-grep -E "^## (Mandatory_Patterns|Conditional_Patterns|Forbidden_Patterns|Agent_Operation_Notes|Source_Bibliography)" \
+# Confirm domain sections are present
+grep -E "^## (Executive Summary|Project Organization|Module Architecture|Environment Strategy|State Management|CI/CD Pipeline|Testing Strategy|Code Quality)" \
   research_Terraform_Engineering_*.md
-# Expected: section headers appear in the research output file
+# Expected: all 8 domain section headers appear
 
-# Confirm every Never-Do entry has a correct alternative
-grep -c "✅ Correct" research_Terraform_Engineering_*.md
-# Expected: count equals or exceeds the number of anti-pattern entries
+# Confirm Architectural Guardrails subsections are present
+grep -E "^### (✅ Mandatory Patterns|⚠️ Conditional Patterns|🚫 Forbidden Patterns)" \
+  research_Terraform_Engineering_*.md
+# Expected: all 3 subsection headers appear
+
+# Confirm closing sections are present
+grep -E "^## (Reference Implementations|Source Bibliography|Completion Checklist|Research Gaps|Agent Operation Notes)" \
+  research_Terraform_Engineering_*.md
+# Expected: all 5 closing section headers appear
+
+# Confirm every Forbidden Pattern has a correct alternative
+grep -c "✅ Correct\|# ✅\|# DO" research_Terraform_Engineering_*.md
+# Expected: count equals or exceeds the number of Forbidden Pattern entries
 
 # Confirm version specificity throughout the document
 grep -c "v{{TERRAFORM_VERSION}}\|v1\.[0-9]" research_Terraform_Engineering_*.md
-# Expected: multiple version references distributed across sections, not only in the header
+# Expected: multiple version references distributed across sections
 ```
 
 ---

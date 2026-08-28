@@ -170,9 +170,33 @@ See [Research Scope Detail — Scope 6](./blueprints/research-scope.md) for per-
 
 ## Output Format
 
-For the complete output file structure (all section templates), see [Output Format](./blueprints/output-format.md#metadata).
+Full template: [Output Format](./blueprints/output-format.md).
 
-> **MANDATORY OUTPUT FORMAT:** Always produce the final deliverable using the exact structure defined in [Output Format](./blueprints/output-format.md#metadata). Never skip, reorder, or abbreviate any section.
+> **MANDATORY OUTPUT FORMAT — ASSEMBLY SEQUENCE:**
+> 1. Open `./blueprints/output-format.md` and copy the skeleton (all section headings, sub-headings, and placeholder markers) into the output file **before** populating content.
+> 2. Populate each section from research findings. Do not deviate from heading names or order.
+> 3. The 18 required sections in order — if any is absent, the output is **incomplete**:
+
+| # | Exact heading | Minimum content |
+|---|---|---|
+| 1 | `## Metadata` | yaml block with all fields |
+| 2 | `## Executive Summary` | 3 paragraphs: what the methodology is, what changed, 3 critical guardrails |
+| 3 | `## Methodology Glossary` | 10–20 terms with Term/Definition/Provider Docs Section/Architect Usage/Common Confusion |
+| 4 | `## Artifact Guardrails` → `### ✅ Mandatory Elements` | ≥3 elements with Pillar/Why/Artifact Decision/Verification/Source |
+| 5 | `## Artifact Guardrails` → `### ⚠️ Contextual Choices` | ≥2 decision tables |
+| 6 | `## Artifact Guardrails` → `### 🚫 Forbidden Patterns` | ≥3 anti-patterns with ❌ wrong / ✅ correct Markdown artifact example |
+| 7 | `## Methodology Update Guide` | version-to-version migration, breaking changes, deprecated patterns |
+| 8 | `## Artifact Library` | reference artifacts for the ARCHITECTURE_CONTEXT |
+| 9 | `## Toolchain Reference` | ≥1 Markdown-compatible renderer with usage command |
+| 10 | `## Scenario Coverage` | Standard Case + Edge Case + Anti-Pattern Case |
+| 11 | `## Quality Attributes Mapping` | ADR trigger conditions per quality attribute |
+| 12 | `## Production & Governance Readiness` | living documentation, governance, traceability |
+| 13 | `## Reference Artifacts` | production-ready examples for the ARCHITECTURE_CONTEXT |
+| 14 | `## Source Bibliography` | all sources with dates; >18mo sources flagged |
+| 15 | `## Completion Checklist` | all mandatory items checked |
+| 16 | `## Research Gaps` | unresolved items with follow-up path |
+| 17 | `## Architect Operation Notes` | High/Medium/Low confidence + when to escalate |
+| 18 | `## Research Iteration Changelog` | table with Iteration/Section/Item/Action/Source; one row per gap-loop resolution (omit for depth=quick) |
 
 Save as `research_{{METHODOLOGY_OR_NOTATION_NAME}}_{{TARGET_VERSION_OR_EDITION}}.md`
 
@@ -200,36 +224,42 @@ The agent MUST run this checklist before finalizing any research output.
 ### Output Completeness Checklist
 
 ```
-[ ] Governing body and official specification URL identified and cited with access date
-[ ] Target version explicitly stated in every major section (not just the metadata header)
-[ ] Minimal valid artifact produced — passes all mandatory element requirements
-[ ] Production reference artifact covers {{ARCHITECTURE_CONTEXT}} specifically
-[ ] Every mandatory element cites a specific methodology section or authoritative source
-[ ] Every forbidden pattern has a concrete correct alternative (Markdown artifact example)
+[ ] All 18 required output sections present (see Output Format table above)
+[ ] Artifact Guardrails has all 3 subsections: ✅ Mandatory Elements, ⚠️ Contextual Choices, 🚫 Forbidden Patterns
+[ ] Methodology Glossary has ≥ 10 terms, each with Term/Definition/Provider Docs Section/Architect Usage/Common Confusion
+[ ] Every ✅ Mandatory Element cites a specific methodology section or authoritative source
+[ ] Every 🚫 Forbidden Pattern has a concrete correct alternative (Markdown artifact example)
 [ ] Every abstraction level used in examples is explicitly declared and respected
 [ ] Toolchain section covers at least one Markdown-compatible renderer/tool with usage command
-[ ] Scenarios cover standard, edge, and anti-pattern cases
+[ ] Scenario Coverage has Standard Case + Edge Case + Anti-Pattern Case
 [ ] Glossary definitions match official methodology terminology (not informal usage)
 [ ] Quality attribute integration documented with ADR trigger conditions
-[ ] Sources are dated; any source older than 18 months is flagged
+[ ] Sources are dated; any source older than 18 months is flagged with ⚠️ >18mo note
 [ ] Research Gaps section documents what could not be verified with follow-up path
+[ ] Target version explicitly stated in every major section (not just the metadata header)
+[ ] Research Iteration Changelog present and complete (skip for depth=quick)
 ```
 
 ### Verification Commands
 
 ```bash
-# Confirm mandatory sections are present in the output file
-grep -E "^## (Executive Summary|Artifact Guardrails|Artifact Library|Toolchain Reference|Source Bibliography|Completion Checklist)" \
+# Confirm all top-level sections are present
+grep -E "^## (Executive Summary|Methodology Glossary|Artifact Guardrails|Methodology Update Guide|Artifact Library|Toolchain Reference|Scenario Coverage|Quality Attributes Mapping|Production & Governance Readiness|Reference Artifacts|Source Bibliography|Completion Checklist|Research Gaps|Architect Operation Notes)" \
   research_*.md
-# Expected: all 6 section headers appear
+# Expected: all 14 top-level section headers appear
 
-# Confirm every forbidden pattern section has a "DO" block (correct alternative)
-grep -c "<!-- DO -->" research_*.md
-# Expected: count equals the number of Never-Do items (one DO block per anti-pattern)
+# Confirm Artifact Guardrails subsections are present
+grep -E "^### (✅ Mandatory Elements|⚠️ Contextual Choices|🚫 Forbidden Patterns)" \
+  research_*.md
+# Expected: all 3 subsection headers appear
+
+# Confirm every forbidden pattern has a correct alternative
+grep -c "<!-- DO -->\|✅ Correct\|Instead:" research_*.md
+# Expected: count equals the number of Forbidden Pattern items
 
 # Confirm version string appears in content (not just metadata)
 grep -c "{{TARGET_VERSION_OR_EDITION}}\|C4 2024\|UML 2\.5\|TOGAF 10\|ADR" research_*.md
-# Expected: multiple matches distributed across sections, not only in the header
+# Expected: multiple matches distributed across sections
 ```
 
 ---

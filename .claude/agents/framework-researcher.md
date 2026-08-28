@@ -92,7 +92,7 @@ suggest the correct `/command` rather than proceeding.
     "unverified", run up to `MAX_ITERATIONS` (default **5**) targeted WebSearch/WebFetch attempts:
     1. Issue a targeted search for the missing fact.
     2. If resolved: replace "unverified" tag, record new source, append a row to the
-       **§7 Research Iteration Changelog** in the output document.
+       **Research Iteration Changelog** in the output document.
     3. If unresolved after `MAX_ITERATIONS`: mark as
        `⚠️ IRRESOLVABLE — human verification required` with a one-line rationale.
     4. Stop early if zero unverified items remain before reaching the limit.

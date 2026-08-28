@@ -16,6 +16,15 @@ Internal_Policy_Version: [Version and effective date if available]
 Jurisdiction: [Country/Region]
 Research_Date: [Date]
 Currency_Threshold: [Date after which this research must be reviewed]
+Research_Depth: "[quick/standard/deep/exhaustive]"
+Max_Iterations: "[N]"
+Research_Quality_Score: "[N%]"
+# Research_Quality_Score = (total_claims - unverified - irresolvable) / total_claims * 100
+Gap_Loop_Ran: "[true/false]"
+Iterations_Used: "[N of MAX_ITERATIONS]"
+Triangulated_Count: "[N]"
+Unverified_Count: "[N]"
+Irresolvable_Count: "[N]"
 ```
 
 ---
@@ -40,6 +49,8 @@ Agent Usage: [How the agent should interpret this term in context]
 ---
 
 ## Operational Guardrails
+
+> Confidence legend: 🟢 High (2+ official sources, dated ≤12mo) | 🟡 Medium (1 source or dated 12–24mo) | 🔴 Low (community source or dated >24mo — verify before use)
 
 ### ✅ Mandatory Practices
 
@@ -143,6 +154,20 @@ Prohibited scenario:     [Scenario + agent refusal behavior]
 **Primary**: [Official regulation, legislation, standards body publications with URLs and effective dates]
 **Validation**: [Professional association reports, industry surveys, established frameworks with relevance notes]
 **All Deep-Links**: [Complete organized list of sources used]
+
+---
+
+## Research Iteration Changelog
+
+> Mandatory when `RESEARCH_DEPTH` is `standard`, `deep`, or `exhaustive`. Omit for `quick`.
+
+| Iteration | Section | Item | Action | Source |
+|-----------|---------|------|--------|--------|
+| 1 | [Section name] | [Claim or pattern] | Added / Resolved / Updated | [URL] (DATE) |
+| 2 | [Section name] | [Claim or pattern] | ⚠️ IRRESOLVABLE — [one-line rationale] | — |
+
+> Add one row per gap-loop resolution. Rows are appended in order; do not reorder.
+> `IRRESOLVABLE` rows remain in the table permanently as an audit trail.
 
 ---
 
