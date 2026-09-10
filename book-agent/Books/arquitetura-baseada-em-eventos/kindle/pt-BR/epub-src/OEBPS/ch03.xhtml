@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Capítulo 3: Topologias e Infraestrutura de Mensageria</title>
+  <link rel="stylesheet" type="text/css" href="styles.css"/>
+</head>
+<body>
+<h1 id="ch03">Capítulo 3: Topologias e Infraestrutura de Mensageria</h1>
+
+<h2>Declaração do Problema Inicial</h2>
+
+<p>O Capítulo 2 ensinou como modelar eventos como fatos de negócio genuínos e tratar cada evento publicado como um contrato de propriedade. Mas um evento bem modelado é inerte até que algo o mova do serviço que o produziu para os serviços que se importam com ele. Esse "algo" é a sua infraestrutura de mensageria (messaging infrastructure), e escolhê-la é uma das decisões de maior alavancagem e mais difíceis de reverter em um sistema orientado a eventos. A distinção entre um log distribuído e uma fila não é trivialidade acadêmica; ela determina se você pode reconstruir um modelo de leitura do zero, se um consumidor lento bloqueia um rápido, e se "adicionar outro consumidor" é uma mudança de configuração ou um redesign.</p>
+
+<h2>Topologia de Broker Versus Topologia de Mediador</h2>
+
+<p>Todo sistema orientado a eventos se encaixa em um de dois padrões estruturais, e a diferença está em onde vive o fluxo de controle. Em uma <strong>topologia de broker</strong> (broker topology), não há coordenador central. Cada serviço publica eventos e subscreve os eventos de que precisa, reagindo de forma autônoma. O processo de negócio é uma propriedade emergente de muitas reações independentes. Ninguém possui o fluxo de ponta a ponta; ele existe apenas como a soma das decisões locais.</p>
+
+<p>Em uma <strong>topologia de mediador</strong> (mediator topology), um componente central, o <strong>mediador</strong> ou <strong>orquestrador</strong>, possui o processo. Ele recebe um evento de disparo, depois emite comandos para serviços participantes em uma sequência deliberada, rastreando o estado do fluxo de trabalho à medida que avança. O mediador sabe qual etapa vem a seguir, o que fazer quando uma etapa falha e quando o processo está completo. O fluxo é explícito e reside em um único lugar que você pode ler.</p>
+
+<p>O trade-off é exatamente o ponto central. A topologia de broker maximiza o desacoplamento e o throughput, mas dispersa o processo pelos serviços. A topologia de mediador centraliza a visibilidade e o tratamento de erros, mas reintroduz uma dependência de coordenação e um possível gargalo. Nenhuma das duas está correta em abstrato.</p>
+
+<p class="diagram-caption">📊 [Diagram — Mermaid source below]</p>
+<pre class="mermaid-source"><code>flowchart LR
+    subgraph BT["Broker Topology"]
+        direction TD
+        E1[Incoming Event] --> BR[(Broker)]
+        BR --> SA[Service A]
+        BR --> SB[Service B]
+        BR --> SC[Service C]
+        SA --> EA[New Event]
+        SB --> EB[New Event]
+        SC --> EC[New Event]
+    end
+
+    subgraph MT["Mediator Topology"]
+        direction TD
+        TE[Trigger Event] --> MD[Mediator]
+        MD -->|"1 - Command"| PA[Service A]
+        MD -->|"2 - Command"| PB[Service B]
+        MD -->|"3 - Command"| PC[Service C]
+        PA -.->|Reply| MD
+        PB -.->|Reply| MD
+        PC -.->|Reply| MD
+    end</code></pre>
+
+<p>Uma heurística útil: use a topologia de broker para reações simples, majoritariamente independentes, onde o trabalho de cada assinante é autocontido. Recorra a um mediador quando o processo tiver etapas reais, restrições de ordenação e lógica de compensação que alguém precise possuir.</p>
+
+<div class="detail"><strong>💡 Nota do Especialista</strong> O texto identifica corretamente o mediador como um possível gargalo, mas na prática o risco de produção mais perigoso é o raio de explosão (blast radius), não o throughput. Motores de workflow modernos (AWS Step Functions, Temporal, Conductor) escalam horizontalmente e raramente sofrem limitações de CPU ou throughput. O perigo real é que um bug na lógica de negócio do orquestrador afeta simultaneamente todas as instâncias em execução de todos os tipos de workflow gerenciados por aquele orquestrador.</div>
+
+<div class="detail"><strong>⚠️ Nota Crítica</strong> O texto abre com "todo sistema orientado a eventos se encaixa em um de dois padrões estruturais" e constrói todo o framework de topologia sobre o binário broker/mediador. Na prática, grandes sistemas de produção rotineiramente combinam ambos: eventos de domínio fluem por um broker enquanto sagas entre domínios são orquestradas via mediador, frequentemente dentro do mesmo deployment. Apresentar a escolha como mutuamente exclusiva no nível do sistema leva arquitetos a uma decisão falsa de "ou um ou outro".</div>
+
+<h2>Coreografia Versus Orquestração</h2>
+
+<p>Broker e mediador são termos estruturais; <strong>coreografia</strong> (choreography) e <strong>orquestração</strong> (orchestration) são os modelos comportamentais de coordenação que se mapeiam sobre eles.</p>
+
+<p>Na <strong>coreografia</strong>, cada serviço reage a eventos e emite novos eventos sem ser instruído por nenhuma autoridade central. Pense em dançarinos que conhecem seus próprios passos e deixas; a dança emerge de todos reagindo à música e uns aos outros. Não há maestro. Um evento <code>OrderPlaced</code> dispara o serviço de pagamento, cujo evento <code>PaymentCaptured</code> dispara o serviço de envio, e assim por diante.</p>
+
+<p>Na <strong>orquestração</strong>, um maestro, o orquestrador, dirige explicitamente cada participante. Ele envia um comando "capturar pagamento", aguarda o resultado, depois envia um comando "reservar estoque". Os participantes não precisam saber nada uns sobre os outros; eles apenas sabem como obedecer comandos e reportar resultados.</p>
+
+<p>A tensão é visibilidade versus autonomia. A coreografia mantém os serviços maximamente independentes, mas oculta o processo. A orquestração torna o processo legível e centraliza o tratamento de falhas, mas acopla os participantes ao orquestrador.</p>
+
+<table>
+<thead><tr><th>Dimensão</th><th>Coreografia</th><th>Orquestração</th></tr></thead>
+<tbody>
+<tr><td>Fluxo de controle</td><td>Distribuído, emergente</td><td>Centralizado, explícito</td></tr>
+<tr><td>Acoplamento</td><td>Mínimo</td><td>Maior (ao orquestrador)</td></tr>
+<tr><td>Visibilidade do processo</td><td>Baixa, deve ser rastreada</td><td>Excelente, reside em um único lugar</td></tr>
+<tr><td>Tratamento de falhas</td><td>Cada serviço, localmente</td><td>O orquestrador possui</td></tr>
+<tr><td>Melhor adequação</td><td>Poucos passos, reações autônomas</td><td>Muitos passos, ordenação, compensação</td></tr>
+</tbody>
+</table>
+
+<p>A posição opinativa: adote coreografia por padrão para um número pequeno de etapas, e mude para orquestração no momento em que o processo ultrapassar cerca de quatro etapas ou exigir compensação.</p>
+
+<div class="detail"><strong>💡 Nota do Especialista</strong> O texto enquadra a escolha como aplicável ao sistema como um todo, mas as arquiteturas de produção mais resilientes aplicam ambos os modelos simultaneamente em diferentes níveis de granularidade. O padrão canônico: use orquestração dentro de um contexto delimitado — um gerenciador de processo de saga possui workflows de múltiplas etapas dentro do domínio de Payment — e use coreografia entre contextos delimitados (Payment publica <code>PaymentCaptured</code>; Fulfillment assina sem saber que Payment existe).</div>
+
+<div class="detail"><strong>⚠️ Nota Crítica</strong> O texto oferece "mude para orquestração no momento em que o processo ultrapassar cerca de quatro etapas" como um limiar opinativo mas acionável. Esse número não tem base empírica e é altamente dependente do contexto. As variáveis relevantes não são a contagem de etapas, mas: se compensação é necessária (sagas), se o processo tem um proprietário de negócio que precisa de uma trilha de auditoria, que ferramentas de observabilidade estão disponíveis e se os serviços são deployáveis de forma autônoma.</div>
+
+<h2>Log Distribuído Versus Fila</h2>
+
+<p>A distinção técnica mais consequente em mensageria é entre uma <strong>fila</strong> (queue) e um <strong>log distribuído</strong> (distributed log), porque ela determina o que você pode e não pode fazer com eventos após serem consumidos.</p>
+
+<p>Uma <strong>fila de mensagens</strong> tradicional, como RabbitMQ ou Amazon SQS, trata uma mensagem como um item de trabalho a ser consumido e destruído. Um produtor coloca uma mensagem na fila; um consumidor a retira; uma vez confirmada, a mensagem desaparece. Filas se destacam na distribuição de trabalho: muitos consumidores concorrentes puxam da mesma fila, e cada mensagem é tratada por exatamente um deles.</p>
+
+<p>Um <strong>log distribuído</strong>, exemplificado pelo Apache Kafka, trata eventos como uma sequência durável e somente de acréscimo (append-only). Consumir um evento não o exclui. Cada consumidor rastreia sua própria posição, o <strong>offset</strong> (deslocamento), no log e lê adiante no seu próprio ritmo. O log retém eventos por um período configurado independentemente de quem os leu.</p>
+
+<p class="diagram-caption">📊 [Diagram — Mermaid source below]</p>
+<pre class="mermaid-source"><code>flowchart TD
+    subgraph QUEUE["Queue Model"]
+        direction LR
+        PQ[Producer] --> Q[(Queue)]
+        Q -->|"Message A"| CA[Consumer A]
+        Q -->|"Message B"| CB[Consumer B]
+        CA --> DA["Message A — deleted"]
+        CB --> DB["Message B — deleted"]
+    end
+
+    subgraph LOG["Distributed Log Model"]
+        direction LR
+        PL[Producer] --> LS["Log  0  1  2  3  4  5"]
+        LS --> G1["Consumer Group 1\nOffset: 4"]
+        LS --> G2["Consumer Group 2\nOffset: 1"]
+    end</code></pre>
+
+<p>A distinção não é "qual é melhor", mas "qual modelo atende à sua necessidade". Se a mensagem é um comando transitório consumido uma única vez, uma fila é mais simples e barata. Se o evento é um fato durável de que múltiplos consumidores independentes precisam — agora e no futuro — e que você pode precisar repetir, o log é a ferramenta certa.</p>
+
+<div class="detail"><strong>💡 Nota do Especialista</strong> O enquadramento binário de log versus fila, embora pedagogicamente útil, subestima o quanto essa fronteira se deslocou. O RabbitMQ 3.9 (2021) introduziu Streams, uma abstração de log durável, somente de acréscimo e repetível incorporada ao broker. Equipes que avaliam RabbitMQ para novas cargas de trabalho de EDA devem avaliar Streams antes de descartá-lo como uma ferramenta exclusiva de fila.</div>
+
+<h2>Publish/Subscribe, Partições e Grupos de Consumidores</h2>
+
+<p>Três mecanismos fazem o modelo de log funcionar em escala, e engenheiros sênior devem entender todos os três com precisão.</p>
+
+<p><strong>Publish/subscribe</strong> (pub/sub) significa que um produtor publica em um <strong>tópico</strong> (topic) e qualquer número de assinantes recebe uma cópia. Isso é fan-out: um evento, muitos leitores independentes.</p>
+
+<p><strong>Partições</strong> (partitions) são como um log escala horizontalmente e preserva a ordem. Um tópico é dividido em partições, e cada evento é roteado para uma partição por uma <strong>chave de partição</strong> (partition key), tipicamente um ID de entidade como <code>orderId</code>. O Kafka garante ordenação apenas dentro de uma partição, nunca entre partições.</p>
+
+<p><em>Exemplo de código: Produtor Kafka chaveando eventos por <code>orderId</code> para impor afinidade de partição por pedido — todos os eventos para o mesmo pedido chegam na mesma partição; eventos para pedidos diferentes se distribuem entre partições para throughput.</em></p>
+
+<pre><code class="language-python"># Kafka producer keying events by orderId to enforce per-order partition affinity
+from __future__ import annotations
+
+import json
+from dataclasses import dataclass, field
+from typing import Any
+
+from confluent_kafka import Producer
+from confluent_kafka.error import KafkaError
+
+BROKER = "localhost:9092"
+TOPIC = "order-events"
+
+
+@dataclass
+class OrderEvent:
+    order_id: str
+    event_type: str
+    payload: dict[str, Any] = field(default_factory=dict)
+
+    def to_json(self) -&gt; bytes:
+        return json.dumps(
+            {"type": self.event_type, "orderId": self.order_id, "payload": self.payload}
+        ).encode("utf-8")
+
+
+def _delivery_report(err: KafkaError | None, msg: Any) -&gt; None:
+    """Callback invoked once the broker acknowledges (or rejects) each message."""
+    if err:
+        print(f"[FAILED] {err}")
+    else:
+        print(f"[OK] type={json.loads(msg.value())['type']} "
+              f"partition={msg.partition()} offset={msg.offset()}")
+
+
+def publish_order_event(producer: Producer, event: OrderEvent) -&gt; None:
+    """Publish one order event.
+
+    The `key` argument is the partition key. Kafka's default partitioner applies
+    a consistent hash over the key bytes, so the same orderId always maps to the
+    same partition — guaranteeing that OrderPlaced arrives before OrderShipped
+    for every individual order, regardless of broker load or producer restarts.
+    """
+    producer.produce(
+        topic=TOPIC,
+        key=event.order_id,
+        value=event.to_json(),
+        callback=_delivery_report,
+    )
+    producer.poll(0)
+
+
+def main() -&gt; None:
+    producer = Producer({"bootstrap.servers": BROKER})
+
+    publish_order_event(producer, OrderEvent("order-42", "OrderPlaced",  {"customerId": "cust-7", "total": 149.99}))
+    publish_order_event(producer, OrderEvent("order-42", "OrderShipped", {"trackingId": "TRK-001"}))
+    publish_order_event(producer, OrderEvent("order-99", "OrderPlaced", {"customerId": "cust-3", "total": 59.00}))
+
+    producer.flush()
+
+
+if __name__ == "__main__":
+    main()</code></pre>
+
+<p><strong>Grupos de consumidores</strong> (consumer groups) coordenam o consumo paralelo sem duplicação. Consumidores que compartilham um ID de grupo dividem as partições entre si; cada partição é lida por exatamente um consumidor do grupo. Um grupo diferente lendo o mesmo tópico recebe sua própria cópia completa do stream. Esta é a unificação elegante: dentro de um grupo você obtém distribuição de trabalho como em uma fila; entre grupos você obtém fan-out como em pub/sub.</p>
+
+<blockquote class="expert"><strong>💡 Nota do Especialista:</strong> O texto afirma corretamente que a ordenação é garantida apenas dentro de uma partição e que a chave de partição deve manter eventos causalmente relacionados juntos. O que não é dito — e o que rotineiramente causa incidentes de produção — é o problema de partição quente (hot-partition): se um pequeno número de chaves (um ID de comerciante de alto volume, um produto viral) responde por uma grande parcela dos eventos, essas partições recebem pressão de escrita desproporcional e o lag se acumula nos consumidores atribuídos a elas.</blockquote>
+
+<blockquote class="expert"><strong>💡 Nota do Especialista:</strong> O texto explica grupos de consumidores com clareza, mas não sinaliza o risco de rebalanceamento. No protocolo de rebalanceamento ansioso (eager rebalancing) original do Kafka, toda vez que um consumidor entra, sai ou falha, o grupo inteiro para de processar e reatribui todas as partições — uma pausa de parada total que pode variar de segundos a dezenas de segundos. O Kafka 2.4 introduziu o Incremental Cooperative Rebalancing (a estratégia de atribuição <code>CooperativeStickyAssignor</code>), que transfere apenas as partições que precisam ser movidas.</blockquote>
+
+<h2>Retenção, Replay e Reprocessamento</h2>
+
+<p>O superpoder definidor do log é que os eventos persistem após o consumo. <strong>Retenção</strong> (retention) é a política que governa por quanto tempo os eventos são mantidos — por tempo (por exemplo, sete dias) ou por tamanho, ou indefinidamente via <strong>compactação de log</strong> (log compaction), que mantém o evento mais recente por chave para sempre.</p>
+
+<p><strong>Replay</strong> é a leitura de eventos históricos novamente, reiniciando o offset de um consumidor para trás. <strong>Reprocessamento</strong> é a aplicação do replay: você deploya uma nova versão de uma projeção, redefine seu grupo de consumidores para o offset zero e reconstrói todo o seu estado a partir do histórico. Essa capacidade é o que torna Event Sourcing e CQRS práticos. Com uma fila, nada disso existe; uma vez que uma mensagem é confirmada, ela desaparece.</p>
+
+<p>Essa única capacidade é o argumento mais forte para um log em vez de uma fila em sistemas orientados a fatos. Mas não é gratuita. A retenção tem custo de armazenamento, o replay pode inundar sistemas downstream se não for limitado, e o reprocessamento exige que os consumidores sejam idempotentes, porque eventos repetidos serão vistos novamente.</p>
+
+<p class="diagram-caption">📊 [Diagram — Mermaid source below]</p>
+<pre class="mermaid-source"><code>flowchart TD
+    START([Start]) --> Q1{"Durable fact that multiple\nconsumers may replay?"}
+    Q1 -->|Yes| LOG["Distributed Log\nKafka / Managed Streaming"]
+    Q1 -->|No| Q2{"Transient work item\nto distribute once?"}
+    Q2 -->|Yes| QUEUE["Queue\nRabbitMQ / Amazon SQS"]
+    Q2 -->|No| Q3{"Simple fan-out\nof notifications?"}
+    Q3 -->|Yes| FANOUT["Pub/Sub — Amazon SNS\nfanning into per-consumer SQS queues"]
+    Q3 -->|No| REVIEW["Re-examine message semantics"]</code></pre>
+
+<blockquote class="expert"><strong>💡 Nota do Especialista:</strong> O replay é a capacidade mais poderosa do log, mas introduz um modo de falha que o texto não cobre: evolução de schema. Eventos escritos meses ou anos atrás carregam versões mais antigas de schema. Quando um consumidor é redefinido para o offset zero e processa esse histórico, seu deserializador atual deve ser compatível com versões anteriores de cada versão de schema que encontrar. A regra prática: trate o registro no schema registry e a imposição de compatibilidade como um pré-requisito para habilitar replay em produção, não como um complemento posterior.</blockquote>
+
+<div class="detail"><strong>💡 Nota do Especialista</strong> O texto define com precisão a compactação de log como manter o evento mais recente por chave para sempre, o que está correto. A nuance que vale acrescentar é que tópicos com log compactado são incompatíveis com Event Sourcing completo. Event Sourcing requer cada evento de uma entidade, não apenas o valor mais recente; a compactação descarta eventos intermediários. A compactação de log é apropriada para tópicos de changelog (CDC, materialização de KTable) e não para agregados event-sourced.</div>
+
+<blockquote class="critical"><strong>⚠️ Nota Crítica:</strong> O texto afirma que a compactação de log "mantém o evento mais recente por chave para sempre" e a apresenta como uma opção de retenção ao lado de políticas baseadas em tempo ou tamanho — mas isso confunde dois objetivos incompatíveis. A compactação de log ativamente deleta todos os eventos intermediários de uma determinada chave, retendo apenas o valor mais recente. Uma equipe que habilita compactação em um tópico e depois tenta um replay completo para reconstruir uma projeção receberá silenciosamente um histórico truncado.</blockquote>
+
+<div class="detail"><strong>⚠️ Nota Crítica</strong> O texto afirma corretamente que o reprocessamento "exige que os consumidores sejam idempotentes, porque eventos repetidos serão vistos novamente" — mas a idempotência nas próprias gravações de dados do consumidor é apenas uma camada do problema. Qualquer consumidor que desencadeia efeitos colaterais externos durante o processamento (enviar um e-mail, chamar um gateway de pagamento, invocar um webhook) reexecutará esses efeitos colaterais no replay, a menos que sejam deduplicados independentemente na fronteira externa.</div>
+
+<div class="detail"><strong>⚠️ Nota Crítica</strong> O capítulo argumenta fortemente em favor do replay e reprocessamento como a vantagem decisiva do log, mas nunca aborda a evolução de schema — provavelmente o maior risco operacional em logs de longa duração. Se um tópico retém eventos por dois anos, consumidores que realizam replay completo encontrarão eventos serializados sob schemas que antecedem múltiplas mudanças incompatíveis.</div>
+
+<h2>Principais Conclusões</h2>
+
+<ul>
+<li><strong>Topologia é uma decisão de fluxo de controle.</strong> A topologia de broker desacopla, mas dispersa o processo; a topologia de mediador centraliza a visibilidade ao custo de uma dependência de coordenação. Coreografia e orquestração são os modelos comportamentais que se mapeiam sobre elas.</li>
+<li><strong>Fila e log são ferramentas fundamentalmente diferentes.</strong> Uma fila destrói mensagens ao consumo e distribui trabalho; um log distribuído retém eventos e permite que consumidores independentes leiam, retrocedam e repitam.</li>
+<li><strong>Partições preservam a ordem apenas dentro de uma partição.</strong> Escolha uma chave de partição que mantenha eventos causalmente relacionados juntos; ordenação global custa paralelismo.</li>
+<li><strong>Grupos de consumidores unificam as semânticas de fila e pub/sub.</strong> Dentro de um grupo você obtém paralelismo de consumidores concorrentes; entre grupos você obtém fan-out — tudo a partir de um único log.</li>
+<li><strong>Retenção e replay são a vantagem decisiva do log</strong> e o alicerce do Event Sourcing e do CQRS, mas exigem consumidores idempotentes e uma política de retenção deliberada.</li>
+</ul>
+
+<h2>O Que Vem a Seguir</h2>
+
+<p>O replay garante que os consumidores verão o mesmo evento mais de uma vez, então o Capítulo 4 enfrenta diretamente as garantias de entrega e mostra como construir consumidores idempotentes sob entrega at-least-once.</p>
+
+</body>
+</html>

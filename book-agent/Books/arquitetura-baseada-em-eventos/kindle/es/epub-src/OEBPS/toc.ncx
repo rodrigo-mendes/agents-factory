@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ncx PUBLIC "-//NISO//DTD ncx 2005-1//EN" "http://www.daisy.org/z3986/2005/ncx-2005-1.dtd">
+<ncx xmlns="http://www.daisy.org/z3986/2005/ncx/" version="2005-1">
+  <head>
+    <meta name="dtb:uid" content="urn:uuid:d1d8c35e-852c-45d9-ab06-a5b5db9fe54a"/>
+    <meta name="dtb:depth" content="2"/>
+    <meta name="dtb:totalPageCount" content="0"/>
+    <meta name="dtb:maxPageNumber" content="0"/>
+  </head>
+  <docTitle><text>Arquitectura Basada en Eventos: CQRS, Event Sourcing, Trade-offs y Errores para Arquitectos Senior</text></docTitle>
+  <navMap>
+    <navPoint id="ch01" playOrder="1">
+      <navLabel><text>Chapter 1: Foundations of Event-Driven Architecture</text></navLabel>
+      <content src="ch01.xhtml#ch01"/>
+    </navPoint>
+    <navPoint id="ch02" playOrder="2">
+      <navLabel><text>Cap&#237;tulo 2: Modelando Eventos como Hechos del Dominio</text></navLabel>
+      <content src="ch02.xhtml#ch02"/>
+    </navPoint>
+    <navPoint id="ch03" playOrder="3">
+      <navLabel><text>Cap&#237;tulo 3: Topolog&#237;as e Infraestructura de Mensajer&#237;a</text></navLabel>
+      <content src="ch03.xhtml#ch03"/>
+    </navPoint>
+    <navPoint id="ch04" playOrder="4">
+      <navLabel><text>Cap&#237;tulo 4: Garant&#237;as de Entrega e Idempotencia</text></navLabel>
+      <content src="ch04.xhtml#ch04"/>
+    </navPoint>
+    <navPoint id="ch05" playOrder="5">
+      <navLabel><text>Cap&#237;tulo 5: CQRS &#8212; Separando Lecturas y Escrituras</text></navLabel>
+      <content src="ch05.xhtml#ch05"/>
+    </navPoint>
+    <navPoint id="ch06" playOrder="6">
+      <navLabel><text>Cap&#237;tulo 6: Event Sourcing &#8212; El Estado como una Secuencia de Eventos</text></navLabel>
+      <content src="ch06.xhtml#ch06"/>
+    </navPoint>
+    <navPoint id="ch07" playOrder="7">
+      <navLabel><text>Cap&#237;tulo 7: Consistencia, Sagas y Procesos de Larga Duraci&#243;n</text></navLabel>
+      <content src="ch07.xhtml#ch07"/>
+    </navPoint>
+    <navPoint id="ch08" playOrder="8">
+      <navLabel><text>Chapter 8: Schema Evolution and Event Versioning</text></navLabel>
+      <content src="ch08.xhtml#ch08"/>
+    </navPoint>
+    <navPoint id="ch09" playOrder="9">
+      <navLabel><text>Cap&#237;tulo 9: Observabilidad, Depuraci&#243;n y Operaciones</text></navLabel>
+      <content src="ch09.xhtml#ch09"/>
+    </navPoint>
+    <navPoint id="ch10" playOrder="10">
+      <navLabel><text>Cap&#237;tulo 10: Casos Reales, Trade-offs y Errores Comunes</text></navLabel>
+      <content src="ch10.xhtml#ch10"/>
+    </navPoint>
+  </navMap>
+</ncx>

@@ -1,0 +1,538 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Chapter 4: Delivery Guarantees and Idempotency</title>
+  <link rel="stylesheet" type="text/css" href="styles.css"/>
+</head>
+<body>
+<h1 id="ch04">Chapter 4: Delivery Guarantees and Idempotency</h1>
+
+<h2>Opening Problem Statement</h2>
+<p>Chapter 3 ended with a promise and a warning. The distributed log lets you replay history — reprocess millions of past events to rebuild a read model or fix a bug. But replay only works if reprocessing the same event twice produces the same result as processing it once. That property is called <strong>idempotency</strong>, and without it, replay corrupts data instead of repairing it.</p>
+<p>This is not an edge case. Under the most common delivery guarantee in production systems, <strong>every consumer will eventually receive a duplicate</strong>. A network timeout, a broker retry, a consumer crash after processing but before acknowledging — any of these produces a message the consumer has already seen. If your handler charges a credit card, sends an email, or decrements inventory, a duplicate is a real financial or reputational loss.</p>
+<p>Senior engineers frequently reach for a comforting escape hatch: "exactly-once delivery." They assume a broker feature or a cloud service flag makes the problem disappear. It does not. This chapter demystifies the three delivery semantics, explains precisely why exactly-once is the most misunderstood term in distributed systems, and gives you the concrete patterns — deduplication keys, the Transactional Outbox, dead-letter queues — that make correctness achievable. The goal is that duplicates stop being a threat and become a non-event.</p>
+
+<h2>At-Most-Once, At-Least-Once, and Exactly-Once Semantics</h2>
+<p>A <strong>delivery guarantee</strong> describes what the messaging system promises about how many times a consumer observes each message. There are three levels, and the difference between them comes down to <em>when</em> the consumer acknowledges receipt.</p>
+<p>An <strong>acknowledgment</strong> (ack) is the signal a consumer sends back to the broker to say "I am done with this message; you may stop tracking it." The ordering of <em>process</em> and <em>ack</em> determines the guarantee.</p>
+<ul>
+<li><strong>At-most-once</strong>: ack first, then process. If the consumer crashes after acking but before finishing, the message is lost. Zero or one delivery. Fast, lossy, acceptable only for disposable data like metrics samples or non-critical telemetry.</li>
+<li><strong>At-least-once</strong>: process first, then ack. If the consumer crashes after processing but before acking, the broker redelivers. One or more deliveries. Never loses a message, but guarantees duplicates. This is the effective default in Kafka (with manual commit), SQS, and RabbitMQ.</li>
+<li><strong>Exactly-once</strong>: the holy grail — one delivery, no loss, no duplication.</li>
+</ul>
+<p class="diagram-caption">📊 [Diagram — Mermaid source below]</p>
+<pre class="mermaid-source"><code>sequenceDiagram
+    participant B as Broker
+    participant C as Consumer
+
+    Note over B,C: Scenario A — At-Most-Once (ack before process)
+    B--&gt;&gt;C: Deliver message
+    C--&gt;&gt;B: ACK sent immediately
+    Note over C: CRASH — processing never completes
+    Note over B,C: Message LOST — broker already released it
+
+    Note over B,C: Scenario B — At-Least-Once (process before ack)
+    B--&gt;&gt;C: Deliver message
+    Note over C: Process message (side effect applied)
+    Note over C: CRASH — ACK never sent
+    B--&gt;&gt;C: Redeliver message (no ACK received)
+    C--&gt;&gt;B: ACK after second processing
+    Note over B,C: DUPLICATE — side effect applied twice</code></pre>
+<pre><code class="language-python"># Delivery-semantics reference table as typed dataclasses
+from dataclasses import dataclass
+from typing import Literal
+
+@dataclass(frozen=True)
+class DeliverySemantics:
+    name: str
+    ack_ordering: str
+    on_crash: str
+    duplicates_possible: bool
+    message_loss_possible: bool
+    typical_use_case: str
+
+DELIVERY_SEMANTICS: list[DeliverySemantics] = [
+    DeliverySemantics(
+        name="at-most-once",
+        ack_ordering="ack BEFORE process",
+        on_crash="message is lost — broker already removed it",
+        duplicates_possible=False,
+        message_loss_possible=True,
+        typical_use_case="metrics samples, non-critical telemetry",
+    ),
+    DeliverySemantics(
+        name="at-least-once",
+        ack_ordering="ack AFTER process",
+        on_crash="broker redelivers — consumer sees it again",
+        duplicates_possible=True,
+        message_loss_possible=False,
+        typical_use_case="effective default in Kafka (manual commit), SQS, RabbitMQ; requires idempotent consumers",
+    ),
+    DeliverySemantics(
+        name="exactly-once (processing)",
+        ack_ordering="atomic commit covering both effect and ack",
+        on_crash="transaction rolls back; redelivered message is a no-op",
+        duplicates_possible=False,
+        message_loss_possible=False,
+        typical_use_case="Kafka Streams read-process-write within Kafka topology only",
+    ),
+]
+
+if __name__ == "__main__":
+    header = f"{'Semantic'}&lt;22} {'Ack order'}&lt;22} {'Dups?'}&lt;7} {'Loss?'}&lt;7} {'Use case'}"
+    print(header)
+    print("-" * len(header))
+    for s in DELIVERY_SEMANTICS:
+        print(
+            f"{s.name}&lt;22} {s.ack_ordering}&lt;22} "
+            f"{'yes' if s.duplicates_possible else 'no'}&lt;7} "
+            f"{'yes' if s.message_loss_possible else 'no'}&lt;7} "
+            f"{s.typical_use_case}"
+        )</code></pre>
+<p>Now for the misunderstanding. <strong>True exactly-once delivery over a network is impossible.</strong> This follows from the Two Generals Problem: two parties communicating over an unreliable channel can never both be certain the other received the final message. A sender that gets no ack cannot distinguish "message lost" from "ack lost," so it must either resend (risking a duplicate) or give up (risking loss). No protocol escapes this.</p>
+<p>What vendors sell as "exactly-once" is really <strong>exactly-once <em>processing</em></strong>, not delivery. The message may be <em>delivered</em> many times, but the system produces the <em>effect</em> only once. Kafka's exactly-once semantics work this way: they combine at-least-once delivery with idempotent producers and transactional writes that are scoped <strong>within Kafka</strong> — a read-process-write loop whose output is another Kafka topic. The moment your side effect leaves that boundary — a database, a payment gateway, an email — Kafka's transaction cannot cover it. You are back to at-least-once, and correctness becomes <em>your</em> responsibility.</p>
+<p>The opinionated takeaway: <strong>design every consumer for at-least-once.</strong> Treat exactly-once as a marketing term for a narrow, broker-internal optimization. If your architecture depends on messages never duplicating, it is already broken.</p>
+<blockquote class="critical"><strong>⚠️ Critical Note:</strong> The prose states that at-least-once is "the default in Kafka, SQS, and RabbitMQ." For Kafka this is inaccurate. Kafka's actual out-of-the-box default is <code>enable.auto.commit=true</code> with a 5-second auto-commit interval. Under this configuration, if the periodic auto-commit timer fires while a batch is being processed and the consumer subsequently crashes, those in-flight messages will not be redelivered — that is at-most-once behavior, not at-least-once. Achieving true at-least-once in Kafka requires explicit configuration: <code>enable.auto.commit=false</code> with a manual commit issued only after the processing of each batch has completed.</blockquote>
+<blockquote class="expert"><strong>💡 Expert Note:</strong> The prose correctly frames Kafka's exactly-once semantics (EOS) as broker-internal, but understates two production-critical constraints. First, enabling EOS requires <code>enable.idempotence=true</code> plus transactional producers (<code>transactional.id</code>) and carries a measurable throughput cost — Confluent benchmarks consistently show 5–15% reduction in write throughput at high load. Second, Kafka EOS is invalidated the moment an external side effect is introduced — but the invalidation is silent. There is no exception, no warning, and no transaction rollback of the external system. The correct mental model is: EOS = atomic Kafka-offset-commit + atomic Kafka-topic-write, nothing more.</blockquote>
+
+<h2>Consumer Idempotency and Deduplication Keys</h2>
+<p>An operation is <strong>idempotent</strong> when applying it multiple times yields the same result as applying it once. Setting a value (<code>status = SHIPPED</code>) is naturally idempotent. Incrementing a value (<code>balance = balance - 10</code>) is not — run it twice and you have double-charged.</p>
+<p>Since duplicates are guaranteed, the consumer must detect and discard them. The tool is a <strong>deduplication key</strong>: a stable, unique identifier carried by the event that lets the consumer recognize a message it has already handled. The producer must generate this key once and attach it to the event; never derive it from arrival time or a random value at the consumer.</p>
+<p>Two patterns dominate.</p>
+<p><strong>1. The idempotency check (dedup store).</strong> Before processing, the consumer checks whether the key already exists in a store of processed IDs. If present, it acks and skips. If absent, it processes and records the key. This works for side effects that cannot be made naturally idempotent, such as calling an external payment API.</p>
+<pre><code class="language-python"># Idempotent consumer: dedup store + side effect in a single atomic transaction
+import sqlite3
+import uuid
+from dataclasses import dataclass
+
+
+@dataclass
+class Message:
+    event_id: str
+    payload: dict
+
+
+class DuplicateEventError(Exception):
+    """Raised when the event has already been processed."""
+
+
+def process_payment(conn: sqlite3.Connection, payload: dict) -&gt; None:
+    conn.execute(
+        "INSERT INTO payments (payment_id, amount) VALUES (?, ?)",
+        (payload["payment_id"], payload["amount"]),
+    )
+
+
+def handle_message(conn: sqlite3.Connection, message: Message) -&gt; None:
+    try:
+        conn.execute(
+            "INSERT INTO processed_events (event_id) VALUES (?)",
+            (message.event_id,),
+        )
+    except sqlite3.IntegrityError:
+        print(f"[SKIP] Duplicate event {message.event_id}")
+        return
+
+    process_payment(conn, message.payload)
+    conn.commit()
+    print(f"[OK]   Processed event {message.event_id}")
+
+
+def bootstrap(conn: sqlite3.Connection) -&gt; None:
+    conn.executescript("""
+        CREATE TABLE IF NOT EXISTS processed_events (
+            event_id TEXT PRIMARY KEY
+        );
+        CREATE TABLE IF NOT EXISTS payments (
+            payment_id TEXT PRIMARY KEY,
+            amount     REAL NOT NULL
+        );
+    """)
+
+
+if __name__ == "__main__":
+    conn = sqlite3.connect(":memory:")
+    bootstrap(conn)
+
+    msg = Message(
+        event_id=str(uuid.uuid4()),
+        payload={"payment_id": "pay-001", "amount": 49.99},
+    )
+
+    handle_message(conn, msg)   # -&gt; [OK]   Processed ...
+    handle_message(conn, msg)   # -&gt; [SKIP] Duplicate ...</code></pre>
+<p>There is a subtle race. If the consumer records the key <em>before</em> the side effect and then crashes, the redelivered message will be skipped and the side effect never happens — silent loss. If it records the key <em>after</em> the side effect and crashes in between, the redelivery reprocesses — a duplicate. The clean solution is to make the dedup record and the business write <strong>atomic</strong>, committed in the same local database transaction. We return to this idea with the Outbox.</p>
+<p><strong>2. Natural idempotency via upsert.</strong> When the side effect is a database write you control, model it so that reapplying it is harmless. An <strong>upsert</strong> keyed by the event's identifier — insert if new, overwrite if present — makes reprocessing safe by construction. This is why event-carried state transfer (Chapter 1) pairs so well with idempotent consumers: the event contains the full new state, and the consumer simply writes it.</p>
+<p>Pro Tip: prefer natural idempotency over a dedup store whenever the domain allows it. A dedup store adds a lookup, a write, and a retention policy — you must eventually expire old keys or the table grows without bound. An upsert carries none of that operational weight.</p>
+<blockquote class="expert"><strong>💡 Expert Note:</strong> The prose correctly warns that dedup key retention cannot grow without bound, but does not provide the formula for the minimum safe retention window. The minimum retention must be: <code>max_redelivery_window = message_visibility_timeout x max_receive_count</code>. For SQS with a 12-hour visibility timeout and a max receive count of 10, that is 120 hours minimum. In Kafka, the equivalent is the <code>retention.ms</code> of the retry topic multiplied by the maximum consumer restart lag. Teams commonly set a flat 24-hour TTL by intuition. If a Kafka broker lag event holds a message in a retry topic for 36 hours before it is redelivered, the dedup store entry has already expired and the handler reprocesses it as new — a silent, intermittent duplicate with no stack trace.</blockquote>
+<div class="detail"><strong>💡 Expert Note</strong>
+<p>The dedup store is a stateful dependency and must be designed to the same availability and consistency tier as the primary business database. In practice, teams commonly reach for a shared Redis instance because it is fast, then deploy it without persistence (<code>appendonly no</code>) or with a single node. When Redis becomes unavailable — a rolling restart during patching, a sentinel failover — the consumer falls back to processing every message as if it were new. The dedup store silently stops protecting. The minimum production posture is Redis with AOF persistence enabled and a replicated Sentinel or Cluster setup. If the dedup check and the business write are unified in the same relational transaction (as the prose recommends), this concern disappears — which is the strongest argument for the unified-transaction approach over a separate cache.</p>
+</div>
+<div class="detail"><strong>⚠️ Critical Note</strong>
+<p>The prose introduces the dedup store as the pattern for "side effects that cannot be made naturally idempotent, such as calling an external payment API," and then proposes fixing the race condition by making "the dedup record and the business write atomic, committed in the same local database transaction." These two statements are in direct contradiction. A local database transaction covers only local database writes. An external payment API call — the stated motivating example — cannot participate in that transaction. Split the discussion: (1) When the side effect is a local DB write, use an atomic transaction covering both the business write and the dedup key. (2) When the side effect is an external call, acknowledge that no local transaction can help — the only sound strategies are to make the external API itself idempotent (passing the event ID as an idempotency key, a capability offered by Stripe, Braintree, and others), or to accept the rare duplicate and build compensating logic downstream.</p>
+</div>
+
+<h2>Message Ordering and Partitioning</h2>
+<p>Idempotency handles <em>duplicates</em>. It does not handle <em>out-of-order</em> arrival, and the two are easy to conflate. Recall from Chapter 3 that a distributed log guarantees order <strong>only within a partition</strong>, selected by the <strong>partition key</strong>. Across partitions, all bets are off.</p>
+<p>This matters because many business operations are order-sensitive. Consider three events for one account: <code>AccountOpened</code>, <code>Deposited</code>, <code>Withdrawn</code>. Process the withdrawal before the deposit and you may reject a valid transaction. The fix is to route all events for a given entity to the same partition by using a stable partition key — here, the account ID. Same key, same partition, guaranteed order.</p>
+<p class="diagram-caption">📊 [Diagram — Mermaid source below]</p>
+<pre class="mermaid-source"><code>flowchart LR
+    Acc1[Account A01\nEvents] --&gt;|partitionKey=A01| P0[Partition 0\nordered per A01]
+    Acc2[Account A02\nEvents] --&gt;|partitionKey=A02| P1[Partition 1\nordered per A02]
+    Acc3[Account A03\nEvents] --&gt;|partitionKey=A03| P2[Partition 2\nordered per A03]
+
+    subgraph CG[Consumer Group]
+        C1[Consumer 1]
+        C2[Consumer 2]
+        C3[Consumer 3]
+    end
+
+    P0 --&gt; C1
+    P1 --&gt; C2
+    P2 --&gt; C3</code></pre>
+<p>But ordering has a cost, and it is the tension every architect must weigh:</p>
+<ul>
+<li>A <strong>narrow</strong> partition key (few distinct values) preserves order across large groups of events but concentrates load on few partitions, capping parallelism.</li>
+<li>A <strong>wide</strong> partition key (many distinct values, like a per-entity ID) spreads load and maximizes throughput but only guarantees order within each tiny group.</li>
+</ul>
+<p>There is no ordering <em>across</em> keys. Pick the key at the granularity where order actually matters to the business — usually the aggregate (the account, the order, the shipment), not the whole system.</p>
+<p>A defensive complement is <strong>version-aware idempotency</strong>. Stamp each event with a monotonically increasing version per entity. The consumer stores the last version it applied and rejects any event whose version is less than or equal to what it has already seen. This makes the consumer robust to both duplicates <em>and</em> stale out-of-order redeliveries in one mechanism.</p>
+<pre><code class="language-python"># Version-aware consumer: rejects duplicates AND stale out-of-order redeliveries
+import sqlite3
+from dataclasses import dataclass
+
+
+@dataclass
+class VersionedEvent:
+    event_id: str
+    entity_id: str
+    version: int
+    payload: dict
+
+
+def apply_event(conn: sqlite3.Connection, event: VersionedEvent) -&gt; None:
+    conn.execute(
+        """
+        INSERT INTO account_state (entity_id, balance, last_version)
+        VALUES (:entity_id, :balance, :version)
+        ON CONFLICT (entity_id) DO UPDATE
+          SET balance      = :balance,
+              last_version = :version
+        """,
+        {
+            "entity_id": event.entity_id,
+            "balance": event.payload.get("balance"),
+            "version": event.version,
+        },
+    )
+
+
+def handle_versioned_event(conn: sqlite3.Connection, event: VersionedEvent) -&gt; None:
+    row = conn.execute(
+        "SELECT last_version FROM account_state WHERE entity_id = ?",
+        (event.entity_id,),
+    ).fetchone()
+
+    stored_version: int = row[0] if row else -1
+
+    if event.version &lt;= stored_version:
+        print(
+            f"[DISCARD] entity={event.entity_id} "
+            f"incoming_v={event.version} stored_v={stored_version}"
+        )
+        return
+
+    apply_event(conn, event)
+    conn.commit()
+    print(
+        f"[APPLIED] entity={event.entity_id} "
+        f"v{stored_version} -&gt; v{event.version}"
+    )
+
+
+def bootstrap(conn: sqlite3.Connection) -&gt; None:
+    conn.execute("""
+        CREATE TABLE IF NOT EXISTS account_state (
+            entity_id    TEXT PRIMARY KEY,
+            balance      REAL NOT NULL DEFAULT 0,
+            last_version INTEGER NOT NULL DEFAULT -1
+        )
+    """)
+
+
+if __name__ == "__main__":
+    conn = sqlite3.connect(":memory:")
+    bootstrap(conn)
+
+    events = [
+        VersionedEvent("e1", "acct-42", version=1, payload={"balance": 100.0}),
+        VersionedEvent("e2", "acct-42", version=2, payload={"balance": 90.0}),
+        VersionedEvent("e2", "acct-42", version=2, payload={"balance": 90.0}),  # duplicate
+        VersionedEvent("e1", "acct-42", version=1, payload={"balance": 100.0}), # stale
+        VersionedEvent("e3", "acct-42", version=3, payload={"balance": 150.0}),
+    ]
+
+    for ev in events:
+        handle_versioned_event(conn, ev)</code></pre>
+<p>Opinionated guidance: do not attempt to impose global ordering across your whole event stream. It destroys the scalability that made you choose a log in the first place. Order per aggregate; tolerate disorder everywhere else.</p>
+<div class="detail"><strong>💡 Expert Note</strong>
+<p>Version-aware idempotency using a monotonically increasing per-entity version number is sound when a single producer owns the entity lifecycle. It breaks down in common multi-producer patterns — for example, when multiple services can independently emit events for the same aggregate. Coordinating a global sequence counter across producers creates coupling and a distributed coordination problem. The industry-standard solution is to push version enforcement to the database via optimistic locking: the consumer performs a <code>WHERE current_version = N - 1</code> conditional update and treats zero-rows-affected as a duplicate or stale event, retrying or discarding accordingly.</p>
+</div>
+<div class="detail"><strong>💡 Expert Note</strong>
+<p>The partition hotspot problem is understated in discussions of partition key selection, and it is acute in multi-tenant SaaS systems. If the partition key is the tenant ID and a single tenant accounts for 40% of traffic volume, that tenant's events concentrate on one or a few partitions. Consumer group parallelism is bounded by partition count, so hot partitions create a processing bottleneck that no amount of horizontal consumer scaling can resolve without a partition count increase — which requires a Kafka topic rebuild or a repartition stream. Design the partition key at the granularity where order matters (aggregate ID, not tenant ID).</p>
+</div>
+<div class="detail"><strong>⚠️ Critical Note</strong>
+<p>The version-aware idempotency mechanism (apply only if <code>incoming_version &gt; stored_version</code>, otherwise discard) silently creates permanent event loss when a version gap occurs. If a consumer has applied version 3 and version 4 is never delivered (dropped, expired, sent to DLQ), then version 5 arrives: the check <code>5 &gt; 3</code> passes and version 5 is applied, permanently skipping version 4's state transition. The system is now in an inconsistent state with no error signal. The prose presents the pattern as robustness against "duplicates and stale redeliveries" without noting that it implicitly assumes gapless delivery. Add a guard against version gaps: if <code>incoming_version &gt; stored_version + 1</code>, the consumer should park the message or emit an alert rather than silently applying it.</p>
+</div>
+
+<h2>The Transactional Outbox Pattern and the Dual-Write Problem</h2>
+<p>Everything so far protects the <em>consumer</em>. But the <em>producer</em> has its own failure mode, and it is one of the most common sources of silent data loss in event-driven systems: the <strong>dual-write problem</strong>.</p>
+<p>A service usually needs to do two things when handling a command: update its own database and publish an event. These are two separate systems — a database and a broker — with no shared transaction. Four sequences are possible, and two of them are corrupt:</p>
+<ol>
+<li>Write DB, publish event — both succeed. Correct.</li>
+<li>Write DB, then crash before publishing — state changed, but no event. Consumers never learn. <strong>Lost event.</strong></li>
+<li>Publish event, then crash before writing DB — consumers act on a fact that never became true. <strong>Phantom event.</strong></li>
+<li>Neither happens. Correct (nothing changed).</li>
+</ol>
+<p>You cannot make two independent systems commit atomically without a distributed transaction, and distributed transactions (two-phase commit) are exactly what we abandon in cloud-native architectures for their cost and fragility.</p>
+<p class="diagram-caption">📊 [Diagram — Mermaid source below]</p>
+<pre class="mermaid-source"><code>flowchart TD
+    CMD[Incoming Command] --&gt; SVC[Service]
+    SVC --&gt; DBW[1. Write to Database]
+    DBW --&gt; DBOK[(DB Updated — Committed)]
+    DBOK --&gt; FAILGAP["2. FAILURE GAP\nService crashes here"]
+    FAILGAP --&gt; NOPUB["3. Broker Publish — NEVER HAPPENS"]
+    NOPUB --&gt; INCON["Inconsistent State\nDB updated, no event emitted\nConsumers never notified"]</code></pre>
+<p>The <strong>Transactional Outbox</strong> pattern solves this elegantly. Instead of writing to the database <em>and</em> the broker, the service writes to the database <em>only</em>. In the <strong>same local transaction</strong> that updates the business tables, it also inserts the event into an <strong>outbox table</strong> in that same database. Because it is one transaction over one database, it is atomic: either both the state change and the outbox row commit, or neither does. The dual-write problem disappears.</p>
+<p>A separate process then reads unpublished rows from the outbox and publishes them to the broker, marking each as sent. This process operates <strong>at-least-once</strong> — if it crashes after publishing but before marking a row, it republishes on restart. Which is exactly why consumers must be idempotent. The Outbox does not eliminate duplicates; it guarantees <em>no loss</em>, and pushes deduplication to the consumer, where we already built defenses for it.</p>
+<pre><code class="language-python"># Transactional Outbox: one atomic commit covers business record + outbox row
+import json
+import sqlite3
+import uuid
+from dataclasses import dataclass, field
+from datetime import datetime, timezone
+
+
+@dataclass
+class Order:
+    order_id: str
+    customer_id: str
+    total_amount: float
+    status: str = "PLACED"
+
+
+@dataclass
+class OutboxRow:
+    event_id: str = field(default_factory=lambda: str(uuid.uuid4()))
+    aggregate_type: str = "Order"
+    event_type: str = "OrderPlaced"
+    payload: dict = field(default_factory=dict)
+    created_at: str = field(
+        default_factory=lambda: datetime.now(timezone.utc).isoformat()
+    )
+    published: bool = False
+
+
+def place_order(conn: sqlite3.Connection, order: Order) -&gt; OutboxRow:
+    outbox_row = OutboxRow(
+        aggregate_type="Order",
+        event_type="OrderPlaced",
+        payload={
+            "order_id": order.order_id,
+            "customer_id": order.customer_id,
+            "total_amount": order.total_amount,
+            "status": order.status,
+        },
+    )
+
+    conn.execute(
+        "INSERT INTO orders (order_id, customer_id, total_amount, status) "
+        "VALUES (?, ?, ?, ?)",
+        (order.order_id, order.customer_id, order.total_amount, order.status),
+    )
+    conn.execute(
+        "INSERT INTO outbox (event_id, aggregate_type, event_type, payload, created_at, published) "
+        "VALUES (?, ?, ?, ?, ?, ?)",
+        (
+            outbox_row.event_id,
+            outbox_row.aggregate_type,
+            outbox_row.event_type,
+            json.dumps(outbox_row.payload),
+            outbox_row.created_at,
+            False,
+        ),
+    )
+    conn.commit()
+    print(f"[COMMITTED] order={order.order_id}  outbox_event={outbox_row.event_id}")
+    return outbox_row
+
+
+def relay_unpublished(conn: sqlite3.Connection) -&gt; None:
+    rows = conn.execute(
+        "SELECT event_id, event_type, payload FROM outbox WHERE published = 0"
+    ).fetchall()
+
+    for event_id, event_type, payload in rows:
+        print(f"[RELAY -&gt; BROKER] event_id={event_id} type={event_type}")
+        conn.execute(
+            "UPDATE outbox SET published = 1 WHERE event_id = ?", (event_id,)
+        )
+        conn.commit()
+
+
+def bootstrap(conn: sqlite3.Connection) -&gt; None:
+    conn.executescript("""
+        CREATE TABLE IF NOT EXISTS orders (
+            order_id     TEXT PRIMARY KEY,
+            customer_id  TEXT NOT NULL,
+            total_amount REAL NOT NULL,
+            status       TEXT NOT NULL
+        );
+        CREATE TABLE IF NOT EXISTS outbox (
+            event_id       TEXT PRIMARY KEY,
+            aggregate_type TEXT NOT NULL,
+            event_type     TEXT NOT NULL,
+            payload        TEXT NOT NULL,
+            created_at     TEXT NOT NULL,
+            published      INTEGER NOT NULL DEFAULT 0
+        );
+    """)
+
+
+if __name__ == "__main__":
+    conn = sqlite3.connect(":memory:")
+    bootstrap(conn)
+
+    order = Order(
+        order_id=str(uuid.uuid4()),
+        customer_id="cust-7",
+        total_amount=129.90,
+    )
+    place_order(conn, order)
+    relay_unpublished(conn)</code></pre>
+<p>Two mechanisms drive the outbox relay. <strong>Polling</strong> queries the table on an interval — simple, portable, but adds latency and database load. <strong>Change Data Capture (CDC)</strong> tails the database transaction log (via tools like Debezium) and streams new outbox rows to the broker in near-real time, with no polling overhead. CDC is the more scalable choice for high-volume systems; polling is perfectly adequate for most.</p>
+<p>Pro Tip: the event ID written into the outbox row is the same deduplication key the consumer uses. Design the two together. The producer's Outbox and the consumer's dedup check are two halves of one end-to-end correctness contract.</p>
+<blockquote class="expert"><strong>💡 Expert Note:</strong> CDC via Debezium is the correct high-throughput choice, but it requires database-level permissions that corporate DBAs frequently restrict and that PaaS offerings (Amazon RDS, Azure Database for PostgreSQL Flexible Server) expose only under specific configurations. Specifically: MySQL binlog access requires the <code>REPLICATION SLAVE</code> and <code>REPLICATION CLIENT</code> grants, and <code>binlog_format=ROW</code> must be set at the server level. PostgreSQL logical replication requires the <code>REPLICATION</code> role and a replication slot, and RDS imposes a hard limit of 20 replication slots that counts against all consumers. Teams routinely discover this constraint during UAT or production cutover, not during design. The fallback to polling is always available, but the architectural decision should be made with full knowledge of the permission requirements in the target environment — not deferred to deployment day.</blockquote>
+<div class="detail"><strong>⚠️ Critical Note</strong>
+<p>The Transactional Outbox is presented as solving the dual-write problem, but introduces a new operationally significant dependency that is not acknowledged: the outbox relay process. Whether implemented as a polling loop or a Debezium CDC connector, this relay is a separate process that can fail, lag, or be unavailable. While the outbox table accumulates rows, downstream consumers receive no events — a scenario that is functionally equivalent to the "lost event" problem the pattern was meant to solve, except now it is a relay-process outage rather than a service crash causing the delay. The prose describes CDC as "the more scalable choice" without surfacing any of this operational burden.</p>
+</div>
+<div class="detail"><strong>⚠️ Critical Note</strong>
+<p>The Outbox pattern as described does not preserve ordering across concurrent transactions from multiple application instances. Consider two concurrent requests A and B: A begins its transaction first (inserts outbox row with <code>id=100</code>), B begins slightly later (inserts outbox row with <code>id=101</code>), but B commits first. The relay picks up row 101 and publishes B's event. A then commits, and row 100 is published second. Consumers relying on insertion-order delivery now observe B's event before A's — violating the ordering guarantee the chapter spent the previous section building. Note the limitation explicitly: "The Outbox guarantees delivery without loss, not strict global ordering across concurrent requests."</p>
+</div>
+
+<h2>Dead-Letter Queues and Retry Policies</h2>
+<p>Idempotency and the Outbox assume messages eventually succeed. Some never will. A malformed payload, a permanent schema mismatch, or a business rule that always rejects the message creates a <strong>poison message</strong> — one that fails no matter how many times it is retried. Under at-least-once, a naive broker redelivers it forever, blocking the partition or starving the consumer. This is a self-inflicted outage.</p>
+<p>The containment tool is a <strong>dead-letter queue (DLQ)</strong>: a separate queue where messages are moved after exhausting their retry budget. The DLQ isolates the poison message so the healthy stream keeps flowing, and preserves the failed message for inspection and manual reprocessing rather than discarding it.</p>
+<p>A sound <strong>retry policy</strong> distinguishes two failure classes:</p>
+<ul>
+<li><strong>Transient failures</strong> — a timeout, a throttled dependency, a brief network blip. These deserve retries, ideally with <strong>exponential backoff</strong> (increasing delays: 1s, 2s, 4s, 8s) and <strong>jitter</strong> (randomization) to avoid a thundering herd of synchronized retries hammering a recovering service.</li>
+<li><strong>Permanent failures</strong> — a validation error, an unparseable message. Retrying is pointless; route these to the DLQ immediately. Wasting a retry budget on a message that can never succeed only delays the inevitable.</li>
+</ul>
+<pre><code class="language-python"># Retry policy: exponential backoff with jitter for transient errors; immediate DLQ for permanent
+import random
+import time
+import logging
+from dataclasses import dataclass
+from typing import Callable
+
+logger = logging.getLogger(__name__)
+
+
+class TransientError(Exception):
+    """Temporary failure — worth retrying (timeout, throttle, network blip)."""
+
+
+class PermanentError(Exception):
+    """Unrecoverable failure — retrying is pointless (bad schema, invalid payload)."""
+
+
+@dataclass
+class RetryPolicy:
+    max_attempts: int = 5
+    base_delay_seconds: float = 1.0
+    max_delay_seconds: float = 30.0
+    jitter_factor: float = 0.3
+
+
+def _backoff_delay(attempt: int, policy: RetryPolicy) -&gt; float:
+    delay = min(
+        policy.base_delay_seconds * (2 ** attempt),
+        policy.max_delay_seconds,
+    )
+    jitter = 1.0 + policy.jitter_factor * (2 * random.random() - 1)
+    return delay * jitter
+
+
+def send_to_dlq(message: dict, reason: str) -&gt; None:
+    logger.error(
+        "DLQ: message dead-lettered",
+        extra={"event_id": message.get("event_id"), "reason": reason},
+    )
+
+
+def process_with_retry(
+    message: dict,
+    handler: Callable[[dict], None],
+    policy: RetryPolicy | None = None,
+) -&gt; None:
+    if policy is None:
+        policy = RetryPolicy()
+
+    for attempt in range(policy.max_attempts):
+        try:
+            handler(message)
+            return
+        except PermanentError as exc:
+            send_to_dlq(message, reason=f"PermanentError: {exc}")
+            return
+        except TransientError as exc:
+            if attempt + 1 == policy.max_attempts:
+                send_to_dlq(message, reason=f"TransientError after {policy.max_attempts} attempts: {exc}")
+                return
+            delay = _backoff_delay(attempt, policy)
+            logger.warning(
+                "Transient failure, retrying",
+                extra={"attempt": attempt + 1, "delay_s": round(delay, 2), "error": str(exc)},
+            )
+            time.sleep(delay)
+
+
+if __name__ == "__main__":
+    logging.basicConfig(level=logging.INFO)
+
+    call_count = 0
+
+    def flaky_handler(msg: dict) -&gt; None:
+        global call_count
+        call_count += 1
+        if call_count &lt; 3:
+            raise TransientError("downstream timeout")
+        print(f"[PROCESSED] event_id={msg['event_id']}")
+
+    def bad_handler(msg: dict) -&gt; None:
+        raise PermanentError("schema validation failed: missing required field 'amount'")
+
+    policy = RetryPolicy(max_attempts=5, base_delay_seconds=0.05)
+
+    process_with_retry({"event_id": "ev-001"}, flaky_handler, policy)
+    process_with_retry({"event_id": "ev-002"}, bad_handler, policy)</code></pre>
+<p>Set a <strong>maximum receive count</strong> — the number of delivery attempts before the message is dead-lettered. In SQS this is a native redrive policy; in Kafka it is typically implemented with retry topics and a final DLQ topic. Choose the count deliberately: too low and transient blips lose messages to the DLQ; too high and a poison message churns for minutes before quarantine.</p>
+<p>Critically, the DLQ is not a garbage can. A message landing there is an <strong>operational signal</strong> demanding an alert. Chapter 9 treats DLQ monitoring and safe reprocessing in depth; for now, the rule is simple: <strong>an unwatched DLQ is a silent data loss buffer.</strong> Every message that enters it represents a business fact your system failed to honor.</p>
+<blockquote class="critical"><strong>⚠️ Critical Note:</strong> The prose warns that a poison message "churns for minutes before quarantine," but in Kafka this is a severe understatement of the consequence. Kafka guarantees order within a partition; a consumer does not advance past a failing offset until that message is either successfully processed or manually skipped. A poison message with a generous retry budget (e.g., 10 attempts × exponential backoff reaching 512s) can block every subsequent message in an entire partition for hours, causing consumer-group lag to grow without bound for that partition. Unlike SQS or RabbitMQ, there is no native mechanism to park a single Kafka message mid-stream and continue consuming — the retry-topic pattern must be deliberately designed in.</blockquote>
+<blockquote class="expert"><strong>💡 Expert Note:</strong> The prose correctly distinguishes transient from permanent failures, but omits a production-critical failure mode that sits between the two: the infrastructure-level redelivery that occurs before any application-level retry policy fires. In SQS, if the <code>VisibilityTimeout</code> is shorter than the processing time for a message, the broker makes the message visible again while the first consumer is still processing it — causing concurrent dual delivery to two different consumer instances. The safe rule is: set <code>VisibilityTimeout</code> to at least 6x the P99 processing latency, and monitor the <code>ApproximateNumberOfMessagesNotVisible</code> CloudWatch metric to detect concurrent delivery events.</blockquote>
+
+<h2>Key Takeaways</h2>
+<ul>
+<li><strong>At-least-once is the realistic default.</strong> True exactly-once <em>delivery</em> is impossible over a network (Two Generals); what vendors sell is exactly-once <em>processing</em>, scoped inside the broker and void the moment a side effect touches an external system.</li>
+<li><strong>Duplicates are guaranteed, so consumers must be idempotent.</strong> Use natural idempotency (upserts keyed by event ID) where the domain allows, and a deduplication-key store where side effects are external.</li>
+<li><strong>Order is a partition-scoped guarantee.</strong> Route order-sensitive events for one aggregate to one partition via a stable partition key, and use per-entity version numbers to reject stale or duplicate deliveries.</li>
+<li><strong>The Transactional Outbox defeats the dual-write problem</strong> by committing the state change and the event atomically to one database, then relaying to the broker at-least-once — which is why the consumer's idempotency is non-negotiable.</li>
+<li><strong>Dead-letter queues contain poison messages.</strong> Retry transient failures with exponential backoff and jitter; dead-letter permanent failures immediately; and alert on every DLQ arrival.</li>
+</ul>
+
+<h2>What's Next</h2>
+<p>With reliable delivery and idempotent processing established, Chapter 5 turns to structure — introducing CQRS to separate the write path from the read path and resolve the shape mismatch between how data is stored and how it is queried.</p>
+</body>
+</html>

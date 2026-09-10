@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Capítulo 8: Evolução de Schema e Versionamento de Eventos</title>
+  <link rel="stylesheet" type="text/css" href="styles.css"/>
+</head>
+<body>
+<h1 id="ch08">Capítulo 8: Evolução de Schema e Versionamento de Eventos</h1>
+
+<h2>Declaração do Problema Inicial</h2>
+
+<p>Com Event Sourcing, cada evento é guardado para sempre. Um evento escrito em 2021 será lido em 2027, por um consumidor escrito em 2025. O evento não é uma mensagem transitória; é um <strong>contrato persistido com o futuro</strong>. Como um arquiteto muda a forma de um fato que já aconteceu, está armazenado milhões de vezes, e é consumido por equipes que ele nunca conheceu?</p>
+
+<h2>Compatibilidade Retroativa e Prospectiva</h2>
+
+<p><strong>Compatibilidade retroativa</strong> (backward compatibility) significa que um <em>novo consumidor</em> pode ler <em>eventos antigos</em>. Essa é a direção que o Event Sourcing exige, porque seu event store está cheio de eventos antigos que serão reexecutados para sempre.</p>
+
+<p><strong>Compatibilidade prospectiva</strong> (forward compatibility) significa que um <em>consumidor antigo</em> pode ler <em>eventos novos</em>. Essa é a direção que a integração pub/sub exige, porque você não pode atualizar todos os consumidores no mesmo instante em que atualiza o produtor.</p>
+
+<p><strong>Compatibilidade total</strong> (full compatibility) é ambas ao mesmo tempo. É a mais restrita e a mais segura.</p>
+
+<p class="diagram-caption">📊 [Diagram — Mermaid source below]</p>
+<pre class="mermaid-source"><code>flowchart LR
+    subgraph FULL["Full-Safe — Backward AND Forward"]
+        F1["Add optional field with default"]
+        F2["Widen type — int to long"]
+    end
+
+    subgraph BACK["Backward-Safe Only\n(new consumer reads old events)"]
+        B1["Remove optional field\n(new schema supplies default)"]
+    end
+
+    subgraph FWD["Forward-Safe Only\n(old consumer reads new events)"]
+        V1["Add required field — no default\n(old consumer ignores unknown fields)"]
+    end
+
+    subgraph UNSAFE["Never Safe — Breaks Both Directions"]
+        U1["Rename field\n= remove + add — fails both ways"]
+        U2["Narrow type — long to int\n(truncation risk)"]
+        U3["Change field meaning\n(semantic breakage)"]
+    end
+
+    FULL -->|"Safe to ship anytime"| OK(["Deploy freely"])
+    BACK -->|"Roll consumers forward first"| WARN(["Coordinate rollout"])
+    FWD -->|"Breaks event replays"| WARN2(["Block for Event Sourcing"])
+    UNSAFE -->|"Registry must reject"| BLOCK(["Build fails"])</code></pre>
+
+<p>Observe a armadilha escondida nessa matriz. Adicionar um campo <strong>obrigatório</strong> quebra a compatibilidade retroativa, porque eventos antigos simplesmente não o carregam. Remover um campo quebra a compatibilidade prospectiva. E uma renomeação não é uma operação — é uma exclusão mais uma adição, portanto falha nos dois lados.</p>
+
+<pre><code class="language-python"># Schema evolution: safe addition of an optional field with a null default
+# Demonstrates both backward and forward compatibility using Avro-style schemas
+
+from typing import Any
+
+# v1 schema: original OrderPlaced event (no coupon support yet)
+ORDER_PLACED_V1: dict[str, Any] = {
+    "type": "record",
+    "name": "OrderPlaced",
+    "namespace": "com.example.orders",
+    "doc": "An order was placed by a customer.",
+    "fields": [
+        {"name": "orderId",    "type": "string"},
+        {"name": "customerId", "type": "string"},
+        {"name": "totalCents", "type": "long"},
+    ],
+}
+
+# v2 schema: adds optional couponCode as a null-first union (default = null)
+ORDER_PLACED_V2: dict[str, Any] = {
+    "type": "record",
+    "name": "OrderPlaced",
+    "namespace": "com.example.orders",
+    "doc": "An order was placed by a customer.",
+    "fields": [
+        {"name": "orderId",    "type": "string"},
+        {"name": "customerId", "type": "string"},
+        {"name": "totalCents", "type": "long"},
+        {
+            "name": "couponCode",
+            "type": ["null", "string"],  # null-first union
+            "default": None,
+            "doc": "Discount coupon applied at checkout, or null if none.",
+        },
+    ],
+}
+
+
+def demonstrate_compatibility() -&gt; None:
+    """Simulate reader/writer schema resolution in plain Python dicts."""
+    import json
+
+    v1_payload: dict[str, Any] = {
+        "orderId": "ord-001",
+        "customerId": "cust-42",
+        "totalCents": 4999,
+    }
+
+    def read_as_v2(payload: dict[str, Any]) -&gt; dict[str, Any]:
+        return {**{"couponCode": None}, **payload}
+
+    v1_field_names = {f["name"] for f in ORDER_PLACED_V1["fields"]}
+
+    def read_as_v1(payload: dict[str, Any]) -&gt; dict[str, Any]:
+        return {k: v for k, v in payload.items() if k in v1_field_names}
+
+    v2_payload: dict[str, Any] = {
+        "orderId": "ord-002",
+        "customerId": "cust-99",
+        "totalCents": 2500,
+        "couponCode": "SAVE10",
+    }
+
+    print("v2 consumer reads v1 event:", json.dumps(read_as_v2(v1_payload)))
+    print("v1 consumer reads v2 event:", json.dumps(read_as_v1(v2_payload)))</code></pre>
+
+<blockquote class="expert"><strong>💡 Nota do Especialista:</strong> O texto afirma que compatibilidade total "é o alvo para o qual a maioria dos registries maduros usa como padrão." Isso é impreciso. O Confluent Schema Registry usa <strong>BACKWARD</strong> como padrão, não FULL. O AWS Glue Schema Registry também usa BACKWARD_ALL como padrão. FULL é uma escolha opt-in, precisamente porque proíbe a remoção de campos e impõe restrições que muitas equipes não conseguem cumprir no início do ciclo de vida de um produto.</blockquote>
+
+<div class="detail"><strong>💡 Nota do Especialista</strong> O texto cobre quais mudanças são seguras, mas não nomeia o padrão <strong>Tolerant Reader</strong> — a disciplina do lado do consumidor que é a implementação prática da compatibilidade prospectiva. Um leitor tolerante desserializa apenas os campos de que explicitamente precisa e descarta todo o resto sem erro, em vez de falhar em campos não reconhecidos ou ausentes.</div>
+
+<blockquote class="critical"><strong>⚠️ Nota Crítica:</strong> O Confluent Schema Registry — o registry dominante em sistemas baseados em Kafka — usa <code>BACKWARD</code> como padrão, não <code>FULL</code>. O AWS Glue Schema Registry também usa <code>BACKWARD_ALL</code> como padrão. Nenhum registry amplamente implantado usa <code>FULL</code> por padrão. Substitua a frase pela declaração precisa: a maioria dos registries maduros usa <code>BACKWARD</code> (Confluent) ou <code>BACKWARD_ALL</code> (AWS Glue) como padrão.</blockquote>
+
+<h2>Schema Registry e Formatos (Avro, JSON Schema, Protobuf)</h2>
+
+<p>Um <strong>schema registry</strong> armazena o schema canônico para cada tipo de evento, atribui uma versão e <em>recusa</em> registrar uma nova versão que viole a regra de compatibilidade configurada. Ele transforma a compatibilidade de uma esperança na revisão de código em uma barreira em tempo de build.</p>
+
+<p class="diagram-caption">📊 [Diagram — Mermaid source below]</p>
+<pre class="mermaid-source"><code>sequenceDiagram
+    participant P as Producer
+    participant SR as Schema Registry
+    participant BR as Broker
+    participant C as Consumer
+
+    P->>SR: Submit candidate schema
+    alt Schema is compatible
+        SR-->>P: Return schema ID
+        P->>BR: Publish event (schema ID + binary payload)
+        C->>BR: Read message
+        C->>SR: Fetch schema by ID (cache miss)
+        SR-->>C: Return schema definition
+        C->>C: Deserialize event using schema
+    else Schema violates compatibility rule
+        SR-->>P: Reject — compatibility violation
+        note over P: Build fails on producer side
+    end</code></pre>
+
+<table>
+<thead><tr><th>Formato</th><th>Localização do schema</th><th>Modelo de evolução</th><th>Legível por humanos</th><th>Melhor uso</th></tr></thead>
+<tbody>
+<tr><td><strong>Avro</strong></td><td>Externo, resolvido por ID</td><td>Resolução reader/writer — história de evolução mais robusta</td><td>Não (binário)</td><td>Streams de eventos Kafka, event stores</td></tr>
+<tr><td><strong>Protobuf</strong></td><td>Compilado no código (números de campo)</td><td>Baseado em número de campo; adicione/reserve, nunca reutilize números</td><td>Não (binário)</td><td>gRPC, contratos internos de alto throughput</td></tr>
+<tr><td><strong>JSON Schema</strong></td><td>Externo ou inline</td><td>Aditivo com defaults; centrado em validação</td><td>Sim (texto)</td><td>Eventos públicos/parceiros, depurabilidade em primeiro lugar</td></tr>
+</tbody>
+</table>
+
+<div class="detail"><strong>💡 Nota do Especialista</strong> O texto explica que os produtores marcam eventos com um schema ID, mas omite o detalhe do formato wire. O formato wire do Confluent — agora um padrão de fato — é: <code>0x00</code> (magic byte) + ID de schema big-endian de 4 bytes + payload serializado. Qualquer consumidor não-Kafka deve entender esse enquadramento antes mesmo de começar a desserialização.</div>
+
+<div class="detail"><strong>💡 Nota do Especialista</strong> O schema registry é mencionado como uma barreira em tempo de build, mas seu risco operacional como dependência em tempo de execução não é abordado. Em produção, todo consumidor realiza uma busca de cache miss no registry no primeiro contato com um novo schema ID. Se o registry estiver indisponível, um consumidor que ainda não armazenou em cache esse schema falhará ao desserializar. A mitigação padrão é um <strong>cache de schema local em disco</strong>.</div>
+
+<div class="detail"><strong>⚠️ Nota Crítica</strong> A seção sobre Protobuf afirma que "renomear um campo não tem custo no wire." Embora verdadeiro no nível de codificação binária, isso é enganoso na prática. Renomear um campo Protobuf muda toda API de cliente gerada — todo serviço que importa o arquivo <code>.proto</code> deve recompilar e atualizar seus call sites. Qualifique a afirmação: "renomear não tem custo no <em>formato wire</em>, mas o código gerado de todo consumidor muda e deve ser recompilado e reimplantado."</div>
+
+<h2>Upcasting e Versionamento de Eventos Persistidos</h2>
+
+<p>Eventualmente um conceito de negócio genuinamente muda de forma — um único campo <code>name</code> deve se tornar <code>firstName</code> e <code>lastName</code>. Nenhuma regra aditiva cobre isso, e você não pode reescrever a história. A resposta é o <strong>upcasting</strong>: transformar um evento antigo no schema atual <em>no momento da leitura</em>, em memória. Os bytes armazenados nunca mudam.</p>
+
+<pre><code class="language-python"># Upcaster pipeline: promote persisted events to the current schema at read time.
+# Stored bytes are never modified; the upgrade is purely in-memory on the read path.
+# Time complexity: O(n) per event, where n = number of version steps required.
+
+from __future__ import annotations
+
+import dataclasses
+from collections.abc import Callable
+from typing import Any
+
+UpcasterKey = tuple[str, int]
+UpcasterFn  = Callable[[dict[str, Any]], dict[str, Any]]
+
+
+class UpcasterPipeline:
+    """Registry and executor of upcaster functions keyed by (event_type, from_version)."""
+
+    def __init__(self) -&gt; None:
+        self._registry: dict[UpcasterKey, UpcasterFn] = {}
+
+    def register(
+        self, event_type: str, from_version: int
+    ) -&gt; Callable[[UpcasterFn], UpcasterFn]:
+        """Decorator: register a function as the upcaster for (event_type, from_version)."""
+        def decorator(fn: UpcasterFn) -&gt; UpcasterFn:
+            self._registry[(event_type, from_version)] = fn
+            return fn
+        return decorator
+
+    def upcast(self, raw: dict[str, Any]) -&gt; dict[str, Any]:
+        """Walk the upcaster chain until the payload reaches the latest version."""
+        payload = dict(raw)
+        event_type: str = payload["event_type"]
+
+        while (key := (event_type, payload["version"])) in self._registry:
+            payload = self._registry[key](payload)
+
+        return payload
+
+
+pipeline = UpcasterPipeline()
+
+
+@pipeline.register("CustomerRegistered", from_version=1)
+def upcast_customer_registered_v1_to_v2(payload: dict[str, Any]) -&gt; dict[str, Any]:
+    full_name: str = payload["full_name"]
+    first, _, last = full_name.partition(" ")
+    return {
+        "event_type":  payload["event_type"],
+        "version":     2,
+        "customer_id": payload["customer_id"],
+        "first_name":  first,
+        "last_name":   last or "",
+    }
+
+
+@dataclasses.dataclass(frozen=True)
+class CustomerRegisteredV2:
+    event_type:  str
+    version:     int
+    customer_id: str
+    first_name:  str
+    last_name:   str
+
+
+def handle_customer_registered(event: CustomerRegisteredV2) -&gt; None:
+    print(
+        f"[handler] Welcome, {event.first_name} {event.last_name}!"
+        f" (customer_id={event.customer_id}, schema_version={event.version})"
+    )
+
+
+def load_and_dispatch(raw: dict[str, Any]) -&gt; None:
+    """Read a stored event payload, upcast transparently, dispatch to handler."""
+    current = pipeline.upcast(raw)
+    event = CustomerRegisteredV2(**current)
+    handle_customer_registered(event)</code></pre>
+
+<p class="diagram-caption">📊 [Diagram — Mermaid source below]</p>
+<pre class="mermaid-source"><code>flowchart TD
+    STORE["Event Store\n(immutable — bytes never changed)"]
+    STORE -->|read raw bytes| A["Stored Event + Version Tag"]
+    A --> VER{Check version}
+
+    VER -->|v1| U1["Upcaster v1 → v2\nsplit fullName into firstName + lastName"]
+    VER -->|v2| U2["Upcaster v2 → v3\nconvert amount float to integer minor units"]
+    VER -->|v3| PT["Pass Through\nno transformation needed"]
+
+    U1 --> U2
+    U2 --> CURR["Current Schema Event — v3"]
+    PT --> CURR
+
+    CURR --> DH["Domain Handler\n(sees only v3 — always)"]</code></pre>
+
+<p>Duas disciplinas tornam o upcasting sustentável: primeiro, <strong>todo evento carrega um número de versão explícito</strong> desde o primeiro dia; segundo, quando uma cadeia de upcasters cresce de forma incontrolável, você pode <strong>reescrever o stream</strong> para um novo sob o novo schema — upcasting é mais barato no dia a dia; reescrita de stream é mais limpa a longo prazo.</p>
+
+<div class="detail"><strong>💡 Nota do Especialista</strong> Em escala de produção, uma cadeia de upcasters interage de forma perigosa com a reconstrução de aggregates. Reproduzir um stream de 500k eventos através de dois upcasters por evento adiciona tempo significativo de CPU. A mitigação padrão — <strong>snapshots de aggregate</strong> — deve ser co-projetada com a estratégia de upcasting: um snapshot armazena um estado totalmente atualizado na versão atual, de modo que as reproduções processem apenas eventos após o último snapshot.</div>
+
+<div class="detail"><strong>⚠️ Nota Crítica</strong> O padrão de cadeia de upcasters é apresentado inteiramente no caminho feliz. Um upcaster defeituoso não falha apenas em uma mensagem — ele torna toda a história do aggregate ilegível. Upcasters devem ser testados contra um corpus de eventos históricos reais antes da implantação; um upcaster com falha deve exibir um erro claro com o payload do evento armazenado e a versão.</div>
+
+<h2>Contratos, Contratos Orientados ao Consumidor e Governança</h2>
+
+<p>A parte mais difícil da evolução de schema não é técnica; é organizacional. Os <strong>contratos orientados ao consumidor</strong> (consumer-driven contracts — CDC) invertem a direção habitual de autoridade. Em vez de o produtor declarar "aqui está meu schema, adapte-se a ele," cada consumidor publica um contrato declarando exatamente os campos de que <em>ele</em> depende. O build do produtor verifica seu schema contra a união de todos os contratos. Se uma mudança proposta quebrar as expectativas declaradas de qualquer consumidor, o pipeline do produtor falha — antes da implantação.</p>
+
+<p class="diagram-caption">📊 [Diagram — Mermaid source below]</p>
+<pre class="mermaid-source"><code>flowchart TD
+    CA["Consumer A\npublishes contract\n(expected fields + types)"]
+    CB["Consumer B\npublishes contract\n(expected fields + types)"]
+
+    CA -->|upload| REPO["Shared Contract Repository\n(contract broker)"]
+    CB -->|upload| REPO
+
+    REPO -->|pull all contracts| CI["Producer CI Pipeline\n(candidate schema)"]
+
+    CI --> CHK{Candidate schema\nsatisfies all contracts?}
+    CHK -->|Yes — all consumers pass| PASS["Build Passes\nProduce deploys safely"]
+    CHK -->|No — contract violated| FAIL["Build Fails\nProducer must fix schema\nbefore deployment"]
+
+    subgraph CONTRAST["Direction of Authority"]
+        PD["Producer-driven\nschema pushed down to consumers"]
+        CDC["Consumer-driven\ncontracts pulled up by producer"]
+    end</code></pre>
+
+<table>
+<thead><tr><th>Preocupação</th><th>Schema registry</th><th>Contratos orientados ao consumidor</th></tr></thead>
+<tbody>
+<tr><td>Pergunta respondida</td><td>"Esta mudança é estruturalmente compatível?"</td><td>"Algum consumidor real realmente quebra?"</td></tr>
+<tr><td>Conhece os consumidores</td><td>Não</td><td>Sim, explicitamente</td></tr>
+<tr><td>Ponto de aplicação</td><td>Registro do schema</td><td>Build de CI do produtor</td></tr>
+<tr><td>Captura uso semântico incorreto</td><td>Não</td><td>Parcialmente (apenas expectativas declaradas)</td></tr>
+</tbody>
+</table>
+
+<div class="detail"><strong>💡 Nota do Especialista</strong> O texto descreve contratos orientados ao consumidor conceitualmente, mas não nomeia as ferramentas. <strong>Pact</strong> (pact.io) é a implementação open-source dominante: consumidores escrevem arquivos Pact expressando as interações de que dependem, um <strong>Pact Broker</strong> os armazena, e o pipeline de CI do produtor executa <code>can-i-deploy</code> antes de qualquer release. A disciplina crítica de produção são os <strong>pending pacts e WIP pacts</strong> — o mecanismo para introduzir novos contratos de consumidor sem bloquear imediatamente o build do produtor.</div>
+
+<div class="detail"><strong>💡 Nota do Especialista</strong> As métricas do schema registry indicam se uma <em>versão</em> do schema está sendo buscada — elas não informam se um <em>campo</em> específico está sendo usado por consumidores downstream. Um consumidor pode buscar o schema v3 enquanto lê apenas o campo <code>orderId</code> e ignora <code>couponCode</code>. A métrica mais segura é a <strong>telemetria de nível de campo do lado do consumidor</strong>: desserialização instrumentada que registra quais campos são acessados por grupo de consumidor.</div>
+
+<div class="detail"><strong>⚠️ Nota Crítica</strong> CDC só funciona quando cada consumidor mantém e publica ativamente seu contrato. Na prática, obter 100% de participação é difícil — equipes desprioritizam atualizações de contratos, novos consumidores são integrados sem contratos. Um build que passa contra a união de contratos <em>publicados</em> ainda pode quebrar um consumidor não publicado. CDC deve ser combinado com um registro de consumidores conhecidos e um checklist de integração que torna a publicação de contratos obrigatória.</div>
+
+<h2>A Armadilha da Política Ausente</h2>
+
+<p>O único erro mais prejudicial neste capítulo não é uma má mudança de schema. É a <em>ausência de uma política de compatibilidade declarada</em>. Um sistema sem uma política não anuncia o problema — tudo funciona até que a primeira mudança genuinamente quebradora é enviada, um consumidor de três equipes de distância desserializa lixo, e como os eventos são persistidos, o veneno agora está permanentemente no store.</p>
+
+<p>A correção é embaraçosamente barata: <strong>escolha um modo de compatibilidade padrão antes que seu primeiro evento seja enviado</strong>, e faça o registry aplicá-lo. <code>BACKWARD</code> é o padrão sensato para a maioria dos sistemas baseados em Event Sourcing. Essa única decisão, tomada cedo, converte toda uma classe de incidentes de produção em falhas em tempo de build na mesa da pessoa que os causou.</p>
+
+<blockquote class="expert"><strong>💡 Nota do Especialista:</strong> O texto identifica corretamente a ausência de uma política declarada como o erro mais prejudicial, mas não distingue entre dois modos de falha. O caso mais doloroso é um sistema em execução onde eventos foram enviados por meses sem um registry, e um registry está agora sendo retrofitado. O registro inicial do schema deve ser tratado como uma auditoria de <strong>baseline de compatibilidade</strong>, não como uma importação simples.</blockquote>
+
+<h2>Principais Conclusões</h2>
+
+<ul>
+<li><strong>Compatibilidade tem uma direção.</strong> Retroativa = novo consumidor lê eventos antigos (Event Sourcing precisa disso); prospectiva = consumidor antigo lê eventos novos (pub/sub precisa disso); total = ambas.</li>
+<li><strong>Somente aditivo é o caminho seguro.</strong> Adicione campos opcionais com defaults; nunca renomeie in-place, adicione campos obrigatórios sem defaults, ou reutilize um número de campo Protobuf retirado.</li>
+<li><strong>Um schema registry transforma política em uma barreira em tempo de build.</strong> O Avro é especialmente robusto para event stores pela sua resolução reader/writer.</li>
+<li><strong>Faça upcasting, não mutação.</strong> Transforme eventos antigos persistidos para o schema atual no momento da leitura por meio de uma cadeia de upcasters versionados.</li>
+<li><strong>O registry responde "é estruturalmente compatível?"; CDC responde "algum consumidor real quebra?"</strong> Você precisa de ambos, mais governança leve.</li>
+<li><strong>Nenhuma política de compatibilidade é a armadilha.</strong> Escolha um modo padrão (BACKWARD ou FULL) e aplique-o antes de seu primeiro evento ser enviado.</li>
+</ul>
+
+<h2>O Que Vem a Seguir</h2>
+
+<p>Com contratos que podem evoluir com segurança estabelecidos, o Capítulo 9 volta-se para a realidade operacional de executar esses sistemas — observando, rastreando e depurando fluxos de eventos cujo fluxo de controle é implícito e distribuído por serviços desacoplados.</p>
+
+</body>
+</html>
