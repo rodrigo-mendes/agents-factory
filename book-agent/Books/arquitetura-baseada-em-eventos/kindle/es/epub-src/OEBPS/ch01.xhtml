@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Chapter 1: Foundations of Event-Driven Architecture</title>
+  <link rel="stylesheet" type="text/css" href="styles.css"/>
+</head>
+<body>
+<h1 id="ch01">Chapter 1: Foundations of Event-Driven Architecture</h1>
+
+<h2>Declaraci&#243;n del Problema Inicial</h2>
+
+<p>La mayor&#237;a de los sistemas distribuidos fallan no porque un servicio sea lento, sino porque cada servicio espera a otro. Un servicio de pagos llama a inventario, que llama a env&#237;os, que llama a notificaciones, y el cliente mira un spinner mientras una cadena de llamadas s&#237;ncronas decide su destino. Cuando un eslab&#243;n se degrada, toda la cadena se degrada con &#233;l. Esta es la patolog&#237;a del <strong>acoplamiento temporal</strong> (temporal coupling): dos componentes deben estar vivos, alcanzables y responsivos en el mismo instante para que la interacci&#243;n tenga &#233;xito. Los arquitectos senior conocen bien este dolor. Se manifiesta como timeouts en cascada, tormentas de reintentos y la llamada de las 3 a.m. en la que un fallo en un servicio descendente dej&#243; toda la pipeline de pedidos fuera de l&#237;nea. Event-Driven Architecture (EDA) no es una etiqueta de moda para colas de mensajes. Es una inversi&#243;n deliberada de qui&#233;n espera a qui&#233;n. Este cap&#237;tulo define el &#225;tomo de esa inversi&#243;n &#8212; el <strong>evento</strong> &#8212; y construye el vocabulario que necesitas para razonar con precisi&#243;n sobre el acoplamiento.</p>
+
+<h2>El Evento como un Hecho Inmutable del Pasado</h2>
+
+<p>Un <strong>evento</strong> es un registro inmutable de algo que ya ocurri&#243;. <code>OrderPlaced</code>, <code>PaymentCaptured</code>, <code>ShipmentDispatched</code> &#8212; cada uno nombra un hecho en tiempo pasado, y cada uno es inmutable una vez emitido. No puedes deshacer un pedido del mismo modo que no puedes des-tocar una campana. Si la realidad cambia despu&#233;s, emites un nuevo evento (<code>OrderCancelled</code>), no editas el antiguo.</p>
+
+<p>Esta inmutabilidad no es una preferencia estil&#237;stica. Es la propiedad que hace que los eventos sean seguros para replicar, reproducir y distribuir a consumidores que el productor nunca conoci&#243;.</p>
+
+<p>La distinci&#243;n que confunde a los ingenieros experimentados es <strong>evento versus comando versus mensaje</strong>. No son sin&#243;nimos, y confundirlos corrompe tu dise&#241;o.</p>
+
+<table>
+<thead><tr><th>Concepto</th><th>Direcci&#243;n</th><th>Intenci&#243;n</th><th>Acoplamiento al receptor</th></tr></thead>
+<tbody>
+<tr><td><strong>Command</strong></td><td>Emisor &#8594; un receptor</td><td>&#34;Haz esto&#34; (imperativo, futuro)</td><td>El emisor conoce y espera un handler</td></tr>
+<tr><td><strong>Event</strong></td><td>Productor &#8594; N consumidores</td><td>&#34;Esto ocurri&#243;&#34; (declarativo, pasado)</td><td>El productor no sabe nada sobre los consumidores</td></tr>
+<tr><td><strong>Message</strong></td><td>&#8212;</td><td>El sobre de transporte</td><td>Ninguno; transporta comandos o eventos</td></tr>
+</tbody>
+</table>
+
+<p>Un <strong>command</strong> expresa intenci&#243;n y espera ejecuci&#243;n: <code>CapturePayment</code> exige que alg&#250;n handler espec&#237;fico act&#250;e. Puede ser rechazado. Un <strong>event</strong> expresa un hecho y no espera nada: <code>PaymentCaptured</code> simplemente anuncia la realidad a quien le interese. Un <strong>message</strong> no es ninguno de los dos &#8212; es el sobre en el cable que lleva uno u otro.</p>
+
+<p>Los commands y los events difieren fundamentalmente en intenci&#243;n y acoplamiento: un command apunta a un receptor espec&#237;fico y exige una respuesta, mientras que un event transmite un hecho a cualquier n&#250;mero de consumidores independientes que pueden o no existir en el momento de la publicaci&#243;n.</p>
+
+<p class="diagram-caption">&#128202; [Diagram &#8212; Mermaid source below]</p>
+<pre class="mermaid-source"><code>flowchart TD
+    subgraph CMD["Command Flow"]
+        Sender["Sender"] --&gt;|"Do this"| Receiver["Receiver"]
+        Receiver -.-&gt;|"Executed or Rejected"| Sender
+    end
+
+    subgraph EVT["Event Flow"]
+        Producer["Producer"] --&gt;|"This happened"| ConsumerA["Consumer A"]
+        Producer --&gt; ConsumerB["Consumer B"]
+        Producer --&gt; ConsumerC["Consumer C"]
+    end</code></pre>
+
+<h2>Acoplamiento Temporal, Espacial y de Flujo</h2>
+
+<p>El acoplamiento es la moneda de la arquitectura, y viene en m&#225;s denominaciones de las que la mayor&#237;a de los diagramas admite. Para evaluar EDA honestamente, separa tres ejes distintos.</p>
+
+<p>El <strong>acoplamiento temporal</strong> significa que ambas partes deben estar disponibles al mismo tiempo. En una llamada HTTP s&#237;ncrona, si el destinatario est&#225; ca&#237;do, el llamador falla ahora. La comunicaci&#243;n orientada a eventos rompe este eje: el productor emite y contin&#250;a; el consumidor procesa cuando est&#233; listo, incluso minutos despu&#233;s. El broker absorbe la brecha.</p>
+
+<p>El <strong>acoplamiento espacial</strong> (tambi&#233;n llamado acoplamiento de ubicaci&#243;n o referencia) significa que el llamador debe conocer la identidad y la direcci&#243;n del destinatario. Publicar en un topic rompe este eje: el productor conoce el topic, no los suscriptores.</p>
+
+<p>El <strong>acoplamiento de flujo</strong> significa que un componente conoce la secuencia de pasos que el otro debe realizar. La coreograf&#237;a de eventos puede invertir esto &#8212; cada servicio reacciona a hechos y emite los suyos propios.</p>
+
+<table>
+<thead><tr><th>Eje de acoplamiento</th><th>Request-response s&#237;ncrono</th><th>Event-driven</th></tr></thead>
+<tbody>
+<tr><td><strong>Temporal</strong></td><td>Ambos vivos simult&#225;neamente</td><td>Desacoplado v&#237;a broker</td></tr>
+<tr><td><strong>Espacial</strong></td><td>El llamador conoce la direcci&#243;n del destinatario</td><td>El productor conoce solo el topic</td></tr>
+<tr><td><strong>Flujo</strong></td><td>El llamador posee la secuencia</td><td>Distribuido entre reactores</td></tr>
+</tbody>
+</table>
+
+<p>La visi&#243;n cr&#237;tica: EDA no elimina el acoplamiento. Intercambia acoplamiento expl&#237;cito en tiempo de compilaci&#243;n por acoplamiento impl&#237;cito en tiempo de ejecuci&#243;n.</p>
+
+<div class="detail"><strong>&#128161; Nota del Experto</strong>
+<p>El marco de acoplamiento de tres ejes (temporal, espacial, de flujo) es preciso pero omite un cuarto eje que emerge como dominante en sistemas EDA maduros: el <strong>acoplamiento sem&#225;ntico</strong> (tambi&#233;n llamado acoplamiento de datos o de contenido). Los consumidores dependen no solo de si un productor es alcanzable, sino de la estructura y el significado precisos del payload del evento. Este eje es lo que hace que la gobernanza de esquemas de eventos sea innegociable en entornos de m&#250;ltiples equipos.</p>
+</div>
+
+<div class="detail"><strong>&#9888;&#65039; Nota Cr&#237;tica</strong>
+<p>La tabla de acoplamiento lista el acoplamiento de Flujo en sistemas event-driven como &#34;Distribuido entre reactores&#34;, y el texto solo describe la coreograf&#237;a como la alternativa EDA a la orquestaci&#243;n. Esto conflaciona un patr&#243;n (coreograf&#237;a) con todo el paradigma. EDA basada en orquestaci&#243;n &#8212; orquestadores de Saga, AWS Step Functions, Azure Durable Functions, Temporal &#8212; centraliza el control de flujo expl&#237;citamente mientras sigue usando eventos as&#237;ncronos entre pasos.</p>
+</div>
+
+<h2>Request-Response Versus Comunicaci&#243;n As&#237;ncrona</h2>
+
+<p>El modelo <strong>request-response</strong> es el predeterminado porque se mapea a c&#243;mo pensamos: hacer una pregunta, esperar la respuesta. Es s&#237;ncrono, bloqueante y maravillosamente f&#225;cil de depurar. Para una lectura que un usuario est&#225; esperando activamente, generalmente es la herramienta correcta.</p>
+
+<p>Su debilidad es la aritm&#233;tica de disponibilidad. Encadena cinco servicios s&#237;ncronos, cada uno con 99.9% de uptime, y la disponibilidad compuesta es aproximadamente el 99.5%. Cada dependencia que agregas a una ruta s&#237;ncrona multiplica el riesgo y la latencia.</p>
+
+<p>La <strong>comunicaci&#243;n as&#237;ncrona</strong> desacopla la solicitud del resultado. El productor entrega un hecho a un broker y regresa de inmediato; los consumidores act&#250;an seg&#250;n su propio horario. Una interrupci&#243;n del consumidor ya no se propaga aguas arriba &#8212; los mensajes esperan en el log.</p>
+
+<p class="diagram-caption">&#128202; [Diagram &#8212; Mermaid source below]</p>
+<pre class="mermaid-source"><code>flowchart TD
+    subgraph SYNC["Scenario A -- Synchronous Chain: failure propagates"]
+        C1[Client] --&gt; SV1[Service 1]
+        SV1 --&gt; SV2[Service 2]
+        SV2 --&gt; SV3[Service 3]
+        SV3 --&gt; SV4["Service 4 -- DOWN"]
+        SV4 -.-&gt;|Timeout| SV3
+        SV3 -.-&gt;|Timeout| SV2
+        SV2 -.-&gt;|Timeout| SV1
+        SV1 -.-&gt;|Timeout| C1
+    end
+
+    subgraph ASYNC["Scenario B -- Async via Broker: failure buffered"]
+        C2[Client] --&gt;|Publish event| BR[Broker]
+        BR --&gt;|ACK -- immediate| C2
+        BR --&gt; B1[Service 1]
+        BR --&gt; B2[Service 2]
+        BR --&gt; B3[Service 3]
+        BR -.-&gt;|Messages buffered| B4["Service 4 -- DOWN"]
+    end</code></pre>
+
+<blockquote class="expert"><strong>&#128161; Nota del Experto:</strong> El texto enmarca correctamente la comunicaci&#243;n async como la conversi&#243;n de &#34;fragilidad multiplicativa en resiliencia aditiva&#34;, pero esto solo se sostiene cuando el broker en s&#237; mismo alcanza una alta disponibilidad genuina. En muchos despliegues de etapa temprana u optimizados en costo &#8212; un &#250;nico cl&#250;ster de Kafka en una zona de disponibilidad, un RabbitMQ administrado sin standby &#8212; los equipos simplemente han reubicado el punto &#250;nico de fallo en el broker. La afirmaci&#243;n de resiliencia solo se vuelve verdadera con replicaci&#243;n multi-AZ del broker.</blockquote>
+
+<div class="detail"><strong>&#9888;&#65039; Nota Cr&#237;tica</strong>
+<p>La aritm&#233;tica de disponibilidad (99.9%^5 &#8776; 99.5%) asume impl&#237;citamente que los fallos de los servicios son estad&#237;sticamente independientes. En la pr&#225;ctica, los servicios que comparten un cl&#250;ster de base de datos, una VPC, una zona de disponibilidad en la nube o una dependencia com&#250;n tienen modos de fallo correlacionados. Cuando los fallos est&#225;n correlacionados, la disponibilidad compuesta real puede ser significativamente peor.</p>
+</div>
+
+<div class="detail"><strong>&#9888;&#65039; Nota Cr&#237;tica</strong>
+<p>La afirmaci&#243;n &#34;una interrupci&#243;n del consumidor ya no se propaga aguas arriba &#8212; los mensajes esperan en el log&#34; solo es cierta dentro de la ventana de retenci&#243;n y la capacidad de almacenamiento del broker. Si un consumidor est&#225; fuera de l&#237;nea por m&#225;s tiempo que el per&#237;odo de retenci&#243;n configurado, los mensajes se descartan o se sobreescriben.</p>
+</div>
+
+<h2>Los Cuatro Estilos de Eventos: Notificaci&#243;n y Transferencia de Estado</h2>
+
+<p>La taxonom&#237;a de cuatro estilos de eventos de Martin Fowler es la herramienta m&#225;s precisa para alinear a un equipo sobre lo que realmente significa &#34;usar eventos&#34;.</p>
+
+<p><strong>Event Notification</strong> (notificaci&#243;n de evento) lleva el hecho b&#225;sico y poco m&#225;s: un ID, un tipo, un timestamp. <code>OrderPlaced { orderId: 4471 }</code>. El consumidor que necesita m&#225;s debe volver a llamar al productor para obtener los detalles.</p>
+
+<p><strong>Event-Carried State Transfer</strong> (transferencia de estado llevada por el evento) pone los datos relevantes dentro del evento. El consumidor no necesita ning&#250;n callback; mantiene su propia r&#233;plica. Esto maximiza el desacoplamiento y la disponibilidad al precio de payloads m&#225;s grandes y duplicaci&#243;n de datos.</p>
+
+<p>Los dos estilos restantes, <strong>Event Sourcing</strong> y <strong>CQRS</strong>, son los patrones arquitect&#243;nicos profundos que este libro disecciona en los Cap&#237;tulos 5 y 6.</p>
+
+<table>
+<thead><tr><th>Estilo</th><th>Payload</th><th>&#191;El consumidor necesita callback?</th><th>Trade-off principal</th></tr></thead>
+<tbody>
+<tr><td><strong>Notification</strong></td><td>M&#237;nimo (ID + tipo)</td><td>S&#237;, para obtener detalles</td><td>Eventos peque&#241;os, pero acoplamiento de callback</td></tr>
+<tr><td><strong>State Transfer</strong></td><td>Estado relevante completo</td><td>No</td><td>Autonom&#237;a, pero duplicaci&#243;n</td></tr>
+<tr><td><strong>Event Sourcing</strong></td><td>Los eventos <em>son</em> el estado</td><td>N/A</td><td>Historial completo, alta complejidad</td></tr>
+<tr><td><strong>CQRS</strong></td><td>Modelos de lectura/escritura separados</td><td>N/A</td><td>Escalabilidad de lectura, modelos duales</td></tr>
+</tbody>
+</table>
+
+<blockquote class="expert"><strong>&#128161; Nota del Experto:</strong> Event-Carried State Transfer maximiza la autonom&#237;a del consumidor, pero asume silenciosamente la estabilidad del esquema. En la pr&#225;ctica, una vez que los fat events est&#225;n en producci&#243;n, el esquema del evento se convierte en un contrato de API distribuido impl&#237;cito que los productores rompen regularmente. Sin un schema registry que aplique un modo de compatibilidad, un &#250;nico despliegue del productor puede crashear todos los consumidores descendentes simult&#225;neamente.</blockquote>
+
+<blockquote class="critical"><strong>&#9888;&#65039; Nota Cr&#237;tica:</strong> El texto recomienda Event-Carried State Transfer (ECST) como el &#34;valor predeterminado pragm&#225;tico para microservicios corporativos&#34; sin reconocer que incrustar estado (especialmente PII) dentro de eventos crea una exposici&#243;n seria al RGPD y a la gobernanza de datos. Una vez que un evento que contiene nombre de cliente, correo electr&#243;nico o datos de pago se replica a N consumidores, satisfacer una solicitud de derecho al olvido se vuelve operacionalmente complejo o t&#233;cnicamente imposible.</blockquote>
+
+<div class="detail"><strong>&#128161; Nota del Experto</strong>
+<p>El valor predeterminado pragm&#225;tico &#8212; &#34;comenzar con Event-Carried State Transfer para la integraci&#243;n entre contextos&#34; &#8212; requiere un calificador cr&#237;tico para los sistemas corporativos que manejan datos personales. Los fat events que llevan PII de clientes y se replican a N consumidores crean una exposici&#243;n significativa al Art&#237;culo 17 del RGPD (derecho de supresi&#243;n). Los patrones de producci&#243;n para fat events conformes incluyen: (1) emitir solo identificadores pseud&#243;nimos en el evento con PII obtenida a trav&#233;s de un data vault controlado, o (2) cifrar los payloads por cliente con una clave almacenada en un key-management service.</p>
+</div>
+
+<h2>Criterios de Decisi&#243;n: Cu&#225;ndo Adoptar y Cu&#225;ndo Evitar</h2>
+
+<p>Las opiniones sin criterios son solo preferencias. Aqu&#237; est&#225; la lista de verificaci&#243;n.</p>
+
+<p><strong>Adopta EDA cuando</strong> varios de estos aplican:</p>
+<ol>
+<li>Los productores y consumidores deben escalar, desplegarse y fallar de forma independiente.</li>
+<li>Un hecho desencadena naturalmente muchas reacciones (fan-out a consumidores que no puedes enumerar hoy).</li>
+<li>El negocio tolera &#8212; o quiere activamente &#8212; consistencia eventual.</li>
+<li>Los picos requieren almacenamiento en buffer, para que un broker pueda absorber picos de carga que el downstream no puede.</li>
+<li>Las nuevas capacidades deben conectarse a los flujos existentes sin modificar al productor.</li>
+</ol>
+
+<p><strong>Evita EDA cuando</strong> alguno de estos domina:</p>
+<ol>
+<li>La interacci&#243;n es una lectura s&#237;ncrona que un usuario est&#225; esperando ahora mismo.</li>
+<li>Necesitas una respuesta inmediata y fuertemente consistente (muchas autorizaciones financieras requieren esto).</li>
+<li>El sistema es un monolito peque&#241;o o un pu&#241;ado de servicios con un flujo estable y bien entendido.</li>
+<li>Tu equipo carece de la madurez operacional para tracing, gobernanza de esquemas e idempotencia.</li>
+</ol>
+
+<p>Esta funci&#243;n codifica la lista de verificaci&#243;n de adopci&#243;n del cap&#237;tulo en una regla ejecutable:</p>
+
+<pre><code class="language-python"># Decision function: maps system context flags to an architectural style recommendation
+from dataclasses import dataclass
+
+
+@dataclass(frozen=True)
+class ArchitectureContext:
+    """Captures the boolean flags that drive the EDA adoption decision."""
+    needs_immediate_answer: bool
+    requires_strong_consistency: bool
+    independent_scaling: bool
+    fan_out: bool
+    tolerates_eventual_consistency: bool
+    operational_maturity: bool
+
+
+def recommend_architecture(ctx: ArchitectureContext) -&gt; str:
+    """
+    Returns one of three recommendations based on the context flags.
+    """
+    if ctx.needs_immediate_answer or ctx.requires_strong_consistency:
+        return "prefer synchronous request-response"
+
+    eda_signals = sum([
+        ctx.independent_scaling,
+        ctx.fan_out,
+        ctx.tolerates_eventual_consistency,
+    ])
+
+    if eda_signals &gt;= 2 and not ctx.operational_maturity:
+        return "reconsider -- insufficient maturity for EDA"
+
+    if eda_signals &gt;= 2 and ctx.operational_maturity:
+        return "prefer event-driven"
+
+    return "prefer synchronous request-response"
+
+
+if __name__ == "__main__":
+    checkout = ArchitectureContext(
+        needs_immediate_answer=True,
+        requires_strong_consistency=True,
+        independent_scaling=False,
+        fan_out=False,
+        tolerates_eventual_consistency=False,
+        operational_maturity=True,
+    )
+    print(recommend_architecture(checkout))
+    # Output: prefer synchronous request-response
+
+    order_placed = ArchitectureContext(
+        needs_immediate_answer=False,
+        requires_strong_consistency=False,
+        independent_scaling=True,
+        fan_out=True,
+        tolerates_eventual_consistency=True,
+        operational_maturity=True,
+    )
+    print(recommend_architecture(order_placed))
+    # Output: prefer event-driven</code></pre>
+
+<p>El modo de fallo que m&#225;s hay que temer es la adopci&#243;n prematura. Envolver una aplicaci&#243;n CRUD de dos servicios en Kafka no la hace resiliente; la convierte en un sistema distribuido con todo el dolor de depuraci&#243;n y ninguno de los beneficios. Recurre a los eventos cuando el problema es as&#237;ncrono por naturaleza &#8212; no para parecer moderno.</p>
+
+<div class="detail"><strong>&#128161; Nota del Experto</strong>
+<p>El criterio &#34;evitar EDA&#34; que hace referencia a la &#34;madurez operacional&#34; es la barrera correcta, pero dejarlo sin definir permite que los equipos se autocertifiquen incorrectamente. Las operaciones m&#237;nimas viables de EDA requieren al menos: (1) distributed tracing con IDs de correlaci&#243;n propagados en todos los productores y consumidores; (2) dead-letter queues en cada consumidor con alertas sobre la profundidad de la DLQ; (3) un schema registry con modos de compatibilidad aplicados; y (4) claves de idempotencia en todos los handlers de consumidores.</p>
+</div>
+
+<h2>Conclusiones Clave</h2>
+
+<ul>
+<li>Un <strong>event</strong> es un hecho inmutable del pasado; un <strong>command</strong> es una intenci&#243;n de actuar; un <strong>message</strong> es solo el sobre. Confundirlos corrompe el dise&#241;o.</li>
+<li>El acoplamiento tiene tres ejes &#8212; <strong>temporal</strong>, <strong>espacial</strong> y <strong>de flujo</strong>. EDA afloja los tres, pero reemplaza el acoplamiento expl&#237;cito por acoplamiento impl&#237;cito en tiempo de ejecuci&#243;n.</li>
+<li>La disponibilidad s&#237;ncrona es multiplicativa y fr&#225;gil; la comunicaci&#243;n as&#237;ncrona mediada por broker convierte eso en resiliencia con buffer &#8212; al costo de consistencia eventual y depuraci&#243;n m&#225;s dif&#237;cil.</li>
+<li><strong>Event Notification</strong> mantiene los eventos peque&#241;os pero reintroduce el acoplamiento de callback; <strong>Event-Carried State Transfer</strong> maximiza la autonom&#237;a del consumidor mediante la duplicaci&#243;n de datos.</li>
+<li>Adopta EDA para escala independiente, fan-out y almacenamiento de carga en buffer; ev&#237;talo para lecturas s&#237;ncronas, necesidades de consistencia fuerte y equipos sin madurez operacional.</li>
+</ul>
+
+<h2>Qu&#233; Sigue</h2>
+
+<p>Con el &#225;tomo definido, el Cap&#237;tulo 2 se centra en dise&#241;ar eventos que expresen hechos de negocio significativos &#8212; usando Domain-Driven Design y Event Storming para evitar publicar ruido t&#233;cnico como si fuera un evento de dominio.</p>
+
+</body>
+</html>

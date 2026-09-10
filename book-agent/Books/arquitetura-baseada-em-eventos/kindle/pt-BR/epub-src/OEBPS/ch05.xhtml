@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Capítulo 5: CQRS — Separando Leituras e Escritas</title>
+  <link rel="stylesheet" type="text/css" href="styles.css"/>
+</head>
+<body>
+<h1 id="ch05">Capítulo 5: CQRS — Separando Leituras e Escritas</h1>
+
+<h2>Declaração do Problema Inicial</h2>
+
+<p>O Capítulo 4 deixou o caminho de escrita em boa forma. Eventos fluem com entrega at-least-once, consumidores são idempotentes e o Transactional Outbox publica com confiabilidade. Mas uma pergunta persistente permanece: uma vez que esses eventos remodelaram o estado do seu sistema, como alguém <em>lê</em> esse estado de forma eficiente? Uma única tabela otimizada para impor invariantes na escrita quase nunca é a mesma tabela que você deseja consultar para um dashboard, uma tela de busca ou um feed mobile. Essa é a tensão que o <strong>Command Query Responsibility Segregation (CQRS)</strong> foi criado para resolver.</p>
+
+<h2>O Problema de Incompatibilidade de Formato</h2>
+
+<p>Todo sistema persistente serve a dois trabalhos fundamentalmente diferentes. De um lado, aceita mudanças e deve proteger regras de negócio. Do outro lado, responde a perguntas. Esses dois trabalhos puxam o modelo de dados em direções opostas.</p>
+
+<p>O lado da escrita quer <strong>normalização</strong>. Tabelas normalizadas evitam anomalias, impõem integridade referencial e mantêm invariantes locais a um único agregado. O lado da leitura quer <strong>desnormalização</strong>. Uma tela de consulta quer tudo o que precisa pré-unido, achatado e indexado para o padrão de acesso exato que serve. Este é o <strong>problema de incompatibilidade de formato</strong>: a estrutura ótima para validar uma mudança difere da estrutura ótima para responder a uma pergunta.</p>
+
+<p class="diagram-caption">📊 [Diagram — Mermaid source below]</p>
+<pre class="mermaid-source"><code>flowchart LR
+    subgraph WriteModel["Write Model (Normalized)"]
+        direction TB
+        CU[Customer\n- customerId PK\n- name\n- email]
+        OR[Order\n- orderId PK\n- customerId FK\n- createdAt]
+        OL[OrderLine\n- lineId PK\n- orderId FK\n- productId FK\n- qty]
+        PR[Product\n- productId PK\n- name\n- thumbnailUrl]
+        CU -->|1 : N| OR
+        OR -->|1 : N| OL
+        OL -->|N : 1| PR
+    end
+
+    WriteModel -->|projection| ReadModel
+
+    subgraph ReadModel["Read Model (Denormalized)"]
+        direction TB
+        COV["CustomerOrderView\n────────────────────\n customerId\n orderId\n productNames\n shippingStatus\n orderTotal\n lifetimeValue (precomputed)"]
+    end</code></pre>
+
+<p><em>O modelo de escrita mantém os dados normalizados em quatro tabelas para impor invariantes e evitar anomalias; o modelo de leitura achata essas tabelas em um único documento pré-otimizado para a tela de consulta.</em></p>
+
+<p>A solução ingênua é continuar adicionando índices e réplicas de leitura ao modelo único. CQRS propõe um corte mais limpo: pare de fingir que um modelo pode ser os dois. Deixe o lado da escrita permanecer enxuto e orientado por regras, e derive os formatos de leitura necessários como estruturas separadas e criadas especificamente.</p>
+
+<div class="detail"><strong>⚠️ Nota Crítica</strong> "A solução ingênua é continuar adicionando índices e réplicas de leitura ao modelo único. Isso compra tempo, mas não uma saída." Isso enquadra réplicas de leitura e visões materializadas como apenas uma solução provisória. Para uma classe significativa de sistemas reais — razões moderadas de leitura/escrita, diversidade de consultas delimitada, padrões de acesso previsíveis — uma réplica de leitura bem mantida com uma visão materializada é uma solução permanente totalmente adequada, não um degrau rumo ao CQRS.</div>
+
+<h2>Separação de Comandos e Consultas</h2>
+
+<p>Um <strong>command</strong> (comando) é uma instrução para mudar estado — <code>PlaceOrder</code>, <code>CancelReservation</code>, <code>ApplyDiscount</code>. Uma <strong>query</strong> (consulta) é uma solicitação para retornar estado sem alterá-lo — <code>GetOrderHistory</code>, <code>FindUnpaidInvoices</code>. CQRS insiste que essas duas responsabilidades vivam em <strong>modelos separados</strong>, e frequentemente em infraestrutura completamente separada.</p>
+
+<p>O caminho de comando processa uma intenção, valida-a contra as regras de negócio e — em caso de sucesso — muta o estado autoritativo e emite um evento de domínio. O caminho de consulta lê de um ou mais <strong>read models</strong> (modelos de leitura) construídos especificamente para as perguntas sendo feitas.</p>
+
+<blockquote class="critical"><strong>⚠️ Nota Crítica:</strong> O texto afirma categoricamente que "o caminho de consulta nunca toca o armazenamento de escrita autoritativo", mas a seção "Consistência Entre o Lado da Escrita e o Lado da Leitura" corretamente aconselha a "manter as leituras críticas a invariantes próximas ao modelo de escrita". Essas duas afirmações se contradizem diretamente.</blockquote>
+
+<pre><code class="language-python"># CQRS write path vs read path — two independent models with no shared store
+from __future__ import annotations
+
+from dataclasses import dataclass, field
+from datetime import datetime, timezone
+from typing import Protocol
+from uuid import UUID, uuid4
+
+
+@dataclass(frozen=True)
+class OrderId:
+    value: UUID = field(default_factory=uuid4)
+
+
+@dataclass(frozen=True)
+class PlaceOrderCommand:
+    customer_id: UUID
+    items: list[dict]
+
+
+@dataclass(frozen=True)
+class OrderPlacedEvent:
+    order_id: UUID
+    customer_id: UUID
+    items: list[dict]
+    total_amount: float
+    placed_at: datetime
+    event_id: UUID = field(default_factory=uuid4)
+
+
+class OrderCommandHandler:
+    """Enforces write-side invariants; returns only OrderId — no read data leaks back."""
+
+    def __init__(self, order_repo: "OrderRepository", publisher: "EventPublisher") -&gt; None:
+        self._repo = order_repo
+        self._publisher = publisher
+
+    def handle(self, cmd: PlaceOrderCommand) -&gt; OrderId:
+        if not cmd.items:
+            raise ValueError("An order must contain at least one line item")
+
+        total = sum(i["quantity"] * i["unit_price"] for i in cmd.items)
+        if total &lt;= 0:
+            raise ValueError("Order total must be positive")
+
+        order_id = OrderId()
+        self._repo.save(order_id, cmd)
+
+        self._publisher.publish(OrderPlacedEvent(
+            order_id=order_id.value,
+            customer_id=cmd.customer_id,
+            items=cmd.items,
+            total_amount=total,
+            placed_at=datetime.now(tz=timezone.utc),
+        ))
+        return order_id
+
+
+@dataclass
+class CustomerOrderSummary:
+    """Fully-denormalized view: prejoined, precomputed — shaped for the UI."""
+    order_id: UUID
+    customer_id: UUID
+    status: str
+    total_amount: float
+    item_count: int
+    placed_at: datetime
+    shipped_at: datetime | None = None
+
+
+class OrderQueryService:
+    """Reads from the dedicated read store only — independent of write infrastructure."""
+
+    def __init__(self, read_store: "ReadStore") -&gt; None:
+        self._store = read_store
+
+    def get_customer_orders(self, customer_id: UUID, *, limit: int = 10) -&gt; list[CustomerOrderSummary]:
+        rows = self._store.query(
+            "SELECT * FROM customer_order_view "
+            "WHERE customer_id = %s ORDER BY placed_at DESC LIMIT %s",
+            (customer_id, limit),
+        )
+        return [CustomerOrderSummary(**row) for row in rows]
+
+
+class OrderRepository(Protocol):
+    def save(self, order_id: OrderId, cmd: PlaceOrderCommand) -&gt; None: ...
+
+class EventPublisher(Protocol):
+    def publish(self, event: OrderPlacedEvent) -&gt; None: ...
+
+class ReadStore(Protocol):
+    def query(self, sql: str, params: tuple) -&gt; list[dict]: ...</code></pre>
+
+<div class="detail"><strong>💡 Nota do Especialista</strong> Um conflito de design comum surge quando equipes de UX assumem que o caminho de comando deve retornar um estado rico pós-mutação. O contrato correto do CQRS é mais estrito: o command handler retorna <strong>erros de validação e códigos de falha</strong> síncronos, mas em caso de sucesso retorna apenas um identificador ou token causal — nunca o formato de leitura mutado.</div>
+
+<div class="detail"><strong>⚠️ Nota Crítica</strong> "O caminho de comando retorna quase nada ao chamador; frequentemente apenas um reconhecimento ou um identificador" é apresentado como um fato arquitetural em vez de uma escolha de design contestada. Retornar apenas um ID força uma segunda viagem de ida e volta obrigatória para recuperar o recurso criado ou atualizado.</div>
+
+<h2>Modelos de Leitura e Projeções Orientadas a Eventos</h2>
+
+<p>Como os dados cruzam do lado da escrita para o lado da leitura? Por meio de eventos. Uma <strong>projection</strong> (projeção) é o componente que consome esses eventos e atualiza um modelo de leitura para refleti-los. Pense em uma projeção como um consumidor pequeno e dedicado com um único trabalho: traduzir um fluxo de fatos em um formato otimizado para uma consulta específica.</p>
+
+<p class="diagram-caption">📊 [Diagram — Mermaid source below]</p>
+<pre class="mermaid-source"><code>flowchart TD
+    CMD[Command] --> CH[Command Handler]
+    CH --> WS[(Write Store\nRelational DB)]
+    CH --> EB[Event Bus]
+
+    EB --> P1[Projection\nOrder History]
+    EB --> P2[Projection\nProduct Search]
+
+    P1 --> RS1[(SQL Read Model\nOrder History)]
+    P2 --> RS2[(Elasticsearch Index\nProduct Search)]
+
+    Q1[Query: Order History] --> RS1
+    Q2[Query: Product Search] --> RS2</code></pre>
+
+<p>Este design tem uma propriedade que arquitetos sêniores devem apreciar: modelos de leitura são <strong>descartáveis e reconstruíveis</strong>. Como uma projeção é uma função pura do fluxo de eventos, você pode excluir um modelo de leitura e reconstruí-lo reproduzindo eventos desde o início.</p>
+
+<pre><code class="language-python"># Idempotent event projection — upserts a denormalized read model from the event stream
+from __future__ import annotations
+
+from dataclasses import dataclass
+from datetime import datetime
+from typing import Protocol
+from uuid import UUID
+
+
+@dataclass(frozen=True)
+class OrderPlaced:
+    event_id: UUID
+    order_id: UUID
+    customer_id: UUID
+    items: list[dict]
+    total_amount: float
+    placed_at: datetime
+
+@dataclass(frozen=True)
+class OrderShipped:
+    event_id: UUID
+    order_id: UUID
+    shipped_at: datetime
+
+@dataclass(frozen=True)
+class OrderCancelled:
+    event_id: UUID
+    order_id: UUID
+    cancelled_at: datetime
+
+
+class CustomerOrderViewProjection:
+    """Maintains the customer_order_view read table. Idempotent via last_applied_event_id."""
+
+    def __init__(self, view_store: "ViewStore") -&gt; None:
+        self._store = view_store
+
+    def on_order_placed(self, event: OrderPlaced) -&gt; None:
+        if self._already_applied(event.order_id, event.event_id):
+            return
+        self._store.upsert(
+            table="customer_order_view",
+            key={"order_id": event.order_id},
+            values={
+                "customer_id": event.customer_id,
+                "status": "placed",
+                "total_amount": event.total_amount,
+                "item_count": len(event.items),
+                "placed_at": event.placed_at,
+                "shipped_at": None,
+                "last_applied_event_id": event.event_id,
+            },
+        )
+
+    def on_order_shipped(self, event: OrderShipped) -&gt; None:
+        if self._already_applied(event.order_id, event.event_id):
+            return
+        self._store.upsert(
+            table="customer_order_view",
+            key={"order_id": event.order_id},
+            values={"status": "shipped", "shipped_at": event.shipped_at,
+                    "last_applied_event_id": event.event_id},
+        )
+
+    def on_order_cancelled(self, event: OrderCancelled) -&gt; None:
+        if self._already_applied(event.order_id, event.event_id):
+            return
+        self._store.upsert(
+            table="customer_order_view",
+            key={"order_id": event.order_id},
+            values={"status": "cancelled", "last_applied_event_id": event.event_id},
+        )
+
+    def _already_applied(self, order_id: UUID, event_id: UUID) -&gt; bool:
+        row = self._store.fetch_one(
+            "SELECT last_applied_event_id FROM customer_order_view WHERE order_id = %s",
+            (order_id,),
+        )
+        if row is None:
+            return False
+        return row["last_applied_event_id"] == event_id
+
+
+class ViewStore(Protocol):
+    def upsert(self, table: str, key: dict, values: dict) -&gt; None: ...
+    def fetch_one(self, sql: str, params: tuple) -&gt; dict | None: ...</code></pre>
+
+<blockquote class="expert"><strong>💡 Nota do Especialista:</strong> O texto apresenta corretamente a reconstruibilidade do modelo de leitura como uma vantagem prática, mas omite o custo operacional que surpreende cada equipe na primeira vez que o exercita em produção. Reproduzir milhões de eventos por meio de uma projeção não é instantâneo — um log de eventos maduro pode conter centenas de milhões de eventos, e uma reprodução ingênua de thread único pode levar horas ou dias.</blockquote>
+
+<h2>Consistência Entre o Lado da Escrita e o Lado da Leitura</h2>
+
+<p>O lado da leitura é <strong>eventualmente consistente</strong> com o lado da escrita. Um comando é confirmado e seu evento é publicado, mas a projeção processa esse evento um momento depois — milissegundos geralmente, segundos sob carga, mais tempo se um consumidor estiver atrasado ou se recuperando. Durante essa janela, uma consulta pode retornar estado que ainda não reflete a mudança que o usuário acabou de fazer. Isso é <strong>replication lag</strong> (atraso de replicação), e não é um bug que você pode eliminar; é o preço estrutural de separar os modelos.</p>
+
+<p>A pergunta central é de <strong>tolerância do negócio</strong>, não de tecnologia. Mantenha as leituras críticas a invariantes próximas ao modelo de escrita e reserve projeções para as cargas de trabalho de relatórios, busca e exibição que dominam o volume, mas toleram atraso.</p>
+
+<table>
+<thead><tr><th>Técnica</th><th>Como funciona</th><th>Custo / ressalva</th></tr></thead>
+<tbody>
+<tr><td>Aceitar o atraso</td><td>Mostrar estado eventual; adicionar uma dica sutil "processando…" na UI</td><td>Mais simples; viável apenas onde a desatualização é tolerável</td></tr>
+<tr><td>Atualização otimista da UI</td><td>O cliente renderiza o resultado esperado localmente após um comando</td><td>A UI pode divergir da verdade do servidor em caso de falha</td></tr>
+<tr><td>Roteamento read-your-writes</td><td>Rotear as leituras de um usuário para o modelo de escrita brevemente após seu comando</td><td>Reintroduz a carga de leitura do lado da escrita que você tentou eliminar</td></tr>
+<tr><td>Verificação de versão / token</td><td>O comando retorna uma versão; a consulta aguarda até que o modelo de leitura a alcance</td><td>Adiciona latência e complexidade de coordenação</td></tr>
+</tbody>
+</table>
+
+<p class="diagram-caption">📊 [Diagram — Mermaid source below]</p>
+<pre class="mermaid-source"><code>sequenceDiagram
+    participant C as Client
+    participant WS as Write Store
+    participant EB as Event Bus
+    participant PR as Projection
+    participant RS as Read Store
+
+    C->>WS: Command (CancelOrder)
+    WS-->>EB: Publish OrderCancelled event
+    WS-->>C: Acknowledgement (success)
+
+    C->>RS: Query (GetOrderStatus)
+    RS-->>C: Stale response — order still Active
+
+    Note over EB,RS: eventual consistency window / replication lag
+
+    EB->>PR: Deliver OrderCancelled event
+    PR->>RS: Upsert read model (status = Cancelled)
+
+    C->>RS: Query (GetOrderStatus)
+    RS-->>C: Fresh response — order Cancelled</code></pre>
+
+<div class="detail"><strong>⚠️ Nota Crítica</strong> O texto caracteriza o replication lag como "milissegundos geralmente, segundos sob carga" — enquadrando-o como uma janela estreita e recuperável. Isso omite o cenário de modo de falha que molda o design de SLA: um consumidor de projeção travado, um evento envenenado causando reprocessamento repetido ou um rebalanceamento de grupo de consumidores do Kafka pode paralisar uma projeção por minutos ou horas, não segundos.</div>
+
+<h2>Quando CQRS É Engenharia Excessiva</h2>
+
+<p>CQRS é uma ferramenta especializada, não uma arquitetura padrão. CQRS é <strong>engenharia excessiva</strong> quando seus modelos de leitura e escrita têm essencialmente o mesmo formato. Se uma entidade CRUD simples é escrita e lida por meio de estruturas quase idênticas, não há incompatibilidade de formato para resolver. Uma tabela bem indexada, talvez com uma réplica de leitura, é a resposta correta e sem glamour.</p>
+
+<p>Fique atento a esses sinais de alerta de que CQRS é a escolha errada:</p>
+<ol>
+<li><strong>O domínio é CRUD simples.</strong> Os dados são criados, lidos, atualizados e excluídos sem comportamento rico.</li>
+<li><strong>Os volumes de leitura e escrita são comparáveis e modestos.</strong> O benefício de escalonamento independente é o principal ganho; com tráfego balanceado e baixo, há pouco a ganhar.</li>
+<li><strong>A equipe não tem maturidade operacional para assincronicidade.</strong> CQRS significa monitorar o atraso de projeção, tratar reproduções e depurar consistência eventual.</li>
+<li><strong>As partes interessadas não podem tolerar qualquer desatualização.</strong> Se toda leitura deve ser imediatamente consistente, você está lutando contra a mecânica central do padrão.</li>
+</ol>
+
+<p><strong>Dica Pro:</strong> Adote CQRS no nível do <em>agregado</em> ou do <em>bounded context</em> (contexto delimitado), nunca como uma regra geral para todo o sistema.</p>
+
+<h2>Principais Conclusões</h2>
+
+<ul>
+<li>O <strong>problema de incompatibilidade de formato</strong> é a razão de existir do CQRS: o modelo normalizado que impõe invariantes do lado da escrita raramente é o formato desnormalizado que serve leituras de forma eficiente.</li>
+<li>CQRS separa o <strong>caminho de comando</strong> (muda estado, emite eventos, retorna pouco) do <strong>caminho de consulta</strong> (lê modelos de leitura criados especificamente), permitindo que cada um escale e evolua de forma independente.</li>
+<li><strong>Projeções</strong> são consumidores de eventos idempotentes que derivam modelos de leitura do fluxo de eventos, tornando os modelos de leitura descartáveis e reconstruíveis por reprodução.</li>
+<li>O lado da leitura é <strong>eventualmente consistente</strong>; replication lag e read-your-own-writes são custos estruturais para os quais se deve projetar, não bugs a serem corrigidos.</li>
+<li>CQRS é <strong>engenharia excessiva</strong> para CRUD simples com formatos de leitura/escrita correspondentes. Adote-o por agregado ou bounded context, apenas onde uma dor concreta justifica a complexidade adicionada.</li>
+</ul>
+
+<h2>O Que Vem a Seguir</h2>
+
+<p>Modelos de leitura reconstruíveis sugeriram uma ideia mais profunda — armazenar estado como os próprios eventos; o Capítulo 6 torna esse salto explícito com Event Sourcing.</p>
+
+</body>
+</html>

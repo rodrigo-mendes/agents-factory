@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Cap&#237;tulo 7: Consistencia, Sagas y Procesos de Larga Duraci&#243;n</title>
+  <link rel="stylesheet" type="text/css" href="styles.css"/>
+</head>
+<body>
+  <h1 id="ch07">Cap&#237;tulo 7: Consistencia, Sagas y Procesos de Larga Duraci&#243;n</h1>
+
+  <h2>Planteamiento del Problema Inicial</h2>
+
+  <p>El Cap&#237;tulo 6 dej&#243; el lado de escritura resuelto: el estado es un registro inmutable de eventos, y la verdad vive en el almac&#233;n de eventos. Pero ese cap&#237;tulo asumi&#243; silenciosamente un l&#237;mite c&#243;modo &#8212; un agregado, un stream, una transacci&#243;n. Los procesos de negocio reales no son tan educados. Colocar un pedido toca inventario, pago y env&#237;o. Incorporar un cliente toca identidad, facturaci&#243;n y cumplimiento. Cada uno de estos vive en un servicio diferente, detr&#225;s de una base de datos diferente, propiedad de un equipo diferente.</p>
+
+  <p>Esta es la pregunta inc&#243;moda que responde este cap&#237;tulo: <strong>&#191;c&#243;mo se mantienen tres servicios consistentes cuando no se pueden envolver en una sola transacci&#243;n?</strong> El instinto cl&#225;sico &#8212; una transacci&#243;n distribuida (distributed transaction) que bloquea los tres y confirma at&#243;micamente &#8212; suena correcto y casi siempre est&#225; equivocado en un sistema cloud-native. Acopla la disponibilidad, penaliza la latencia y falla de maneras dif&#237;ciles de razonar.</p>
+
+  <p>La alternativa es la <strong>saga</strong>: una secuencia de transacciones locales, cada una confirmando de forma independiente, coordinadas por eventos, y revertidas no por rollback sino por <em>compensaci&#243;n</em>. Las sagas intercambian la ilusi&#243;n de consistencia global instant&#225;nea por algo honesto y operable: <strong>consistencia eventual</strong> (eventual consistency). Este cap&#237;tulo muestra c&#243;mo funcionan las sagas, cu&#225;ndo coreografiarlas y cu&#225;ndo orquestarlas, c&#243;mo dise&#241;ar compensaciones que realmente deshagan efectos de negocio, y c&#243;mo el teorema CAP gobierna silenciosamente cada una de estas decisiones.</p>
+
+  <h2>Consistencia Eventual Versus Consistencia Fuerte</h2>
+
+  <p>Comencemos con la palabra que todo arquitecto usa y pocos definen con precisi&#243;n. La <strong>consistencia fuerte</strong> (strong consistency) significa que una vez que se completa una escritura, cada lectura posterior &#8212; desde cualquier lugar &#8212; ve esa escritura. El sistema se comporta como si hubiera una sola copia de los datos y un solo reloj. Esta es la garant&#237;a que da una transacci&#243;n ACID local dentro de una sola base de datos.</p>
+
+  <p>La <strong>consistencia eventual</strong> (eventual consistency) hace una promesa m&#225;s d&#233;bil: si las escrituras se detienen, todas las r&#233;plicas y vistas derivadas <em>eventualmente</em> converger&#225;n al mismo valor. Entre la escritura y esa convergencia, existe una ventana en la que diferentes partes del sistema no est&#225;n de acuerdo. Esa ventana no es un error. Es el precio de mantener los servicios independientes y disponibles.</p>
+
+  <p>El error es tratar la consistencia eventual como &#8220;consistencia fuerte, pero descuidada.&#8221; Es un modelo diferente con reglas diferentes. No se pregunta &#8220;&#191;son los datos consistentes?&#8221; Se pregunta &#8220;&#191;cu&#225;l es la obsolescencia m&#225;xima que el negocio puede tolerar, y qu&#233; sucede dentro de esa ventana?&#8221;</p>
+
+  <p>Considere una analog&#237;a familiar. Cuando transfiere dinero entre bancos, el saldo del remitente cae inmediatamente, pero el destinatario no ve nada durante horas o d&#237;as. El dinero est&#225;, por un tiempo, <em>en tr&#225;nsito</em> &#8212; invisible en ning&#250;n lado. El sistema bancario es consistente de forma eventual por dise&#241;o, y funciona porque el negocio defini&#243; estados intermedios expl&#237;citos (&#8220;pendiente&#8221;, &#8220;liquidado&#8221;) y reglas para cada uno. Esa es la disciplina que exige la consistencia eventual.</p>
+
+  <p><strong>Figura 7.1</strong> &#8212; El commit en dos fases obliga a todos los participantes a bloquearse y confirmar at&#243;micamente, creando una &#250;nica ventana de todo o nada; una saga deja que cada servicio confirme localmente en secuencia, aceptando una ventana de inconsistencia visible entre pasos que se cierra a medida que los eventos se propagan hacia adelante.</p>
+
+  <p class="diagram-caption">&#128202; [Diagram &#8212; Mermaid source below]</p>
+<pre class="mermaid-source"><code>sequenceDiagram
+    participant C as Client
+    participant O as Order Service
+    participant P as Payment Service
+    participant I as Inventory Service
+
+    Note over C,I: Strong Consistency &#8212; 2PC (all-or-nothing)
+    C-&gt;&gt;O: PlaceOrder
+    O-&gt;&gt;P: PREPARE (lock held)
+    O-&gt;&gt;I: PREPARE (lock held)
+    P--&gt;&gt;O: VOTE YES
+    I--&gt;&gt;O: VOTE YES
+    O-&gt;&gt;P: COMMIT
+    O-&gt;&gt;I: COMMIT
+    O--&gt;&gt;C: Order Confirmed
+
+    Note over C,I: Eventual Consistency &#8212; Saga (independent commits)
+    C-&gt;&gt;O: PlaceOrder
+    O--&gt;&gt;C: Order Accepted (local commit)
+    O-)P: OrderPlaced event
+    Note over P: inconsistency window
+    P-&gt;&gt;P: Commit locally
+    P-)I: PaymentCaptured event
+    Note over I: inconsistency window
+    I-&gt;&gt;I: Commit locally</code></pre>
+
+  <p>La siguiente tabla agudiza el contraste.</p>
+
+  <table>
+    <thead><tr><th>Dimensi&#243;n</th><th>Consistencia fuerte</th><th>Consistencia eventual</th></tr></thead>
+    <tbody>
+      <tr><td>Lectura despu&#233;s de escritura</td><td>Siempre actualizada</td><td>Actualizada <em>eventualmente</em></td></tr>
+      <tr><td>Alcance</td><td>Base de datos &#250;nica / transacci&#243;n</td><td>M&#250;ltiples servicios</td></tr>
+      <tr><td>Disponibilidad bajo partici&#243;n</td><td>Sacrificada</td><td>Preservada</td></tr>
+      <tr><td>Latencia</td><td>Mayor (coordinaci&#243;n)</td><td>Menor (commits locales)</td></tr>
+      <tr><td>Modo de fallo</td><td>Todo o nada</td><td>Parcial, luego reconciliado</td></tr>
+      <tr><td>Costo de razonamiento</td><td>Bajo</td><td>Alto &#8212; los estados intermedios importan</td></tr>
+    </tbody>
+  </table>
+
+  <p>La conclusi&#243;n para arquitectos senior: <strong>la consistencia eventual no es un compromiso que se acepta a rega&#241;adientes; es el supuesto habilitador de los servicios independientes.</strong> En el momento en que se exige consistencia fuerte a trav&#233;s de l&#237;mites de servicio, se han reacoplado los servicios que los Cap&#237;tulos 1 al 6 se esforzaron en desacoplar.</p>
+
+  <div class="detail"><strong>&#128161; Nota del Experto</strong> El texto presenta la consistencia como algo binario (fuerte vs. eventual), lo cual es &#250;til pedag&#243;gicamente pero puede llevar a los arquitectos a sobreingeniería. En la pr&#225;ctica, muchos requisitos de UX y API solo necesitan consistencia &#8220;read-your-writes&#8221; (causal) &#8212; el usuario que acaba de crear un recurso puede verlo en la siguiente solicitud, pero que otros usuarios vean una vista ligeramente obsoleta es aceptable. Esto es m&#225;s d&#233;bil que la consistencia fuerte pero m&#225;s fuerte que la eventual pura. Dise&#241;ar para read-your-writes a menudo elimina la necesidad de llamadas s&#237;ncronas entre servicios: redirige al usuario a la URL can&#243;nica del recurso reci&#233;n creado inmediatamente despu&#233;s del commit local, y depende de la propagaci&#243;n de eventos para todos los dem&#225;s.</div>
+
+  <h2>Por Qu&#233; Fallan las Transacciones ACID Distribuidas</h2>
+
+  <p>Antes de las sagas, hay que reconocer el patr&#243;n que reemplazan. La respuesta del libro de texto para la consistencia multi-servicio es el <strong>commit en dos fases</strong> (two-phase commit, 2PC): un coordinador le pide a cada participante que se <em>prepare</em>, espera que todos voten s&#237;, y luego les dice que hagan <em>commit</em>. Si alg&#250;n participante vota no, todos abortan. Sobre el papel, atomicidad a trav&#233;s de servicios.</p>
+
+  <p>En la pr&#225;ctica, 2PC tiene tres propiedades fatales para los sistemas cloud-native.</p>
+
+  <p>Primero, <strong>mantiene bloqueos a trav&#233;s de la red.</strong> Entre prepare y commit, cada participante mantiene sus filas bloqueadas, esperando al coordinador. Una red lenta o un servicio distante convierte un bloqueo de milisegundos en uno de varios segundos, colapsando el rendimiento.</p>
+
+  <p>Segundo, <strong>es un protocolo bloqueante.</strong> Si el coordinador falla despu&#233;s de que los participantes votan s&#237; pero antes de que transmita la decisi&#243;n, los participantes quedan atrapados &#8212; bloqueados, inciertos, incapaces de continuar o abortar de forma segura. Este es el conocido estado &#8220;en duda&#8221;, y recuperarse de &#233;l es operacionalmente miserable.</p>
+
+  <p>Tercero, <strong>acopla la disponibilidad.</strong> Una transacci&#243;n tiene &#233;xito solo si <em>cada</em> participante est&#225; activo al mismo instante. Cinco servicios con 99.9% de disponibilidad cada uno producen aproximadamente 99.5% combinado &#8212; se ha multiplicado la fragilidad. Esto viola directamente la independencia que hace que los microservicios valgan su costo.</p>
+
+  <p><strong>Listing 7.1</strong> &#8212; Este ejemplo simula un coordinador 2PC que dirige tres servicios a trav&#233;s de las fases de prepare y commit. El flag <code>simulate_crash_after_prepare</code> demuestra la ventana de estado en duda: los participantes ya votaron s&#237; y mantienen sus bloqueos, pero el coordinador a&#250;n no transmiti&#243; la decisi&#243;n &#8212; dejando al sistema en un estado irresoluble hasta una intervenci&#243;n manual o un protocolo de recuperaci&#243;n.</p>
+
+<pre><code class="language-python"># O(n) per phase where n = number of participants; locks held across both phases are the core hazard
+from __future__ import annotations
+
+import enum
+from dataclasses import dataclass
+
+
+class VoteResult(enum.Enum):
+    YES = "yes"
+    NO = "no"
+
+
+class CoordinatorState(enum.Enum):
+    IDLE = "IDLE"
+    PREPARING = "PREPARING"
+    COMMITTED = "COMMITTED"
+    ABORTED = "ABORTED"
+    IN_DOUBT = "IN_DOUBT"  # coordinator crashed after votes, before broadcasting the decision
+
+
+@dataclass
+class Participant:
+    """Represents one service participating in the distributed transaction."""
+    name: str
+    vote: VoteResult = VoteResult.YES
+    locked: bool = False   # True while row locks are held during the prepare phase
+    committed: bool = False
+
+    def prepare(self) -&gt; VoteResult:
+        # Participant locks its rows and signals readiness; lock is NOT released until phase 2
+        self.locked = True
+        return self.vote
+
+    def commit(self) -&gt; None:
+        self.locked = False
+        self.committed = True
+
+    def abort(self) -&gt; None:
+        self.locked = False
+        self.committed = False
+
+
+class TwoPhaseCommitCoordinator:
+    """Drives the two phases; exposes the crash-induced in-doubt scenario."""
+
+    def __init__(self, participants: list[Participant]) -&gt; None:
+        self.participants = participants
+        self.state = CoordinatorState.IDLE
+        self._votes: dict[str, VoteResult] = {}
+
+    def run(self, simulate_crash_after_prepare: bool = False) -&gt; CoordinatorState:
+        # ── Phase 1 ── Prepare ───────────────────────────────────────────────
+        # Coordinator asks every participant to vote; each locks its rows.
+        self.state = CoordinatorState.PREPARING
+        for p in self.participants:
+            vote = p.prepare()
+            self._votes[p.name] = vote
+            print(f"  {p.name:20s}  voted {vote.value:3s}  locked={p.locked}")
+
+        all_yes = all(v == VoteResult.YES for v in self._votes.values())
+
+        if simulate_crash_after_prepare:
+            # The coordinator dies here. Participants hold locks and cannot safely
+            # commit or abort on their own ── the "in-doubt" blocking window begins.
+            self.state = CoordinatorState.IN_DOUBT
+            stuck = [p.name for p in self.participants if p.locked]
+            print(f"\n  *** COORDINATOR CRASHED ── in-doubt participants (locks held): {stuck} ***")
+            print("  Recovery requires the coordinator to restart and re-broadcast its decision.")
+            return self.state
+
+        # ── Phase 2 ── Commit or Abort ────────────────────────────────────────
+        # Only reached if the coordinator survived; broadcasts a single uniform decision.
+        if all_yes:
+            for p in self.participants:
+                p.commit()
+            self.state = CoordinatorState.COMMITTED
+        else:
+            for p in self.participants:
+                p.abort()
+            self.state = CoordinatorState.ABORTED
+
+        return self.state
+
+
+# ── Demo ─────────────────────────────────────────────────────────────────────
+if __name__ == "__main__":
+    print("=== Happy path: all participants vote YES ===")
+    services = [Participant("OrderSvc"), Participant("PaymentSvc"), Participant("InventorySvc")]
+    result = TwoPhaseCommitCoordinator(services).run()
+    print(f"Coordinator final state: {result.value}\n")
+
+    print("=== Crash scenario: coordinator dies after phase 1 ===")
+    services = [Participant("OrderSvc"), Participant("PaymentSvc"), Participant("InventorySvc")]
+    result = TwoPhaseCommitCoordinator(services).run(simulate_crash_after_prepare=True)
+    print(f"Coordinator final state: {result.value}")
+    # Expected output:
+    #   *** COORDINATOR CRASHED ── in-doubt participants (locks held): ['OrderSvc', 'PaymentSvc', 'InventorySvc'] ***</code></pre>
+
+  <p>Hay una verdad m&#225;s profunda aqu&#237;, y es el teorema CAP, al cual volvemos al final del cap&#237;tulo: cuando una partici&#243;n de red divide los servicios, 2PC elige consistencia neg&#225;ndose a continuar. Para la mayor&#237;a de los procesos de negocio &#8212; pedidos, reservas, registros &#8212; negarse a continuar es la respuesta incorrecta. El negocio preferir&#237;a aceptar el pedido ahora y reconciliar despu&#233;s. Esa preferencia <em>es</em> la elecci&#243;n de una saga.</p>
+
+  <blockquote class="expert"><strong>&#128161; Nota del Experto:</strong> El texto identifica correctamente 2PC como el patr&#243;n a reemplazar, pero omite una trampa empresarial muy extendida: las transacciones XA (JTA en Jakarta EE, <code>@Transactional</code> de Spring abarcando m&#250;ltiples beans <code>DataSource</code> o <code>ConnectionFactory</code>, y MSDTC en .NET) son 2PC disfrazado. Muchos equipos creen que no est&#225;n usando ACID distribuido hasta que rastrean un incidente en producci&#243;n y encuentran un coordinador XA manteniendo bloqueos silenciosamente a trav&#233;s de una base de datos y un message broker.</blockquote>
+
+  <div class="detail"><strong>&#9888;&#65039; Nota Cr&#237;tica</strong> El cap&#237;tulo enmarca 2PC como una elecci&#243;n puramente &#8220;CP&#8221; &#8212; un sistema que sacrifica disponibilidad a cambio de consistencia cuando ocurre una partici&#243;n. Esto es una simplificaci&#243;n excesiva que el propio estado en duda ya refuta dentro de la misma secci&#243;n. Cuando el coordinador falla despu&#233;s de que los participantes hayan votado <em>s&#237;</em> pero antes de que se transmita la decisi&#243;n de commit, los participantes est&#225;n bloqueados e inciertos &#8212; no pueden ni confirmar ni abortar de forma segura. En ese punto, el sistema no es ni disponible <em>ni</em> consistente: est&#225; atascado. <strong>Correcci&#243;n sugerida:</strong> Calificar la caracterizaci&#243;n CP: &#8220;2PC se describe t&#237;picamente como CP, pero la garant&#237;a es m&#225;s precisamente &#8216;ning&#250;n commit incorrecto&#8217; &#8212; bajo fallos del coordinador, los participantes en duda no logran ni disponibilidad ni un estado consistente garantizado.&#8221;</div>
+
+  <h2>Sagas Coreografiadas Versus Orquestadas</h2>
+
+  <p>Una <strong>saga</strong> es una secuencia de transacciones locales donde cada paso publica un evento que desencadena el siguiente. Si un paso falla, la saga ejecuta <strong>transacciones compensatorias</strong> (compensating transactions) para deshacer los pasos completados. Hay dos formas de conectar los pasos, y la distinci&#243;n &#8212; presentada por primera vez en el Cap&#237;tulo 3 como una topolog&#237;a, aplicada ahora espec&#237;ficamente a las sagas &#8212; define c&#243;mo operar&#225; el sistema.</p>
+
+  <p>En una <strong>saga coreografiada</strong> (choreographed saga), no hay coordinador central. Cada servicio escucha eventos, hace su trabajo local y emite su propio evento. El servicio de pedidos publica <code>OrderPlaced</code>; el servicio de pagos reacciona, carga la tarjeta y publica <code>PaymentCaptured</code>; el servicio de inventario reacciona a <em>ese</em> y reserva el stock. El flujo vive en las reacciones. Ning&#250;n componente individual conoce el proceso completo.</p>
+
+  <p>En una <strong>saga orquestada</strong> (orchestrated saga), un coordinador dedicado &#8212; el <strong>orquestador</strong> (orchestrator) &#8212; es due&#241;o del proceso. Env&#237;a comandos expl&#237;citos (<code>CapturePayment</code>, <code>ReserveStock</code>), espera respuestas y decide el siguiente paso. El Order Orchestrator conoce cada paso, cada posible fallo y cada compensaci&#243;n. El flujo vive en un solo lugar.</p>
+
+  <p><strong>Figura 7.2</strong> &#8212; La coreograf&#237;a conecta los servicios a trav&#233;s de una cadena de eventos reactivos sin coordinador &#250;nico, mientras que la orquestaci&#243;n coloca toda la l&#243;gica del proceso en un orquestador expl&#237;cito que emite comandos y espera respuestas.</p>
+
+  <p class="diagram-caption">&#128202; [Diagram &#8212; Mermaid source below]</p>
+<pre class="mermaid-source"><code>flowchart TD
+    subgraph CHOREO["Choreographed Saga (no center)"]
+        direction LR
+        OS[Order Service] --&gt;|OrderPlaced| PS1[Payment Service]
+        PS1 --&gt;|PaymentCaptured| IS1[Inventory Service]
+        IS1 --&gt;|StockReserved| SS1[Shipping Service]
+    end
+
+    subgraph ORCH["Orchestrated Saga (explicit coordinator)"]
+        direction LR
+        ORC[Order Orchestrator]
+        ORC --&gt;|CapturePayment| PS2[Payment Service]
+        PS2 --&gt;|PaymentCaptured| ORC
+        ORC --&gt;|ReserveStock| IS2[Inventory Service]
+        IS2 --&gt;|StockReserved| ORC
+        ORC --&gt;|CreateShipment| SS2[Shipping Service]
+        SS2 --&gt;|ShipmentCreated| ORC
+    end</code></pre>
+
+  <p>El compromiso es real y se trata de <em>d&#243;nde vive la l&#243;gica del proceso</em>.</p>
+
+  <table>
+    <thead><tr><th>Factor</th><th>Coreograf&#237;a</th><th>Orquestaci&#243;n</th></tr></thead>
+    <tbody>
+      <tr><td>Acoplamiento</td><td>Bajo &#8212; los servicios solo conocen eventos</td><td>Mayor &#8212; el orquestador conoce todos los pasos</td></tr>
+      <tr><td>Visibilidad</td><td>Deficiente &#8212; el flujo es impl&#237;cito</td><td>Excelente &#8212; el flujo es expl&#237;cito en un solo lugar</td></tr>
+      <tr><td>Agregar un paso</td><td>Tocar m&#250;ltiples servicios</td><td>Tocar el orquestador</td></tr>
+      <tr><td>Riesgo de ciclos</td><td>Alto &#8212; eventos desencadenando eventos</td><td>Bajo &#8212; los comandos son dirigidos</td></tr>
+      <tr><td>Mejor para</td><td>Flujos cortos, 2&#8211;4 pasos</td><td>Flujos complejos, muchas ramificaciones</td></tr>
+      <tr><td>Depuraci&#243;n</td><td>Dif&#237;cil &#8212; sin narrativa &#250;nica</td><td>M&#225;s f&#225;cil &#8212; un solo estado para inspeccionar</td></tr>
+    </tbody>
+  </table>
+
+  <p>Aqu&#237; est&#225; la gu&#237;a con posici&#243;n propia. <strong>Use coreograf&#237;a para flujos cortos y estables</strong> donde las reacciones son obvias e improbables de cambiar. El desacoplamiento es genuino y la simplicidad es real. Pero <strong>en el momento en que una saga crece m&#225;s all&#225; de tres o cuatro pasos, o adquiere ramas condicionales, recurra a la orquestaci&#243;n.</strong> Las sagas coreografiadas a escala se convierten en &#8220;espagueti de eventos&#8221; &#8212; nadie puede decirle lo que hace el proceso sin rastrear eventos a trav&#233;s de seis servicios.</p>
+
+  <blockquote class="expert"><strong>&#128161; Nota del Experto:</strong> El texto advierte correctamente sobre el &#8220;espagueti de eventos&#8221; en la coreograf&#237;a, pero la dependencia de confiabilidad en la publicaci&#243;n transaccional de eventos merece igual &#233;nfasis. En una saga coreografiada, si un servicio confirma su transacci&#243;n de base de datos local pero falla antes de publicar el evento downstream, la saga se detiene silenciosamente &#8212; sin excepci&#243;n, sin alerta, sin siguiente paso. El Outbox Pattern no es opcional para sagas coreografiadas en producci&#243;n; es el mecanismo que hace que la coreograf&#237;a sea confiable en absoluto.</blockquote>
+
+  <div class="detail"><strong>&#128161; Nota del Experto</strong> La estrategia de pruebas diverge marcadamente entre las dos topolog&#237;as, y esto moldea la velocidad del equipo en la pr&#225;ctica. Las sagas coreografiadas requieren pruebas de contrato a trav&#233;s de los l&#237;mites de servicio (Pact, Spring Cloud Contract) para verificar que un evento publicado por el Servicio A satisface realmente el esquema de consumidor del Servicio B. Las sagas orquestadas se pueden probar unitariamente de forma aislada: simular los canales de comandos downstream, alimentar eventos de respuesta, verificar transiciones de estado. El conjunto de pruebas del orquestador se convierte en la documentaci&#243;n viva de la saga.</div>
+
+  <h2>Transacciones Compensatorias y Rollback Sem&#225;ntico</h2>
+
+  <p>El coraz&#243;n de la saga es lo que sucede cuando el paso cuatro falla despu&#233;s de que los pasos uno al tres tuvieron &#233;xito. No hay <code>ROLLBACK</code> &#8212; esas transacciones ya confirmaron, en otras bases de datos, posiblemente hace horas. En cambio, la saga ejecuta <strong>transacciones compensatorias</strong>: nuevas transacciones que sem&#225;nticamente deshacen el efecto de las completadas.</p>
+
+  <p>La palabra cr&#237;tica es <strong>sem&#225;nticamente</strong>. Una compensaci&#243;n no es una reversi&#243;n t&#233;cnica a un estado anterior; es una <em>nueva acci&#243;n de negocio</em> que contrarresta una anterior. No se descarga una tarjeta de cr&#233;dito &#8212; se <em>emite un reembolso</em>. No se des-env&#237;a un correo electr&#243;nico &#8212; se <em>env&#237;a una correcci&#243;n</em>. No se elimina un registro de env&#237;o &#8212; se <em>cancela el env&#237;o</em>. La acci&#243;n compensatoria es en s&#237; misma un hecho real, registrado y que avanza hacia adelante.</p>
+
+  <p><strong>Listing 7.2</strong> &#8212; Este ejemplo implementa el n&#250;cleo de ejecuci&#243;n de saga independiente de coreograf&#237;a: cada <code>SagaStep</code> agrupa una acci&#243;n de avance con su compensaci&#243;n sem&#225;ntica. Cuando cualquier paso lanza una excepci&#243;n, el ejecutor deshace solo los pasos ya completados en estricto orden inverso.</p>
+
+<pre><code class="language-python"># Saga execution ── O(n) forward, O(k) compensation where k = steps completed before failure
+from __future__ import annotations
+
+import enum
+from dataclasses import dataclass, field
+from typing import Callable
+
+
+class StepStatus(enum.Enum):
+    PENDING = "pending"
+    COMPLETED = "completed"
+    COMPENSATED = "compensated"
+    FAILED = "failed"
+
+
+@dataclass
+class SagaStep:
+    """Pairs a forward business action with its semantic compensation."""
+    name: str
+    action: Callable[[], None]
+    compensation: Callable[[], None]
+    status: StepStatus = field(default=StepStatus.PENDING, init=False)
+
+
+class OrderSaga:
+    """
+    Executes an order saga: ReserveStock &#8594; CapturePayment &#8594; CreateShipment.
+    On any failure, compensates completed steps in reverse order.
+    """
+
+    def __init__(self, order_id: str) -&gt; None:
+        self.order_id = order_id
+        self.steps: list[SagaStep] = [
+            SagaStep("ReserveStock",   self._reserve_stock,   self._release_stock),
+            SagaStep("CapturePayment", self._capture_payment, self._refund_payment),
+            SagaStep("CreateShipment", self._create_shipment, self._cancel_shipment),
+        ]
+
+    def _reserve_stock(self) -&gt; None:
+        print(f"  [ReserveStock]   stock reserved   order={self.order_id}")
+
+    def _capture_payment(self) -&gt; None:
+        print(f"  [CapturePayment] charging card     order={self.order_id}")
+        raise RuntimeError("Payment gateway timeout ── no charge was made")
+
+    def _create_shipment(self) -&gt; None:
+        print(f"  [CreateShipment] shipment created  order={self.order_id}")
+
+    def _release_stock(self) -&gt; None:
+        print(f"  [ReleaseStock]   stock released    order={self.order_id}")
+
+    def _refund_payment(self) -&gt; None:
+        print(f"  [RefundPayment]  refund issued     order={self.order_id}")
+
+    def _cancel_shipment(self) -&gt; None:
+        print(f"  [CancelShipment] shipment cancelled order={self.order_id}")
+
+    def execute(self) -&gt; bool:
+        """
+        Run forward steps in order. On the first failure, compensate every
+        previously completed step in reverse order (LIFO), then return False.
+        """
+        completed: list[SagaStep] = []
+
+        for step in self.steps:
+            try:
+                step.action()
+                step.status = StepStatus.COMPLETED
+                completed.append(step)
+            except Exception as exc:
+                step.status = StepStatus.FAILED
+                print(f"\n  Step '{step.name}' failed: {exc}")
+                print("  Compensating completed steps in reverse order...")
+                for done in reversed(completed):
+                    done.compensation()
+                    done.status = StepStatus.COMPENSATED
+                return False
+
+        return True
+
+
+if __name__ == "__main__":
+    print("=== Order Saga: ReserveStock succeeds, CapturePayment fails ===\n")
+    saga = OrderSaga(order_id="ORD-42")
+    success = saga.execute()
+    print(f"\nSaga result: {'completed' if success else 'compensated'}")
+    for step in saga.steps:
+        print(f"  {step.name:20s}  {step.status.value}")</code></pre>
+
+  <p>Tres propiedades hacen confiables a las compensaciones, y cada una se mapea a una regla de dise&#241;o.</p>
+
+  <ol>
+    <li><strong>Las compensaciones deben ser idempotentes.</strong> Un comando de reembolso puede entregarse m&#225;s de una vez bajo entrega at-least-once (Cap&#237;tulo 4). Reemitirlo no debe reembolsar dos veces. Use una clave de compensaci&#243;n y verifique &#8220;&#191;ya compensado?&#8221; antes de actuar.</li>
+    <li><strong>Las compensaciones deben aplicarse en estricto orden inverso.</strong> Ej&#233;cutelas en orden inverso a los pasos de avance, para que los efectos se deshagan en una secuencia sensata.</li>
+    <li><strong>Algunas acciones no pueden compensarse &#8212; as&#237; que ordene la saga en torno a ellas.</strong> No se puede des-lanzar un misil ni des-enviar un paquete f&#237;sico. Estas son <strong>transacciones pivote</strong> (pivot transactions): despu&#233;s del pivote, la saga solo puede avanzar. Coloque todos los pasos <em>compensables</em> antes del pivote y todos los pasos <em>reintentables</em> despu&#233;s de &#233;l.</li>
+  </ol>
+
+  <blockquote class="expert"><strong>&#128161; Nota del Experto:</strong> El texto establece que las compensaciones deben ser idempotentes, pero no aborda el caso en que la propia compensaci&#243;n falla &#8212; y este es uno de los escenarios operacionalmente m&#225;s peligrosos en sagas en producci&#243;n. Un comando <code>RefundPayment</code> puede ser rechazado por un procesador de pagos downstream que est&#225; temporalmente ca&#237;do. Los sistemas en producci&#243;n deben modelar esto expl&#237;citamente: un estado terminal <code>CompensationFailed</code> respaldado por una dead-letter queue, una regla de alerta y un playbook de remediaci&#243;n manual.</blockquote>
+
+  <blockquote class="critical"><strong>&#9888;&#65039; Nota Cr&#237;tica:</strong> Toda la secci&#243;n sobre compensaciones describe una &#250;nica instancia de saga de forma aislada. Nunca aborda el <em>problema de aislamiento de sagas</em>: porque cada transacci&#243;n local confirma de forma independiente y los estados intermedios de la saga son completamente visibles para otras transacciones concurrentes, las sagas sufren de fen&#243;menos que el aislamiento ACID previene &#8212; espec&#237;ficamente lecturas sucias y actualizaciones perdidas. El art&#237;culo original de Garcia-Molina de 1987 que introdujo las sagas identific&#243; expl&#237;citamente esta limitaci&#243;n, y &#8220;Microservices Patterns&#8221; de Chris Richardson dedica una secci&#243;n completa a las contramedidas: bloqueos sem&#225;nticos, actualizaciones conmutativas, vistas pesimistas y re-lectura de valores.</blockquote>
+
+  <div class="detail"><strong>&#9888;&#65039; Nota Cr&#237;tica</strong> La Propiedad 2 establece &#8220;Las compensaciones deben aplicarse en estricto orden inverso.&#8221; La formulaci&#243;n original en ingl&#233;s usaba el t&#233;rmino &#8220;commutative-safe&#8221; (conmutativo seguro), lo cual es un error terminol&#243;gico que contradice directamente el consejo que le sigue. La <em>conmutatividad</em> significa que el orden de las operaciones no importa &#8212; si las compensaciones fueran conmutativas, no habr&#237;a necesidad de ejecutarlas en orden inverso. <strong>Correcci&#243;n sugerida:</strong> Reemplazar &#8220;commutative-safe&#8221; con &#8220;Las compensaciones deben aplicarse en estricta secuencia inversa: deshacer primero el &#250;ltimo paso confirmado.&#8221;</div>
+
+  <h2>Gestores de Procesos y M&#225;quinas de Estado</h2>
+
+  <p>Un orquestador que simplemente reenv&#237;a comandos es delgado. Un orquestador real debe recordar: qu&#233; pasos se han completado, cu&#225;les est&#225;n pendientes, qu&#233; hacer en cada respuesta, cu&#225;ndo agotar el tiempo de espera y cu&#225;ndo comenzar a compensar. Ese coordinador con estado tiene un nombre &#8212; el <strong>gestor de procesos</strong> (process manager) &#8212; y su implementaci&#243;n m&#225;s confiable es una <strong>m&#225;quina de estados</strong> (state machine) expl&#237;cita.</p>
+
+  <p>Un gestor de procesos es un componente que recibe eventos, mantiene el estado de una &#250;nica instancia de saga y decide el siguiente comando basado en ese estado. Mod&#233;lelo como un conjunto finito de estados con transiciones definidas: <code>AwaitingPayment &#8594; AwaitingStock &#8594; AwaitingShipment &#8594; Completed</code>, con aristas de fallo que ramifican en <code>Compensating &#8594; Cancelled</code>.</p>
+
+  <p><strong>Figura 7.3</strong> &#8212; Esta m&#225;quina de estados captura cada estado observable de una saga de pedido en vuelo y hace expl&#237;citas tanto la ruta feliz como las rutas de compensaci&#243;n como transiciones.</p>
+
+  <p class="diagram-caption">&#128202; [Diagram &#8212; Mermaid source below]</p>
+<pre class="mermaid-source"><code>stateDiagram-v2
+    [*] --&gt; Started
+    Started --&gt; AwaitingPayment: CapturePayment sent
+    AwaitingPayment --&gt; AwaitingStock: PaymentCaptured
+    AwaitingPayment --&gt; Compensating: PaymentFailed / Timeout
+    AwaitingStock --&gt; AwaitingShipment: StockReserved
+    AwaitingStock --&gt; Compensating: StockFailed / Timeout
+    AwaitingShipment --&gt; Completed: ShipmentCreated
+    AwaitingShipment --&gt; Compensating: ShipmentFailed / Timeout
+    Compensating --&gt; Cancelled: AllCompensated
+    Completed --&gt; [*]
+    Cancelled --&gt; [*]</code></pre>
+
+  <p>Dos disciplinas de implementaci&#243;n separan un gestor de procesos robusto de uno fr&#225;gil.</p>
+
+  <p><strong>Persistir el estado de la saga en cada transici&#243;n.</strong> El gestor de procesos es en s&#237; mismo un agregado &#8212; y todo lo del Cap&#237;tulo 6 aplica. Su estado debe sobrevivir a un fallo. Cuando el orquestador reinicia, rehidrata cada saga en vuelo desde su estado persistido y reanuda exactamente donde se qued&#243;. Un gestor de procesos que mantiene el estado de la saga solo en memoria hu&#233;rfanar&#225;, en el primer reinicio del pod, cada pedido en vuelo.</p>
+
+  <p><strong>Tratar los timeouts como estados de primera clase, no como ocurrencias tard&#237;as.</strong> En un mundo s&#237;ncrono, una llamada colgada lanza una excepci&#243;n. En una saga, un paso que nunca responde simplemente... espera, para siempre, silenciosamente. El gestor de procesos debe establecer un temporizador en cada paso pendiente. Si <code>PaymentCaptured</code> no llega dentro del plazo, el timeout es un <em>evento</em> que transiciona la m&#225;quina de estados &#8212; usualmente hacia la compensaci&#243;n.</p>
+
+  <p>Muchos equipos recurren a un motor de workflow aqu&#237; &#8212; Temporal, AWS Step Functions, Camunda &#8212; precisamente porque estas herramientas proporcionan estado duradero, temporizadores y reintentos de forma nativa. Es una elecci&#243;n razonable. Pero comprenda lo que le dan: una m&#225;quina de estados persistida y gestionada. El patr&#243;n es el mismo ya sea que lo implemente a mano o lo adquiera.</p>
+
+  <div class="detail"><strong>&#128161; Nota del Experto</strong> El texto recomienda Temporal, AWS Step Functions y Camunda como opciones razonables, lo cual es preciso. Sin embargo, sus modelos de durabilidad difieren de maneras que emergen bajo fallos: Temporal persiste un historial de eventos completo y seguro para replay; AWS Step Functions impone l&#237;mites estrictos (25,000 eventos de historial por ejecuci&#243;n) que afectan los procesos de larga duraci&#243;n; Camunda 8 utiliza el log replicado de Zeebe. Los equipos que seleccionan una de estas herramientas basado &#250;nicamente en la experiencia del desarrollador pueden enfrentar migraciones costosas al alcanzar l&#237;mites operacionales.</div>
+
+  <div class="detail"><strong>&#128161; Nota del Experto</strong> Un antipatr&#243;n com&#250;n cuando los equipos adoptan motores de workflow es codificar reglas de negocio dentro del propio orquestador &#8212; ramas condicionales basadas en el nivel del cliente, l&#243;gica de precios, verificaciones de cumplimiento &#8212; convirti&#233;ndolo en un &#8220;God Workflow&#8221;. El orquestador debe emitir comandos y recibir respuestas; debe contener solo flujo de control. Las reglas de negocio pertenecen a los servicios que ejecutan los comandos.</div>
+
+  <h2>El Teorema CAP Aplicado a Flujos de Eventos</h2>
+
+  <p>Todo en este cap&#237;tulo es consecuencia de un teorema, as&#237; que hay que hacerlo expl&#237;cito. El <strong>teorema CAP</strong> establece que un sistema distribuido, cuando una <strong>partici&#243;n</strong> (P) de red lo divide, puede preservar ya sea <strong>consistencia</strong> (C) &#8212; cada nodo ve los mismos datos &#8212; o <strong>disponibilidad</strong> (A) &#8212; cada solicitud obtiene una respuesta &#8212; pero no ambas. Las particiones no son opcionales; las redes fallan. As&#237; que la elecci&#243;n real no es &#8220;CA versus algo.&#8221; Cuando ocurre la partici&#243;n, se elige C o A.</p>
+
+  <p>Las transacciones distribuidas y 2PC son la elecci&#243;n <strong>CP</strong>: bajo una partici&#243;n, se niegan a continuar para mantener los datos consistentes. Las sagas son la elecci&#243;n <strong>AP</strong>: bajo una partici&#243;n, cada transacci&#243;n local a&#250;n confirma, el sistema permanece disponible, y la consistencia se restaura posteriormente a trav&#233;s del flujo de eventos y compensaciones. <strong>Una saga es, en su n&#250;cleo, una apuesta arquitect&#243;nica de que la disponibilidad importa m&#225;s que la consistencia instant&#225;nea</strong> &#8212; y para la mayor&#237;a de los procesos de negocio, esa apuesta es correcta.</p>
+
+  <p><strong>Figura 7.4</strong> &#8212; Cuando ocurre una partici&#243;n de red, el sistema debe elegir entre bloquear la operaci&#243;n para preservar la consistencia (CP &#8212; la ruta 2PC) o confirmar localmente para permanecer disponible y converger despu&#233;s (AP &#8212; la ruta de saga).</p>
+
+  <p class="diagram-caption">&#128202; [Diagram &#8212; Mermaid source below]</p>
+<pre class="mermaid-source"><code>flowchart TD
+    A[Cross-Service Business Operation] --&gt; B{Network Partition Detected?}
+    B --&gt;|No| N[Proceed Normally]
+    B --&gt;|Yes| D{CAP Choice}
+    D --&gt;|Choose Consistency - CP| E[Block &#8212; Wait for All Participants]
+    E --&gt; F[2PC Coordinator Holds Locks]
+    F --&gt; G[Operation Fails\nData remains consistent\nBusiness request rejected]
+    D --&gt;|Choose Availability - AP| H[Commit Locally per Service]
+    H --&gt; I[Each Service Stays Available\nSaga Continues]
+    I --&gt; J[Eventual Convergence\nvia Events and Compensations\nBusiness request accepted]</code></pre>
+
+  <p>Un matiz que vale la pena interiorizar: CAP no es una propiedad de todo el sistema; es una propiedad de cada <em>operaci&#243;n</em>. Cargar un pago podr&#237;a demandar estrictez similar a CP dentro del propio l&#237;mite del servicio de pagos &#8212; una &#250;nica transacci&#243;n ACID, sin ambig&#252;edad sobre el dinero. Coordinar ese pago con inventario y env&#237;o a trav&#233;s de servicios es AP &#8212; una saga. Las arquitecturas maduras son fuertemente consistentes <em>dentro</em> de cada l&#237;mite de servicio y eventualmente consistentes <em>a trav&#233;s</em> de l&#237;mites, con las sagas como el puente entre los dos reg&#237;menes.</p>
+
+  <div class="detail"><strong>&#9888;&#65039; Nota Cr&#237;tica</strong> El teorema CAP se presenta como un marco completo y actual para las decisiones de consistencia distribuida, pero sus limitaciones pr&#225;cticas est&#225;n bien establecidas. El propio Eric Brewer reconoci&#243; en su retrospectiva de 2012 que el encuadre binario del teorema oscurece m&#225;s de lo que revela. El teorema PACELC (Abadi, 2012) &#8212; que extiende CAP para abordar el compromiso latencia/consistencia que existe <em>incluso cuando no hay partici&#243;n</em> &#8212; es el modelo m&#225;s operacionalmente relevante para los arquitectos que dise&#241;an sistemas dirigidos por eventos. <strong>Correcci&#243;n sugerida:</strong> Agregar un cuadro lateral &#8220;M&#225;s all&#225; de CAP&#8221; se&#241;alando: (1) la &#8220;C&#8221; de CAP significa espec&#237;ficamente linearizabilidad; (2) el modelo PACELC extiende el an&#225;lisis a la dimensi&#243;n latencia/consistencia; (3) la retrospectiva de Brewer de 2012 recomienda tratar el compromiso como continuo.</div>
+
+  <h2>Conclusiones Clave</h2>
+
+  <ul>
+    <li><strong>Las transacciones ACID distribuidas no escalan.</strong> El commit en dos fases mantiene bloqueos a trav&#233;s de la red, se bloquea ante fallos del coordinador y multiplica la fragilidad de sus servicios en un &#250;nico punto de fallo. Rech&#225;celo para procesos de negocio entre servicios.</li>
+    <li><strong>Una saga es una secuencia de transacciones locales coordinadas por eventos, revertidas por compensaci&#243;n, no por rollback.</strong> Acepta la consistencia eventual para preservar la disponibilidad y la independencia de los servicios.</li>
+    <li><strong>Coreograf&#237;e flujos cortos y estables; orqueste los complejos o con ramificaciones.</strong> La coreograf&#237;a desacopla pero oculta el proceso; la orquestaci&#243;n centraliza la l&#243;gica y hace visible el flujo. M&#225;s all&#225; de tres o cuatro pasos, prefiera la orquestaci&#243;n.</li>
+    <li><strong>Las compensaciones son nuevas acciones de negocio, no deshechos t&#233;cnicos.</strong> Clasifique cada paso como compensable, pivote o reintentable, y ordene la saga para que la irreversibilidad llegue al final.</li>
+    <li><strong>Un gestor de procesos es una m&#225;quina de estados persistida.</strong> Persista el estado en cada transici&#243;n y trate los timeouts como eventos de primera clase, o el primer reinicio del pod hu&#233;rfanar&#225; sus sagas en vuelo.</li>
+    <li><strong>Las sagas son la elecci&#243;n AP del teorema CAP.</strong> Consistencia fuerte dentro de cada l&#237;mite de servicio, consistencia eventual a trav&#233;s de l&#237;mites, con la saga como el puente.</li>
+  </ul>
+
+</body>
+</html>

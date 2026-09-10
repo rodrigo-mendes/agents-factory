@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Capítulo 10: Casos Reais, Trade-offs e Armadilhas</title>
+  <link rel="stylesheet" type="text/css" href="styles.css"/>
+</head>
+<body>
+<h1 id="ch10">Capítulo 10: Casos Reais, Trade-offs e Armadilhas</h1>
+
+<h2>Declaração do Problema Inicial</h2>
+
+<p>Nove capítulos colocaram em suas mãos uma caixa de ferramentas. Mas uma caixa de ferramentas é perigosa nas mãos erradas. O erro mais caro em arquitetura orientada a eventos não é um bug — é adotar um padrão que resolve um problema que você não tem. Este capítulo final muda a pergunta. Em vez de perguntar "como uso esse padrão?", ele pergunta "devo usá-lo, e o que acontece com a organização quando o faço?"</p>
+
+<h2>Estudos de Caso em Fintech e E-commerce</h2>
+
+<p>Considere um <strong>ledger de fintech</strong> — o sistema central que registra movimentações financeiras para um banco digital. Dinheiro tem uma propriedade inegociável: todo saldo deve ser explicável. O ledger armazena cada evento <code>FundsDeposited</code>, <code>FundsWithdrawn</code> e <code>TransferSettled</code> como um fato imutável. Quando um auditor chega, o histórico <em>é</em> a trilha de auditoria. Aqui, o Event Sourcing não é engenharia excessiva; é o modo mais barato de atender a um requisito rígido.</p>
+
+<p>O <strong>checkout</strong> de e-commerce conta uma história diferente. Um cliente faz um pedido, e por trás desse único clique existem reserva de estoque, autorização de pagamento, pontuação antifraude e envio. Nenhum banco de dados único é dono de tudo isso. Uma transação ACID distribuída entre eles é impraticável. Este é território de saga.</p>
+
+<table>
+<thead><tr><th>Preocupação</th><th>Ledger de Fintech</th><th>Checkout de E-commerce</th></tr></thead>
+<tbody>
+<tr><td>Motivador principal</td><td>Auditabilidade e correção</td><td>Disponibilidade e coordenação</td></tr>
+<tr><td>Padrão dominante</td><td>Event Sourcing</td><td>Saga + process manager</td></tr>
+<tr><td>Postura de consistência</td><td>Histórico é a fonte da verdade</td><td>Consistência eventual, compensações</td></tr>
+<tr><td>Custo de um evento perdido</td><td>Catastrófico (dinheiro)</td><td>Recuperável (retry ou compensar)</td></tr>
+<tr><td>Modelo de leitura</td><td>Projeção de saldo reconstruída</td><td>Projeção de status do pedido</td></tr>
+</tbody>
+</table>
+
+<p class="diagram-caption">📊 [Diagram — Mermaid source below]</p>
+<pre class="mermaid-source"><code>flowchart TD
+    subgraph Fintech["Fintech Ledger — Event Sourcing"]
+        FD[FundsDeposited] --> ES[(Event Store)]
+        FW[FundsWithdrawn] --> ES
+        TS[TransferSettled] --> ES
+        ES --> BP[Balance Projection]
+        BP --> AT[Audit Trail]
+    end
+
+    subgraph Ecommerce["E-commerce Checkout — Saga"]
+        OP[OrderPlaced] --> IR[Reserve Inventory]
+        IR --> PA[Authorize Payment]
+        PA --> SH[Schedule Shipping]
+        PA -->|Payment fails| CI[Compensate: Release Inventory]
+        SH -->|Shipping fails| RP[Compensate: Refund Payment]
+        RP --> CI
+    end</code></pre>
+
+<blockquote class="expert"><strong>💡 Nota do Especialista:</strong> O exemplo do ledger de fintech omite uma restrição crítica de produção: à medida que um agregado acumula dezenas de milhares de eventos — comum para contas ativas após 2–3 anos — reproduzir o stream completo a cada leitura torna-se proibitivo. Sistemas de Event Sourcing em produção em escala exigem universalmente uma <strong>estratégia de snapshot</strong>. Sem snapshots, a latência de leitura para agregados de alta frequência cresce linearmente com a idade da conta.</blockquote>
+
+<div class="detail"><strong>💡 Nota do Especialista</strong> A seção de saga do checkout omite o modo de falha da <strong>tempestade de rollback de saga</strong>. Quando uma compensação de estágio tardio dispara em alto volume — por exemplo, um serviço de envio rejeita um pedido depois que o pagamento já foi capturado — os eventos compensatórios chegam aos serviços anteriores como uma rajada que pode sobrecarregar os limites de taxa do provedor de pagamento ou a capacidade do serviço de estoque. Equipes que operam em escala adicionam backpressure e orçamentos de retry com backoff exponencial especificamente para o caminho de compensação.</div>
+
+<div class="detail"><strong>⚠️ Nota Crítica</strong> O texto afirma que Event Sourcing é "o modo mais barato de atender" ao requisito de auditabilidade de um ledger de fintech, sem comparação com alternativas. Tabelas de log de auditoria append-only, Change Data Capture (CDC) com Debezium escrevendo em um sink imutável, e serviços de auditoria específicos atendem ao mesmo requisito com uma fração da complexidade operacional. Apresentar o Event Sourcing como a resposta correta por padrão para "você precisa de auditabilidade" é exatamente a armadilha de adoção excessiva contra a qual o capítulo adverte.</div>
+
+<div class="detail"><strong>⚠️ Nota Crítica</strong> A seção de checkout de e-commerce apresenta o ACID distribuído como "impraticável" como uma afirmação universal, sem reconhecer que bancos de dados modernos globalmente distribuídos (Google Spanner, CockroachDB, YugabyteDB, AWS Aurora Global Database com isolamento serializável) oferecem semântica ACID distribuída.</div>
+
+<div class="detail"><strong>⚠️ Nota Crítica</strong> O carrinho de compras é descrito como "descartável por natureza", endossando implicitamente a decisão de não usá-lo com Event Sourcing. Recuperação de carrinho abandonado, auditoria de direito ao apagamento GDPR sobre conteúdo do carrinho, snapshot de jurisdição fiscal e recursos de lista de desejos — todos requerem estado de carrinho durável e consultável. O enquadramento pode levar os leitores a investir insuficientemente no design de persistência do carrinho.</div>
+
+<h2>Catálogo de Anti-Padrões e Armadilhas Recorrentes</h2>
+
+<ul>
+<li><strong>O evento como comando disfarçado.</strong> Uma mensagem chamada <code>SendEmail</code> ou <code>UpdateInventory</code> não é um evento — é um comando com uma fantasia. Eventos reais descrevem fatos do passado (<code>OrderPlaced</code>), não instruções para o futuro (Capítulos 1 e 2).</li>
+<li><strong>Ruído técnico como eventos de domínio.</strong> Publicar <code>RowInserted</code> ou <code>CacheInvalidated</code> inunda o sistema com fatos que nenhuma capacidade de negócio se importa (Capítulo 2).</li>
+<li><strong>O monolito distribuído.</strong> Serviços se comunicam por eventos mas permanecem tão fortemente acoplados que nenhum pode fazer deploy de forma independente (Capítulos 2 e 8).</li>
+<li><strong>Assumir entrega exatamente uma vez.</strong> Com entrega at-least-once — o padrão realista — duplicatas são prováveis. Consumidores não idempotentes são uma bomba-relógio (Capítulo 4).</li>
+<li><strong>A fila de mensagens mortas ignorada.</strong> Tratar a DLQ como um depósito em vez de uma fila de trabalho. Uma DLQ não vazia é um incidente (Capítulo 9).</li>
+<li><strong>Evolução de schema pela esperança.</strong> Lançar uma mudança incompatível em um contrato de evento e descobrir os consumidores afetados somente quando eles travam (Capítulo 8).</li>
+</ul>
+
+<p class="diagram-caption">📊 [Diagram — Mermaid source below]</p>
+<pre class="mermaid-source"><code>flowchart LR
+    AP1["Symptom: SendEmail event"] -->|Root cause: Command as event| FX1["Fix: Past-tense fact — EmailSent"]
+    AP2["Symptom: RowInserted published"] -->|Root cause: Technical noise| FX2["Fix: Business-meaningful events only"]
+    AP3["Symptom: Shared schema, lockstep deploy"] -->|Root cause: Distributed monolith| FX3["Fix: Schema registry + compatibility policy"]
+    AP4["Symptom: Breaks on duplicate message"] -->|Root cause: Assumes exactly-once| FX4["Fix: Idempotent consumer design"]
+    AP5["Symptom: DLQ never actioned"] -->|Root cause: DLQ as landfill| FX5["Fix: Alert on non-empty DLQ"]
+    AP6["Symptom: Consumers crash on deploy"] -->|Root cause: No compatibility strategy| FX6["Fix: Schema evolution contracts"]</code></pre>
+
+<blockquote class="expert"><strong>💡 Nota do Especialista:</strong> O anti-padrão "assumir entrega exatamente uma vez" não aborda um equívoco recorrente: engenheiros que habilitam a <strong>semântica exactly-once (EOS)</strong> do Kafka via produtores transacionais acreditam ter eliminado o requisito de idempotência no lado do consumidor. O EOS do Kafka garante que cada mensagem seja escrita e lida do log do Kafka exatamente uma vez; ele não faz nenhuma garantia sobre os efeitos colaterais do processamento do consumidor — escritas em banco de dados, chamadas HTTP downstream estão completamente fora do escopo do EOS.</blockquote>
+
+<div class="detail"><strong>💡 Nota do Especialista</strong> O anti-padrão de monolito distribuído poderia ser mais específico com um gatilho organizacional concreto: o uso de um <strong>schema registry compartilhado com releases sincronizados</strong>. As equipes adotam o Confluent Schema Registry corretamente, mas então gerenciam todas as versões de schema em um monorepo único com um pipeline de release unificado — exigindo que os proprietários do schema e todas as equipes de consumidores coordenem cada ciclo de release.</div>
+
+<div class="detail"><strong>⚠️ Nota Crítica</strong> O anti-padrão "Assumir entrega exatamente uma vez" afirma que "com entrega at-least-once, duplicatas são <em>garantidas</em>." A palavra "garantidas" está tecnicamente errada: entrega at-least-once significa que uma mensagem será entregue pelo menos uma vez, o que torna duplicatas possíveis e prováveis sob condições de falha, mas não garantidas em toda execução.</div>
+
+<h2>Adoção Prematura de ES, CQRS e Saga em Conjunto</h2>
+
+<p>Há uma falha específica tão comum e tão prejudicial que merece sua própria seção: adotar <strong>Event Sourcing</strong>, <strong>CQRS</strong> e <strong>sagas</strong> juntos, desde o primeiro dia, em um projeto greenfield. Cada padrão carrega um imposto permanente, e os impostos se acumulam.</p>
+
+<table>
+<thead><tr><th>Padrão</th><th>O que promete</th><th>O que custa, permanentemente</th></tr></thead>
+<tbody>
+<tr><td>Event Sourcing</td><td>Histórico completo, auditoria perfeita</td><td>Versionamento, upcasting, sem edições in-place</td></tr>
+<tr><td>CQRS</td><td>Leituras otimizadas, consultas escaláveis</td><td>Consistência eventual, manutenção de projeções</td></tr>
+<tr><td>Saga</td><td>Coordenação sem ACID distribuído</td><td>Lógica de compensação, rastreamento de estado, raciocínio sobre falhas parciais</td></tr>
+</tbody>
+</table>
+
+<p>A sequência correta é subtrativa, não aditiva. Comece com a coisa mais simples que funciona. Introduza CQRS somente quando as formas de leitura e escrita genuinamente divergem. Introduza Event Sourcing somente quando o histórico é um requisito rígido. Introduza sagas somente quando um processo de negócio realmente abrange bounded contexts. Cada padrão deve ganhar seu lugar resolvendo um problema que você consegue nomear.</p>
+
+<div class="detail"><strong>💡 Nota do Especialista</strong> O texto descreve corretamente os impostos técnicos de combinar os três padrões, mas o imposto organizacional é igualmente significativo. Em um sistema com Event Sourcing, CQRS e sagas todos ativos, um único incidente P1 exige que um engenheiro raciocine simultaneamente em quatro camadas distintas: o stream de eventos, o estado da projeção, o estado da saga e o log de compensação. Equipes relatam que integrar um novo engenheiro para depuração full-stack neste ambiente leva 6–9 meses em vez das 4–6 semanas típicas de um sistema baseado em serviços.</div>
+
+<h2>Migrando para e do Event Sourcing</h2>
+
+<p><strong>Migrando para Event Sourcing</strong> a partir de um sistema baseado em estado é um procedimento controlado, não uma reescrita:</p>
+
+<ol>
+<li><strong>Identifique o agregado</strong> cujo histórico importa — a conta, o pedido, a apólice.</li>
+<li><strong>Modele os eventos</strong> que teriam produzido o estado atual. Este é um trabalho de domínio, não de banco de dados.</li>
+<li><strong>Popule o event store</strong> com um evento <code>Migrated</code> ou <code>Initialized</code> que capture o estado atual como um fato inicial.</li>
+<li><strong>Execute dual-write ou shadow projections</strong> para validar que reproduzir os eventos reproduz o estado que o sistema legado mantém.</li>
+<li><strong>Transfira as leituras para a projeção</strong>, depois encerre o caminho de escrita legado assim que a confiança estiver estabelecida.</li>
+</ol>
+
+<p class="diagram-caption">📊 [Diagram — Mermaid source below]</p>
+<pre class="mermaid-source"><code>sequenceDiagram
+    participant App as Application
+    participant Legacy as Legacy State DB
+    participant ES as Event Store
+    participant Proj as Shadow Projection
+
+    App->>Legacy: Read current state
+    App->>ES: Append Initialized event (snapshot of current state)
+
+    loop Dual-write phase
+        App->>Legacy: Write state change (legacy path)
+        App->>ES: Append domain event (new path)
+        ES->>Proj: Replay events
+        Proj-->>App: Compare projection vs Legacy state
+    end
+
+    App->>App: Validation passed — cutover reads to Projection
+    App->>Legacy: Retire legacy write path</code></pre>
+
+<p><strong>Migrando para fora do Event Sourcing</strong> é mais raro, mas não é uma derrota. Construa a projeção final, persista-a como estado ordinário em uma tabela convencional, aponte leituras e escritas para essa tabela, e arquive o event store como um registro histórico frio. A capacidade de sair de forma limpa é em si mesma um argumento para adotar deliberadamente — uma decisão reversível é uma decisão mais segura.</p>
+
+<blockquote class="expert"><strong>💡 Nota do Especialista:</strong> A etapa 4 do procedimento de migração — "execute dual-write ou shadow projections" — glosa sobre um problema crítico de atomicidade. Fazer dual-write em um banco de dados de estado legado e em um event store na mesma transação de aplicação não é atômico. A abordagem segura para produção é o <strong>padrão transactional outbox</strong>: escrever o evento em uma tabela de outbox local na mesma transação que a atualização de estado, então retransmiti-lo assincronamente para o event store via CDC.</blockquote>
+
+<blockquote class="expert"><strong>💡 Nota do Especialista:</strong> A etapa 3 afirma que "o histórico antigo anterior ao corte é perdido, e isso é aceitável." Esta afirmação requer uma qualificação rígida para setores regulamentados. Sob SOX, PCI-DSS e os requisitos de retenção de dados da maioria dos reguladores bancários, o estado histórico de transações deve ser auditável por 5–7 anos.</blockquote>
+
+<blockquote class="critical"><strong>⚠️ Nota Crítica:</strong> A etapa 3 do guia de migração afirma "O histórico antigo anterior ao corte é perdido, e isso é aceitável." Essa afirmação é diretamente contraditada pelo estudo de caso do ledger de fintech introduzido apenas duas seções antes, onde o motivador principal é auditabilidade e o requisito declarado é que "todo saldo deve ser explicável." Reguladores (PCI-DSS, SOX, FCA, BACEN) rotineiramente exigem histórico de transações de vários anos.</blockquote>
+
+<div class="detail"><strong>⚠️ Nota Crítica</strong> A saída do Event Sourcing é descrita como "direta" porque "o estado atual é sempre derivável." Isso glosa sobre três modos de falha: (1) bugs de projeção que acumularam silenciosamente estado incorreto; (2) volume do event store — um sistema com centenas de milhões de eventos pode levar horas ou dias para reproduzir em um snapshot final; e (3) streams de eventos incompletos ou corrompidos onde o estado atual não é totalmente derivável.</div>
+
+<h2>Framework de Decisão: Quando Não Usar Cada Padrão</h2>
+
+<p>Cada padrão tem uma pergunta espelhada: não "quando uso isso?", mas "quando recuso?" O framework abaixo é deliberadamente formulado como proibições, porque o padrão deve ser sempre a opção mais simples até que um requisito concreto force o complexo.</p>
+
+<table>
+<thead><tr><th>Padrão</th><th>NÃO use quando...</th><th>Prefira em vez disso</th></tr></thead>
+<tbody>
+<tr><td>Arquitetura Orientada a Eventos</td><td>O fluxo de trabalho é uma solicitação simples e síncrona que precisa de uma resposta imediata</td><td>Chamada direta de request-response</td></tr>
+<tr><td>Event Sourcing</td><td>Você não tem requisito de auditoria, temporal ou de replay</td><td>Persistência baseada em estado (CRUD)</td></tr>
+<tr><td>CQRS</td><td>Os modelos de leitura e escrita têm a mesma forma</td><td>Um único modelo compartilhado</td></tr>
+<tr><td>Saga</td><td>A transação vive dentro de um único bounded context</td><td>Uma transação ACID local</td></tr>
+<tr><td>Choreography</td><td>O processo tem muitas etapas e precisa de visibilidade central</td><td>Orchestration com um process manager</td></tr>
+<tr><td>Orchestration</td><td>Dois serviços precisam de acoplamento frouxo e independente</td><td>Choreography via eventos</td></tr>
+</tbody>
+</table>
+
+<p class="diagram-caption">📊 [Diagram — Mermaid source below]</p>
+<pre class="mermaid-source"><code>flowchart TD
+    A{Concrete requirement\nidentified?} -->|No| B[Use simpler default\nCRUD / request-response]
+    A -->|Yes| C{Audit, replay,\nor temporal query needed?}
+    C -->|Yes| D[Event Sourcing]
+    C -->|No| E{Process spans multiple\nbounded contexts?}
+    E -->|Yes| F{Central visibility\nor complex flow?}
+    F -->|Yes| G[Saga + Orchestration\nprocess manager]
+    F -->|No| H[Saga + Choreography\nvia events]
+    E -->|No| I{Read and write shapes\ngenuinely differ?}
+    I -->|Yes| J[CQRS]
+    I -->|No| K{Async decoupling\nrequired?}
+    K -->|Yes| L[Event-Driven Architecture]
+    K -->|No| M[Direct request-response call]</code></pre>
+
+<p>O princípio unificador é o <strong>acoplamento como orçamento</strong>. Cada padrão neste livro troca um tipo de acoplamento por outro. A EDA troca acoplamento temporal por consistência eventual. O CQRS troca um único modelo por dois modelos mantidos em sincronia. As sagas trocam garantias ACID por lógica de compensação. Você não obtém desacoplamento de graça; você paga em complexidade, e essa complexidade é permanente.</p>
+
+<p>Esse é o fio que percorre todos os dez capítulos. Eventos são fatos imutáveis. Desacoplamento é poderoso, mas não é gratuito. Consistência é um espectro no qual você escolhe um ponto. A entrega é at-least-once, portanto a idempotência não é opcional. Histórico é um requisito a ser justificado, não um padrão a ser assumido. Os padrões são ferramentas, e ferramentas são escolhidas em função de problemas. O objetivo nunca foi construir um sistema orientado a eventos. O objetivo era resolver um problema de negócio, e a arquitetura orientada a eventos é um dos meios para esse fim — poderosa quando o problema a exige, e engenharia excessiva cara quando não o exige.</p>
+
+<div class="detail"><strong>💡 Nota do Especialista</strong> A tabela de decisão recomenda choreography quando "dois serviços precisam de acoplamento frouxo e independente", implicando um limite de dois serviços onde a orquestração ainda não se justifica. Na prática, o limiar é mais uma função de <strong>observabilidade</strong> do que de contagem de participantes. Choreography deve ser reservada para fan-out fire-and-forget onde o publicador genuinamente não se importa com o que os consumidores fazem com o evento.</div>
+
+<h2>Principais Conclusões</h2>
+
+<ul>
+<li>Sistemas reais aplicam um padrão onde ele se paga e resistem a aplicá-lo em todo lugar; o ledger de fintech precisa de Event Sourcing, o checkout de e-commerce precisa de sagas, e nenhum dos dois precisa de ambos.</li>
+<li>Anti-padrões se repetem de forma previsível — eventos disfarçados de comandos, DLQs ignoradas, suposições de exatamente uma vez e mudanças de schema incompatíveis — e reconhecer o sintoma é mais rápido do que qualquer dashboard.</li>
+<li>Adotar Event Sourcing, CQRS e sagas juntos desde o primeiro dia é a armadilha de otimização prematura mais cara; a sequência correta é subtrativa, adicionando cada padrão somente quando um problema nomeado o exige.</li>
+<li>A migração para Event Sourcing é um procedimento controlado e em etapas, e a migração para fora é limpa porque o estado atual é sempre derivável — a reversibilidade é um motivo para adotar deliberadamente.</li>
+<li>Cada padrão troca um acoplamento por outro; gaste o orçamento de acoplamento somente onde o retorno é concreto, e mantenha como padrão a opção mais simples até que um requisito real force a complexidade.</li>
+</ul>
+
+</body>
+</html>

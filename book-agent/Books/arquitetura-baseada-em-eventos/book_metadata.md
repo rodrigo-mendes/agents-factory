@@ -1,0 +1,13 @@
+# Book Metadata
+- Topic: Event-Driven Architecture (Arquitetura Baseada em Eventos)
+- Audience: Software architects and senior back-end engineers
+- Market Context: One of the most frequently cited skills in senior engineering roles; authoritative English-language material is abundant, but this book targets Portuguese-speaking senior practitioners who need depth, trade-offs, and real-world cases — not a translation.
+- Focus: Event-Driven Architecture, CQRS, Event Sourcing, real-world cases, trade-offs and pitfalls
+- Primary Language: English (source); translations: pt-BR, es
+- Chapters: 10
+- Depth: standard
+- Code Language: python
+- Code Style: working-code
+- Additional Languages: none
+- Slug: arquitetura-baseada-em-eventos
+- Created: 2026-09-01

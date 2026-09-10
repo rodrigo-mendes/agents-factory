@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Chapter 8: Schema Evolution and Event Versioning</title>
+  <link rel="stylesheet" type="text/css" href="styles.css"/>
+</head>
+<body>
+<h1 id="ch08">Chapter 8: Schema Evolution and Event Versioning</h1>
+
+<h2>Opening Problem Statement</h2>
+<p>Chapter 7 left the reader with a system whose truth is spread across services that converge over time through sagas and compensations. Chapter 6 made a heavier promise still: with Event Sourcing, every event is kept forever. That promise now presents its bill. A request-response API can deprecate a field in a quarter and force every caller to upgrade. An event store cannot. An event written in 2021 will be read in 2027, by a consumer written in 2025, running code nobody on the original team remembers. The event is not a transient message; it is a <strong>persisted contract with the future</strong>. So the real question of this chapter is uncomfortable: how does an architect change the shape of a fact that has already happened, is stored millions of times over, and is consumed by teams they have never met? Get this wrong and every deployment becomes a coordinated, cross-team, high-risk event. Get it right and teams evolve their contracts independently, on their own schedule, without a single broken consumer. This chapter is about buying that independence — and about the one policy decision that, if skipped, quietly guarantees the opposite.</p>
+
+<h2>Backward and Forward Compatibility</h2>
+<p>Every conversation about schema evolution eventually reduces to two words: <strong>compatibility</strong> direction. Confusing them is the most common — and most expensive — mistake in this domain, so define them precisely and never mix them again.</p>
+<p><strong>Backward compatibility</strong> means a <em>new consumer</em> can read <em>old events</em>. You changed the schema; a consumer running the new schema still understands data written under the old one. This is the direction Event Sourcing demands, because your event store is full of old events that will be replayed forever.</p>
+<p><strong>Forward compatibility</strong> means an <em>old consumer</em> can read <em>new events</em>. You changed the schema; a consumer still running the old version tolerates data written under the new one, typically by ignoring what it does not recognize. This is the direction that pub/sub integration demands, because you cannot upgrade every consumer at the same instant you upgrade the producer.</p>
+<p><strong>Full compatibility</strong> is both at once. It is the strictest and the safest, and it is the target most mature registries default to.</p>
+<p>The practical payoff is a simple rule set for what a change is allowed to do. The safe changes are almost always additive.</p>
+<p class="diagram-caption">📊 [Diagram — Schema change compatibility decision matrix]</p>
+<pre class="mermaid-source"><code>flowchart LR
+    subgraph FULL["Full-Safe — Backward AND Forward"]
+        F1["Add optional field with default"]
+        F2["Widen type — int to long"]
+    end
+
+    subgraph BACK["Backward-Safe Only\n(new consumer reads old events)"]
+        B1["Remove optional field\n(new schema supplies default)"]
+    end
+
+    subgraph FWD["Forward-Safe Only\n(old consumer reads new events)"]
+        V1["Add required field — no default\n(old consumer ignores unknown fields)"]
+    end
+
+    subgraph UNSAFE["Never Safe — Breaks Both Directions"]
+        U1["Rename field\n= remove + add — fails both ways"]
+        U2["Narrow type — long to int\n(truncation risk)"]
+        U3["Change field meaning\n(semantic breakage)"]
+    end
+
+    FULL --&gt;|"Safe to ship anytime"| OK(["Deploy freely"])
+    BACK --&gt;|"Roll consumers forward first"| WARN(["Coordinate rollout"])
+    FWD --&gt;|"Breaks event replays"| WARN2(["Block for Event Sourcing"])
+    UNSAFE --&gt;|"Registry must reject"| BLOCK(["Build fails"])</code></pre>
+<p>Notice the trap hiding in that matrix. Adding a <strong>required</strong> field breaks backward compatibility, because old events simply do not carry it. Removing a field breaks forward compatibility, because old consumers still expect it. And a rename is not one operation — it is a delete plus an add, so it fails on both fronts. The discipline, then, is boring on purpose: prefer optional fields, always supply defaults, and treat "required" as a word you have to justify in a review.</p>
+<pre><code class="language-python"># Schema evolution: safe addition of an optional field with a null default
+# Demonstrates both backward and forward compatibility using Avro-style schemas
+
+from typing import Any
+
+# v1 schema: original OrderPlaced event (no coupon support yet)
+ORDER_PLACED_V1: dict[str, Any] = {
+    "type": "record",
+    "name": "OrderPlaced",
+    "namespace": "com.example.orders",
+    "doc": "An order was placed by a customer.",
+    "fields": [
+        {"name": "orderId",    "type": "string"},
+        {"name": "customerId", "type": "string"},
+        {"name": "totalCents", "type": "long"},
+    ],
+}
+
+# v2 schema: adds optional couponCode as a null-first union (default = null)
+ORDER_PLACED_V2: dict[str, Any] = {
+    "type": "record",
+    "name": "OrderPlaced",
+    "namespace": "com.example.orders",
+    "doc": "An order was placed by a customer.",
+    "fields": [
+        {"name": "orderId",    "type": "string"},
+        {"name": "customerId", "type": "string"},
+        {"name": "totalCents", "type": "long"},
+        # null-first union means the declared default (None/null) is valid.
+        # Avro requires that the default value matches the first type in the union.
+        {
+            "name": "couponCode",
+            "type": ["null", "string"],  # null-first union
+            "default": None,             # Python None serialises as Avro null
+            "doc": "Discount coupon applied at checkout, or null if none.",
+        },
+    ],
+}
+
+# --- Compatibility analysis ---
+#
+# BACKWARD-COMPATIBLE (new consumer reads old v1 event):
+#   A v2 consumer deserialising a v1 event finds no couponCode bytes.
+#   Avro reader/writer schema resolution fills in the declared default: null.
+#   The v2 consumer proceeds without error. ✓
+#
+# FORWARD-COMPATIBLE (old consumer reads new v2 event):
+#   A v1 consumer deserialising a v2 event encounters the couponCode bytes.
+#   Avro projection: writer fields absent from the reader schema are skipped.
+#   The v1 consumer proceeds without error. ✓
+#
+# RESULT: FULL compatibility — safe in both directions.
+
+
+def demonstrate_compatibility() -&gt; None:
+    """Simulate reader/writer schema resolution in plain Python dicts."""
+    import json
+
+    # v1 event as it exists in the store — no couponCode field
+    v1_payload: dict[str, Any] = {
+        "orderId": "ord-001",
+        "customerId": "cust-42",
+        "totalCents": 4999,
+    }
+
+    # v2 consumer view: Avro fills in the default for absent fields
+    def read_as_v2(payload: dict[str, Any]) -&gt; dict[str, Any]:
+        return {**{"couponCode": None}, **payload}  # default applied if key missing
+
+    # v1 consumer view: extra fields in a v2 payload are projected away
+    v1_field_names = {f["name"] for f in ORDER_PLACED_V1["fields"]}
+
+    def read_as_v1(payload: dict[str, Any]) -&gt; dict[str, Any]:
+        return {k: v for k, v in payload.items() if k in v1_field_names}
+
+    # v2 event as a newer producer would write it
+    v2_payload: dict[str, Any] = {
+        "orderId": "ord-002",
+        "customerId": "cust-99",
+        "totalCents": 2500,
+        "couponCode": "SAVE10",
+    }
+
+    print("v2 consumer reads v1 event:", json.dumps(read_as_v2(v1_payload)))
+    print("v1 consumer reads v2 event:", json.dumps(read_as_v1(v2_payload)))
+
+
+if __name__ == "__main__":
+    demonstrate_compatibility()</code></pre>
+<p>One more distinction that senior engineers routinely blur: compatibility is a property of the <em>schema pair</em>, not of the event. A single change can be backward-compatible and forward-incompatible at the same time. Always ask "compatible in which direction, for whom?" before approving anything.</p>
+<blockquote class="expert"><strong>💡 Expert Note:</strong> The prose states that full compatibility "is the target most mature registries default to." This is inaccurate and should be corrected before publication. Confluent Schema Registry — the de facto industry standard — defaults to <strong>BACKWARD</strong> compatibility, not FULL. AWS Glue Schema Registry also defaults to BACKWARD_ALL. FULL compatibility is an opt-in choice, not a default, precisely because it prohibits field removal and imposes constraints many teams cannot meet early in a product's lifecycle. Shipping the claim as written will cause practitioners to mis-configure registries, then be confused when the real defaults contradict the book.</blockquote>
+<div class="detail"><strong>💡 Expert Note</strong>
+<p>The prose covers what changes are safe and unsafe, but does not name the <strong>Tolerant Reader</strong> pattern — the consumer-side discipline that is the practical implementation of forward compatibility. A tolerant reader deserializes only the fields it explicitly needs and discards everything else without error, rather than failing on unrecognized or missing fields. This is the complementary discipline to additive-only producer changes: the producer adds fields safely only if consumers are written to tolerate them. In practice, many deserialization frameworks (especially Jackson with <code>FAIL_ON_UNKNOWN_PROPERTIES</code> defaulting to false in recent versions, or Avro's schema projection) implement this automatically, but teams using strict validation libraries or hand-written parsers must enforce it explicitly in code review. Naming the pattern gives teams a vocabulary to use in standards documents and review checklists.</p>
+</div>
+<blockquote class="critical"><strong>⚠️ Critical Note:</strong> The prose states that FULL compatibility "is the target most mature registries default to." This is factually incorrect. Confluent Schema Registry — the dominant registry in Kafka-based systems and the de facto reference implementation — defaults to <code>BACKWARD</code>, not <code>FULL</code>. AWS Glue Schema Registry also defaults to <code>BACKWARD_ALL</code>. No widely deployed registry defaults to <code>FULL</code> out of the box. An architect who reads this claim and then opens their registry's admin UI will immediately encounter a contradiction, which undermines trust in the entire chapter. Replace the sentence with the accurate statement: most mature registries default to <code>BACKWARD</code> (Confluent) or <code>BACKWARD_ALL</code> (AWS Glue). Clarify that <code>FULL</code> must be explicitly configured and explain the trade-off: it prevents field removal, which causes schema bloat over time but eliminates an entire class of consumer breakage.</blockquote>
+
+<h2>Schema Registry and Formats (Avro, JSON Schema, Protobuf)</h2>
+<p>Rules are worthless if nobody enforces them. A <strong>schema registry</strong> is the component that stores the canonical schema for each event type, assigns it a version, and — this is the part that matters — <em>refuses</em> to register a new version that violates the configured compatibility rule. It turns compatibility from a code-review hope into a build-time gate.</p>
+<p>The mechanics are straightforward. The producer registers a schema and gets back a numeric ID. It publishes events tagged with that ID rather than the full schema. The consumer reads the ID, fetches the matching schema from the registry (and caches it), and deserializes. Two benefits fall out immediately: events on the wire are small, and no consumer can ever guess the schema — it always resolves the exact one the producer used.</p>
+<p class="diagram-caption">📊 [Diagram — Schema registry interaction sequence]</p>
+<pre class="mermaid-source"><code>sequenceDiagram
+    participant P as Producer
+    participant SR as Schema Registry
+    participant BR as Broker
+    participant C as Consumer
+
+    P-&gt;&gt;SR: Submit candidate schema
+    alt Schema is compatible
+        SR--&gt;&gt;P: Return schema ID
+        P-&gt;&gt;BR: Publish event (schema ID + binary payload)
+        C-&gt;&gt;BR: Read message
+        C-&gt;&gt;SR: Fetch schema by ID (cache miss)
+        SR--&gt;&gt;C: Return schema definition
+        C-&gt;&gt;C: Deserialize event using schema
+    else Schema violates compatibility rule
+        SR--&gt;&gt;P: Reject — compatibility violation
+        note over P: Build fails on producer side
+    end</code></pre>
+<p>The registry is format-neutral in concept, but the choice of serialization format is itself a design decision with real consequences. The three that dominate cloud-native systems trade off differently.</p>
+<table>
+<thead><tr><th>Format</th><th>Schema location</th><th>Evolution model</th><th>Human-readable</th><th>Best fit</th></tr></thead>
+<tbody>
+<tr><td><strong>Avro</strong></td><td>External, resolved by ID</td><td>Reader/writer schema resolution — strongest evolution story</td><td>No (binary)</td><td>Kafka event streams, event stores</td></tr>
+<tr><td><strong>Protobuf</strong></td><td>Compiled into code (field numbers)</td><td>Field-number based; add/reserve, never reuse numbers</td><td>No (binary)</td><td>gRPC, high-throughput internal contracts</td></tr>
+<tr><td><strong>JSON Schema</strong></td><td>External or inline</td><td>Additive with defaults; validation-centric</td><td>Yes (text)</td><td>Public/partner events, debuggability first</td></tr>
+</tbody>
+</table>
+<p><strong>Avro</strong> deserves the architect's attention in event-sourced systems because of one feature: it deserializes using <em>both</em> the writer's schema (what produced the event) and the reader's schema (what the consumer expects), reconciling the difference automatically. That reader/writer split is exactly the backward-compatibility machinery Event Sourcing needs, built into the format.</p>
+<p><strong>Protobuf</strong> encodes fields by number, not name, so renaming a field costs nothing on the wire — but reusing a retired field number is catastrophic, silently mapping old bytes to a new meaning. The rule is absolute: <strong>reserve</strong> deleted field numbers, never recycle them.</p>
+<p><strong>JSON Schema</strong> buys you readability and painless debugging at the cost of size and weaker guarantees. For events that cross a company boundary to a partner who will inspect them by eye, that trade is often correct.</p>
+<p>There is no universal winner. Streams internal to your platform lean Avro or Protobuf; contracts you hand to outsiders lean JSON. What is non-negotiable is that <em>some</em> registry enforces <em>some</em> policy.</p>
+<div class="detail"><strong>💡 Expert Note</strong>
+<p>The prose explains that producers tag events with a schema ID, but omits the wire-format detail that makes this interoperable in practice. The Confluent wire format — now a de facto standard adopted by AWS MSK, Confluent Cloud, and most Kafka-adjacent tooling — is: <code>0x00</code> (magic byte) + 4-byte big-endian schema ID + serialized payload. Any non-Kafka consumer (an HTTP webhook bridge, a CDC pipeline, a legacy Java consumer) must understand this framing before it can even begin deserialization. Teams that treat the schema ID as an internal detail discover this the hard way when they onboard their first external or polyglot consumer. Architects should document this wire contract explicitly and test deserialization from at least one non-JVM client before go-live.</p>
+</div>
+<div class="detail"><strong>💡 Expert Note</strong>
+<p>The schema registry is mentioned as a build-time gate but its operational risk as a runtime dependency is not addressed. In production, every consumer performs a cache-miss lookup to the registry on first contact with a new schema ID. If the registry is unavailable, a consumer that has not yet cached that schema will fail to deserialize. The standard mitigation is a <strong>local on-disk schema cache</strong> that survives registry downtime — Confluent's Java client supports this via <code>SchemaRegistryClient</code> cache configuration, but it is not on by default. Teams that deploy the registry as a single instance without HA, or that do not seed the local cache before deploying consumers, treat a routine registry restart as a production incident. Treat the registry with the same availability SLA as the broker itself.</p>
+</div>
+<div class="detail"><strong>⚠️ Critical Note</strong>
+<p>The Protobuf section states that "renaming a field costs nothing on the wire." While true at the binary encoding level (fields are keyed by number, not name), it is misleading in practice for the target audience. Renaming a Protobuf field changes every generated client API — every service that imports the <code>.proto</code> file must recompile and update its call sites. For a shared internal contract with many consumers, a rename triggers a coordinated rollout of generated code across all consumers, which is exactly the coupling problem the chapter aims to avoid. Presenting this as "costs nothing" understates the operational impact. Qualify the statement: "renaming costs nothing on the <em>wire format</em>, but every consumer's generated code changes and must be recompiled and deployed." Add a note that this makes renaming a logistical concern even when it is wire-safe, particularly for widely shared contracts.</p>
+</div>
+
+<h2>Upcasting and Versioning of Persisted Events</h2>
+<p>Compatibility rules keep you safe as long as every change is additive. Reality is not that kind. Eventually a business concept genuinely changes shape — a single <code>name</code> field must become <code>firstName</code> and <code>lastName</code>, or an amount stored as a float must become an integer of minor units. No additive rule covers this, and you cannot rewrite history: the old events are immutable facts, already persisted, possibly by the millions.</p>
+<p>The answer is <strong>upcasting</strong>: transforming an old event into the current schema <em>at read time</em>, in memory, on its way from the store to the application. The stored bytes never change. A component in the deserialization pipeline detects the old version and applies a function that maps it forward to the new shape. Your domain logic only ever sees the latest version and stays blissfully unaware that five historical formats exist beneath it.</p>
+<pre><code class="language-python"># Upcaster pipeline: promote persisted events to the current schema at read time.
+# Stored bytes are never modified; the upgrade is purely in-memory on the read path.
+# Time complexity: O(n) per event, where n = number of version steps required.
+
+from __future__ import annotations
+
+import dataclasses
+from collections.abc import Callable
+from typing import Any
+
+UpcasterKey = tuple[str, int]          # (event_type, from_version)
+UpcasterFn  = Callable[[dict[str, Any]], dict[str, Any]]
+
+
+class UpcasterPipeline:
+    """Registry and executor of upcaster functions keyed by (event_type, from_version).
+
+    Each registered upcaster promotes one version forward. The pipeline walks
+    the chain until no further upcaster is registered for the current version.
+    """
+
+    def __init__(self) -&gt; None:
+        self._registry: dict[UpcasterKey, UpcasterFn] = {}
+
+    def register(
+        self, event_type: str, from_version: int
+    ) -&gt; Callable[[UpcasterFn], UpcasterFn]:
+        """Decorator: register a function as the upcaster for (event_type, from_version)."""
+        def decorator(fn: UpcasterFn) -&gt; UpcasterFn:
+            self._registry[(event_type, from_version)] = fn
+            return fn
+        return decorator
+
+    def upcast(self, raw: dict[str, Any]) -&gt; dict[str, Any]:
+        """Walk the upcaster chain until the payload reaches the latest version."""
+        payload = dict(raw)  # shallow copy — original dict (stored bytes) is untouched
+        event_type: str = payload["event_type"]
+
+        while (key := (event_type, payload["version"])) in self._registry:
+            payload = self._registry[key](payload)
+
+        return payload
+
+
+# Singleton pipeline shared across the read path
+pipeline = UpcasterPipeline()
+
+
+# Upcaster: CustomerRegistered v1 to v2
+# Business change: the single denormalised fullName field was split into
+# firstName and lastName to support proper sorting and personalisation.
+
+@pipeline.register("CustomerRegistered", from_version=1)
+def upcast_customer_registered_v1_to_v2(payload: dict[str, Any]) -&gt; dict[str, Any]:
+    full_name: str = payload["full_name"]
+    first, _, last = full_name.partition(" ")   # partition on first space only
+    return {
+        "event_type":  payload["event_type"],
+        "version":     2,                        # bumped — v2 upcaster can now run if needed
+        "customer_id": payload["customer_id"],
+        "first_name":  first,
+        "last_name":   last or "",
+        # full_name is intentionally absent — it no longer exists in v2
+    }
+
+
+# Current domain schema
+
+@dataclasses.dataclass(frozen=True)
+class CustomerRegisteredV2:
+    event_type:  str
+    version:     int
+    customer_id: str
+    first_name:  str
+    last_name:   str
+
+
+# Domain handler — knows nothing about v1; only works with CustomerRegisteredV2.
+
+def handle_customer_registered(event: CustomerRegisteredV2) -&gt; None:
+    print(
+        f"[handler] Welcome, {event.first_name} {event.last_name}!"
+        f" (customer_id={event.customer_id}, schema_version={event.version})"
+    )
+
+
+# Read-path orchestration
+
+def load_and_dispatch(raw: dict[str, Any]) -&gt; None:
+    """Read a stored event payload, upcast transparently, dispatch to handler."""
+    current = pipeline.upcast(raw)          # v1 is promoted; v2+ passes through
+    event = CustomerRegisteredV2(**current)
+    handle_customer_registered(event)
+
+
+if __name__ == "__main__":
+    # Simulate a v1 event written to the event store years ago
+    stored_v1: dict[str, Any] = {
+        "event_type":  "CustomerRegistered",
+        "version":     1,
+        "customer_id": "cust-007",
+        "full_name":   "Ada Lovelace",     # old single-field schema
+    }
+
+    # Simulate a v2 event written after the schema change
+    stored_v2: dict[str, Any] = {
+        "event_type":  "CustomerRegistered",
+        "version":     2,
+        "customer_id": "cust-008",
+        "first_name":  "Grace",
+        "last_name":   "Hopper",
+    }
+
+    load_and_dispatch(stored_v1)  # upcasted v1 to v2 transparently
+    load_and_dispatch(stored_v2)  # already current; passes through unchanged</code></pre>
+<p>The upcaster chain is the pattern that scales this. Each upcaster promotes exactly one version forward — v1→v2, v2→v3 — and the pipeline runs them in sequence. A v1 event on disk passes through both upcasters and arrives as v3. This keeps every transformation small, independently testable, and honest about exactly which change it represents.</p>
+<p class="diagram-caption">📊 [Diagram — Upcaster pipeline flowchart]</p>
+<pre class="mermaid-source"><code>flowchart TD
+    STORE["Event Store\n(immutable — bytes never changed)"]
+    STORE --&gt;|read raw bytes| A["Stored Event + Version Tag"]
+    A --&gt; VER{Check version}
+
+    VER --&gt;|v1| U1["Upcaster v1 to v2\nsplit fullName into firstName + lastName"]
+    VER --&gt;|v2| U2["Upcaster v2 to v3\nconvert amount float to integer minor units"]
+    VER --&gt;|v3| PT["Pass Through\nno transformation needed"]
+
+    U1 --&gt; U2
+    U2 --&gt; CURR["Current Schema Event — v3"]
+    PT --&gt; CURR
+
+    CURR --&gt; DH["Domain Handler\n(sees only v3 — always)"]</code></pre>
+<p>Two disciplines make upcasting sustainable rather than a growing tax. First, <strong>every event carries an explicit version number</strong> in its metadata from day one — retrofitting versioning onto an unversioned store is painful, so pay this cost up front even when v1 is all you have. Second, upcasting is not the <em>only</em> option for large migrations. When an upcaster chain grows unwieldy, you can <strong>rewrite the stream</strong> into a new one under the new schema (a "copy-and-transform" migration), leaving the old stream as an immutable archive. Upcasting is cheaper day to day; stream rewriting is cleaner long-term. Most systems use both, and choosing between them is a genuine architectural judgment, not a default.</p>
+<p>Resist the temptation to "just fix the data" with an in-place update to the store. That destroys the one property — an immutable, auditable history — that justified Event Sourcing in the first place.</p>
+<div class="detail"><strong>💡 Expert Note</strong>
+<p>At production scale, an upcaster chain interacts dangerously with Event Sourcing aggregate reconstruction. Replaying a stream of 500k events through even two upcasters per event adds meaningful CPU and wall-clock time during cold restarts or aggregate rebuilds from scratch. The standard mitigation — <strong>aggregate snapshots</strong> — must be co-designed with the upcasting strategy: a snapshot stores a fully-upcasted, current-version aggregate state, so replays only process events <em>since</em> the last snapshot. If snapshotting is added as an afterthought after the upcaster chain is already in place, teams discover that old snapshots may themselves need versioning and upcasting, creating a recursive problem. Both versioning and snapshotting should be designed together from the start, not sequentially.</p>
+</div>
+<div class="detail"><strong>⚠️ Critical Note</strong>
+<p>The upcaster chain pattern is presented entirely in the happy path. There is no discussion of what happens when an upcaster throws an exception or produces an output that fails downstream validation. In an event-sourced system, a defective upcaster does not just fail one message — it renders the entire aggregate history unreadable, blocking all command processing for that aggregate until the bug is fixed and redeployed. This is one of the most operationally dangerous failure modes in event-sourced systems and is completely absent from the prose. Upcasters must be tested against a corpus of real historical events before deployment; a failing upcaster should surface a clear error with the stored event payload and version, not silently corrupt state; consider wrapping the pipeline in a fallback that surfaces the raw event for triage rather than crashing the read side entirely.</p>
+</div>
+
+<h2>Contracts, Consumer-Driven Contracts, and Governance</h2>
+<p>Everything so far is mechanism. The hardest part of schema evolution is not technical; it is organizational. An event that crosses a bounded context (Chapter 2 framed events as owned contracts) is a promise from a producing team to consuming teams that may sit in other departments, other time zones, other reporting lines. The registry enforces syntactic compatibility. It cannot tell you <em>who is actually consuming what</em>, and therefore cannot tell you whether a technically-compatible change is <em>semantically</em> safe to ship.</p>
+<p>This is where <strong>consumer-driven contracts</strong> (CDC) earn their place. The idea inverts the usual direction of authority. Instead of the producer declaring "here is my schema, adapt to it," each consumer publishes a contract stating exactly the fields and shapes <em>it</em> depends on. The producer's build then verifies its schema against the union of all consumer contracts. If a proposed change breaks any consumer's stated expectations, the producer's pipeline fails — before deployment, on the producer's side, where the change originated.</p>
+<p class="diagram-caption">📊 [Diagram — Consumer-driven contract workflow]</p>
+<pre class="mermaid-source"><code>flowchart TD
+    CA["Consumer A\npublishes contract\n(expected fields + types)"]
+    CB["Consumer B\npublishes contract\n(expected fields + types)"]
+
+    CA --&gt;|upload| REPO["Shared Contract Repository\n(contract broker)"]
+    CB --&gt;|upload| REPO
+
+    REPO --&gt;|pull all contracts| CI["Producer CI Pipeline\n(candidate schema)"]
+
+    CI --&gt; CHK{Candidate schema\nsatisfies all contracts?}
+    CHK --&gt;|Yes — all consumers pass| PASS["Build Passes\nProduce deploys safely"]
+    CHK --&gt;|No — contract violated| FAIL["Build Fails\nProducer must fix schema\nbefore deployment"]
+
+    subgraph CONTRAST["Direction of Authority"]
+        PD["Producer-driven\nschema pushed down to consumers"]
+        CDC["Consumer-driven\ncontracts pulled up by producer"]
+    end</code></pre>
+<p>The distinction between a schema registry and consumer-driven contracts is worth stating plainly, because teams often assume one replaces the other.</p>
+<table>
+<thead><tr><th>Concern</th><th>Schema registry</th><th>Consumer-driven contracts</th></tr></thead>
+<tbody>
+<tr><td>Question answered</td><td>"Is this change structurally compatible?"</td><td>"Does any real consumer actually break?"</td></tr>
+<tr><td>Knows about consumers</td><td>No</td><td>Yes, explicitly</td></tr>
+<tr><td>Enforcement point</td><td>Schema registration</td><td>Producer CI build</td></tr>
+<tr><td>Catches semantic misuse</td><td>No</td><td>Partially (only stated expectations)</td></tr>
+</tbody>
+</table>
+<p>They are complementary layers, not competitors. The registry is the fast, coarse gate; CDC is the slower, consumer-aware one.</p>
+<p>Around both sits <strong>governance</strong>: the policies that make evolution predictable across an organization. Effective governance is lighter than teams fear and consists of a few durable rules. Assign every event type a single owning team. Mandate an explicit compatibility mode per event stream, registered and visible. Require deprecation to be announced with a timeline and a metric proving the old version is no longer read before it is retired. Version in metadata, never by mutating payloads. Governance is not a committee that slows teams down; it is the small set of agreements that let teams move <em>without</em> coordinating every release.</p>
+<div class="detail"><strong>💡 Expert Note</strong>
+<p>The prose describes consumer-driven contracts conceptually but does not name the tooling, which matters for practitioners. <strong>Pact</strong> (pact.io) is the dominant open-source implementation: consumers write Pact files expressing the interactions they depend on, a <strong>Pact Broker</strong> (or PactFlow for SaaS) stores them, and the producer's CI pipeline runs <code>can-i-deploy</code> against the broker before any release. The critical production discipline that the prose does not mention is <strong>pending pacts and WIP pacts</strong> — Pact's mechanism for introducing new consumer contracts without immediately blocking the producer's build during the initial negotiation period. Without this mechanism, onboarding a new consumer becomes a coordinated freeze across both teams. Senior architects evaluating CDC should specifically assess whether their chosen tool supports this graduated rollout mode.</p>
+</div>
+<div class="detail"><strong>💡 Expert Note</strong>
+<p>The prose recommends "metric-backed deprecation" before retiring old schema versions, which is the right principle, but the measurement gap in practice is worth naming explicitly. Schema registry metrics tell you whether a schema <em>version</em> is being registered or fetched — they do not tell you whether a specific <em>field</em> within that version is being used by downstream consumers. A consumer might fetch schema v3 while only reading the <code>orderId</code> field and ignoring <code>couponCode</code>. If <code>couponCode</code> is the field you want to remove, fetch counts give you false confidence. The safest metric is <strong>consumer-side field-level telemetry</strong>: instrumented deserialization that logs which fields are accessed per consumer group. Few teams implement this, but those who have gone through a painful field removal incident almost always add it afterward.</p>
+</div>
+<div class="detail"><strong>⚠️ Critical Note</strong>
+<p>The consumer-driven contracts (CDC) section presents the pattern as a reliable safety net with little acknowledgment of its primary organizational failure mode: CDC only works when every consumer actively maintains and publishes its contract. In practice, getting 100% participation is difficult — teams deprioritize contract updates, new consumers are onboarded without contracts, and legacy consumers are forgotten. A producer CI build that passes against the union of <em>published</em> contracts can still break an unpublished consumer. The prose implies CDC answers "does any real consumer actually break?" but the honest answer is "does any real consumer <em>that published a contract</em> break?" — a weaker guarantee than the table suggests. The guarantee is bounded by participation — a consuming team that never publishes a contract gets no protection. CDC must be paired with a registry of known consumers and an onboarding checklist that makes contract publication mandatory.</p>
+</div>
+
+<h2>The Missing-Policy Pitfall</h2>
+<p>The single most damaging mistake in this entire chapter is not a bad schema change. It is the <em>absence of a declared compatibility policy at all</em>. This deserves its own section because it fails silently and is nearly always discovered too late.</p>
+<p>A system without a policy does not announce the problem. Everything works — right up until the first genuinely breaking change ships, a consumer three teams away deserializes garbage, and a production incident traces back to a field someone "cleaned up" months earlier. Because there was no gate, nothing stopped it. Because events are persisted, the poison is now in the store permanently, and every replay re-triggers it.</p>
+<p>The fix is embarrassingly cheap relative to the damage it prevents: <strong>choose a default compatibility mode before your first event ships</strong>, and make the registry enforce it. <code>BACKWARD</code> is the sane default for most event-sourced systems; <code>FULL</code> if you can afford the discipline. That one decision, made early, converts an entire class of cross-team production incidents into build-time failures on the desk of the person who caused them.</p>
+<blockquote class="expert"><strong>💡 Expert Note:</strong> The prose correctly identifies the absence of a declared policy as the most damaging mistake, but does not distinguish between two failure modes that require different remediation. The first is a greenfield team with no registry at all — the fix is straightforward: stand up a registry, pick BACKWARD, enforce it. The second, more painful case is a running system where events have been shipped for months without a registry, and a registry is now being retrofitted. In this case, the initial schema registration must be treated as a <strong>compatibility baseline</strong> audit, not a simple import: every existing schema must be manually reviewed before being registered, because the registry's first compatibility check will be against whatever you declare as v1. Teams that bulk-import existing schemas without review often discover that their "stable" schemas already contain patterns (undocumented required fields, implicit type coercions) that would fail a BACKWARD check, requiring immediate remediation of live consumers before the registry can be enforced.</blockquote>
+
+<h2>Key Takeaways</h2>
+<ul>
+<li><strong>Compatibility has a direction.</strong> Backward = new consumer reads old events (Event Sourcing needs this); forward = old consumer reads new events (pub/sub needs this); full = both. Always ask "compatible in which direction, for whom?"</li>
+<li><strong>Additive-only is the safe path.</strong> Add optional fields with defaults; never rename in place, add required fields without defaults, or reuse a retired Protobuf field number.</li>
+<li><strong>A schema registry turns policy into a build-time gate.</strong> It rejects incompatible schemas before they ship; Avro's reader/writer resolution makes it especially strong for event stores.</li>
+<li><strong>Upcast, don't mutate.</strong> Transform old persisted events to the current schema at read time through a versioned upcaster chain; version every event in metadata from day one.</li>
+<li><strong>The registry answers "is it structurally compatible?"; consumer-driven contracts answer "does any real consumer break?"</strong> You need both, plus lightweight governance: one owner per event type, an explicit compatibility mode, and metric-backed deprecation.</li>
+<li><strong>No compatibility policy is the pitfall.</strong> Choose a default mode (BACKWARD or FULL) and enforce it before your first event ships.</li>
+</ul>
+
+<h2>What's Next</h2>
+<p>With contracts that can evolve safely in place, Chapter 9 turns to the operational reality of running these systems — observing, tracing, and debugging event flows whose control flow is implicit and spread across decoupled services.</p>
+</body>
+</html>

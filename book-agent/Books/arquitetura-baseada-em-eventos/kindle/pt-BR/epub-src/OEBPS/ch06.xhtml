@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Capítulo 6: Event Sourcing — Estado como uma Sequência de Eventos</title>
+  <link rel="stylesheet" type="text/css" href="styles.css"/>
+</head>
+<body>
+<h1 id="ch06">Capítulo 6: Event Sourcing — Estado como uma Sequência de Eventos</h1>
+
+<h2>Declaração do Problema Inicial</h2>
+
+<p>O Capítulo 5 deixou um fio solto. Ele mostrou que os modelos de leitura são descartáveis — você pode jogá-los fora e reconstruí-los reproduzindo eventos. Essa afirmação assumiu silenciosamente algo que nunca justificamos: que os eventos ainda existem em algum lugar, em ordem, para sempre. Se as projeções podem ser reconstruídas a partir de um log de eventos, então esse log, e não o modelo de leitura, é a real fonte da verdade.</p>
+
+<p>Este capítulo formaliza essa ideia. <strong>Event Sourcing (armazenamento baseado em eventos)</strong> é o padrão em que o estado autoritativo de uma entidade não é uma linha que você atualiza, mas a sequência completa e ordenada de eventos que aconteceram com ela. Você não armazena o saldo atual de uma conta. Você armazena cada depósito e cada saque, e calcula o saldo quando precisar.</p>
+
+<h2>O Problema da Verdade e da História</h2>
+
+<p>Sistemas tradicionais têm um problema de memória: eles esquecem. Considere uma tabela bancária clássica com uma única coluna <code>balance</code>. Quando um cliente saca dinheiro, você executa um <code>UPDATE</code> e o saldo anterior se vai. O banco de dados agora contém um fato — "o saldo é 500" — mas destruiu o histórico que o produziu.</p>
+
+<p>Este é o <strong>problema da verdade e da história</strong>: um sistema que armazena apenas o estado atual pode responder <em>o que é verdade agora</em>, mas não <em>como se tornou verdade</em>. Na maior parte do tempo ninguém faz a segunda pergunta. Então um auditor, um regulador ou um cliente insatisfeito o faz, e a resposta é um encolher de ombros.</p>
+
+<p class="diagram-caption">📊 [Diagram — Mermaid source below]</p>
+<pre class="mermaid-source"><code>flowchart LR
+    subgraph STATE["State-Oriented Storage"]
+        direction TB
+        S1["balance = 200 — LOST"]
+        S2["balance = 700 — LOST"]
+        S3["balance = 500 (current)"]
+        S1 --"UPDATE overwrites"--> S2
+        S2 --"UPDATE overwrites"--> S3
+    end
+
+    subgraph EVENT["Event-Sourced Storage"]
+        direction TB
+        E1["AccountOpened"]
+        E2["MoneyDeposited +1000"]
+        E3["MoneyWithdrawn -500"]
+        E4["balance = 500 (computed)"]
+        E1 --> E2 --> E3 --> E4
+    end
+
+    STATE --- EVENT</code></pre>
+
+<p>A abordagem orientada a estado otimiza o presente à custa do passado. O Event Sourcing inverte essa prioridade. Ele trata cada <strong>evento</strong> — um fato imutável do passado, exatamente como definido no Capítulo 1 — como a unidade durável de verdade. O estado atual se torna um <em>valor derivado</em>, recalculado sob demanda a partir dos eventos.</p>
+
+<blockquote class="critical"><strong>⚠️ Nota Crítica:</strong> O texto afirma "você não pode ter um histórico incorreto, porque o histórico é a única coisa que você escreveu" — isso é uma generalização exagerada. Bugs na camada de aplicação produzem eventos incorretos que são persistidos permanentemente com a mesma garantia de imutabilidade que os eventos corretos. O event store garante append-only e ordenação, não a exatidão do domínio.</blockquote>
+
+<div class="detail"><strong>💡 Nota do Especialista</strong> O texto descarta corretamente as tabelas de auditoria como "sempre ligeiramente erradas", mas os modos de falha vão mais fundo do que a maioria das equipes espera. Triggers de auditoria não capturam estados intermediários dentro de transações com múltiplos comandos. Mais insidiosamente, quando o schema muda, a definição do trigger silenciosamente quebra ou começa a registrar null para esse campo, sem que nenhum erro seja levantado. O Event Sourcing evita isso completamente porque a intenção — o evento de negócio — é o que é escrito, não a mutação da linha.</div>
+
+<h2>O Event Store e o Log Somente para Adição</h2>
+
+<p>O banco de dados que armazena esses eventos é chamado de <strong>event store</strong>. É um log especializado com duas regras: é <strong>append-only</strong> (você nunca pode atualizar ou deletar um evento já escrito) e os eventos são agrupados em <strong>streams</strong> — a sequência ordenada de todos os eventos de uma entidade.</p>
+
+<pre><code class="language-python"># Python 3.10+ — event store schema setup using psycopg2
+# global_position provides monotone total order across all streams;
+# UNIQUE (stream_id, version) enforces per-stream ordering and acts as the
+# optimistic concurrency guard with no application-level locking.
+
+import psycopg2
+
+_CREATE_TABLE = """
+CREATE TABLE IF NOT EXISTS event_store (
+    global_position  BIGSERIAL    PRIMARY KEY,
+    stream_id        TEXT         NOT NULL,
+    version          INTEGER      NOT NULL,
+    event_type       TEXT         NOT NULL,
+    payload          JSONB        NOT NULL,
+    metadata         JSONB        NOT NULL DEFAULT '{}',
+    occurred_at      TIMESTAMPTZ  NOT NULL DEFAULT now(),
+
+    CONSTRAINT uq_stream_version UNIQUE (stream_id, version)
+);
+"""
+
+_CREATE_INDEX_STREAM = """
+CREATE INDEX IF NOT EXISTS idx_event_store_stream
+    ON event_store (stream_id, version ASC);
+"""
+
+_CREATE_INDEX_GLOBAL = """
+CREATE INDEX IF NOT EXISTS idx_event_store_global
+    ON event_store (global_position ASC);
+"""
+
+
+def setup_event_store(conn) -&gt; None:
+    """
+    Create the event_store table and supporting indexes if they do not exist.
+    Safe to call on an already-initialised database (uses IF NOT EXISTS).
+    """
+    with conn:
+        with conn.cursor() as cur:
+            cur.execute(_CREATE_TABLE)
+            cur.execute(_CREATE_INDEX_STREAM)
+            cur.execute(_CREATE_INDEX_GLOBAL)</code></pre>
+
+<p>A coluna <code>version</code> numera os eventos dentro de um stream: 1, 2, 3... A restrição <code>UNIQUE (stream_id, version)</code> garante ordem total dentro de cada stream e oferece <strong>controle de concorrência otimista</strong>. Quando um manipulador tenta adicionar versão 8 e outro processo já a escreveu, a restrição única rejeita a inserção — sem bloqueios, sem espera.</p>
+
+<pre><code class="language-python"># Python 3.10+ — optimistic concurrency append using psycopg2 and PostgreSQL
+# Raises ConcurrencyConflictError when another writer has already claimed the expected version.
+
+from __future__ import annotations
+
+import json
+from dataclasses import dataclass, field
+from typing import Any
+
+import psycopg2
+from psycopg2 import errors as pg_errors
+
+
+@dataclass
+class EventRecord:
+    stream_id:  str
+    event_type: str
+    payload:    dict[str, Any]
+    metadata:   dict[str, Any] = field(default_factory=dict)
+
+
+class ConcurrencyConflictError(Exception):
+    """Raised when another writer already appended at the expected version.
+    The caller should reload the stream and retry the command."""
+
+
+def append_events(
+    conn,
+    stream_id:        str,
+    events:           list[EventRecord],
+    expected_version: int,
+) -&gt; None:
+    """
+    Appends events to stream_id starting at expected_version + 1.
+    A unique-constraint violation signals a concurrent write.
+    """
+    with conn:
+        with conn.cursor() as cur:
+            for offset, event in enumerate(events):
+                next_version = expected_version + 1 + offset
+
+                try:
+                    cur.execute(
+                        """
+                        INSERT INTO event_store
+                            (stream_id, version, event_type, payload, metadata)
+                        VALUES (%s, %s, %s, %s::jsonb, %s::jsonb)
+                        """,
+                        (
+                            stream_id,
+                            next_version,
+                            event.event_type,
+                            json.dumps(event.payload),
+                            json.dumps(event.metadata),
+                        ),
+                    )
+                except pg_errors.UniqueViolation:
+                    raise ConcurrencyConflictError(
+                        f"Concurrency conflict on stream '{stream_id}': "
+                        f"expected version {expected_version} is stale. Reload and retry."
+                    )</code></pre>
+
+<blockquote class="expert"><strong>💡 Nota do Especialista:</strong> A coluna <code>global_position</code> com <code>BIGSERIAL</code> cria um risco silencioso: sequências no PostgreSQL são não-transacionais — se uma transação faz rollback, o valor da sequência é consumido e não reutilizado. Consumidores verão lacunas e devem decidir se uma lacuna significa "ainda não confirmado" ou "permanentemente ausente". Use replication slot (pg_logical) ou uma tabela de contador separada para posição global confiável.</blockquote>
+
+<div class="detail"><strong>💡 Nota do Especialista</strong> Ao comparar EventStoreDB com um store PostgreSQL feito internamente, o diferenciador prático para empresas é a semântica de subscription, não o armazenamento. Para organizações que já padronizaram no Kafka, tratar o event store como o log append-only autoritativo e o Kafka como a camada de subscription/fan-out é um híbrido comum que preserva a familiaridade.</div>
+
+<div class="detail"><strong>⚠️ Nota Crítica</strong> A afirmação "sem bloqueios, sem espera — apenas uma restrição fazendo seu trabalho" exagera o benefício da concorrência otimista sob contenção. Em cenários de alta taxa de transferência em um único stream, cada escritor em conflito vai tentar novamente. Sob contenção sustentada, isso degrada para serialização efetiva. A concorrência otimista funciona melhor quando escritores conflitantes no mesmo stream são raros.</div>
+
+<h2>Reconstrução de Estado e Agregados</h2>
+
+<p>Se você nunca armazena o estado atual, como o obtém? Você o calcula. O processo é chamado de <strong>reconstrução</strong> ou <strong>reidratação</strong>: você lê o stream do início e aplica cada evento, em ordem, a um objeto fresco na memória. Esse objeto é o <strong>agregado</strong> — o limite de consistência do Domain-Driven Design que detém as regras de negócio.</p>
+
+<pre><code class="language-python"># Python 3.10+ — Account aggregate with strict command / apply separation
+# rehydrate() folds the full event stream into a live aggregate; O(n) in stream length.
+
+from __future__ import annotations
+
+from dataclasses import dataclass, field
+from typing import Union
+
+
+@dataclass(frozen=True)
+class AccountOpened:
+    account_id: str
+    owner:      str
+
+@dataclass(frozen=True)
+class MoneyDeposited:
+    account_id: str
+    amount:     int  # in cents; always positive
+
+@dataclass(frozen=True)
+class MoneyWithdrawn:
+    account_id: str
+    amount:     int  # in cents; always positive
+
+DomainEvent = Union[AccountOpened, MoneyDeposited, MoneyWithdrawn]
+
+
+@dataclass
+class Account:
+    account_id: str  = ""
+    owner:      str  = ""
+    balance:    int  = 0    # in cents
+    version:    int  = 0
+    _pending:   list[DomainEvent] = field(default_factory=list, repr=False)
+
+    @classmethod
+    def open(cls, account_id: str, owner: str) -&gt; "Account":
+        """Command: open a new account."""
+        aggregate = cls()
+        aggregate._record(AccountOpened(account_id=account_id, owner=owner))
+        return aggregate
+
+    def deposit(self, amount: int) -&gt; None:
+        """Command: credit the account."""
+        if amount &lt;= 0:
+            raise ValueError(f"Deposit amount must be positive, got {amount}.")
+        self._record(MoneyDeposited(account_id=self.account_id, amount=amount))
+
+    def withdraw(self, amount: int) -&gt; None:
+        """Command: debit the account; rejects if funds are insufficient."""
+        if amount &lt;= 0:
+            raise ValueError(f"Withdrawal amount must be positive, got {amount}.")
+        if amount &gt; self.balance:
+            raise ValueError(
+                f"Insufficient funds: balance={self.balance} cents, requested={amount} cents."
+            )
+        self._record(MoneyWithdrawn(account_id=self.account_id, amount=amount))
+
+    def _apply(self, event: DomainEvent) -&gt; None:
+        """Mutate in-memory state from an already-decided event. Must never raise."""
+        match event:
+            case AccountOpened(account_id=aid, owner=owner):
+                self.account_id = aid
+                self.owner      = owner
+                self.balance    = 0
+            case MoneyDeposited(amount=amount):
+                self.balance += amount
+            case MoneyWithdrawn(amount=amount):
+                self.balance -= amount
+
+    def _record(self, event: DomainEvent) -&gt; None:
+        """Apply a new event to in-memory state and stage it for persistence."""
+        self._apply(event)
+        self._pending.append(event)
+
+    @classmethod
+    def rehydrate(cls, events: list[DomainEvent]) -&gt; "Account":
+        """
+        Fold a complete event stream into a live Account aggregate.
+        Time complexity: O(n) where n = len(events).
+        """
+        aggregate = cls()
+        for i, event in enumerate(events, start=1):
+            aggregate._apply(event)
+            aggregate.version = i
+        return aggregate</code></pre>
+
+<p>A regra é absoluta: <strong>métodos de apply nunca devem rejeitar um evento ou conter validação.</strong> O evento é um fato histórico. Toda validação vive nos métodos de comando, antes de o evento existir.</p>
+
+<p class="diagram-caption">📊 [Diagram — Mermaid source below]</p>
+<pre class="mermaid-source"><code>sequenceDiagram
+    participant CH as Command Handler
+    participant ES as Event Store
+    participant AG as Aggregate
+
+    CH->>ES: Load stream (acc-123)
+    ES-->>CH: Events v1..v7
+    CH->>AG: rehydrate(events)
+    AG-->>CH: Aggregate state (version=7)
+    CH->>AG: withdraw(300)
+    AG-->>CH: MoneyWithdrawn event
+    CH->>ES: Append event (expectedVersion=7)
+    alt Version 8 is free
+        ES-->>CH: OK — written as version 8
+    else Version 8 already taken
+        ES-->>CH: Conflict — unique constraint violation
+        CH->>CH: Retry with fresh load
+    end</code></pre>
+
+<div class="detail"><strong>💡 Nota do Especialista</strong> O padrão de implementação padrão adiciona um detalhe: o agregado mantém uma lista interna de "eventos não confirmados." Quando um método de comando aceita uma ação, ele chama seu próprio <code>apply()</code> internamente e anexa o evento a essa lista. O repositório, após chamar o comando, lê a lista não confirmada e adiciona esses eventos ao store. Esse design em duas fases (apply agora, descarregar depois) é por que os métodos de comando podem encadear decisões dentro de uma única unidade de trabalho.</div>
+
+<div class="detail"><strong>⚠️ Nota Crítica</strong> A regra "métodos de apply nunca devem rejeitar um evento" não aborda o cenário de compatibilidade futura onde um agregado encontra um tipo de evento introduzido por uma versão mais nova da aplicação. Ignorar silenciosamente tipos de evento desconhecidos pode produzir um estado na memória sutilmente errado. Para tipos desconhecidos, a estratégia recomendada é ignorar e registrar em log com uma verificação de consciência de versão.</div>
+
+<h2>Snapshots e Otimização de Replay</h2>
+
+<p>Se uma conta acumulou 200.000 eventos, você deve ler e dobrar todos eles cada vez que alguém verificar o saldo? A resposta é o <strong>snapshot</strong>. Um snapshot é uma cópia em cache do estado do agregado em uma versão específica. A reconstrução então: carregue o snapshot mais recente, depois reproduza apenas os eventos que vieram <em>depois</em> dele.</p>
+
+<pre><code class="language-python"># Python 3.10+ — snapshot-based rehydration with full-replay fallback
+# Snapshot is a disposable optimisation; deleting all snapshots must leave behaviour unchanged.
+
+from __future__ import annotations
+
+import json
+from dataclasses import dataclass
+from typing import Any, Optional
+
+
+@dataclass
+class Snapshot:
+    stream_id: str
+    version:   int
+    state:     dict[str, Any]
+
+
+def load_latest_snapshot(stream_id: str) -&gt; Optional[Snapshot]:
+    """Return the most recent snapshot for the stream, or None if none exists."""
+    raise NotImplementedError
+
+
+def load_events_after_version(stream_id: str, after_version: int) -&gt; list[DomainEvent]:
+    """Return events where version &gt; after_version, ordered ascending by version."""
+    raise NotImplementedError
+
+
+def rehydrate_from_snapshot(stream_id: str) -&gt; Account:
+    """
+    Reconstruct an Account aggregate, using a snapshot when available.
+    The snapshot is purely an optimisation — deleting it produces the same
+    aggregate state, just more slowly.
+    """
+    snapshot: Optional[Snapshot] = load_latest_snapshot(stream_id)
+
+    if snapshot is not None:
+        aggregate = Account(
+            account_id=snapshot.state["account_id"],
+            owner=snapshot.state["owner"],
+            balance=snapshot.state["balance"],
+        )
+        aggregate.version = snapshot.version
+        delta_events = load_events_after_version(stream_id, after_version=snapshot.version)
+    else:
+        aggregate = Account()
+        delta_events = load_events_after_version(stream_id, after_version=0)
+
+    for event in delta_events:
+        aggregate._apply(event)
+        aggregate.version += 1
+
+    return aggregate
+
+
+def maybe_take_snapshot(aggregate: Account, interval: int = 100) -&gt; Optional[Snapshot]:
+    """
+    Policy: create a new snapshot every `interval` events.
+    Returns None when the version does not fall on a snapshot boundary.
+    """
+    if aggregate.version &gt; 0 and aggregate.version % interval == 0:
+        return Snapshot(
+            stream_id=aggregate.account_id,
+            version=aggregate.version,
+            state={
+                "account_id": aggregate.account_id,
+                "owner":      aggregate.owner,
+                "balance":    aggregate.balance,
+            },
+        )
+    return None</code></pre>
+
+<table>
+<thead><tr><th>Frequência de snapshot</th><th>Custo de replay por carregamento</th><th>Overhead de armazenamento e escrita</th><th>Melhor adequação</th></tr></thead>
+<tbody>
+<tr><td>Nunca (replay puro)</td><td>Cresce sem limite</td><td>Nenhum</td><td>Streams curtos, baixas contagens de eventos</td></tr>
+<tr><td>A cada N eventos (ex: 100)</td><td>Limitado, pequeno</td><td>Moderado</td><td>A maioria dos sistemas em produção</td></tr>
+<tr><td>A cada evento</td><td>Próximo de zero</td><td>Alto; aproxima-se do armazenamento de estado</td><td>Quase nunca — um code smell</td></tr>
+</tbody>
+</table>
+
+<blockquote class="expert"><strong>💡 Nota do Especialista:</strong> Um bug em qualquer método <code>apply()</code> vai corromper silenciosamente cada snapshot gerado durante esse período. A correção em produção é anexar um <code>snapshot_schema_version</code> a cada linha de snapshot. No carregamento, se a versão não corresponder à versão atual do código, descarte o snapshot e faça fallback para replay completo.</blockquote>
+
+<div class="detail"><strong>💡 Nota do Especialista</strong> O snapshotting deve ser assíncrono: um worker em background detecta que um stream avançou além de um limite e escreve o snapshot fora de banda. O caminho de comando permanece rápido e previsível; o snapshot pode atrasar alguns segundos, o que é aceitável porque a reconstrução sempre volta ao replay se um snapshot estiver ausente.</div>
+
+<div class="detail"><strong>⚠️ Nota Crítica</strong> Os snapshots devem ser escritos como operações de melhor esforço, não transacionais, que nunca bloqueiam nem falham o pipeline de comando. O código deve sempre fazer fallback para replay completo se um snapshot estiver faltando, tratando o snapshot como um cache consultivo em vez de uma dependência obrigatória.</div>
+
+<h2>Custos de Longo Prazo e Restrições de Design</h2>
+
+<p><strong>Eventos são permanentes, então seus schemas são permanentes.</strong> Um evento escrito em 2024 ainda será lido durante a reconstrução em 2030. Você não pode migrar o passado — você acomoda formatos antigos por meio de versionamento e upcasting (Capítulo 8).</p>
+
+<p><strong>Deleção se torna um problema real de design.</strong> O GDPR concede um direito ao apagamento que colide diretamente com um log imutável. A resposta padrão é o <strong>crypto-shredding</strong>: criptografe os dados pessoais por sujeito e delete a chave. Isso deve ser projetado desde o primeiro evento, porque você não pode adicionar criptografia retroativamente.</p>
+
+<p><strong>Consultar o estado atual requer o lado de leitura.</strong> Como o estado é derivado, você não pode escrever um simples <code>SELECT balance FROM accounts</code>. Você precisa de projeções e modelos de leitura — é precisamente por que o Event Sourcing e o CQRS são tão frequentemente adotados juntos.</p>
+
+<p class="diagram-caption">📊 [Diagram — Mermaid source below]</p>
+<pre class="mermaid-source"><code>flowchart TD
+    Q1{"Audit trail is a\nhard requirement?\n(regulatory / financial)"}
+    Q2{"Need temporal queries\nor past state reconstruction?"}
+    Q3{"Domain is behavior-rich\nrather than simple CRUD?"}
+    Q4{"Team can absorb schema\nversioning and eventual consistency?"}
+    YES["Event Sourcing Justified"]
+    NO["Prefer State Storage\nor CQRS-Lite"]
+
+    Q1 -->|Yes| Q2
+    Q1 -->|No| NO
+    Q2 -->|Yes| Q3
+    Q2 -->|No| NO
+    Q3 -->|Yes| Q4
+    Q3 -->|No| NO
+    Q4 -->|Yes| YES
+    Q4 -->|No| NO</code></pre>
+
+<blockquote class="expert"><strong>💡 Nota do Especialista:</strong> O crypto-shredding subestima uma restrição crítica: o escopo do que deve ser criptografado é mais amplo do que a maioria das equipes antecipa. Um ID de stream <code>user-john.doe@example.com</code> não pode ser destruído criptograficamente; o próprio identificador é dado pessoal. A disciplina arquitetural é usar UUIDs como IDs de stream desde o primeiro dia e armazenar chaves de criptografia separadas por sujeito de dados em um serviço de gerenciamento de chaves (AWS KMS, HashiCorp Vault).</blockquote>
+
+<div class="detail"><strong>⚠️ Nota Crítica</strong> O texto cita prontuários médicos como um domínio canônico para Event Sourcing, mas a HIPAA e o GDPR criam obrigação de direito ao apagamento e correção de dados, que colidem diretamente com a imutabilidade. Razões contábeis e ciclos de vida de pedidos são exemplos canônicos mais adequados, pois têm os requisitos de deleção mais fracos.</div>
+
+<h2>Principais Conclusões</h2>
+
+<ul>
+<li>O Event Sourcing armazena cada evento de mudança de estado como fato imutável e deriva o estado atual por replay, resolvendo o problema da verdade e da história.</li>
+<li>O <strong>event store</strong> é append-only e organizado em <strong>streams</strong> por entidade; uma restrição <code>UNIQUE (stream_id, version)</code> garante ordenação e concorrência otimista sem bloqueio.</li>
+<li>Os agregados são <strong>reidratados</strong> dobrando eventos em ordem; métodos de comando validam invariantes e emitem eventos, enquanto métodos de apply apenas mutam o estado e nunca devem rejeitar um fato.</li>
+<li><strong>Snapshots</strong> limitam o custo de replay fazendo checkpoint a cada N eventos, mas são otimizações descartáveis — nunca uma fonte de verdade, nunca criados em cada escrita.</li>
+<li>Os custos são schemas permanentes, deleção difícil (crypto-shredding) e um lado de leitura obrigatório; adote o Event Sourcing apenas onde o histórico é genuinamente valioso para o negócio.</li>
+</ul>
+
+<h2>O Que Vem a Seguir</h2>
+
+<p>O Capítulo 7 confronta o que acontece quando um único processo de negócio abrange múltiplos agregados e serviços, introduzindo sagas para coordenar transações sob consistência eventual em vez de ACID distribuído.</p>
+
+</body>
+</html>

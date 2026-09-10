@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Cap&#237;tulo 9: Observabilidad, Depuraci&#243;n y Operaciones</title>
+  <link rel="stylesheet" type="text/css" href="styles.css"/>
+</head>
+<body>
+  <h1 id="ch09">Cap&#237;tulo 9: Observabilidad, Depuraci&#243;n y Operaciones</h1>
+
+  <h2>Planteamiento del Problema Inicial</h2>
+
+  <p>El Cap&#237;tulo 8 le proporcion&#243; la disciplina para evolucionar esquemas de eventos sin romper consumidores, y a&#241;adi&#243; metadatos de versionado a cada evento. Ahora aparece un problema diferente en producci&#243;n. Un cliente se queja de que un pedido fue cobrado dos veces pero el correo de confirmaci&#243;n nunca lleg&#243;. En un sistema sincr&#243;nico, abrir&#237;a un stack trace y seguir&#237;a la cadena de llamadas de arriba a abajo. En un sistema event-driven (orientado a eventos), no hay stack trace. El servicio de pagos public&#243; un hecho. Tres consumidores reaccionaron de forma independiente. Uno de ellos public&#243; otro hecho. Se supon&#237;a que el servicio de correo estaba escuchando, pero no ocurri&#243; nada. &#191;Por d&#243;nde se empieza?</p>
+
+  <p>Este es el dolor operacional central de la Event-Driven Architecture (arquitectura orientada a eventos): <strong>el flujo de control es impl&#237;cito</strong>. Ning&#250;n servicio individual conoce la historia completa, porque el desacoplamiento &#8212; la propiedad misma por la que pag&#243; en el Cap&#237;tulo 1 &#8212; oculta la cadena causal. Este cap&#237;tulo le proporciona las herramientas para hacer visible esa cadena oculta nuevamente. Aprender&#225; a rastrear una solicitud a trav&#233;s de servicios desacoplados, a medir si los consumidores est&#225;n al d&#237;a, a depurar flujos que no tienen call stack, y a operar la maquinaria de fallos &#8212; dead-letter queues y reprocesamiento &#8212; sin empeorar las cosas.</p>
+
+  <h2>Rastreo Distribuido e IDs de Correlaci&#243;n/Causalidad</h2>
+
+  <p>Comencemos con la idea m&#225;s importante de este cap&#237;tulo. Para reconstruir una historia a partir de eventos desacoplados, debe transportar identidad a trav&#233;s de todo el flujo. Dos IDs realizan este trabajo, y no son lo mismo.</p>
+
+  <p>Un <strong>correlation ID</strong> (ID de correlaci&#243;n) es un identificador &#250;nico compartido por cada evento que pertenece a la misma transacci&#243;n de negocio l&#243;gica. Se genera una vez, en el borde &#8212; cuando se realiza el pedido &#8212; y se copia sin cambios en cada evento resultante, sin importar cu&#225;ntos servicios toque el flujo. Filtrar sus logs por un correlation ID le da la historia completa de ese pedido.</p>
+
+  <p>Un <strong>causation ID</strong> (ID de causalidad) responde a una pregunta m&#225;s acotada: <em>&#191;qu&#233; evento espec&#237;fico caus&#243; directamente este?</em> El causation ID de cada evento es el message ID de su padre inmediato. Mientras que el correlation ID agrupa todo el &#225;rbol, el causation ID reconstruye las aristas exactas padre-hijo de ese &#225;rbol. Con ambos, puede reconstruir no solo <em>qu&#233;</em> ocurri&#243; sino <em>en qu&#233; orden causal</em>.</p>
+
+  <p>La regla es simple y absoluta: <strong>todo consumidor que produce un nuevo evento copia el correlation ID y establece el causation ID al ID del evento padre.</strong> Omitir esto en un consumidor rompe la cadena all&#237;.</p>
+
+  <p><strong>Envelope de Mensaje con Campos de Trazabilidad y Patr&#243;n de Construcci&#243;n de Eventos Hijos</strong></p>
+
+<pre><code class="language-python"># Message envelope with traceability fields and child-event construction pattern
+from __future__ import annotations
+
+import uuid
+from dataclasses import dataclass, field
+from datetime import datetime, timezone
+
+
+@dataclass(frozen=True)
+class EventEnvelope:
+    """Immutable wrapper carried by every event through the system."""
+    message_id: str                     # unique ID for this specific event
+    event_type: str                     # e.g. "order.placed", "payment.captured"
+    event_version: str                  # schema version, e.g. "1.0"
+    payload: dict                       # domain-specific body
+    correlation_id: str                 # shared by all events in one business transaction
+    causation_id: str                   # message_id of the direct parent event
+    timestamp: str = field(
+        default_factory=lambda: datetime.now(timezone.utc).isoformat()
+    )
+
+    @staticmethod
+    def create_root(event_type: str, event_version: str, payload: dict) -&gt; "EventEnvelope":
+        """Create the first event in a flow; its own ID seeds the correlation chain."""
+        new_id = str(uuid.uuid4())
+        return EventEnvelope(
+            message_id=new_id,
+            event_type=event_type,
+            event_version=event_version,
+            payload=payload,
+            correlation_id=new_id,   # root event is its own correlation anchor
+            causation_id=new_id,     # no parent, so self-reference by convention
+        )
+
+    def spawn_child(self, event_type: str, event_version: str, payload: dict) -&gt; "EventEnvelope":
+        """Produce a child event: copy correlation_id, set causation_id to this event's ID."""
+        return EventEnvelope(
+            message_id=str(uuid.uuid4()),
+            event_type=event_type,
+            event_version=event_version,
+            payload=payload,
+            correlation_id=self.correlation_id,  # unchanged ── same business transaction
+            causation_id=self.message_id,        # direct parent is this event
+        )
+
+
+# --- Consumer handler example ---
+
+def handle_order_placed(parent: EventEnvelope, publisher) -&gt; None:
+    """
+    Payment consumer: receives OrderPlaced, performs capture, emits PaymentCaptured.
+    Demonstrates the mandatory ID-propagation rule.
+    """
+    order_id = parent.payload["order_id"]
+    amount = parent.payload["amount"]
+
+    # ... domain logic: charge the card ...
+    charge_result = {"charge_id": "ch_abc123", "status": "captured"}
+
+    child_event = parent.spawn_child(
+        event_type="payment.captured",
+        event_version="1.0",
+        payload={
+            "order_id": order_id,
+            "amount": amount,
+            "charge_id": charge_result["charge_id"],
+        },
+    )
+
+    publisher.publish(topic="payments", event=child_event)</code></pre>
+
+  <p>Estos IDs son lo que hace posible el <strong>distributed tracing</strong> (rastreo distribuido). El rastreo distribuido es la pr&#225;ctica de seguir una solicitud a medida que cruza l&#237;mites de servicio, representando el recorrido como un <strong>trace</strong> (la solicitud completa) compuesto por <strong>spans</strong> (unidades individuales de trabajo). El est&#225;ndar abierto es <strong>OpenTelemetry</strong>, que propaga un contexto de traza a trav&#233;s de cabeceras de mensajes. La sutileza importante para EDA: con mensajer&#237;a as&#237;ncrona el padre ya ha retornado, por tanto su instrumentaci&#243;n debe vincular spans a trav&#233;s de <strong>span links</strong> en lugar de anidamiento simple padre-hijo.</p>
+
+  <p><strong>Flujo de IDs de Correlaci&#243;n y Causalidad con Spans de Rastreo Distribuido</strong></p>
+
+  <p class="diagram-caption">&#128202; [Diagram &#8212; Mermaid source below]</p>
+<pre class="mermaid-source"><code>sequenceDiagram
+    participant GW as API Gateway
+    participant BR as Broker
+    participant PAY as Payment Service
+    participant EMAIL as Email Service
+
+    GW-&gt;&gt;BR: OrderPlaced
+    Note over GW,BR: msg_id=M1, corr=C1 / Trace Span S1
+
+    BR-&gt;&gt;PAY: OrderPlaced
+    Note over BR,PAY: Span S2 (linked to S1)
+
+    PAY-&gt;&gt;BR: PaymentCaptured
+    Note over PAY,BR: msg_id=M2, corr=C1, cause=M1 / Trace Span S3
+
+    BR-&gt;&gt;EMAIL: PaymentCaptured
+    Note over BR,EMAIL: Span S4 (linked to S3)
+
+    EMAIL--&gt;&gt;BR: Ack (EmailSent)
+    Note over EMAIL,BR: Span S4 ends</code></pre>
+
+  <blockquote class="expert"><strong>&#128161; Nota del Experto:</strong> El texto recomienda correctamente vincular spans as&#237;ncronos a trav&#233;s de span links de OpenTelemetry en lugar de anidamiento padre-hijo, pero en la pr&#225;ctica la mayor&#237;a de los backends de observabilidad &#8212; Jaeger, Zipkin, e incluso algunas configuraciones del agente Datadog &#8212; tienen soporte parcial o inconsistente para span links en sus versiones estables actuales. Los equipos que dependen de span links para flujos fan-out frecuentemente descubren que sus trazas se renderizan como fragmentos desconectados en la UI. El workaround en producci&#243;n es propagar la cabecera W3C <code>traceparent</code> a trav&#233;s de cada cabecera de mensaje y cruzar referencias por correlation ID en consultas de logs hasta que el soporte del backend madure.</blockquote>
+
+  <div class="detail"><strong>&#128161; Nota del Experto</strong> Un error com&#250;n en la capa del API gateway es reutilizar directamente la cabecera HTTP entrante <code>X-Request-ID</code> o <code>X-B3-TraceId</code> como correlation ID. Estas cabeceras son generadas por load balancers y proxies en formatos que var&#237;an entre proveedores, y las consultas de agregaci&#243;n de logs downstream frecuentemente fallan cuando encuentran valores no-UUID mezclados con correlation IDs UUID de servicios internos. La mejor pr&#225;ctica: genere siempre un UUID v4 fresco en el l&#237;mite del dominio y &#250;selo exclusivamente como correlation ID.</div>
+
+  <div class="detail"><strong>&#9888;&#65039; Nota Cr&#237;tica</strong> El texto afirma &#8220;La regla es simple y absoluta: todo consumidor que produce un nuevo evento copia el correlation ID y establece el causation ID al ID del evento padre.&#8221; Esto colapsa por completo en escenarios fan-in, que son comunes en sistemas EDA reales. Cuando un consumidor de saga emite un evento de salida solo despu&#233;s de recibir dos o m&#225;s eventos upstream independientes (por ejemplo, tanto un <code>PaymentCaptured</code> como un <code>InventoryReserved</code> deben llegar antes de que se publique <code>OrderFulfilled</code>), no hay un &#250;nico evento padre que establecer como causation ID. La regla no es absoluta &#8212; solo es correcta para topolog&#237;as fan-out. En patrones fan-in como las sagas, lleve todos los IDs de eventos contribuyentes en una lista <code>causation_ids</code>.</div>
+
+  <div class="detail"><strong>&#9888;&#65039; Nota Cr&#237;tica</strong> El consejo profesional aconseja &#8220;rechazar cualquier evento interno que llegue sin [un correlation ID].&#8221; Aplicada literalmente, esta regla rompe una clase entera de eventos leg&#237;timos: los producidos por trabajos programados, pipelines disparados por cron, automatizaci&#243;n de infraestructura, capturas CDC de bases de datos, y scripts de migraci&#243;n de datos. La regla matizada: los eventos sint&#233;ticos (programados, generados por el sistema, o de origen CDC) deben generar su propio correlation ID ra&#237;z en el punto de emisi&#243;n, documentado como una transacci&#243;n originada por el sistema. La regla de rechazo se aplica a eventos que afirman ser parte de una transacci&#243;n de negocio existente pero no llevan ID &#8212; no a todos los eventos universalmente.</div>
+
+  <h2>Lag, Rendimiento y M&#233;tricas de Salud del Consumidor</h2>
+
+  <p>El rastreo le cuenta la historia de una solicitud. Las m&#233;tricas le dicen el estado de salud del sistema completo. En sistemas event-driven, la m&#233;trica m&#225;s valiosa es el <strong>consumer lag</strong> (retraso del consumidor).</p>
+
+  <p>El <strong>consumer lag</strong> es la brecha entre el &#250;ltimo offset que un productor ha escrito en una partici&#243;n y el &#250;ltimo offset que un consumer group (grupo de consumidores) ha procesado. El lag es el equivalente en sistemas distribuidos de una pila de tareas pendientes creciente: una pila peque&#241;a y estable est&#225; bien, pero una pila que crece sin l&#237;mite significa que el consumidor nunca podr&#225; ponerse al d&#237;a.</p>
+
+  <p>Observe c&#243;mo el lag se comporta con el tiempo, porque la tendencia importa m&#225;s que el valor.</p>
+
+  <table>
+    <thead><tr><th>Patr&#243;n de lag</th><th>Qu&#233; significa</th><th>Acci&#243;n</th></tr></thead>
+    <tbody>
+      <tr><td>Bajo y plano</td><td>El consumidor sigue el ritmo de los productores</td><td>Saludable; sin acci&#243;n</td></tr>
+      <tr><td>Diente de sierra (sube, se drena)</td><td>Tr&#225;fico en r&#225;fagas, el consumidor se recupera</td><td>Normal; verificar que el pico se drena completamente</td></tr>
+      <tr><td>Subiendo constantemente</td><td>El consumidor es m&#225;s lento que el productor</td><td>Escalar consumidores u optimizar el handler</td></tr>
+      <tr><td>Plano pero alto, sin drenarse</td><td>Consumidor probablemente bloqueado o en crash-loop</td><td>Investigar poison message inmediatamente</td></tr>
+    </tbody>
+  </table>
+
+  <p>El lag por s&#237; solo no es suficiente. Comb&#237;nelo con <strong>throughput</strong> (eventos procesados por segundo) y <strong>processing latency</strong> (tiempo desde la recepci&#243;n del evento hasta la finalizaci&#243;n). Juntos distinguen dos fallos muy diferentes: un lag creciente con alto throughput significa que simplemente est&#225; abrumado por volumen, mientras que un lag creciente con <em>cero</em> throughput significa que el consumidor se ha detenido por completo &#8212; frecuentemente atascado en un solo mensaje que no puede ni procesar ni liberar.</p>
+
+  <p><strong>&#193;rbol de Decisi&#243;n para Diagn&#243;stico de Consumer Lag</strong></p>
+
+  <p class="diagram-caption">&#128202; [Diagram &#8212; Mermaid source below]</p>
+<pre class="mermaid-source"><code>flowchart TD
+    A[Rising Consumer Lag Detected] --&gt; B{Throughput near zero?}
+
+    B --&gt;|Yes - consumer stuck| C[Suspect poison message]
+    C --&gt; D[Inspect DLQ for failed messages]
+    D --&gt; E[Apply bounded retries + DLQ routing]
+    E --&gt; F[Partition unblocked ── lag resumes draining]
+
+    B --&gt;|No - throughput is high| G{Does lag drain during off-peak?}
+    G --&gt;|Yes - bursty traffic| H[Normal burst pattern]
+    H --&gt; I[Verify peak lag fully drains]
+    G --&gt;|No - lag keeps climbing| J[Consumer slower than producer]
+    J --&gt; K{Handler optimization feasible?}
+    K --&gt;|Yes| L[Optimize consumer handler]
+    K --&gt;|No| M[Scale out consumer instances]</code></pre>
+
+  <p>Alerte sobre la <em>tendencia y antig&#252;edad</em> del lag, no sobre un n&#250;mero absoluto fijo. Un umbral de &#8220;10.000 mensajes&#8221; no tiene sentido sin conocer el throughput; diez mil mensajes a cien mil por segundo es una d&#233;cima de segundo de retraso, pero el mismo n&#250;mero a diez por segundo es un cuarto de hora de interrupci&#243;n. Alertar sobre la antig&#252;edad del mensaje no procesado m&#225;s antiguo expresa el impacto de negocio directamente.</p>
+
+  <blockquote class="expert"><strong>&#128161; Nota del Experto:</strong> El texto distingue correctamente &#8220;abrumado&#8221; (alto throughput, lag creciente) de &#8220;bloqueado&#8221; (cero throughput, lag creciente), pero monitorea el throughput agregado del consumer group, lo que enmascara un modo de fallo cr&#237;tico en producci&#243;n. Un consumer group que procesa mensajes de diez particiones puede mostrar throughput agregado no nulo mientras una partici&#243;n est&#225; completamente bloqueada en la cabecera de l&#237;nea por un poison message. La postura correcta de monitoreo es rastrear el lag y el throughput a nivel de <strong>partici&#243;n individual</strong>, no solo a nivel del consumer group.</blockquote>
+
+  <div class="detail"><strong>&#128161; Nota del Experto</strong> El texto recomienda correctamente alertar sobre la antig&#252;edad del mensaje no procesado m&#225;s antiguo en lugar del recuento absoluto de lag, pero no aborda c&#243;mo obtener esta m&#233;trica en la pr&#225;ctica. La API nativa de consumer group de Kafka reporta offsets confirmados y offsets de fin de log pero no expone marcas de tiempo de mensajes directamente en forma de antig&#252;edad de lag. AWS MSK expone una m&#233;trica de CloudWatch llamada <code>EstimatedMaxTimeLag</code> que proporciona directamente el lag basado en antig&#252;edad para cl&#250;steres MSK. Para Kafka autogestionado, Burrow calcula el estado del consumer group usando una ventana deslizante de velocidad de lag en lugar de una instant&#225;nea &#250;nica.</div>
+
+  <h2>Depuraci&#243;n de Flujos de Eventos As&#237;ncronos</h2>
+
+  <p>Cuando llega un incidente, raramente tiene una excepci&#243;n clara apuntando a una l&#237;nea. Tiene un s&#237;ntoma &#8212; un correo faltante, un cargo duplicado &#8212; y debe trabajar hacia atr&#225;s a trav&#233;s de un flujo invisible. Siga un procedimiento disciplinado en lugar de adivinar.</p>
+
+  <ol>
+    <li><strong>Ancle en el correlation ID.</strong> Encuentre el ID de la transacci&#243;n afectada desde cualquier evento conocido, l&#237;nea de log, o referencia visible al usuario. Esta es su clave para todo lo dem&#225;s.</li>
+    <li><strong>Reconstruya el &#225;rbol.</strong> Consulte su agregaci&#243;n de logs para cada evento y entrada de log que lleve ese correlation ID, luego ord&#233;nelos por causation ID para reconstruir la cadena causal exacta. Esto le muestra cu&#225;l fue el &#250;ltimo evento que se dispar&#243;.</li>
+    <li><strong>Encuentre el enlace roto.</strong> El fallo est&#225; casi siempre en el primer <em>eslab&#243;n faltante</em> &#8212; el evento que deber&#237;a haberse producido o consumido pero no lo fue. Si existe <code>PaymentCaptured</code> pero ning&#250;n <code>EmailRequested</code> lo sigui&#243;, su fallo est&#225; en el consumidor de correo o en su suscripci&#243;n, no en el pago.</li>
+    <li><strong>Inspeccione el consumidor sospechoso.</strong> Verifique su lag, su tasa de errores, y su dead-letter queue para ese mensaje. Un mensaje en el DLQ es su prueba irrefutable.</li>
+  </ol>
+
+  <p><strong>Consulta de Incidente en Agregaci&#243;n de Logs: Reconstruir la Cadena Causal para un Correlation ID</strong></p>
+
+<pre><code class="language-python"># Log-aggregation incident query: reconstruct the causal chain for one correlation_id
+from __future__ import annotations
+
+from dataclasses import dataclass
+from typing import Any
+
+# --- Generic SQL query (ANSI-compatible; paste directly into Athena / BigQuery / ClickHouse) ---
+INCIDENT_QUERY = """
+SELECT
+    timestamp,
+    event_type,
+    service,
+    message_id,
+    causation_id,
+    correlation_id,
+    COALESCE(status, 'unknown') AS status
+FROM event_log
+WHERE correlation_id = :correlation_id
+ORDER BY timestamp ASC;
+"""
+# Note: replace :correlation_id with $1 / ? / %(correlation_id)s depending on your driver.
+
+
+@dataclass
+class EventRow:
+    timestamp: str
+    event_type: str
+    service: str
+    message_id: str
+    causation_id: str
+    correlation_id: str
+    status: str
+
+
+def fetch_causal_chain(
+    connection,           # any PEP 249-compatible DB connection
+    correlation_id: str,
+) -&gt; list[EventRow]:
+    """
+    Run the incident query and return rows ordered by timestamp.
+    Each row's causation_id points to its parent message_id,
+    giving you the exact causal tree without relying on wall-clock order.
+    """
+    cursor = connection.cursor()
+    cursor.execute(
+        INCIDENT_QUERY.replace(":correlation_id", "%s"),  # adapt placeholder per driver
+        (correlation_id,),
+    )
+    rows = [EventRow(*row) for row in cursor.fetchall()]
+    return rows
+
+
+def print_causal_tree(rows: list[EventRow]) -&gt; None:
+    """
+    Pretty-print the chain; highlight any gap where causation_id has no matching message_id.
+    The first missing link is almost always where the incident occurred.
+    """
+    known_ids = {r.message_id for r in rows}
+    print(f"{'TIMESTAMP':&lt;30} {'EVENT TYPE':&lt;30} {'SERVICE':&lt;20} {'STATUS':&lt;12} NOTE")
+    print("-" * 100)
+    for row in rows:
+        gap_flag = ""
+        if row.causation_id not in known_ids and row.causation_id != row.message_id:
+            gap_flag = "  &lt;-- BROKEN LINK (parent not in trace)"
+        print(
+            f"{row.timestamp:&lt;30} {row.event_type:&lt;30} {row.service:&lt;20} {row.status:&lt;12}{gap_flag}"
+        )</code></pre>
+
+  <p>Dos advertencias surgidas de la experiencia. Primero, <strong>los timestamps de reloj de pared mienten</strong> entre m&#225;quinas. El desfase de reloj entre servicios significa que no puede confiar en el ordenamiento por timestamp solo; conf&#237;e en la cadena de causalidad, que codifica causalidad real. Segundo, resista el impulso de razonar sobre el flujo desde su diagrama de arquitectura. El diagrama muestra el flujo que <em>dise&#241;&#243;</em>; la traza de correlaci&#243;n muestra el flujo que <em>realmente ocurri&#243;</em>.</p>
+
+  <div class="detail"><strong>&#128161; Nota del Experto</strong> El texto advierte que los timestamps de reloj de pared mienten debido al desfase de reloj, lo cual es correcto. En entornos cloud, incluso con NTP configurado, el desfase de reloj entre hosts de 50&#8211;200 milisegundos es com&#250;n. Para cualquier flujo de eventos donde el ordenamiento importe, almacene el <strong>n&#250;mero de secuencia asignado por el broker o el partition offset</strong> junto al evento en su almac&#233;n de logs y &#250;selo como clave de ordenamiento autoritativa. El broker offset es la &#250;nica ancla de ordenamiento verdaderamente mon&#243;tono entre servicios.</div>
+
+  <h2>Dead-Letter Queues y Reprocesamiento Operacional</h2>
+
+  <p>El Cap&#237;tulo 4 introdujo la <strong>dead-letter queue (DLQ)</strong> &#8212; un destino separado donde un broker aparca mensajes que no pudieron ser procesados despu&#233;s de agotar sus reintentos. Aqu&#237; la tratamos como algo que debe operar activamente, porque un DLQ desatendido es uno de los fallos silenciosos m&#225;s comunes en EDA en producci&#243;n.</p>
+
+  <p>Un DLQ no es un basurero. Es una <em>cola de trabajo pendiente que requiere juicio humano o automatizado</em>. Cada mensaje en &#233;l representa un hecho de negocio que no tom&#243; efecto: un pago no registrado, un pedido no enviado. Dejado solo, el DLQ se convierte en un cementerio de eventos de negocio perdidos que nadie descubre hasta que un cliente se queja. Por tanto: <strong>alerte cuando la profundidad del DLQ sea mayor que cero.</strong> Un DLQ no vac&#237;o es siempre un incidente, aunque sea peque&#241;o.</p>
+
+  <p>El reprocesamiento &#8212; mover mensajes del DLQ de vuelta al flujo principal &#8212; es donde los operadores causan interrupciones secundarias si no son cuidadosos. Siga estas reglas.</p>
+
+  <ul>
+    <li><strong>Corrija la causa antes de reprocesar.</strong> Reproducir un mensaje en el mismo consumidor roto simplemente lo env&#237;a de vuelta al DLQ. Despliegue la correcci&#243;n primero.</li>
+    <li><strong>El reprocesamiento exige idempotencia.</strong> Un mensaje puede haber parcialmente tenido &#233;xito antes de fallar; reproducirlo no debe cobrar doble. Sin idempotencia, el reprocesamiento es inseguro.</li>
+    <li><strong>Preserve los metadatos originales.</strong> Reprocese con los IDs de correlaci&#243;n y causalidad <em>originales</em>, no con nuevos, o separar&#225; el mensaje de su historia y perder&#225; la trazabilidad.</li>
+    <li><strong>Reprocese en lotes controlados.</strong> Drenar diez mil mensajes del DLQ a velocidad total puede abrumar a un downstream que apenas se est&#225; recuperando. Regule la reproducci&#243;n.</li>
+  </ul>
+
+  <p><strong>Flujo de Trabajo de Reprocesamiento Seguro de DLQ</strong></p>
+
+  <p class="diagram-caption">&#128202; [Diagram &#8212; Mermaid source below]</p>
+<pre class="mermaid-source"><code>flowchart TD
+    A[DLQ Alert: depth &gt; 0] --&gt; B[Inspect DLQ messages]
+    B --&gt; C[Identify root cause]
+    C --&gt; D[Deploy fix to consumer]
+    D --&gt; E{Consumer idempotent?}
+
+    E --&gt;|No| F[Implement idempotency guard]
+    F --&gt; G[Replay messages in throttled batches]
+    E --&gt;|Yes| G
+
+    G --&gt; H[Preserve original corr_id and cause_id]
+    H --&gt; I[Monitor consumer lag during replay]
+    I --&gt; J{Lag stable or decreasing?}
+
+    J --&gt;|Yes| K[Continue replay until DLQ empty]
+    K --&gt; L[Incident resolved]
+    J --&gt;|No| M[Pause replay]
+    M --&gt; N[Investigate downstream health]
+    N --&gt; G</code></pre>
+
+  <blockquote class="expert"><strong>&#128161; Nota del Experto:</strong> El texto afirma &#8220;alerte cuando la profundidad del DLQ sea mayor que cero &#8212; un DLQ no vac&#237;o es siempre un incidente, aunque sea peque&#241;o.&#8221; Esta regla es correcta e importante para equipos en sus inicios con EDA, pero a escala produce fatiga de alertas. El refinamiento maduro en producci&#243;n es alertar sobre la <strong>tasa de crecimiento del DLQ</strong> (mensajes por minuto) y sobre la <strong>antig&#252;edad de mensajes del DLQ que supere su ventana de SLA de negocio</strong> (por ejemplo, m&#225;s de 15 minutos para un flujo de pago), en lugar del n&#250;mero absoluto mayor que cero.</blockquote>
+
+  <blockquote class="critical"><strong>&#9888;&#65039; Nota Cr&#237;tica:</strong> &#8220;Alerte cuando la profundidad del DLQ sea mayor que cero. Un DLQ no vac&#237;o es siempre un incidente, aunque sea peque&#241;o.&#8221; En sistemas de producci&#243;n de alto volumen, esta prescripci&#243;n es operacionalmente da&#241;ina. A escala, fallos transitorios aislados por timeouts de terceros o contrat iempos de infraestructura rutinariamente depositar&#225;n uno o dos mensajes en el DLQ antes de la recuperaci&#243;n autom&#225;tica. Alertar sobre cualquier mensaje &#250;nico crea fatiga de alertas cr&#243;nica. Reemplace la regla absoluta con una pol&#237;tica graduada: alerte inmediatamente sobre la <em>tasa</em> del DLQ (nuevos mensajes por minuto por encima de una l&#237;nea base) y sobre mensajes del DLQ que han estado sin reconocer m&#225;s all&#225; de un SLO basado en tiempo.</blockquote>
+
+  <blockquote class="expert"><strong>&#128161; Nota del Experto:</strong> El texto instruye a los operadores a &#8220;preservar los metadatos originales&#8221; durante el reprocesamiento, lo que incluye los IDs de correlaci&#243;n y causalidad. Una dimensi&#243;n de los metadatos originales que com&#250;nmente se pasa por alto es la <strong>clave de enrutamiento del mensaje</strong> &#8212; en Kafka es la partition key, en RabbitMQ la routing key, en colas FIFO de SQS el message group ID. Cuando los operadores drenan un DLQ usando una herramienta de reproducci&#243;n gen&#233;rica o un script simple de re-publicaci&#243;n, es f&#225;cil re-publicar sin la partition key original, haciendo que el mensaje reproducido aterrice en una partici&#243;n diferente a la original. Esto rompe las garant&#237;as de ordenamiento para todos los consumidores downstream.</blockquote>
+
+  <div class="detail"><strong>&#9888;&#65039; Nota Cr&#237;tica</strong> La regla &#8220;Preserve los metadatos originales &#8212; reprocese con los IDs de correlaci&#243;n y causalidad originales, no con nuevos&#8221; es s&#243;lida en la capa de aplicaci&#243;n, pero falla silenciosamente cuando se usan mecanismos DLQ nativos del broker. El redrive de dead-letter de AWS SQS, la resubmisi&#243;n de dead-letter de Azure Service Bus, y caracter&#237;sticas similares del broker reasignan un nuevo MessageId a nivel de broker al mensaje re-encolado independientemente del payload de la aplicaci&#243;n. Siempre embeba los IDs de correlaci&#243;n y causalidad en el cuerpo del mensaje o en cabeceras definidas por la aplicaci&#243;n (no en campos nativos del broker), y verifique que todos los consumidores lean de esos campos de aplicaci&#243;n.</div>
+
+  <h2>Poison Messages y Estrategias de Contenci&#243;n</h2>
+
+  <p>Algunos mensajes nunca pueden procesarse con &#233;xito, sin importar cu&#225;ntas veces se reintenten. Este es el <strong>poison message</strong> (mensaje veneno) &#8212; un evento cuyo contenido desencadena un fallo determin&#237;stico en el consumidor cada vez. La causa cl&#225;sica es un payload malformado o inesperado: un campo nulo al que el handler hace dereference, un esquema que el consumidor no puede deserializar, un valor que viola un invariante.</p>
+
+  <p>El peligro es espec&#237;fico y severo. En una partici&#243;n <em>ordenada</em>, un poison message es un <strong>head-of-line blocking</strong> (bloqueo en la cabecera de l&#237;nea): porque el consumidor debe procesar mensajes en orden y no puede pasar este, todos los mensajes detr&#225;s de &#233;l tambi&#233;n est&#225;n bloqueados. Un evento malo puede congelar una partici&#243;n entera.</p>
+
+  <p>La contenci&#243;n descansa en tres mecanismos trabajando juntos.</p>
+
+  <ol>
+    <li><strong>Reintentos acotados con backoff.</strong> Nunca reintente un poison message infinitamente. Despu&#233;s de un peque&#241;o n&#250;mero de intentos con retraso creciente, desista de &#233;l y enr&#250;telo al DLQ. El reintento infinito convierte un mensaje malo en una interrupci&#243;n permanente.</li>
+    <li><strong>Enrutar al DLQ para desbloquear la partici&#243;n.</strong> Mover el poison message a un lado permite que el consumidor avance y procese los mensajes saludables encolados detr&#225;s de &#233;l. El DLQ es lo que convierte un bloqueo de todo el sistema en un &#250;nico fallo aislado.</li>
+    <li><strong>Validar en el borde.</strong> El poison message m&#225;s barato es el que rechaza antes de que entre al flujo. La validaci&#243;n de esquema en la ingesta &#8212; el registry del Cap&#237;tulo 8 &#8212; captura la mayor&#237;a de los payloads malformados antes de que puedan envenenar algo downstream.</li>
+  </ol>
+
+  <p><strong>Bucle de Consumidor con Reintentos Acotados y Enrutamiento a DLQ para Prevenir Head-of-Line Blocking</strong></p>
+
+<pre><code class="language-python"># Bounded-retry consumer loop with DLQ routing to prevent head-of-line blocking
+from __future__ import annotations
+
+import logging
+import time
+from dataclasses import dataclass
+from typing import Callable
+
+logger = logging.getLogger(__name__)
+
+MAX_ATTEMPTS = 3          # after this many failures the message is a confirmed poison message
+BASE_BACKOFF_SECONDS = 1  # initial retry delay; doubles on each attempt
+
+
+@dataclass
+class MessageContext:
+    """Thin wrapper around a broker message carrying the envelope and ack handle."""
+    envelope: "EventEnvelope"
+    raw_payload: bytes
+    ack: Callable[[], None]     # callable that commits the offset / deletes from queue
+    nack: Callable[[], None]    # callable that returns the message for immediate retry
+
+
+def process_with_dlq_fallback(
+    ctx: MessageContext,
+    handler: Callable[["EventEnvelope"], None],
+    dlq_publisher,
+    dlq_topic: str,
+) -&gt; None:
+    """
+    Attempt to process a message up to MAX_ATTEMPTS times with exponential backoff.
+    On final failure, publish to the DLQ with diagnostic metadata and acknowledge
+    the original so the partition advances past the poison message.
+    """
+    last_exception: Exception | None = None
+
+    for attempt in range(1, MAX_ATTEMPTS + 1):
+        try:
+            handler(ctx.envelope)
+            ctx.ack()   # success ── commit the offset; we are done
+            return
+
+        except Exception as exc:
+            last_exception = exc
+            logger.warning(
+                "Handler failed (attempt %d/%d) for message_id=%s: %s",
+                attempt,
+                MAX_ATTEMPTS,
+                ctx.envelope.message_id,
+                exc,
+            )
+            if attempt &lt; MAX_ATTEMPTS:
+                backoff = BASE_BACKOFF_SECONDS * (2 ** (attempt - 1))  # 1s, 2s, 4s ...
+                time.sleep(backoff)
+
+    # All attempts exhausted ── this is a poison message.
+    # Publish to DLQ *before* acking so the message is never silently dropped.
+    dead_letter_payload = {
+        "original_message_id": ctx.envelope.message_id,
+        "original_event_type": ctx.envelope.event_type,
+        "original_payload": ctx.envelope.payload,
+        "correlation_id": ctx.envelope.correlation_id,   # preserve for traceability
+        "causation_id": ctx.envelope.causation_id,       # preserve causal link
+        "dead_letter_reason": str(last_exception),
+        "retry_count": MAX_ATTEMPTS,
+    }
+
+    try:
+        dlq_publisher.publish(topic=dlq_topic, payload=dead_letter_payload)
+        logger.error(
+            "Poison message routed to DLQ after %d attempts: message_id=%s reason=%s",
+            MAX_ATTEMPTS,
+            ctx.envelope.message_id,
+            last_exception,
+        )
+    except Exception as dlq_exc:
+        # DLQ publish failed ── log loudly but still ack to avoid infinite head-of-line block.
+        logger.critical(
+            "CRITICAL: DLQ publish failed for message_id=%s. Acknowledging anyway to unblock "
+            "partition. Manual recovery required. dlq_error=%s original_error=%s",
+            ctx.envelope.message_id,
+            dlq_exc,
+            last_exception,
+        )
+
+    # Acknowledge the original message so the partition advances past the poison message.
+    # This is the key step that converts a system-wide stall into an isolated DLQ entry.
+    ctx.ack()</code></pre>
+
+  <p>La lecci&#243;n arquitect&#243;nica es fallar <em>r&#225;pido y lateralmente</em>, nunca <em>lento y hacia adelante</em>. Un poison message debe detectarse r&#225;pidamente, sacarse del camino caliente de inmediato, y preservarse para revisi&#243;n humana posterior &#8212; no reintentarse para siempre de una manera que bloquee el tr&#225;fico saludable.</p>
+
+  <div class="detail"><strong>&#128161; Nota del Experto</strong> El texto recomienda &#8220;validaci&#243;n de esquema en la ingesta&#8221; a trav&#233;s del registry como la principal defensa en el borde. En producci&#243;n, la validaci&#243;n de esquema captura violaciones de contrato estructurales, pero no captura <strong>poison messages sem&#225;nticos</strong> &#8212; eventos que son estructuralmente v&#225;lidos seg&#250;n el esquema pero contienen valores que desencadenan fallos determin&#237;sticos en consumidores espec&#237;ficos: un ID de producto que hace referencia a un registro eliminado, una cantidad num&#233;rica de cero que causa una divisi&#243;n por cero, o un timestamp t&#233;cnicamente v&#225;lido que est&#225; en el futuro lejano. La capa defensiva para los poisons sem&#225;nticos es la <strong>validaci&#243;n de entrada a nivel del consumidor al inicio del handler</strong> &#8212; cl&#225;usulas de guardia que verifican invariantes de dominio antes de que se ejecute cualquier l&#243;gica de negocio.</div>
+
+  <div class="detail"><strong>&#9888;&#65039; Nota Cr&#237;tica</strong> El texto afirma &#8220;La validaci&#243;n de esquema en la ingesta &#8212; el registry del Cap&#237;tulo 8 &#8212; captura la mayor&#237;a de los payloads malformados antes de que puedan envenenar algo downstream.&#8221; Esto sobrevalora significativamente la cobertura de la validaci&#243;n de esquema. Los registries de esquema validan la conformidad estructural. No capturan los poison messages m&#225;s comunes en el mundo real: un entero sint&#225;cticamente v&#225;lido que causa una divisi&#243;n por cero en una regla de negocio, un valor nulo en un campo opcional que el consumidor desreferencia sin una guardia, o un ID de cliente v&#225;lido que ya no existe en la base de datos y causa un fallo en una b&#250;squeda de clave for&#225;nea. Reencuadre: &#8220;La validaci&#243;n de esquema elimina la malformaci&#243;n <em>estructural</em> &#8212; el tipo incorrecto, campos requeridos faltantes &#8212; pero no los fallos sem&#225;nticos, que son la fuente m&#225;s com&#250;n en el mundo real de poison messages.&#8221;</div>
+
+  <h2>Conclusiones Clave</h2>
+
+  <ul>
+    <li><strong>Los correlation IDs agrupan una transacci&#243;n de negocio completa; los causation IDs reconstruyen la cadena causal exacta padre-hijo.</strong> Todo consumidor productor debe copiar el correlation ID y establecer el causation ID al message ID de su padre, o la traza se rompe.</li>
+    <li><strong>El consumer lag es su se&#241;al de salud primaria.</strong> Alerte sobre su tendencia y sobre la antig&#252;edad del mensaje no procesado m&#225;s antiguo, y comb&#237;nelo con el throughput para distinguir &#8220;abrumado&#8221; de &#8220;bloqueado.&#8221;</li>
+    <li><strong>Depure hacia atr&#225;s desde el correlation ID, no desde el diagrama de arquitectura.</strong> Conf&#237;e en la cadena de causalidad sobre los timestamps de reloj de pared, y busque el primer eslab&#243;n faltante.</li>
+    <li><strong>Un DLQ no vac&#237;o es siempre un incidente.</strong> Corrija la causa ra&#237;z primero, conf&#237;e en la idempotencia, preserve los metadatos originales, y reprocese en lotes regulados.</li>
+    <li><strong>Los poison messages causan head-of-line blocking.</strong> Cont&#243;ngalos con reintentos acotados, enrutamiento al DLQ para desbloquear la partici&#243;n, y validaci&#243;n en el borde para mantenerlos fuera por completo.</li>
+  </ul>
+
+</body>
+</html>

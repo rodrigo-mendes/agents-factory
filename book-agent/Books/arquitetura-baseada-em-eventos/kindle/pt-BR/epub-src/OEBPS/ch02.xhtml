@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Capítulo 2: Modelando Eventos como Fatos do Domínio</title>
+  <link rel="stylesheet" type="text/css" href="styles.css"/>
+</head>
+<body>
+<h1 id="ch02">Capítulo 2: Modelando Eventos como Fatos do Domínio</h1>
+
+<h2>Declaração do Problema Inicial</h2>
+
+<p>O Capítulo 1 definiu um evento como um fato imutável do passado e nos deu um vocabulário compartilhado: eixos de acoplamento, estilos de evento e Event-Carried State Transfer (transferência de estado transportada pelo evento) como padrão para integração entre contextos. Mas uma definição não diz <em>quais</em> fatos merecem se tornar eventos. É aqui que a maioria dos sistemas orientados a eventos apodrece silenciosamente. Uma equipe conecta um broker à sua stack e, em poucos meses, os tópicos estão inundados com <code>RowInserted</code>, <code>CacheInvalidated</code> e <code>UserEntityUpdated</code>. Nenhum desses termos significa algo para o negócio. São resíduos técnicos disfarçados de conhecimento de domínio, e todo consumidor que os assina herda o schema do banco de dados do produtor como um contrato de fato. O problema que este capítulo resolve é a disciplina na modelagem: como projetar eventos que carregam significado genuíno de negócio, que sobrevivem a refatorações e que permitem que equipes independentes se integrem sem interferir umas nas outras. O trabalho do arquiteto sênior aqui não é publicar mais eventos — é publicar os <em>certos</em>, com nomes que soam como frases que um especialista de domínio falaria. Errar nisso e nenhuma quantidade de tuning no Kafka salvará a arquitetura.</p>
+
+<h2>Eventos de Domínio Versus Eventos de Integração</h2>
+
+<p>A distinção mais útil na modelagem de eventos é entre <strong>eventos de domínio</strong> (domain events) e <strong>eventos de integração</strong> (integration events). Eles parecem idênticos no wire — ambos são fatos imutáveis — mas servem a audiências diferentes e obedecem a regras distintas.</p>
+
+<p>Um <strong>evento de domínio</strong> é um fato que importa <em>dentro</em> de um único contexto delimitado (bounded context). Ele é expresso na linguagem ubíqua (ubiquitous language) daquele contexto e muitas vezes é consumido pelo mesmo serviço que o produziu, ou por componentes intimamente relacionados dentro do limite da mesma equipe. <code>OrderPlaced</code>, <code>PaymentDeclined</code>, <code>SeatReserved</code> — esses descrevem algo que um stakeholder de negócio se importa. Eventos de domínio são ricos; podem referenciar agregados internos livremente porque todos que os leem compartilham o mesmo modelo.</p>
+
+<p>Um <strong>evento de integração</strong> é um fato publicado <em>além</em> de um limite de contexto delimitado, destinado a outras equipes e outros serviços. É um contrato deliberado e público. Por cruzar um limite, não deve vazar estrutura interna. Um evento de integração é uma tradução — uma projeção enxuta e estabilizada de um ou mais eventos de domínio em uma forma da qual o mundo exterior pode depender.</p>
+
+<p>A tabela abaixo torna o contraste concreto.</p>
+
+<table>
+<thead><tr><th>Aspecto</th><th>Evento de Domínio</th><th>Evento de Integração</th></tr></thead>
+<tbody>
+<tr><td>Audiência</td><td>Dentro de um único contexto delimitado</td><td>Outros contextos e equipes</td></tr>
+<tr><td>Linguagem</td><td>Linguagem ubíqua completa</td><td>Vocabulário público estável</td></tr>
+<tr><td>Payload</td><td>Rico, referencia agregados</td><td>Mínimo, autocontido</td></tr>
+<tr><td>Acoplamento</td><td>Interno, por design</td><td>Fraco, contratual</td></tr>
+<tr><td>Vida útil</td><td>Muda com o modelo</td><td>Muda apenas via versionamento</td></tr>
+<tr><td>Consequência do vazamento</td><td>Refatoração local</td><td>Quebra consumidores externos</td></tr>
+</tbody>
+</table>
+
+<p>A regra decorre diretamente: <strong>nunca publique um evento de domínio bruto além de um limite de contexto.</strong> Traduza-o primeiro. No momento em que uma equipe externa assina seu <code>OrderAggregateUpdated</code> interno, seu banco de dados torna-se a API deles, e você perdeu a liberdade de refatorar. Essa etapa de tradução não é burocracia — é a costura que mantém as equipes independentes.</p>
+
+<p><em>Um evento de domínio produzido dentro de um contexto delimitado deve ser traduzido em um evento de integração antes de cruzar o limite do contexto; essa costura preserva a liberdade de cada equipe de refatorar seu modelo interno de forma independente.</em></p>
+
+<p class="diagram-caption">📊 [Diagram — Mermaid source below]</p>
+<pre class="mermaid-source"><code>flowchart LR
+    subgraph CA["Context A (Producer)"]
+        DE["Domain Event\n— OrderAggregateUpdated —"]
+        TL["Translation Layer"]
+        IE["Integration Event\n— OrderPlaced —"]
+        DE --> TL --> IE
+    end
+    subgraph CB["Context B (Consumer)"]
+        ACL["Anti-Corruption Layer"]
+        CBM["Internal Model"]
+        ACL --> CBM
+    end
+    IE -->|"Bounded-Context Edge"| ACL</code></pre>
+
+<blockquote class="expert"><strong>💡 Nota do Especialista:</strong> A etapa de tradução de evento de domínio para evento de integração não é apenas uma disciplina de modelagem — é um limite de confiabilidade que requer um mecanismo de entrega explícito. Em sistemas de produção, o modo de falha mais comum é: o evento de domínio é capturado em memória ou em um listener da camada de aplicação, a tradução é executada de forma síncrona, e a publicação no broker falha ou o processo falha entre o commit no banco de dados e a escrita no broker. A correção padrão da indústria é o <strong>padrão Transactional Outbox</strong>: escrever o evento de integração de saída em uma tabela <code>outbox</code> dentro da mesma transação ACID que muta o agregado, e depois repassar de forma assíncrona. Sem isso, o limite de tradução que protege seus consumidores do seu schema é em si uma fonte de bugs de consistência fantasma extremamente difíceis de reproduzir em ambientes de teste.</blockquote>
+
+<div class="detail"><strong>⚠️ Nota Crítica</strong> A tabela rotula o acoplamento de evento de domínio como "Interno, por design." Isso é enganoso e arrisca confundir arquitetos sênior. Eventos de domínio dentro de um contexto delimitado são precisamente um mecanismo de <em>desacoplamento</em>: um agregado Order levanta <code>OrderPlaced</code> para que outros serviços de domínio (reserva de estoque, envio de e-mail) possam reagir sem que o agregado os chame diretamente. "Estreito" é impreciso; o enquadramento correto é "interno — o limite do contrato não se aplica." Descrever o acoplamento intra-contexto como "estreito por design" poderia levar os leitores a resistir a eventos de domínio dentro de seu próprio contexto, frustrando o propósito deles.</div>
+
+<div class="detail"><strong>⚠️ Nota Crítica</strong> O texto apresenta a etapa de tradução ("nunca publique um evento de domínio bruto além de um limite de contexto — traduza-o primeiro") como uma regra de design sem abordar o mecanismo de confiabilidade que torna essa regra segura de seguir. A tradução de evento de domínio para evento de integração normalmente é feita dentro da mesma transação ou via padrão outbox; se for feita por um processo ou handler separado, a própria tradução pode falhar silenciosamente, produzindo duplicatas ou eventos perdidos. Para arquitetos sênior, a regra "traduza primeiro" está incompleta sem reconhecer que o <em>como</em> da tradução confiável é não trivial e é a origem da maioria dos bugs de integração no mundo real.</div>
+
+<h2>Event Storming como Técnica de Descoberta</h2>
+
+<p>Você não consegue modelar eventos bem olhando fixamente para um schema de banco de dados. Os eventos devem ser <em>descobertos</em> a partir do negócio, e a técnica mais rápida para essa descoberta é o <strong>Event Storming</strong> — um workshop colaborativo inventado por Alberto Brandolini. Ele coloca especialistas de domínio e engenheiros diante do mesmo painel e faz uma pergunta: o que acontece neste negócio?</p>
+
+<p>A mecânica é deliberadamente de baixa tecnologia. Os participantes escrevem fatos em post-its laranjas, formulados no passado, e os colocam em uma linha do tempo. <code>OrderPlaced</code> vai para cima, depois <code>PaymentAuthorized</code>, depois <code>OrderShipped</code>. Quando os post-its laranjas param de fluir, outras cores entram: azul para comandos que acionam eventos, amarelo para agregados, rosa para sistemas externos e roxo para políticas ("sempre que <em>isso</em> acontece, faça <em>aquilo</em>"). O painel torna-se um mapa do processo de negócio antes que uma única classe seja escrita.</p>
+
+<p>Três sinais de uma sessão de Event Storming moldam diretamente sua arquitetura:</p>
+<ol>
+<li><strong>Clusters de eventos</strong> em torno do mesmo agregado revelam um contexto delimitado. Onde a linguagem muda — onde "order" começa a significar algo diferente — você encontrou um limite.</li>
+<li><strong>Hotspots</strong>, marcados com post-its vermelhos, expõem discordâncias ou desconhecidos. Essas são as partes arriscadas do domínio e merecem maior atenção de design.</li>
+<li><strong>Eventos pivotais</strong> — aqueles aos quais todos os stakeholders apontam — são seus verdadeiros eventos de integração, os fatos que outros contextos irão querer.</li>
+</ol>
+
+<p><em>Uma linha do tempo de Event Storming mapeia fatos de negócio no passado da esquerda para a direita, revelando comandos, agregados e políticas; o ponto onde a linguagem ubíqua muda marca um limite de contexto delimitado e sinaliza um candidato a evento de integração.</em></p>
+
+<p class="diagram-caption">📊 [Diagram — Mermaid source below]</p>
+<pre class="mermaid-source"><code>flowchart LR
+    subgraph SALES["Sales Context"]
+        CMD1["Command: Place Order"]
+        EV1["Event: Order Placed"]
+        EV2["Event: Payment Authorized"]
+        AGG1["Aggregate: Order"]
+        POL1["Policy: When Payment Authorized"]
+        CMD1 --> EV1 --> EV2 --> AGG1 --> POL1
+    end
+    subgraph SHIPPING["Shipping Context"]
+        EV3["Event: Order Shipped"]
+        AGG2["Aggregate: Shipment"]
+        EV3 --> AGG2
+    end
+    POL1 -->|"Language Boundary"| EV3</code></pre>
+
+<p>O ganho é que os eventos emergem da linguagem do negócio, não do formato de uma tabela. Quando um especialista de domínio acena para <code>PaymentDeclined</code> e balança a cabeça para <code>UserRecordUpdated</code>, ele está fazendo sua revisão de nomenclatura de graça. Execute o workshop antes de projetar schemas, não depois.</p>
+
+<div class="detail"><strong>💡 Nota do Especialista</strong> Alberto Brandolini define três níveis de Event Storming — <strong>Big Picture</strong>, <strong>Process Modeling</strong> e <strong>Software Design</strong> — mas a maioria das equipes executa apenas o primeiro e chama de suficiente. A sessão Big Picture produz o mapa de limites e os eventos pivotais descritos no texto. O Process Modeling (uma sessão separada e menor) é onde comandos, atores, read models e políticas são refinados por subprocesso: esse é o nível que produz o design de agregado e comando que alimenta diretamente o código. Parar no Big Picture deixa uma lacuna de tradução significativa entre o painel do workshop e o primeiro rascunho de schema, que os engenheiros tipicamente preenchem revertendo para eventos moldados pelo banco de dados — o exato anti-padrão contra o qual o Capítulo 2 alerta.</div>
+
+<div class="detail"><strong>💡 Nota do Especialista</strong> Na prática, os hotspots do Event Storming (post-its vermelhos) são tão frequentemente organizacionais quanto técnicos. Um hotspot persistente onde especialistas de domínio não conseguem concordar com um termo é frequentemente um sinal de tensão da <strong>Lei de Conway</strong>: duas equipes compartilham a propriedade de um conceito e desenvolveram modelos diferentes. Tratá-los como problemas puramente técnicos de modelagem leva a compromissos frágeis. A resposta mais eficaz é levantar a questão organizacional de propriedade explicitamente — qual equipe é dona da definição desse agregado? — e deixar essa decisão guiar o limite do contexto delimitado.</div>
+
+<div class="detail"><strong>⚠️ Nota Crítica</strong> O Event Storming é apresentado como uma técnica diretamente acessível: "os participantes escrevem fatos em post-its laranjas" e o painel "torna-se um mapa do processo de negócio antes que uma única classe seja escrita." Isso obscurece os pré-requisitos organizacionais e de facilitação substanciais. Sem um facilitador experiente, as sessões costumam entrar em colapso devido a jargão técnico, explosão de escopo ou agendas políticas concorrentes entre departamentos. Os especialistas de domínio precisam estar dispostos e disponíveis — uma restrição que muitas vezes é a parte mais difícil em ambientes corporativos.</div>
+
+<h2>Contextos Delimitados e Contratos de Evento Entre Equipes</h2>
+
+<p>Um <strong>contexto delimitado</strong> é o escopo dentro do qual um modelo e sua linguagem ubíqua são consistentes. "Customer" no contexto de Sales não é o mesmo "Customer" no contexto de Billing, mesmo que ambos se refiram à mesma pessoa. Os eventos são como esses contextos se comunicam sem fundir seus modelos — e isso torna cada evento publicado um <strong>contrato</strong>.</p>
+
+<p>Tratar eventos como contratos muda a forma de gerenciá-los. Um contrato tem um dono (a equipe produtora), uma especificação (o schema) e consumidores que constroem com base nele. Uma vez que alguém depende do seu evento de integração, você não pode alterar silenciosamente sua forma. Por isso organizações maduras adotam <strong>contratos orientados ao consumidor</strong> (consumer-driven contracts): os consumidores publicam as expectativas que têm, e o pipeline do produtor verifica que as mudanças não as quebram. Retornamos à evolução de schema em profundidade no Capítulo 8, mas a decisão de modelagem começa aqui — um evento de integração bem modelado é aquele cujo significado é estável o suficiente para que mudanças exijam versionamento explícito e migração coordenada dos consumidores — não mutação silenciosa do schema.</p>
+
+<p>O limite anticorrupção (Anti-Corruption Layer) é o mecanismo prático. Quando o Contexto B consome um evento do Contexto A, ele traduz o vocabulário de A para seu próprio modelo na borda, em vez de deixar os conceitos de A se espalharem internamente. Isso mantém os dois modelos livres para evoluir. O evento é o fio entre eles; as camadas de tradução em cada lado são o isolamento.</p>
+
+<p><strong>Dica Pro:</strong> Atribua a cada evento de integração uma única equipe proprietária e registre isso em um catálogo descobrível. Um evento sem dono é um evento que ninguém pode alterar com segurança — e que ninguém se atreve a deletar.</p>
+
+<div class="detail"><strong>💡 Nota do Especialista</strong> O texto corretamente introduz os contratos orientados ao consumidor como o mecanismo para evoluir com segurança os eventos de integração, mas a lacuna de ferramental vale ser nomeada para os profissionais prontos para implementá-lo. Para sistemas de eventos assíncronos, o <strong>Pact</strong> (pact.io) é o framework de teste de contrato orientado ao consumidor mais amplamente adotado e tem suporte de primeira classe para contratos de mensagem a partir da v4. A imposição de contratos via schema registry (Confluent Schema Registry com modos de compatibilidade, ou AWS Glue Schema Registry) trata da evolução estrutural, mas não da compatibilidade semântica — o Pact cobre o segundo. Uma camada complementar é o <strong>AsyncAPI 3.0</strong>, agora a especificação dominante para documentar contratos de eventos assíncronos.</div>
+
+<blockquote class="expert"><strong>💡 Nota do Especialista:</strong> O texto corretamente posiciona o limite anticorrupção na borda do contexto, mas as equipes frequentemente o implementam no lugar errado. Em um sistema de eventos assíncrono, o ACL vive <strong>dentro do handler de eventos do serviço consumidor ou em um processo transformador dedicado</strong> — não no broker, não em uma camada de middleware compartilhada. Tentativas de implementar um "ACL centralizado" no nível do broker (via topologia do Kafka Streams ou um intermediário no estilo ESB) reconstituem o hub de integração que a arquitetura orientada a eventos foi criada para eliminar, e criam um componente mutável compartilhado do qual toda equipe depende. Cada consumidor é dono de sua própria tradução; é isso que os mantém implantáveis de forma independente.</blockquote>
+
+<div class="detail"><strong>⚠️ Nota Crítica</strong> O texto afirma que "um evento de integração bem modelado é aquele cujo significado é estável o suficiente para ser prometido indefinidamente." Esse é um padrão irrealista e potencialmente prejudicial para a maioria dos domínios de negócio. O significado de negócio muda: regulamentações se alteram, produtos são descontinuados, fusões redefinem "customer." O enquadramento correto é que eventos de integração devem ser <em>estáveis o suficiente para que mudanças exijam versionamento explícito em vez de ruptura silenciosa</em> — não estáveis indefinidamente.</div>
+
+<h2>Granularidade e Convenções de Nomenclatura de Eventos</h2>
+
+<p>A granularidade é onde as boas intenções produzem sistemas ruins. Muito granular, e um evento inflado força cada consumidor a analisar campos de que não precisa. Muito fino, e os consumidores precisam remontar um fato de negócio a partir de uma tempestade de fragmentos, reintroduzindo exatamente o acoplamento que os eventos deveriam eliminar.</p>
+
+<p>A heurística orientadora: <strong>modele eventos na granularidade de uma decisão de negócio, não de uma mutação de dados.</strong> <code>OrderPlaced</code> é uma decisão. <code>OrderTotalColumnUpdated</code> é uma mutação. Se um fato só faz sentido para alguém que conhece sua definição de tabela, é muito fino e provavelmente não é um evento de domínio de forma alguma.</p>
+
+<p>A nomenclatura carrega tanto peso quanto a granularidade. Siga estas regras sem exceção:</p>
+<ul>
+<li><strong>Sempre no passado.</strong> Um evento registra algo que já aconteceu: <code>InvoiceIssued</code>, não <code>IssueInvoice</code> (isso é um comando) e não <code>InvoiceIssue</code>.</li>
+<li><strong>Linguagem de negócio, não linguagem técnica.</strong> <code>PaymentCaptured</code> é melhor que <code>PaymentServiceApiCallSucceeded</code>.</li>
+<li><strong>Nomeie o fato, não o handler.</strong> <code>SubscriptionCancelled</code>, não <code>SendCancellationEmail</code> — o segundo nomeia uma reação, acoplando o evento à intenção de um consumidor.</li>
+<li><strong>Inclua o agregado, seja específico.</strong> <code>CartCheckedOut</code> informa o sujeito e o fato em duas palavras.</li>
+</ul>
+
+<p><em>Ambas as definições abaixo são dataclasses Python publicáveis. <code>OrderPlaced</code> captura uma decisão de negócio em vocabulário que um especialista de domínio reconhece; <code>OrderTableRowChanged</code> expõe detalhes brutos de persistência que acoplam cada consumidor ao schema do banco de dados do produtor.</em></p>
+
+<pre><code class="language-python"># Contrasting event schemas: durable business contract vs. technical noise
+from __future__ import annotations
+
+import uuid
+from dataclasses import dataclass, field
+from datetime import datetime
+from decimal import Decimal
+from enum import StrEnum
+
+
+# GOOD: OrderPlaced — a durable integration event
+class Currency(StrEnum):
+    USD = "USD"
+    EUR = "EUR"
+    BRL = "BRL"
+
+
+@dataclass(frozen=True)
+class OrderLineItem:
+    product_id: str
+    product_name: str
+    quantity: int
+    unit_price: Decimal
+    currency: Currency
+
+
+@dataclass(frozen=True)
+class OrderPlaced:
+    """Integration event: a customer has placed an order."""
+    event_id: str = field(default_factory=lambda: str(uuid.uuid4()))
+    occurred_at: datetime = field(default_factory=datetime.utcnow)
+    order_id: str = ""
+    customer_id: str = ""
+    channel: str = ""
+    items: tuple[OrderLineItem, ...] = field(default_factory=tuple)
+    total_amount: Decimal = Decimal("0.00")
+    currency: Currency = Currency.USD
+    shipping_address_country: str = ""
+
+
+# BAD: OrderTableRowChanged — technical noise masquerading as a domain event
+@dataclass(frozen=True)
+class ColumnDiff:
+    column_name: str
+    old_value: object
+    new_value: object
+
+
+@dataclass(frozen=True)
+class OrderTableRowChanged:
+    """Anti-pattern: publishes a raw persistence event as though it were a domain fact."""
+    event_id: str = field(default_factory=lambda: str(uuid.uuid4()))
+    occurred_at: datetime = field(default_factory=datetime.utcnow)
+    table_name: str = "orders"
+    row_pk: int = 0
+    changed_columns: tuple[ColumnDiff, ...] = field(default_factory=tuple)
+    transaction_id: str = ""
+    orm_version: int = 0
+
+
+def demo() -&gt; None:
+    item = OrderLineItem(
+        product_id="PROD-7821",
+        product_name="Wireless Keyboard",
+        quantity=2,
+        unit_price=Decimal("49.99"),
+        currency=Currency.USD,
+    )
+    good_event = OrderPlaced(
+        order_id="ORD-20240901-00042",
+        customer_id="CUST-8814",
+        channel="web",
+        items=(item,),
+        total_amount=Decimal("99.98"),
+        currency=Currency.USD,
+        shipping_address_country="US",
+    )
+    bad_event = OrderTableRowChanged(
+        table_name="orders",
+        row_pk=100042,
+        changed_columns=(
+            ColumnDiff("status_cd", "DRAFT", "CONFIRMED"),
+            ColumnDiff("upd_ts", "2024-09-01T10:00:00", "2024-09-01T10:00:01"),
+            ColumnDiff("orm_ver", 3, 4),
+        ),
+    )
+    print("Good event type :", type(good_event).__name__)
+    print("Bad event type  :", type(bad_event).__name__)
+
+
+if __name__ == "__main__":
+    demo()</code></pre>
+
+<p>Um bom nome é uma revisão de design por si só. Se um especialista de domínio não consegue entender seu evento apenas pelo nome, o modelo está errado — renomeie-o antes de publicá-lo.</p>
+
+<blockquote class="expert"><strong>💡 Nota do Especialista:</strong> O texto alerta contra eventos muito detalhados (mutações), mas a falha oposta é igualmente perigosa em produção e recebe menos atenção: eventos muito granulares criam <strong>pressão evolutiva em direção a payloads tudo-em-um</strong>. À medida que novos consumidores chegam, cada um precisa de um campo que o evento existente não carrega. O caminho de menor resistência é continuar adicionando campos ao evento granular único. Em 18 meses, <code>OrderPlaced</code> carrega 60 campos, metade dos quais são nulos para qualquer consumidor específico, e o schema tornou-se um banco de dados compartilhado de fato entre equipes.</blockquote>
+
+<div class="detail"><strong>⚠️ Nota Crítica</strong> A discussão sobre granularidade está ausente do trade-off crítico entre eventos gordos e finos que todo arquiteto sênior deve decidir no momento do design. Eventos gordos (carregando o estado completo do agregado) tornam os consumidores autossuficientes, mas aumentam o tamanho do payload, podem vazar detalhes do modelo interno e dificultam o controle do que constitui uma mudança "significativa". Eventos finos (carregando apenas o ID ou um diff mínimo) mantêm os payloads pequenos, mas forçam os consumidores a fazer uma chamada de consulta síncrona para obter o estado necessário, reintroduzindo acoplamento temporal.</div>
+
+<h2>Ruído Técnico como Anti-Padrão de Modelagem</h2>
+
+<p>A falha mais comum em sistemas orientados a eventos é o <strong>ruído técnico</strong>: publicar eventos de infraestrutura e persistência como se fossem fatos de domínio. <code>EntitySaved</code>, <code>KafkaOffsetCommitted</code>, <code>CacheEvicted</code>, <code>FieldXChanged</code>. Esses eventos descrevem como o software funciona, não o que o negócio fez.</p>
+
+<p>O ruído técnico é corrosivo por três razões. Primeiro, ele acopla os consumidores à sua implementação — os assinantes agora dependem da cadência de salvamento do seu ORM ou da sua estratégia de cache. Segundo, ele destrói o sinal: eventos de negócio reais se afogam em uma enxurrada de ruído mecânico, e os consumidores não conseguem distinguir quais eventos importam. Terceiro, ele mente. Um evento <code>EntityUpdated</code> afirma que um fato de negócio ocorreu quando muitas vezes nada significativo aconteceu — uma tentativa, uma migração ou uma escrita sem efeito.</p>
+
+<p>O teste é simples e implacável: <strong>um especialista de domínio não técnico conseguiria dizer este evento em voz alta e dar sentido a ele?</strong> "O pedido foi feito" passa. "A linha foi atualizada" falha. Se a resposta for não, você está olhando para ruído técnico, e ele não pertence a um tópico de domínio.</p>
+
+<p><em>Misturar ruído técnico em tópicos de domínio inunda os consumidores com sinais irrelevantes, tornando impossível distinguir fatos de negócio reais de artefatos de implementação; manter os tópicos de domínio limpos preserva o stream como um registro de negócio confiável.</em></p>
+
+<p class="diagram-caption">📊 [Diagram — Mermaid source below]</p>
+<pre class="mermaid-source"><code>flowchart TD
+    subgraph CLEAN["Clean Stream — Business Events"]
+        CE1["OrderPlaced"]
+        CE2["PaymentCaptured"]
+        CE3["OrderShipped"]
+        CC["Consumer — Clear Signal"]
+        CE1 --> CE2 --> CE3 --> CC
+    end
+    subgraph NOISY["Noisy Stream — Mixed Events"]
+        NE1["OrderPlaced"]
+        NE2["EntitySaved"]
+        NE3["CacheEvicted"]
+        NE4["RowUpdated"]
+        NE5["PaymentCaptured"]
+        NC["Consumer — Signal Lost"]
+        NE1 --> NE2 --> NE3 --> NE4 --> NE5 --> NC
+    end</code></pre>
+
+<p>Isso não significa que eventos técnicos não têm valor. Sinais operacionais e de infraestrutura são legítimos — para monitoramento, métricas e depuração, assunto que o Capítulo 9 aborda. O pecado não é produzi-los; é publicá-los nos mesmos canais de domínio que outras equipes tratam como fonte da verdade de negócio. Mantenha os dois streams separados. Seus tópicos de domínio são um registro de negócio, e um registro com entradas falsas é pior do que nenhum registro.</p>
+
+<blockquote class="expert"><strong>💡 Nota do Especialista:</strong> A fonte mais comum de ruído técnico em produção que os profissionais encontram são <strong>pipelines de Change Data Capture (CDC) publicando diretamente em tópicos de domínio</strong>. Ferramentas como o Debezium capturam mudanças no nível de linha do log de transações do banco de dados e emitem eventos como <code>INSERT/UPDATE na tabela orders com deltas de coluna</code> — que é precisamente o anti-padrão <code>OrderTableRowChanged</code> descrito no texto. O modo de falha é que as equipes tratam o CDC como a camada de publicação de eventos, ignorando completamente a modelagem de domínio. A arquitetura correta é usar o CDC como um <strong>relay de outbox</strong> (lendo de uma tabela <code>outbox</code> ou <code>domain_events</code> escrita pela aplicação) em vez de capturar mutações brutas de tabela.</blockquote>
+
+<h2>Principais Conclusões</h2>
+
+<ul>
+<li><strong>Eventos de domínio</strong> vivem dentro de um único contexto delimitado; <strong>eventos de integração</strong> são contratos públicos deliberados. Nunca publique um evento de domínio bruto além de um limite — traduza-o primeiro.</li>
+<li>O <strong>Event Storming</strong> descobre eventos a partir da linguagem do negócio, expondo contextos delimitados, hotspots e os fatos pivotais que se tornam eventos de integração.</li>
+<li>Todo evento publicado é um <strong>contrato</strong> com um dono, um schema e consumidores; os limites anticorrupção mantêm os modelos do produtor e do consumidor independentes.</li>
+<li>Modele eventos na granularidade de uma <strong>decisão de negócio</strong>, nomeie-os no <strong>passado</strong> usando linguagem ubíqua e nomeie o fato em vez do handler.</li>
+<li>O <strong>ruído técnico</strong> — eventos de persistência e infraestrutura disfarçados de fatos de domínio — acopla os consumidores à sua implementação e afoga o sinal real. Aplique o teste do especialista de domínio.</li>
+</ul>
+
+<h2>O Que Vem a Seguir</h2>
+
+<p>Com eventos bem modelados em mãos, o Capítulo 3 examina como esses eventos realmente fluem — comparando topologias de broker e mediador, coreografia versus orquestração, e as tecnologias de mensageria que transportam seus fatos de domínio por todo o sistema.</p>
+
+</body>
+</html>

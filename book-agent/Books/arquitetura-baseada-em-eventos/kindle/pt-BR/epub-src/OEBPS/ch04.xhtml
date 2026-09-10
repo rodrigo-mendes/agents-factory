@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Capítulo 4: Garantias de Entrega e Idempotência</title>
+  <link rel="stylesheet" type="text/css" href="styles.css"/>
+</head>
+<body>
+<h1 id="ch04">Capítulo 4: Garantias de Entrega e Idempotência</h1>
+
+<h2>Problema Inicial</h2>
+
+<p>O Capítulo 3 terminou com uma promessa e um aviso. O log distribuído permite que você reproduza o histórico — reprocesse milhões de eventos passados para reconstruir um modelo de leitura ou corrigir um bug. Mas a reprodução só funciona se reprocessar o mesmo evento duas vezes produzir o mesmo resultado que processá-lo uma única vez. Essa propriedade é chamada de <strong>idempotência</strong> (idempotency), e sem ela a reprodução corrompe os dados em vez de repará-los.</p>
+
+<p>Isso não é um caso extremo. Sob a garantia de entrega mais comum em sistemas de produção, <strong>todo consumidor eventualmente receberá uma mensagem duplicada</strong>. Um timeout de rede, uma nova tentativa do broker, uma falha do consumidor após processar, mas antes de confirmar o recebimento — qualquer um desses eventos produz uma mensagem que o consumidor já recebeu.</p>
+
+<h2>Semânticas At-Most-Once, At-Least-Once e Exactly-Once</h2>
+
+<p>Uma <strong>garantia de entrega</strong> (delivery guarantee) descreve o que o sistema de mensageria promete sobre quantas vezes um consumidor observa cada mensagem. Existem três níveis, e a diferença entre eles se resume a <em>quando</em> o consumidor confirma o recebimento.</p>
+
+<ul>
+<li><strong>At-most-once</strong> (no máximo uma vez): confirma primeiro, depois processa. Se o consumidor falhar após confirmar, mas antes de terminar, a mensagem é perdida. Zero ou uma entrega. Aceitável apenas para dados descartáveis como amostras de métricas.</li>
+<li><strong>At-least-once</strong> (pelo menos uma vez): processa primeiro, depois confirma. Se o consumidor falhar após processar, mas antes de confirmar, o broker reenvia. Uma ou mais entregas. Nunca perde uma mensagem, mas garante duplicatas. Este é o padrão no Kafka, SQS e RabbitMQ.</li>
+<li><strong>Exactly-once</strong> (exatamente uma vez): o santo graal — uma entrega, sem perda, sem duplicação.</li>
+</ul>
+
+<p class="diagram-caption">📊 [Diagram — Mermaid source below]</p>
+<pre class="mermaid-source"><code>sequenceDiagram
+    participant B as Broker
+    participant C as Consumer
+
+    Note over B,C: Scenario A — At-Most-Once (ack before process)
+    B->>C: Deliver message
+    C-->>B: ACK sent immediately
+    Note over C: CRASH — processing never completes
+    Note over B,C: Message LOST — broker already released it
+
+    Note over B,C: Scenario B — At-Least-Once (process before ack)
+    B->>C: Deliver message
+    Note over C: Process message (side effect applied)
+    Note over C: CRASH — ACK never sent
+    B->>C: Redeliver message (no ACK received)
+    C-->>B: ACK after second processing
+    Note over B,C: DUPLICATE — side effect applied twice</code></pre>
+
+<pre><code class="language-python"># Delivery-semantics reference table as typed dataclasses
+from dataclasses import dataclass
+
+@dataclass(frozen=True)
+class DeliverySemantics:
+    name: str
+    ack_ordering: str
+    on_crash: str
+    duplicates_possible: bool
+    message_loss_possible: bool
+    typical_use_case: str
+
+DELIVERY_SEMANTICS: list[DeliverySemantics] = [
+    DeliverySemantics(
+        name="at-most-once",
+        ack_ordering="ack BEFORE process",
+        on_crash="message is lost — broker already removed it",
+        duplicates_possible=False,
+        message_loss_possible=True,
+        typical_use_case="metrics samples, non-critical telemetry",
+    ),
+    DeliverySemantics(
+        name="at-least-once",
+        ack_ordering="ack AFTER process",
+        on_crash="broker redelivers — consumer sees it again",
+        duplicates_possible=True,
+        message_loss_possible=False,
+        typical_use_case="default in Kafka, SQS, RabbitMQ; requires idempotent consumers",
+    ),
+    DeliverySemantics(
+        name="exactly-once (processing)",
+        ack_ordering="atomic commit covering both effect and ack",
+        on_crash="transaction rolls back; redelivered message is a no-op",
+        duplicates_possible=False,
+        message_loss_possible=False,
+        typical_use_case="Kafka Streams read-process-write within Kafka topology only",
+    ),
+]</code></pre>
+
+<p>A entrega truly exactly-once por uma rede é impossível. Isso decorre do Problema dos Dois Generais: duas partes que se comunicam por um canal não confiável nunca podem ter certeza de que a outra recebeu a mensagem final. O que os fornecedores vendem como "exactly-once" é na verdade <strong>processamento <em>exactly-once</em></strong>, não entrega. A conclusão opinativa: <strong>projete todo consumidor para at-least-once.</strong></p>
+
+<blockquote class="critical"><strong>⚠️ Nota Crítica:</strong> O texto afirma que at-least-once é "o padrão no Kafka, SQS e RabbitMQ." Para o Kafka, isso é impreciso. O padrão real do Kafka fora da caixa é <code>enable.auto.commit=true</code> com um intervalo de auto-commit de 5 segundos. Sob essa configuração, se o temporizador periódico de auto-commit disparar enquanto um lote está sendo processado e o consumidor subsequentemente falhar, essas mensagens em trânsito não serão reentregues — esse é um comportamento at-most-once, não at-least-once. Alcançar at-least-once verdadeiro no Kafka requer configuração explícita: <code>enable.auto.commit=false</code> com um commit manual emitido somente após o processamento de cada lote.</blockquote>
+
+<h2>Idempotência do Consumidor e Chaves de Deduplicação</h2>
+
+<p>Uma operação é <strong>idempotente</strong> quando aplicá-la múltiplas vezes produz o mesmo resultado que aplicá-la uma vez. Definir um valor (<code>status = SHIPPED</code>) é naturalmente idempotente. Incrementar um valor (<code>balance = balance - 10</code>) não é.</p>
+
+<p>Como duplicatas são garantidas, o consumidor deve detectá-las e descartá-las. A ferramenta é uma <strong>chave de deduplicação</strong> (deduplication key): um identificador estável e único carregado pelo evento que permite ao consumidor reconhecer uma mensagem que já foi tratada.</p>
+
+<p>Dois padrões dominam. <strong>1. A verificação de idempotência (dedup store).</strong> Antes de processar, o consumidor verifica se a chave já existe em um armazenamento de IDs processados. <strong>2. Idempotência natural via upsert.</strong> Quando o efeito colateral é uma escrita em banco de dados, modele-o de forma que reaplicá-lo seja inofensivo.</p>
+
+<pre><code class="language-python"># Idempotent consumer: dedup store + side effect in a single atomic transaction
+import sqlite3
+import uuid
+from dataclasses import dataclass
+
+
+@dataclass
+class Message:
+    event_id: str
+    payload: dict
+
+
+def handle_message(conn: sqlite3.Connection, message: Message) -&gt; None:
+    """
+    Idempotent message handler.
+    Both writes share a SINGLE local transaction so they commit or roll back together.
+    """
+    try:
+        conn.execute(
+            "INSERT INTO processed_events (event_id) VALUES (?)",
+            (message.event_id,),
+        )
+    except sqlite3.IntegrityError:
+        print(f"[SKIP] Duplicate event {message.event_id}")
+        return
+
+    conn.execute(
+        "INSERT INTO payments (payment_id, amount) VALUES (?, ?)",
+        (message.payload["payment_id"], message.payload["amount"]),
+    )
+    conn.commit()
+    print(f"[OK]   Processed event {message.event_id}")</code></pre>
+
+<blockquote class="expert"><strong>💡 Nota do Especialista:</strong> O texto avisa corretamente que a retenção de chaves de deduplicação não pode crescer sem limite, mas não fornece a fórmula para a janela de retenção mínima segura. A retenção mínima deve ser: <code>max_redelivery_window = message_visibility_timeout x max_receive_count</code>. Para SQS com um visibility timeout de 12 horas e uma contagem máxima de recebimento de 10, isso é no mínimo 120 horas.</blockquote>
+
+<h2>Ordenação de Mensagens e Particionamento</h2>
+
+<p>A idempotência lida com <em>duplicatas</em>. Ela não lida com chegadas <em>fora de ordem</em>, e as duas são fáceis de confundir. Um log distribuído garante ordem <strong>apenas dentro de uma partição</strong>, selecionada pela <strong>chave de partição</strong> (partition key). Entre partições, todas as apostas são canceladas.</p>
+
+<p>Isso importa porque muitas operações de negócio são sensíveis à ordem. A correção é rotear todos os eventos de uma determinada entidade para a mesma partição usando uma chave de partição estável.</p>
+
+<p class="diagram-caption">📊 [Diagram — Mermaid source below]</p>
+<pre class="mermaid-source"><code>flowchart LR
+    Acc1[Account A01\nEvents] -->|partitionKey=A01| P0[Partition 0\nordered per A01]
+    Acc2[Account A02\nEvents] -->|partitionKey=A02| P1[Partition 1\nordered per A02]
+    Acc3[Account A03\nEvents] -->|partitionKey=A03| P2[Partition 2\nordered per A03]
+
+    subgraph CG[Consumer Group]
+        C1[Consumer 1]
+        C2[Consumer 2]
+        C3[Consumer 3]
+    end
+
+    P0 --> C1
+    P1 --> C2
+    P2 --> C3</code></pre>
+
+<pre><code class="language-python"># Version-aware consumer: rejects duplicates AND stale out-of-order redeliveries
+import sqlite3
+from dataclasses import dataclass
+
+
+@dataclass
+class VersionedEvent:
+    event_id: str
+    entity_id: str
+    version: int
+    payload: dict
+
+
+def handle_versioned_event(conn: sqlite3.Connection, event: VersionedEvent) -&gt; None:
+    """
+    Version gate: apply the event only if its version strictly exceeds
+    the last stored version for this entity.
+    """
+    row = conn.execute(
+        "SELECT last_version FROM account_state WHERE entity_id = ?",
+        (event.entity_id,),
+    ).fetchone()
+
+    stored_version: int = row[0] if row else -1
+
+    if event.version &lt;= stored_version:
+        print(f"[DISCARD] entity={event.entity_id} "
+              f"incoming_v={event.version} stored_v={stored_version}")
+        return
+
+    conn.execute(
+        """
+        INSERT INTO account_state (entity_id, balance, last_version)
+        VALUES (:entity_id, :balance, :version)
+        ON CONFLICT (entity_id) DO UPDATE
+          SET balance      = :balance,
+              last_version = :version
+        """,
+        {"entity_id": event.entity_id, "balance": event.payload.get("balance"), "version": event.version},
+    )
+    conn.commit()
+    print(f"[APPLIED] entity={event.entity_id} v{stored_version} -&gt; v{event.version}")</code></pre>
+
+<h2>O Padrão Transactional Outbox e o Problema de Dual-Write</h2>
+
+<p>Um serviço geralmente precisa fazer duas coisas ao lidar com um comando: atualizar seu próprio banco de dados e publicar um evento. Esses são dois sistemas separados — um banco de dados e um broker — sem transação compartilhada. Isso é o <strong>problema de dual-write</strong> (escrita dupla): quatro sequências são possíveis, e duas delas são corrompidas: estado alterado mas evento nunca publicado (<em>evento perdido</em>), ou evento publicado mas estado nunca alterado (<em>evento fantasma</em>).</p>
+
+<p class="diagram-caption">📊 [Diagram — Mermaid source below]</p>
+<pre class="mermaid-source"><code>flowchart TD
+    CMD[Incoming Command] --> SVC[Service]
+    SVC --> DBW[1. Write to Database]
+    DBW --> DBOK[(DB Updated — Committed)]
+    DBOK --> FAILGAP["2. FAILURE GAP\nService crashes here"]
+    FAILGAP --> NOPUB["3. Broker Publish — NEVER HAPPENS"]
+    NOPUB --> INCON["Inconsistent State\nDB updated, no event emitted\nConsumers never notified"]</code></pre>
+
+<p>O padrão <strong>Transactional Outbox</strong> resolve isso de forma elegante. Em vez de escrever no banco de dados <em>e</em> no broker, o serviço escreve apenas no banco de dados. Na <strong>mesma transação local</strong> que atualiza as tabelas de negócio, ele também insere o evento em uma <strong>tabela outbox</strong> nesse mesmo banco de dados. Um processo separado então lê as linhas não publicadas do outbox e as publica no broker.</p>
+
+<pre><code class="language-python"># Transactional Outbox: one atomic commit covers business record + outbox row
+import json
+import sqlite3
+import uuid
+from dataclasses import dataclass, field
+from datetime import datetime, timezone
+
+
+@dataclass
+class Order:
+    order_id: str
+    customer_id: str
+    total_amount: float
+    status: str = "PLACED"
+
+
+def place_order(conn: sqlite3.Connection, order: Order) -&gt; None:
+    """
+    Both the orders INSERT and the outbox INSERT execute in the SAME
+    local transaction. Either both commit or both roll back — no dual-write problem.
+    """
+    event_id = str(uuid.uuid4())
+    payload = json.dumps({
+        "order_id": order.order_id,
+        "customer_id": order.customer_id,
+        "total_amount": order.total_amount,
+    })
+    conn.execute(
+        "INSERT INTO orders (order_id, customer_id, total_amount, status) VALUES (?, ?, ?, ?)",
+        (order.order_id, order.customer_id, order.total_amount, order.status),
+    )
+    conn.execute(
+        "INSERT INTO outbox (event_id, event_type, payload, published) VALUES (?, ?, ?, ?)",
+        (event_id, "OrderPlaced", payload, False),
+    )
+    conn.commit()
+    print(f"[COMMITTED] order={order.order_id}  outbox_event={event_id}")
+
+
+def relay_unpublished(conn: sqlite3.Connection) -&gt; None:
+    """Outbox relay — operates at-least-once; consumers must be idempotent."""
+    rows = conn.execute(
+        "SELECT event_id, event_type, payload FROM outbox WHERE published = 0"
+    ).fetchall()
+    for event_id, event_type, payload in rows:
+        print(f"[RELAY -&gt; BROKER] event_id={event_id} type={event_type}")
+        conn.execute("UPDATE outbox SET published = 1 WHERE event_id = ?", (event_id,))
+        conn.commit()</code></pre>
+
+<blockquote class="expert"><strong>💡 Nota do Especialista:</strong> CDC via Debezium é a escolha correta para alto throughput, mas requer permissões em nível de banco de dados que DBAs corporativos frequentemente restringem. Especificamente: o acesso ao binlog do MySQL requer os grants <code>REPLICATION SLAVE</code> e <code>REPLICATION CLIENT</code>. A replicação lógica do PostgreSQL requer a role <code>REPLICATION</code> e um replication slot, e o RDS impõe um limite rígido de 20 replication slots. Equipes rotineiramente descobrem essa restrição durante UAT ou cutover de produção, não durante o design.</blockquote>
+
+<h2>Filas de Mensagens Mortas e Políticas de Retry</h2>
+
+<p>Idempotência e Outbox assumem que as mensagens eventualmente têm sucesso. Algumas nunca terão. Um payload malformado, uma incompatibilidade permanente de schema ou uma regra de negócio que sempre rejeita a mensagem cria uma <strong>mensagem envenenada</strong> (poison message). A ferramenta de contenção é uma <strong>dead-letter queue (DLQ)</strong>: uma fila separada onde as mensagens são movidas após esgotar seu orçamento de retentativas.</p>
+
+<p>Uma <strong>política de retry</strong> sólida distingue duas classes de falha: <strong>falhas transitórias</strong> — um timeout, uma dependência com throttling — que merecem retentativas com <strong>exponential backoff</strong> e <strong>jitter</strong>; e <strong>falhas permanentes</strong> — um erro de validação, uma mensagem não parseável — que devem ser roteadas para a DLQ imediatamente.</p>
+
+<pre><code class="language-python"># Retry policy: exponential backoff with jitter for transient errors; immediate DLQ for permanent
+import random
+import time
+import logging
+from dataclasses import dataclass
+from typing import Callable
+
+logger = logging.getLogger(__name__)
+
+
+class TransientError(Exception):
+    """Temporary failure — worth retrying (timeout, throttle, network blip)."""
+
+
+class PermanentError(Exception):
+    """Unrecoverable failure — retrying is pointless (bad schema, invalid payload)."""
+
+
+@dataclass
+class RetryPolicy:
+    max_attempts: int = 5
+    base_delay_seconds: float = 1.0
+    max_delay_seconds: float = 30.0
+    jitter_factor: float = 0.3
+
+
+def _backoff_delay(attempt: int, policy: RetryPolicy) -&gt; float:
+    """Exponential backoff: base * 2^attempt, capped, then jittered."""
+    delay = min(
+        policy.base_delay_seconds * (2 ** (attempt - 1)),
+        policy.max_delay_seconds,
+    )
+    jitter = delay * policy.jitter_factor * (2 * random.random() - 1)
+    return max(0.0, delay + jitter)
+
+
+def process_with_retry(
+    message: dict,
+    handler: Callable[[dict], None],
+    policy: RetryPolicy,
+) -&gt; None:
+    last_exception: Exception | None = None
+    for attempt in range(1, policy.max_attempts + 1):
+        try:
+            handler(message)
+            return
+        except PermanentError as exc:
+            logger.error("Permanent failure — routing to DLQ immediately: %s", exc)
+            # send_to_dlq(message)
+            return
+        except TransientError as exc:
+            last_exception = exc
+            if attempt &lt; policy.max_attempts:
+                delay = _backoff_delay(attempt, policy)
+                logger.warning("Transient failure (attempt %d/%d), retrying in %.1fs: %s",
+                               attempt, policy.max_attempts, delay, exc)
+                time.sleep(delay)
+    logger.error("Exhausted retries — routing to DLQ: %s", last_exception)
+    # send_to_dlq(message)</code></pre>
+
+<p>Defina uma <strong>contagem máxima de recebimento</strong> — o número de tentativas de entrega antes de a mensagem ser enviada para a DLQ. Criticamente, a DLQ não é uma lata de lixo. Uma mensagem chegando lá é um <strong>sinal operacional</strong> que exige um alerta. A regra é simples: <strong>uma DLQ não monitorada é um buffer silencioso de perda de dados.</strong></p>
+
+<blockquote class="critical"><strong>⚠️ Nota Crítica:</strong> O texto avisa que uma mensagem envenenada "fica girando por minutos antes da quarentena," mas no Kafka essa é uma subestimação grave. O Kafka garante ordem dentro de uma partição; um consumidor não avança além de um offset com falha até que a mensagem seja processada com sucesso ou ignorada manualmente. Uma mensagem envenenada com um orçamento generoso de retentativas pode bloquear todas as mensagens subsequentes em uma partição inteira por horas.</blockquote>
+
+<h2>Principais Conclusões</h2>
+
+<ul>
+<li><strong>At-least-once é o padrão realista.</strong> A entrega truly exactly-once por uma rede é impossível; o que os fornecedores vendem é processamento exactly-once, limitado ao interior do broker.</li>
+<li><strong>Duplicatas são garantidas, portanto os consumidores devem ser idempotentes.</strong> Use idempotência natural (upserts com chave no event ID) onde o domínio permite, e uma dedup store com chave de deduplicação onde os efeitos colaterais são externos.</li>
+<li><strong>Ordem é uma garantia com escopo de partição.</strong> Roteie eventos sensíveis à ordem de um agregado para uma partição via chave de partição estável.</li>
+<li><strong>O Transactional Outbox derrota o problema de dual-write</strong> ao confirmar a mudança de estado e o evento atomicamente em um banco de dados, e então fazendo relay para o broker at-least-once.</li>
+<li><strong>Dead-letter queues contêm mensagens envenenadas.</strong> Tente novamente falhas transitórias com exponential backoff e jitter; envie falhas permanentes imediatamente para DLQ; e alerte em toda chegada à DLQ.</li>
+</ul>
+
+<h2>O Que Vem a Seguir</h2>
+
+<p>Com entrega confiável e processamento idempotente estabelecidos, o Capítulo 5 se volta para a estrutura — introduzindo CQRS para separar o caminho de escrita do caminho de leitura e resolver a incompatibilidade de forma entre como os dados são armazenados e como são consultados.</p>
+
+</body>
+</html>
