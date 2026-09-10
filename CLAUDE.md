@@ -33,7 +33,7 @@ Operational commands fork (`context: fork`) to a subagent. The 5 subagents live 
 
 | Subagent | Does | Commands it routes |
 |---|---|---|
-| [framework-researcher](.claude/agents/framework-researcher.md) | anti-hallucination research (uses WebSearch/WebFetch) | `researching-technical-frameworks`, `technical-framework-researcher-terraform`, `cloud-architecture-researcher`, `business-domain-researcher`, `requirements-methodology-researcher`, `architecture-methodology-researcher`, `terraform-engineering-best-practices-researcher` |
+| [framework-researcher](.claude/agents/framework-researcher.md) | anti-hallucination research (uses WebSearch/WebFetch) | `researching-technical-frameworks`, `technical-framework-researcher-terraform`, `cloud-architecture-researcher`, `business-domain-researcher`, `requirements-methodology-researcher`, `architecture-methodology-researcher`, `terraform-engineering-best-practices-researcher`, **platform-software family** (orchestrator `researching-platform-software` → siblings: `researching-streaming-broker`, `researching-cache-store`, `researching-coordination-service`, `researching-search-engine`, `researching-api-gateway`, `researching-rdbms`, `researching-document-store`, `researching-kv-store`, `researching-wide-column-store`, `researching-graph-database`, `researching-timeseries-db`, `researching-columnar-analytics`, `researching-vector-store`, `researching-object-storage`) |
 | [skill-author](.claude/agents/skill-author.md) | generates SKILL.md / rules | `skill-creator`, `methodologies-skill-generator`, `architecture-approaches-skill-generator`, `terraform-instructions-compiler` |
 | [architecture-auditor](.claude/agents/architecture-auditor.md) | audits architecture (consensus = 3 lenses in parallel via Agent tool) | `audit-architecture-scope`, `audit-architecture-flow`, `audit-architecture-engine`, `audit-architecture-consensus` (Copilot); `audit-cc-architecture-scope`, `audit-cc-architecture-flow`, `audit-cc-architecture-engine`, `audit-cc-architecture-consensus` (Claude Code) |
 | [quality-validator](.claude/agents/quality-validator.md) | validates quality/adherence | `skill-best-practices-validator`, `instructions-best-practices-validator`, `agent-router-pattern-validator`, `copilot-compatibility-review`, `project-analysis-validator` |
@@ -53,8 +53,12 @@ Not compiled code — artifacts run **in Claude Code** via `/<command>`:
 - Validate skill quality: `/skill-best-practices-validator .claude/skills/`
 - Audit full project health: `/project-analysis-validator .claude/`
 - Evaluate skill behavior: `/evaluating-skill-scenarios cloud-architecture-researcher`
+- Research self-managed platform software (auto-routes to the right sibling): `/researching-platform-software Kafka 3.7`
+- Or call the sibling directly: `/researching-streaming-broker Kafka 3.7 deployment=kubernetes-operator`
+- Datastore with modeling: `/researching-document-store MongoDB 7.0 deployment=kubernetes-operator`
+- API gateway: `/researching-api-gateway Kong 3.7 deployment=kubernetes-operator`
 
-The 25 commands use `disable-model-invocation: true` (deliberate actions) — accessible via `/name`,
+The 40 commands use `disable-model-invocation: true` (deliberate actions) — accessible via `/name`,
 with no auto-listing cost.
 
 ## Structure
@@ -62,9 +66,9 @@ with no auto-listing cost.
 ```
 .claude/
 ├── agents/     ← 5 subagents (framework-researcher, skill-author, architecture-auditor, quality-validator, skill-evaluator)
-├── skills/     ← 25 operational commands (fork → subagent)
+├── skills/     ← 40 operational commands (fork → subagent); includes the platform-software family (1 orchestrator + 14 siblings)
 ├── rules/      ← rules by path (paths:)
-├── templates/  ← scaffolding: agents/, skills/, rules/, prompts/, reports/
+├── templates/  ← scaffolding: agents/, skills/, rules/, prompts/, reports/; platform-research/ (shared output-format, research-scope, deployment-guides for the platform-software family)
 ├── MIGRATION.md ← migration history Copilot → Claude Code
 ├── worktrees/  ← temporary Git worktrees (auto-generated; do not edit) [created on demand]
 └── settings.json

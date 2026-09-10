@@ -6,14 +6,15 @@ All Agents Factory capabilities organized by category.
 
 | Category | Count | Purpose |
 |-----------|:---:|-----------|
-| [Skills](skills.md) | 1 | Research skill with version absolutism; authoring patterns integrated into `skill-creator` |
-| [Templates](templates.md) | 14 | Scaffolding to create any artifact |
-| [Research](prompts-pesquisa.md) | 7 | Build validated knowledge bases |
+| [Research](prompts-pesquisa.md) | 7 | Build validated knowledge bases (technologies, cloud, domains, methodologies) |
+| [Platform Software](../manual/platform-software-family.md) | 15 | Research self-managed platforms (1 orchestrator + 14 siblings: brokers, data stores, cache, search, API gateway) |
 | [Compilation](prompts-compilacao.md) | 4 | Transform research into skills/instructions |
 | [Validation](prompts-validacao.md) | 4 | Verify artifact quality |
 | [Auditing](prompts-arquitetura.md) | 8 | Multi-model architecture auditing |
 | [Framework](prompts-framework.md) | 1 | Validate agent projects |
 | [Evaluation](prompts-avaliacao.md) | 1 | Test skill behavior via LLM-as-judge |
+| **Total operational commands** | **40** | All via `/name` (`disable-model-invocation`) |
+| [Templates](templates.md) | 24 | Scaffolding + shared platform-research assets |
 
 ---
 
@@ -46,6 +47,24 @@ All Agents Factory capabilities organized by category.
 | 23 | `audit-cc-architecture-flow` | Prompt | Auditing | Model B: invocation chains prompt→agent→skill (Claude Code target) |
 | 24 | `audit-cc-architecture-engine` | Prompt | Auditing | Model C: Claude Code engine mechanics (Claude Code target) |
 | 25 | `evaluating-skill-scenarios` | Prompt | Evaluation | Executes LLM-as-judge scenarios and judges skill behavior |
+| 26 | `researching-platform-software` | Skill | Platform Software | **Orchestrator** — routes a platform request to the correct sibling below |
+| 27 | `researching-streaming-broker` | Skill | Platform Software | Self-managed streaming/messaging brokers (Kafka, RabbitMQ, Pulsar, NATS) |
+| 28 | `researching-cache-store` | Skill | Platform Software | In-memory cache / session stores (Redis-as-cache, Memcached, KeyDB, Dragonfly) |
+| 29 | `researching-coordination-service` | Skill | Platform Software | Distributed coordination (etcd, ZooKeeper, Consul) |
+| 30 | `researching-search-engine` | Skill | Platform Software | Full-text / analytics search (Elasticsearch, OpenSearch, Solr, Typesense) |
+| 31 | `researching-api-gateway` | Skill | Platform Software | API gateways (Kong, APISIX, Tyk, Traefik EE, KrakenD, Envoy Gateway) |
+| 32 | `researching-rdbms` | Skill | Platform Software | Relational / NewSQL (PostgreSQL, MySQL, MariaDB, CockroachDB) |
+| 33 | `researching-document-store` | Skill | Platform Software | Document databases (MongoDB, Couchbase, RavenDB) |
+| 34 | `researching-kv-store` | Skill | Platform Software | Persistent key-value stores (Redis-as-DB, RocksDB, LMDB, TiKV) |
+| 35 | `researching-wide-column-store` | Skill | Platform Software | Wide-column databases (Cassandra, ScyllaDB, HBase) |
+| 36 | `researching-graph-database` | Skill | Platform Software | Graph databases (Neo4j, JanusGraph, ArangoDB, Nebula) |
+| 37 | `researching-timeseries-db` | Skill | Platform Software | Time-series databases (InfluxDB, TimescaleDB, VictoriaMetrics, QuestDB) |
+| 38 | `researching-columnar-analytics` | Skill | Platform Software | Columnar OLAP (ClickHouse, Druid, Pinot, DuckDB) |
+| 39 | `researching-vector-store` | Skill | Platform Software | Vector / ANN databases (Milvus, Qdrant, Weaviate, pgvector, Chroma) |
+| 40 | `researching-object-storage` | Skill | Platform Software | S3-compatible object storage (MinIO, Ceph RGW, SeaweedFS, GarageHQ) |
+
+> The **Platform Software** family (26–40) routes through the same `framework-researcher` subagent.
+> Full detail: [Platform Software Research Family](../manual/platform-software-family.md).
 
 ---
 
@@ -58,12 +77,13 @@ flowchart TD
     START --> Q3{Validate quality?}
     START --> Q4{Audit architecture?}
     
-    Q1 -->|Technology| R1[researching-technical-frameworks]
+    Q1 -->|Technology / SDK| R1[researching-technical-frameworks]
     Q1 -->|Terraform| R2[terraform-engineering-best-practices-researcher]
     Q1 -->|Architecture| R3[architecture-methodology-researcher]
-    Q1 -->|Cloud| R4[cloud-architecture-researcher]
+    Q1 -->|Cloud managed service| R4[cloud-architecture-researcher]
     Q1 -->|Domain| R5[business-domain-researcher]
     Q1 -->|Requirements| R6[requirements-methodology-researcher]
+    Q1 -->|Self-managed platform<br/>Kafka/Redis/Mongo/Postgres…| R7[researching-platform-software]
     
     Q2 -->|Skill| C1[skill-creator]
     Q2 -->|Instructions| C2[terraform-instructions-compiler]

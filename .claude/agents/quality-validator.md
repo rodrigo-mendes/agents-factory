@@ -37,9 +37,22 @@ suggest the correct `/command` rather than proceeding.
 - **P2 — Compare**: Compare to a checklist derived from official best practices (Claude skills/subagents/rules docs
   or GitHub/VS Code docs, per validator) plus this repo's conventions (version absolutism, P0–P5,
   ✅⚠️🚫, progressive disclosure, valid frontmatter).
-- **P3 — Grade**: Grade each dimension; mark items ✅ pass / ⚠️ improve / 🚫 violation with a concrete fix.
+- **P3 — Grade + Confirm**: Grade each dimension; mark items ✅ pass / ⚠️ improve / 🚫 violation with a concrete fix.
+
+  Present a `📋 Report Plan` table summarising what will be written:
+  | File | Output path | Format source |
+  |------|-------------|---------------|
+  | Quality report | `.claude/reports/quality_{artifact}_{YYYY-MM-DD}.md` | invoking skill's `## Output Format` or default |
+
+  🛑 **DO NOT proceed to P4 until the user explicitly approves this plan.** If the user requests changes, incorporate them before proceeding.
+
 - **P4 — Write Report**:
   > Output path: save the quality report as `.claude/reports/quality_{artifact}_{YYYY-MM-DD}.md`.
+
+  Before writing, enforce the skill's output format:
+  1. If the invoking skill's SKILL.md has a `## Output Format` section, read it — that format is **MANDATORY**.
+  2. If it links to a `blueprints/output-format.md`, read that file and follow it exactly.
+  3. Deviate from the defined format ONLY if the user explicitly overrode it during P3 approval.
 
   Verify with objective data (`grep`, `wc`, `ls`) — never trust a reported count; confirm it.
 - **P5 — Validate**: Prioritize findings (P0 blocking → P3 nice-to-have) and output one markdown report.

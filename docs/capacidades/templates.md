@@ -1,8 +1,8 @@
 # Templates — Artifact Scaffolding
 
-14 templates available to create any type of framework artifact.
+**14 scaffolding templates** to create any type of framework artifact, plus the **platform-research shared assets** (Claude Code-exclusive) used by the platform-software family — **24 template files total**.
 
-> **System coexistence**: Templates exist in two mirrored locations — `.github/templates/` (GitHub Copilot) and `.claude/templates/` (Claude Code). The only structural difference is that `.github/` uses `instructions/` while `.claude/` uses `rules/` for scope instruction templates.
+> **System coexistence**: Scaffolding templates exist in two mirrored locations — `.github/templates/` (GitHub Copilot) and `.claude/templates/` (Claude Code). The only structural difference is that `.github/` uses `instructions/` while `.claude/` uses `rules/` for scope instruction templates. The **`platform-research/`** set below is **Claude Code-exclusive** (no `.github/` mirror).
 
 ---
 
@@ -17,6 +17,7 @@
 | Skill | 1 | Create versioned skills |
 | Instruction | 3 | Create instructions (Config, Standards, Skills-routing) |
 | Report | 1 | Post-incident reports |
+| Platform Research (CC-exclusive) | 8 | Shared assets for the platform-software family |
 
 ---
 
@@ -67,7 +68,7 @@
 | **Category** | Knowledge building |
 | **When to use** | Create a prompt that researches a technology/methodology |
 | **Referenced by** | None explicitly |
-| **Implementations that follow** | `researching-technical-frameworks`, `terraform-engineering-best-practices-researcher`, `architecture-methodology-researcher`, `cloud-architecture-researcher`, `business-domain-researcher`, `requirements-methodology-researcher`, `technical-framework-researcher-terraform` |
+| **Implementations that follow** | `researching-technical-frameworks`, `terraform-engineering-best-practices-researcher`, `architecture-methodology-researcher`, `cloud-architecture-researcher`, `business-domain-researcher`, `requirements-methodology-researcher`, `technical-framework-researcher-terraform`, and the 15-command [platform-software family](../manual/platform-software-family.md) |
 
 ### TEMPLATE.GENERATOR.prompt.md
 > **File**: `.github/templates/prompts/TEMPLATE.GENERATOR.prompt.md`
@@ -178,6 +179,24 @@
 
 ---
 
+## Platform Research Shared Assets (Claude Code-exclusive)
+
+> **Location**: `.claude/templates/platform-research/` — no `.github/` mirror. Reused by all 15
+> commands of the [platform-software family](../manual/platform-software-family.md).
+
+| File | Purpose | Referenced by |
+|------|---------|---------------|
+| `output-format-base.md` | 13-section neutral output skeleton for every platform research file | All 14 sibling skills |
+| `research-scope-operations.md` | §1–§12 operational research scope common to all families | All 14 sibling skills |
+| `data-modeling-principles.md` | Cross-type data modeling principles | Datastore siblings (rdbms, document, kv, wide-column, graph, timeseries, columnar, vector, object) |
+| `reference-card-template.md` | Canonical skeleton for a per-vendor, version-pinned reference card | All 14 sibling skills |
+| `reference-card-example-kafka-3.7.md` | Fully-worked instance of the reference-card template | Referenced as the example by all siblings |
+| `deployment-guides/kubernetes-operator-guide.md` | K8s operator deployment playbook | Siblings with `deployment=kubernetes-operator` |
+| `deployment-guides/container-compose-guide.md` | Docker Compose deployment playbook | Siblings with `deployment=container-compose` |
+| `deployment-guides/vm-and-bare-metal-guide.md` | VM / bare-metal deployment playbook | Siblings with `deployment=vm`/`bare-metal` |
+
+---
+
 ## Traceability: Template → Implementations
 
 ```mermaid
@@ -199,7 +218,7 @@ graph TD
     end
 
     subgraph "Implementations"
-        TR --> P1[7 research prompts]
+        TR --> P1[7 research prompts + platform-software family]
         TG --> P2[4 compilation prompts]
         TV --> P3[4 validation prompts]
         TS --> SK[Generated skills]

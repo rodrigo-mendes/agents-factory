@@ -355,6 +355,49 @@ Sections: recommended directory structure, module design, environment strategy, 
 
 ---
 
+## Platform Software Family (15 commands)
+
+> **Agent:** `framework-researcher` | **Context:** fork | **Model invocation:** disabled
+
+A dedicated family of 15 commands researches **self-managed platform software** — the storage
+engines, brokers, caches, coordination services, search engines, and API gateways a team installs
+and operates itself (as opposed to `cloud-architecture-researcher`, which covers the **managed**
+cloud equivalents, and `researching-technical-frameworks`, which covers the **client SDK**).
+
+The family uses a **two-level routing pattern**: the orchestrator `researching-platform-software`
+identifies the platform, consults its `routing-decision-tree.md`, and delegates to the correct
+specialized sibling. Each sibling forks to this same `framework-researcher` — which, at
+`depth=deep`/`exhaustive`, spawns the **`section-investigator`** helper (parallel sub-investigation)
+and the **`research-synthesizer`** helper (merges findings into `output-format-base.md`). You can
+also invoke a sibling directly (`/researching-streaming-broker Kafka 3.7`).
+
+| Command | Covers |
+|---------|--------|
+| `researching-platform-software` | **Orchestrator** — routes to the correct sibling |
+| `researching-streaming-broker` | Kafka, RabbitMQ, Pulsar, NATS, ActiveMQ |
+| `researching-cache-store` | Redis (cache), Memcached, KeyDB, Dragonfly |
+| `researching-coordination-service` | etcd, ZooKeeper, Consul |
+| `researching-search-engine` | Elasticsearch, OpenSearch, Solr, Typesense, Meilisearch |
+| `researching-api-gateway` | Kong, APISIX, Tyk, Traefik EE, KrakenD, Envoy Gateway |
+| `researching-rdbms` | PostgreSQL, MySQL, MariaDB, CockroachDB |
+| `researching-document-store` | MongoDB, Couchbase, RavenDB |
+| `researching-kv-store` | Redis (as DB), RocksDB, LMDB, TiKV |
+| `researching-wide-column-store` | Cassandra, ScyllaDB, HBase |
+| `researching-graph-database` | Neo4j, JanusGraph, ArangoDB, Nebula Graph |
+| `researching-timeseries-db` | InfluxDB, TimescaleDB, VictoriaMetrics, QuestDB |
+| `researching-columnar-analytics` | ClickHouse, Druid, Pinot, DuckDB |
+| `researching-vector-store` | Milvus, Qdrant, Weaviate, pgvector, Chroma |
+| `researching-object-storage` | MinIO, Ceph RGW, SeaweedFS, GarageHQ |
+
+**Output:** `StoryBeat/docs/research_platform_<Platform>_v<Version>.md`.
+
+> Full detail — routing rules, ambiguity handling (Redis → cache/kv/coordination), shared templates
+> (`.claude/templates/platform-research/`), and the neutral `category-specifics.md` +
+> per-vendor `references/<vendor>-<version>.md` pattern: see
+> **[Platform Software Research Family](platform-software-family.md)**.
+
+---
+
 ## Agent Principles
 
 **Version Absolutism** — each research file covers exactly one version. Research files for different versions are separate files.

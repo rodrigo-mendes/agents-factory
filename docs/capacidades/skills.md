@@ -1,6 +1,8 @@
 # Skills — Framework Base Capabilities
 
-The Agents Factory has **25 commands, built on 2 foundation skills**: `skill-creator` (authoring patterns) and `researching-technical-frameworks` (research methodology, now a fork command). These 2 foundation skills define the patterns all other skills follow. In Copilot, `authoring-agent-skills` is the skill equivalent to `skill-creator`.
+The Agents Factory has **40 commands** (all invoked via `/name` with `disable-model-invocation: true`), **built on 2 foundation skills**: `skill-creator` (authoring patterns) and `researching-technical-frameworks` (research methodology). These 2 foundation skills define the patterns all other skills follow. In Copilot, `authoring-agent-skills` is the skill equivalent to `skill-creator`.
+
+> The 40 commands include the **platform-software family** (15: 1 orchestrator + 14 siblings) — all following the same research methodology below. See [Platform Software Research Family](../manual/platform-software-family.md).
 
 ---
 

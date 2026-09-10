@@ -7,8 +7,8 @@ Framework sistemático para criação de **Skills, Prompts e Agentes** — com s
 O Agents Factory é uma fábrica de artefatos de IA que oferece:
 
 - **2 Meta-Skills** — Padrões de criação de skills e pesquisa de tecnologias
-- **24 Skills Operacionais** (Claude Code) / **20 Prompts** (Copilot) — Pesquisa, compilação, validação e auditoria
-- **14 Templates** — Scaffolding para qualquer tipo de artefato
+- **40 Skills Operacionais** (Claude Code) / **20 Prompts** (Copilot) — Pesquisa, compilação, validação e auditoria — inclui a **família platform-software** (15: orquestradora + 14 irmãs para Kafka, Redis, MongoDB, Postgres…)
+- **24 Templates** — Scaffolding + assets compartilhados de platform-research
 - **4 Fluxos Combinados** — Pipelines de ponta-a-ponta
 
 ## Início Rápido
@@ -44,10 +44,10 @@ O Agents Factory é uma fábrica de artefatos de IA que oferece:
 
 ```
 .claude/                    ← Claude Code (runtime principal)
-├── agents/                 ← 4 subagentes (framework-researcher, skill-author, architecture-auditor, quality-validator)
-├── skills/                 ← 26 skills (2 meta + 24 operacionais com context: fork)
-├── rules/                  ← 1 rule de frontmatter
-├── templates/              ← 14 templates (agents/, prompts/, rules/, skills/, reports/)
+├── agents/                 ← 7 subagentes: 5 roteadores (framework-researcher, skill-author, architecture-auditor, quality-validator, skill-evaluator) + 2 helpers de pesquisa (research-synthesizer, section-investigator)
+├── skills/                 ← 40 skills (todas com context: fork), incl. a família platform-software (15)
+├── rules/                  ← 5 rules (agent/rules/skill-frontmatter, naming-conventions, skill-structure)
+├── templates/              ← 24 arquivos: scaffolding (agents/, prompts/, rules/, skills/, reports/) + platform-research/ (exclusivo CC)
 └── settings.json
 
 .github/                    ← GitHub Copilot (coexistência; não remover)
@@ -62,6 +62,7 @@ O Agents Factory é uma fábrica de artefatos de IA que oferece:
 |-------|-----------|
 | [Visão Geral](docs/visao-geral.md) | Arquitetura do framework com diagramas |
 | [Catálogo de Capacidades](docs/capacidades/README.md) | Todas as capacidades listadas e categorizadas |
+| [Família Platform Software](docs/manual/platform-software-family.md) | 15 comandos para pesquisar plataformas auto-hospedadas (Kafka, Redis, Mongo…) |
 | [Como Usar](docs/como-usar/README.md) | Guias passo-a-passo por jornada |
 | [Fluxos Combinados](docs/fluxos/README.md) | Pipelines de ponta-a-ponta com diagramas |
 | [Mapeamento .github/ ↔ .claude/](docs/referencia/mapeamento-github-claude.md) | Equivalência entre artefatos Copilot e Claude Code |

@@ -50,7 +50,7 @@ graph LR
     A[Researcher] --> B[Compiler/Generator] --> C[Validator] --> D[✅ Skill/Instruction]
 ```
 
-**Capabilities involved**: 7 research + 4 compilation + 2 validation
+**Capabilities involved**: 7 core research + platform-software family (15) + 4 compilation + 2 validation
 
 ---
 

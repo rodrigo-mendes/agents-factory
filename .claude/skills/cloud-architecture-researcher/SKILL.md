@@ -42,7 +42,7 @@ disable-model-invocation: true
 - **Use exact provider-specific service names** — never substitute generic terms (e.g., write "AWS S3" not "object storage", "Azure Event Hubs" not "message bus") when a canonical name exists in `{{CLOUD_PROVIDER}}` docs.
 - **Pin to `{{TARGET_EDITION}}`** — reject patterns from earlier editions; flag any source with no explicit version/edition as unverified.
 - **Flag content older than 12 months** — cloud services evolve (GA promotions, pricing changes, new regions). Add a `> ⚠️ Source dated [YYYY-MM]; verify currency.` note for any source past 12 months.
-- **Apply all six mandatory output sections** — every research output must include: Framework Pillars, Always-Do Patterns, Ask-First Decisions, Never-Do Anti-patterns, Service Equivalence Map, and Source Bibliography.
+- **Apply all 13 mandatory output sections** — see the Output Format table below. Every section listed there is required; if any is absent, the output is incomplete.
 
 ### ⚠️ Ask First
 
@@ -59,7 +59,7 @@ disable-model-invocation: true
 | Include patterns without a verifiable provider URL | Hallucination risk; unverifiable claims undermine the knowledge base | Every pattern must link to official provider documentation with access date |
 | Use generic cloud terms when provider-specific names exist | Breaks Provider Fidelity; readers cannot act on "use a managed database" | Use exact service names: "Amazon RDS Multi-AZ", "Azure SQL Hyperscale", "Cloud Spanner" |
 | Research multi-provider patterns without explicitly scoping to `{{TARGET_EDITION}}` | Different editions have different pillars and guidelines; mixing versions produces contradictions | Pin every section to `{{TARGET_EDITION}}`; reject cross-edition pattern mix |
-| Omit the Service Equivalence Map | Architects choosing between providers need the comparison — it is a mandatory output section | Always include the equivalence table across AWS / GCP / Azure / OCI for every service class covered |
+| Omit the Service Equivalence Map when `CLOUD_PROVIDER` is Multi-Cloud | Architects evaluating multiple providers need the comparison | For Multi-Cloud: always include the equivalence table. For single-cloud: include only if the comparison concretely aids architecture decisions for that domain |
 
 ---
 
@@ -258,7 +258,7 @@ Full template: [Output Template](./blueprints/output-format.md).
 
 | # | Exact heading | Minimum content |
 |---|---|---|
-| 1 | `## Metadata` | yaml block with all 9 fields |
+| 1 | `## Metadata` | yaml block with all 18 fields (as defined in `blueprints/output-format.md`) |
 | 2 | `## Executive Summary` | 3 paragraphs: what the domain is, what changed in TARGET_EDITION, 3 critical guardrails |
 | 3 | `## Cloud Architecture Glossary` | 10–20 terms, each with Term/Definition/Provider Docs Section/Architect Usage/Common Confusion |
 | 4 | `## Architecture Guardrails` → `### ✅ Mandatory Patterns` | ≥3 patterns, each with Pillar Alignment/Why/Services/Architecture Decision/Verification/Source |
