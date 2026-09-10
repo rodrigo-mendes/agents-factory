@@ -53,7 +53,7 @@ Terms of the Agents Factory framework.
 | YAML Field | Context | Description |
 |-----------|----------|-----------|
 | `context: fork` | Skills command (G3) | Instructs the CC engine to spawn an isolated sub-agent when this skill is invoked |
-| `disable-model-invocation: true` | Skills command (G3) | Prevents auto-listing of the skill in the context budget. Mandatory in all 24 operational commands |
+| `disable-model-invocation: true` | Skills command (G3) | Prevents auto-listing of the skill in the context budget. Present in all 40 operational commands |
 | `allowed-tools:` | Skills (`.claude/skills/`) | List of tools available to the skill. Never use `tools:` in a skill |
 | `tools:` | Sub-agents (`.claude/agents/`) | List of tools available to the sub-agent. Never use `allowed-tools:` in an agent |
 | `paths:` | Rules (`.claude/rules/`) | File glob that automatically activates the rule when the corresponding files are in context |

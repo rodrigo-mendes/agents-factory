@@ -16,13 +16,19 @@ How to use the research prompts to build validated knowledge bases.
 
 | Domain | Prompt |
 |---------|--------|
-| Framework/lib (FastAPI, Redis, Spring) | `researching-technical-frameworks` |
+| Framework/lib/SDK (FastAPI, Spring, client libraries) | `researching-technical-frameworks` |
+| Self-managed platform (Kafka, Redis, Mongo, Postgres, Cassandra…) | `researching-platform-software` (orchestrator → 14 siblings) |
 | Cloud service + Terraform | `technical-framework-researcher-terraform` |
 | Terraform practices (org, CI/CD, test) | `terraform-engineering-best-practices-researcher` |
 | Architecture methodology (C4, DDD) | `architecture-methodology-researcher` |
-| Cloud framework (WAF, CAF) | `cloud-architecture-researcher` |
+| Cloud framework (WAF, CAF) — managed services | `cloud-architecture-researcher` |
 | Business domain (Finance, Legal) | `business-domain-researcher` |
 | Requirements framework (Scrum, SAFe) | `requirements-methodology-researcher` |
+
+> **Platform vs SDK vs managed:** research a self-managed **platform** (install & operate it yourself)
+> with `researching-platform-software`; its **client library** with `researching-technical-frameworks`;
+> its **managed cloud equivalent** (RDS, MSK…) with `cloud-architecture-researcher`.
+> Detail: [Platform Software Research Family](../manual/platform-software-family.md).
 
 ### 2. Run the prompt
 

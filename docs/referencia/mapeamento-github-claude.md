@@ -46,6 +46,11 @@ The following skills exist only in `.claude/` — they have no Copilot equivalen
 | `audit-cc-architecture-flow/SKILL.md` | CC Audit | Audits `.claude/` — does not exist in Copilot |
 | `audit-cc-architecture-engine/SKILL.md` | CC Audit | Audits `.claude/` — does not exist in Copilot |
 | `evaluating-skill-scenarios/SKILL.md` | Evaluation | LLM-as-judge for skills — Claude Code-specific pattern |
+| `researching-platform-software/SKILL.md` + 14 siblings | Platform Software | Self-managed platform research family (orchestrator → 14 siblings) — no Copilot equivalent. See [family manual](../manual/platform-software-family.md) |
+
+> The **platform-software family** (15 commands) is Claude Code-exclusive. It also introduces the
+> `.claude/templates/platform-research/` shared assets (8 files) — the only template set that
+> **does not mirror** `.github/` (see Templates note below).
 
 ---
 
@@ -100,6 +105,10 @@ The following skills exist only in `.claude/` — they have no Copilot equivalen
 | System | Operational Prompts/Skills | Meta-skills | Agents | Templates | Rules/Instructions |
 |---------|:--:|:--:|:--:|:--:|:--:|
 | `.github/` (Copilot) | 20 | 2 | 0 | 15 | 0 |
-| `.claude/` (Claude Code) | 25 | 1 | 5 | 14 | 1 |
+| `.claude/` (Claude Code) | 40 | 2 | 7 | 24 | 5 |
 
-> `.github/` has 15 templates (includes `README.md`); `.claude/` has 14 (without internal README).
+> **Claude Code counts** (verified via `find`/`grep`): **40** commands (all with
+> `disable-model-invocation`), incl. the 15-command platform-software family; **7** agents (5 routers
+> + 2 research helpers: `research-synthesizer`, `section-investigator`); **24** template files
+> (14 scaffolding mirrored + 8 CC-exclusive `platform-research/`); **5** rules.
+> `.github/` remains at its Copilot scope — the platform-software family has no Copilot equivalent.

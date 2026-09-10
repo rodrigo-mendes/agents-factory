@@ -5,7 +5,7 @@ description: >
   mechanics) and produces a compliance report with scoring and remediation. Use when auditing an
   agent/skill project's architecture or running the multi-model consensus audit
   (e.g. "audit the oci-terraform agent", "consensus audit of .claude/").
-tools: Read, Grep, Glob, Agent, Write, Bash
+tools: Read, Grep, Glob, Agent, Write, Bash, EnterPlanMode, ExitPlanMode
 model: opus
 ---
 
@@ -74,11 +74,23 @@ structured findings.
 
 **P2 — Collect**: Gather each lens's findings + severity.
 
-**P3 — Consensus**: Build the agree/disagree matrix across lenses; a finding confirmed by ≥2 lenses
+**P3 — Consensus + Confirm**: Build the agree/disagree matrix across lenses; a finding confirmed by ≥2 lenses
 is high-confidence.
+
+Present a `📋 Report Plan` table summarising what will be written:
+| File | Output path | Format source |
+|------|-------------|---------------|
+| Compliance report | `.claude/reports/audit_{target}_{YYYY-MM-DD}.md` | invoking skill's `## Output Format` or default |
+
+🛑 **DO NOT proceed to P4 until the user explicitly approves this plan.** If the user requests changes (e.g., different path, scope adjustment), incorporate them before proceeding.
 
 **P4 — Write Report**:
 > Output path: save the compliance report as `.claude/reports/audit_{target}_{YYYY-MM-DD}.md`.
+
+Before writing, enforce the skill's output format:
+1. If the invoking skill's SKILL.md has a `## Output Format` section, read it — that format is **MANDATORY**.
+2. If it links to a `blueprints/output-format.md`, read that file and follow it exactly.
+3. Deviate from the defined format ONLY if the user explicitly overrode it during P3 approval.
 
 Emit one prioritized remediation report (scoring + concrete fixes), citing which lens found what.
 A markdown compliance report: per-lens findings, consensus matrix, score, and a prioritized,

@@ -17,6 +17,7 @@ flowchart TD
     CHOOSE -->|Cloud Framework| R5[cloud-architecture-researcher]
     CHOOSE -->|Business Domain| R6[business-domain-researcher]
     CHOOSE -->|Requirements/Agile| R7[requirements-methodology-researcher]
+    CHOOSE -->|Self-managed platform<br/>Kafka/Redis/Mongo…| R8[researching-platform-software<br/>→ 14 siblings]
     
     R1 --> DOC[Research Document]
     R2 --> DOC
@@ -25,6 +26,7 @@ flowchart TD
     R5 --> DOC
     R6 --> DOC
     R7 --> DOC
+    R8 --> DOC
     
     DOC --> COMPILE{Compile to<br/>which format?}
     
@@ -57,6 +59,7 @@ flowchart TD
 | If you need... | Use |
 |----------------------|-----|
 | FastAPI v0.100 patterns | `researching-technical-frameworks` |
+| Operate your own Kafka / Redis / Mongo / Postgres | `researching-platform-software` (→ sibling) |
 | OCI Functions Terraform resources | `technical-framework-researcher-terraform` |
 | Terraform project structure | `terraform-engineering-best-practices-researcher` |
 | C4 Model or DDD patterns | `architecture-methodology-researcher` |
@@ -128,10 +131,10 @@ requirements-methodology-researcher → methodologies-skill-generator → skill-
 
 | Step | Capabilities | Qty |
 |-------|------------|:---:|
-| Research | 7 researchers | 7 |
+| Research | 7 core researchers + platform-software family (15) | 22 |
 | Compilation | 4 compilers/generators | 4 |
 | Validation | 2 validators | 2 |
-| **Total** | | **13** |
+| **Total** | | **28** |
 
 ---
 

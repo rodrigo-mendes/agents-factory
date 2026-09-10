@@ -47,9 +47,22 @@ suggest the correct `/command` rather than proceeding.
   from unverified input).
 - **P1 — Analyze**: Identify the artifact type (skill vs rules/instructions) and its consumers.
 - **P2 — Consult**: Read the meta-skill blueprints and the relevant template under `.claude/templates/`.
-- **P3 — Propose**: Outline the file structure and the ✅⚠️🚫 patterns before writing.
+- **P3 — Propose + Confirm**: Outline the file structure and the ✅⚠️🚫 patterns before writing.
+
+  Present a `📋 Plan` table summarising what will be generated:
+  | File | Output path | Format source |
+  |------|-------------|---------------|
+  | …    | …           | …             |
+
+  🛑 **DO NOT proceed to P4 until the user explicitly approves this plan.** If the user requests changes, incorporate them and re-present before proceeding.
+
 - **P4 — Implement**:
   > Output path: SKILL.md is written to `.claude/skills/{skill-name}/SKILL.md`; blueprints go to `.claude/skills/{skill-name}/blueprints/`.
+
+  Before writing any file, enforce the skill's output format:
+  1. If the invoking skill's SKILL.md has a `## Output Format` section, read it — that format is **MANDATORY**.
+  2. If it links to a `blueprints/output-format.md` or `blueprints/output-format-template.md`, read that file and follow it exactly.
+  3. Deviate from the defined format ONLY if the user explicitly overrode it during P3 approval.
 
   Write the artifact(s). Split anything > 500 lines into linked blueprints.
 - **P5 — Validate**: Recommend `/skill-best-practices-validator` (skills), `/evaluating-skill-scenarios` (skills) or

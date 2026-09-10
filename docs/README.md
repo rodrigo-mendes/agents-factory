@@ -34,16 +34,18 @@
 docs/
 ├── visao-geral.md                 ← Architecture + diagrams
 ├── manual/
-│   ├── README.md                  ← Index + cheat sheet of 24 commands
-│   ├── framework-researcher.md    ← 7 research commands
+│   ├── README.md                  ← Index + cheat sheet of 40 commands
+│   ├── framework-researcher.md    ← 7 research commands + platform-software family
+│   ├── platform-software-family.md ← 15 platform-software commands (1 orchestrator + 14 siblings)
 │   ├── skill-author.md            ← 4 generation commands
 │   ├── architecture-auditor.md    ← 8 audit commands
-│   └── quality-validator.md       ← 5 validation commands
+│   ├── quality-validator.md       ← 5 validation commands
+│   └── skill-evaluator.md         ← 1 evaluation command
 ├── capacidades/
-│   ├── README.md                  ← Complete catalog
-│   ├── skills.md                  ← 2 meta-skills
-│   ├── templates.md               ← 14 templates + traceability
-│   ├── prompts-pesquisa.md        ← 7 research prompts
+│   ├── README.md                  ← Complete catalog (40 commands)
+│   ├── skills.md                  ← foundation skills
+│   ├── templates.md               ← 24 template files + traceability
+│   ├── prompts-pesquisa.md        ← 7 research prompts (+ platform-software family)
 │   ├── prompts-compilacao.md      ← 4 compilation prompts
 │   ├── prompts-validacao.md       ← 4 validation prompts
 │   ├── prompts-arquitetura.md     ← 8 audit prompts (4 Copilot + 4 Claude Code)

@@ -67,7 +67,7 @@ For each scenario found in `evaluation-scenarios.md`:
 Execute scenarios **sequentially** — do not parallelize (each run is isolated; results must be
 captured before the next scenario starts).
 
-**P3 — Judge Responses**
+**P3 — Judge + Confirm**
 
 For each captured response, apply LLM-as-judge against the criteria:
 
@@ -84,10 +84,21 @@ For each captured response, apply LLM-as-judge against the criteria:
 - ⚠️ PARTIAL: ≥1 must_pass FAIL but ≥50% pass, AND all must_not = OK
 - 🚫 FAIL: >50% must_pass FAIL OR any must_not VIOLATED
 
+After judging all scenarios, present a `📋 Report Plan` before writing:
+| File | Output path | Format source |
+|------|-------------|---------------|
+| Evaluation report | `.claude/skills/{skill-name}/{skill-name}-evaluation-report.md` | invoking skill's rubric (P0) |
+
+🛑 **DO NOT proceed to P4 until the user explicitly approves this plan.** If the user requests changes, incorporate them before proceeding.
+
 **P4 — Write Report**
 
+Before writing, enforce the skill's output format:
+1. Check the invoking skill's rubric (loaded at P0) for a defined report structure — follow it exactly if present.
+2. If the invoking skill's SKILL.md has a `## Output Format` section or links to a `blueprints/output-format.md`, read it — that format is **MANDATORY**.
+3. Deviate from the defined format ONLY if the user explicitly overrode it during P3 approval.
+
 Save to `.claude/skills/{skill-name}/{skill-name}-evaluation-report.md`.
-Follow the report structure specified in the invoking skill's rubric (loaded at P0).
 Confirm the file was written with Glob after saving.
 
 ## Boundaries

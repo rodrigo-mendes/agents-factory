@@ -76,7 +76,10 @@ Common Confusion: [What it is frequently (incorrectly) confused with — especia
 **[Anti-Pattern Name]**
 - Risk Level: [CRITICAL | HIGH | MEDIUM]
 - Why: [Framework pillar violation — cite exactly]
-- Instead: [Correct pattern with {{CLOUD_PROVIDER}} services]
+- ❌ Wrong:
+  [Concrete wrong architecture — exact {{CLOUD_PROVIDER}} service names]
+- ✅ Correct:
+  [Concrete correct alternative — exact {{CLOUD_PROVIDER}} service names]
 - Detection: [Audit tool, CLI command, or policy check]
 - Impact: [Data breach | Outage | Cost overrun | Compliance violation]
 - Source: [URL]

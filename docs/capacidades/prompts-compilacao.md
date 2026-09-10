@@ -53,7 +53,7 @@ skill-name/
 - Template: `TEMPLATE.SKILL.md` (implicit reference)
 
 ### Complements
-- All 7 research prompts (receives their output)
+- All 7 core research prompts + the platform-software family (receives their `research_*.md` output)
 - `skill-best-practices-validator` (validates the output)
 
 ---

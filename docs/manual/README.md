@@ -1,6 +1,6 @@
 # Agent Usage Manual — Agents Factory
 
-Complete reference for the 5 sub-agents and the 25 commands that invoke them.
+Complete reference for the 7 sub-agents (5 routers + 2 research helpers) and the 40 commands that invoke them.
 
 ---
 
@@ -8,15 +8,19 @@ Complete reference for the 5 sub-agents and the 25 commands that invoke them.
 
 | Agent | Model | Commands | File |
 |--------|--------|:--------:|---------|
-| [framework-researcher](framework-researcher.md) | opus | 7 | Research on technologies, frameworks, domains, architectures |
+| [framework-researcher](framework-researcher.md) | opus | 22 | Research on technologies, frameworks, domains, architectures + the [platform-software family](platform-software-family.md) (15) |
 | [skill-author](skill-author.md) | sonnet | 4 | Generation of SKILL.md and .instructions.md |
 | [architecture-auditor](architecture-auditor.md) | opus | 8 | Multi-model audit of agent architecture |
 | [quality-validator](quality-validator.md) | sonnet | 5 | Quality and compliance validation of artifacts |
 | [skill-evaluator](skill-evaluator.md) | sonnet | 1 | Behavioral evaluation of skills via LLM-as-judge |
 
+> **Research helpers** (not directly invocable — spawned by `framework-researcher` at
+> `depth=deep`/`exhaustive`): `section-investigator` (parallel sub-investigation) and
+> `research-synthesizer` (merges findings into the output template).
+
 ---
 
-## Quick Reference — All 25 Commands
+## Quick Reference — All 40 Commands
 
 ### Research (`framework-researcher`)
 
@@ -29,6 +33,27 @@ Complete reference for the 5 sub-agents and the 25 commands that invoke them.
 /architecture-methodology-researcher         # Research architecture methodology (C4, DDD, TOGAF)
 /terraform-engineering-best-practices-researcher  # Research Terraform engineering practices
 ```
+
+### Platform Software family (`framework-researcher`) — self-managed platforms
+
+```
+/researching-platform-software <platform> <version>   # Orchestrator — routes to the right sibling
+/researching-streaming-broker         # Kafka, RabbitMQ, Pulsar, NATS, ActiveMQ
+/researching-cache-store              # Redis (cache), Memcached, KeyDB, Dragonfly
+/researching-coordination-service     # etcd, ZooKeeper, Consul
+/researching-search-engine            # Elasticsearch, OpenSearch, Solr, Typesense, Meilisearch
+/researching-api-gateway              # Kong, APISIX, Tyk, Traefik EE, KrakenD, Envoy Gateway
+/researching-rdbms                    # PostgreSQL, MySQL, MariaDB, CockroachDB
+/researching-document-store           # MongoDB, Couchbase, RavenDB
+/researching-kv-store                 # Redis (as DB), RocksDB, LMDB, TiKV
+/researching-wide-column-store        # Cassandra, ScyllaDB, HBase
+/researching-graph-database           # Neo4j, JanusGraph, ArangoDB, Nebula
+/researching-timeseries-db            # InfluxDB, TimescaleDB, VictoriaMetrics, QuestDB
+/researching-columnar-analytics       # ClickHouse, Druid, Pinot, DuckDB
+/researching-vector-store             # Milvus, Qdrant, Weaviate, pgvector, Chroma
+/researching-object-storage           # MinIO, Ceph RGW, SeaweedFS, GarageHQ
+```
+> Detail: [Platform Software Research Family](platform-software-family.md).
 
 ### Generation (`skill-author`)
 
@@ -92,6 +117,7 @@ flowchart TD
     P --> P4[/business-domain-researcher/]
     P --> P5[/requirements-methodology-researcher/]
     P --> P6[/architecture-methodology-researcher/]
+    P --> P7[/researching-platform-software — self-managed platforms/]
 
     G --> G1{Do I have a research file?}
     G1 -->|Yes| G2[/skill-creator path/to/research.md/]
