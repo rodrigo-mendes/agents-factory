@@ -1,0 +1,34 @@
+# ==============================================================================
+# OCI Function Dockerfile Template
+# Copy this file to your function directory and replace placeholders:
+#   {{PACKAGE}}  → e.g., com.brx.functions.mypackage
+#   {{CLASS}}    → e.g., MyFunction
+#   {{HANDLER}}  → e.g., handler (for fn-events) or handleRequest (for direct POJO)
+# ==============================================================================
+
+# --- Stage 1: Build ---
+FROM fnproject/fn-java-fdk-build:jdk17-latest as build
+
+WORKDIR /function
+
+# Layer caching: copy POM first, resolve dependencies
+COPY pom.xml /function/pom.xml
+RUN ["mvn", "package", "dependency:copy-dependencies", "-DincludeScope=runtime", \
+     "-DskipTests=true", "-Dmdep.prependGroupId=true", "--fail-never"]
+
+# Copy source and build
+COPY src /function/src
+RUN ["mvn", "package", "-DskipTests=true"]
+
+# --- Stage 2: Runtime ---
+FROM fnproject/fn-java-fdk:jre17-latest
+
+WORKDIR /function
+
+COPY --from=build /function/target/*.jar /function/app/
+COPY --from=build /function/target/dependency/*.jar /function/app/
+
+# ⚠️ MANDATORY: Without CMD, container starts and immediately dies → 502 with zero logs
+# This is the ONLY way Docker/Terraform deployments know which class/method to invoke.
+# Must match the `cmd:` field in func.yaml.
+CMD ["{{PACKAGE}}.{{CLASS}}::{{HANDLER}}"]

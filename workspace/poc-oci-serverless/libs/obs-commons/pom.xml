@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.brx.functions</groupId>
+    <artifactId>brx-fn-obs-commons</artifactId>
+    <version>0.0.1</version>
+    <packaging>jar</packaging>
+
+    <name>BRX Functions - Observability Commons</name>
+    <description>
+        Shared observability + event-envelope building blocks for the OCI Functions event pub/sub
+        services (producer + notify/audit consumers). Single source of truth for the W3C trace
+        inject/extract contract so the distributed trace cannot drift across services.
+        Contains: TracingSupport (SimpleSpanProcessor — REQUIRED in FaaS), MetricsPublisher,
+        ObservabilityHelper (static facade), LoggingBridge, and the DomainEvent envelope (+ Trace).
+    </description>
+
+    <!--
+        Install-able library JAR. Consumed by the 3 pub/sub services either via the Maven reactor
+        or after `mvn install` into the local repository. NOT deployed to OCIR (it is a plain JAR,
+        not a function image); the image bump to 0.0.3 + redeploy of the services is a SEPARATE
+        later step (see docs/handoff/event-pubsub) and is not performed by this change.
+    -->
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>17</java.version>
+        <fdk.version>1.1.11</fdk.version>
+        <oci.sdk.version>3.86.0</oci.sdk.version>
+        <jackson.version>2.17.2</jackson.version>
+        <junit.version>4.13.2</junit.version>
+        <slf4j.version>2.0.16</slf4j.version>
+        <otel.version>1.40.0</otel.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.oracle.oci.sdk</groupId>
+                <artifactId>oci-java-sdk-bom</artifactId>
+                <version>${oci.sdk.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <!-- Fn FDK for Java — RuntimeContext (configure() reads config keys) -->
+        <dependency>
+            <groupId>com.fnproject.fn</groupId>
+            <artifactId>api</artifactId>
+            <version>${fdk.version}</version>
+        </dependency>
+
+        <!-- OCI SDK - Common (Resource Principal auth for MetricsPublisher) -->
+        <dependency>
+            <groupId>com.oracle.oci.sdk</groupId>
+            <artifactId>oci-java-sdk-common</artifactId>
+        </dependency>
+
+        <!-- OCI SDK - HTTP Client (required by SDK 3.x — MetricsPublisher makes SDK calls) -->
+        <dependency>
+            <groupId>com.oracle.oci.sdk</groupId>
+            <artifactId>oci-java-sdk-common-httpclient-jersey3</artifactId>
+        </dependency>
+
+        <!-- OCI SDK - Monitoring (PostMetricData custom metrics) -->
+        <dependency>
+            <groupId>com.oracle.oci.sdk</groupId>
+            <artifactId>oci-java-sdk-monitoring</artifactId>
+        </dependency>
+
+        <!-- Logging - SLF4J API + JUL bridge (LoggingBridge installs the bridge) -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jul-to-slf4j</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+
+        <!-- OpenTelemetry — Distributed Tracing (OCI APM via OTLP/HTTP) -->
+        <dependency>
+            <groupId>io.opentelemetry</groupId>
+            <artifactId>opentelemetry-api</artifactId>
+            <version>${otel.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.opentelemetry</groupId>
+            <artifactId>opentelemetry-sdk</artifactId>
+            <version>${otel.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.opentelemetry</groupId>
+            <artifactId>opentelemetry-exporter-otlp</artifactId>
+            <version>${otel.version}</version>
+        </dependency>
+
+        <!-- Jackson — DomainEvent envelope annotations -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+
+        <!-- Test dependencies -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.2.2</version>
+                <configuration>
+                    <useSystemClassLoader>false</useSystemClassLoader>
+                    <argLine>
+                        --add-opens java.base/java.lang=ALL-UNNAMED
+                    </argLine>
+                </configuration>
+            </plugin>
+            <!-- Not published to OCIR / no mvn deploy of this JAR. -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>3.1.1</version>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

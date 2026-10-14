@@ -1,0 +1,12 @@
+schema_version: 20180708
+name: api-handler
+version: 0.0.10
+runtime: java
+build_image: fnproject/fn-java-fdk-build:jdk17-latest
+run_image: fnproject/fn-java-fdk:jre17-latest
+cmd: com.brx.serverless.handler.ApiHandler::handler
+memory: 256
+timeout: 60
+config:
+  ENVIRONMENT: dev
+  LOG_LEVEL: INFO

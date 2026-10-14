@@ -1,0 +1,1073 @@
+{
+  "dashboards": [
+    {
+      "dashboardId": "ocid1.custommanagementdashboard.oc1..events-transaction-path",
+      "displayName": "Events — Transaction Path (${environment})",
+      "description": "Fluxo pub/sub do producer -> stream -> consumers (notify+audit). As tiles de trace (tracesDataSource) mostram spans/duração/status recentes dos 3 serviços; as tiles de métrica (monitoringDataSource) mostram publish/consume rate, lag e auditoria. Para seguir UMA transação por ID, use o APM Trace Explorer com o filtro transaction.id = '<id>' (o dashboard OCI não suporta campo de texto-livre no filtro).",
+      "compartmentId": "${compartment_ocid}",
+      "isOobDashboard": false,
+      "isShowInHome": false,
+      "providerId": "management-dashboard",
+      "providerName": "Management Dashboard",
+      "providerVersion": "3.0.0",
+      "isShowDescription": true,
+      "screenImage": "",
+      "nls": {},
+      "type": "normal",
+      "metadataVersion": "2.0",
+      "uiConfig": {
+        "isFilteringEnabled": false,
+        "isTimeRangeEnabled": true,
+        "isRefreshEnabled": true
+      },
+      "dataConfig": [],
+      "isFavorite": false,
+      "featuresConfig": {
+        "crossService": {
+          "shared": true
+        },
+        "serviceTypes": [
+          "APM"
+        ]
+      },
+      "parametersConfig": [
+        {
+          "savedSearchId": "OOBSS-APM-domain-filter",
+          "width": 2,
+          "state": "DEFAULT",
+          "parametersMap": {
+            "isStoreInLocalStorage": true,
+            "compartmentId": "$(dashboard.params.compartmentId)"
+          },
+          "name": "apmDomain",
+          "localStorageKey": "apmDomain"
+        },
+        {
+          "savedSearchId": "OOBSS-management-dashboard-compartment-filter",
+          "displayName": "Compartment",
+          "width": 3,
+          "state": "DEFAULT",
+          "parametersMap": {
+            "isStoreInLocalStorage": false,
+            "isActiveCompartment": "true"
+          },
+          "name": "compartmentId",
+          "localStorageKey": "compartmentId"
+        },
+        {
+          "savedSearchId": "OOBSS-management-dashboard-region-filter",
+          "width": 2,
+          "state": "DEFAULT",
+          "parametersMap": {
+            "isStoreInLocalStorage": true
+          },
+          "name": "regionName",
+          "localStorageKey": "regionName"
+        },
+        {
+          "name": "time",
+          "displayName": "$(bundle.globalSavedSearch.TIME)",
+          "src": "$(context.time)"
+        }
+      ],
+      "drilldownConfig": [],
+      "tiles": [
+        {
+          "displayName": "Transaction Path (spans)",
+          "savedSearchId": "ocid1.custommanagementsavedsearch.oc1..txn-path-spans",
+          "row": 0,
+          "column": 0,
+          "height": 4,
+          "width": 12,
+          "nls": {},
+          "uiConfig": {},
+          "dataConfig": [],
+          "state": "DEFAULT",
+          "drilldownConfig": [],
+          "parametersMap": {
+            "compartmentId": "$(dashboard.params.compartmentId)",
+            "time": "$(dashboard.params.time)",
+            "apmDomain": "$(dashboard.params.apmDomain)"
+          }
+        },
+        {
+          "displayName": "Duration by Service",
+          "savedSearchId": "ocid1.custommanagementsavedsearch.oc1..txn-duration-by-service",
+          "row": 4,
+          "column": 0,
+          "height": 4,
+          "width": 6,
+          "nls": {},
+          "uiConfig": {},
+          "dataConfig": [],
+          "state": "DEFAULT",
+          "drilldownConfig": [],
+          "parametersMap": {
+            "compartmentId": "$(dashboard.params.compartmentId)",
+            "time": "$(dashboard.params.time)",
+            "apmDomain": "$(dashboard.params.apmDomain)"
+          }
+        },
+        {
+          "displayName": "Transaction Status / Errors",
+          "savedSearchId": "ocid1.custommanagementsavedsearch.oc1..txn-status-errors",
+          "row": 4,
+          "column": 6,
+          "height": 4,
+          "width": 6,
+          "nls": {},
+          "uiConfig": {},
+          "dataConfig": [],
+          "state": "DEFAULT",
+          "drilldownConfig": [],
+          "parametersMap": {
+            "compartmentId": "$(dashboard.params.compartmentId)",
+            "time": "$(dashboard.params.time)",
+            "apmDomain": "$(dashboard.params.apmDomain)"
+          }
+        },
+        {
+          "displayName": "Publish Rate (producer)",
+          "savedSearchId": "ocid1.custommanagementsavedsearch.oc1..txn-publish-rate",
+          "row": 8,
+          "column": 0,
+          "height": 4,
+          "width": 4,
+          "nls": {},
+          "uiConfig": {},
+          "dataConfig": [],
+          "state": "DEFAULT",
+          "drilldownConfig": [],
+          "parametersMap": {
+            "compartmentId": "$(dashboard.params.compartmentId)",
+            "time": "$(dashboard.params.time)",
+            "regionName": "$(dashboard.params.regionName)"
+          }
+        },
+        {
+          "displayName": "Consume Rate — Notify",
+          "savedSearchId": "ocid1.custommanagementsavedsearch.oc1..txn-consume-rate-notify",
+          "row": 8,
+          "column": 4,
+          "height": 4,
+          "width": 4,
+          "nls": {},
+          "uiConfig": {},
+          "dataConfig": [],
+          "state": "DEFAULT",
+          "drilldownConfig": [],
+          "parametersMap": {
+            "compartmentId": "$(dashboard.params.compartmentId)",
+            "time": "$(dashboard.params.time)",
+            "regionName": "$(dashboard.params.regionName)"
+          }
+        },
+        {
+          "displayName": "Consume Rate — Audit",
+          "savedSearchId": "ocid1.custommanagementsavedsearch.oc1..txn-consume-rate-audit",
+          "row": 8,
+          "column": 8,
+          "height": 4,
+          "width": 4,
+          "nls": {},
+          "uiConfig": {},
+          "dataConfig": [],
+          "state": "DEFAULT",
+          "drilldownConfig": [],
+          "parametersMap": {
+            "compartmentId": "$(dashboard.params.compartmentId)",
+            "time": "$(dashboard.params.time)",
+            "regionName": "$(dashboard.params.regionName)"
+          }
+        },
+        {
+          "displayName": "Consumer Lag (ms)",
+          "savedSearchId": "ocid1.custommanagementsavedsearch.oc1..txn-consumer-lag",
+          "row": 12,
+          "column": 0,
+          "height": 4,
+          "width": 6,
+          "nls": {},
+          "uiConfig": {},
+          "dataConfig": [],
+          "state": "DEFAULT",
+          "drilldownConfig": [],
+          "parametersMap": {
+            "compartmentId": "$(dashboard.params.compartmentId)",
+            "time": "$(dashboard.params.time)",
+            "regionName": "$(dashboard.params.regionName)"
+          }
+        },
+        {
+          "displayName": "Audit Events Processed",
+          "savedSearchId": "ocid1.custommanagementsavedsearch.oc1..txn-audit-processed",
+          "row": 12,
+          "column": 6,
+          "height": 4,
+          "width": 6,
+          "nls": {},
+          "uiConfig": {},
+          "dataConfig": [],
+          "state": "DEFAULT",
+          "drilldownConfig": [],
+          "parametersMap": {
+            "compartmentId": "$(dashboard.params.compartmentId)",
+            "time": "$(dashboard.params.time)",
+            "regionName": "$(dashboard.params.regionName)"
+          }
+        }
+      ],
+      "savedSearches": [
+        {
+          "id": "ocid1.custommanagementsavedsearch.oc1..txn-path-spans",
+          "displayName": "Transaction Path (spans)",
+          "providerId": "management-dashboard",
+          "providerName": "Management Dashboard",
+          "providerVersion": "3.0.0",
+          "compartmentId": "${compartment_ocid}",
+          "isOobSavedSearch": false,
+          "description": "Spans recentes dos 3 serviços pub/sub por serviço/operação/duração/kind.",
+          "nls": {},
+          "type": "WIDGET_SHOW_IN_DASHBOARD",
+          "metadataVersion": "2.0",
+          "screenImage": "",
+          "widgetTemplate": "visualizations/chartWidgetTemplate.html",
+          "widgetVM": "visualizations/chartWidget",
+          "parametersConfig": [
+            {
+              "name": "time",
+              "displayName": "Time",
+              "required": true,
+              "defaultFilterIds": [
+                "OOBSS-management-dashboard-time-selector-filter"
+              ],
+              "editUi": {
+                "inputType": "savedSearch",
+                "filterTile": {
+                  "filterId": "OOBSS-management-dashboard-time-selector-filter"
+                }
+              }
+            },
+            {
+              "name": "apmDomain",
+              "displayName": "Apm Domain",
+              "required": true,
+              "defaultFilterIds": [
+                "OOBSS-APM-domain-filter"
+              ],
+              "editUi": {
+                "filterTile": {
+                  "filterId": "OOBSS-APM-domain-filter"
+                }
+              }
+            },
+            {
+              "name": "flex"
+            }
+          ],
+          "drilldownConfig": [],
+          "featuresConfig": {
+            "crossService": {
+              "shared": true
+            }
+          },
+          "uiConfig": {
+            "vizType": "table",
+            "tableInfo": {
+              "cols": [
+                {
+                  "val": "ServiceName",
+                  "header": {
+                    "name": "ServiceName"
+                  },
+                  "sortable": "enable"
+                },
+                {
+                  "val": "OperationName",
+                  "header": {
+                    "name": "OperationName"
+                  },
+                  "sortable": "enable"
+                },
+                {
+                  "val": "SpanDuration",
+                  "header": {
+                    "name": "SpanDuration"
+                  },
+                  "sortable": "enable"
+                },
+                {
+                  "val": "SpanKind",
+                  "header": {
+                    "name": "SpanKind"
+                  },
+                  "sortable": "enable"
+                }
+              ]
+            },
+            "defaultDataSource": "traceData"
+          },
+          "dataConfig": [
+            {
+              "name": "traceData",
+              "type": "tracesDataSource",
+              "parameters": {
+                "compartmentId": "$(params.compartmentId)",
+                "startTime": "$(params.startTime)",
+                "endTime": "$(params.endTime)",
+                "apmDomain": "$(params.apmDomain)",
+                "maxDesiredDataPoints": 320,
+                "dimensionFilters": "$(params.flex)",
+                "apmQuery": "show spans ServiceName, OperationName, SpanDuration, SpanKind where ServiceName = 'func-event-producer' or ServiceName = 'func-evt-consumer-notify' or ServiceName = 'func-evt-consumer-audit' order by SpanDuration desc",
+                "simplifyDataSource": true
+              }
+            }
+          ]
+        },
+        {
+          "id": "ocid1.custommanagementsavedsearch.oc1..txn-duration-by-service",
+          "displayName": "Duration by Service",
+          "providerId": "management-dashboard",
+          "providerName": "Management Dashboard",
+          "providerVersion": "3.0.0",
+          "compartmentId": "${compartment_ocid}",
+          "isOobSavedSearch": false,
+          "description": "Soma de SpanDuration dos 3 serviços pub/sub agrupada por ServiceName.",
+          "nls": {},
+          "type": "WIDGET_SHOW_IN_DASHBOARD",
+          "metadataVersion": "2.0",
+          "screenImage": "",
+          "widgetTemplate": "visualizations/chartWidgetTemplate.html",
+          "widgetVM": "visualizations/chartWidget",
+          "parametersConfig": [
+            {
+              "name": "time",
+              "displayName": "Time",
+              "required": true,
+              "defaultFilterIds": [
+                "OOBSS-management-dashboard-time-selector-filter"
+              ],
+              "editUi": {
+                "inputType": "savedSearch",
+                "filterTile": {
+                  "filterId": "OOBSS-management-dashboard-time-selector-filter"
+                }
+              }
+            },
+            {
+              "name": "apmDomain",
+              "displayName": "Apm Domain",
+              "required": true,
+              "defaultFilterIds": [
+                "OOBSS-APM-domain-filter"
+              ],
+              "editUi": {
+                "filterTile": {
+                  "filterId": "OOBSS-APM-domain-filter"
+                }
+              }
+            },
+            {
+              "name": "flex"
+            }
+          ],
+          "drilldownConfig": [],
+          "featuresConfig": {
+            "crossService": {
+              "shared": true
+            }
+          },
+          "uiConfig": {
+            "vizType": "table",
+            "tableInfo": {
+              "cols": [
+                {
+                  "val": "ServiceName",
+                  "header": {
+                    "name": "ServiceName"
+                  },
+                  "sortable": "enable"
+                },
+                {
+                  "val": "TotalDuration",
+                  "header": {
+                    "name": "TotalDuration"
+                  },
+                  "sortable": "enable"
+                }
+              ]
+            },
+            "defaultDataSource": "traceData"
+          },
+          "dataConfig": [
+            {
+              "name": "traceData",
+              "type": "tracesDataSource",
+              "parameters": {
+                "compartmentId": "$(params.compartmentId)",
+                "startTime": "$(params.startTime)",
+                "endTime": "$(params.endTime)",
+                "apmDomain": "$(params.apmDomain)",
+                "maxDesiredDataPoints": 320,
+                "dimensionFilters": "$(params.flex)",
+                "apmQuery": "show spans sum(SpanDuration) as \"TotalDuration\" where ServiceName = 'func-event-producer' or ServiceName = 'func-evt-consumer-notify' or ServiceName = 'func-evt-consumer-audit' group by ServiceName",
+                "simplifyDataSource": true
+              }
+            }
+          ]
+        },
+        {
+          "id": "ocid1.custommanagementsavedsearch.oc1..txn-status-errors",
+          "displayName": "Transaction Status / Errors",
+          "providerId": "management-dashboard",
+          "providerName": "Management Dashboard",
+          "providerVersion": "3.0.0",
+          "compartmentId": "${compartment_ocid}",
+          "isOobSavedSearch": false,
+          "description": "Traces recentes com raiz no producer: TraceId/OperationName/TraceDuration/TraceStatus.",
+          "nls": {},
+          "type": "WIDGET_SHOW_IN_DASHBOARD",
+          "metadataVersion": "2.0",
+          "screenImage": "",
+          "widgetTemplate": "visualizations/chartWidgetTemplate.html",
+          "widgetVM": "visualizations/chartWidget",
+          "parametersConfig": [
+            {
+              "name": "time",
+              "displayName": "Time",
+              "required": true,
+              "defaultFilterIds": [
+                "OOBSS-management-dashboard-time-selector-filter"
+              ],
+              "editUi": {
+                "inputType": "savedSearch",
+                "filterTile": {
+                  "filterId": "OOBSS-management-dashboard-time-selector-filter"
+                }
+              }
+            },
+            {
+              "name": "apmDomain",
+              "displayName": "Apm Domain",
+              "required": true,
+              "defaultFilterIds": [
+                "OOBSS-APM-domain-filter"
+              ],
+              "editUi": {
+                "filterTile": {
+                  "filterId": "OOBSS-APM-domain-filter"
+                }
+              }
+            },
+            {
+              "name": "flex"
+            }
+          ],
+          "drilldownConfig": [],
+          "featuresConfig": {
+            "crossService": {
+              "shared": true
+            }
+          },
+          "uiConfig": {
+            "vizType": "table",
+            "tableInfo": {
+              "cols": [
+                {
+                  "val": "TraceId",
+                  "header": {
+                    "name": "TraceId"
+                  },
+                  "sortable": "enable"
+                },
+                {
+                  "val": "OperationName",
+                  "header": {
+                    "name": "OperationName"
+                  },
+                  "sortable": "enable"
+                },
+                {
+                  "val": "TraceDuration",
+                  "header": {
+                    "name": "TraceDuration"
+                  },
+                  "sortable": "enable"
+                },
+                {
+                  "val": "TraceStatus",
+                  "header": {
+                    "name": "TraceStatus"
+                  },
+                  "sortable": "enable"
+                }
+              ]
+            },
+            "defaultDataSource": "traceData"
+          },
+          "dataConfig": [
+            {
+              "name": "traceData",
+              "type": "tracesDataSource",
+              "parameters": {
+                "compartmentId": "$(params.compartmentId)",
+                "startTime": "$(params.startTime)",
+                "endTime": "$(params.endTime)",
+                "apmDomain": "$(params.apmDomain)",
+                "maxDesiredDataPoints": 320,
+                "dimensionFilters": "$(params.flex)",
+                "apmQuery": "show traces TraceId, OperationName, TraceDuration, TraceStatus where ServiceName = 'func-event-producer' order by TraceDuration desc",
+                "simplifyDataSource": true
+              }
+            }
+          ]
+        },
+        {
+          "id": "ocid1.custommanagementsavedsearch.oc1..txn-publish-rate",
+          "displayName": "Publish Rate (producer)",
+          "providerId": "management-dashboard",
+          "providerVersion": "3.0.0",
+          "providerName": "Management Dashboard",
+          "compartmentId": "${compartment_ocid}",
+          "isOobSavedSearch": false,
+          "description": "FunctionInvocationCount rate do func-event-producer (oci_faas, resourceId = function OCID).",
+          "nls": {},
+          "type": "WIDGET_SHOW_IN_DASHBOARD",
+          "uiConfig": {
+            "vizType": "chart",
+            "chartInfo": {
+              "jetConfig": {
+                "type": "lineWithArea",
+                "timeAxisType": "enabled",
+                "xAxis": {
+                  "viewportMin": "$(params.time.start)",
+                  "viewportMax": "$(params.time.end)"
+                },
+                "yAxis": {
+                  "title": ""
+                },
+                "dataCursor": "on"
+              },
+              "value": "aggregatedDatapoints.value",
+              "group": "aggregatedDatapoints.timestamp",
+              "colorBy": "_allDimensionConglomerate",
+              "series": "_allDimensionConglomerate"
+            },
+            "defaultDataSource": "Publish Rate"
+          },
+          "dataConfig": [
+            {
+              "name": "Publish Rate",
+              "type": "monitoringDataSource",
+              "parameters": {
+                "compartmentId": "$(params.compartmentId)",
+                "startTime": "$(params.time.start)",
+                "endTime": "$(params.time.end)",
+                "regionName": "$(params.regionName)",
+                "namespace": "oci_faas",
+                "mql": "FunctionInvocationCount[1m]{resourceId=\"${producer_function_id}\"}.rate()",
+                "maxDataPoints": "useIntervalExact"
+              }
+            }
+          ],
+          "metadataVersion": "2.0",
+          "screenImage": "",
+          "widgetTemplate": "visualizations/chartWidgetTemplate.html",
+          "widgetVM": "visualizations/chartWidget",
+          "parametersConfig": [
+            {
+              "name": "time",
+              "displayName": "$(bundle.globalSavedSearch.TIME_PARAMETER_NAME)",
+              "required": true,
+              "editUi": {
+                "inputType": "savedSearch",
+                "filterTile": {
+                  "filterId": "OOBSS-management-dashboard-time-selector-filter",
+                  "parametersMap": {
+                    "maxDurationDays": 89
+                  }
+                }
+              }
+            },
+            {
+              "name": "compartmentId",
+              "displayName": "$(bundle.globalSavedSearch.COMPARTMENT)",
+              "required": true,
+              "defaultFilterIds": [
+                "OOBSS-management-dashboard-compartment-filter"
+              ],
+              "valueFormat": {
+                "type": "object"
+              },
+              "editUi": {
+                "inputType": "compartmentSelect"
+              }
+            },
+            {
+              "name": "regionName",
+              "displayName": "$(bundle.globalSavedSearch.REGION)",
+              "required": false,
+              "defaultFilterIds": [
+                "OOBSS-management-dashboard-region-filter"
+              ],
+              "valueFormat": {
+                "type": "string"
+              },
+              "editUi": {
+                "inputType": "savedSearch",
+                "filterTile": {
+                  "filterId": "OOBSS-management-dashboard-region-filter",
+                  "parametersMap": {
+                    "selectionMode": "single"
+                  }
+                }
+              }
+            }
+          ],
+          "featuresConfig": {
+            "crossService": {
+              "shared": false
+            }
+          },
+          "drilldownConfig": []
+        },
+        {
+          "id": "ocid1.custommanagementsavedsearch.oc1..txn-consume-rate-notify",
+          "displayName": "Consume Rate — Notify",
+          "providerId": "management-dashboard",
+          "providerVersion": "3.0.0",
+          "providerName": "Management Dashboard",
+          "compartmentId": "${compartment_ocid}",
+          "isOobSavedSearch": false,
+          "description": "FunctionInvocationCount rate do func-evt-consumer-notify (oci_faas, resourceId = function OCID).",
+          "nls": {},
+          "type": "WIDGET_SHOW_IN_DASHBOARD",
+          "uiConfig": {
+            "vizType": "chart",
+            "chartInfo": {
+              "jetConfig": {
+                "type": "lineWithArea",
+                "timeAxisType": "enabled",
+                "xAxis": {
+                  "viewportMin": "$(params.time.start)",
+                  "viewportMax": "$(params.time.end)"
+                },
+                "yAxis": {
+                  "title": ""
+                },
+                "dataCursor": "on"
+              },
+              "value": "aggregatedDatapoints.value",
+              "group": "aggregatedDatapoints.timestamp",
+              "colorBy": "_allDimensionConglomerate",
+              "series": "_allDimensionConglomerate"
+            },
+            "defaultDataSource": "Consume Rate Notify"
+          },
+          "dataConfig": [
+            {
+              "name": "Consume Rate Notify",
+              "type": "monitoringDataSource",
+              "parameters": {
+                "compartmentId": "$(params.compartmentId)",
+                "startTime": "$(params.time.start)",
+                "endTime": "$(params.time.end)",
+                "regionName": "$(params.regionName)",
+                "namespace": "oci_faas",
+                "mql": "FunctionInvocationCount[1m]{resourceId=\"${notify_function_id}\"}.rate()",
+                "maxDataPoints": "useIntervalExact"
+              }
+            }
+          ],
+          "metadataVersion": "2.0",
+          "screenImage": "",
+          "widgetTemplate": "visualizations/chartWidgetTemplate.html",
+          "widgetVM": "visualizations/chartWidget",
+          "parametersConfig": [
+            {
+              "name": "time",
+              "displayName": "$(bundle.globalSavedSearch.TIME_PARAMETER_NAME)",
+              "required": true,
+              "editUi": {
+                "inputType": "savedSearch",
+                "filterTile": {
+                  "filterId": "OOBSS-management-dashboard-time-selector-filter",
+                  "parametersMap": {
+                    "maxDurationDays": 89
+                  }
+                }
+              }
+            },
+            {
+              "name": "compartmentId",
+              "displayName": "$(bundle.globalSavedSearch.COMPARTMENT)",
+              "required": true,
+              "defaultFilterIds": [
+                "OOBSS-management-dashboard-compartment-filter"
+              ],
+              "valueFormat": {
+                "type": "object"
+              },
+              "editUi": {
+                "inputType": "compartmentSelect"
+              }
+            },
+            {
+              "name": "regionName",
+              "displayName": "$(bundle.globalSavedSearch.REGION)",
+              "required": false,
+              "defaultFilterIds": [
+                "OOBSS-management-dashboard-region-filter"
+              ],
+              "valueFormat": {
+                "type": "string"
+              },
+              "editUi": {
+                "inputType": "savedSearch",
+                "filterTile": {
+                  "filterId": "OOBSS-management-dashboard-region-filter",
+                  "parametersMap": {
+                    "selectionMode": "single"
+                  }
+                }
+              }
+            }
+          ],
+          "featuresConfig": {
+            "crossService": {
+              "shared": false
+            }
+          },
+          "drilldownConfig": []
+        },
+        {
+          "id": "ocid1.custommanagementsavedsearch.oc1..txn-consume-rate-audit",
+          "displayName": "Consume Rate — Audit",
+          "providerId": "management-dashboard",
+          "providerVersion": "3.0.0",
+          "providerName": "Management Dashboard",
+          "compartmentId": "${compartment_ocid}",
+          "isOobSavedSearch": false,
+          "description": "FunctionInvocationCount rate do func-evt-consumer-audit (oci_faas, resourceId = function OCID).",
+          "nls": {},
+          "type": "WIDGET_SHOW_IN_DASHBOARD",
+          "uiConfig": {
+            "vizType": "chart",
+            "chartInfo": {
+              "jetConfig": {
+                "type": "lineWithArea",
+                "timeAxisType": "enabled",
+                "xAxis": {
+                  "viewportMin": "$(params.time.start)",
+                  "viewportMax": "$(params.time.end)"
+                },
+                "yAxis": {
+                  "title": ""
+                },
+                "dataCursor": "on"
+              },
+              "value": "aggregatedDatapoints.value",
+              "group": "aggregatedDatapoints.timestamp",
+              "colorBy": "_allDimensionConglomerate",
+              "series": "_allDimensionConglomerate"
+            },
+            "defaultDataSource": "Consume Rate Audit"
+          },
+          "dataConfig": [
+            {
+              "name": "Consume Rate Audit",
+              "type": "monitoringDataSource",
+              "parameters": {
+                "compartmentId": "$(params.compartmentId)",
+                "startTime": "$(params.time.start)",
+                "endTime": "$(params.time.end)",
+                "regionName": "$(params.regionName)",
+                "namespace": "oci_faas",
+                "mql": "FunctionInvocationCount[1m]{resourceId=\"${audit_function_id}\"}.rate()",
+                "maxDataPoints": "useIntervalExact"
+              }
+            }
+          ],
+          "metadataVersion": "2.0",
+          "screenImage": "",
+          "widgetTemplate": "visualizations/chartWidgetTemplate.html",
+          "widgetVM": "visualizations/chartWidget",
+          "parametersConfig": [
+            {
+              "name": "time",
+              "displayName": "$(bundle.globalSavedSearch.TIME_PARAMETER_NAME)",
+              "required": true,
+              "editUi": {
+                "inputType": "savedSearch",
+                "filterTile": {
+                  "filterId": "OOBSS-management-dashboard-time-selector-filter",
+                  "parametersMap": {
+                    "maxDurationDays": 89
+                  }
+                }
+              }
+            },
+            {
+              "name": "compartmentId",
+              "displayName": "$(bundle.globalSavedSearch.COMPARTMENT)",
+              "required": true,
+              "defaultFilterIds": [
+                "OOBSS-management-dashboard-compartment-filter"
+              ],
+              "valueFormat": {
+                "type": "object"
+              },
+              "editUi": {
+                "inputType": "compartmentSelect"
+              }
+            },
+            {
+              "name": "regionName",
+              "displayName": "$(bundle.globalSavedSearch.REGION)",
+              "required": false,
+              "defaultFilterIds": [
+                "OOBSS-management-dashboard-region-filter"
+              ],
+              "valueFormat": {
+                "type": "string"
+              },
+              "editUi": {
+                "inputType": "savedSearch",
+                "filterTile": {
+                  "filterId": "OOBSS-management-dashboard-region-filter",
+                  "parametersMap": {
+                    "selectionMode": "single"
+                  }
+                }
+              }
+            }
+          ],
+          "featuresConfig": {
+            "crossService": {
+              "shared": false
+            }
+          },
+          "drilldownConfig": []
+        },
+        {
+          "id": "ocid1.custommanagementsavedsearch.oc1..txn-consumer-lag",
+          "displayName": "Consumer Lag (ms)",
+          "providerId": "management-dashboard",
+          "providerVersion": "3.0.0",
+          "providerName": "Management Dashboard",
+          "compartmentId": "${compartment_ocid}",
+          "isOobSavedSearch": false,
+          "description": "EventConsumeLagMs média (custom namespace ${events_metric_namespace}); dims consumer/event_type.",
+          "nls": {},
+          "type": "WIDGET_SHOW_IN_DASHBOARD",
+          "uiConfig": {
+            "vizType": "chart",
+            "chartInfo": {
+              "jetConfig": {
+                "type": "lineWithArea",
+                "timeAxisType": "enabled",
+                "xAxis": {
+                  "viewportMin": "$(params.time.start)",
+                  "viewportMax": "$(params.time.end)"
+                },
+                "yAxis": {
+                  "title": ""
+                },
+                "dataCursor": "on"
+              },
+              "value": "aggregatedDatapoints.value",
+              "group": "aggregatedDatapoints.timestamp",
+              "colorBy": "_allDimensionConglomerate",
+              "series": "_allDimensionConglomerate"
+            },
+            "defaultDataSource": "Consumer Lag"
+          },
+          "dataConfig": [
+            {
+              "name": "Consumer Lag",
+              "type": "monitoringDataSource",
+              "parameters": {
+                "compartmentId": "$(params.compartmentId)",
+                "startTime": "$(params.time.start)",
+                "endTime": "$(params.time.end)",
+                "regionName": "$(params.regionName)",
+                "namespace": "${events_metric_namespace}",
+                "mql": "EventConsumeLagMs[1m].grouping(consumer).mean()",
+                "maxDataPoints": "useIntervalExact"
+              }
+            }
+          ],
+          "metadataVersion": "2.0",
+          "screenImage": "",
+          "widgetTemplate": "visualizations/chartWidgetTemplate.html",
+          "widgetVM": "visualizations/chartWidget",
+          "parametersConfig": [
+            {
+              "name": "time",
+              "displayName": "$(bundle.globalSavedSearch.TIME_PARAMETER_NAME)",
+              "required": true,
+              "editUi": {
+                "inputType": "savedSearch",
+                "filterTile": {
+                  "filterId": "OOBSS-management-dashboard-time-selector-filter",
+                  "parametersMap": {
+                    "maxDurationDays": 89
+                  }
+                }
+              }
+            },
+            {
+              "name": "compartmentId",
+              "displayName": "$(bundle.globalSavedSearch.COMPARTMENT)",
+              "required": true,
+              "defaultFilterIds": [
+                "OOBSS-management-dashboard-compartment-filter"
+              ],
+              "valueFormat": {
+                "type": "object"
+              },
+              "editUi": {
+                "inputType": "compartmentSelect"
+              }
+            },
+            {
+              "name": "regionName",
+              "displayName": "$(bundle.globalSavedSearch.REGION)",
+              "required": false,
+              "defaultFilterIds": [
+                "OOBSS-management-dashboard-region-filter"
+              ],
+              "valueFormat": {
+                "type": "string"
+              },
+              "editUi": {
+                "inputType": "savedSearch",
+                "filterTile": {
+                  "filterId": "OOBSS-management-dashboard-region-filter",
+                  "parametersMap": {
+                    "selectionMode": "single"
+                  }
+                }
+              }
+            }
+          ],
+          "featuresConfig": {
+            "crossService": {
+              "shared": false
+            }
+          },
+          "drilldownConfig": []
+        },
+        {
+          "id": "ocid1.custommanagementsavedsearch.oc1..txn-audit-processed",
+          "displayName": "Audit Events Processed",
+          "providerId": "management-dashboard",
+          "providerVersion": "3.0.0",
+          "providerName": "Management Dashboard",
+          "compartmentId": "${compartment_ocid}",
+          "isOobSavedSearch": false,
+          "description": "AuditEventProcessed agrupado por event_type (custom namespace ${events_metric_namespace}).",
+          "nls": {},
+          "type": "WIDGET_SHOW_IN_DASHBOARD",
+          "uiConfig": {
+            "vizType": "chart",
+            "chartInfo": {
+              "jetConfig": {
+                "type": "bar",
+                "timeAxisType": "enabled",
+                "xAxis": {
+                  "viewportMin": "$(params.time.start)",
+                  "viewportMax": "$(params.time.end)"
+                },
+                "yAxis": {
+                  "title": ""
+                },
+                "dataCursor": "on"
+              },
+              "value": "aggregatedDatapoints.value",
+              "group": "aggregatedDatapoints.timestamp",
+              "colorBy": "_allDimensionConglomerate",
+              "series": "_allDimensionConglomerate"
+            },
+            "defaultDataSource": "Audit Events Processed"
+          },
+          "dataConfig": [
+            {
+              "name": "Audit Events Processed",
+              "type": "monitoringDataSource",
+              "parameters": {
+                "compartmentId": "$(params.compartmentId)",
+                "startTime": "$(params.time.start)",
+                "endTime": "$(params.time.end)",
+                "regionName": "$(params.regionName)",
+                "namespace": "${events_metric_namespace}",
+                "mql": "AuditEventProcessed[1m].grouping(event_type).sum()",
+                "maxDataPoints": "useIntervalExact"
+              }
+            }
+          ],
+          "metadataVersion": "2.0",
+          "screenImage": "",
+          "widgetTemplate": "visualizations/chartWidgetTemplate.html",
+          "widgetVM": "visualizations/chartWidget",
+          "parametersConfig": [
+            {
+              "name": "time",
+              "displayName": "$(bundle.globalSavedSearch.TIME_PARAMETER_NAME)",
+              "required": true,
+              "editUi": {
+                "inputType": "savedSearch",
+                "filterTile": {
+                  "filterId": "OOBSS-management-dashboard-time-selector-filter",
+                  "parametersMap": {
+                    "maxDurationDays": 89
+                  }
+                }
+              }
+            },
+            {
+              "name": "compartmentId",
+              "displayName": "$(bundle.globalSavedSearch.COMPARTMENT)",
+              "required": true,
+              "defaultFilterIds": [
+                "OOBSS-management-dashboard-compartment-filter"
+              ],
+              "valueFormat": {
+                "type": "object"
+              },
+              "editUi": {
+                "inputType": "compartmentSelect"
+              }
+            },
+            {
+              "name": "regionName",
+              "displayName": "$(bundle.globalSavedSearch.REGION)",
+              "required": false,
+              "defaultFilterIds": [
+                "OOBSS-management-dashboard-region-filter"
+              ],
+              "valueFormat": {
+                "type": "string"
+              },
+              "editUi": {
+                "inputType": "savedSearch",
+                "filterTile": {
+                  "filterId": "OOBSS-management-dashboard-region-filter",
+                  "parametersMap": {
+                    "selectionMode": "single"
+                  }
+                }
+              }
+            }
+          ],
+          "featuresConfig": {
+            "crossService": {
+              "shared": false
+            }
+          },
+          "drilldownConfig": []
+        }
+      ]
+    }
+  ]
+}

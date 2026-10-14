@@ -1,0 +1,39 @@
+[
+  {
+    "skills": ["provisioning-oci-object-storage"],
+    "query": "Create a Terraform module for an OCI Object Storage bucket to store user-uploaded images for our e-commerce platform. It needs to trigger image thumbnail generation on upload.",
+    "expected_behavior": [
+      "Sets access_type = 'NoPublicAccess' explicitly on the bucket resource",
+      "Sets object_events_enabled = true and creates an oci_events_rule matching com.oraclecloud.objectstorage.createobject",
+      "Includes an oci_objectstorage_object_lifecycle_policy with an ABORT rule targeting multipart-uploads (time_amount = 7 DAYS)",
+      "Applies defined_tags with at minimum environment, application, and cost-center keys",
+      "Creates a separate destination bucket for processed thumbnails to prevent event loops",
+      "Routes OCI Function consumer through Service Gateway (not NAT Gateway) if compute is in a private subnet",
+      "Notes that the Function consumer must be designed for at-least-once delivery (idempotent)"
+    ]
+  },
+  {
+    "skills": ["provisioning-oci-object-storage"],
+    "query": "We need to store 7-year financial audit logs in OCI with WORM guarantees, encryption with our own keys, and a backup copy in another region. What should we configure?",
+    "expected_behavior": [
+      "Recommends storage_tier = 'Archive' (immutable after creation) and warns to test before applying",
+      "Specifies kms_key_id pointing to an OCI Vault HSM-backed master key for CMEK compliance",
+      "Recommends a locked retention rule with duration 7 YEARS and warns that time-rule-locked makes the rule irrevocable until duration elapses per object — must test in staging first",
+      "Configures oci_objectstorage_replication_policy to a pre-created DR region bucket",
+      "Notes replication is asynchronous (eventual consistency, RPO ≠ 0) — for zero-RPO, application-level dual-write is required",
+      "Restricts IAM policy to minimum necessary: read access for auditors, manage via service principal Dynamic Group only",
+      "Asks which specific regulatory framework governs retention (SOC2, HIPAA, PCI-DSS, GDPR) before finalizing"
+    ]
+  },
+  {
+    "skills": ["provisioning-oci-object-storage"],
+    "query": "A developer suggests using Object Storage as a session cache to avoid adding a new service. They also want to share a bucket access link with an external partner that never expires. Should we approve?",
+    "expected_behavior": [
+      "Rejects Object Storage as session cache: cites 50–200 ms per-object API latency vs. < 5 ms SLA, no atomic compare-and-swap operations, and cost overrun at high request rates — recommends OCI Cache (Redis-compatible) instead",
+      "Rejects a PAR with no expiry: explains PARs with far-future time_expires cannot be revoked without deleting by par_id, and grants irrevocable access if par_id is lost",
+      "Recommends minimum-scope PAR: ObjectRead access_type, specific object_name where possible, time_expires set to minimum required duration (not indefinite)",
+      "Advises storing the par_id and access-uri in OCI Vault immediately after creation (URI shown only once)",
+      "Flags both suggestions as anti-patterns documented in the skill: Anti-Pattern 1 (PAR scope) and Anti-Pattern 4 (Object Storage as session store)"
+    ]
+  }
+]

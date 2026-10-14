@@ -1,0 +1,52 @@
+[
+  {
+    "skills": ["monitoring-oci-java-functions"],
+    "query": "Add custom metrics to my OCI Java function that tracks order processing count and duration. The function runs in a private subnet.",
+    "expected_behavior": [
+      "Uses ResourcePrincipalAuthenticationDetailsProvider — never API Key credentials",
+      "Initializes MonitoringClient in @FnConfiguration static block, not inside handleRequest",
+      "Calls PostMetricData synchronously before returning — no detached threads or CompletableFuture",
+      "Uses BatchAtomicity.NonAtomic and checks getRejectedMetricsData() in the response",
+      "Uses new Date() for datapoint timestamps — never stale event timestamps",
+      "Reads COMPARTMENT_OCID and METRIC_NAMESPACE from RuntimeContext config, not hardcoded",
+      "Reminds user that a Service Gateway is required in the VCN for private-subnet connectivity",
+      "Swallows metric post exceptions so observability failures never break business logic"
+    ]
+  },
+  {
+    "skills": ["monitoring-oci-java-functions"],
+    "query": "Create Terraform alarms for my OCI Function. It times out after 30 seconds. I need to know when it errors, when it's slow, and when it gets throttled.",
+    "expected_behavior": [
+      "Creates oci_monitoring_alarm for FunctionErrorCount with pending_duration = 'PT2M' (not default PT1M)",
+      "Creates oci_monitoring_alarm for FunctionExecutionDuration p99 with threshold at 80% of timeout (24000ms) and pending_duration = 'PT3M'",
+      "Creates oci_monitoring_alarm for FunctionThrottleCount with pending_duration = 'PT2M'",
+      "All alarms use namespace = 'oci_faas'",
+      "All alarms use message_format = 'ONS_OPTIMIZED'",
+      "Uses variable or local for function OCID in MQL queries — does not hardcode OCID",
+      "Asks for (or notes requirement for) an ONS notification topic to attach as destination"
+    ]
+  },
+  {
+    "skills": ["monitoring-oci-java-functions"],
+    "query": "I have 5 Java Functions in a single microservice domain. How should I organize my metric namespaces? Some developers want per-function namespaces.",
+    "expected_behavior": [
+      "Presents the namespace strategy decision with tradeoff table (per-function / per-application / per-domain)",
+      "Recommends per-domain namespace for functions sharing a business domain SLO",
+      "Warns against flat 'custom_metrics' namespace — explains MQL ambiguity and collision risk at scale",
+      "Explains that namespace suffix with environment (e.g. order_system_prod vs order_system_staging) is mandatory for isolation",
+      "Notes that environment-suffixed namespace must be injected via function config — not hardcoded in source"
+    ]
+  },
+  {
+    "skills": ["monitoring-oci-java-functions"],
+    "query": "My metric dashboard shows gaps every time the function is invoked during high-load periods. The function returns successfully but I see no custom metrics.",
+    "expected_behavior": [
+      "Identifies Service Gateway as primary suspect for private-subnet functions — explains SocketTimeoutException silent failure path",
+      "Identifies fire-and-forget / detached thread posting as second suspect — explains FDK container freeze race condition",
+      "Identifies missing rejection check on PostMetricData as third suspect — HTTP 200 with rejectedMetricsData is not an HTTP error",
+      "Provides curl verification command to check Service Gateway connectivity from private subnet",
+      "Identifies stale timestamps (> 2 hours) as possible cause if the function processes buffered events",
+      "Provides mvn dependency:tree check to rule out Jersey2/Jersey3 classpath conflict"
+    ]
+  }
+]

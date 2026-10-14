@@ -1,0 +1,25 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mvn *)",
+      "Bash(terraform fmt *)",
+      "Bash(terraform validate *)",
+      "Bash(terraform plan *)",
+      "Bash(docker build *)",
+      "Bash(docker images *)",
+      "Bash(./scripts/preflight.sh*)",
+      "Read(./services/**)",
+      "Read(./infra/**)"
+    ],
+    "ask": [
+      "Bash(terraform apply *)",
+      "Bash(terraform destroy *)",
+      "Bash(docker push *)",
+      "Bash(./scripts/oci-cleanup.sh*)"
+    ],
+    "deny": [
+      "Read(./**/.env)",
+      "Read(./**/*.tfvars)"
+    ]
+  }
+}
