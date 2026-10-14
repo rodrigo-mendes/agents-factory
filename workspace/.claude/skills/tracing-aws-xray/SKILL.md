@@ -201,7 +201,7 @@ aws lambda list-functions \
 ## Blueprints Directory Structure
 
 ```
-StoryBeat/.claude/skills/tracing-aws-xray/
+workspace/.claude/skills/tracing-aws-xray/
 ├── SKILL.md                          ← This file (summary + guardrails)
 └── blueprints/
     └── evaluation-scenarios.md       ← 6 test scenarios for skill-evaluator

@@ -1,6 +1,6 @@
 # Platform Software Research — Output Template
 
-Save as `research_platform_{{PLATFORM_SOFTWARE}}_v{{TARGET_VERSION}}.md` in `StoryBeat/docs/`.
+Save as `research_platform_{{PLATFORM_SOFTWARE}}_v{{TARGET_VERSION}}.md` in `workspace/docs/`.
 
 ---
 

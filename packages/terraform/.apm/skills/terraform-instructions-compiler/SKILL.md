@@ -1,7 +1,7 @@
 ---
 name: terraform-instructions-compiler
 description: Interactive compiler that extracts Terraform best practices from a research file, interviews the user, and compiles targeted rules/instruction files. Use when turning Terraform research into scoped rules.
-argument-hint: "<research-file-path> (e.g. StoryBeat/research_terraform_v1.5.md)"
+argument-hint: "<research-file-path> (e.g. workspace/research_terraform_v1.5.md)"
 context: fork
 agent: artifact-author
 disable-model-invocation: true

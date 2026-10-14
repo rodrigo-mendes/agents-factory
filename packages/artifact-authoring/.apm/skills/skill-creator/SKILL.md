@@ -1,7 +1,7 @@
 ---
 name: skill-creator
 description: "Creates Agent Skills (SKILL.md) from a research_[TECH]_v[VERSION].md file following official Claude best practices and team conventions. Use when authoring a new skill from a completed research file produced by a researcher skill (e.g. /researching-technical-frameworks). For all-in-one research + skill, use /methodologies-skill-generator instead."
-argument-hint: "Path to research file (e.g. StoryBeat/research_FastAPI_v0.115.md)"
+argument-hint: "Path to research file (e.g. workspace/research_FastAPI_v0.115.md)"
 context: fork
 agent: artifact-author
 disable-model-invocation: true
@@ -295,7 +295,7 @@ Source Bibliography:
 ## Invocation Example
 
 ```
-/skill-creator StoryBeat/research_FastAPI_v0.104.1.md
+/skill-creator workspace/research_FastAPI_v0.104.1.md
 ```
 
 Derived: tech = `FastAPI`, version = `0.104.1`, skill name = `fastapi-async-api`.

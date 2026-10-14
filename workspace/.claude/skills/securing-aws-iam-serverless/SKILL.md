@@ -209,7 +209,7 @@ aws iam get-credential-report --query 'Content' --output text | base64 -d | \
 ## Blueprints Directory Structure
 
 ```
-StoryBeat/.claude/skills/securing-aws-iam-serverless/
+workspace/.claude/skills/securing-aws-iam-serverless/
 ├── SKILL.md                          ← This file (summary + guardrails)
 └── blueprints/
     ├── evaluation-scenarios.md       ← 6 test scenarios

@@ -81,7 +81,7 @@ it.
 Not compiled code — artifacts run **in Claude Code** via `/<command>`:
 
 - Search for a technology: `/researching-technical-frameworks <tech> <version>`
-- Create a skill from a research file: `/skill-creator StoryBeat/research_X_v1.md`
+- Create a skill from a research file: `/skill-creator workspace/research_X_v1.md`
 - Create a subagent: `/agent-creator <domain-role> [advisory|orchestrator]`
 - Compile Terraform research into scoped rules: `/terraform-instructions-compiler <research-file>`
 - Create a methodology skill (all-in-one): `/methodologies-skill-generator <methodology>`
@@ -145,7 +145,8 @@ docs/
 ├── manual/       ← subagent reference manual
 ├── templates/    ← POST_MORTEM_TEMPLATE.md (human procedure, not a Claude Code artifact)
 └── referencia/   ← glossary and conventions
-StoryBeat/      ← agent-generated research outputs (untracked)
+workspace/      ← research outputs and validation working files (versioned; was StoryBeat/); Camel Quarkus
+                  research_*_v3.40.md + _family_facts/_family_rules are the provenance of its 13 skills
 ```
 
 There is **no `.claude/templates/`** — every template lives in the `assets/` of the skill that

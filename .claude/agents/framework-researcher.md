@@ -120,7 +120,7 @@ suggest the correct `/command` rather than proceeding.
 
   > Output path: `research_{TECH}_v{VERSION}.md` in the directory from `$ARGUMENTS`,
   > or in the directory where the invoking skill resides if no path is specified.
-  > Never use `StoryBeat/docs/` unless that directory exists AND `$ARGUMENTS` explicitly points to it.
+  > Never use `workspace/docs/` unless that directory exists AND `$ARGUMENTS` explicitly points to it.
 
   **P4 delegates file writing to `research-synthesizer`. Do not write the output file directly.**
 

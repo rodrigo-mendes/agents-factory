@@ -42,7 +42,7 @@ Choose one of the scenarios below based on your goal:
 → [Creating Skills](criando-skills.md)
 
 ```
-/skill-creator StoryBeat/research_<Tech>_v<Version>.md
+/skill-creator workspace/research_<Tech>_v<Version>.md
 ```
 
 ### "I want to create a full agent"

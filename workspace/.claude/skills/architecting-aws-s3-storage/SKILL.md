@@ -258,7 +258,7 @@ Standard (0-30d) → Standard-IA (30-90d) → Glacier Instant Retrieval (90-365d
 ## Blueprints Directory Structure
 
 ```
-StoryBeat/.claude/skills/architecting-aws-s3-storage/
+workspace/.claude/skills/architecting-aws-s3-storage/
 ├── SKILL.md                              <- This file (guardrails + verification)
 └── blueprints/
     └── evaluation-scenarios.md           <- 5 test scenarios for skill-evaluator

@@ -31,12 +31,12 @@ Use after having a `research_<Tech>_v<Version>.md` from any researcher and wanti
 
 | Field | Required | Example |
 |-------|:-----------:|---------|
-| Path to the research file | ✅ | `StoryBeat/research_FastAPI_v0.115.md` |
+| Path to the research file | ✅ | `workspace/research_FastAPI_v0.115.md` |
 
 ### Call Example
 
 ```
-/skill-creator StoryBeat/research_FastAPI_v0.115.md
+/skill-creator workspace/research_FastAPI_v0.115.md
 ```
 
 The agent will automatically derive from the file:
@@ -275,7 +275,7 @@ selected by `TARGET_PLATFORM`. Both dialects come from the same generic template
 
 | Field | Required | Example |
 |-------|:-----------:|---------|
-| Research file | ✅ | `StoryBeat/research_Terraform_Engineering_Best_Practices_v1.9.md` |
+| Research file | ✅ | `workspace/research_Terraform_Engineering_Best_Practices_v1.9.md` |
 | Terraform Version | Derived from file | `1.9` |
 | Cloud Provider | Derived from file | `AWS` |
 | Project root | Optional | `.` (workspace root) |
@@ -284,7 +284,7 @@ selected by `TARGET_PLATFORM`. Both dialects come from the same generic template
 ### Call Example
 
 ```
-/terraform-instructions-compiler StoryBeat/research_Terraform_Engineering_Best_Practices_v1.9.md
+/terraform-instructions-compiler workspace/research_Terraform_Engineering_Best_Practices_v1.9.md
 ```
 
 ### Internal Pipeline (5 phases, from the generic engine)

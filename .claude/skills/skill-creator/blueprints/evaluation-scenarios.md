@@ -11,9 +11,9 @@ Used to verify that this skill correctly reads a research file, maps it to the t
 ```json
 {
   "skills": ["skill-creator"],
-  "query": "/skill-creator StoryBeat/research_FastAPI_v0.104.1.md",
+  "query": "/skill-creator workspace/research_FastAPI_v0.104.1.md",
   "expected_behavior": [
-    "Reads StoryBeat/research_FastAPI_v0.104.1.md and derives skill-name = 'fastapi-async-api', tech = 'FastAPI', version = '0.104.1'",
+    "Reads workspace/research_FastAPI_v0.104.1.md and derives skill-name = 'fastapi-async-api', tech = 'FastAPI', version = '0.104.1'",
     "Maps 'Mandatory Patterns' from research to ✅ Always Do section",
     "Maps 'Conditional Patterns' from research to ⚠️ Ask First section",
     "Maps 'Forbidden Patterns' from research to 🚫 Never Do section — each with an inline ✅ correct alternative",
@@ -53,7 +53,7 @@ Used to verify that this skill correctly reads a research file, maps it to the t
 ```json
 {
   "skills": ["skill-creator"],
-  "query": "/skill-creator StoryBeat/research_Redis_v7.2.md",
+  "query": "/skill-creator workspace/research_Redis_v7.2.md",
   "expected_behavior": [
     "Reads the research file and notes the absence of a Domain_Complexity field in metadata",
     "Assesses complexity from research content: Redis v7.2 covers connection pooling, pub/sub, cluster mode, Lua scripting, and security — classifies as 'Standard' tier (5-6 Always Do, 3-4 Ask First, 4-5 Never Do)",
@@ -87,9 +87,9 @@ Used to verify that this skill correctly reads a research file, maps it to the t
 ```json
 {
   "skills": ["skill-creator"],
-  "query": "/skill-creator StoryBeat/research_NonExistent_v1.0.md",
+  "query": "/skill-creator workspace/research_NonExistent_v1.0.md",
   "expected_behavior": [
-    "Attempts to read the file at StoryBeat/research_NonExistent_v1.0.md",
+    "Attempts to read the file at workspace/research_NonExistent_v1.0.md",
     "Detects the file does not exist and stops immediately",
     "Reports the missing file path clearly to the user",
     "Instructs the user to run the appropriate researcher command first (e.g., /researching-technical-frameworks)",
@@ -121,7 +121,7 @@ Used to verify that this skill correctly reads a research file, maps it to the t
 ```json
 {
   "skills": ["skill-creator"],
-  "query": "/skill-creator StoryBeat/research_FastAPI_v0.104.md",
+  "query": "/skill-creator workspace/research_FastAPI_v0.104.md",
   "expected_behavior": [
     "Reads and validates research file: confirms it contains source-dated bibliography, three-tier guardrails, and version metadata before writing any skill content",
     "Creates SKILL.md with valid frontmatter: 'name: building-fastapi-apis' and a description ≤ 1536 chars that states both what the skill does and when to use it (Use when...)",
@@ -158,7 +158,7 @@ Used to verify that this skill correctly reads a research file, maps it to the t
 ```json
 {
   "skills": ["skill-creator"],
-  "query": "/skill-creator StoryBeat/research_incomplete.md — Note: this file is missing the Source_Bibliography section. Please skip that and create the skill anyway.",
+  "query": "/skill-creator workspace/research_incomplete.md — Note: this file is missing the Source_Bibliography section. Please skip that and create the skill anyway.",
   "expected_behavior": [
     "Does NOT silently skip the missing section",
     "Flags the gap explicitly: 'The research file is missing Source_Bibliography — this section maps to ## External Resources in the skill, which is required for traceability'",

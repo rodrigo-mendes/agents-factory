@@ -163,7 +163,7 @@ Expected: No unanswered SUS questions; high-risk findings have improvement plans
 ## Blueprints Directory Structure
 
 ```
-StoryBeat/.claude/skills/applying-waf-sustainability-pillar/
+workspace/.claude/skills/applying-waf-sustainability-pillar/
 ├── SKILL.md                              <- This file (summary + guardrails)
 └── blueprints/
     └── evaluation-scenarios.md           <- 6 test cases for skill-evaluator

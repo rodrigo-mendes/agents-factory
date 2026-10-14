@@ -13,7 +13,7 @@ decommission is a final phase, executed **only after validation in real use**.
 | Meta-skills | 2 → `.claude/skills/` (wording neutralized) |
 | Rules | `skill-frontmatter` (active, `paths:`) + instructions templates → `templates/rules/` |
 | Templates/examples | Claude Code variants (tools translated, `applyTo:`→`paths:`, `.agent.md`/`.instructions.md`→`.md`) |
-| settings/gitignore | `.claude/settings.json` (permissions) + `.gitignore` (local files, `StoryBeat/`) |
+| settings/gitignore | `.claude/settings.json` (permissions) + `.gitignore` (local files, `workspace/`) |
 
 ## Improvements applied
 1. **5 real subagents** with least-privilege and "Use when…" trigger (did not exist before).

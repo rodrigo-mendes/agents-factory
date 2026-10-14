@@ -209,7 +209,7 @@ aws secretsmanager stop-replication-to-replica --secret-id <replica-arn>
 ## Blueprints Directory Structure
 
 ```
-StoryBeat/.claude/skills/securing-aws-secrets-certificates/
+workspace/.claude/skills/securing-aws-secrets-certificates/
 ├── SKILL.md                              <- This file (index + guardrails)
 └── blueprints/
     ├── always-do-patterns.md             <- 10 mandatory patterns, verification commands, IAM examples

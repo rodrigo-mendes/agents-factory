@@ -76,7 +76,7 @@ Additional streaming-broker-specific research: see **[category-specifics.md](./b
 
 Base template: **[output-format-base.md](../researching-platform-software/blueprints/shared/output-format-base.md)** (13 mandatory sections).
 
-Save as `research_platform_{{PLATFORM_SOFTWARE}}_v{{TARGET_VERSION}}.md` in `StoryBeat/docs/`.
+Save as `research_platform_{{PLATFORM_SOFTWARE}}_v{{TARGET_VERSION}}.md` in `workspace/docs/`.
 
 Conditional sections applicable to this sibling:
 - **§K8s Kubernetes Deployment Blueprint** — mandatory when `DEPLOYMENT_MODEL=kubernetes-operator`
@@ -87,10 +87,10 @@ Conditional sections applicable to this sibling:
 ```bash
 # Confirm all mandatory sections + reference card cited
 grep -E "^## (Executive Summary|Platform Glossary|Operational Guardrails|Installation|Configuration Reference|HA & Failover|Backup|Upgrade|Observability|Security Hardening|Failure Modes)" \
-  StoryBeat/docs/research_platform_*.md
+  workspace/docs/research_platform_*.md
 
 # Confirm the reference card used is cited in the doc
-grep -c "references/" StoryBeat/docs/research_platform_*.md
+grep -c "references/" workspace/docs/research_platform_*.md
 
 # Confirm vendor terminology is not mixed
 # Example: if researching RabbitMQ, "partition" (Kafka term) should not appear as if applicable

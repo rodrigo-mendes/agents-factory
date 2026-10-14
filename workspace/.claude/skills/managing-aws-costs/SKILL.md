@@ -215,7 +215,7 @@ aws ce list-cost-categories
 ## Blueprints Directory Structure
 
 ```
-StoryBeat/.claude/skills/managing-aws-costs/
+workspace/.claude/skills/managing-aws-costs/
 ├── SKILL.md                              <- This file (index + guardrails)
 └── blueprints/
     └── evaluation-scenarios.md           <- 5 test scenarios for skill validation

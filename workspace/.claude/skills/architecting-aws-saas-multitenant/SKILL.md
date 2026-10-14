@@ -221,7 +221,7 @@ Action: Audit onboarding runbook — any manual step is a defect.
 ## Blueprints Directory Structure
 
 ```
-StoryBeat/.claude/skills/architecting-aws-saas-multitenant/
+workspace/.claude/skills/architecting-aws-saas-multitenant/
 ├── SKILL.md                              <- This file (guardrails + decision tables)
 └── blueprints/
     └── evaluation-scenarios.md           <- 6 test cases for skill-evaluator

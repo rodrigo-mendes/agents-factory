@@ -233,7 +233,7 @@ aws budgets describe-budgets --account-id <management-account-id> \
 ## Blueprints Directory Structure
 
 ```
-StoryBeat/.claude/skills/architecting-aws-multi-account-organizations/
+workspace/.claude/skills/architecting-aws-multi-account-organizations/
 ├── SKILL.md                              ← This file (summary + guardrails)
 └── blueprints/
     ├── always-do-patterns.md             ← ✅ 8 mandatory patterns with AWS CLI verification

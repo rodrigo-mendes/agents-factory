@@ -691,18 +691,18 @@ Cross-provider mapping for the messaging/eventing/scheduling service classes cov
 ### Verification commands (expected output)
 
 ```bash
-grep -E "^## (Executive Summary|Cloud Architecture Glossary|Architecture Guardrails|Cloud-Native Design Patterns|Security Architecture|Operational Patterns|Reference Architectures|Provider Differentiators|Scenario Coverage|Service Equivalence Map)" StoryBeat/docs/research_cloud_AWS_EventBridge_EDA_2026.md
+grep -E "^## (Executive Summary|Cloud Architecture Glossary|Architecture Guardrails|Cloud-Native Design Patterns|Security Architecture|Operational Patterns|Reference Architectures|Provider Differentiators|Scenario Coverage|Service Equivalence Map)" workspace/docs/research_cloud_AWS_EventBridge_EDA_2026.md
 # Expected: all 10 headings appear
 
-grep -E "^### (✅ Mandatory Patterns|⚠️ Architectural Decisions|🚫 Anti-Patterns)" StoryBeat/docs/research_cloud_AWS_EventBridge_EDA_2026.md
+grep -E "^### (✅ Mandatory Patterns|⚠️ Architectural Decisions|🚫 Anti-Patterns)" workspace/docs/research_cloud_AWS_EventBridge_EDA_2026.md
 # Expected: all 3 subsection headings appear
 
-grep -c "Pillar Alignment:" StoryBeat/docs/research_cloud_AWS_EventBridge_EDA_2026.md
+grep -c "Pillar Alignment:" workspace/docs/research_cloud_AWS_EventBridge_EDA_2026.md
 # Expected: 6 (one per Mandatory Pattern)
 
-grep -c "Risk Level:" StoryBeat/docs/research_cloud_AWS_EventBridge_EDA_2026.md
+grep -c "Risk Level:" workspace/docs/research_cloud_AWS_EventBridge_EDA_2026.md
 # Expected: 6 (one per Anti-Pattern)
 
-grep "Target_Edition:" StoryBeat/docs/research_cloud_AWS_EventBridge_EDA_2026.md
+grep "Target_Edition:" workspace/docs/research_cloud_AWS_EventBridge_EDA_2026.md
 # Expected: Target_Edition: "AWS EventBridge 2026"
 ```

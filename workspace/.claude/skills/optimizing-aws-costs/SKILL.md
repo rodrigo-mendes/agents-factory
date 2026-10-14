@@ -218,7 +218,7 @@ Otherwise → On-Demand
 ## Blueprints Directory Structure
 
 ```
-StoryBeat/.claude/skills/optimizing-aws-costs/
+workspace/.claude/skills/optimizing-aws-costs/
 ├── SKILL.md                          <- This file (guardrails + quick reference)
 └── blueprints/
     └── evaluation-scenarios.md       <- 6 test cases for skill-evaluator

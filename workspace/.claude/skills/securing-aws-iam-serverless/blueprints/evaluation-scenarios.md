@@ -1,7 +1,7 @@
 # Evaluation Scenarios — securing-aws-iam-serverless
 
 Skill under test: `securing-aws-iam-serverless`
-Research source: `StoryBeat/docs/research_cloud_AWS_IAM_Security_Serverless_2026.md` (2026-08-28)
+Research source: `workspace/docs/research_cloud_AWS_IAM_Security_Serverless_2026.md` (2026-08-28)
 
 ---
 

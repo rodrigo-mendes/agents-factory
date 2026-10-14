@@ -10,9 +10,9 @@ Estimated time: 15-20 minutes. No prerequisites beyond Claude Code open in the p
 ```
 Step 1: /researching-technical-frameworks
          → agent asks for: technology, version, official URL, partners
-         → produces: StoryBeat/research_FastAPI_v0.115.md
+         → produces: workspace/research_FastAPI_v0.115.md
 
-Step 2: /skill-creator StoryBeat/research_FastAPI_v0.115.md
+Step 2: /skill-creator workspace/research_FastAPI_v0.115.md
          → agent loads patterns + applies three-tier
          → produces: .claude/skills/fastapi-async-api/SKILL.md + blueprints/
 
@@ -44,7 +44,7 @@ The agent will ask (interactively):
 **Produced output**:
 
 ```
-StoryBeat/research_FastAPI_v0.115.md
+workspace/research_FastAPI_v0.115.md
 ```
 
 Sections the file contains:
@@ -62,7 +62,7 @@ Sections the file contains:
 ## Step 2 — Create the Skill
 
 ```
-/skill-creator StoryBeat/research_FastAPI_v0.115.md
+/skill-creator workspace/research_FastAPI_v0.115.md
 ```
 
 The agent loads the research file and automatically applies:

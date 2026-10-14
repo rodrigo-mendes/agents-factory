@@ -181,7 +181,7 @@ aws sqs start-message-move-task \
 ## Blueprints Directory Structure
 
 ```
-StoryBeat/.claude/skills/architecting-aws-sqs-messaging/
+workspace/.claude/skills/architecting-aws-sqs-messaging/
 ├── SKILL.md                              <- This file (guardrails + quick reference)
 └── blueprints/
     └── evaluation-scenarios.md           <- 6 test cases for skill-evaluator

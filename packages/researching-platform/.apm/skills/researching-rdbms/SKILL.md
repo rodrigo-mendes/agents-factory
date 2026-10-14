@@ -66,7 +66,7 @@ RDBMS-specific: **[category-specifics.md](./blueprints/category-specifics.md)**.
 
 Base: **[output-format-base.md](../researching-platform-software/blueprints/shared/output-format-base.md)**.
 
-Save as `research_platform_{{PLATFORM_SOFTWARE}}_v{{TARGET_VERSION}}.md` in `StoryBeat/docs/`.
+Save as `research_platform_{{PLATFORM_SOFTWARE}}_v{{TARGET_VERSION}}.md` in `workspace/docs/`.
 
 Conditional sections:
 - **§K8s Kubernetes Deployment Blueprint** — when `DEPLOYMENT_MODEL=kubernetes-operator` (CloudNativePG, Percona, etc.)

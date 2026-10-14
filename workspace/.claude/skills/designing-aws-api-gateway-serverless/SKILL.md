@@ -256,7 +256,7 @@ aws apigateway get-request-validators --rest-api-id <id>
 ## Blueprints Directory Structure
 
 ```
-StoryBeat/.claude/skills/designing-aws-api-gateway-serverless/
+workspace/.claude/skills/designing-aws-api-gateway-serverless/
 ├── SKILL.md                           <- This file (guardrails + patterns + verification)
 └── blueprints/
     └── evaluation-scenarios.md        <- 6 LLM-as-judge test scenarios

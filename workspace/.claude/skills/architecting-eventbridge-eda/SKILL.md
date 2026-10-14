@@ -215,7 +215,7 @@ aws events start-replay \
 ## Blueprints Directory Structure
 
 ```
-StoryBeat/.claude/skills/architecting-eventbridge-eda/
+workspace/.claude/skills/architecting-eventbridge-eda/
 ├── SKILL.md                          <- This file (summary + guardrails)
 └── blueprints/
     ├── always-do-patterns.md         <- 6 mandatory patterns with full verification commands
