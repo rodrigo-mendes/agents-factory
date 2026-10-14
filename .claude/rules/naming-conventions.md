@@ -2,7 +2,7 @@
 name: naming-conventions
 description: "Naming convention rules for skills, agents, and rules in this factory. Use when creating or renaming any artifact."
 paths:
-  - ".claude/skills/*/"
+  - ".claude/skills/**/SKILL.md"
   - ".claude/agents/*.md"
   - ".claude/rules/*.md"
 ---
@@ -11,20 +11,26 @@ paths:
 
 ## Artifact naming patterns (kebab-case, all artifacts)
 
+Both skill kinds live under `.claude/skills/<name>/SKILL.md` — the frontmatter shape decides
+which pattern applies (see [skill-frontmatter.md](./skill-frontmatter.md)), not a separate folder.
+
 | Artifact type | Pattern | Rationale |
 |---|---|---|
-| Skill folder | `gerund-noun` | Action-oriented — describes what the skill *does* (e.g., `researching-technical-frameworks`, `auditing-architecture`) |
-| Agent file | `domain-role` | Identity-oriented — describes *who* the agent is (e.g., `framework-researcher`, `skill-author`) |
+| Skill folder — **knowledge skill** (no `context: fork`, auto-invocable) | `gerund-noun` | Action-oriented — describes what the skill *teaches/does* (e.g., `researching-technical-frameworks`, `auditing-architecture`) |
+| Skill folder — **action-command skill** (`context: fork` + `disable-model-invocation: true`, routes to a subagent) | `action-noun` or `domain-role` | Deliberate-invocation commands follow the same pattern as the subagent/domain they front (e.g., `skill-creator`, `skill-best-practices-validator`, `audit-architecture-scope`) |
+| Agent file | `domain-role` | Identity-oriented — describes *who* the agent is (e.g., `framework-researcher`, `artifact-author`) |
 | Rule file | `scope-noun` | Scope-oriented — describes *what* the rule governs (e.g., `skill-frontmatter`, `naming-conventions`) |
 
 ## ✅ Correct examples
 
 | Type | Correct name | Why |
 |---|---|---|
-| Skill | `researching-technical-frameworks` | gerund (`researching`) + noun (`technical-frameworks`) |
-| Skill | `auditing-architecture` | gerund (`auditing`) + noun (`architecture`) |
+| Knowledge skill | `researching-technical-frameworks` | gerund (`researching`) + noun (`technical-frameworks`) |
+| Knowledge skill | `auditing-architecture` | gerund (`auditing`) + noun (`architecture`) |
+| Action-command skill | `skill-creator` | domain (`skill`) + role (`creator`) — mirrors its subagent naming, not gerund-noun |
+| Action-command skill | `skill-best-practices-validator` | domain (`skill-best-practices`) + role (`validator`) |
 | Agent | `framework-researcher` | domain (`framework`) + role (`researcher`) |
-| Agent | `skill-author` | domain (`skill`) + role (`author`) |
+| Agent | `artifact-author` | domain (`artifact`) + role (`author`) |
 | Rule | `skill-frontmatter` | scope (`skill`) + noun (`frontmatter`) |
 | Rule | `naming-conventions` | scope (`naming`) + noun (`conventions`) |
 

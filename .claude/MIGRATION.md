@@ -62,6 +62,11 @@ Ran the factory's own validators/auditor against `.claude/`:
 `scratchpad/verify.py`: 4 agents · 21 skills · 1 rule · 0 broken refs · 0 `runSubagent`/`list_dir` ·
 `name`=folder in all · `agent:` points to existing subagent · YAML without unquoted `:`.
 
+> **Correction (Phase 4, see below):** this "4 agents · 21 skills · 1 rule" count was already
+> stale by the time it was checked — `ls`/`wc` on the actual tree at every subsequent point in
+> this file's history disagrees with it. Do not trust counts recorded here without re-verifying
+> with `ls`/`wc`/`grep` — this is also `CLAUDE.md`'s own standing instruction.
+
 ## Pending functional verification (interactive, in Claude Code)
 - `/memory` → confirm that `CLAUDE.md` loads.
 - `/technical-framework-researcher <tech> <version>` → runs via `framework-researcher`, uses WebFetch.
@@ -83,4 +88,50 @@ After the main migration, a fifth subagent was added:
 - **`skill-evaluator`** — Skill Behavioral Evaluator; executes evaluation-scenarios.md test suites via LLM-as-judge
 - **`evaluating-skill-scenarios`** — the corresponding slash command that forks to skill-evaluator
 
-The project now has **25 commands** and **5 subagents**.
+The project had, at that point, 25 commands and 5 subagents — since grown by further additions
+(the platform-software family, then Phase 4 below); do not treat this as a current count.
+
+## Phase 4 — templates dissolution, agent-creator, rules-compiler, terraform package split (this refactor)
+
+Driven by a prerequisite for packaging under APM (Microsoft's Agent Package Manager): **APM has
+no `templates` primitive**, only a skill's own `assets/`/`references/`/`scripts/` subfolders,
+which deploy with the skill. `.claude/templates/` (26 files) could not survive that model
+un-owned, so it was dissolved:
+
+| Move | From | To |
+|---|---|---|
+| 3 skill templates | `templates/skills/` | `skill-creator/assets/` |
+| 3 agent templates | `templates/agents/` | `agent-creator/assets/` (new skill) |
+| 3 instruction templates | `templates/rules/` | `rules-compiler/assets/` (new knowledge skill) |
+| 8 platform-research shared assets (1853 lines) | `templates/platform-research/` | `researching-platform-software/blueprints/shared/` |
+| 6 prompt templates (1219 lines) | `templates/prompts/` | deleted — superseded by real skills; `prompts` is also not a supported Claude Code deploy target |
+| `POST_MORTEM_TEMPLATE.md` | `templates/reports/` | `docs/templates/` (human procedure, not a skill artifact) |
+| `templates/README.md` | — | deleted — its decision trees moved into `skill-creator` and the new `agent-creator` |
+
+Other changes in the same pass:
+- **Subagent rename**: `skill-author` → `artifact-author` — it authors 3 artifact types (skills,
+  agents, rules), not just skills.
+- **New skill `agent-creator`**: closed a real gap — the factory had a skill to create skills and
+  one to compile rules, none to create subagents; creation was a manual `cp` documented in
+  `docs/como-usar/criando-agentes.md`.
+- **New knowledge skill `rules-compiler`**: extracted the generic 5-phase engine (load → interview
+  → plan → generate → validate) out of `terraform-instructions-compiler`, which had 60 mentions of
+  "terraform" in a pipeline that needed none. `terraform-instructions-compiler` is now a thin
+  domain adapter that links into it — same `/command`, no deprecation.
+- **Content bugs fixed**: `skill-creator` asked for "3" evaluation scenarios while its own
+  template required 4; 14 of the 15 platform-software siblings were missing a link to 2 of the 3
+  shared deployment guides despite accepting all 3 `deployment=` values in their `argument-hint`;
+  `data-modeling-principles.md` was referenced asymmetrically by 2 siblings.
+- **Rule fixes**: `naming-conventions.md`'s `paths:` used a directory glob (`.claude/skills/*/`)
+  that never matched a file, so it never fired on a skill edit; its `gerund-noun` requirement was
+  also being applied past knowledge skills onto action-command skills (`action-noun`/`domain-role`
+  is the correct pattern for those) — both fixed. `agent-frontmatter.md`/`rules-frontmatter.md`/
+  `skill-frontmatter.md` globs re-pointed at the relocated `assets/` paths.
+- Two agents had a tools/behavior mismatch, both fixed: `quality-validator` declared `Bash` with
+  zero calls in its body (removed); `architecture-auditor` declared `EnterPlanMode`/`ExitPlanMode`
+  without ever calling them (now calls them at its P3 gate, mirroring `framework-researcher`'s
+  pattern).
+
+Net result: **42 skills, 7 agents, 5 rules** — up from 40/7/5 (2 new skills, 0 new agents/rules).
+`.claude/templates/` no longer exists. `.github/` is unaffected by this phase — its own
+descommission remains the separate, later step described above.

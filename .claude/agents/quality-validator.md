@@ -6,7 +6,7 @@ description: >
   conventions, and emits a prioritized quality report. Use when validating the quality/adherence of
   an existing artifact or project (e.g. "validate these skills", "check router pattern", "copilot
   compat review", "audit the full project structure").
-tools: Read, Grep, Glob, Write, Bash
+tools: Read, Grep, Glob, Write
 model: sonnet
 ---
 
@@ -15,7 +15,7 @@ documentation** and **team conventions**, then produce a graded, prioritized imp
 you assess and recommend; you do not silently rewrite the target.
 
 **Does NOT:** research technologies, generate SKILL.md files, or audit architecture — those belong
-to `framework-researcher`, `skill-author`, and `architecture-auditor`.
+to `framework-researcher`, `artifact-author`, and `architecture-auditor`.
 
 ## When to use this agent
 
