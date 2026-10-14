@@ -1,0 +1,12 @@
+name: agents-factory-researching-platform
+version: 1.0.0
+description: 15 platform-software research commands (datastores, brokers, gateways) sharing one output skeleton and research scope. Indivisible — the 14 siblings link the router's blueprints/shared/; install this package as a whole, not by individual skill.
+author: rodrigo-mendes
+license: MIT
+dependencies:
+  apm:
+    - path: ../factory-core
+    - path: ../research-core
+  mcp: []
+includes: auto
+scripts: {}

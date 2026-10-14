@@ -1,0 +1,11 @@
+name: agents-factory-research-core
+version: 1.0.0
+description: framework-researcher + its 2 internal helpers (section-investigator, research-synthesizer) — no skills of its own, shared by researching-frameworks, researching-platform, and terraform
+author: rodrigo-mendes
+license: MIT
+dependencies:
+  apm:
+    - path: ../factory-core
+  mcp: []
+includes: auto
+scripts: {}

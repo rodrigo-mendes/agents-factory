@@ -1,0 +1,11 @@
+name: agents-factory-artifact-authoring
+version: 1.0.0
+description: artifact-author subagent + 5 commands that author skills, subagents, and rules (skill-creator, agent-creator, rules-compiler, methodologies-skill-generator, architecture-approaches-skill-generator). rules-compiler is a knowledge skill — no /command of its own.
+author: rodrigo-mendes
+license: MIT
+dependencies:
+  apm:
+    - path: ../factory-core
+  mcp: []
+includes: auto
+scripts: {}

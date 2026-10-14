@@ -1,0 +1,10 @@
+name: agents-factory-factory-core
+version: 1.0.0
+description: Frontmatter and naming-convention rules shared by every skill/agent/rule in the factory
+author: rodrigo-mendes
+license: MIT
+dependencies:
+  apm: []
+  mcp: []
+includes: auto
+scripts: {}

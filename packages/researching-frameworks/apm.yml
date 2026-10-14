@@ -1,0 +1,12 @@
+name: agents-factory-researching-frameworks
+version: 1.0.0
+description: 5 anti-hallucination research commands (frameworks, cloud, methodology, domain) via framework-researcher
+author: rodrigo-mendes
+license: MIT
+dependencies:
+  apm:
+    - path: ../factory-core
+    - path: ../research-core
+  mcp: []
+includes: auto
+scripts: {}
