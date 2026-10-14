@@ -56,6 +56,16 @@ This ensures the most actionable content is visible before scrolling.
 ## [Long sections below]
 ```
 
+## Hybrid knowledge skills
+
+A knowledge skill (frontmatter `name` + `description` only) may use `blueprints/` when it is
+version-locked and research-derived (template: `TEMPLATE.KNOWLEDGE-SKILL.HYBRID.md`). It then must:
+
+- Keep `SKILL.md` lean (target 100–200 lines) with `## Version Context`, `## Quick Navigation` and `## Blueprints & Guardrails` before any long section.
+- Give **every flat claim in `SKILL.md`** (defaults, versions, limits, Always/Never rules) an inline source URL or an explicit **(medium confidence)** / **(unverified)** tag; Always Do and Never Do hold high-confidence claims only.
+- Ship `blueprints/unverified-and-risks.md` (headings `Version-lifetime risk` and `Source Bibliography`) and `blueprints/evaluation-scenarios.md` with at least 3 scenarios.
+- Record the exact page URL for each default/number; when the research did not record it, say so instead of citing a general docs index.
+
 ## 🚫 Never Do
 
 - **Never exceed 500 lines** — split to blueprints

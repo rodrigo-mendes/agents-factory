@@ -182,10 +182,14 @@ If absent, assess from content. Never pad to reach a count; never omit to fit a 
 | No `context: fork`, no `agent:`, no `blueprints/` | Forks to a subagent: `context: fork` + `agent:` + `disable-model-invocation: true` |
 | Body stays under 150 lines | May need progressive disclosure into `blueprints/` |
 
-If a knowledge skill's body grows past 150 lines or starts needing forked execution, convert it to
-an action-command skill instead of stretching the knowledge template.
+If a knowledge skill needs forked execution, convert it to an action-command skill. If it merely
+grows past 150 lines because it is a **version-locked, research-derived reference** (many
+guardrails, an unverified-claims register, evaluation scenarios), use
+[TEMPLATE.KNOWLEDGE-SKILL.HYBRID.md](./assets/TEMPLATE.KNOWLEDGE-SKILL.HYBRID.md) instead: frontmatter
+stays `name` + `description`, `SKILL.md` stays lean and the bulk goes to `blueprints/` (rules:
+`skill-structure.md`, "Hybrid knowledge skills"; name suffix `-vMAJOR-MINOR` per `naming-conventions.md`).
 
-1. Start from [TEMPLATE.SKILL.md](./assets/TEMPLATE.SKILL.md) or [TEMPLATE.KNOWLEDGE-SKILL.md](./assets/TEMPLATE.KNOWLEDGE-SKILL.md) per the table above
+1. Start from [TEMPLATE.SKILL.md](./assets/TEMPLATE.SKILL.md), [TEMPLATE.KNOWLEDGE-SKILL.md](./assets/TEMPLATE.KNOWLEDGE-SKILL.md) or [TEMPLATE.KNOWLEDGE-SKILL.HYBRID.md](./assets/TEMPLATE.KNOWLEDGE-SKILL.HYBRID.md) per the table above
 2. Populate every section following [Authoring Standards](#authoring-standards)
 3. Replace all `[placeholder]` values with research-derived content
 4. Apply progressive disclosure: move content > 30 lines to `blueprints/` if approaching 500 lines (action-command skills only)
@@ -194,7 +198,7 @@ Output: `.claude/skills/<skill-name>/SKILL.md`
 
 ### Step 3: Create Evaluation Scenarios
 
-For action-command skills, follow [TEMPLATE.EVALUATION-SCENARIOS.md](./assets/TEMPLATE.EVALUATION-SCENARIOS.md) — at least 4 scenarios: canonical path, edge case, misuse rejection, anti-pattern trap. Derive `<skill-name>` from the research file metadata. Knowledge skills (no `context: fork`) do not require `blueprints/evaluation-scenarios.md`.
+For action-command skills, follow [TEMPLATE.EVALUATION-SCENARIOS.md](./assets/TEMPLATE.EVALUATION-SCENARIOS.md) — at least 4 scenarios: canonical path, edge case, misuse rejection, anti-pattern trap. Derive `<skill-name>` from the research file metadata. Plain knowledge skills (no `context: fork`) do not require `blueprints/evaluation-scenarios.md`; **hybrid** knowledge skills do (at least 3 scenarios).
 
 ```json
 {
