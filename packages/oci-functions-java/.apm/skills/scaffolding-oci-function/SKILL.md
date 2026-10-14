@@ -219,7 +219,9 @@ See [blueprints/dockerfile-template.md](blueprints/dockerfile-template.md) — m
 
 ### build-push.sh
 
-See [blueprints/build-push-script.md](blueprints/build-push-script.md) — complete build-and-push script: runs `preflight.sh`, validates `.env` variables (`OCIR_REGION`, `OCIR_NAMESPACE`, `OCIR_REPO`, `OCIR_USERNAME`, `OCIR_PASSWORD`), logs in to OCIR, builds `linux/amd64`, and pushes.
+Runnable template: [assets/build-push.sh](assets/build-push.sh) — copy to `services/<function-name>/build-push.sh` and `chmod +x` it. No hardcoded values; reads `OCIR_REGION`, `OCIR_NAMESPACE`, `OCIR_REPO`, `OCIR_USERNAME`, `OCIR_PASSWORD` from `services/.env` and function name/version from `func.yaml`.
+
+Documentation and `.env` variable reference: [blueprints/build-push-script.md](blueprints/build-push-script.md).
 
 ---
 
