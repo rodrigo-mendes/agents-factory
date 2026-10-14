@@ -103,7 +103,7 @@ artificial inflation, and surfaces consensus-level violations ahead of single-mo
 ```json
 {
   "skills": ["audit-architecture-consensus"],
-  "query": "Audit the skill-author agent. Models A and B each found issues but used different terminology.",
+  "query": "Audit the artifact-author agent. Models A and B each found issues but used different terminology.",
   "expected_behavior": [
     "Model A flagged 'L3.10 — prompt frontmatter incomplete: missing name field'",
     "Model B flagged 'B.3 — no argument-hint: field, user cannot know what to provide'",

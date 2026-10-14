@@ -141,7 +141,7 @@ Search-engine data modeling = **mapping + analyzer + index design**:
 4. **Index-per-tenant vs shared index**: multi-tenancy strategy (routing key vs separate indices)
 5. **Time-based index strategy**: for logs/events, roll indices by time window + ILM
 
-Cross-type modeling principles: [data-modeling-principles.md](../../templates/platform-research/data-modeling-principles.md).
+Cross-type modeling principles: [data-modeling-principles.md](../../researching-platform-software/blueprints/shared/data-modeling-principles.md).
 
 ---
 

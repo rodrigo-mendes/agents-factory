@@ -11,7 +11,7 @@ disable-model-invocation: true
 
 ## Purpose
 
-This skill is a **thin router**: it identifies the correct specialized sibling skill for the requested platform and delegates the actual research to it. It contains **no research logic** of its own — all research templates, output formats, and category-specific patterns live in the sibling skills and in `.claude/templates/platform-research/`.
+This skill is a **thin router**: it identifies the correct specialized sibling skill for the requested platform and delegates the actual research to it. It contains **no research logic** of its own — all research templates, output formats, and category-specific patterns live in the sibling skills and in [`./blueprints/shared/`](./blueprints/shared/).
 
 ## INPUT VARIABLES
 
@@ -51,12 +51,14 @@ This skill is a **thin router**: it identifies the correct specialized sibling s
 
 ## Shared assets (reused by all siblings)
 
-Located in `.claude/templates/platform-research/`:
+Located in [`./blueprints/shared/`](./blueprints/shared/) (moved here from `.claude/templates/platform-research/` — that directory does not exist under APM's packaging model, and this skill is the correct owner since it already inventories these assets):
 
-- [output-format-base.md](../../templates/platform-research/output-format-base.md) — 13-section neutral output template
-- [research-scope-operations.md](../../templates/platform-research/research-scope-operations.md) — §1–§12 operational research scope common to all families
-- [data-modeling-principles.md](../../templates/platform-research/data-modeling-principles.md) — cross-type modeling principles (siblings of datastore families import this)
-- [deployment-guides/](../../templates/platform-research/deployment-guides/) — kubernetes-operator, container-compose, vm-and-bare-metal playbooks
+- [output-format-base.md](./blueprints/shared/output-format-base.md) — 13-section neutral output template
+- [research-scope-operations.md](./blueprints/shared/research-scope-operations.md) — §1–§12 operational research scope common to all families
+- [data-modeling-principles.md](./blueprints/shared/data-modeling-principles.md) — cross-type modeling principles (siblings of datastore families import this)
+- [reference-card-template.md](./blueprints/shared/reference-card-template.md) — skeleton every per-vendor reference card follows
+- [reference-card-example-kafka-3.7.md](./blueprints/shared/reference-card-example-kafka-3.7.md) — worked example of the skeleton above
+- [deployment-guides/](./blueprints/shared/deployment-guides/) — kubernetes-operator, container-compose, vm-and-bare-metal playbooks (all 3 apply to every sibling; see each sibling's `argument-hint` for `deployment=`)
 
 ## Blueprints & Guardrails
 
@@ -65,6 +67,7 @@ Located in `.claude/templates/platform-research/`:
 - **Always route — never research inline.** This skill's only output is the routing decision or the resolved sibling invocation. Do not populate research sections here.
 - **Preserve arguments verbatim** when forwarding to the sibling — no reformatting, no defaults injection beyond what the sibling schema requires.
 - **Log the routing decision** in the first line of the response (`Routing "<platform> <version>" → researching-<sibling>`).
+- **Verify the shared assets exist before routing.** This package installs as a whole — if `./blueprints/shared/` is missing a file a sibling depends on, report it explicitly (name the missing file, note that a partial skill subset was likely installed instead of the full `researching-platform` package) rather than routing normally and letting the sibling fail mid-research.
 
 ### ⚠️ Ask First
 
@@ -98,4 +101,8 @@ done
 ## Related Skills
 
 - [cloud-architecture-researcher](../cloud-architecture-researcher/SKILL.md) — for the **managed** cloud equivalent (RDS, MSK, DocumentDB) — different lens: managed by the provider, not by the team
+
+## Evaluation
+
+- [evaluation-scenarios.md](./blueprints/evaluation-scenarios.md) — routing test cases (unique match, ambiguous platform, unknown platform)
 - [researching-technical-frameworks](../researching-technical-frameworks/SKILL.md) — for **client SDKs** (pymongo, kafka-python, jedis) — different concern: how to call the platform from application code

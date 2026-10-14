@@ -1,4 +1,4 @@
-﻿---
+---
 name: cloud-architecture-researcher
 description: Researches a cloud provider's architecture framework/patterns (AWS WAF, Azure CAF, GCP, OCI) into a hallucination-proof, version-absolute knowledge base. Use when researching cloud architecture best practices for a skill.
 argument-hint: "<cloud-provider> [depth=exhaustive] [iterations=5] (e.g. AWS depth=deep iterations=3)"

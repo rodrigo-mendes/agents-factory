@@ -3,7 +3,7 @@ name: skill-creator
 description: "Creates Agent Skills (SKILL.md) from a research_[TECH]_v[VERSION].md file following official Claude best practices and team conventions. Use when authoring a new skill from a completed research file produced by a researcher skill (e.g. /researching-technical-frameworks). For all-in-one research + skill, use /methodologies-skill-generator instead."
 argument-hint: "Path to research file (e.g. StoryBeat/research_FastAPI_v0.115.md)"
 context: fork
-agent: skill-author
+agent: artifact-author
 disable-model-invocation: true
 ---
 
@@ -28,8 +28,8 @@ disable-model-invocation: true
 ### ✅ Always Do
 
 - **Verify the research file exists before proceeding** — If `$ARGUMENTS` is missing or unreadable, stop and report the error. Do not generate from memory.
-- **Start from `TEMPLATE.SKILL.md`** — Use `.claude/templates/skills/TEMPLATE.SKILL.md` as the scaffold. Populate every section placeholder; never invent new sections or skip existing ones.
-- **Create `blueprints/evaluation-scenarios.md`** — Generate at least 3 evaluation scenarios and save them as part of the output. Always required, not optional.
+- **Start from `TEMPLATE.SKILL.md`** — Use [`./assets/TEMPLATE.SKILL.md`](./assets/TEMPLATE.SKILL.md) as the scaffold. Populate every section placeholder; never invent new sections or skip existing ones.
+- **Create `blueprints/evaluation-scenarios.md`** — Follow [`./assets/TEMPLATE.EVALUATION-SCENARIOS.md`](./assets/TEMPLATE.EVALUATION-SCENARIOS.md), which requires **at least 4 scenarios covering the 4 types**: canonical path, edge case, misuse rejection, and anti-pattern trap. Always required, not optional.
 - **Stay under 500 lines** — Monitor line count; if approaching 500, extract the largest content block to `blueprints/` before writing further inline content.
 - **Apply authoring standards** — Use the [Authoring Standards](#authoring-standards) below as the authoritative reference for naming, three-tier structure, and quality checklist.
 
@@ -44,7 +44,7 @@ disable-model-invocation: true
 | ❌ Incorrect | ✅ Correct |
 |---|---|
 | Generate a SKILL.md without reading a research file | Run `/researching-technical-frameworks` or equivalent first; pass the output as `$ARGUMENTS` |
-| Skip creating `blueprints/evaluation-scenarios.md` | Always produce at least 3 scenarios — mandatory artifact, not optional |
+| Skip creating `blueprints/evaluation-scenarios.md` | Always produce at least 4 scenarios (canonical path, edge case, misuse rejection, anti-pattern trap) — mandatory artifact, not optional |
 | Use absolute or Windows-style paths in the generated SKILL.md | Use relative paths only (`./blueprints/file.md`, `../../rules/skill-frontmatter.md`) |
 | Duplicate large documentation blocks inline | Move blocks > 30 lines to `blueprints/` and link from SKILL.md |
 | Author from an unverified/opinion source without flagging | Mark output as `UNVERIFIED`; offer to run `/researching-technical-frameworks` first |
@@ -118,13 +118,13 @@ Include `## Version Context` (version-specific skills) and `## Verification Loop
 - [ ] Version Context section present (if version-specific)
 - [ ] Verification Loop commands present, executable, with expected output
 - [ ] `## External Resources` with at least one dated official link
-- [ ] At least 3 evaluation scenarios in `blueprints/evaluation-scenarios.md`, linked from Quick Navigation
+- [ ] At least 4 evaluation scenarios in `blueprints/evaluation-scenarios.md` (canonical path, edge case, misuse rejection, anti-pattern trap), linked from Quick Navigation
 
 ### Skill Template
 
 > **MANDATORY OUTPUT STRUCTURE:** Always generate the artifact using the exact structure below. Never skip, reorder, or abbreviate any section.
 
-Start from [TEMPLATE.SKILL.md](../../templates/skills/TEMPLATE.SKILL.md). Sections provided: Frontmatter, `## Function`, `## Version Context`, `## Quick Navigation`, `## Blueprints & Guardrails` (✅⚠️🚫), `## Integration Patterns`, `## Verification Loop`, `## Quick Reference`, `## Blueprints Directory Structure`, `## External Resources`.
+Start from [TEMPLATE.SKILL.md](./assets/TEMPLATE.SKILL.md). Sections provided: Frontmatter, `## Function`, `## Version Context`, `## Quick Navigation`, `## Blueprints & Guardrails` (✅⚠️🚫), `## Integration Patterns`, `## Verification Loop`, `## Quick Reference`, `## Blueprints Directory Structure`, `## External Resources`.
 
 ### Common Mistakes
 
@@ -174,16 +174,27 @@ If absent, assess from content. Never pad to reach a count; never omit to fit a 
 
 ### Step 2: Generate SKILL.md
 
-1. Start from [TEMPLATE.SKILL.md](../../templates/skills/TEMPLATE.SKILL.md)
+**Decide which template first — the two skill kinds are not interchangeable:**
+
+| Use `TEMPLATE.KNOWLEDGE-SKILL.md` when | Use `TEMPLATE.SKILL.md` when |
+|---|---|
+| Auto-invocable reference — Claude decides when it applies | Deliberate action, invoked via `/name` |
+| No `context: fork`, no `agent:`, no `blueprints/` | Forks to a subagent: `context: fork` + `agent:` + `disable-model-invocation: true` |
+| Body stays under 150 lines | May need progressive disclosure into `blueprints/` |
+
+If a knowledge skill's body grows past 150 lines or starts needing forked execution, convert it to
+an action-command skill instead of stretching the knowledge template.
+
+1. Start from [TEMPLATE.SKILL.md](./assets/TEMPLATE.SKILL.md) or [TEMPLATE.KNOWLEDGE-SKILL.md](./assets/TEMPLATE.KNOWLEDGE-SKILL.md) per the table above
 2. Populate every section following [Authoring Standards](#authoring-standards)
 3. Replace all `[placeholder]` values with research-derived content
-4. Apply progressive disclosure: move content > 30 lines to `blueprints/` if approaching 500 lines
+4. Apply progressive disclosure: move content > 30 lines to `blueprints/` if approaching 500 lines (action-command skills only)
 
 Output: `.claude/skills/<skill-name>/SKILL.md`
 
 ### Step 3: Create Evaluation Scenarios
 
-Generate at least 3 scenarios (canonical, edge, misuse). Derive `<skill-name>` from the research file metadata.
+For action-command skills, follow [TEMPLATE.EVALUATION-SCENARIOS.md](./assets/TEMPLATE.EVALUATION-SCENARIOS.md) — at least 4 scenarios: canonical path, edge case, misuse rejection, anti-pattern trap. Derive `<skill-name>` from the research file metadata. Knowledge skills (no `context: fork`) do not require `blueprints/evaluation-scenarios.md`.
 
 ```json
 {
@@ -298,6 +309,6 @@ Output:
 - [Three-Tier Architecture (Team)](./blueprints/three-tier-architecture.md) — ✅⚠️🚫 framework with examples
 - [Evaluation & Iteration (Official)](./blueprints/evaluation-iteration.md) — Testing and improving skills
 - [Evaluation Scenarios (Team)](./blueprints/evaluation-scenarios.md) — 6 test cases
-- [TEMPLATE.SKILL.md](../../templates/skills/TEMPLATE.SKILL.md) — Canonical scaffold
+- [TEMPLATE.SKILL.md](./assets/TEMPLATE.SKILL.md) — Canonical scaffold
 - [skill-frontmatter rules](../../rules/skill-frontmatter.md) — YAML frontmatter requirements
 - [researching-technical-frameworks](../researching-technical-frameworks/SKILL.md) — Research protocol producing `$ARGUMENTS`

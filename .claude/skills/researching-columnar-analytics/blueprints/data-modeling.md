@@ -1,6 +1,6 @@
 # Columnar / OLAP Data Modeling
 
-For columnar analytics databases. Cross-type principles: [shared modeling-principles](../../templates/platform-research/data-modeling-principles.md).
+For columnar analytics databases. Cross-type principles: [shared modeling-principles](../../researching-platform-software/blueprints/shared/data-modeling-principles.md).
 
 ---
 

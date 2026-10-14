@@ -1,6 +1,6 @@
 # Object Storage Data Modeling
 
-For S3-compatible object storage. Cross-type principles: [shared modeling-principles](../../templates/platform-research/data-modeling-principles.md).
+For S3-compatible object storage. Cross-type principles: [shared modeling-principles](../../researching-platform-software/blueprints/shared/data-modeling-principles.md).
 
 ---
 

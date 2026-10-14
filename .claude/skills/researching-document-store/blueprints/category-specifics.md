@@ -85,7 +85,7 @@ Compound or hashed shard keys mitigate monotonic-key hot spots.
 
 ## §Data Modeling
 
-Full guidance: [data-modeling.md](./data-modeling.md). Core principle: **embed data accessed together; reference data accessed independently or that grows unboundedly.** Cross-type principles: [shared modeling-principles](../../templates/platform-research/data-modeling-principles.md).
+Full guidance: [data-modeling.md](./data-modeling.md). Core principle: **embed data accessed together; reference data accessed independently or that grows unboundedly.** Cross-type principles: [shared modeling-principles](../../researching-platform-software/blueprints/shared/data-modeling-principles.md).
 
 ---
 

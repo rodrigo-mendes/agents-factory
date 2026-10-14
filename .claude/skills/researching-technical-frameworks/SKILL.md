@@ -1,4 +1,4 @@
-﻿---
+---
 name: researching-technical-frameworks
 description: "Researches technologies, frameworks, and SDKs to produce hallucination-proof research_[TECH]_v[VERSION].md documents. Use when starting technical research for a new skill, researching a version migration, or researching an SDK integration (e.g., Stripe Java SDK, Terraform AWS provider)."
 argument-hint: "<tech> <version> [depth=exhaustive] [iterations=5] (e.g. FastAPI 0.115 depth=deep iterations=3)"
@@ -423,7 +423,7 @@ grep -c "✅ Correct\|# ✅\|# DO" research_*.md
 
 ### Skill Authoring
 - [Skill Author Specialist](../skill-creator/SKILL.md) - Transforms research into skills
-- [SKILL Template](../../templates/skills/TEMPLATE.SKILL.md) - Structure reference
+- [SKILL Template](../skill-creator/assets/TEMPLATE.SKILL.md) - Structure reference (available when `artifact-authoring` is installed — this link crosses a package boundary)
 
 
 ### Official Documentation References

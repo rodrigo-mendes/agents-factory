@@ -12,7 +12,8 @@ Full rubric for dimensions P1–P7. Each item grades as ✅ Pass / ⚠️ Warn /
 | `.claude/skills/` exists | present | — | absent |
 | `.claude/rules/` exists | present | — | absent |
 | `CLAUDE.md` at project root | present | — | absent |
-| `.claude/templates/` | present | absent | — |
+| `.claude/templates/` does NOT exist | absent | present | — |
+| No `TEMPLATE.*` file outside a skill's `assets/` | clean | stray `TEMPLATE.*` found | — |
 | `.claude/settings.json` | present | absent | — |
 | No unexpected top-level dirs in `.claude/` | clean | unknown dirs | — |
 

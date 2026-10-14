@@ -1,6 +1,6 @@
 # Key-Value Data Modeling
 
-For persistent key-value stores used as primary datastore. Cross-type principles: [shared modeling-principles](../../templates/platform-research/data-modeling-principles.md).
+For persistent key-value stores used as primary datastore. Cross-type principles: [shared modeling-principles](../../researching-platform-software/blueprints/shared/data-modeling-principles.md).
 
 ---
 

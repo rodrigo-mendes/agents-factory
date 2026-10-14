@@ -1,6 +1,6 @@
 # RDBMS Data Modeling
 
-For `DATASTORE_TYPE=rdbms`. Platforms: PostgreSQL, MySQL, MariaDB, CockroachDB.
+For `DATASTORE_TYPE=rdbms`. Platforms: PostgreSQL, MySQL, MariaDB, CockroachDB. Cross-type principles: [shared modeling-principles](../../researching-platform-software/blueprints/shared/data-modeling-principles.md).
 
 ---
 
