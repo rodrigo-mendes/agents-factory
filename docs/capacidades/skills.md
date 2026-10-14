@@ -1,8 +1,8 @@
 # Skills — Framework Base Capabilities
 
-The Agents Factory has **52 skills** — 51 action commands (invoked via `/name` with `disable-model-invocation: true`) and 1 knowledge skill (`rules-compiler`, auto-invocable) — **built on 2 foundation skills**: `skill-creator` (authoring patterns) and `researching-technical-frameworks` (research methodology). These 2 foundation skills define the patterns all other skills follow. In Copilot, `authoring-agent-skills` is the skill equivalent to `skill-creator`.
+The Agents Factory has **78 skills** — 51 action commands (invoked via `/name` with `disable-model-invocation: true`) and 27 knowledge skills (auto-invocable: `rules-compiler`, 11 from `microsoft/apm`, and the 15 Camel Quarkus skills) — **built on 2 foundation skills**: `skill-creator` (authoring patterns) and `researching-technical-frameworks` (research methodology). These 2 foundation skills define the patterns all other skills follow. In Copilot, `authoring-agent-skills` is the skill equivalent to `skill-creator`.
 
-> The 52 skills include the **platform-software family** (15: 1 orchestrator + 14 siblings) — all following the same research methodology below. See [Platform Software Research Family](../manual/platform-software-family.md).
+> The 78 skills include the **platform-software family** (15: 1 orchestrator + 14 siblings) — all following the same research methodology below. See [Platform Software Research Family](../manual/platform-software-family.md).
 
 ---
 

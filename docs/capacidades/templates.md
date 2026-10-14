@@ -151,7 +151,7 @@
 |-------|-------|
 | **When to use** | Create an action-command skill (`context: fork` + `disable-model-invocation: true`, forks to a subagent) |
 | **Referenced by** | ✅ `skill-creator/SKILL.md` (4 sites), plus 3 weak External-Resources mentions (`architecture-approaches-skill-generator`, `methodologies-skill-generator`, `researching-technical-frameworks`) |
-| **Implementations that follow** | All 52 skills in `.claude/skills/` that are action commands |
+| **Implementations that follow** | All 51 action-command skills in `.claude/skills/` (those with `context: fork`) |
 
 ### TEMPLATE.KNOWLEDGE-SKILL.md
 > **File**: **Claude Code equivalent**: [`skill-creator/assets/TEMPLATE.KNOWLEDGE-SKILL.md`](../../.claude/skills/skill-creator/assets/TEMPLATE.KNOWLEDGE-SKILL.md) (no `.github/` mirror)
@@ -160,7 +160,16 @@
 |-------|-------|
 | **When to use** | Create an auto-invocable reference skill — no fork/agent/blueprints, kept under 150 lines |
 | **Referenced by** | ✅ `skill-creator/SKILL.md` Step 2 — decision table vs. `TEMPLATE.SKILL.md` |
-| **Implementations that follow** | `rules-compiler` is the first knowledge skill in this repo (no `context: fork`) |
+| **Implementations that follow** | `rules-compiler` (no `context: fork`) |
+
+### TEMPLATE.KNOWLEDGE-SKILL.HYBRID.md
+> **File**: **Claude Code equivalent**: [`skill-creator/assets/TEMPLATE.KNOWLEDGE-SKILL.HYBRID.md`](../../.claude/skills/skill-creator/assets/TEMPLATE.KNOWLEDGE-SKILL.HYBRID.md) (no `.github/` mirror)
+
+| Field | Value |
+|-------|-------|
+| **When to use** | Create a version-locked, research-derived knowledge skill that is too large for the plain knowledge template: frontmatter stays `name` + `description`, `SKILL.md` stays lean (100–200 lines) and the bulk lives in `blueprints/` (always-do, never-do, unverified-and-risks register, evaluation scenarios). Rules: `.claude/rules/skill-structure.md` ("Hybrid knowledge skills") and the `-vMAJOR-MINOR` name suffix in `naming-conventions.md` |
+| **Referenced by** | `TEMPLATE.KNOWLEDGE-SKILL.md` header note, the `skill-structure` and `naming-conventions` rules |
+| **Implementations that follow** | The 13 `developing-*-v3-40` skills of `packages/camel-quarkus-skills/` (reference implementation: `developing-camel-quarkus-core-v3-40`) |
 
 ### TEMPLATE.EVALUATION-SCENARIOS.md
 > **File**: **Claude Code equivalent**: [`skill-creator/assets/TEMPLATE.EVALUATION-SCENARIOS.md`](../../.claude/skills/skill-creator/assets/TEMPLATE.EVALUATION-SCENARIOS.md) (no `.github/` mirror)
@@ -169,7 +178,7 @@
 |-------|-------|
 | **When to use** | Scaffold a skill's `blueprints/evaluation-scenarios.md` (test cases for `skill-evaluator`) — requires 4 scenarios: canonical path, edge case, misuse rejection, anti-pattern trap |
 | **Referenced by** | ✅ `skill-creator/SKILL.md` Step 3 and its ✅/🚫 guardrails |
-| **Implementations that follow** | `evaluation-scenarios.md` blueprints across the 52 skills |
+| **Implementations that follow** | `evaluation-scenarios.md` blueprints across the 51 action-command skills and the hybrid knowledge skills |
 
 ---
 

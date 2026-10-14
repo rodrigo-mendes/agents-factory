@@ -1,6 +1,6 @@
 # Agent Usage Manual — Agents Factory
 
-Complete reference for the 7 sub-agents (5 routers + 2 research helpers) and the 52 skills that invoke them. The 13 agents of the book-writing pipeline are documented separately in [packages/book-writing/README.md](../../packages/book-writing/README.md).
+Complete reference for the 7 sub-agents (5 routers + 2 research helpers) and the 51 command skills that invoke them. The 13 agents of the book-writing pipeline are documented separately in [packages/book-writing/README.md](../../packages/book-writing/README.md), and the `camel-quarkus-integrator` subagent with its skills in [packages/camel-quarkus-integrator/README.md](../../packages/camel-quarkus-integrator/README.md).
 
 ---
 
