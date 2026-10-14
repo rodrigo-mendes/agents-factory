@@ -28,7 +28,7 @@ graph TD
     end
 
     subgraph "Orchestration Layer"
-        AG[Agents<br/>20 subagents: 5 routers + 2 research helpers + 13 book-writing]
+        AG[Agents<br/>21 subagents: 5 routers + 2 research helpers + 13 book-writing + camel-quarkus-integrator]
     end
 
     subgraph "Knowledge Layer"
