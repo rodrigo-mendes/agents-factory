@@ -1,0 +1,42 @@
+name: agents-factory
+version: 1.0.0
+description: AI artifact factory (skills, subagents, rules) with an anti-hallucination focus
+author: rodrigo-mendes
+license: MIT
+dependencies:
+  apm:
+    # factory-core and research-core are NOT listed directly here — every
+    # package below already depends on factory-core (and the 3 research
+    # packages on research-core too), so they resolve transitively. Listing
+    # them again here would give APM two different textual paths
+    # (./packages/X here vs ../X from the siblings) for the SAME physical
+    # package, which `apm audit --ci` rejects as "ambiguous resolved_by"
+    # (confirmed, CLI v0.31.0) — this is not cosmetic, it fails CI.
+    - path: ./packages/researching-frameworks
+    - path: ./packages/researching-platform
+    - path: ./packages/terraform
+    - path: ./packages/artifact-authoring
+    - path: ./packages/auditing
+    - path: ./packages/validating
+    - path: ./packages/evaluating
+    - path: ./packages/book-writing
+    - git: microsoft/apm 
+  mcp: []
+includes: auto
+scripts: {}
+# NOTE: `apm lifecycle trust` + this post-install block did NOT auto-fire during
+# `apm install` in testing (CLI v0.31.0) despite being trusted and validated —
+# confirmed via `apm lifecycle test post-install` (shows as armed) vs. a real
+# `apm install` run (no lifecycle phase logged, scripts never executed). Kept
+# here in case a future CLI version honors it, but DO NOT rely on it: run both
+# scripts explicitly after every `apm install` (see CI workflow and README).
+lifecycle:
+  post-install:
+    - type: command
+      description: "Restore name:/description: on .claude/rules/*.md if a future APM version drops them again (defensive; did not reproduce in this repo's real install — see scripts/restore-rule-metadata.py docstring)."
+      command: "python3 scripts/restore-rule-metadata.py"
+      timeoutSec: 30
+    - type: command
+      description: "Fix within-package markdown links APM rewrites into apm_modules/ paths (confirmed bug, v0.31.0). See scripts/fix-cross-package-links.py."
+      command: "python3 scripts/fix-cross-package-links.py"
+      timeoutSec: 30
