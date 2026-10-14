@@ -1,0 +1,97 @@
+# Project structure configuration for Camel Quarkus integration projects.
+#
+# Single place for file placement and naming conventions, read by the
+# structuring-camel-quarkus-projects skill. It holds layout facts only:
+# no Camel/Quarkus versions, extensions, annotations or code templates.
+#
+# The "${...}" expressions are descriptive placeholders for the agent to resolve,
+# not a templating engine run by any tool.
+
+project:
+  # PLACEHOLDER values. Replace them from the project's real package and
+  # coordinates (existing source tree or pom.xml). Never invent them.
+  base_package: "com.company.project"
+  maven_group_id: "com.company.project"
+  maven_artifact_id: "camel-quarkus-integration"
+  version: "1.0.0"
+
+directories:
+  source:
+    main:
+      java: "src/main/java"
+      resources: "src/main/resources"
+    test:
+      java: "src/test/java"
+      resources: "src/test/resources"
+    build:
+      target: "target"
+      classes: "target/classes"
+      test_classes: "target/test-classes"
+
+packages:
+  base: "${project.base_package}"
+  integration:
+    routes: "${project.base_package}.integration.routes"
+    services: "${project.base_package}.integration.services"
+    processors: "${project.base_package}.integration.processors"
+  model: "${project.base_package}.model"
+  config: "${project.base_package}.config"
+  test:
+    integration: "${project.base_package}.integration"
+    unit: "${project.base_package}.unit"
+
+file_patterns:
+  route_builder: "[Functionality]Route.java"
+  service: "[Functionality]Service.java"
+  processor: "[Functionality]Processor.java"
+  model: "[Entity]Model.java"
+  config: "[Config]Config.java"
+  test_route: "[ClassName]Test.java"
+  test_service: "[ClassName]Test.java"
+  test_unit: "[ClassName]Test.java"
+  test_integration: "[Functionality]IntegrationTest.java"
+
+# Directory = source root + package path (dots replaced by slashes).
+file_locations:
+  route_builder: "${directories.source.main.java}/${packages.integration.routes.replace('.', '/')}"
+  service: "${directories.source.main.java}/${packages.integration.services.replace('.', '/')}"
+  processor: "${directories.source.main.java}/${packages.integration.processors.replace('.', '/')}"
+  model: "${directories.source.main.java}/${packages.model.replace('.', '/')}"
+  config: "${directories.source.main.java}/${packages.config.replace('.', '/')}"
+  test_route: "${directories.source.test.java}/${packages.integration.routes.replace('.', '/')}"
+  test_service: "${directories.source.test.java}/${packages.integration.services.replace('.', '/')}"
+  test_unit: "${directories.source.test.java}/${packages.test.unit.replace('.', '/')}"
+  test_integration: "${directories.source.test.java}/${packages.test.integration.replace('.', '/')}"
+
+naming_conventions:
+  route_builder:
+    pattern: "[Functionality]Route"
+    examples: ["FileProcessingRoute", "RestApiRoute", "ScheduledRoute", "HttpIntegrationRoute"]
+  service:
+    pattern: "[Functionality]Service"
+    examples: ["ValidationService", "TransformationService", "ExternalApiService"]
+  processor:
+    pattern: "[Functionality]Processor"
+    examples: ["DataProcessor", "ValidationProcessor", "EnrichmentProcessor"]
+  model:
+    pattern: "[Entity]Model"
+    examples: ["CustomerModel", "ProductModel", "InvoiceModel"]
+  config:
+    pattern: "[Config]Config"
+    examples: ["HttpClientConfig", "ApiConfig", "IntegrationConfig"]
+  test:
+    pattern: "[ClassName]Test"
+    examples: ["FileProcessingRouteTest", "ValidationServiceTest"]
+  integration_test:
+    pattern: "[Functionality]IntegrationTest"
+    examples: ["FileProcessingIntegrationTest"]
+
+verification_commands:
+  structure_check:
+    - "find ${directories.source.main.java} -name '*.java' -type f"
+    - "find ${directories.source.test.java} -name '*.java' -type f"
+    - "tree ${directories.source.main.java}"
+    - "tree ${directories.source.test.java}"
+  build_check:
+    - "./mvnw clean compile"   # or mvn when the project has no wrapper
+    - "./mvnw test"            # or mvn when the project has no wrapper

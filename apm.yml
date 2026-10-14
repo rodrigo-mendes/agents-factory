@@ -20,7 +20,11 @@ dependencies:
     - path: ./packages/validating
     - path: ./packages/evaluating
     - path: ./packages/book-writing
-    - git: microsoft/apm 
+    # camel-quarkus-skills is NOT listed directly: camel-quarkus-integrator
+    # depends on ../camel-quarkus-skills, so it resolves transitively (same
+    # "ambiguous resolved_by" reason as factory-core above).
+    - path: ./packages/camel-quarkus-integrator
+    - git: microsoft/apm
   mcp: []
 includes: auto
 scripts: {}
