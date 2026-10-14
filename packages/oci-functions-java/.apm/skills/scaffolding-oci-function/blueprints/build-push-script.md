@@ -1,6 +1,10 @@
 # Blueprint: build-push.sh Script
 
-Complete build-and-push script. Place at `services/<function-name>/build-push.sh` and `chmod +x` it.
+> **Runnable template**: [`assets/build-push.sh`](../assets/build-push.sh) — copy that file to
+> `services/<function-name>/build-push.sh` and `chmod +x` it. It contains the identical script
+> below, kept in a single place to avoid the 6-copy duplication seen in the PoC services.
+
+Reference listing (for documentation purposes — the authoritative copy is `assets/build-push.sh`):
 
 ```bash
 #!/usr/bin/env bash
