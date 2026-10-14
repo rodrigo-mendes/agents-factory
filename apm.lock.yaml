@@ -1,5 +1,5 @@
 lockfile_version: '1'
-apm_version: 0.32.0
+apm_version: 0.33.0
 dependencies:
 - repo_url: _local/artifact-authoring
   name: agents-factory-artifact-authoring
@@ -151,6 +151,49 @@ dependencies:
     .claude/skills/writing-technical-book/blueprints/writing-style-guide.md: sha256:6eb978bfd7ebc2451f944764f93a81336282546634db68052718e0e337311742
   source: local
   local_path: ./packages/book-writing
+  declared_license: MIT
+- repo_url: _local/camel-quarkus-integrator
+  name: agents-factory-camel-quarkus-integrator
+  version: 1.0.0
+  package_type: apm_package
+  deployed_files:
+  - .claude/agents/camel-quarkus-integrator.md
+  - .claude/rules/camel-quarkus-integrator-code-standards.md
+  - .claude/rules/camel-quarkus-integrator-project-config.md
+  - .claude/rules/camel-quarkus-integrator-skills-management.md
+  - .claude/skills/integrating-camel-quarkus
+  - .claude/skills/integrating-camel-quarkus/SKILL.md
+  - .claude/skills/integrating-camel-quarkus/blueprints/core-routes.md
+  - .claude/skills/integrating-camel-quarkus/blueprints/data-transformation.md
+  - .claude/skills/integrating-camel-quarkus/blueprints/evaluation-scenarios.md
+  - .claude/skills/integrating-camel-quarkus/blueprints/file-processing.md
+  - .claude/skills/integrating-camel-quarkus/blueprints/http-clients.md
+  - .claude/skills/integrating-camel-quarkus/blueprints/rest-apis.md
+  - .claude/skills/integrating-camel-quarkus/blueprints/testing.md
+  - .claude/skills/structuring-camel-quarkus-projects
+  - .claude/skills/structuring-camel-quarkus-projects/SKILL.md
+  - .claude/skills/structuring-camel-quarkus-projects/assets/project-structure.yml
+  - .claude/skills/structuring-camel-quarkus-projects/blueprints/evaluation-scenarios.md
+  - .claude/skills/structuring-camel-quarkus-projects/blueprints/project-structure-loader.md
+  deployed_file_hashes:
+    .claude/agents/camel-quarkus-integrator.md: sha256:8326673603861481597c4e0f78bbda89a8e219a0588950c1aafabff7685d3911
+    .claude/rules/camel-quarkus-integrator-code-standards.md: sha256:ff81408341eb3edd5e100d205eebd63ad12e336f55102acc26b4039696ccdf49
+    .claude/rules/camel-quarkus-integrator-project-config.md: sha256:a1b1c16da9a8e9d383090a07c02cd73ab421386328d2067080f749b67cf65cb4
+    .claude/rules/camel-quarkus-integrator-skills-management.md: sha256:dc65462a4b369a2089ff59e07e7e65f1d774747d5e8365460fcee60b663a8405
+    .claude/skills/integrating-camel-quarkus/SKILL.md: sha256:5a7c4755a5e945f30ba85b75563ff1b7d596e29c2a898c1154ef09b63d27fc95
+    .claude/skills/integrating-camel-quarkus/blueprints/core-routes.md: sha256:75a16c479ddab18173d85951f42feaaf9409e92c36a572bf8f616a3c521c0b86
+    .claude/skills/integrating-camel-quarkus/blueprints/data-transformation.md: sha256:a51473c940307d5b3e242d94ef85ca3c3d83a109303f463e66ea3987a7aebbe3
+    .claude/skills/integrating-camel-quarkus/blueprints/evaluation-scenarios.md: sha256:2b777cbd4318d11c4922e07e12abdbfd562cea634e322879b72ced70d61a9d2c
+    .claude/skills/integrating-camel-quarkus/blueprints/file-processing.md: sha256:3037026afe6e93636e663719c13ad80fca11188635406dd7fc5078df1079acc3
+    .claude/skills/integrating-camel-quarkus/blueprints/http-clients.md: sha256:c240077c066496e0716c4caad4411990d604b7a9a3a0171bfc529ce4d0462655
+    .claude/skills/integrating-camel-quarkus/blueprints/rest-apis.md: sha256:49f1a110223e30f3337632924d45d477e7a718fb60959c449a1482919abbc56f
+    .claude/skills/integrating-camel-quarkus/blueprints/testing.md: sha256:4949d32220f5ecb8e5a420a082e4c231641910ec3686d3679b96525ce0b6ff97
+    .claude/skills/structuring-camel-quarkus-projects/SKILL.md: sha256:cbd91dd5d156790688241ef01a9e42c0a080c12911e8e988870423b81323ef6b
+    .claude/skills/structuring-camel-quarkus-projects/assets/project-structure.yml: sha256:67bd66f113775586e1eeb4d716693d2908adc5356b003bf33fa0ca1c7bcddc39
+    .claude/skills/structuring-camel-quarkus-projects/blueprints/evaluation-scenarios.md: sha256:16adfbb866172b79d218ba332853b1b717702a427d1c9d8173192df3573bee07
+    .claude/skills/structuring-camel-quarkus-projects/blueprints/project-structure-loader.md: sha256:910ffa809b74ba72d5a01c5982bacc22512fd3c152347874f6af060a40cfcdc7
+  source: local
+  local_path: ./packages/camel-quarkus-integrator
   declared_license: MIT
 - repo_url: _local/evaluating
   name: agents-factory-evaluating
@@ -513,6 +556,7 @@ dependencies:
   - .claude/skills/skill-creator
   - .claude/skills/skill-creator/SKILL.md
   - .claude/skills/skill-creator/assets/TEMPLATE.EVALUATION-SCENARIOS.md
+  - .claude/skills/skill-creator/assets/TEMPLATE.KNOWLEDGE-SKILL.HYBRID.md
   - .claude/skills/skill-creator/assets/TEMPLATE.KNOWLEDGE-SKILL.md
   - .claude/skills/skill-creator/assets/TEMPLATE.SKILL.md
   - .claude/skills/skill-creator/blueprints/evaluation-iteration.md
@@ -536,9 +580,10 @@ dependencies:
     .claude/skills/rules-compiler/assets/TEMPLATE.SKILLS.md: sha256:674c706aa032415af67c12264bee57a108bff931bec5984716c35db4447af876
     .claude/skills/rules-compiler/assets/TEMPLATE.STANDARDS.md: sha256:e61d1bd6a44d3f9807a8b395ba7e83ee4aabd8404ea22ee7927d8bfc5b106aa2
     .claude/skills/rules-compiler/blueprints/domain-compiler-contract.md: sha256:b5788bf42dd1364c5da5589261badcc91310d8b861569dd94a390adaa6594c2b
-    .claude/skills/skill-creator/SKILL.md: sha256:9698ece1e9f84d1d79e78962f0146d63f53b993eb4bdd7f6c7721cb6174495b9
+    .claude/skills/skill-creator/SKILL.md: sha256:d8f19134e27db6045086cc2a35370ab0e96dd109e0649558550e4c86b7910bb5
     .claude/skills/skill-creator/assets/TEMPLATE.EVALUATION-SCENARIOS.md: sha256:5a0d97d141d77f3e985700afb5a4f6ca25b6713b5ec451b21dba4c583146626f
-    .claude/skills/skill-creator/assets/TEMPLATE.KNOWLEDGE-SKILL.md: sha256:39f777150b0fd1e3950fadc60f9c184d3760695544c06edfa2382b0f54528ae3
+    .claude/skills/skill-creator/assets/TEMPLATE.KNOWLEDGE-SKILL.HYBRID.md: sha256:554f371ddd0b02f3a730cf8972839229f49a8ba8f6168b2a3775cc5566e85bdd
+    .claude/skills/skill-creator/assets/TEMPLATE.KNOWLEDGE-SKILL.md: sha256:36190f31b443c5d123fe3342eb98eeea849661f84b24de31b78deea54b194d18
     .claude/skills/skill-creator/assets/TEMPLATE.SKILL.md: sha256:b0289b78e9323d95e355aa7a1842f3bff28a927a30d3f35c5db93fd98440ea89
     .claude/skills/skill-creator/blueprints/evaluation-iteration.md: sha256:0a5b8ce27eb5824bb5845172ef421c07289616437232320c8ec36bbfda33c54a
     .claude/skills/skill-creator/blueprints/evaluation-scenarios.md: sha256:97201f1c30f1a8fa3707af3b11fde92b8d35c9a90f09105fe5ecd45dedbb00ed
@@ -547,6 +592,288 @@ dependencies:
   local_path: ../artifact-authoring
   declaring_parent: ./packages/terraform
   anchored_local_path: packages/artifact-authoring
+  declared_license: MIT
+- repo_url: _local/camel-quarkus-skills
+  name: agents-factory-camel-quarkus-skills
+  version: 1.0.0
+  depth: 2
+  resolved_by: _local/camel-quarkus-integrator
+  package_type: apm_package
+  deployed_files:
+  - .claude/skills/developing-camel-quarkus-bean-v3-40
+  - .claude/skills/developing-camel-quarkus-bean-v3-40/SKILL.md
+  - .claude/skills/developing-camel-quarkus-bean-v3-40/blueprints/always-do-patterns.md
+  - .claude/skills/developing-camel-quarkus-bean-v3-40/blueprints/bean-binding.md
+  - .claude/skills/developing-camel-quarkus-bean-v3-40/blueprints/cdi-and-native.md
+  - .claude/skills/developing-camel-quarkus-bean-v3-40/blueprints/evaluation-scenarios.md
+  - .claude/skills/developing-camel-quarkus-bean-v3-40/blueprints/integration-examples.md
+  - .claude/skills/developing-camel-quarkus-bean-v3-40/blueprints/migration-guide.md
+  - .claude/skills/developing-camel-quarkus-bean-v3-40/blueprints/never-do-patterns.md
+  - .claude/skills/developing-camel-quarkus-bean-v3-40/blueprints/testing-with-injectmock.md
+  - .claude/skills/developing-camel-quarkus-bean-v3-40/blueprints/unverified-and-risks.md
+  - .claude/skills/developing-camel-quarkus-core-v3-40
+  - .claude/skills/developing-camel-quarkus-core-v3-40/SKILL.md
+  - .claude/skills/developing-camel-quarkus-core-v3-40/blueprints/always-do-patterns.md
+  - .claude/skills/developing-camel-quarkus-core-v3-40/blueprints/evaluation-scenarios.md
+  - .claude/skills/developing-camel-quarkus-core-v3-40/blueprints/integration-examples.md
+  - .claude/skills/developing-camel-quarkus-core-v3-40/blueprints/migration-guide.md
+  - .claude/skills/developing-camel-quarkus-core-v3-40/blueprints/native-mode.md
+  - .claude/skills/developing-camel-quarkus-core-v3-40/blueprints/never-do-patterns.md
+  - .claude/skills/developing-camel-quarkus-core-v3-40/blueprints/tls-and-security.md
+  - .claude/skills/developing-camel-quarkus-core-v3-40/blueprints/unverified-and-risks.md
+  - .claude/skills/developing-camel-quarkus-file-v3-40
+  - .claude/skills/developing-camel-quarkus-file-v3-40/SKILL.md
+  - .claude/skills/developing-camel-quarkus-file-v3-40/blueprints/always-do-patterns.md
+  - .claude/skills/developing-camel-quarkus-file-v3-40/blueprints/evaluation-scenarios.md
+  - .claude/skills/developing-camel-quarkus-file-v3-40/blueprints/file-consumer-producer.md
+  - .claude/skills/developing-camel-quarkus-file-v3-40/blueprints/file-watch-and-cluster.md
+  - .claude/skills/developing-camel-quarkus-file-v3-40/blueprints/integration-examples.md
+  - .claude/skills/developing-camel-quarkus-file-v3-40/blueprints/migration-guide.md
+  - .claude/skills/developing-camel-quarkus-file-v3-40/blueprints/native-mode.md
+  - .claude/skills/developing-camel-quarkus-file-v3-40/blueprints/never-do-patterns.md
+  - .claude/skills/developing-camel-quarkus-file-v3-40/blueprints/remote-ftp-sftp.md
+  - .claude/skills/developing-camel-quarkus-file-v3-40/blueprints/unverified-and-risks.md
+  - .claude/skills/developing-camel-quarkus-http-v3-40
+  - .claude/skills/developing-camel-quarkus-http-v3-40/SKILL.md
+  - .claude/skills/developing-camel-quarkus-http-v3-40/blueprints/always-do-patterns.md
+  - .claude/skills/developing-camel-quarkus-http-v3-40/blueprints/evaluation-scenarios.md
+  - .claude/skills/developing-camel-quarkus-http-v3-40/blueprints/fault-tolerance-and-errors.md
+  - .claude/skills/developing-camel-quarkus-http-v3-40/blueprints/integration-examples.md
+  - .claude/skills/developing-camel-quarkus-http-v3-40/blueprints/migration-guide.md
+  - .claude/skills/developing-camel-quarkus-http-v3-40/blueprints/never-do-patterns.md
+  - .claude/skills/developing-camel-quarkus-http-v3-40/blueprints/tls-and-security.md
+  - .claude/skills/developing-camel-quarkus-http-v3-40/blueprints/unverified-and-risks.md
+  - .claude/skills/developing-camel-quarkus-jaxb-v3-40
+  - .claude/skills/developing-camel-quarkus-jaxb-v3-40/SKILL.md
+  - .claude/skills/developing-camel-quarkus-jaxb-v3-40/blueprints/always-do-patterns.md
+  - .claude/skills/developing-camel-quarkus-jaxb-v3-40/blueprints/evaluation-scenarios.md
+  - .claude/skills/developing-camel-quarkus-jaxb-v3-40/blueprints/integration-examples.md
+  - .claude/skills/developing-camel-quarkus-jaxb-v3-40/blueprints/migration-guide.md
+  - .claude/skills/developing-camel-quarkus-jaxb-v3-40/blueprints/native-mode-and-contexts.md
+  - .claude/skills/developing-camel-quarkus-jaxb-v3-40/blueprints/never-do-patterns.md
+  - .claude/skills/developing-camel-quarkus-jaxb-v3-40/blueprints/schema-security.md
+  - .claude/skills/developing-camel-quarkus-jaxb-v3-40/blueprints/unverified-and-risks.md
+  - .claude/skills/developing-camel-quarkus-junit-v3-40
+  - .claude/skills/developing-camel-quarkus-junit-v3-40/SKILL.md
+  - .claude/skills/developing-camel-quarkus-junit-v3-40/blueprints/advice-with-and-lifecycle.md
+  - .claude/skills/developing-camel-quarkus-junit-v3-40/blueprints/always-do-patterns.md
+  - .claude/skills/developing-camel-quarkus-junit-v3-40/blueprints/evaluation-scenarios.md
+  - .claude/skills/developing-camel-quarkus-junit-v3-40/blueprints/integration-examples.md
+  - .claude/skills/developing-camel-quarkus-junit-v3-40/blueprints/migration-3-31-rename.md
+  - .claude/skills/developing-camel-quarkus-junit-v3-40/blueprints/native-testing.md
+  - .claude/skills/developing-camel-quarkus-junit-v3-40/blueprints/never-do-patterns.md
+  - .claude/skills/developing-camel-quarkus-junit-v3-40/blueprints/unverified-and-risks.md
+  - .claude/skills/developing-camel-quarkus-log-v3-40
+  - .claude/skills/developing-camel-quarkus-log-v3-40/SKILL.md
+  - .claude/skills/developing-camel-quarkus-log-v3-40/blueprints/always-do-patterns.md
+  - .claude/skills/developing-camel-quarkus-log-v3-40/blueprints/evaluation-scenarios.md
+  - .claude/skills/developing-camel-quarkus-log-v3-40/blueprints/integration-examples.md
+  - .claude/skills/developing-camel-quarkus-log-v3-40/blueprints/log-component-options.md
+  - .claude/skills/developing-camel-quarkus-log-v3-40/blueprints/masking-and-security.md
+  - .claude/skills/developing-camel-quarkus-log-v3-40/blueprints/mdc.md
+  - .claude/skills/developing-camel-quarkus-log-v3-40/blueprints/migration-guide.md
+  - .claude/skills/developing-camel-quarkus-log-v3-40/blueprints/never-do-patterns.md
+  - .claude/skills/developing-camel-quarkus-log-v3-40/blueprints/quarkus-logging.md
+  - .claude/skills/developing-camel-quarkus-log-v3-40/blueprints/unverified-and-risks.md
+  - .claude/skills/developing-camel-quarkus-platform-http-v3-40
+  - .claude/skills/developing-camel-quarkus-platform-http-v3-40/SKILL.md
+  - .claude/skills/developing-camel-quarkus-platform-http-v3-40/blueprints/always-do-patterns.md
+  - .claude/skills/developing-camel-quarkus-platform-http-v3-40/blueprints/evaluation-scenarios.md
+  - .claude/skills/developing-camel-quarkus-platform-http-v3-40/blueprints/file-uploads.md
+  - .claude/skills/developing-camel-quarkus-platform-http-v3-40/blueprints/integration-examples.md
+  - .claude/skills/developing-camel-quarkus-platform-http-v3-40/blueprints/migration-guide.md
+  - .claude/skills/developing-camel-quarkus-platform-http-v3-40/blueprints/never-do-patterns.md
+  - .claude/skills/developing-camel-quarkus-platform-http-v3-40/blueprints/tls-and-security.md
+  - .claude/skills/developing-camel-quarkus-platform-http-v3-40/blueprints/unverified-and-risks.md
+  - .claude/skills/developing-camel-quarkus-rest-v3-40
+  - .claude/skills/developing-camel-quarkus-rest-v3-40/SKILL.md
+  - .claude/skills/developing-camel-quarkus-rest-v3-40/blueprints/always-do-patterns.md
+  - .claude/skills/developing-camel-quarkus-rest-v3-40/blueprints/evaluation-scenarios.md
+  - .claude/skills/developing-camel-quarkus-rest-v3-40/blueprints/integration-examples.md
+  - .claude/skills/developing-camel-quarkus-rest-v3-40/blueprints/migration-guide.md
+  - .claude/skills/developing-camel-quarkus-rest-v3-40/blueprints/never-do-patterns.md
+  - .claude/skills/developing-camel-quarkus-rest-v3-40/blueprints/openapi-contract-first.md
+  - .claude/skills/developing-camel-quarkus-rest-v3-40/blueprints/rest-dsl-configuration.md
+  - .claude/skills/developing-camel-quarkus-rest-v3-40/blueprints/unverified-and-risks.md
+  - .claude/skills/developing-camel-quarkus-rest-v3-40/blueprints/validation-and-cors.md
+  - .claude/skills/developing-camel-quarkus-xslt-v3-40
+  - .claude/skills/developing-camel-quarkus-xslt-v3-40/SKILL.md
+  - .claude/skills/developing-camel-quarkus-xslt-v3-40/blueprints/always-do-patterns.md
+  - .claude/skills/developing-camel-quarkus-xslt-v3-40/blueprints/evaluation-scenarios.md
+  - .claude/skills/developing-camel-quarkus-xslt-v3-40/blueprints/extension-functions.md
+  - .claude/skills/developing-camel-quarkus-xslt-v3-40/blueprints/integration-examples.md
+  - .claude/skills/developing-camel-quarkus-xslt-v3-40/blueprints/migration-guide.md
+  - .claude/skills/developing-camel-quarkus-xslt-v3-40/blueprints/native-mode.md
+  - .claude/skills/developing-camel-quarkus-xslt-v3-40/blueprints/never-do-patterns.md
+  - .claude/skills/developing-camel-quarkus-xslt-v3-40/blueprints/security-hardening-3-40.md
+  - .claude/skills/developing-camel-quarkus-xslt-v3-40/blueprints/unverified-and-risks.md
+  - .claude/skills/developing-quarkus-arc-v3-40
+  - .claude/skills/developing-quarkus-arc-v3-40/SKILL.md
+  - .claude/skills/developing-quarkus-arc-v3-40/blueprints/always-do-patterns.md
+  - .claude/skills/developing-quarkus-arc-v3-40/blueprints/bean-removal.md
+  - .claude/skills/developing-quarkus-arc-v3-40/blueprints/camel-integration.md
+  - .claude/skills/developing-quarkus-arc-v3-40/blueprints/cdi-lite-limitations.md
+  - .claude/skills/developing-quarkus-arc-v3-40/blueprints/evaluation-scenarios.md
+  - .claude/skills/developing-quarkus-arc-v3-40/blueprints/migration-guide.md
+  - .claude/skills/developing-quarkus-arc-v3-40/blueprints/never-do-patterns.md
+  - .claude/skills/developing-quarkus-arc-v3-40/blueprints/scopes-and-injection.md
+  - .claude/skills/developing-quarkus-arc-v3-40/blueprints/testing.md
+  - .claude/skills/developing-quarkus-arc-v3-40/blueprints/unverified-and-risks.md
+  - .claude/skills/developing-quarkus-junit-v3-40
+  - .claude/skills/developing-quarkus-junit-v3-40/SKILL.md
+  - .claude/skills/developing-quarkus-junit-v3-40/blueprints/always-do-patterns.md
+  - .claude/skills/developing-quarkus-junit-v3-40/blueprints/evaluation-scenarios.md
+  - .claude/skills/developing-quarkus-junit-v3-40/blueprints/integration-examples.md
+  - .claude/skills/developing-quarkus-junit-v3-40/blueprints/migration-3-31-rename.md
+  - .claude/skills/developing-quarkus-junit-v3-40/blueprints/mocking.md
+  - .claude/skills/developing-quarkus-junit-v3-40/blueprints/never-do-patterns.md
+  - .claude/skills/developing-quarkus-junit-v3-40/blueprints/profiles-and-resources.md
+  - .claude/skills/developing-quarkus-junit-v3-40/blueprints/test-types.md
+  - .claude/skills/developing-quarkus-junit-v3-40/blueprints/unverified-and-risks.md
+  - .claude/skills/developing-quarkus-rest-v3-40
+  - .claude/skills/developing-quarkus-rest-v3-40/SKILL.md
+  - .claude/skills/developing-quarkus-rest-v3-40/blueprints/always-do-patterns.md
+  - .claude/skills/developing-quarkus-rest-v3-40/blueprints/camel-integration.md
+  - .claude/skills/developing-quarkus-rest-v3-40/blueprints/evaluation-scenarios.md
+  - .claude/skills/developing-quarkus-rest-v3-40/blueprints/migration-quarkus-4-preview.md
+  - .claude/skills/developing-quarkus-rest-v3-40/blueprints/never-do-patterns.md
+  - .claude/skills/developing-quarkus-rest-v3-40/blueprints/rest-client.md
+  - .claude/skills/developing-quarkus-rest-v3-40/blueprints/security-and-tls.md
+  - .claude/skills/developing-quarkus-rest-v3-40/blueprints/server-resources.md
+  - .claude/skills/developing-quarkus-rest-v3-40/blueprints/unverified-and-risks.md
+  deployed_file_hashes:
+    .claude/skills/developing-camel-quarkus-bean-v3-40/SKILL.md: sha256:476e0ab1109f2644dba35b7a9608239785a1436fdb55cfdcb550db981e4a8138
+    .claude/skills/developing-camel-quarkus-bean-v3-40/blueprints/always-do-patterns.md: sha256:21d16e96f18b5814e844e317009fba24a5e6bdf945bce04117f30df76bbf907b
+    .claude/skills/developing-camel-quarkus-bean-v3-40/blueprints/bean-binding.md: sha256:6fe5462cddfb2e7465168900076082c5f90eaf308e538e77612f00bb0c157508
+    .claude/skills/developing-camel-quarkus-bean-v3-40/blueprints/cdi-and-native.md: sha256:89e45535c99ef60fa9d690dc3da6929ae32dede8f380bae88571a58ba8f09eac
+    .claude/skills/developing-camel-quarkus-bean-v3-40/blueprints/evaluation-scenarios.md: sha256:c8952b39b6f7bee130cd105ca17b87e232587ce6ad3ced778bd830ba32a5832a
+    .claude/skills/developing-camel-quarkus-bean-v3-40/blueprints/integration-examples.md: sha256:2134a2b9a0136425701e2669bdcb08ed3b3d262e03e0f48fed20b019ba8986c6
+    .claude/skills/developing-camel-quarkus-bean-v3-40/blueprints/migration-guide.md: sha256:59bf920437580b5f32079f3314db5580f2077d24b6db8aeacd409e59f6872b9c
+    .claude/skills/developing-camel-quarkus-bean-v3-40/blueprints/never-do-patterns.md: sha256:cf45379b895360ab55d6ebf21f9a0ec67611ed72082ea0ff0d71cbed5cd8c834
+    .claude/skills/developing-camel-quarkus-bean-v3-40/blueprints/testing-with-injectmock.md: sha256:a874afffbb52f68ce21e1fd9d0b02c41279461953e609be29d71c2c7090bf025
+    .claude/skills/developing-camel-quarkus-bean-v3-40/blueprints/unverified-and-risks.md: sha256:28c8cbd6cb04c551d61f23b4024f42b54f9d6be8036175f721d8fba872325733
+    .claude/skills/developing-camel-quarkus-core-v3-40/SKILL.md: sha256:bf647b826d209f74c2776313467f3f979ddfbce9e55defec25b27c185faacc28
+    .claude/skills/developing-camel-quarkus-core-v3-40/blueprints/always-do-patterns.md: sha256:a577b81e9ce1339386f93b2df782df02d28f94aec756f59816cdd83ab36a7e2c
+    .claude/skills/developing-camel-quarkus-core-v3-40/blueprints/evaluation-scenarios.md: sha256:8bcaa8535a24963090654e08eaf46b44049fbb447ab4287e7621353adec34745
+    .claude/skills/developing-camel-quarkus-core-v3-40/blueprints/integration-examples.md: sha256:225c552f35548669942b3bed4af248d60f791fb830d5e62d504f53ef3414e615
+    .claude/skills/developing-camel-quarkus-core-v3-40/blueprints/migration-guide.md: sha256:46a710de81e61392de3c912436a1560e77bc343440b8434a175fe750b99fe3fa
+    .claude/skills/developing-camel-quarkus-core-v3-40/blueprints/native-mode.md: sha256:484eb4ff497545e8a68313efffecf79c1bb3ece181748c79da1144df14fae4ff
+    .claude/skills/developing-camel-quarkus-core-v3-40/blueprints/never-do-patterns.md: sha256:2ce3b8564f36aae13c02f3123c6a9d524061be751f8c602f74f5b397de63e596
+    .claude/skills/developing-camel-quarkus-core-v3-40/blueprints/tls-and-security.md: sha256:90c00bf0d248a65d649725696431a4246cb4bd47614165bb8e8e02b59e8e71e0
+    .claude/skills/developing-camel-quarkus-core-v3-40/blueprints/unverified-and-risks.md: sha256:03ed70c8325128dbe8ada54ebc0c6fd38eb04137a3cc3fedb1edd5b746a64a92
+    .claude/skills/developing-camel-quarkus-file-v3-40/SKILL.md: sha256:eb096bcea8037013ab14aedc0c3e261b8ca8548eaa258a91d9fafe0c3bfe409b
+    .claude/skills/developing-camel-quarkus-file-v3-40/blueprints/always-do-patterns.md: sha256:9bb82a40275142b1b8ac21fd702f6ad543157329168bb9c08631668ad2d56aa9
+    .claude/skills/developing-camel-quarkus-file-v3-40/blueprints/evaluation-scenarios.md: sha256:e85659a3a1f68712800920d43c82111d663bcbb80ad9a8658e99286be02a51a4
+    .claude/skills/developing-camel-quarkus-file-v3-40/blueprints/file-consumer-producer.md: sha256:45e46da5f8d2ff5f44b28dc5f489f10a779841c7b2230201576fca926d4e5e63
+    .claude/skills/developing-camel-quarkus-file-v3-40/blueprints/file-watch-and-cluster.md: sha256:8b87116c855d7b1ae40e465326cff5d51a150d50c4acbf27602d65e9118bf200
+    .claude/skills/developing-camel-quarkus-file-v3-40/blueprints/integration-examples.md: sha256:54b7519a1398927b06a338409ecbf79b7aa145856f37c836d9f64ca19e95f7d8
+    .claude/skills/developing-camel-quarkus-file-v3-40/blueprints/migration-guide.md: sha256:a240d0132286f5eb39e73ddc2ec73916a00ba983d4340cc755ae7c3637ab2be3
+    .claude/skills/developing-camel-quarkus-file-v3-40/blueprints/native-mode.md: sha256:94848f3f7c10a9528aab687bf8c7534a1fb065da2b67884c167ed066aa4b8741
+    .claude/skills/developing-camel-quarkus-file-v3-40/blueprints/never-do-patterns.md: sha256:81515567f6a732e33fc068ad82d4a0179c1e52bd294e048fccfcf3cf6419c098
+    .claude/skills/developing-camel-quarkus-file-v3-40/blueprints/remote-ftp-sftp.md: sha256:dac5442a43d59b4dcba4ab17cc4db70c2f450b740e38ad1be7c5a2bbd6b1ded0
+    .claude/skills/developing-camel-quarkus-file-v3-40/blueprints/unverified-and-risks.md: sha256:bedb023c2ce588bdec00c18ef6f6f2b7c84a1b35d300dd420dbd06ace5604fae
+    .claude/skills/developing-camel-quarkus-http-v3-40/SKILL.md: sha256:c3eb77df7b1847c02f3bf6bfa6069a01164f3bd6e7fb43471ed45caa031492d8
+    .claude/skills/developing-camel-quarkus-http-v3-40/blueprints/always-do-patterns.md: sha256:276e264c7f4ce6ec8ea59698d956fa0ebfe076676e5e6c804f78e1cac25e5983
+    .claude/skills/developing-camel-quarkus-http-v3-40/blueprints/evaluation-scenarios.md: sha256:0befadcd244cf0b8178cf7e15cca44aa557c9ac09dde57ae1959deee07776487
+    .claude/skills/developing-camel-quarkus-http-v3-40/blueprints/fault-tolerance-and-errors.md: sha256:cacf074e91305e12286970b489058daadd2a16c3f7ffea7c908c9453259fc4ab
+    .claude/skills/developing-camel-quarkus-http-v3-40/blueprints/integration-examples.md: sha256:267f32bf5a233e827cd6163c9f69c52ae598d03c615cce6182e5c0b644dafce2
+    .claude/skills/developing-camel-quarkus-http-v3-40/blueprints/migration-guide.md: sha256:0dcffd167bdbdbd2a3d8bd89614d6931ebbf822ebf7420b2955ea336e788b9a0
+    .claude/skills/developing-camel-quarkus-http-v3-40/blueprints/never-do-patterns.md: sha256:58929a4bb4cc2417f450780a37e29543805cdab1454d8988d24d7d92445209a5
+    .claude/skills/developing-camel-quarkus-http-v3-40/blueprints/tls-and-security.md: sha256:3d5e5fc644118bb453b1fd154e7be4a29aa08bdd29f3eaefb1fd716138aa8d2a
+    .claude/skills/developing-camel-quarkus-http-v3-40/blueprints/unverified-and-risks.md: sha256:8d0d85017383c92889eb4cfd5fbc0ce5add7bc3870c55c2db1f68a141c5c9f9f
+    .claude/skills/developing-camel-quarkus-jaxb-v3-40/SKILL.md: sha256:7391b2224a34f4586c2c5942b55e42a0b1d89103924cc4778f47fa7d4006934e
+    .claude/skills/developing-camel-quarkus-jaxb-v3-40/blueprints/always-do-patterns.md: sha256:1e8578422b2164ad31aafc938bcb648da47941a0e32553bb3d5f1f90c941092b
+    .claude/skills/developing-camel-quarkus-jaxb-v3-40/blueprints/evaluation-scenarios.md: sha256:26066a3d9aa1db9ee4681d2f4e40052b963235fb275c32ef775c391c79847063
+    .claude/skills/developing-camel-quarkus-jaxb-v3-40/blueprints/integration-examples.md: sha256:043c4550ad2b541f257f67765c28e5687d3eb7929df9074945ff990f4ca87f6d
+    .claude/skills/developing-camel-quarkus-jaxb-v3-40/blueprints/migration-guide.md: sha256:43bdaec77eabfc49e4df2774795b2afe377168b4ba39df01b39d34d7476ac5c9
+    .claude/skills/developing-camel-quarkus-jaxb-v3-40/blueprints/native-mode-and-contexts.md: sha256:690dc5d1e5499f21c4b8e44de2303bd2cbacf9b93572ec57ba01c1d3d659fdc7
+    .claude/skills/developing-camel-quarkus-jaxb-v3-40/blueprints/never-do-patterns.md: sha256:d896e6a91469ee63f3aea019af7c0f004ec92c5339cbfe712b77fbbf36b417d7
+    .claude/skills/developing-camel-quarkus-jaxb-v3-40/blueprints/schema-security.md: sha256:62bd2748a7a2ae7d170470a6daf9f473777efb071dd751105b9e3cb05421d21d
+    .claude/skills/developing-camel-quarkus-jaxb-v3-40/blueprints/unverified-and-risks.md: sha256:4a652c20b08ceb4f1f08a1423756f255dd77f7bb96a5d0fe1b8a9f57f2be8e3e
+    .claude/skills/developing-camel-quarkus-junit-v3-40/SKILL.md: sha256:cf486f2568070994a84905b90df8a1928e378c533d07c1ead4529b7f2b101641
+    .claude/skills/developing-camel-quarkus-junit-v3-40/blueprints/advice-with-and-lifecycle.md: sha256:a27f755f07b78d3fb073756548d3fc08049157312c36dafd00d1bd2d92d7f204
+    .claude/skills/developing-camel-quarkus-junit-v3-40/blueprints/always-do-patterns.md: sha256:9fcf8f8415f4ad80a61658fdd6f748324bf0fd005bac19266cd028d211610478
+    .claude/skills/developing-camel-quarkus-junit-v3-40/blueprints/evaluation-scenarios.md: sha256:d6465dbf0ca17069bc60ffe8adebfc1e048c3850d861ad3b7fd5ce958e034b19
+    .claude/skills/developing-camel-quarkus-junit-v3-40/blueprints/integration-examples.md: sha256:314b4c00bc395acdcde3cd0966eed455bc99983f3462c30880a564994655fa7f
+    .claude/skills/developing-camel-quarkus-junit-v3-40/blueprints/migration-3-31-rename.md: sha256:4db006aa2002bf86f8791c2f3854ead560dd721882f4ba8dce95a2a96b52a1d9
+    .claude/skills/developing-camel-quarkus-junit-v3-40/blueprints/native-testing.md: sha256:0a2203314ff3bba27fb04ead1b68f54b34899577759daff18af762c21ce6eca7
+    .claude/skills/developing-camel-quarkus-junit-v3-40/blueprints/never-do-patterns.md: sha256:1c8d748b189267feb51d823494627f1423912d42c7cbc44d0484309a0c216619
+    .claude/skills/developing-camel-quarkus-junit-v3-40/blueprints/unverified-and-risks.md: sha256:70a258f392e3f66989e98dfd297ffde070f093325f02b32a21208f3e8b48b419
+    .claude/skills/developing-camel-quarkus-log-v3-40/SKILL.md: sha256:ced33dccc6ba9fc05c9dafd8b6b202ed6b68c13759d83509f098dd74fd2f6278
+    .claude/skills/developing-camel-quarkus-log-v3-40/blueprints/always-do-patterns.md: sha256:004b95ec64f7b8b489d743e0ea14b20994f0638612baccf66e83034716f8653c
+    .claude/skills/developing-camel-quarkus-log-v3-40/blueprints/evaluation-scenarios.md: sha256:586947264a358bd4597c1ecce064894fc6b7fb78d488cb91b59a8b2253ca61ee
+    .claude/skills/developing-camel-quarkus-log-v3-40/blueprints/integration-examples.md: sha256:84fee689705a99adcaba9b133b550ddf8c035e335721e3f6638b467d8cd7821d
+    .claude/skills/developing-camel-quarkus-log-v3-40/blueprints/log-component-options.md: sha256:1a7e3ae8b6a57f1429139f47df8843adc8e6889998b1b906b85f86acacc614a2
+    .claude/skills/developing-camel-quarkus-log-v3-40/blueprints/masking-and-security.md: sha256:092e68ce4364c15164b48f5a31303cb5732c40b29bfb01754c29508e617cd224
+    .claude/skills/developing-camel-quarkus-log-v3-40/blueprints/mdc.md: sha256:ca3bd16d0302ebfaec89c894db37ee34f1001f08deb2c0f4b31ae9fa11f262f2
+    .claude/skills/developing-camel-quarkus-log-v3-40/blueprints/migration-guide.md: sha256:ea0c0d47e492987f694430d352eb261974009011dd7a0be36bb70fc0e111ab86
+    .claude/skills/developing-camel-quarkus-log-v3-40/blueprints/never-do-patterns.md: sha256:d128d57fffd1f2a2b109a647b19e4fdc6554b7874f2434c8025987d6f905ea16
+    .claude/skills/developing-camel-quarkus-log-v3-40/blueprints/quarkus-logging.md: sha256:08347fa1b4b5a753755f59fab67ecf0620d3556abe885ce61f539863325173f1
+    .claude/skills/developing-camel-quarkus-log-v3-40/blueprints/unverified-and-risks.md: sha256:649eb127158a5f6ab75ce9dc6219aa48ff491c2c74e4695e3c1a0ec9b47b9b4b
+    .claude/skills/developing-camel-quarkus-platform-http-v3-40/SKILL.md: sha256:398226f2540bd2997f7a6b43faf83ebe4fb636dbf5f5a61f870febc9a189f64e
+    .claude/skills/developing-camel-quarkus-platform-http-v3-40/blueprints/always-do-patterns.md: sha256:12f6a29e3e2338065f27e73760b22365958aedaa42477f22a723a38908d8919d
+    .claude/skills/developing-camel-quarkus-platform-http-v3-40/blueprints/evaluation-scenarios.md: sha256:a8f77756e7715a8e30fc7849d13dfbc18a828d8b5302a94298d4c83161391056
+    .claude/skills/developing-camel-quarkus-platform-http-v3-40/blueprints/file-uploads.md: sha256:47b010400f8ab6031abe85f020206cd4c5e3cd8f6d23d73911cb081aabc0005a
+    .claude/skills/developing-camel-quarkus-platform-http-v3-40/blueprints/integration-examples.md: sha256:4bcb4b2dd62a7141ac3d98ce4160bb2fed26314a189b94256582a99cef99b8c3
+    .claude/skills/developing-camel-quarkus-platform-http-v3-40/blueprints/migration-guide.md: sha256:6f666dcb430ff949f299db4c07305cfe5b93f09bd0a07ba17a75305716b9eeef
+    .claude/skills/developing-camel-quarkus-platform-http-v3-40/blueprints/never-do-patterns.md: sha256:c5db400c4bdc01ecbbb15c2fe70b1aead146f8820f5d701d398fa10f2eaf6062
+    .claude/skills/developing-camel-quarkus-platform-http-v3-40/blueprints/tls-and-security.md: sha256:6aaccaecb93f8edba586d40fe7f89c45ef6699f234d9190d9d41ac256b754384
+    .claude/skills/developing-camel-quarkus-platform-http-v3-40/blueprints/unverified-and-risks.md: sha256:a1d8ed6b8b98d1bae3661104b5a7cdbcd31d847df7b79a7467df5d3fe7dc47dc
+    .claude/skills/developing-camel-quarkus-rest-v3-40/SKILL.md: sha256:74c6b9067035c33c5237e7eacaf1be893e039620133427787150486b79476c51
+    .claude/skills/developing-camel-quarkus-rest-v3-40/blueprints/always-do-patterns.md: sha256:e6221fbe0a52c678dbbd81ce6196747df94132775e32d2ffc04e5828c6d44a00
+    .claude/skills/developing-camel-quarkus-rest-v3-40/blueprints/evaluation-scenarios.md: sha256:352ce02e2a9c22d9a35810989444298357982d159a3330443005296566840283
+    .claude/skills/developing-camel-quarkus-rest-v3-40/blueprints/integration-examples.md: sha256:a9f0d6373ab3887ba8f42463fee515755df3896ec9b2c71a481d702fe94419d7
+    .claude/skills/developing-camel-quarkus-rest-v3-40/blueprints/migration-guide.md: sha256:96c8c0cd95a1c1214cb8b3ca0adfeadbc75cc84b7cea732b33cec044c5f95151
+    .claude/skills/developing-camel-quarkus-rest-v3-40/blueprints/never-do-patterns.md: sha256:89d32b4d061aa75870e5341b8e2a356ae0e80359d8707dabae229ff4f62a5a72
+    .claude/skills/developing-camel-quarkus-rest-v3-40/blueprints/openapi-contract-first.md: sha256:54bf64c545faa221425929deb63988751cc774eb92282e3d0dbb1247ae0dc579
+    .claude/skills/developing-camel-quarkus-rest-v3-40/blueprints/rest-dsl-configuration.md: sha256:58f5a7eddf55e7b34af48ad9125c74700168f216cf194edcad4d3bb131532abd
+    .claude/skills/developing-camel-quarkus-rest-v3-40/blueprints/unverified-and-risks.md: sha256:d735809fe32423fc5662b93b4b06e66814b1226c8df6a2132ed266815d207f18
+    .claude/skills/developing-camel-quarkus-rest-v3-40/blueprints/validation-and-cors.md: sha256:9b20ce5de8b63dbf97bd773b33d558050621749e5c1cc3412782e93752bdb201
+    .claude/skills/developing-camel-quarkus-xslt-v3-40/SKILL.md: sha256:ab0bcbc2b3bc6d943b4f4a4c8ab90329d5de92c34b90d62d39192ee216172f48
+    .claude/skills/developing-camel-quarkus-xslt-v3-40/blueprints/always-do-patterns.md: sha256:4cc542b9cc6c49bd6f98bfabcb29503a29042cd259d88a09da621ba84e3c0cb6
+    .claude/skills/developing-camel-quarkus-xslt-v3-40/blueprints/evaluation-scenarios.md: sha256:147875f318cc83c072f965d1c2fddd66b537a30a7531f4b0498950fc25f1c0c1
+    .claude/skills/developing-camel-quarkus-xslt-v3-40/blueprints/extension-functions.md: sha256:3477d5e3031bdfa84adab6c065fab6812aad0fbf30fd8d2d5cdf474466d8b18f
+    .claude/skills/developing-camel-quarkus-xslt-v3-40/blueprints/integration-examples.md: sha256:d333423066a74e538577f1a807a61ea855ef501ea8aaf55697e78130fb1ead95
+    .claude/skills/developing-camel-quarkus-xslt-v3-40/blueprints/migration-guide.md: sha256:fbcd38180805e7ef5c247492f233d0057ac30cbc310e9aae3b7fa44759ef8b8e
+    .claude/skills/developing-camel-quarkus-xslt-v3-40/blueprints/native-mode.md: sha256:74c3ddc86588c95312639db56b3e5d83e0021eead865cabb6854b9e2dc761895
+    .claude/skills/developing-camel-quarkus-xslt-v3-40/blueprints/never-do-patterns.md: sha256:8b82a5c0735046b7f6105188775c77b9de28bde642ca68b1434fd7d49bf9a3c5
+    .claude/skills/developing-camel-quarkus-xslt-v3-40/blueprints/security-hardening-3-40.md: sha256:dcfbd7190646904531807e3296d8f57f87474459ac1184a70744607ab8caeda0
+    .claude/skills/developing-camel-quarkus-xslt-v3-40/blueprints/unverified-and-risks.md: sha256:b055298672d9fcc66529c712140aec0ad01a816f341890fd12ff510c8977ca2b
+    .claude/skills/developing-quarkus-arc-v3-40/SKILL.md: sha256:e1755f784493f0373bac6ab137eee68dc76a10c4c2056dabf7cc6aa3c4fe0799
+    .claude/skills/developing-quarkus-arc-v3-40/blueprints/always-do-patterns.md: sha256:53ea18f65b59d2c9e667417ac6026ea55277f6167a1b276795baffc9e0e8e44d
+    .claude/skills/developing-quarkus-arc-v3-40/blueprints/bean-removal.md: sha256:7f1765bf80a326370dcecca889296757a7e9c3bd8a351c463d8cd4a14a766b6e
+    .claude/skills/developing-quarkus-arc-v3-40/blueprints/camel-integration.md: sha256:834b8be76ed794a985ff6a406438adc59d9c29b715df82b0cefa6e1496aa2bcb
+    .claude/skills/developing-quarkus-arc-v3-40/blueprints/cdi-lite-limitations.md: sha256:dfee989e873454153974fc0e8908f818ac9415aef3f870ca350a71005ad899bb
+    .claude/skills/developing-quarkus-arc-v3-40/blueprints/evaluation-scenarios.md: sha256:1f624e4bc8278e4fff0f80ce9a745f4a6cd2a4f7f98ea1d1c02c870e1d4bf9c0
+    .claude/skills/developing-quarkus-arc-v3-40/blueprints/migration-guide.md: sha256:9b2a9f2e36d1bee4909c3da1c06b405e2c2e61e18747a61f988d28cb6a4e7d8a
+    .claude/skills/developing-quarkus-arc-v3-40/blueprints/never-do-patterns.md: sha256:34c04494f586b45f0b57b35e17c53cf097c6f9d735849e522130a3fe0d2449ae
+    .claude/skills/developing-quarkus-arc-v3-40/blueprints/scopes-and-injection.md: sha256:5e5bffe1dc2cd7647d245963e172980f16c4253c33339048681e0d93f97194ef
+    .claude/skills/developing-quarkus-arc-v3-40/blueprints/testing.md: sha256:9ddef541d69aa26f4da39e68ba57485226b706143f7f2a92fd34bdbc4d908ef2
+    .claude/skills/developing-quarkus-arc-v3-40/blueprints/unverified-and-risks.md: sha256:7ef501d05a707c50bcb3331de39a32cd84b6b2e8c0417267bb3fa5b6ce05dd2e
+    .claude/skills/developing-quarkus-junit-v3-40/SKILL.md: sha256:1bab2135e6c25bc5ee06628c038edf6c55305a6bda2549495bcd5e48382952ec
+    .claude/skills/developing-quarkus-junit-v3-40/blueprints/always-do-patterns.md: sha256:d0cede07b03019e9691309c99b0b11655174c40c2a49bb4db130578efc598002
+    .claude/skills/developing-quarkus-junit-v3-40/blueprints/evaluation-scenarios.md: sha256:e09851ba2b13df63b31a013f891c518d4fa6c26c11e1a39d880a8a4511c0f4d9
+    .claude/skills/developing-quarkus-junit-v3-40/blueprints/integration-examples.md: sha256:c002aeaca4db069d618c02fa3f5271e473b54445110a576fdc4a08ff2ac08d09
+    .claude/skills/developing-quarkus-junit-v3-40/blueprints/migration-3-31-rename.md: sha256:64e99b2e2f0d59b68bb915770b4ca8266f6c7c90247bec97979df1e262c98558
+    .claude/skills/developing-quarkus-junit-v3-40/blueprints/mocking.md: sha256:ba2770bf72ea24f2e1b69821f83e8fd17e56a24b43da5b45469359e43b9b160e
+    .claude/skills/developing-quarkus-junit-v3-40/blueprints/never-do-patterns.md: sha256:a65ee09d9793008a851e29c5929b4044560e55449c6a04cb8c6aa61e15ba1343
+    .claude/skills/developing-quarkus-junit-v3-40/blueprints/profiles-and-resources.md: sha256:1284515df942f878fc00d885c83de92a94550f4217fd49457a76558abd52d8f1
+    .claude/skills/developing-quarkus-junit-v3-40/blueprints/test-types.md: sha256:ff83adc27be48a7662ee06219271d9abd24c2145aa2dbab0f2f0a3870f414799
+    .claude/skills/developing-quarkus-junit-v3-40/blueprints/unverified-and-risks.md: sha256:24a7bd0cb9bfee208bd09f2f4c65e95d55282f8e73beae2d08435570d97eddc0
+    .claude/skills/developing-quarkus-rest-v3-40/SKILL.md: sha256:c0e456bbbcd2016d3643e17962d61d384fc32778bcee1fe792dc8f8d6f3558b0
+    .claude/skills/developing-quarkus-rest-v3-40/blueprints/always-do-patterns.md: sha256:5ec14417e82b4293386e1a7d47c262872fcc63c9d330c10e75d6b83c0e2e2ba9
+    .claude/skills/developing-quarkus-rest-v3-40/blueprints/camel-integration.md: sha256:9111b1d67ecd3d74b6639c3e2da54066210df6c700300511d20ee237221b65ca
+    .claude/skills/developing-quarkus-rest-v3-40/blueprints/evaluation-scenarios.md: sha256:91aba42ae0209fc63193ba2bbe346013950b80d9f3d882cab480859622ee17a7
+    .claude/skills/developing-quarkus-rest-v3-40/blueprints/migration-quarkus-4-preview.md: sha256:ab674411417edc4a865bf5d7ea5f03844f6212fa5a5688bc9048ad18d7c2c250
+    .claude/skills/developing-quarkus-rest-v3-40/blueprints/never-do-patterns.md: sha256:11aeb25b2ee83166744dd01ccd52a09b19b108a246e9000000942e5cde54e614
+    .claude/skills/developing-quarkus-rest-v3-40/blueprints/rest-client.md: sha256:76e604098d8078b2b061c19d68d5f4271362a8d6ecc3ca0e4f58a0025e03d3ab
+    .claude/skills/developing-quarkus-rest-v3-40/blueprints/security-and-tls.md: sha256:16762c5cc07ba58c66eac544d8d1d74d5e26983a1646d9ec3b913d89614b74a3
+    .claude/skills/developing-quarkus-rest-v3-40/blueprints/server-resources.md: sha256:865bbf83dcb243d6c8fff67910aa179d56fa779711de9f8d78e8fb492b00149b
+    .claude/skills/developing-quarkus-rest-v3-40/blueprints/unverified-and-risks.md: sha256:9fc093b5bd18ecf60e1c5bc745b65dce887debdc91628140a86e9dc434750d3c
+  source: local
+  local_path: ../camel-quarkus-skills
+  declaring_parent: ./packages/camel-quarkus-integrator
+  anchored_local_path: packages/camel-quarkus-skills
   declared_license: MIT
 - repo_url: _local/factory-core
   name: agents-factory-factory-core
@@ -562,10 +889,10 @@ dependencies:
   - .claude/rules/skill-structure.md
   deployed_file_hashes:
     .claude/rules/agent-frontmatter.md: sha256:5d9ea57fc54bcd225ed60a049239381954b30391fa5d2088200e96d8a6b09205
-    .claude/rules/naming-conventions.md: sha256:10aba4ed1b25a3186ccfafff809baa0e42fc62b74cef6761a47dba8e657c7738
+    .claude/rules/naming-conventions.md: sha256:459ebc86e72e6baa18b998a92dd1acde19d2fea6aeabf69520f1fe4d27b22842
     .claude/rules/rules-frontmatter.md: sha256:1fe2afc6176a02c41e8e312c75b9d6b02b6ce560b745689400dd1f12ab596fef
     .claude/rules/skill-frontmatter.md: sha256:59253084ec1038ef1171fb22ed165664a9276b58003dde8cb9fff2f110e77c2e
-    .claude/rules/skill-structure.md: sha256:e8a85860cab7b53c2581c27d5a6932248f5f771dcf28d8ab079de7e0ce5bd09a
+    .claude/rules/skill-structure.md: sha256:5f9db35b8e9050ed5f793e10582cadd4a6224d25382087d00d03df2a4f4282ca
   source: local
   local_path: ../factory-core
   declaring_parent: ./packages/researching-frameworks
@@ -989,6 +1316,15 @@ deployments:
   content_hash: sha256:c431d2aebbd9905a6444d9411f3a99a5908b550d7ff6c86cdf014c2410b8f20d
 - kind: project-relative
   target: claude
+  value: .claude/agents/camel-quarkus-integrator.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/camel-quarkus-integrator
+  active_owner: ./packages/camel-quarkus-integrator
+  content_hash: sha256:8326673603861481597c4e0f78bbda89a8e219a0588950c1aafabff7685d3911
+- kind: project-relative
+  target: claude
   value: .claude/agents/chapter-assembler.md
   runtime: null
   scope: project
@@ -1133,13 +1469,40 @@ deployments:
   content_hash: sha256:5d9ea57fc54bcd225ed60a049239381954b30391fa5d2088200e96d8a6b09205
 - kind: project-relative
   target: claude
+  value: .claude/rules/camel-quarkus-integrator-code-standards.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/camel-quarkus-integrator
+  active_owner: ./packages/camel-quarkus-integrator
+  content_hash: sha256:ff81408341eb3edd5e100d205eebd63ad12e336f55102acc26b4039696ccdf49
+- kind: project-relative
+  target: claude
+  value: .claude/rules/camel-quarkus-integrator-project-config.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/camel-quarkus-integrator
+  active_owner: ./packages/camel-quarkus-integrator
+  content_hash: sha256:a1b1c16da9a8e9d383090a07c02cd73ab421386328d2067080f749b67cf65cb4
+- kind: project-relative
+  target: claude
+  value: .claude/rules/camel-quarkus-integrator-skills-management.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/camel-quarkus-integrator
+  active_owner: ./packages/camel-quarkus-integrator
+  content_hash: sha256:dc65462a4b369a2089ff59e07e7e65f1d774747d5e8365460fcee60b663a8405
+- kind: project-relative
+  target: claude
   value: .claude/rules/naming-conventions.md
   runtime: null
   scope: project
   owners:
   - local:packages/factory-core
   active_owner: local:packages/factory-core
-  content_hash: sha256:10aba4ed1b25a3186ccfafff809baa0e42fc62b74cef6761a47dba8e657c7738
+  content_hash: sha256:459ebc86e72e6baa18b998a92dd1acde19d2fea6aeabf69520f1fe4d27b22842
 - kind: project-relative
   target: claude
   value: .claude/rules/rules-frontmatter.md
@@ -1166,7 +1529,7 @@ deployments:
   owners:
   - local:packages/factory-core
   active_owner: local:packages/factory-core
-  content_hash: sha256:e8a85860cab7b53c2581c27d5a6932248f5f771dcf28d8ab079de7e0ce5bd09a
+  content_hash: sha256:5f9db35b8e9050ed5f793e10582cadd4a6224d25382087d00d03df2a4f4282ca
 - kind: project-relative
   target: claude
   value: .claude/skills/agent-creator
@@ -2474,6 +2837,1275 @@ deployments:
   content_hash: sha256:466f269d48fbc82dfaf104d855d4d4c3224142480c289aa21976a879f729a39c
 - kind: project-relative
   target: claude
+  value: .claude/skills/developing-camel-quarkus-bean-v3-40
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-bean-v3-40/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:476e0ab1109f2644dba35b7a9608239785a1436fdb55cfdcb550db981e4a8138
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-bean-v3-40/blueprints/always-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:21d16e96f18b5814e844e317009fba24a5e6bdf945bce04117f30df76bbf907b
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-bean-v3-40/blueprints/bean-binding.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:6fe5462cddfb2e7465168900076082c5f90eaf308e538e77612f00bb0c157508
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-bean-v3-40/blueprints/cdi-and-native.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:89e45535c99ef60fa9d690dc3da6929ae32dede8f380bae88571a58ba8f09eac
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-bean-v3-40/blueprints/evaluation-scenarios.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:c8952b39b6f7bee130cd105ca17b87e232587ce6ad3ced778bd830ba32a5832a
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-bean-v3-40/blueprints/integration-examples.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:2134a2b9a0136425701e2669bdcb08ed3b3d262e03e0f48fed20b019ba8986c6
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-bean-v3-40/blueprints/migration-guide.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:59bf920437580b5f32079f3314db5580f2077d24b6db8aeacd409e59f6872b9c
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-bean-v3-40/blueprints/never-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:cf45379b895360ab55d6ebf21f9a0ec67611ed72082ea0ff0d71cbed5cd8c834
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-bean-v3-40/blueprints/testing-with-injectmock.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:a874afffbb52f68ce21e1fd9d0b02c41279461953e609be29d71c2c7090bf025
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-bean-v3-40/blueprints/unverified-and-risks.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:28c8cbd6cb04c551d61f23b4024f42b54f9d6be8036175f721d8fba872325733
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-core-v3-40
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-core-v3-40/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:bf647b826d209f74c2776313467f3f979ddfbce9e55defec25b27c185faacc28
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-core-v3-40/blueprints/always-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:a577b81e9ce1339386f93b2df782df02d28f94aec756f59816cdd83ab36a7e2c
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-core-v3-40/blueprints/evaluation-scenarios.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:8bcaa8535a24963090654e08eaf46b44049fbb447ab4287e7621353adec34745
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-core-v3-40/blueprints/integration-examples.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:225c552f35548669942b3bed4af248d60f791fb830d5e62d504f53ef3414e615
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-core-v3-40/blueprints/migration-guide.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:46a710de81e61392de3c912436a1560e77bc343440b8434a175fe750b99fe3fa
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-core-v3-40/blueprints/native-mode.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:484eb4ff497545e8a68313efffecf79c1bb3ece181748c79da1144df14fae4ff
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-core-v3-40/blueprints/never-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:2ce3b8564f36aae13c02f3123c6a9d524061be751f8c602f74f5b397de63e596
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-core-v3-40/blueprints/tls-and-security.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:90c00bf0d248a65d649725696431a4246cb4bd47614165bb8e8e02b59e8e71e0
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-core-v3-40/blueprints/unverified-and-risks.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:03ed70c8325128dbe8ada54ebc0c6fd38eb04137a3cc3fedb1edd5b746a64a92
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-file-v3-40
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-file-v3-40/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:eb096bcea8037013ab14aedc0c3e261b8ca8548eaa258a91d9fafe0c3bfe409b
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-file-v3-40/blueprints/always-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:9bb82a40275142b1b8ac21fd702f6ad543157329168bb9c08631668ad2d56aa9
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-file-v3-40/blueprints/evaluation-scenarios.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:e85659a3a1f68712800920d43c82111d663bcbb80ad9a8658e99286be02a51a4
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-file-v3-40/blueprints/file-consumer-producer.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:45e46da5f8d2ff5f44b28dc5f489f10a779841c7b2230201576fca926d4e5e63
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-file-v3-40/blueprints/file-watch-and-cluster.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:8b87116c855d7b1ae40e465326cff5d51a150d50c4acbf27602d65e9118bf200
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-file-v3-40/blueprints/integration-examples.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:54b7519a1398927b06a338409ecbf79b7aa145856f37c836d9f64ca19e95f7d8
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-file-v3-40/blueprints/migration-guide.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:a240d0132286f5eb39e73ddc2ec73916a00ba983d4340cc755ae7c3637ab2be3
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-file-v3-40/blueprints/native-mode.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:94848f3f7c10a9528aab687bf8c7534a1fb065da2b67884c167ed066aa4b8741
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-file-v3-40/blueprints/never-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:81515567f6a732e33fc068ad82d4a0179c1e52bd294e048fccfcf3cf6419c098
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-file-v3-40/blueprints/remote-ftp-sftp.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:dac5442a43d59b4dcba4ab17cc4db70c2f450b740e38ad1be7c5a2bbd6b1ded0
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-file-v3-40/blueprints/unverified-and-risks.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:bedb023c2ce588bdec00c18ef6f6f2b7c84a1b35d300dd420dbd06ace5604fae
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-http-v3-40
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-http-v3-40/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:c3eb77df7b1847c02f3bf6bfa6069a01164f3bd6e7fb43471ed45caa031492d8
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-http-v3-40/blueprints/always-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:276e264c7f4ce6ec8ea59698d956fa0ebfe076676e5e6c804f78e1cac25e5983
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-http-v3-40/blueprints/evaluation-scenarios.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:0befadcd244cf0b8178cf7e15cca44aa557c9ac09dde57ae1959deee07776487
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-http-v3-40/blueprints/fault-tolerance-and-errors.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:cacf074e91305e12286970b489058daadd2a16c3f7ffea7c908c9453259fc4ab
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-http-v3-40/blueprints/integration-examples.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:267f32bf5a233e827cd6163c9f69c52ae598d03c615cce6182e5c0b644dafce2
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-http-v3-40/blueprints/migration-guide.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:0dcffd167bdbdbd2a3d8bd89614d6931ebbf822ebf7420b2955ea336e788b9a0
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-http-v3-40/blueprints/never-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:58929a4bb4cc2417f450780a37e29543805cdab1454d8988d24d7d92445209a5
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-http-v3-40/blueprints/tls-and-security.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:3d5e5fc644118bb453b1fd154e7be4a29aa08bdd29f3eaefb1fd716138aa8d2a
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-http-v3-40/blueprints/unverified-and-risks.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:8d0d85017383c92889eb4cfd5fbc0ce5add7bc3870c55c2db1f68a141c5c9f9f
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-jaxb-v3-40
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-jaxb-v3-40/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:7391b2224a34f4586c2c5942b55e42a0b1d89103924cc4778f47fa7d4006934e
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-jaxb-v3-40/blueprints/always-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:1e8578422b2164ad31aafc938bcb648da47941a0e32553bb3d5f1f90c941092b
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-jaxb-v3-40/blueprints/evaluation-scenarios.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:26066a3d9aa1db9ee4681d2f4e40052b963235fb275c32ef775c391c79847063
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-jaxb-v3-40/blueprints/integration-examples.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:043c4550ad2b541f257f67765c28e5687d3eb7929df9074945ff990f4ca87f6d
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-jaxb-v3-40/blueprints/migration-guide.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:43bdaec77eabfc49e4df2774795b2afe377168b4ba39df01b39d34d7476ac5c9
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-jaxb-v3-40/blueprints/native-mode-and-contexts.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:690dc5d1e5499f21c4b8e44de2303bd2cbacf9b93572ec57ba01c1d3d659fdc7
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-jaxb-v3-40/blueprints/never-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:d896e6a91469ee63f3aea019af7c0f004ec92c5339cbfe712b77fbbf36b417d7
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-jaxb-v3-40/blueprints/schema-security.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:62bd2748a7a2ae7d170470a6daf9f473777efb071dd751105b9e3cb05421d21d
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-jaxb-v3-40/blueprints/unverified-and-risks.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:4a652c20b08ceb4f1f08a1423756f255dd77f7bb96a5d0fe1b8a9f57f2be8e3e
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-junit-v3-40
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-junit-v3-40/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:cf486f2568070994a84905b90df8a1928e378c533d07c1ead4529b7f2b101641
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-junit-v3-40/blueprints/advice-with-and-lifecycle.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:a27f755f07b78d3fb073756548d3fc08049157312c36dafd00d1bd2d92d7f204
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-junit-v3-40/blueprints/always-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:9fcf8f8415f4ad80a61658fdd6f748324bf0fd005bac19266cd028d211610478
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-junit-v3-40/blueprints/evaluation-scenarios.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:d6465dbf0ca17069bc60ffe8adebfc1e048c3850d861ad3b7fd5ce958e034b19
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-junit-v3-40/blueprints/integration-examples.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:314b4c00bc395acdcde3cd0966eed455bc99983f3462c30880a564994655fa7f
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-junit-v3-40/blueprints/migration-3-31-rename.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:4db006aa2002bf86f8791c2f3854ead560dd721882f4ba8dce95a2a96b52a1d9
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-junit-v3-40/blueprints/native-testing.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:0a2203314ff3bba27fb04ead1b68f54b34899577759daff18af762c21ce6eca7
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-junit-v3-40/blueprints/never-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:1c8d748b189267feb51d823494627f1423912d42c7cbc44d0484309a0c216619
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-junit-v3-40/blueprints/unverified-and-risks.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:70a258f392e3f66989e98dfd297ffde070f093325f02b32a21208f3e8b48b419
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-log-v3-40
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-log-v3-40/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:ced33dccc6ba9fc05c9dafd8b6b202ed6b68c13759d83509f098dd74fd2f6278
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-log-v3-40/blueprints/always-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:004b95ec64f7b8b489d743e0ea14b20994f0638612baccf66e83034716f8653c
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-log-v3-40/blueprints/evaluation-scenarios.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:586947264a358bd4597c1ecce064894fc6b7fb78d488cb91b59a8b2253ca61ee
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-log-v3-40/blueprints/integration-examples.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:84fee689705a99adcaba9b133b550ddf8c035e335721e3f6638b467d8cd7821d
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-log-v3-40/blueprints/log-component-options.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:1a7e3ae8b6a57f1429139f47df8843adc8e6889998b1b906b85f86acacc614a2
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-log-v3-40/blueprints/masking-and-security.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:092e68ce4364c15164b48f5a31303cb5732c40b29bfb01754c29508e617cd224
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-log-v3-40/blueprints/mdc.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:ca3bd16d0302ebfaec89c894db37ee34f1001f08deb2c0f4b31ae9fa11f262f2
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-log-v3-40/blueprints/migration-guide.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:ea0c0d47e492987f694430d352eb261974009011dd7a0be36bb70fc0e111ab86
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-log-v3-40/blueprints/never-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:d128d57fffd1f2a2b109a647b19e4fdc6554b7874f2434c8025987d6f905ea16
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-log-v3-40/blueprints/quarkus-logging.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:08347fa1b4b5a753755f59fab67ecf0620d3556abe885ce61f539863325173f1
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-log-v3-40/blueprints/unverified-and-risks.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:649eb127158a5f6ab75ce9dc6219aa48ff491c2c74e4695e3c1a0ec9b47b9b4b
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-platform-http-v3-40
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-platform-http-v3-40/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:398226f2540bd2997f7a6b43faf83ebe4fb636dbf5f5a61f870febc9a189f64e
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-platform-http-v3-40/blueprints/always-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:12f6a29e3e2338065f27e73760b22365958aedaa42477f22a723a38908d8919d
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-platform-http-v3-40/blueprints/evaluation-scenarios.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:a8f77756e7715a8e30fc7849d13dfbc18a828d8b5302a94298d4c83161391056
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-platform-http-v3-40/blueprints/file-uploads.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:47b010400f8ab6031abe85f020206cd4c5e3cd8f6d23d73911cb081aabc0005a
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-platform-http-v3-40/blueprints/integration-examples.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:4bcb4b2dd62a7141ac3d98ce4160bb2fed26314a189b94256582a99cef99b8c3
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-platform-http-v3-40/blueprints/migration-guide.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:6f666dcb430ff949f299db4c07305cfe5b93f09bd0a07ba17a75305716b9eeef
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-platform-http-v3-40/blueprints/never-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:c5db400c4bdc01ecbbb15c2fe70b1aead146f8820f5d701d398fa10f2eaf6062
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-platform-http-v3-40/blueprints/tls-and-security.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:6aaccaecb93f8edba586d40fe7f89c45ef6699f234d9190d9d41ac256b754384
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-platform-http-v3-40/blueprints/unverified-and-risks.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:a1d8ed6b8b98d1bae3661104b5a7cdbcd31d847df7b79a7467df5d3fe7dc47dc
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-rest-v3-40
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-rest-v3-40/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:74c6b9067035c33c5237e7eacaf1be893e039620133427787150486b79476c51
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-rest-v3-40/blueprints/always-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:e6221fbe0a52c678dbbd81ce6196747df94132775e32d2ffc04e5828c6d44a00
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-rest-v3-40/blueprints/evaluation-scenarios.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:352ce02e2a9c22d9a35810989444298357982d159a3330443005296566840283
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-rest-v3-40/blueprints/integration-examples.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:a9f0d6373ab3887ba8f42463fee515755df3896ec9b2c71a481d702fe94419d7
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-rest-v3-40/blueprints/migration-guide.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:96c8c0cd95a1c1214cb8b3ca0adfeadbc75cc84b7cea732b33cec044c5f95151
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-rest-v3-40/blueprints/never-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:89d32b4d061aa75870e5341b8e2a356ae0e80359d8707dabae229ff4f62a5a72
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-rest-v3-40/blueprints/openapi-contract-first.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:54bf64c545faa221425929deb63988751cc774eb92282e3d0dbb1247ae0dc579
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-rest-v3-40/blueprints/rest-dsl-configuration.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:58f5a7eddf55e7b34af48ad9125c74700168f216cf194edcad4d3bb131532abd
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-rest-v3-40/blueprints/unverified-and-risks.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:d735809fe32423fc5662b93b4b06e66814b1226c8df6a2132ed266815d207f18
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-rest-v3-40/blueprints/validation-and-cors.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:9b20ce5de8b63dbf97bd773b33d558050621749e5c1cc3412782e93752bdb201
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-xslt-v3-40
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-xslt-v3-40/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:ab0bcbc2b3bc6d943b4f4a4c8ab90329d5de92c34b90d62d39192ee216172f48
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-xslt-v3-40/blueprints/always-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:4cc542b9cc6c49bd6f98bfabcb29503a29042cd259d88a09da621ba84e3c0cb6
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-xslt-v3-40/blueprints/evaluation-scenarios.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:147875f318cc83c072f965d1c2fddd66b537a30a7531f4b0498950fc25f1c0c1
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-xslt-v3-40/blueprints/extension-functions.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:3477d5e3031bdfa84adab6c065fab6812aad0fbf30fd8d2d5cdf474466d8b18f
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-xslt-v3-40/blueprints/integration-examples.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:d333423066a74e538577f1a807a61ea855ef501ea8aaf55697e78130fb1ead95
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-xslt-v3-40/blueprints/migration-guide.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:fbcd38180805e7ef5c247492f233d0057ac30cbc310e9aae3b7fa44759ef8b8e
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-xslt-v3-40/blueprints/native-mode.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:74c3ddc86588c95312639db56b3e5d83e0021eead865cabb6854b9e2dc761895
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-xslt-v3-40/blueprints/never-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:8b82a5c0735046b7f6105188775c77b9de28bde642ca68b1434fd7d49bf9a3c5
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-xslt-v3-40/blueprints/security-hardening-3-40.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:dcfbd7190646904531807e3296d8f57f87474459ac1184a70744607ab8caeda0
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-camel-quarkus-xslt-v3-40/blueprints/unverified-and-risks.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:b055298672d9fcc66529c712140aec0ad01a816f341890fd12ff510c8977ca2b
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-quarkus-arc-v3-40
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-quarkus-arc-v3-40/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:e1755f784493f0373bac6ab137eee68dc76a10c4c2056dabf7cc6aa3c4fe0799
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-quarkus-arc-v3-40/blueprints/always-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:53ea18f65b59d2c9e667417ac6026ea55277f6167a1b276795baffc9e0e8e44d
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-quarkus-arc-v3-40/blueprints/bean-removal.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:7f1765bf80a326370dcecca889296757a7e9c3bd8a351c463d8cd4a14a766b6e
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-quarkus-arc-v3-40/blueprints/camel-integration.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:834b8be76ed794a985ff6a406438adc59d9c29b715df82b0cefa6e1496aa2bcb
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-quarkus-arc-v3-40/blueprints/cdi-lite-limitations.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:dfee989e873454153974fc0e8908f818ac9415aef3f870ca350a71005ad899bb
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-quarkus-arc-v3-40/blueprints/evaluation-scenarios.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:1f624e4bc8278e4fff0f80ce9a745f4a6cd2a4f7f98ea1d1c02c870e1d4bf9c0
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-quarkus-arc-v3-40/blueprints/migration-guide.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:9b2a9f2e36d1bee4909c3da1c06b405e2c2e61e18747a61f988d28cb6a4e7d8a
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-quarkus-arc-v3-40/blueprints/never-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:34c04494f586b45f0b57b35e17c53cf097c6f9d735849e522130a3fe0d2449ae
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-quarkus-arc-v3-40/blueprints/scopes-and-injection.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:5e5bffe1dc2cd7647d245963e172980f16c4253c33339048681e0d93f97194ef
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-quarkus-arc-v3-40/blueprints/testing.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:9ddef541d69aa26f4da39e68ba57485226b706143f7f2a92fd34bdbc4d908ef2
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-quarkus-arc-v3-40/blueprints/unverified-and-risks.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:7ef501d05a707c50bcb3331de39a32cd84b6b2e8c0417267bb3fa5b6ce05dd2e
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-quarkus-junit-v3-40
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-quarkus-junit-v3-40/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:1bab2135e6c25bc5ee06628c038edf6c55305a6bda2549495bcd5e48382952ec
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-quarkus-junit-v3-40/blueprints/always-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:d0cede07b03019e9691309c99b0b11655174c40c2a49bb4db130578efc598002
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-quarkus-junit-v3-40/blueprints/evaluation-scenarios.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:e09851ba2b13df63b31a013f891c518d4fa6c26c11e1a39d880a8a4511c0f4d9
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-quarkus-junit-v3-40/blueprints/integration-examples.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:c002aeaca4db069d618c02fa3f5271e473b54445110a576fdc4a08ff2ac08d09
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-quarkus-junit-v3-40/blueprints/migration-3-31-rename.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:64e99b2e2f0d59b68bb915770b4ca8266f6c7c90247bec97979df1e262c98558
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-quarkus-junit-v3-40/blueprints/mocking.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:ba2770bf72ea24f2e1b69821f83e8fd17e56a24b43da5b45469359e43b9b160e
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-quarkus-junit-v3-40/blueprints/never-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:a65ee09d9793008a851e29c5929b4044560e55449c6a04cb8c6aa61e15ba1343
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-quarkus-junit-v3-40/blueprints/profiles-and-resources.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:1284515df942f878fc00d885c83de92a94550f4217fd49457a76558abd52d8f1
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-quarkus-junit-v3-40/blueprints/test-types.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:ff83adc27be48a7662ee06219271d9abd24c2145aa2dbab0f2f0a3870f414799
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-quarkus-junit-v3-40/blueprints/unverified-and-risks.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:24a7bd0cb9bfee208bd09f2f4c65e95d55282f8e73beae2d08435570d97eddc0
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-quarkus-rest-v3-40
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-quarkus-rest-v3-40/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:c0e456bbbcd2016d3643e17962d61d384fc32778bcee1fe792dc8f8d6f3558b0
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-quarkus-rest-v3-40/blueprints/always-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:5ec14417e82b4293386e1a7d47c262872fcc63c9d330c10e75d6b83c0e2e2ba9
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-quarkus-rest-v3-40/blueprints/camel-integration.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:9111b1d67ecd3d74b6639c3e2da54066210df6c700300511d20ee237221b65ca
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-quarkus-rest-v3-40/blueprints/evaluation-scenarios.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:91aba42ae0209fc63193ba2bbe346013950b80d9f3d882cab480859622ee17a7
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-quarkus-rest-v3-40/blueprints/migration-quarkus-4-preview.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:ab674411417edc4a865bf5d7ea5f03844f6212fa5a5688bc9048ad18d7c2c250
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-quarkus-rest-v3-40/blueprints/never-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:11aeb25b2ee83166744dd01ccd52a09b19b108a246e9000000942e5cde54e614
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-quarkus-rest-v3-40/blueprints/rest-client.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:76e604098d8078b2b061c19d68d5f4271362a8d6ecc3ca0e4f58a0025e03d3ab
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-quarkus-rest-v3-40/blueprints/security-and-tls.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:16762c5cc07ba58c66eac544d8d1d74d5e26983a1646d9ec3b913d89614b74a3
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-quarkus-rest-v3-40/blueprints/server-resources.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:865bbf83dcb243d6c8fff67910aa179d56fa779711de9f8d78e8fb492b00149b
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-quarkus-rest-v3-40/blueprints/unverified-and-risks.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/camel-quarkus-skills
+  active_owner: local:packages/camel-quarkus-skills
+  content_hash: sha256:9fc093b5bd18ecf60e1c5bc745b65dce887debdc91628140a86e9dc434750d3c
+- kind: project-relative
+  target: claude
   value: .claude/skills/enriching-book-chapter
   runtime: null
   scope: project
@@ -2571,6 +4203,87 @@ deployments:
   - ./packages/validating
   active_owner: ./packages/validating
   content_hash: sha256:82492891970296d72a6228542bdda5b082efa8b2030301bcfbae8e02ff29c380
+- kind: project-relative
+  target: claude
+  value: .claude/skills/integrating-camel-quarkus
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/camel-quarkus-integrator
+  active_owner: ./packages/camel-quarkus-integrator
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/integrating-camel-quarkus/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/camel-quarkus-integrator
+  active_owner: ./packages/camel-quarkus-integrator
+  content_hash: sha256:5a7c4755a5e945f30ba85b75563ff1b7d596e29c2a898c1154ef09b63d27fc95
+- kind: project-relative
+  target: claude
+  value: .claude/skills/integrating-camel-quarkus/blueprints/core-routes.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/camel-quarkus-integrator
+  active_owner: ./packages/camel-quarkus-integrator
+  content_hash: sha256:75a16c479ddab18173d85951f42feaaf9409e92c36a572bf8f616a3c521c0b86
+- kind: project-relative
+  target: claude
+  value: .claude/skills/integrating-camel-quarkus/blueprints/data-transformation.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/camel-quarkus-integrator
+  active_owner: ./packages/camel-quarkus-integrator
+  content_hash: sha256:a51473c940307d5b3e242d94ef85ca3c3d83a109303f463e66ea3987a7aebbe3
+- kind: project-relative
+  target: claude
+  value: .claude/skills/integrating-camel-quarkus/blueprints/evaluation-scenarios.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/camel-quarkus-integrator
+  active_owner: ./packages/camel-quarkus-integrator
+  content_hash: sha256:2b777cbd4318d11c4922e07e12abdbfd562cea634e322879b72ced70d61a9d2c
+- kind: project-relative
+  target: claude
+  value: .claude/skills/integrating-camel-quarkus/blueprints/file-processing.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/camel-quarkus-integrator
+  active_owner: ./packages/camel-quarkus-integrator
+  content_hash: sha256:3037026afe6e93636e663719c13ad80fca11188635406dd7fc5078df1079acc3
+- kind: project-relative
+  target: claude
+  value: .claude/skills/integrating-camel-quarkus/blueprints/http-clients.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/camel-quarkus-integrator
+  active_owner: ./packages/camel-quarkus-integrator
+  content_hash: sha256:c240077c066496e0716c4caad4411990d604b7a9a3a0171bfc529ce4d0462655
+- kind: project-relative
+  target: claude
+  value: .claude/skills/integrating-camel-quarkus/blueprints/rest-apis.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/camel-quarkus-integrator
+  active_owner: ./packages/camel-quarkus-integrator
+  content_hash: sha256:49f1a110223e30f3337632924d45d477e7a718fb60959c449a1482919abbc56f
+- kind: project-relative
+  target: claude
+  value: .claude/skills/integrating-camel-quarkus/blueprints/testing.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/camel-quarkus-integrator
+  active_owner: ./packages/camel-quarkus-integrator
+  content_hash: sha256:4949d32220f5ecb8e5a420a082e4c231641910ec3686d3679b96525ce0b6ff97
 - kind: project-relative
   target: claude
   value: .claude/skills/methodologies-skill-generator
@@ -3848,7 +5561,7 @@ deployments:
   owners:
   - local:packages/artifact-authoring
   active_owner: local:packages/artifact-authoring
-  content_hash: sha256:9698ece1e9f84d1d79e78962f0146d63f53b993eb4bdd7f6c7721cb6174495b9
+  content_hash: sha256:d8f19134e27db6045086cc2a35370ab0e96dd109e0649558550e4c86b7910bb5
 - kind: project-relative
   target: claude
   value: .claude/skills/skill-creator/assets/TEMPLATE.EVALUATION-SCENARIOS.md
@@ -3860,13 +5573,22 @@ deployments:
   content_hash: sha256:5a0d97d141d77f3e985700afb5a4f6ca25b6713b5ec451b21dba4c583146626f
 - kind: project-relative
   target: claude
+  value: .claude/skills/skill-creator/assets/TEMPLATE.KNOWLEDGE-SKILL.HYBRID.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/artifact-authoring
+  active_owner: local:packages/artifact-authoring
+  content_hash: sha256:554f371ddd0b02f3a730cf8972839229f49a8ba8f6168b2a3775cc5566e85bdd
+- kind: project-relative
+  target: claude
   value: .claude/skills/skill-creator/assets/TEMPLATE.KNOWLEDGE-SKILL.md
   runtime: null
   scope: project
   owners:
   - local:packages/artifact-authoring
   active_owner: local:packages/artifact-authoring
-  content_hash: sha256:39f777150b0fd1e3950fadc60f9c184d3760695544c06edfa2382b0f54528ae3
+  content_hash: sha256:36190f31b443c5d123fe3342eb98eeea849661f84b24de31b78deea54b194d18
 - kind: project-relative
   target: claude
   value: .claude/skills/skill-creator/assets/TEMPLATE.SKILL.md
@@ -3903,6 +5625,51 @@ deployments:
   - local:packages/artifact-authoring
   active_owner: local:packages/artifact-authoring
   content_hash: sha256:bf86feff5f52ea6a2fa64459a042ad206cb92be091a6f49acee4a7fb1cc9ce8e
+- kind: project-relative
+  target: claude
+  value: .claude/skills/structuring-camel-quarkus-projects
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/camel-quarkus-integrator
+  active_owner: ./packages/camel-quarkus-integrator
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/structuring-camel-quarkus-projects/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/camel-quarkus-integrator
+  active_owner: ./packages/camel-quarkus-integrator
+  content_hash: sha256:cbd91dd5d156790688241ef01a9e42c0a080c12911e8e988870423b81323ef6b
+- kind: project-relative
+  target: claude
+  value: .claude/skills/structuring-camel-quarkus-projects/assets/project-structure.yml
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/camel-quarkus-integrator
+  active_owner: ./packages/camel-quarkus-integrator
+  content_hash: sha256:67bd66f113775586e1eeb4d716693d2908adc5356b003bf33fa0ca1c7bcddc39
+- kind: project-relative
+  target: claude
+  value: .claude/skills/structuring-camel-quarkus-projects/blueprints/evaluation-scenarios.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/camel-quarkus-integrator
+  active_owner: ./packages/camel-quarkus-integrator
+  content_hash: sha256:16adfbb866172b79d218ba332853b1b717702a427d1c9d8173192df3573bee07
+- kind: project-relative
+  target: claude
+  value: .claude/skills/structuring-camel-quarkus-projects/blueprints/project-structure-loader.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/camel-quarkus-integrator
+  active_owner: ./packages/camel-quarkus-integrator
+  content_hash: sha256:910ffa809b74ba72d5a01c5982bacc22512fd3c152347874f6af060a40cfcdc7
 - kind: project-relative
   target: claude
   value: .claude/skills/switching-book-language
