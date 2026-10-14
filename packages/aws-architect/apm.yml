@@ -1,0 +1,15 @@
+name: agents-factory-aws-architect
+version: 1.0.0
+description: >-
+  aws-architect advisory agent and two scoped guardrail instruction files for reviewing and
+  designing AWS architectures grounded in the 40 aws-skills knowledge base (WAF six pillars,
+  security, networking, serverless, data, messaging, observability, multi-account, cost).
+author: rodrigo-mendes
+license: MIT
+dependencies:
+  apm:
+    - path: ../aws-skills
+    - path: ../factory-core
+  mcp: []
+includes: auto
+scripts: {}
