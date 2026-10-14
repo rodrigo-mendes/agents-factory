@@ -16,15 +16,13 @@
       "Edit(./StoryBeats/**)",
       "Write(./.claude/**)",
       "Edit(./.claude/**)",
+      "Write(./.github/**)",
+      "Edit(./.github/**)",
       "Agent"
     ],
     "deny": [
       "Read(./**/.env)",
       "Read(./**/*.tfvars)"
-    ],
-    "ask": [
-      "Write(./.github/**)",
-      "Edit(./.github/**)"
     ]
   }
 }

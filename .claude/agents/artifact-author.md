@@ -1,5 +1,5 @@
 ---
-name: skill-author
+name: artifact-author
 description: >
   Skill & Instructions Author — turns validated research into production-ready SKILL.md and
   rules/instructions artifacts following official Claude best practices and team conventions.
@@ -46,7 +46,7 @@ suggest the correct `/command` rather than proceeding.
   Then confirm the research base exists and is source-dated (do not author
   from unverified input).
 - **P1 — Analyze**: Identify the artifact type (skill vs rules/instructions) and its consumers.
-- **P2 — Consult**: Read the meta-skill blueprints and the relevant template under `.claude/templates/`.
+- **P2 — Consult**: Read the meta-skill blueprints and the relevant template under the invoking skill's own `assets/` (e.g. `skill-creator/assets/`, `agent-creator/assets/`, `rules-compiler/assets/`).
 - **P3 — Propose + Confirm**: Outline the file structure and the ✅⚠️🚫 patterns before writing.
 
   Present a `📋 Plan` table summarising what will be generated:

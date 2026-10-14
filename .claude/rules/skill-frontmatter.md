@@ -3,7 +3,7 @@ name: skill-frontmatter
 description: "Frontmatter schema for skill files (.claude/skills/**/SKILL.md). Use when creating or editing a skill definition."
 paths:
   - ".claude/skills/**/SKILL.md"
-  - ".claude/templates/skills/*.md"
+  - ".claude/skills/skill-creator/assets/*.md"
 ---
 
 # Frontmatter conventions — Skills (`.claude/skills/<n>/SKILL.md`)
@@ -43,7 +43,7 @@ name: my-action-command
 description: "Creates X from Y. Use when authoring a new X from a research file."
 argument-hint: "Path to research file (e.g. StoryBeat/research_X_v1.md)"
 context: fork
-agent: skill-author
+agent: artifact-author
 disable-model-invocation: true
 ---
 ```

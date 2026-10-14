@@ -3,7 +3,7 @@ name: agent-frontmatter
 description: "Frontmatter schema for subagent files (.claude/agents/*.md). Use when creating or editing a subagent definition."
 paths:
   - ".claude/agents/*.md"
-  - ".claude/templates/agents/*.md"
+  - ".claude/skills/agent-creator/assets/*.md"
 ---
 
 # Frontmatter conventions — Subagents (`.claude/agents/<n>.md`)

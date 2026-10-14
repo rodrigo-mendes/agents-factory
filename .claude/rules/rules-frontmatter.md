@@ -3,7 +3,7 @@ name: rules-frontmatter
 description: "Frontmatter schema for rules/instructions files (.claude/rules/*.md). Use when creating or editing a rule definition."
 paths:
   - ".claude/rules/*.md"
-  - ".claude/templates/rules/*.md"
+  - ".claude/skills/rules-compiler/assets/*.md"
 ---
 
 # Frontmatter conventions — Rules (`.claude/rules/<n>.md`)
@@ -19,7 +19,7 @@ paths:
 
 | Field | Rule |
 |---|---|
-| `description` | Brief summary of what this rule covers. Optional in practice but recommended — templates include it, real rules may omit it. |
+| `description` | Brief summary of what this rule covers. Optional per this schema, but every rule in `.claude/rules/` currently has one — treat it as recommended, not skippable. |
 
 ## Minimal example
 
@@ -47,7 +47,7 @@ paths:
 
 - `paths:` is exclusive to rules — agents and skills do not have this field.
 - Rules have **no** `tools:`, `model:`, `context:`, `agent:`, or `disable-model-invocation` fields.
-- `description` appears in templates but is optional — it is absent from at least one real rule.
+- `description` is optional per this schema; every rule under `.claude/rules/` has one today.
 - The glob patterns in `paths:` follow ripgrep/glob conventions relative to the workspace root.
 
 ## YAML

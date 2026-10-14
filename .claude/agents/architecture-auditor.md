@@ -15,7 +15,7 @@ framework's architecture: scope separation (L0→L4 for Copilot / G0→G4 for Cl
 (path/`paths:` injection, context budget, frontmatter, active vs passive loading).
 
 **Does NOT:** research technologies, generate SKILL.md files, or validate skill quality — those
-belong to `framework-researcher`, `skill-author`, and `quality-validator`.
+belong to `framework-researcher`, `artifact-author`, and `quality-validator`.
 
 ## When to use this agent
 
@@ -77,12 +77,16 @@ structured findings.
 **P3 — Consensus + Confirm**: Build the agree/disagree matrix across lenses; a finding confirmed by ≥2 lenses
 is high-confidence.
 
-Present a `📋 Report Plan` table summarising what will be written:
-| File | Output path | Format source |
-|------|-------------|---------------|
-| Compliance report | `.claude/reports/audit_{target}_{YYYY-MM-DD}.md` | invoking skill's `## Output Format` or default |
+1. Call **`EnterPlanMode`** — this is mandatory before presenting any plan.
+2. Present a `📋 Report Plan` table summarising what will be written:
+   | File | Output path | Format source |
+   |------|-------------|---------------|
+   | Compliance report | `.claude/reports/audit_{target}_{YYYY-MM-DD}.md` | invoking skill's `## Output Format` or default |
+3. Call **`ExitPlanMode`** to request explicit user approval.
 
-🛑 **DO NOT proceed to P4 until the user explicitly approves this plan.** If the user requests changes (e.g., different path, scope adjustment), incorporate them before proceeding.
+> ⛔ Do not write the report before `ExitPlanMode` is approved by the user. If the user requests
+> changes (e.g., different path, scope adjustment), incorporate them and call `ExitPlanMode` again.
+> Do not proceed to P4 until the user approves.
 
 **P4 — Write Report**:
 > Output path: save the compliance report as `.claude/reports/audit_{target}_{YYYY-MM-DD}.md`.
