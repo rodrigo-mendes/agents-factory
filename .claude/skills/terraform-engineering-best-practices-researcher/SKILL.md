@@ -1,4 +1,4 @@
-﻿---
+---
 name: terraform-engineering-best-practices-researcher
 description: Researches Terraform engineering best practices (project layout, module design, CI/CD, testing, governance) into a source-backed knowledge base. Use when researching Terraform engineering practices for a skill or rules.
 argument-hint: "<topic> [depth=exhaustive] [iterations=5] (e.g. module-design depth=deep iterations=3)"

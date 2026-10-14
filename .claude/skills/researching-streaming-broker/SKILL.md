@@ -19,12 +19,12 @@ disable-model-invocation: true
 
 - **[Blueprints & Guardrails](#blueprints--guardrails)** — Three-tier operational rules for this skill's execution
 - **[Category Specifics](./blueprints/category-specifics.md)** — Neutral streaming/messaging patterns (topology, ordering, delivery guarantees)
-- **[Reference Card Template](../../templates/platform-research/reference-card-template.md)** — Skeleton every per-vendor card follows (worked example: reference-card-example-kafka-3.7.md)
+- **[Reference Card Template](../researching-platform-software/blueprints/shared/reference-card-template.md)** — Skeleton every per-vendor card follows (worked example: [reference-card-example-kafka-3.7.md](../researching-platform-software/blueprints/shared/reference-card-example-kafka-3.7.md))
 - **[Reference Cards](./blueprints/references/)** — Per-vendor pinned instances following the template (`<vendor>-<version>.md`, e.g. `rabbitmq-3.13.md`, `pulsar-3.2.md`)
 - **[Evaluation Scenarios](./blueprints/evaluation-scenarios.md)** — Cross-vendor tests (must cover ≥ 2 different brokers)
-- **[Shared Output Template](../../templates/platform-research/output-format-base.md)** — 13-section skeleton
-- **[Shared Research Scope](../../templates/platform-research/research-scope-operations.md)** — §1–§12 operational scope
-- **[K8s Deployment Guide](../../templates/platform-research/deployment-guides/kubernetes-operator-guide.md)** — Strimzi, RabbitMQ Cluster Operator, Pulsar operators
+- **[Shared Output Template](../researching-platform-software/blueprints/shared/output-format-base.md)** — 13-section skeleton
+- **[Shared Research Scope](../researching-platform-software/blueprints/shared/research-scope-operations.md)** — §1–§12 operational scope
+- **[Deployment Guides](../researching-platform-software/blueprints/shared/deployment-guides/)** — bare-metal, VM, container-compose, and Kubernetes-operator playbooks; pick the one matching `DEPLOYMENT_MODEL` (K8s guide covers Strimzi, RabbitMQ Cluster Operator, Pulsar operators)
 
 ## Blueprints & Guardrails
 
@@ -51,7 +51,7 @@ disable-model-invocation: true
 | Copy config parameter names between brokers | `replication.factor` (Kafka) has no direct equivalent in RabbitMQ; assumption produces invalid config | Use the vendor reference card; state "not applicable" when a concept doesn't map |
 | Recommend `acks=all` (or equivalent) without also setting minimum in-sync replicas equivalent | False durability — one ISR = single point of failure | Always pair strong ack settings with quorum size that survives one node loss |
 | Assume ZooKeeper is required for Kafka in `TARGET_VERSION` ≥ 3.5 | KRaft is production-ready since 3.3, default recommendation since 3.5 — ZooKeeper-based deployments are legacy | Verify the version's KRaft status and prefer KRaft for new installs |
-| Ignore `DEPLOYMENT_MODEL` differences | K8s operator sets many configs via CR that differ from raw config file names | Consult `.claude/templates/platform-research/deployment-guides/kubernetes-operator-guide.md` |
+| Ignore `DEPLOYMENT_MODEL` differences | K8s operator sets many configs via CR that differ from raw config file names | Consult `../researching-platform-software/blueprints/shared/deployment-guides/kubernetes-operator-guide.md` |
 | Use vendor-branded terminology of one broker to describe another | "Partition" is Kafka-specific; RabbitMQ uses "queue"; Pulsar uses "topic partition" over "ledger segments" | Use the broker's own terminology, cited from its docs |
 
 ## Role & Mission
@@ -68,13 +68,13 @@ Senior Platform Engineering Researcher specializing in **`{{PLATFORM_SOFTWARE}} 
 
 ## Research Scope
 
-Shared scope: **[research-scope-operations.md](../../templates/platform-research/research-scope-operations.md)** §1–§12.
+Shared scope: **[research-scope-operations.md](../researching-platform-software/blueprints/shared/research-scope-operations.md)** §1–§12.
 
 Additional streaming-broker-specific research: see **[category-specifics.md](./blueprints/category-specifics.md)**.
 
 ## Output Format
 
-Base template: **[output-format-base.md](../../templates/platform-research/output-format-base.md)** (13 mandatory sections).
+Base template: **[output-format-base.md](../researching-platform-software/blueprints/shared/output-format-base.md)** (13 mandatory sections).
 
 Save as `research_platform_{{PLATFORM_SOFTWARE}}_v{{TARGET_VERSION}}.md` in `StoryBeat/docs/`.
 

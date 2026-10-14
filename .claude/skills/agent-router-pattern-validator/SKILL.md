@@ -1,4 +1,4 @@
-﻿---
+---
 name: agent-router-pattern-validator
 description: Analyzes an agent project and reports Agent Router Pattern compliance — deviations and concrete improvements; technology-agnostic. Use when checking whether a project's command to agent to skill delegation is well-formed.
 argument-hint: "Optional: path to the agent project directory (e.g. .claude/ for Claude Code, .github/ for Copilot)"

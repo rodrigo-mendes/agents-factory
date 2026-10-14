@@ -19,11 +19,12 @@ disable-model-invocation: true
 
 - **[Blueprints & Guardrails](#blueprints--guardrails)** — Three-tier rules
 - **[Category Specifics](./blueprints/category-specifics.md)** — Neutral cache patterns (cache-aside, TTL discipline, eviction, stampede)
-- **[Reference Card Template](../../templates/platform-research/reference-card-template.md)** — Skeleton every per-vendor card follows (worked example: reference-card-example-kafka-3.7.md)
+- **[Reference Card Template](../researching-platform-software/blueprints/shared/reference-card-template.md)** — Skeleton every per-vendor card follows (worked example: [reference-card-example-kafka-3.7.md](../researching-platform-software/blueprints/shared/reference-card-example-kafka-3.7.md))
+- **[Deployment Guides](../researching-platform-software/blueprints/shared/deployment-guides/)** — bare-metal, VM, container-compose, and Kubernetes-operator playbooks; pick the one matching `DEPLOYMENT_MODEL`
 - **[Reference Cards](./blueprints/references/)** — Per-vendor pinned playbooks
 - **[Evaluation Scenarios](./blueprints/evaluation-scenarios.md)** — Cross-vendor tests
-- **[Shared Output Template](../../templates/platform-research/output-format-base.md)** — 13-section skeleton
-- **[Shared Research Scope](../../templates/platform-research/research-scope-operations.md)** — §1–§12 operational scope
+- **[Shared Output Template](../researching-platform-software/blueprints/shared/output-format-base.md)** — 13-section skeleton
+- **[Shared Research Scope](../researching-platform-software/blueprints/shared/research-scope-operations.md)** — §1–§12 operational scope
 
 ## Blueprints & Guardrails
 
@@ -56,13 +57,13 @@ Senior Platform Engineering Researcher specializing in **`{{PLATFORM_SOFTWARE}} 
 
 ## Research Scope
 
-Shared: **[research-scope-operations.md](../../templates/platform-research/research-scope-operations.md)** §1–§12.
+Shared: **[research-scope-operations.md](../researching-platform-software/blueprints/shared/research-scope-operations.md)** §1–§12.
 
 Cache-specific: see **[category-specifics.md](./blueprints/category-specifics.md)**.
 
 ## Output Format
 
-Base: **[output-format-base.md](../../templates/platform-research/output-format-base.md)**.
+Base: **[output-format-base.md](../researching-platform-software/blueprints/shared/output-format-base.md)**.
 
 Save as `research_platform_{{PLATFORM_SOFTWARE}}_v{{TARGET_VERSION}}.md` in `StoryBeat/docs/`.
 

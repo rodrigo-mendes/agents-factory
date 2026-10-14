@@ -93,7 +93,7 @@ Wide-column stores mark deletes as tombstones (not immediate removal):
 
 ## §Data Modeling
 
-Full guidance: [data-modeling.md](./data-modeling.md). Core principle: **query-first — one table per access pattern, data duplication is intentional.** Cross-type principles: [shared modeling-principles](../../templates/platform-research/data-modeling-principles.md).
+Full guidance: [data-modeling.md](./data-modeling.md). Core principle: **query-first — one table per access pattern, data duplication is intentional.** Cross-type principles: [shared modeling-principles](../../researching-platform-software/blueprints/shared/data-modeling-principles.md).
 
 ---
 

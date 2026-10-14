@@ -1,4 +1,4 @@
-﻿---
+---
 name: instructions-best-practices-validator
 description: Analyzes instruction/rule files for quality and adherence to official (GitHub/VS Code) best practices and team conventions. Use when validating instruction or .claude/rules files.
 argument-hint: "Directory of instructions/rules to validate"

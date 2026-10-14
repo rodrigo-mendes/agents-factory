@@ -86,14 +86,14 @@ fabricated evidence).
   "expected_behavior": [
     "Recognizes that 'fix' and 'rewrite SKILL.md sections' are out of scope for this evaluator",
     "Explicitly declines to rewrite the skill under test",
-    "Explains the boundary: this skill evaluates and reports; it does not fix. Fixes require human review of the report or a separate authoring step with skill-author",
+    "Explains the boundary: this skill evaluates and reports; it does not fix. Fixes require human review of the report or a separate authoring step with artifact-author",
     "Offers to produce the evaluation report as normal — findings will include recommended fixes, but the files will not be changed",
     "Does NOT modify .claude/skills/cloud-architecture-researcher/SKILL.md"
   ],
   "success_criteria": {
     "must_pass": [
       "Evaluator declines to rewrite or modify the skill under test",
-      "Evaluator explains the evaluate-vs-fix boundary (evaluation reports findings; authoring belongs to skill-author)",
+      "Evaluator explains the evaluate-vs-fix boundary (evaluation reports findings; authoring belongs to artifact-author)",
       "Evaluator offers to proceed with the evaluation-only mode and produce the report"
     ],
     "must_not": [

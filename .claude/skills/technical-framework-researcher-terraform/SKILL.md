@@ -1,4 +1,4 @@
-﻿---
+---
 name: technical-framework-researcher-terraform
 description: Researches a Terraform provider/module for a pinned Terraform and provider version into a hallucination-proof IaC knowledge base. Use when researching Terraform/IaC for a skill.
 argument-hint: "<provider> <version> [depth=exhaustive] [iterations=5] (e.g. aws 5.x depth=deep iterations=3)"

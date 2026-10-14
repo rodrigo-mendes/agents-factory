@@ -79,7 +79,7 @@ and does not mis-flag description-reachable knowledge skills as orphans.
   "expected_behavior": [
     "Declines to create the subagent — states that implementing fixes is outside the flow auditor's scope",
     "Explains that Model B traces and reports chain integrity but does not author artifacts",
-    "Provides the remediation from the report: the exact command file, the missing agent: value, and whether to fix the reference or create the subagent (via /skill-creator or the skill-author subagent)",
+    "Provides the remediation from the report: the exact command file, the missing agent: value, and whether to fix the reference or create the subagent (via /skill-creator or the artifact-author subagent)",
     "Confirms the report already contains the Proposed Change for this fix"
   ],
   "success_criteria": {

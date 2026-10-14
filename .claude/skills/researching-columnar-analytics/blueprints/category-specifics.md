@@ -105,7 +105,7 @@ Document the coordination dependency (ClickHouse Keeper/ZooKeeper, Druid coordin
 
 ## §Data Modeling
 
-Full guidance: [data-modeling.md](./data-modeling.md). Cross-type principles: [shared modeling-principles](../../templates/platform-research/data-modeling-principles.md).
+Full guidance: [data-modeling.md](./data-modeling.md). Cross-type principles: [shared modeling-principles](../../researching-platform-software/blueprints/shared/data-modeling-principles.md).
 
 ---
 

@@ -137,3 +137,34 @@ Tests **routing correctness only** — this skill delegates research to siblings
 
 **must_not**:
 - Fail to match because of case or the vendor prefix (`apache`, `hashicorp`) — matching is case-insensitive and strips known vendor prefixes
+
+---
+
+## Scenario 7 — Shared Assets Integrity (partial install detection)
+
+This package (`researching-platform`) is indivisible: all 14 siblings link
+`./blueprints/shared/` on this router, so a partial install (e.g. someone hand-picking a subset
+of skills instead of installing the package as a whole) breaks them silently mid-research rather
+than at routing time. This scenario exists to catch that early.
+
+**Input**:
+```
+/researching-platform-software Kafka 3.7
+```
+
+**must_pass**:
+- Before or during routing, confirms the 8 shared assets this router owns are present and
+  reachable at `./blueprints/shared/` (`output-format-base.md`, `research-scope-operations.md`,
+  `reference-card-template.md`, `reference-card-example-kafka-3.7.md`,
+  `data-modeling-principles.md`, and the 3 `deployment-guides/*.md`)
+- If any shared asset is missing, reports it explicitly — e.g. *"Shared asset
+  `blueprints/shared/output-format-base.md` not found. This package installs as a whole;
+  re-run `apm install` for the full `researching-platform` package rather than a partial
+  skill subset."* — instead of routing normally and letting the sibling fail later, deep into
+  a research run, with a confusing broken-link error
+
+**must_not**:
+- Route silently when a shared asset is missing and let the failure surface only once the sibling
+  skill is already mid-research
+- Treat a missing shared asset the same as "platform not found" (Scenario 4) — the two failure
+  modes have different causes and different fixes

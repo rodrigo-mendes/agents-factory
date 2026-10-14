@@ -1,4 +1,4 @@
-﻿---
+---
 name: project-analysis-validator
 description: >
   Validates an entire agent project for structural integrity, CLAUDE.md accuracy, router
@@ -131,7 +131,9 @@ Save the consolidated report to `.claude/project-analysis-report.md` following t
 
 **P1 — Directory Structure**
 Required dirs: `.claude/agents/`, `.claude/skills/`, `.claude/rules/`. CLAUDE.md present at
-project root. Warn for: no `templates/`, unexpected top-level dirs.
+project root. `.claude/templates/` must **not** exist — templates live in the `assets/` of the
+skill that owns them (APM has no `templates` primitive). Warn for: any `TEMPLATE.*` file found
+outside a skill's `assets/`, or `.claude/templates/` present at all; unexpected top-level dirs.
 
 **P2 — CLAUDE.md Accuracy**
 Counts (skills, agents, commands) claimed in CLAUDE.md match `Glob`/`ls` output. Routing table

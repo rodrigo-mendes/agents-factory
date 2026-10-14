@@ -1,9 +1,9 @@
-﻿---
+---
 name: methodologies-skill-generator
 description: Researches an engineering/process methodology and generates an operational SKILL.md for producing correct artifacts. Use when turning a methodology into a skill.
 argument-hint: "<methodology> (e.g. TDD, scrum, kanban)"
 context: fork
-agent: skill-author
+agent: artifact-author
 disable-model-invocation: true
 ---
 # Meta-Prompt: Methodology Research → SKILL.md Generator
@@ -351,5 +351,5 @@ Expected output:
 
 ### Skill Authoring Standards
 - [skill-creator SKILL.md](../skill-creator/SKILL.md) — House conventions for generated SKILL.md files
-- [TEMPLATE.SKILL.md](../../templates/skills/TEMPLATE.SKILL.md) — Canonical scaffold for generated output
+- [TEMPLATE.SKILL.md](../skill-creator/assets/TEMPLATE.SKILL.md) — Canonical scaffold for generated output
 - [skill-frontmatter rules](../../rules/skill-frontmatter.md) — YAML frontmatter requirements
