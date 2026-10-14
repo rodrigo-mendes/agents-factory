@@ -1,0 +1,75 @@
+---
+name: skill-frontmatter
+description: "Frontmatter schema for skill files (.claude/skills/**/SKILL.md). Use when creating or editing a skill definition."
+applyTo: ".claude/skills/**/SKILL.md,.claude/skills/skill-creator/assets/*.md"
+---
+
+# Frontmatter conventions — Skills (`.claude/skills/<n>/SKILL.md`)
+
+## Required fields (all skills)
+
+| Field | Rule |
+|---|---|
+| `name` | kebab-case; must match the folder name |
+| `description` | ≤ 1536 characters; must contain a **"Use when…"** trigger |
+
+## Knowledge skills (auto-invocable)
+
+Only `name` + `description`. No `disable-model-invocation`, no `context`. Claude auto-invokes these when the trigger is matched.
+
+```yaml
+---
+name: my-knowledge-skill
+description: "Explains X patterns for Y. Use when the user asks about X in context Z."
+---
+```
+
+## Action-command skills (deliberate, via `/name`)
+
+Add four extra fields. All four are required together — omitting any one breaks the routing:
+
+| Field | Rule |
+|---|---|
+| `argument-hint` | Human-readable hint for the slash-command argument (shown in the UI); required when the skill uses `$ARGUMENTS` |
+| `context: fork` | Forks execution to a subagent |
+| `agent:` | Name of the subagent to invoke; must match a file in `.claude/agents/` without the `.md` extension |
+| `disable-model-invocation: true` | Prevents auto-listing cost; makes the skill accessible only via `/name` |
+
+```yaml
+---
+name: my-action-command
+description: "Creates X from Y. Use when authoring a new X from a research file."
+argument-hint: "Path to research file (e.g. StoryBeat/research_X_v1.md)"
+context: fork
+agent: artifact-author
+disable-model-invocation: true
+---
+```
+
+## Coupled fields constraint
+
+`context: fork` and `disable-model-invocation: true` are **always paired** — they must both be present or both be absent.
+
+| If you set | You must also set |
+|---|---|
+| `context: fork` | `disable-model-invocation: true` |
+| `disable-model-invocation: true` | `context: fork` |
+
+A skill with `context: fork` but without `disable-model-invocation: true` will appear in auto-listing and incur invocation cost every session. A skill with `disable-model-invocation: true` but without `context: fork` will silently do nothing when invoked via `/name`.
+
+## Optional field
+
+| Field | Rule |
+|---|---|
+| `allowed-tools:` | Least-privilege tool restriction. Use **`allowed-tools:`** — **not** `tools:` (that field belongs to subagents). |
+
+## Progressive disclosure
+
+Keep `SKILL.md` < 500 lines; link `blueprints/` for large content. Avoid `@file` (eager import) for large files.
+
+## YAML
+
+- Values containing `:` **require quotes** (e.g. `argument-hint: "Scope: new / review"`).
+- `name` must match the folder name exactly.
+
+Full reference: [skill-creator](../skills/skill-creator/SKILL.md).

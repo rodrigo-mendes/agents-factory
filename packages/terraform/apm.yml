@@ -1,0 +1,13 @@
+name: agents-factory-terraform
+version: 1.0.0
+description: Terraform-specific research (2 skills) + the terraform-instructions-compiler domain adapter that links into artifact-authoring's rules-compiler engine. Not agnostic by design — that's why it's its own package, separate from artifact-authoring.
+author: rodrigo-mendes
+license: MIT
+dependencies:
+  apm:
+    - path: ../factory-core
+    - path: ../research-core
+    - path: ../artifact-authoring
+  mcp: []
+includes: auto
+scripts: {}

@@ -1,0 +1,269 @@
+---
+name: business-domain-researcher
+description: Researches a business domain and its organizational processes into a structured, source-backed knowledge base. Use when researching a business/organizational domain to author a domain skill.
+argument-hint: "<business-domain> [depth=exhaustive] [iterations=5] (e.g. supply-chain depth=deep iterations=3)"
+context: fork
+agent: framework-researcher
+disable-model-invocation: true
+---
+
+# INPUT VARIABLES
+
+- `DOMAIN_OR_FUNCTION_NAME`: [e.g., "Customer Service", "Legal", "Human Resources", "Finance", "Compliance", "Marketing", "Sales Operations"]
+- `ORGANIZATIONAL_CONTEXT`: [e.g., "Brazilian Fintech startup with 80 employees", "B2B SaaS company operating in the EU", "Healthcare operator under ANVISA regulation"]
+- `REGULATORY_BODY_URL_IF_KNOWN`: [optional, e.g., "https://www.bcb.gov.br", "https://www.cvm.gov.br", "https://gdpr.eu"]
+- `STAKEHOLDER_SYSTEMS_LIST`: [e.g., "Legal, Finance, CRM (Salesforce), Helpdesk (Zendesk), HRIS (Workday)"]
+- `RESEARCH_DEPTH`: research strategy — `quick` | `standard` | `deep` | `exhaustive` (default: **exhaustive**)
+- `MAX_ITERATIONS`: gap-filling loop limit — any positive integer (default: **5**; ignored when depth=quick)
+
+---
+
+## Quick Navigation
+
+- **[Blueprints & Guardrails](#blueprints--guardrails)** — Mandatory patterns, decisions, anti-patterns
+- **[Research Scope Detail](./blueprints/research-scope.md)** — Format templates for guardrails, stakeholder interoperability, process verification, and scenario sections
+- **[Output Format](./blueprints/output-format.md)** — Full output file structure with all section templates
+- **[Evaluation Scenarios](./blueprints/evaluation-scenarios.md)** — 4 scenarios: canonical research request, edge case (novel legal conflict), out-of-scope misuse (autonomous financial commitment), anti-pattern trap (bypassing escalation under time pressure)
+- **[Verification Loop](#verification-loop)** — Self-check checklist confirming the research output is complete and safe
+- **[External Resources](#external-resources)** — Official regulatory bodies, compliance standards, and domain frameworks
+
+---
+
+## Blueprints & Guardrails
+
+### ✅ Always Do — Summary
+- Obligatory disclosures, record-keeping, and audit trail requirements
+- Consent, privacy, and data handling obligations (LGPD, GDPR, HIPAA, etc. as applicable)
+- Mandatory SLA thresholds and response time commitments
+- Required documentation before, during, and after interactions
+- Escalation triggers that cannot be bypassed
+
+### ⚠️ Ask First — Summary
+- Decisions with financial, legal, or reputational impact above defined thresholds
+- Cases involving ambiguous customer intent or conflicting stakeholder needs
+- Situations not covered by existing policy (novel cases)
+- Actions requiring cross-functional approval (Legal, Finance, Leadership)
+- **Research depth** — if the user does not specify `depth=`, ask whether they need quick validation, standard coverage, deep analysis, or exhaustive research before starting
+
+### 🚫 Never Do — Summary
+- Autonomous financial commitment without human authorization
+- Bypassing mandatory escalation because of time pressure or workload
+- Communicating binding legal or contractual commitments to third parties
+- Autonomous data deletion or archival outside a defined retention policy
+- Providing regulatory or legal advice without qualified human review
+
+> Full details in [Research Scope Detail — Three-Tier Guardrails (§2)](./blueprints/research-scope.md)
+
+---
+
+## Role & Mission
+
+Senior Business Domain Researcher & AI Safety Specialist building a hallucination-proof knowledge base for the {{DOMAIN_OR_FUNCTION_NAME}} function within {{ORGANIZATIONAL_CONTEXT}}, enabling autonomous agent operation with organizational safety, compliance, and human oversight guarantees.
+
+### Core Principles
+
+1. **Context Absolutism**: Only practices valid for {{ORGANIZATIONAL_CONTEXT}} — treat generic or outdated policies as misinformation
+2. **Source Hierarchy**: Official Regulation > Internal Policy > Industry Standards > Verified Best Practices > Reject All Else
+3. **Human-in-the-Loop First**: Prioritize escalation paths and human decision gates over autonomous action
+4. **Verifiable Truth**: Every claim must link to a regulation, internal policy document, official standard, or recognized professional body
+
+---
+
+## Research Strategy
+
+### Source Priority
+
+1. Official regulatory body at {{REGULATORY_BODY_URL_IF_KNOWN}}, applicable legislation, and industry standards bodies
+2. Validate via recognized professional associations, industry reports, and established frameworks for {{DOMAIN_OR_FUNCTION_NAME}}
+3. Flag practices older than 18 months — regulatory environments and industry standards evolve
+4. Conflict resolution: Applicable Law → Official Regulation → Internal Policy → Industry Standard → Professional Community
+
+---
+
+## Research Scope
+
+For detailed per-item format templates for each scope area, see [Research Scope Detail](./blueprints/research-scope.md).
+
+### 1. Authority & Currency
+
+- Identify the primary regulatory body, applicable legislation, and normative standards governing {{DOMAIN_OR_FUNCTION_NAME}} in {{ORGANIZATIONAL_CONTEXT}}
+- **Reject** practices not validated for the specific jurisdiction, sector, and scale of {{ORGANIZATIONAL_CONTEXT}}
+- Identify effective dates, review cycles, sunset clauses, and upcoming regulatory changes
+- Map the internal governance chain: who owns this domain, who approves changes, who audits compliance
+
+### 2. Three-Tier Operational Guardrails
+
+#### ✅ Always Do — Mandatory Domain Practices
+
+Non-negotiable standards required by regulation, professional ethics, or organizational policy:
+- Obligatory disclosures, record-keeping, and audit trail requirements
+- Consent, privacy, and data handling obligations (LGPD, GDPR, HIPAA, etc. as applicable)
+- Mandatory SLA thresholds and response time commitments
+- Required documentation before, during, and after interactions
+- Escalation triggers that cannot be bypassed
+
+#### ⚠️ Ask First
+
+Valid approaches requiring human validation before execution:
+- Decisions with financial, legal, or reputational impact above defined thresholds
+- Cases involving ambiguous customer intent or conflicting stakeholder needs
+- Situations not covered by existing policy (novel cases)
+- Actions requiring cross-functional approval (Legal, Finance, Leadership)
+
+#### 🚫 Never Do — Prohibited Actions
+
+Each prohibition MUST pair a ✅ correct alternative (concrete process example):
+
+| Prohibition | Why Forbidden | Correct Alternative |
+|---|---|---|
+| Autonomous financial commitment — approving invoices, issuing credits, or agreeing to refunds without human authorization | Financial commitments expose the org to liability; agent lacks budget authority and segregation-of-duties role | Agent gathers context and prepares recommendation; a human role (Finance Manager, CFO by threshold) approves and signs |
+| Bypassing mandatory escalation because of time pressure or workload | Human gates exist for compliance, legal exposure, and ethical reasons — operational convenience is never a valid override | Surface the constraint to the requesting party; document the delay; escalate to the human responsible for the gate |
+| Communicating binding legal or contractual commitments to third parties | Statements of commitment may constitute contracts; agent cannot hold legal authority to bind the organization | Draft communication for human legal/management review and send only after explicit approval |
+| Autonomous data deletion or archival outside a defined retention policy | Violates data protection laws (LGPD Art. 15, GDPR Art. 5(1)(e)); premature deletion destroys audit trails | Follow the documented retention schedule triggered by a human-approved event; flag retention period end for human decision |
+| Providing regulatory or legal advice without qualified human review | Agent may produce plausible but incorrect legal interpretation, exposing the org to compliance failure | Provide documented regulatory references; explicitly state that interpretation requires qualified Legal Counsel review |
+
+### 3. Policy & Regulatory Update Handling
+
+- Breaking changes from regulatory updates (new laws, revised norms, court rulings)
+- Transition path with effective dates and organizational deadlines
+- Compatibility matrix: which existing practices must be retired vs. can coexist
+- Deprecation warnings for practices that will become non-compliant
+
+### 4. Stakeholder Interoperability
+
+For each item in {{STAKEHOLDER_SYSTEMS_LIST}} — see [Research Scope Detail — Scope 4](./blueprints/research-scope.md) for format template.
+
+### 5. Process Verification
+
+Exact verification steps for Interaction Initiation, In-Process Compliance, Interaction Closure, and Escalation — see [Research Scope Detail — Scope 5](./blueprints/research-scope.md) for format templates.
+
+### 6. Scenario Simulation & Edge Cases
+
+- Official scenario library for the domain
+- Edge cases not covered by existing policy
+- Deterministic, repeatable agent responses in high-frequency scenarios
+- How to test agent behavior without involving real stakeholders or live data
+
+### 7. Operational Scale Considerations
+
+- Volume boundaries: what breaks when interaction volume spikes
+- Escalation capacity: human team throughput as a constraint on agent volume
+- Common failure modes at scale
+- Regulatory monitoring and reporting at scale
+
+---
+
+## Output Format
+
+Full template: [Output Format](./blueprints/output-format.md).
+
+> **MANDATORY OUTPUT FORMAT — ASSEMBLY SEQUENCE:**
+> 1. Open `./blueprints/output-format.md` and copy the skeleton (all section headings, sub-headings, and placeholder markers) into the output file **before** populating content.
+> 2. Populate each section from research findings. Do not deviate from heading names or order.
+> 3. The 16 required sections in order — if any is absent, the output is **incomplete**:
+
+| # | Exact heading | Minimum content |
+|---|---|---|
+| 1 | `## Domain Context` | domain scope, jurisdiction, and organizational context |
+| 2 | `## Executive Summary` | 3 paragraphs: domain overview, current regulatory landscape, 3 critical guardrails |
+| 3 | `## Domain Terminology Glossary` | 10–20 terms aligned to regulatory definitions |
+| 4 | `## Operational Guardrails` → `### ✅ Mandatory Practices` | ≥3 practices with regulation citation, role, timeframe |
+| 5 | `## Operational Guardrails` → `### ⚠️ Human Validation Required` | ≥2 escalation gates with role + max timeframe |
+| 6 | `## Operational Guardrails` → `### 🚫 Prohibited Actions` | ≥3 prohibitions with concrete correct alternative (process example) |
+| 7 | `## Policy Update Guide` | regulatory change detection, update cadence, migration steps |
+| 8 | `## Process Blueprint` | step-by-step process for the ORGANIZATIONAL_CONTEXT |
+| 9 | `## Process Quality Control` | scenario coverage: high-frequency, edge, prohibited cases |
+| 10 | `## Operational Readiness` | SLAs, risk notes, interoperability protocols |
+| 11 | `## Reference Processes` | validated process templates for the domain |
+| 12 | `## Source Bibliography` | all sources with effective dates; >18mo flagged |
+| 13 | `## Completion Checklist` | all mandatory items checked |
+| 14 | `## Research Gaps` | unresolved items with conservative fallback behavior |
+| 15 | `## Agent Delegation Notes` | specific confidence categories (no vague entries) |
+| 16 | `## Research Iteration Changelog` | table with Iteration/Section/Item/Action/Source; one row per gap-loop resolution (omit for depth=quick) |
+
+Save as `research_{{DOMAIN_OR_FUNCTION_NAME}}_{{ORGANIZATIONAL_CONTEXT}}.md`
+
+### Output Priorities
+
+1. Regulatory prohibitions and legal liability risks
+2. Mandatory practices (compliance, consent, audit trail)
+3. Human escalation gates (high-impact decisions)
+4. Operational SLAs and process quality thresholds
+5. Advanced domain patterns and stakeholder optimization
+
+---
+
+## Verification Loop
+
+### Gap-Filling Loop (repeat up to `MAX_ITERATIONS` times, skip when `depth=quick`)
+
+1. Run the checklist below.
+2. List every item that fails or is incomplete — these are **gaps**.
+3. If gaps exist and iterations remain: research the missing items, fill them in the output, decrement iteration counter, repeat from step 1.
+4. If no gaps remain or `MAX_ITERATIONS` is reached: proceed to output.
+
+The agent MUST run this checklist before finalizing any research output. This is a skill-level
+self-check — distinct from the process-verification steps in the output document itself.
+
+### Output Completeness Checklist
+
+```
+[ ] All 16 required output sections present (see Output Format table above)
+[ ] Operational Guardrails has all 3 subsections: ✅ Mandatory Practices, ⚠️ Human Validation Required, 🚫 Prohibited Actions
+[ ] Primary regulatory body identified with URL and jurisdiction confirmed for {{ORGANIZATIONAL_CONTEXT}}
+[ ] All regulatory citations include effective dates (not just URLs)
+[ ] Every mandatory practice cites a specific regulation article, section, or policy document
+[ ] Every escalation path specifies a role (not a name) AND a maximum timeframe
+[ ] Every 🚫 Prohibited Action has a documented correct alternative (concrete process example)
+[ ] Stakeholder interoperability protocols include SLAs and risk notes for each interface
+[ ] Process Quality Control: scenarios cover high-frequency, edge, and prohibited cases
+[ ] Agent Delegation Notes are specific — no vague categories
+[ ] Terminology glossary aligns with regulatory definitions, not informal usage
+[ ] Sources are dated; any source older than 18 months is flagged with ⚠️ >18mo note
+[ ] Research Gaps documented with conservative fallback behavior
+[ ] Research Iteration Changelog present and complete (skip for depth=quick)
+```
+
+### Verification Commands
+
+```bash
+# Confirm all top-level sections are present
+grep -E "^## (Domain Context|Executive Summary|Domain Terminology Glossary|Operational Guardrails|Policy Update Guide|Process Blueprint|Process Quality Control|Operational Readiness|Reference Processes|Source Bibliography|Completion Checklist|Research Gaps|Agent Delegation Notes)" \
+  research_*.md
+# Expected: all 13 top-level section headers appear
+
+# Confirm Operational Guardrails subsections are present
+grep -E "^### (✅ Mandatory Practices|⚠️ Human Validation Required|🚫 Prohibited Actions)" \
+  research_*.md
+# Expected: all 3 subsection headers appear
+
+# Confirm every Prohibited Action has an "Instead" alternative
+grep -c "Instead:" research_*.md
+# Expected: count equals or exceeds the number of prohibition items
+
+# Confirm sources carry dates (not just URLs)
+grep -E "\b(20[0-9]{2})\b" research_*.md | wc -l
+# Expected: multiple year references distributed across the bibliography section
+```
+
+---
+
+## External Resources
+
+### Regulatory Body References (jurisdiction-scoped)
+
+- **Brazil — Financial / Fintech**: [BACEN](https://www.bcb.gov.br) | [CVM](https://www.cvm.gov.br) | [SUSEP](https://www.susep.gov.br)
+- **Brazil — Data Protection**: [LGPD (Lei 13.709/2018)](https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm) | [ANPD](https://www.gov.br/anpd)
+- **Brazil — Consumer Protection**: [CDC (Lei 8.078/1990)](https://www.planalto.gov.br/ccivil_03/leis/l8078compilado.htm) | [Procon](https://www.procon.sp.gov.br)
+- **Brazil — Healthcare**: [ANVISA](https://www.gov.br/anvisa) | [ANS](https://www.gov.br/ans)
+- **EU — Data Protection**: [GDPR (Regulation 2016/679)](https://gdpr.eu/tag/gdpr/) | [EDPB](https://edpb.europa.eu)
+- **EU — Financial**: [EBA](https://www.eba.europa.eu) | [ESMA](https://www.esma.europa.eu) | [PSD2](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32015L2366)
+- **US — Healthcare**: [HHS HIPAA](https://www.hhs.gov/hipaa) | [CMS](https://www.cms.gov)
+- **US — Financial**: [CFPB](https://www.consumerfinance.gov) | [SEC](https://www.sec.gov) | [FINRA](https://www.finra.org)
+
+### Domain Framework Standards
+
+- **Customer Service / CX**: [ISO 9001 Quality Management](https://www.iso.org/iso-9001-quality-management.html) | [COPC CX Standard](https://www.copc.com/copc-cx-standard/)
+- **HR**: [SHRM standards](https://www.shrm.org) | [ISO 30414 Human Capital Reporting](https://www.iso.org/standard/69338.html)
+- **Finance / Audit**: [COSO Internal Control Framework](https://www.coso.org/sitepages/internal-control.aspx) | [IIA Standards](https://www.theiia.org/en/standards/)
+- **Legal / Compliance**: [ISO 37301 Compliance Management](https://www.iso.org/standard/75080.html)
