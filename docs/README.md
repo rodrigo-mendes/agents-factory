@@ -24,7 +24,6 @@
 ### 📚 Reference
 1. [Conventions](referencia/convencoes.md) — P0-P5, Three-Tier, naming, YAML
 2. [Glossary](referencia/glossario.md) — All terms
-3. [Mapping .github/ ↔ .claude/](referencia/mapeamento-github-claude.md) — Copilot vs Claude Code equivalency
 
 ---
 
@@ -37,7 +36,7 @@ docs/
 │   ├── README.md                  ← Index + cheat sheet of 40 commands
 │   ├── framework-researcher.md    ← 7 research commands + platform-software family
 │   ├── platform-software-family.md ← 15 platform-software commands (1 orchestrator + 14 siblings)
-│   ├── skill-author.md            ← 4 generation commands
+│   ├── artifact-author.md         ← 6 generation commands
 │   ├── architecture-auditor.md    ← 8 audit commands
 │   ├── quality-validator.md       ← 5 validation commands
 │   └── skill-evaluator.md         ← 1 evaluation command
@@ -66,5 +65,4 @@ docs/
 └── referencia/
     ├── convencoes.md
     ├── glossario.md
-    └── mapeamento-github-claude.md
 ```

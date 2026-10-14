@@ -48,9 +48,9 @@ Choose one of the scenarios below based on your goal:
 ### "I want to create a full agent"
 → [Creating Agents](criando-agentes.md)
 
-There is no single command — the process involves researching technologies, creating skills, and then
-manually creating the agent definition files from the templates in
-`.claude/templates/`.
+There is no single command — the process involves researching technologies, creating skills, and
+then creating the agent with [`/agent-creator`](../../.claude/skills/agent-creator/SKILL.md),
+which reads its templates from its own `assets/` (there is no `.claude/templates/`).
 
 ### "I want to validate what I already have"
 → [Validating Artifacts](validando-artefatos.md)

@@ -1,6 +1,6 @@
 # Agent Usage Manual — Agents Factory
 
-Complete reference for the 7 sub-agents (5 routers + 2 research helpers) and the 40 commands that invoke them.
+Complete reference for the 7 sub-agents (5 routers + 2 research helpers) and the 52 skills that invoke them. The 13 agents of the book-writing pipeline are documented separately in [packages/book-writing/README.md](../../packages/book-writing/README.md).
 
 ---
 
@@ -9,18 +9,19 @@ Complete reference for the 7 sub-agents (5 routers + 2 research helpers) and the
 | Agent | Model | Commands | File |
 |--------|--------|:--------:|---------|
 | [framework-researcher](framework-researcher.md) | opus | 22 | Research on technologies, frameworks, domains, architectures + the [platform-software family](platform-software-family.md) (15) |
-| [skill-author](skill-author.md) | sonnet | 4 | Generation of SKILL.md and .instructions.md |
+| [artifact-author](artifact-author.md) | sonnet | 6 | Generation of SKILL.md, subagent, and rules/instructions artifacts (renamed from `skill-author` — it authors 3 of the 4 artifact types) |
 | [architecture-auditor](architecture-auditor.md) | opus | 8 | Multi-model audit of agent architecture |
 | [quality-validator](quality-validator.md) | sonnet | 5 | Quality and compliance validation of artifacts |
 | [skill-evaluator](skill-evaluator.md) | sonnet | 1 | Behavioral evaluation of skills via LLM-as-judge |
 
 > **Research helpers** (not directly invocable — spawned by `framework-researcher` at
-> `depth=deep`/`exhaustive`): `section-investigator` (parallel sub-investigation) and
-> `research-synthesizer` (merges findings into the output template).
+> `depth=deep`/`exhaustive`): [section-investigator](section-investigator.md) (parallel
+> sub-investigation) and [research-synthesizer](research-synthesizer.md) (merges findings into
+> the output template).
 
 ---
 
-## Quick Reference — All 40 Commands
+## Quick Reference — All 52 Skills
 
 ### Research (`framework-researcher`)
 
@@ -55,14 +56,17 @@ Complete reference for the 7 sub-agents (5 routers + 2 research helpers) and the
 ```
 > Detail: [Platform Software Research Family](platform-software-family.md).
 
-### Generation (`skill-author`)
+### Generation (`artifact-author`)
 
 ```
 /skill-creator <path-to-research-file>             # Creates SKILL.md from any research file
+/agent-creator <domain-role> [advisory|orchestrator]  # Creates a subagent (.claude/agents/<name>.md)
 /methodologies-skill-generator <methodology>       # Research + generates methodology skill (all-in-one)
 /architecture-approaches-skill-generator <topic>   # Research + generates architecture skill (all-in-one)
-/terraform-instructions-compiler <research-file>   # Generates .instructions.md from Terraform research
+/terraform-instructions-compiler <research-file>   # Generates rules/instructions from Terraform research
 ```
+> `rules-compiler` is the generic 5-phase engine `terraform-instructions-compiler` links into. It
+> is a knowledge skill (no `/command`), not counted among the 6 commands above.
 
 ### Audit — Claude Code (`architecture-auditor`)
 
@@ -98,6 +102,15 @@ Complete reference for the 7 sub-agents (5 routers + 2 research helpers) and the
 /evaluating-skill-scenarios <skill-name>            # Runs LLM-as-judge scenarios for the skill
 ```
 
+### Book writing (`book-orchestrator` and book agents)
+
+```
+/writing-technical-book "<topic>" audience="..." context="..."   # Full pipeline: TOC → chapters → translations → EPUB
+/writing-book-toc | /rewriting-book-chapter | /rewriting-book-introduction | /switching-book-language | /enriching-book-chapter
+/translating-book | /formatting-book-epub | /repairing-book-epub | /rendering-mermaid-diagrams
+```
+> Detail: [packages/book-writing/README.md](../../packages/book-writing/README.md).
+
 ---
 
 ## How to Choose the Agent
@@ -119,11 +132,12 @@ flowchart TD
     P --> P6[/architecture-methodology-researcher/]
     P --> P7[/researching-platform-software — self-managed platforms/]
 
-    G --> G1{Do I have a research file?}
-    G1 -->|Yes| G2[/skill-creator path/to/research.md/]
-    G1 -->|No — methodology| G3[/methodologies-skill-generator/]
-    G1 -->|No — architecture| G4[/architecture-approaches-skill-generator/]
-    G1 -->|No — Terraform rules| G5[/terraform-instructions-compiler/]
+    G --> G1{What artifact?}
+    G1 -->|Skill, have research| G2[/skill-creator path/to/research.md/]
+    G1 -->|Skill, no research — methodology| G3[/methodologies-skill-generator/]
+    G1 -->|Skill, no research — architecture| G4[/architecture-approaches-skill-generator/]
+    G1 -->|Rules — Terraform| G5[/terraform-instructions-compiler/]
+    G1 -->|Subagent| G6[/agent-creator/]
 
     A --> A1{Which platform?}
     A1 -->|Claude Code .claude/| A2[/audit-cc-architecture-consensus target/]
@@ -162,5 +176,4 @@ flowchart TD
 
 - [How to Use → Complete workflows](../como-usar/README.md)
 - [Capabilities Catalog](../capacidades/README.md)
-- [Mapping .github/ ↔ .claude/](../referencia/mapeamento-github-claude.md)
 - [Conventions and Standards](../referencia/convencoes.md)

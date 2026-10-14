@@ -89,9 +89,11 @@ The orchestrator (`researching-platform-software`) follows
 
 ---
 
-## Shared Assets — `.claude/templates/platform-research/`
+## Shared Assets — `researching-platform-software/blueprints/shared/`
 
-Every sibling reuses these shared templates (Claude Code-exclusive; no `.github/` mirror):
+Every sibling reuses these shared templates (Claude Code-exclusive; no `.github/` mirror). They
+moved here from `.claude/templates/platform-research/` — the router skill is the correct owner
+since it already inventories them:
 
 | Asset | Purpose |
 |-------|---------|

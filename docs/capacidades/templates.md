@@ -1,8 +1,20 @@
 # Templates — Artifact Scaffolding
 
-**14 scaffolding templates** to create any type of framework artifact, plus the **platform-research shared assets** (Claude Code-exclusive) used by the platform-software family — **24 template files total**.
-
-> **System coexistence**: Scaffolding templates exist in two mirrored locations — `.github/templates/` (GitHub Copilot) and `.claude/templates/` (Claude Code). The only structural difference is that `.github/` uses `instructions/` while `.claude/` uses `rules/` for scope instruction templates. The **`platform-research/`** set below is **Claude Code-exclusive** (no `.github/` mirror).
+> **`.claude/templates/` no longer exists.** APM (the packaging model this repo is migrating to)
+> has no `templates` primitive — only a skill's own `assets/`, `references/`, `scripts/`
+> subfolders, which deploy with the skill. Every former `.claude/templates/` file moved into the
+> `assets/` of the skill that owns it: [`skill-creator`](../../.claude/skills/skill-creator/SKILL.md)
+> (3 skill templates), [`agent-creator`](../../.claude/skills/agent-creator/SKILL.md) (3 agent
+> templates), [`rules-compiler`](../../.claude/skills/rules-compiler/SKILL.md) (3 instruction
+> templates). The `platform-research/` shared assets moved into
+> [`researching-platform-software/blueprints/shared/`](../../.claude/skills/researching-platform-software/blueprints/shared/).
+> The 6 prompt templates and the templates `README.md` were deleted — superseded (see
+> Discrepancies below).
+>
+> **`.github/templates/`** (14 files below) is unaffected by this move — it belongs to the
+> pre-migration Copilot mirror, still physically present though not a source of truth (see
+> `CLAUDE.md`). This page documents both: the Copilot catalog as it exists today, and where its
+> Claude Code equivalent now lives.
 
 ---
 
@@ -10,21 +22,21 @@
 
 ## Summary by Category
 
-| Category | Templates | Purpose |
-|-----------|:---------:|-----------|
-| Agent | 3 | Create agents (Implementation, Advisory, Orchestrator) |
-| Prompt | 6 | Create prompts by operation type |
-| Skill | 1 | Create versioned skills |
-| Instruction | 3 | Create instructions (Config, Standards, Skills-routing) |
-| Report | 1 | Post-incident reports |
-| Platform Research (CC-exclusive) | 8 | Shared assets for the platform-software family |
+| Category | Templates | Purpose | Claude Code location |
+|-----------|:---------:|-----------|-----------|
+| Agent | 3 | Create agents (Implementation, Advisory, Orchestrator) | `agent-creator/assets/` |
+| Prompt | 6 | Create prompts by operation type | Copilot-only — deleted on the Claude Code side (superseded) |
+| Skill | 3 | Create versioned skills (action command, knowledge skill, evaluation scenarios) | `skill-creator/assets/` |
+| Instruction | 3 | Create instructions/rules (Config, Standards, Skills-routing) | `rules-compiler/assets/` |
+| Report | 1 | Post-incident reports | `docs/templates/` (human procedure, not a skill artifact) |
+| Platform Research (CC-exclusive) | 8 | Shared assets for the platform-software family | `researching-platform-software/blueprints/shared/` |
 
 ---
 
 ## Agent Templates
 
 ### TEMPLATE.AGENT.md
-> **File**: `.github/templates/agents/TEMPLATE.AGENT.md`
+> **File**: `.github/templates/agents/TEMPLATE.AGENT.md` · **Claude Code equivalent**: [`agent-creator/assets/TEMPLATE.AGENT.md`](../../.claude/skills/agent-creator/assets/TEMPLATE.AGENT.md)
 
 | Field | Value |
 |-------|-------|
@@ -35,7 +47,7 @@
 | **Real example** | `templates/examples/agents/oci-terraform.agent.md` |
 
 ### TEMPLATE.ADVISORY-AGENT.md
-> **File**: `.github/templates/agents/TEMPLATE.ADVISORY-AGENT.md`
+> **File**: `.github/templates/agents/TEMPLATE.ADVISORY-AGENT.md` · **Claude Code equivalent**: [`agent-creator/assets/TEMPLATE.ADVISORY-AGENT.md`](../../.claude/skills/agent-creator/assets/TEMPLATE.ADVISORY-AGENT.md)
 
 | Field | Value |
 |-------|-------|
@@ -46,7 +58,7 @@
 | **Real example** | `templates/examples/agents/oci-serverless-architect.agent.md` |
 
 ### TEMPLATE.ORCHESTRATOR-AGENT.md
-> **File**: `.github/templates/agents/TEMPLATE.ORCHESTRATOR-AGENT.md`
+> **File**: `.github/templates/agents/TEMPLATE.ORCHESTRATOR-AGENT.md` · **Claude Code equivalent**: [`agent-creator/assets/TEMPLATE.ORCHESTRATOR-AGENT.md`](../../.claude/skills/agent-creator/assets/TEMPLATE.ORCHESTRATOR-AGENT.md)
 
 | Field | Value |
 |-------|-------|
@@ -59,6 +71,14 @@
 ---
 
 ## Prompt Templates
+
+> **Copilot-only.** These 6 exist only in `.github/templates/prompts/`. Their Claude Code
+> equivalent was deleted (not moved) — each is a pre-progressive-disclosure ancestor whose
+> content is now covered, more thoroughly, by a real skill (`TEMPLATE.GENERATOR.prompt.md` →
+> [`methodologies-skill-generator`](../../.claude/skills/methodologies-skill-generator/SKILL.md)
+> and [`rules-compiler`](../../.claude/skills/rules-compiler/SKILL.md); `TEMPLATE.RESEARCH.prompt.md`
+> → [`researching-technical-frameworks`](../../.claude/skills/researching-technical-frameworks/SKILL.md)).
+> `prompts` is also not a supported deploy target for Claude Code under APM.
 
 ### TEMPLATE.RESEARCH.prompt.md
 > **File**: `.github/templates/prompts/TEMPLATE.RESEARCH.prompt.md`
@@ -122,67 +142,96 @@
 
 ---
 
-## Skill Template
+## Skill Templates
 
 ### TEMPLATE.SKILL.md
-> **File**: `.github/templates/skills/TEMPLATE.SKILL.md`
+> **File**: `.github/templates/skills/TEMPLATE.SKILL.md` · **Claude Code equivalent**: [`skill-creator/assets/TEMPLATE.SKILL.md`](../../.claude/skills/skill-creator/assets/TEMPLATE.SKILL.md)
 
 | Field | Value |
 |-------|-------|
-| **When to use** | Create any new SKILL.md |
-| **Referenced by** | ✅ `researching-technical-frameworks/SKILL.md` (L459) — "Structure reference" |
-| **Implementations that follow** | All skills generated by compilers |
+| **When to use** | Create an action-command skill (`context: fork` + `disable-model-invocation: true`, forks to a subagent) |
+| **Referenced by** | ✅ `skill-creator/SKILL.md` (4 sites), plus 3 weak External-Resources mentions (`architecture-approaches-skill-generator`, `methodologies-skill-generator`, `researching-technical-frameworks`) |
+| **Implementations that follow** | All 52 skills in `.claude/skills/` that are action commands |
+
+### TEMPLATE.KNOWLEDGE-SKILL.md
+> **File**: **Claude Code equivalent**: [`skill-creator/assets/TEMPLATE.KNOWLEDGE-SKILL.md`](../../.claude/skills/skill-creator/assets/TEMPLATE.KNOWLEDGE-SKILL.md) (no `.github/` mirror)
+
+| Field | Value |
+|-------|-------|
+| **When to use** | Create an auto-invocable reference skill — no fork/agent/blueprints, kept under 150 lines |
+| **Referenced by** | ✅ `skill-creator/SKILL.md` Step 2 — decision table vs. `TEMPLATE.SKILL.md` |
+| **Implementations that follow** | `rules-compiler` is the first knowledge skill in this repo (no `context: fork`) |
+
+### TEMPLATE.EVALUATION-SCENARIOS.md
+> **File**: **Claude Code equivalent**: [`skill-creator/assets/TEMPLATE.EVALUATION-SCENARIOS.md`](../../.claude/skills/skill-creator/assets/TEMPLATE.EVALUATION-SCENARIOS.md) (no `.github/` mirror)
+
+| Field | Value |
+|-------|-------|
+| **When to use** | Scaffold a skill's `blueprints/evaluation-scenarios.md` (test cases for `skill-evaluator`) — requires 4 scenarios: canonical path, edge case, misuse rejection, anti-pattern trap |
+| **Referenced by** | ✅ `skill-creator/SKILL.md` Step 3 and its ✅/🚫 guardrails |
+| **Implementations that follow** | `evaluation-scenarios.md` blueprints across the 52 skills |
 
 ---
 
 ## Instruction Templates
 
+> Their Claude Code equivalent is no longer scoped to Terraform. All 3 moved into
+> [`rules-compiler/assets/`](../../.claude/skills/rules-compiler/SKILL.md) — the generic 5-phase
+> engine that any `<domain>-instructions-compiler` skill (today: `terraform-instructions-compiler`;
+> tomorrow: a Kubernetes/AWS equivalent) links into, per
+> [`domain-compiler-contract.md`](../../.claude/skills/rules-compiler/blueprints/domain-compiler-contract.md).
+
 ### TEMPLATE.CONFIG.instructions.md
-> **File**: `.github/templates/instructions/TEMPLATE.CONFIG.instructions.md`
+> **File**: `.github/templates/instructions/TEMPLATE.CONFIG.instructions.md` · **Claude Code equivalent**: [`rules-compiler/assets/TEMPLATE.CONFIG.md`](../../.claude/skills/rules-compiler/assets/TEMPLATE.CONFIG.md)
 
 | Field | Value |
 |-------|-------|
 | **Purpose** | Project setup, dependencies, structure |
-| **Referenced by** | ✅ `terraform-instructions-compiler.prompt.md` (L55) |
-| **When to use** | Create a project configuration instruction |
+| **Referenced by** | ✅ `terraform-instructions-compiler/SKILL.md` (Phase 1, via `../rules-compiler/assets/`) |
+| **When to use** | Create a project configuration instruction/rule |
 
 ### TEMPLATE.STANDARDS.instructions.md
-> **File**: `.github/templates/instructions/TEMPLATE.STANDARDS.instructions.md`
+> **File**: `.github/templates/instructions/TEMPLATE.STANDARDS.instructions.md` · **Claude Code equivalent**: [`rules-compiler/assets/TEMPLATE.STANDARDS.md`](../../.claude/skills/rules-compiler/assets/TEMPLATE.STANDARDS.md)
 
 | Field | Value |
 |-------|-------|
 | **Purpose** | Code standards, naming, quality |
-| **Referenced by** | ✅ `terraform-instructions-compiler.prompt.md` (L54) |
-| **When to use** | Create a coding standards instruction |
+| **Referenced by** | ✅ `terraform-instructions-compiler/SKILL.md` (Phase 1, via `../rules-compiler/assets/`) |
+| **When to use** | Create a coding standards instruction/rule |
 
 ### TEMPLATE.SKILLS.instructions.md
-> **File**: `.github/templates/instructions/TEMPLATE.SKILLS.instructions.md`
+> **File**: `.github/templates/instructions/TEMPLATE.SKILLS.instructions.md` · **Claude Code equivalent**: [`rules-compiler/assets/TEMPLATE.SKILLS.md`](../../.claude/skills/rules-compiler/assets/TEMPLATE.SKILLS.md)
 
 | Field | Value |
 |-------|-------|
 | **Purpose** | Skills routing (which skills to load per keyword) |
-| **Referenced by** | ✅ `terraform-instructions-compiler.prompt.md` (L56) |
-| **When to use** | Create an instruction that maps keywords → skills |
+| **Referenced by** | ✅ `terraform-instructions-compiler/SKILL.md` (Phase 1, via `../rules-compiler/assets/`) |
+| **When to use** | Create an instruction/rule that maps keywords → skills |
 
 ---
 
 ## Report Template
 
 ### POST_MORTEM_TEMPLATE.md
-> **File**: `.github/templates/reports/POST_MORTEM_TEMPLATE.md`
+> **File**: `.github/templates/reports/POST_MORTEM_TEMPLATE.md` · **Claude Code side**: moved to
+> [`docs/templates/POST_MORTEM_TEMPLATE.md`](../templates/POST_MORTEM_TEMPLATE.md) — it is a human
+> procedure, not a Claude Code artifact (no skill reads it), so it lives in `docs/` rather than in
+> any skill's `assets/`.
 
 | Field | Value |
 |-------|-------|
 | **Purpose** | Post-incident analysis |
-| **Referenced by** | ❌ None (orphan) |
+| **Referenced by** | ❌ None (orphan) — unchanged by the move |
 | **When to use** | Document incident post-mortems |
 
 ---
 
 ## Platform Research Shared Assets (Claude Code-exclusive)
 
-> **Location**: `.claude/templates/platform-research/` — no `.github/` mirror. Reused by all 15
-> commands of the [platform-software family](../manual/platform-software-family.md).
+> **Location**: [`researching-platform-software/blueprints/shared/`](../../.claude/skills/researching-platform-software/blueprints/shared/)
+> — moved here from `.claude/templates/platform-research/`; the router skill is the correct owner
+> since it already inventories these assets. No `.github/` mirror. Reused by all 15 commands of
+> the [platform-software family](../manual/platform-software-family.md).
 
 | File | Purpose | Referenced by |
 |------|---------|---------------|
@@ -241,8 +290,11 @@ graph TD
 
 ## Identified Discrepancies
 
-| Issue | Description | Suggested Action |
+| Issue | Description | Status |
 |-------|-----------|---------------|
-| Ghost README | `templates/README.md` mentions `TEMPLATE.COMPILER.prompt.md` — file does not exist | Verify if it was renamed to `TEMPLATE.GENERATOR.prompt.md` |
-| Ghost README | `templates/README.md` mentions `TEMPLATE.SCAFFOLDING.prompt.md` — file does not exist | Verify if it was renamed or removed |
-| Orphan | `POST_MORTEM_TEMPLATE.md` with no references | Consider integrating into a flow or removing |
+| Orphan | `POST_MORTEM_TEMPLATE.md` with no references | Still open — moved to `docs/templates/`, no flow adopted it |
+| ~~Orphan~~ | ~~`TEMPLATE.KNOWLEDGE-SKILL.md` and `TEMPLATE.EVALUATION-SCENARIOS.md` not referenced explicitly by any prompt~~ | **Resolved** — `skill-creator/SKILL.md` now links both explicitly (Step 2 decision table, Step 3 scenario generation) |
+| Fixed | `skill-creator/SKILL.md:32` asked for "at least 3" evaluation scenarios while `TEMPLATE.EVALUATION-SCENARIOS.md` requires 4 | **Resolved** — the skill now cites the 4-type contract directly |
+| Fixed | `.claude/templates/` existed as a parallel, un-owned directory with no APM equivalent | **Resolved** — dissolved; every file relocated into the `assets/` of the skill that owns it (this page reflects the new locations throughout) |
+
+> Resolved: `templates/README.md` previously referenced `TEMPLATE.COMPILER.prompt.md` / `TEMPLATE.SCAFFOLDING.prompt.md` — both ghost entries have since been corrected in the source file (`TEMPLATE.GENERATOR.prompt.md`, "formerly COMPILER"; scaffolding marked *not implemented*). That `.claude/` source file has since been deleted entirely (see banner at the top of this page); this note is retained as history.

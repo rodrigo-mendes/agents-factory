@@ -28,7 +28,7 @@ graph TD
     end
 
     subgraph "Orchestration Layer"
-        AG[Agents<br/>7 subagents: 5 routers + 2 research helpers]
+        AG[Agents<br/>20 subagents: 5 routers + 2 research helpers + 13 book-writing]
     end
 
     subgraph "Knowledge Layer"
@@ -104,7 +104,7 @@ mindmap
       requirements-methodology-researcher
       terraform-engineering-best-practices-researcher
     "Platform Software - 15 total"
-      "researching-platform-software (orchestrator)"
+      "researching-platform-software - orchestrator"
       "brokers / cache / coordination / search / api-gateway"
       "rdbms / document / kv / wide-column / graph"
       "timeseries / columnar / vector / object-storage"

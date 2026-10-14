@@ -1,8 +1,8 @@
 # Skills — Framework Base Capabilities
 
-The Agents Factory has **40 commands** (all invoked via `/name` with `disable-model-invocation: true`), **built on 2 foundation skills**: `skill-creator` (authoring patterns) and `researching-technical-frameworks` (research methodology). These 2 foundation skills define the patterns all other skills follow. In Copilot, `authoring-agent-skills` is the skill equivalent to `skill-creator`.
+The Agents Factory has **52 skills** — 51 action commands (invoked via `/name` with `disable-model-invocation: true`) and 1 knowledge skill (`rules-compiler`, auto-invocable) — **built on 2 foundation skills**: `skill-creator` (authoring patterns) and `researching-technical-frameworks` (research methodology). These 2 foundation skills define the patterns all other skills follow. In Copilot, `authoring-agent-skills` is the skill equivalent to `skill-creator`.
 
-> The 40 commands include the **platform-software family** (15: 1 orchestrator + 14 siblings) — all following the same research methodology below. See [Platform Software Research Family](../manual/platform-software-family.md).
+> The 52 skills include the **platform-software family** (15: 1 orchestrator + 14 siblings) — all following the same research methodology below. See [Platform Software Research Family](../manual/platform-software-family.md).
 
 ---
 
@@ -38,7 +38,7 @@ In Claude Code, `skill-creator` absorbed the authoring patterns (`authoring-agen
 - `skill-best-practices-validator` — Uses as validation baseline
 - `architecture-approaches-skill-generator` — Follows the pattern
 - `methodologies-skill-generator` — Follows the pattern
-- `skill-author` (subagent) — Loads at P0 before generating any SKILL.md
+- `artifact-author` (subagent) — Loads at P0 before generating any SKILL.md
 
 ---
 

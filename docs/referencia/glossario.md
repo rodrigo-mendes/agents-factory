@@ -41,7 +41,7 @@ Terms of the Agents Factory framework.
 | **Skill** | Artifact `SKILL.md` with versioned knowledge base and three-tier patterns (✅⚠️🚫). |
 | **Source Hierarchy** | Hierarchy of accepted sources: official/registry > official blog > official examples > community <12 months > reject the rest. |
 | **Subagente** | Agent defined in `.claude/agents/` that receives a fork from a skill command via `context: fork`. Runs in an isolated context. |
-| **Template** | File `TEMPLATE.*.md` in `.claude/templates/` or `.github/templates/` — template for creating new artifacts. |
+| **Template** | File `TEMPLATE.*.md` — template for creating new artifacts. Claude Code: lives in the `assets/` of the skill that owns it (`skill-creator/assets/`, `agent-creator/assets/`, `rules-compiler/assets/`); there is no `.claude/templates/`. Copilot: `.github/templates/`. |
 | **Three-Tier** | Guardrail architecture in 3 layers: ✅ Always Do, ⚠️ Ask First, 🚫 Never Do. Mandatory in every SKILL.md. |
 | **Validator** | Skill that verifies artifact quality against defined standards. Never modifies files by default. |
 | **Version Absolutism** | Principle: one skill = one specific version. Old versions = misinformation. Separate research files per version. |

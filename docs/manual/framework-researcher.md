@@ -392,7 +392,7 @@ also invoke a sibling directly (`/researching-streaming-broker Kafka 3.7`).
 **Output:** `StoryBeat/docs/research_platform_<Platform>_v<Version>.md`.
 
 > Full detail — routing rules, ambiguity handling (Redis → cache/kv/coordination), shared templates
-> (`.claude/templates/platform-research/`), and the neutral `category-specifics.md` +
+> (`researching-platform-software/blueprints/shared/`), and the neutral `category-specifics.md` +
 > per-vendor `references/<vendor>-<version>.md` pattern: see
 > **[Platform Software Research Family](platform-software-family.md)**.
 
