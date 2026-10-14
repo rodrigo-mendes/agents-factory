@@ -1,6 +1,84 @@
 lockfile_version: '1'
 apm_version: 0.33.0
 dependencies:
+- repo_url: _local/agent-package-builder
+  name: agents-factory-agent-package-builder
+  version: 1.0.0
+  package_type: apm_package
+  deployed_files:
+  - .claude/skills/building-agent-packages
+  - .claude/skills/building-agent-packages/SKILL.md
+  - .claude/skills/building-agent-packages/assets/FAMILY_FACTS.template.md
+  - .claude/skills/building-agent-packages/assets/FAMILY_RULES.template.md
+  - .claude/skills/building-agent-packages/assets/PACKAGE_BRIEF.template.md
+  - .claude/skills/building-agent-packages/assets/PIPELINE_STATE.template.md
+  - .claude/skills/building-agent-packages/blueprints/evaluation-scenarios.md
+  - .claude/skills/building-agent-packages/blueprints/known-failures.md
+  - .claude/skills/building-agent-packages/blueprints/modes.md
+  - .claude/skills/building-agent-packages/blueprints/phases/p0-intake.md
+  - .claude/skills/building-agent-packages/blueprints/phases/p1-version-gate.md
+  - .claude/skills/building-agent-packages/blueprints/phases/p2-inventory-design.md
+  - .claude/skills/building-agent-packages/blueprints/phases/p3-pilot.md
+  - .claude/skills/building-agent-packages/blueprints/phases/p4-fanout.md
+  - .claude/skills/building-agent-packages/blueprints/phases/p5-package-assembly.md
+  - .claude/skills/building-agent-packages/blueprints/phases/p6-quality-loop.md
+  - .claude/skills/building-agent-packages/blueprints/phases/p7-fact-sweep.md
+  - .claude/skills/building-agent-packages/blueprints/phases/p8-mechanical-close.md
+  - .claude/skills/building-agent-packages/blueprints/phases/p9-commit.md
+  - .claude/skills/building-agent-packages/blueprints/policy/evidence-rule.md
+  - .claude/skills/building-agent-packages/blueprints/policy/hybrid-format-checklist.md
+  - .claude/skills/building-agent-packages/blueprints/policy/tag-notation-and-registers.md
+  - .claude/skills/building-agent-packages/blueprints/policy/triage-and-stop-rules.md
+  - .claude/skills/building-agent-packages/blueprints/worker-briefs/README.md
+  - .claude/skills/building-agent-packages/blueprints/worker-briefs/fix-cycle.md
+  - .claude/skills/building-agent-packages/blueprints/worker-briefs/package-author.md
+  - .claude/skills/building-agent-packages/blueprints/worker-briefs/researcher.md
+  - .claude/skills/building-agent-packages/blueprints/worker-briefs/skill-author-hybrid.md
+  - .claude/skills/building-agent-packages/blueprints/worker-briefs/validator.md
+  - .claude/skills/building-agent-packages/scripts/check_counts.sh
+  - .claude/skills/building-agent-packages/scripts/commit_groups.py
+  - .claude/skills/building-agent-packages/scripts/inspect_workspace.py
+  - .claude/skills/building-agent-packages/scripts/normalize_tags.py
+  - .claude/skills/building-agent-packages/scripts/verify_package.py
+  - .claude/skills/building-agent-packages/scripts/verify_skill.py
+  deployed_file_hashes:
+    .claude/skills/building-agent-packages/SKILL.md: sha256:7d804408de06808aa3b49d62c0a918c2f4f38a659a38d08a1855b2e3d94d944d
+    .claude/skills/building-agent-packages/assets/FAMILY_FACTS.template.md: sha256:3344ba313640b7dce289749eed777846727e9c8fbc13910d77dbc0ecb429c58f
+    .claude/skills/building-agent-packages/assets/FAMILY_RULES.template.md: sha256:c4d2e0022a8adc906120da2c40445b8dc5adfd2173b765364de3e394b68e7ae1
+    .claude/skills/building-agent-packages/assets/PACKAGE_BRIEF.template.md: sha256:e9473755c6d9a9b78d16b9198a4f84499e966ff30ab7d72a032726f56acb98b6
+    .claude/skills/building-agent-packages/assets/PIPELINE_STATE.template.md: sha256:1cfdbbb5431e815fdddc2a6a53cd61fbb0abfc70b7fc0c317e26157035099f3d
+    .claude/skills/building-agent-packages/blueprints/evaluation-scenarios.md: sha256:ce597068036ecd50ceb67289737657a1c6886290449942881043a6fe8137ba29
+    .claude/skills/building-agent-packages/blueprints/known-failures.md: sha256:ec50616cd4049780204812e12f4357c45cf50429df3514e62015156663434610
+    .claude/skills/building-agent-packages/blueprints/modes.md: sha256:89c6caa466a6ce2e1209db50afcc301e14eb498498487987ae289d696c684c30
+    .claude/skills/building-agent-packages/blueprints/phases/p0-intake.md: sha256:e0dc0ba759253b21344483b7fbfa674a669af3facc6beba55af3d01f57d58b36
+    .claude/skills/building-agent-packages/blueprints/phases/p1-version-gate.md: sha256:ba28243a48bf4d8fdabe9c2278bdc13cd2dc00e0d74e7145b9dd0a55b6b6569e
+    .claude/skills/building-agent-packages/blueprints/phases/p2-inventory-design.md: sha256:123bb1399d183d3dd6035d68cbb2fa0d7a2c9006af052277b553413d9350427f
+    .claude/skills/building-agent-packages/blueprints/phases/p3-pilot.md: sha256:dbb118ac4f1ab4ecf1affd3986207bf75207aecd6dd84efd6cb3b24e75ffc1b2
+    .claude/skills/building-agent-packages/blueprints/phases/p4-fanout.md: sha256:d6cf450cebaef6e3be7064eb3d6fcf10461c10f6becdc52639f5bf2017d3587b
+    .claude/skills/building-agent-packages/blueprints/phases/p5-package-assembly.md: sha256:673736034dc6b69b70f618f5e06456f8121d91adcafb518f77a01a3f4a3d9ed1
+    .claude/skills/building-agent-packages/blueprints/phases/p6-quality-loop.md: sha256:1b29e94d35777104a06b400faff7e15ec548088440af47821ce21af1ab36819c
+    .claude/skills/building-agent-packages/blueprints/phases/p7-fact-sweep.md: sha256:707d1458330adff549491093f6c99e6b15fb964c5e635b9b65c41240c68d84f4
+    .claude/skills/building-agent-packages/blueprints/phases/p8-mechanical-close.md: sha256:a3a4962eae07a6e4ca7972a923659466e55e83f9b3af20280cd82489148a8808
+    .claude/skills/building-agent-packages/blueprints/phases/p9-commit.md: sha256:faf956ef2bb4b34d2e60882ce0e4368545f1435c278f0f0797e6243f57fa6cbe
+    .claude/skills/building-agent-packages/blueprints/policy/evidence-rule.md: sha256:7d6e3d9a1932ec9fd39253518dd4a41a3d9be82589a418cf013d6f99455ca07d
+    .claude/skills/building-agent-packages/blueprints/policy/hybrid-format-checklist.md: sha256:94ad98f27eac4c6165eeab284476686a3ee5fdc5ec3c0e94f257d1a1391158ac
+    .claude/skills/building-agent-packages/blueprints/policy/tag-notation-and-registers.md: sha256:cdae0c01e4f0f227d7fc463da6154abcf6395a57146a28daf9648bba2301c53e
+    .claude/skills/building-agent-packages/blueprints/policy/triage-and-stop-rules.md: sha256:8854295b29b7aecee03251156f33e363a27ff9bee3c7933be29f3afcab75af34
+    .claude/skills/building-agent-packages/blueprints/worker-briefs/README.md: sha256:dde051c997ce08d825f0a542a61214dc84f0aed0c8d04b3ac256355475be2d3d
+    .claude/skills/building-agent-packages/blueprints/worker-briefs/fix-cycle.md: sha256:b3e7777f357e8a9321933b19ffc23e1b487c4343c52fe8b1b2fd3e51950d04c1
+    .claude/skills/building-agent-packages/blueprints/worker-briefs/package-author.md: sha256:e24d5209967eaf8934609e0cf483cd41b9d55b5426f13f011898b6676d844c47
+    .claude/skills/building-agent-packages/blueprints/worker-briefs/researcher.md: sha256:cf9181da4e3ece5bc1005d04cf53f60e5e2afa0e8d68bcbe1d6b2ee547e1540d
+    .claude/skills/building-agent-packages/blueprints/worker-briefs/skill-author-hybrid.md: sha256:38227ded06618d81a752eb4af7893a28cb0b1a87399b47610e0c727096df6f8f
+    .claude/skills/building-agent-packages/blueprints/worker-briefs/validator.md: sha256:d6988309ec47e8ce405312b8dc4aea5ef587fdfe697e3ce640be45c8af03a12e
+    .claude/skills/building-agent-packages/scripts/check_counts.sh: sha256:85aed6482d05b1fdaf1fa0c3ec774cb256358c4473a03612db4ccc2c431f98b5
+    .claude/skills/building-agent-packages/scripts/commit_groups.py: sha256:f814b5ee62f471630773ad27d9ff94553b14d250797a9f3dd7c3e5ea2ed0e271
+    .claude/skills/building-agent-packages/scripts/inspect_workspace.py: sha256:141dac996cbfc16cdb570a8481847158fb69e34b5ed1abd7f335f6488e8f6ae9
+    .claude/skills/building-agent-packages/scripts/normalize_tags.py: sha256:52afbe4e693be8f340c95726184a0ddf808dba50ce166671dab51cf3d8023a1f
+    .claude/skills/building-agent-packages/scripts/verify_package.py: sha256:084b1286eb9201a77d7043ad3b9a42ee286ae7c90c6441adae27761695e5ec24
+    .claude/skills/building-agent-packages/scripts/verify_skill.py: sha256:b3a5bfb530217c4ecde541c11396c588240c1b1a1a7874debb0d88e21c2c0021
+  source: local
+  local_path: ./packages/agent-package-builder
+  declared_license: MIT
 - repo_url: _local/artifact-authoring
   name: agents-factory-artifact-authoring
   version: 1.0.0
@@ -2718,6 +2796,321 @@ deployments:
   - microsoft/apm/packages/autopilot/autopilot-pr-triage-worker
   active_owner: microsoft/apm/packages/autopilot/autopilot-pr-triage-worker
   content_hash: sha256:d5155b45b2fa10badd82945582a9e3968cfaece5ca29678f3091f78e9dffae70
+- kind: project-relative
+  target: claude
+  value: .claude/skills/building-agent-packages
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/agent-package-builder
+  active_owner: ./packages/agent-package-builder
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/building-agent-packages/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/agent-package-builder
+  active_owner: ./packages/agent-package-builder
+  content_hash: sha256:7d804408de06808aa3b49d62c0a918c2f4f38a659a38d08a1855b2e3d94d944d
+- kind: project-relative
+  target: claude
+  value: .claude/skills/building-agent-packages/assets/FAMILY_FACTS.template.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/agent-package-builder
+  active_owner: ./packages/agent-package-builder
+  content_hash: sha256:3344ba313640b7dce289749eed777846727e9c8fbc13910d77dbc0ecb429c58f
+- kind: project-relative
+  target: claude
+  value: .claude/skills/building-agent-packages/assets/FAMILY_RULES.template.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/agent-package-builder
+  active_owner: ./packages/agent-package-builder
+  content_hash: sha256:c4d2e0022a8adc906120da2c40445b8dc5adfd2173b765364de3e394b68e7ae1
+- kind: project-relative
+  target: claude
+  value: .claude/skills/building-agent-packages/assets/PACKAGE_BRIEF.template.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/agent-package-builder
+  active_owner: ./packages/agent-package-builder
+  content_hash: sha256:e9473755c6d9a9b78d16b9198a4f84499e966ff30ab7d72a032726f56acb98b6
+- kind: project-relative
+  target: claude
+  value: .claude/skills/building-agent-packages/assets/PIPELINE_STATE.template.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/agent-package-builder
+  active_owner: ./packages/agent-package-builder
+  content_hash: sha256:1cfdbbb5431e815fdddc2a6a53cd61fbb0abfc70b7fc0c317e26157035099f3d
+- kind: project-relative
+  target: claude
+  value: .claude/skills/building-agent-packages/blueprints/evaluation-scenarios.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/agent-package-builder
+  active_owner: ./packages/agent-package-builder
+  content_hash: sha256:ce597068036ecd50ceb67289737657a1c6886290449942881043a6fe8137ba29
+- kind: project-relative
+  target: claude
+  value: .claude/skills/building-agent-packages/blueprints/known-failures.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/agent-package-builder
+  active_owner: ./packages/agent-package-builder
+  content_hash: sha256:ec50616cd4049780204812e12f4357c45cf50429df3514e62015156663434610
+- kind: project-relative
+  target: claude
+  value: .claude/skills/building-agent-packages/blueprints/modes.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/agent-package-builder
+  active_owner: ./packages/agent-package-builder
+  content_hash: sha256:89c6caa466a6ce2e1209db50afcc301e14eb498498487987ae289d696c684c30
+- kind: project-relative
+  target: claude
+  value: .claude/skills/building-agent-packages/blueprints/phases/p0-intake.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/agent-package-builder
+  active_owner: ./packages/agent-package-builder
+  content_hash: sha256:e0dc0ba759253b21344483b7fbfa674a669af3facc6beba55af3d01f57d58b36
+- kind: project-relative
+  target: claude
+  value: .claude/skills/building-agent-packages/blueprints/phases/p1-version-gate.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/agent-package-builder
+  active_owner: ./packages/agent-package-builder
+  content_hash: sha256:ba28243a48bf4d8fdabe9c2278bdc13cd2dc00e0d74e7145b9dd0a55b6b6569e
+- kind: project-relative
+  target: claude
+  value: .claude/skills/building-agent-packages/blueprints/phases/p2-inventory-design.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/agent-package-builder
+  active_owner: ./packages/agent-package-builder
+  content_hash: sha256:123bb1399d183d3dd6035d68cbb2fa0d7a2c9006af052277b553413d9350427f
+- kind: project-relative
+  target: claude
+  value: .claude/skills/building-agent-packages/blueprints/phases/p3-pilot.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/agent-package-builder
+  active_owner: ./packages/agent-package-builder
+  content_hash: sha256:dbb118ac4f1ab4ecf1affd3986207bf75207aecd6dd84efd6cb3b24e75ffc1b2
+- kind: project-relative
+  target: claude
+  value: .claude/skills/building-agent-packages/blueprints/phases/p4-fanout.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/agent-package-builder
+  active_owner: ./packages/agent-package-builder
+  content_hash: sha256:d6cf450cebaef6e3be7064eb3d6fcf10461c10f6becdc52639f5bf2017d3587b
+- kind: project-relative
+  target: claude
+  value: .claude/skills/building-agent-packages/blueprints/phases/p5-package-assembly.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/agent-package-builder
+  active_owner: ./packages/agent-package-builder
+  content_hash: sha256:673736034dc6b69b70f618f5e06456f8121d91adcafb518f77a01a3f4a3d9ed1
+- kind: project-relative
+  target: claude
+  value: .claude/skills/building-agent-packages/blueprints/phases/p6-quality-loop.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/agent-package-builder
+  active_owner: ./packages/agent-package-builder
+  content_hash: sha256:1b29e94d35777104a06b400faff7e15ec548088440af47821ce21af1ab36819c
+- kind: project-relative
+  target: claude
+  value: .claude/skills/building-agent-packages/blueprints/phases/p7-fact-sweep.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/agent-package-builder
+  active_owner: ./packages/agent-package-builder
+  content_hash: sha256:707d1458330adff549491093f6c99e6b15fb964c5e635b9b65c41240c68d84f4
+- kind: project-relative
+  target: claude
+  value: .claude/skills/building-agent-packages/blueprints/phases/p8-mechanical-close.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/agent-package-builder
+  active_owner: ./packages/agent-package-builder
+  content_hash: sha256:a3a4962eae07a6e4ca7972a923659466e55e83f9b3af20280cd82489148a8808
+- kind: project-relative
+  target: claude
+  value: .claude/skills/building-agent-packages/blueprints/phases/p9-commit.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/agent-package-builder
+  active_owner: ./packages/agent-package-builder
+  content_hash: sha256:faf956ef2bb4b34d2e60882ce0e4368545f1435c278f0f0797e6243f57fa6cbe
+- kind: project-relative
+  target: claude
+  value: .claude/skills/building-agent-packages/blueprints/policy/evidence-rule.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/agent-package-builder
+  active_owner: ./packages/agent-package-builder
+  content_hash: sha256:7d6e3d9a1932ec9fd39253518dd4a41a3d9be82589a418cf013d6f99455ca07d
+- kind: project-relative
+  target: claude
+  value: .claude/skills/building-agent-packages/blueprints/policy/hybrid-format-checklist.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/agent-package-builder
+  active_owner: ./packages/agent-package-builder
+  content_hash: sha256:94ad98f27eac4c6165eeab284476686a3ee5fdc5ec3c0e94f257d1a1391158ac
+- kind: project-relative
+  target: claude
+  value: .claude/skills/building-agent-packages/blueprints/policy/tag-notation-and-registers.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/agent-package-builder
+  active_owner: ./packages/agent-package-builder
+  content_hash: sha256:cdae0c01e4f0f227d7fc463da6154abcf6395a57146a28daf9648bba2301c53e
+- kind: project-relative
+  target: claude
+  value: .claude/skills/building-agent-packages/blueprints/policy/triage-and-stop-rules.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/agent-package-builder
+  active_owner: ./packages/agent-package-builder
+  content_hash: sha256:8854295b29b7aecee03251156f33e363a27ff9bee3c7933be29f3afcab75af34
+- kind: project-relative
+  target: claude
+  value: .claude/skills/building-agent-packages/blueprints/worker-briefs/README.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/agent-package-builder
+  active_owner: ./packages/agent-package-builder
+  content_hash: sha256:dde051c997ce08d825f0a542a61214dc84f0aed0c8d04b3ac256355475be2d3d
+- kind: project-relative
+  target: claude
+  value: .claude/skills/building-agent-packages/blueprints/worker-briefs/fix-cycle.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/agent-package-builder
+  active_owner: ./packages/agent-package-builder
+  content_hash: sha256:b3e7777f357e8a9321933b19ffc23e1b487c4343c52fe8b1b2fd3e51950d04c1
+- kind: project-relative
+  target: claude
+  value: .claude/skills/building-agent-packages/blueprints/worker-briefs/package-author.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/agent-package-builder
+  active_owner: ./packages/agent-package-builder
+  content_hash: sha256:e24d5209967eaf8934609e0cf483cd41b9d55b5426f13f011898b6676d844c47
+- kind: project-relative
+  target: claude
+  value: .claude/skills/building-agent-packages/blueprints/worker-briefs/researcher.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/agent-package-builder
+  active_owner: ./packages/agent-package-builder
+  content_hash: sha256:cf9181da4e3ece5bc1005d04cf53f60e5e2afa0e8d68bcbe1d6b2ee547e1540d
+- kind: project-relative
+  target: claude
+  value: .claude/skills/building-agent-packages/blueprints/worker-briefs/skill-author-hybrid.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/agent-package-builder
+  active_owner: ./packages/agent-package-builder
+  content_hash: sha256:38227ded06618d81a752eb4af7893a28cb0b1a87399b47610e0c727096df6f8f
+- kind: project-relative
+  target: claude
+  value: .claude/skills/building-agent-packages/blueprints/worker-briefs/validator.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/agent-package-builder
+  active_owner: ./packages/agent-package-builder
+  content_hash: sha256:d6988309ec47e8ce405312b8dc4aea5ef587fdfe697e3ce640be45c8af03a12e
+- kind: project-relative
+  target: claude
+  value: .claude/skills/building-agent-packages/scripts/check_counts.sh
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/agent-package-builder
+  active_owner: ./packages/agent-package-builder
+  content_hash: sha256:85aed6482d05b1fdaf1fa0c3ec774cb256358c4473a03612db4ccc2c431f98b5
+- kind: project-relative
+  target: claude
+  value: .claude/skills/building-agent-packages/scripts/commit_groups.py
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/agent-package-builder
+  active_owner: ./packages/agent-package-builder
+  content_hash: sha256:f814b5ee62f471630773ad27d9ff94553b14d250797a9f3dd7c3e5ea2ed0e271
+- kind: project-relative
+  target: claude
+  value: .claude/skills/building-agent-packages/scripts/inspect_workspace.py
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/agent-package-builder
+  active_owner: ./packages/agent-package-builder
+  content_hash: sha256:141dac996cbfc16cdb570a8481847158fb69e34b5ed1abd7f335f6488e8f6ae9
+- kind: project-relative
+  target: claude
+  value: .claude/skills/building-agent-packages/scripts/normalize_tags.py
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/agent-package-builder
+  active_owner: ./packages/agent-package-builder
+  content_hash: sha256:52afbe4e693be8f340c95726184a0ddf808dba50ce166671dab51cf3d8023a1f
+- kind: project-relative
+  target: claude
+  value: .claude/skills/building-agent-packages/scripts/verify_package.py
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/agent-package-builder
+  active_owner: ./packages/agent-package-builder
+  content_hash: sha256:084b1286eb9201a77d7043ad3b9a42ee286ae7c90c6441adae27761695e5ec24
+- kind: project-relative
+  target: claude
+  value: .claude/skills/building-agent-packages/scripts/verify_skill.py
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/agent-package-builder
+  active_owner: ./packages/agent-package-builder
+  content_hash: sha256:b3a5bfb530217c4ecde541c11396c588240c1b1a1a7874debb0d88e21c2c0021
 - kind: project-relative
   target: claude
   value: .claude/skills/business-domain-researcher

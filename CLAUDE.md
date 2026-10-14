@@ -109,7 +109,7 @@ listed in every session of a project that installs them, so keep them short and 
 │                 architecture-auditor, quality-validator, skill-evaluator) +
 │                 2 internal helpers (research-synthesizer, section-investigator) +
 │                 13 book-writing agents + camel-quarkus-integrator
-├── skills/     ← 78 skills: 51 fork → subagent commands + 27 knowledge/auto-invoke; includes the
+├── skills/     ← 79 skills: 51 fork → subagent commands + 28 knowledge/auto-invoke; includes the
 │                 platform-software family (1 orchestrator + 14 siblings), 11 from microsoft/apm,
 │                 15 Camel Quarkus, and each skill's own assets/ (former .claude/templates/
 │                 content) + blueprints/
@@ -118,7 +118,7 @@ listed in every session of a project that installs them, so keep them short and 
 ├── settings.json         ← hand-authored, not generated (APM only merges `hooks:`, unused here)
 └── settings.local.json   ← hand-authored, gitignored
 
-packages/           ← the actual source of truth — 12 APM packages, each with its own apm.yml
+packages/           ← the actual source of truth — 13 APM packages, each with its own apm.yml
 ├── factory-core/                 ← 5 rules (frontmatter + naming schemas), no skills/agents
 ├── research-core/                ← framework-researcher + its 2 internal helpers, no skills
 ├── researching-frameworks/       ← 5 generic research skills
@@ -130,6 +130,8 @@ packages/           ← the actual source of truth — 12 APM packages, each wit
 ├── book-writing/                 ← 13 agents + 10 commands for the technical-book pipeline
 ├── camel-quarkus-skills/         ← 13 version-locked knowledge skills (Camel Quarkus 3.40 LTS)
 ├── camel-quarkus-integrator/     ← orchestrator + structure skills, 1 subagent, 3 rules
+├── agent-package-builder/        ← building-agent-packages: inline orchestrator of the whole
+│                                   research → skills → agent/rules → quality loop → commit chain
 └── evaluating/                   ← skill-evaluator + 1 skill (runtime dep on every package)
 
 apm.yml             ← root manifest: aggregates the packages (factory-core, research-core and

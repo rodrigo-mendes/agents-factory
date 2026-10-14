@@ -11,7 +11,7 @@ pré-migração foi retirado (ver `.claude/MIGRATION.md`); `audit-architecture-*
 
 O Agents Factory é uma fábrica de artefatos de IA que oferece:
 
-- **78 Skills** (Claude Code) — 51 comandos (`/nome`) e 27 skills de conhecimento (auto-invocáveis). Pesquisa, autoria de skills/agentes/rules, compilação, validação e auditoria — inclui a **família platform-software** (15: orquestradora + 14 irmãs para Kafka, Redis, MongoDB, Postgres…), o **pipeline de livros técnicos** (pacote `book-writing`: 10 comandos + 13 agentes, saída em `Books/`) e os pacotes **Camel Quarkus** (`camel-quarkus-skills`: 13 skills versionadas para Camel Quarkus 3.40 LTS; `camel-quarkus-integrator`: orquestradora `integrating-camel-quarkus`, skill de estrutura, subagente e 3 rules — veja [packages/camel-quarkus-integrator/README.md](packages/camel-quarkus-integrator/README.md))
+- **79 Skills** (Claude Code) — 51 comandos (`/nome`) e 28 skills de conhecimento (auto-invocáveis). Pesquisa, autoria de skills/agentes/rules, compilação, validação e auditoria — inclui a **família platform-software** (15: orquestradora + 14 irmãs para Kafka, Redis, MongoDB, Postgres…), o **pipeline de livros técnicos** (pacote `book-writing`: 10 comandos + 13 agentes, saída em `Books/`) e os pacotes **Camel Quarkus** (`camel-quarkus-skills`: 13 skills versionadas para Camel Quarkus 3.40 LTS; `camel-quarkus-integrator`: orquestradora `integrating-camel-quarkus`, skill de estrutura, subagente e 3 rules — veja [packages/camel-quarkus-integrator/README.md](packages/camel-quarkus-integrator/README.md)) e o **orquestrador de pacotes** `building-agent-packages` (pacote `agent-package-builder`: brief/pesquisas/retomada → skills + agente + rules, com loop de qualidade e 4 portões humanos — veja [packages/agent-package-builder/README.md](packages/agent-package-builder/README.md))
 - **Ficheiros de `assets/`** nas skills que os possuem (`skill-creator`, `agent-creator`, `rules-compiler`, `terraform-instructions-compiler`, `structuring-camel-quarkus-projects` e as skills vindas do `microsoft/apm`) — não existe mais `.claude/templates/`
 - **4 Fluxos Combinados** — Pipelines de ponta-a-ponta
 
@@ -39,7 +39,7 @@ O Agents Factory é uma fábrica de artefatos de IA que oferece:
 ```
 .claude/                    ← Claude Code (única fonte de verdade — não há .github/)
 ├── agents/                 ← 21 subagentes: 5 roteadores (framework-researcher, artifact-author, architecture-auditor, quality-validator, skill-evaluator) + 2 helpers de pesquisa (research-synthesizer, section-investigator) + 13 do pipeline de livros (book-writing) + camel-quarkus-integrator
-├── skills/                 ← 78 skills; incl. a família platform-software (15), 15 skills Camel Quarkus e as skills com assets/ próprio
+├── skills/                 ← 79 skills; incl. a família platform-software (15), 15 skills Camel Quarkus e as skills com assets/ próprio
 │                              (skill-creator, agent-creator, rules-compiler, terraform-instructions-compiler, structuring-camel-quarkus-projects, …)
 ├── rules/                  ← 8 rules: 5 da fábrica (agent/rules/skill-frontmatter, naming-conventions, skill-structure) + 3 do Camel Quarkus
 └── settings.json

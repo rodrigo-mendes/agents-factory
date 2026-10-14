@@ -12,6 +12,9 @@ flowchart TD
     START --> Q2[Build knowledge base]
     START --> Q3[Validate quality]
     START --> Q4[Implement with existing agent]
+    START --> Q5[Whole package from brief to commits]
+    Q5 --> F5[Complete Agent Package Flow]
+    click F5 "fluxo-pacote-agente-completo.md"
 
     Q1 --> F1[Project Creation Flow]
     Q2 --> F2[Knowledge Base Flow]
@@ -26,7 +29,7 @@ flowchart TD
 
 ---
 
-## The 4 Flows
+## The 5 Flows
 
 ### 1. [Project Creation Flow](fluxo-criacao-projeto.md)
 
@@ -80,6 +83,19 @@ graph LR
 
 ---
 
+### 5. [Complete Agent Package Flow](fluxo-pacote-agente-completo.md)
+
+**Objective**: Orchestrate research → skills → agent/rules → quality loop → commits with 4 human gates.
+
+```mermaid
+graph LR
+    A[brief / research_dir / resume] --> B[building-agent-packages] --> C[workers: research, author, validate, test, audit] --> D[✅ Committed package]
+```
+
+**Capabilities involved**: the orchestrator + all existing workers (driven unchanged)
+
+---
+
 ## When to Use Which Flow
 
 | Situation | Flow |
@@ -88,7 +104,8 @@ graph LR
 | Learning a new technology | Knowledge Base |
 | Periodic quality review | Quality |
 | Agent project already exists, want to use it | Implementation |
-| Everything from scratch (new technology + agent) | Knowledge Base → Project Creation |
+| Everything from scratch (new technology + agent) | Knowledge Base → Project Creation, or the single orchestrated Complete Agent Package flow |
+| Research + skills + agent + rules + validation + commits, in one guided run (or resume one) | Complete Agent Package |
 
 ---
 
