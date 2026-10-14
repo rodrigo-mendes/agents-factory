@@ -1,0 +1,16 @@
+schema_version: 20180708
+name: func-evt-consumer-audit
+version: 0.0.1
+runtime: java
+build_image: fnproject/fn-java-fdk-build:jdk17-latest
+run_image: fnproject/fn-java-fdk:jre17-latest
+cmd: com.brx.functions.event.consumer.audit.AuditConsumerFunction::handler
+memory: 256
+timeout: 60
+config:
+  ENVIRONMENT: dev
+  SERVICE_NAME: func-evt-consumer-audit
+  METRIC_NAMESPACE: event_pubsub_analytics
+  COMPARTMENT_OCID: "" # Managed by Terraform (application config)
+  APM_DOMAIN_URL: "" # Managed by Terraform (application config)
+  APM_DATA_KEY: "" # Managed by Terraform (application config)

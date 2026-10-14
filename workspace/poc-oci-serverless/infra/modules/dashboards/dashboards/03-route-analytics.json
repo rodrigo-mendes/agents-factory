@@ -1,0 +1,829 @@
+{
+  "dashboards": [
+    {
+      "dashboardId": "ocid1.custommanagementdashboard.oc1..rest-proxy-route-analytics",
+      "displayName": "REST Proxy — Route Analytics (${environment})",
+      "description": "Métricas customizadas do func-rr-rest-proxy no namespace ${metric_namespace}: requests/erros/duração por rota, status_code e método.",
+      "compartmentId": "${compartment_ocid}",
+      "isOobDashboard": false,
+      "isShowInHome": false,
+      "providerId": "management-dashboard",
+      "providerName": "Management Dashboard",
+      "providerVersion": "3.0.0",
+      "isShowDescription": true,
+      "screenImage": "",
+      "nls": {},
+      "type": "normal",
+      "uiConfig": {
+        "isFilteringEnabled": false,
+        "isTimeRangeEnabled": true,
+        "isRefreshEnabled": true
+      },
+      "dataConfig": [],
+      "isFavorite": false,
+      "isEnabled": true,
+      "featuresConfig": {
+        "crossService": {
+          "shared": false
+        }
+      },
+      "metadataVersion": "2.0",
+      "tiles": [
+        {
+          "displayName": "Requests by Route",
+          "savedSearchId": "ocid1.custommanagementsavedsearch.oc1..route-requests-by-route",
+          "row": 0,
+          "column": 0,
+          "height": 4,
+          "width": 4,
+          "nls": {},
+          "uiConfig": {},
+          "dataConfig": [],
+          "state": "DEFAULT",
+          "drilldownConfig": [],
+          "parametersMap": {
+            "compartmentId": "$(dashboard.params.compartmentId)",
+            "time": "$(dashboard.params.time)",
+            "regionName": "$(dashboard.params.regionName)"
+          }
+        },
+        {
+          "displayName": "Errors by Status Code",
+          "savedSearchId": "ocid1.custommanagementsavedsearch.oc1..route-errors-by-status",
+          "row": 0,
+          "column": 4,
+          "height": 4,
+          "width": 4,
+          "nls": {},
+          "uiConfig": {},
+          "dataConfig": [],
+          "state": "DEFAULT",
+          "drilldownConfig": [],
+          "parametersMap": {
+            "compartmentId": "$(dashboard.params.compartmentId)",
+            "time": "$(dashboard.params.time)",
+            "regionName": "$(dashboard.params.regionName)"
+          }
+        },
+        {
+          "displayName": "Store Create vs Update",
+          "savedSearchId": "ocid1.custommanagementsavedsearch.oc1..route-create-vs-update",
+          "row": 0,
+          "column": 8,
+          "height": 4,
+          "width": 4,
+          "nls": {},
+          "uiConfig": {},
+          "dataConfig": [],
+          "state": "DEFAULT",
+          "drilldownConfig": [],
+          "parametersMap": {
+            "compartmentId": "$(dashboard.params.compartmentId)",
+            "time": "$(dashboard.params.time)",
+            "regionName": "$(dashboard.params.regionName)"
+          }
+        },
+        {
+          "displayName": "Webhook 207",
+          "savedSearchId": "ocid1.custommanagementsavedsearch.oc1..route-webhook-207",
+          "row": 4,
+          "column": 0,
+          "height": 4,
+          "width": 3,
+          "nls": {},
+          "uiConfig": {},
+          "dataConfig": [],
+          "state": "DEFAULT",
+          "drilldownConfig": [],
+          "parametersMap": {
+            "compartmentId": "$(dashboard.params.compartmentId)",
+            "time": "$(dashboard.params.time)",
+            "regionName": "$(dashboard.params.regionName)"
+          }
+        },
+        {
+          "displayName": "Duration by Route",
+          "savedSearchId": "ocid1.custommanagementsavedsearch.oc1..route-duration-by-route",
+          "row": 4,
+          "column": 3,
+          "height": 4,
+          "width": 5,
+          "nls": {},
+          "uiConfig": {},
+          "dataConfig": [],
+          "state": "DEFAULT",
+          "drilldownConfig": [],
+          "parametersMap": {
+            "compartmentId": "$(dashboard.params.compartmentId)",
+            "time": "$(dashboard.params.time)",
+            "regionName": "$(dashboard.params.regionName)"
+          }
+        },
+        {
+          "displayName": "Method / Environment Breakdown",
+          "savedSearchId": "ocid1.custommanagementsavedsearch.oc1..route-method-env-breakdown",
+          "row": 4,
+          "column": 8,
+          "height": 4,
+          "width": 4,
+          "nls": {},
+          "uiConfig": {},
+          "dataConfig": [],
+          "state": "DEFAULT",
+          "drilldownConfig": [],
+          "parametersMap": {
+            "compartmentId": "$(dashboard.params.compartmentId)",
+            "time": "$(dashboard.params.time)",
+            "regionName": "$(dashboard.params.regionName)"
+          }
+        }
+      ],
+      "savedSearches": [
+        {
+          "id": "ocid1.custommanagementsavedsearch.oc1..route-requests-by-route",
+          "displayName": "Requests by Route",
+          "providerId": "management-dashboard",
+          "providerVersion": "3.0.0",
+          "providerName": "Management Dashboard",
+          "compartmentId": "${compartment_ocid}",
+          "isOobSavedSearch": false,
+          "description": "RestProxyInvocation agrupado por route (custom namespace).",
+          "nls": {},
+          "type": "WIDGET_SHOW_IN_DASHBOARD",
+          "uiConfig": {
+            "vizType": "chart",
+            "chartInfo": {
+              "jetConfig": {
+                "type": "pie",
+                "timeAxisType": "enabled",
+                "xAxis": {
+                  "viewportMin": "$(params.time.start)",
+                  "viewportMax": "$(params.time.end)"
+                },
+                "yAxis": {
+                  "title": ""
+                },
+                "dataCursor": "on"
+              },
+              "value": "aggregatedDatapoints.value",
+              "group": "aggregatedDatapoints.timestamp",
+              "colorBy": "_allDimensionConglomerate",
+              "series": "_allDimensionConglomerate"
+            },
+            "defaultDataSource": "Requests by Route"
+          },
+          "dataConfig": [
+            {
+              "name": "Requests by Route",
+              "type": "monitoringDataSource",
+              "parameters": {
+                "compartmentId": "$(params.compartmentId)",
+                "startTime": "$(params.time.start)",
+                "endTime": "$(params.time.end)",
+                "regionName": "$(params.regionName)",
+                "namespace": "${metric_namespace}",
+                "mql": "RestProxyInvocation[5m].grouping(route).sum()",
+                "maxDataPoints": "useIntervalExact"
+              }
+            }
+          ],
+          "metadataVersion": "2.0",
+          "screenImage": "",
+          "widgetTemplate": "visualizations/chartWidgetTemplate.html",
+          "widgetVM": "visualizations/chartWidget",
+          "parametersConfig": [
+            {
+              "name": "time",
+              "displayName": "$(bundle.globalSavedSearch.TIME_PARAMETER_NAME)",
+              "required": true,
+              "editUi": {
+                "inputType": "savedSearch",
+                "filterTile": {
+                  "filterId": "OOBSS-management-dashboard-time-selector-filter",
+                  "parametersMap": {
+                    "maxDurationDays": 89
+                  }
+                }
+              }
+            },
+            {
+              "name": "compartmentId",
+              "displayName": "$(bundle.globalSavedSearch.COMPARTMENT)",
+              "required": true,
+              "defaultFilterIds": [
+                "OOBSS-management-dashboard-compartment-filter"
+              ],
+              "valueFormat": {
+                "type": "object"
+              },
+              "editUi": {
+                "inputType": "compartmentSelect"
+              }
+            },
+            {
+              "name": "regionName",
+              "displayName": "$(bundle.globalSavedSearch.REGION)",
+              "required": false,
+              "defaultFilterIds": [
+                "OOBSS-management-dashboard-region-filter"
+              ],
+              "valueFormat": {
+                "type": "string"
+              },
+              "editUi": {
+                "inputType": "savedSearch",
+                "filterTile": {
+                  "filterId": "OOBSS-management-dashboard-region-filter",
+                  "parametersMap": {
+                    "selectionMode": "single"
+                  }
+                }
+              }
+            }
+          ],
+          "featuresConfig": {
+            "crossService": {
+              "shared": false
+            }
+          },
+          "drilldownConfig": []
+        },
+        {
+          "id": "ocid1.custommanagementsavedsearch.oc1..route-errors-by-status",
+          "displayName": "Errors by Status Code",
+          "providerId": "management-dashboard",
+          "providerVersion": "3.0.0",
+          "providerName": "Management Dashboard",
+          "compartmentId": "${compartment_ocid}",
+          "isOobSavedSearch": false,
+          "description": "RestProxyError agrupado por status_code (custom namespace).",
+          "nls": {},
+          "type": "WIDGET_SHOW_IN_DASHBOARD",
+          "uiConfig": {
+            "vizType": "chart",
+            "chartInfo": {
+              "jetConfig": {
+                "type": "bar",
+                "timeAxisType": "enabled",
+                "xAxis": {
+                  "viewportMin": "$(params.time.start)",
+                  "viewportMax": "$(params.time.end)"
+                },
+                "yAxis": {
+                  "title": ""
+                },
+                "dataCursor": "on"
+              },
+              "value": "aggregatedDatapoints.value",
+              "group": "aggregatedDatapoints.timestamp",
+              "colorBy": "_allDimensionConglomerate",
+              "series": "_allDimensionConglomerate"
+            },
+            "defaultDataSource": "Errors by Status Code"
+          },
+          "dataConfig": [
+            {
+              "name": "Errors by Status Code",
+              "type": "monitoringDataSource",
+              "parameters": {
+                "compartmentId": "$(params.compartmentId)",
+                "startTime": "$(params.time.start)",
+                "endTime": "$(params.time.end)",
+                "regionName": "$(params.regionName)",
+                "namespace": "${metric_namespace}",
+                "mql": "RestProxyError[5m].grouping(status_code).sum()",
+                "maxDataPoints": "useIntervalExact"
+              }
+            }
+          ],
+          "metadataVersion": "2.0",
+          "screenImage": "",
+          "widgetTemplate": "visualizations/chartWidgetTemplate.html",
+          "widgetVM": "visualizations/chartWidget",
+          "parametersConfig": [
+            {
+              "name": "time",
+              "displayName": "$(bundle.globalSavedSearch.TIME_PARAMETER_NAME)",
+              "required": true,
+              "editUi": {
+                "inputType": "savedSearch",
+                "filterTile": {
+                  "filterId": "OOBSS-management-dashboard-time-selector-filter",
+                  "parametersMap": {
+                    "maxDurationDays": 89
+                  }
+                }
+              }
+            },
+            {
+              "name": "compartmentId",
+              "displayName": "$(bundle.globalSavedSearch.COMPARTMENT)",
+              "required": true,
+              "defaultFilterIds": [
+                "OOBSS-management-dashboard-compartment-filter"
+              ],
+              "valueFormat": {
+                "type": "object"
+              },
+              "editUi": {
+                "inputType": "compartmentSelect"
+              }
+            },
+            {
+              "name": "regionName",
+              "displayName": "$(bundle.globalSavedSearch.REGION)",
+              "required": false,
+              "defaultFilterIds": [
+                "OOBSS-management-dashboard-region-filter"
+              ],
+              "valueFormat": {
+                "type": "string"
+              },
+              "editUi": {
+                "inputType": "savedSearch",
+                "filterTile": {
+                  "filterId": "OOBSS-management-dashboard-region-filter",
+                  "parametersMap": {
+                    "selectionMode": "single"
+                  }
+                }
+              }
+            }
+          ],
+          "featuresConfig": {
+            "crossService": {
+              "shared": false
+            }
+          },
+          "drilldownConfig": []
+        },
+        {
+          "id": "ocid1.custommanagementsavedsearch.oc1..route-create-vs-update",
+          "displayName": "Store Create vs Update",
+          "providerId": "management-dashboard",
+          "providerVersion": "3.0.0",
+          "providerName": "Management Dashboard",
+          "compartmentId": "${compartment_ocid}",
+          "isOobSavedSearch": false,
+          "description": "RestProxyInvocation por route ao longo do tempo (create vs update).",
+          "nls": {},
+          "type": "WIDGET_SHOW_IN_DASHBOARD",
+          "uiConfig": {
+            "vizType": "chart",
+            "chartInfo": {
+              "jetConfig": {
+                "type": "lineWithArea",
+                "timeAxisType": "enabled",
+                "xAxis": {
+                  "viewportMin": "$(params.time.start)",
+                  "viewportMax": "$(params.time.end)"
+                },
+                "yAxis": {
+                  "title": ""
+                },
+                "dataCursor": "on"
+              },
+              "value": "aggregatedDatapoints.value",
+              "group": "aggregatedDatapoints.timestamp",
+              "colorBy": "_allDimensionConglomerate",
+              "series": "_allDimensionConglomerate"
+            },
+            "defaultDataSource": "Store Create vs Update"
+          },
+          "dataConfig": [
+            {
+              "name": "Store Create vs Update",
+              "type": "monitoringDataSource",
+              "parameters": {
+                "compartmentId": "$(params.compartmentId)",
+                "startTime": "$(params.time.start)",
+                "endTime": "$(params.time.end)",
+                "regionName": "$(params.regionName)",
+                "namespace": "${metric_namespace}",
+                "mql": "RestProxyInvocation[5m].grouping(route).sum()",
+                "maxDataPoints": "useIntervalExact"
+              }
+            }
+          ],
+          "metadataVersion": "2.0",
+          "screenImage": "",
+          "widgetTemplate": "visualizations/chartWidgetTemplate.html",
+          "widgetVM": "visualizations/chartWidget",
+          "parametersConfig": [
+            {
+              "name": "time",
+              "displayName": "$(bundle.globalSavedSearch.TIME_PARAMETER_NAME)",
+              "required": true,
+              "editUi": {
+                "inputType": "savedSearch",
+                "filterTile": {
+                  "filterId": "OOBSS-management-dashboard-time-selector-filter",
+                  "parametersMap": {
+                    "maxDurationDays": 89
+                  }
+                }
+              }
+            },
+            {
+              "name": "compartmentId",
+              "displayName": "$(bundle.globalSavedSearch.COMPARTMENT)",
+              "required": true,
+              "defaultFilterIds": [
+                "OOBSS-management-dashboard-compartment-filter"
+              ],
+              "valueFormat": {
+                "type": "object"
+              },
+              "editUi": {
+                "inputType": "compartmentSelect"
+              }
+            },
+            {
+              "name": "regionName",
+              "displayName": "$(bundle.globalSavedSearch.REGION)",
+              "required": false,
+              "defaultFilterIds": [
+                "OOBSS-management-dashboard-region-filter"
+              ],
+              "valueFormat": {
+                "type": "string"
+              },
+              "editUi": {
+                "inputType": "savedSearch",
+                "filterTile": {
+                  "filterId": "OOBSS-management-dashboard-region-filter",
+                  "parametersMap": {
+                    "selectionMode": "single"
+                  }
+                }
+              }
+            }
+          ],
+          "featuresConfig": {
+            "crossService": {
+              "shared": false
+            }
+          },
+          "drilldownConfig": []
+        },
+        {
+          "id": "ocid1.custommanagementsavedsearch.oc1..route-webhook-207",
+          "displayName": "Webhook 207",
+          "providerId": "management-dashboard",
+          "providerVersion": "3.0.0",
+          "providerName": "Management Dashboard",
+          "compartmentId": "${compartment_ocid}",
+          "isOobSavedSearch": false,
+          "description": "RestProxyError status_code=207 por 5m (multi-status webhook).",
+          "nls": {},
+          "type": "WIDGET_SHOW_IN_DASHBOARD",
+          "uiConfig": {
+            "vizType": "chart",
+            "chartInfo": {
+              "jetConfig": {
+                "type": "bar",
+                "timeAxisType": "enabled",
+                "xAxis": {
+                  "viewportMin": "$(params.time.start)",
+                  "viewportMax": "$(params.time.end)"
+                },
+                "yAxis": {
+                  "title": ""
+                },
+                "dataCursor": "on"
+              },
+              "value": "aggregatedDatapoints.value",
+              "group": "aggregatedDatapoints.timestamp",
+              "colorBy": "_allDimensionConglomerate",
+              "series": "_allDimensionConglomerate"
+            },
+            "defaultDataSource": "Webhook 207"
+          },
+          "dataConfig": [
+            {
+              "name": "Webhook 207",
+              "type": "monitoringDataSource",
+              "parameters": {
+                "compartmentId": "$(params.compartmentId)",
+                "startTime": "$(params.time.start)",
+                "endTime": "$(params.time.end)",
+                "regionName": "$(params.regionName)",
+                "namespace": "${metric_namespace}",
+                "mql": "RestProxyError[5m]{status_code=\"207\"}.sum()",
+                "maxDataPoints": "useIntervalExact"
+              }
+            }
+          ],
+          "metadataVersion": "2.0",
+          "screenImage": "",
+          "widgetTemplate": "visualizations/chartWidgetTemplate.html",
+          "widgetVM": "visualizations/chartWidget",
+          "parametersConfig": [
+            {
+              "name": "time",
+              "displayName": "$(bundle.globalSavedSearch.TIME_PARAMETER_NAME)",
+              "required": true,
+              "editUi": {
+                "inputType": "savedSearch",
+                "filterTile": {
+                  "filterId": "OOBSS-management-dashboard-time-selector-filter",
+                  "parametersMap": {
+                    "maxDurationDays": 89
+                  }
+                }
+              }
+            },
+            {
+              "name": "compartmentId",
+              "displayName": "$(bundle.globalSavedSearch.COMPARTMENT)",
+              "required": true,
+              "defaultFilterIds": [
+                "OOBSS-management-dashboard-compartment-filter"
+              ],
+              "valueFormat": {
+                "type": "object"
+              },
+              "editUi": {
+                "inputType": "compartmentSelect"
+              }
+            },
+            {
+              "name": "regionName",
+              "displayName": "$(bundle.globalSavedSearch.REGION)",
+              "required": false,
+              "defaultFilterIds": [
+                "OOBSS-management-dashboard-region-filter"
+              ],
+              "valueFormat": {
+                "type": "string"
+              },
+              "editUi": {
+                "inputType": "savedSearch",
+                "filterTile": {
+                  "filterId": "OOBSS-management-dashboard-region-filter",
+                  "parametersMap": {
+                    "selectionMode": "single"
+                  }
+                }
+              }
+            }
+          ],
+          "featuresConfig": {
+            "crossService": {
+              "shared": false
+            }
+          },
+          "drilldownConfig": []
+        },
+        {
+          "id": "ocid1.custommanagementsavedsearch.oc1..route-duration-by-route",
+          "displayName": "Duration by Route",
+          "providerId": "management-dashboard",
+          "providerVersion": "3.0.0",
+          "providerName": "Management Dashboard",
+          "compartmentId": "${compartment_ocid}",
+          "isOobSavedSearch": false,
+          "description": "RestProxyDuration média agrupada por route (custom namespace).",
+          "nls": {},
+          "type": "WIDGET_SHOW_IN_DASHBOARD",
+          "uiConfig": {
+            "vizType": "chart",
+            "chartInfo": {
+              "jetConfig": {
+                "type": "lineWithArea",
+                "timeAxisType": "enabled",
+                "xAxis": {
+                  "viewportMin": "$(params.time.start)",
+                  "viewportMax": "$(params.time.end)"
+                },
+                "yAxis": {
+                  "title": ""
+                },
+                "dataCursor": "on"
+              },
+              "value": "aggregatedDatapoints.value",
+              "group": "aggregatedDatapoints.timestamp",
+              "colorBy": "_allDimensionConglomerate",
+              "series": "_allDimensionConglomerate"
+            },
+            "defaultDataSource": "Duration by Route"
+          },
+          "dataConfig": [
+            {
+              "name": "Duration by Route",
+              "type": "monitoringDataSource",
+              "parameters": {
+                "compartmentId": "$(params.compartmentId)",
+                "startTime": "$(params.time.start)",
+                "endTime": "$(params.time.end)",
+                "regionName": "$(params.regionName)",
+                "namespace": "${metric_namespace}",
+                "mql": "RestProxyDuration[5m].grouping(route).mean()",
+                "maxDataPoints": "useIntervalExact"
+              }
+            }
+          ],
+          "metadataVersion": "2.0",
+          "screenImage": "",
+          "widgetTemplate": "visualizations/chartWidgetTemplate.html",
+          "widgetVM": "visualizations/chartWidget",
+          "parametersConfig": [
+            {
+              "name": "time",
+              "displayName": "$(bundle.globalSavedSearch.TIME_PARAMETER_NAME)",
+              "required": true,
+              "editUi": {
+                "inputType": "savedSearch",
+                "filterTile": {
+                  "filterId": "OOBSS-management-dashboard-time-selector-filter",
+                  "parametersMap": {
+                    "maxDurationDays": 89
+                  }
+                }
+              }
+            },
+            {
+              "name": "compartmentId",
+              "displayName": "$(bundle.globalSavedSearch.COMPARTMENT)",
+              "required": true,
+              "defaultFilterIds": [
+                "OOBSS-management-dashboard-compartment-filter"
+              ],
+              "valueFormat": {
+                "type": "object"
+              },
+              "editUi": {
+                "inputType": "compartmentSelect"
+              }
+            },
+            {
+              "name": "regionName",
+              "displayName": "$(bundle.globalSavedSearch.REGION)",
+              "required": false,
+              "defaultFilterIds": [
+                "OOBSS-management-dashboard-region-filter"
+              ],
+              "valueFormat": {
+                "type": "string"
+              },
+              "editUi": {
+                "inputType": "savedSearch",
+                "filterTile": {
+                  "filterId": "OOBSS-management-dashboard-region-filter",
+                  "parametersMap": {
+                    "selectionMode": "single"
+                  }
+                }
+              }
+            }
+          ],
+          "featuresConfig": {
+            "crossService": {
+              "shared": false
+            }
+          },
+          "drilldownConfig": []
+        },
+        {
+          "id": "ocid1.custommanagementsavedsearch.oc1..route-method-env-breakdown",
+          "displayName": "Method / Environment Breakdown",
+          "providerId": "management-dashboard",
+          "providerVersion": "3.0.0",
+          "providerName": "Management Dashboard",
+          "compartmentId": "${compartment_ocid}",
+          "isOobSavedSearch": false,
+          "description": "RestProxyInvocation agrupado por method e environment (custom namespace).",
+          "nls": {},
+          "type": "WIDGET_SHOW_IN_DASHBOARD",
+          "uiConfig": {
+            "vizType": "chart",
+            "chartInfo": {
+              "jetConfig": {
+                "type": "bar",
+                "timeAxisType": "enabled",
+                "xAxis": {
+                  "viewportMin": "$(params.time.start)",
+                  "viewportMax": "$(params.time.end)"
+                },
+                "yAxis": {
+                  "title": ""
+                },
+                "dataCursor": "on"
+              },
+              "value": "aggregatedDatapoints.value",
+              "group": "aggregatedDatapoints.timestamp",
+              "colorBy": "_allDimensionConglomerate",
+              "series": "_allDimensionConglomerate"
+            },
+            "defaultDataSource": "Method / Environment Breakdown"
+          },
+          "dataConfig": [
+            {
+              "name": "Method / Environment Breakdown",
+              "type": "monitoringDataSource",
+              "parameters": {
+                "compartmentId": "$(params.compartmentId)",
+                "startTime": "$(params.time.start)",
+                "endTime": "$(params.time.end)",
+                "regionName": "$(params.regionName)",
+                "namespace": "${metric_namespace}",
+                "mql": "RestProxyInvocation[5m].grouping(method,environment).sum()",
+                "maxDataPoints": "useIntervalExact"
+              }
+            }
+          ],
+          "metadataVersion": "2.0",
+          "screenImage": "",
+          "widgetTemplate": "visualizations/chartWidgetTemplate.html",
+          "widgetVM": "visualizations/chartWidget",
+          "parametersConfig": [
+            {
+              "name": "time",
+              "displayName": "$(bundle.globalSavedSearch.TIME_PARAMETER_NAME)",
+              "required": true,
+              "editUi": {
+                "inputType": "savedSearch",
+                "filterTile": {
+                  "filterId": "OOBSS-management-dashboard-time-selector-filter",
+                  "parametersMap": {
+                    "maxDurationDays": 89
+                  }
+                }
+              }
+            },
+            {
+              "name": "compartmentId",
+              "displayName": "$(bundle.globalSavedSearch.COMPARTMENT)",
+              "required": true,
+              "defaultFilterIds": [
+                "OOBSS-management-dashboard-compartment-filter"
+              ],
+              "valueFormat": {
+                "type": "object"
+              },
+              "editUi": {
+                "inputType": "compartmentSelect"
+              }
+            },
+            {
+              "name": "regionName",
+              "displayName": "$(bundle.globalSavedSearch.REGION)",
+              "required": false,
+              "defaultFilterIds": [
+                "OOBSS-management-dashboard-region-filter"
+              ],
+              "valueFormat": {
+                "type": "string"
+              },
+              "editUi": {
+                "inputType": "savedSearch",
+                "filterTile": {
+                  "filterId": "OOBSS-management-dashboard-region-filter",
+                  "parametersMap": {
+                    "selectionMode": "single"
+                  }
+                }
+              }
+            }
+          ],
+          "featuresConfig": {
+            "crossService": {
+              "shared": false
+            }
+          },
+          "drilldownConfig": []
+        }
+      ],
+      "parametersConfig": [
+        {
+          "savedSearchId": "OOBSS-management-dashboard-compartment-filter",
+          "displayName": "Compartment",
+          "width": 3,
+          "state": "DEFAULT",
+          "parametersMap": {
+            "isStoreInLocalStorage": false,
+            "isActiveCompartment": "true"
+          },
+          "name": "compartmentId",
+          "localStorageKey": "compartmentId"
+        },
+        {
+          "name": "time",
+          "displayName": "Time",
+          "src": "$(context.time)"
+        },
+        {
+          "savedSearchId": "OOBSS-management-dashboard-region-filter",
+          "width": 2,
+          "state": "DEFAULT",
+          "parametersMap": {
+            "isStoreInLocalStorage": true
+          },
+          "name": "regionName",
+          "localStorageKey": "regionName"
+        }
+      ],
+      "drilldownConfig": []
+    }
+  ]
+}

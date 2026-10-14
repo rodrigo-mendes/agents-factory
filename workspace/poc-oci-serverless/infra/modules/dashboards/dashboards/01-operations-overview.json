@@ -1,0 +1,1083 @@
+{
+  "dashboards": [
+    {
+      "dashboardId": "ocid1.custommanagementdashboard.oc1..rest-proxy-operations-overview",
+      "displayName": "REST Proxy — Operations Overview (${environment})",
+      "description": "Golden signals do func-rr-rest-proxy: invocations, errors, latency, throttles, cold-starts e sinais do API Gateway.",
+      "compartmentId": "${compartment_ocid}",
+      "isOobDashboard": false,
+      "isShowInHome": false,
+      "providerId": "management-dashboard",
+      "providerName": "Management Dashboard",
+      "providerVersion": "3.0.0",
+      "isShowDescription": true,
+      "screenImage": "",
+      "nls": {},
+      "type": "normal",
+      "uiConfig": {
+        "isFilteringEnabled": false,
+        "isTimeRangeEnabled": true,
+        "isRefreshEnabled": true
+      },
+      "dataConfig": [],
+      "isFavorite": false,
+      "isEnabled": true,
+      "featuresConfig": {
+        "crossService": {
+          "shared": false
+        }
+      },
+      "metadataVersion": "2.0",
+      "tiles": [
+        {
+          "displayName": "Invocations",
+          "savedSearchId": "ocid1.custommanagementsavedsearch.oc1..ops-invocations",
+          "row": 0,
+          "column": 0,
+          "height": 4,
+          "width": 6,
+          "nls": {},
+          "uiConfig": {},
+          "dataConfig": [],
+          "state": "DEFAULT",
+          "drilldownConfig": [],
+          "parametersMap": {
+            "compartmentId": "$(dashboard.params.compartmentId)",
+            "time": "$(dashboard.params.time)",
+            "regionName": "$(dashboard.params.regionName)"
+          }
+        },
+        {
+          "displayName": "Errors",
+          "savedSearchId": "ocid1.custommanagementsavedsearch.oc1..ops-errors",
+          "row": 0,
+          "column": 6,
+          "height": 4,
+          "width": 6,
+          "nls": {},
+          "uiConfig": {},
+          "dataConfig": [],
+          "state": "DEFAULT",
+          "drilldownConfig": [],
+          "parametersMap": {
+            "compartmentId": "$(dashboard.params.compartmentId)",
+            "time": "$(dashboard.params.time)",
+            "regionName": "$(dashboard.params.regionName)"
+          }
+        },
+        {
+          "displayName": "Latency p50/p95/p99",
+          "savedSearchId": "ocid1.custommanagementsavedsearch.oc1..ops-latency",
+          "row": 4,
+          "column": 0,
+          "height": 4,
+          "width": 6,
+          "nls": {},
+          "uiConfig": {},
+          "dataConfig": [],
+          "state": "DEFAULT",
+          "drilldownConfig": [],
+          "parametersMap": {
+            "compartmentId": "$(dashboard.params.compartmentId)",
+            "time": "$(dashboard.params.time)",
+            "regionName": "$(dashboard.params.regionName)"
+          }
+        },
+        {
+          "displayName": "Throttles",
+          "savedSearchId": "ocid1.custommanagementsavedsearch.oc1..ops-throttles",
+          "row": 4,
+          "column": 6,
+          "height": 4,
+          "width": 3,
+          "nls": {},
+          "uiConfig": {},
+          "dataConfig": [],
+          "state": "DEFAULT",
+          "drilldownConfig": [],
+          "parametersMap": {
+            "compartmentId": "$(dashboard.params.compartmentId)",
+            "time": "$(dashboard.params.time)",
+            "regionName": "$(dashboard.params.regionName)"
+          }
+        },
+        {
+          "displayName": "Cold-start count",
+          "savedSearchId": "ocid1.custommanagementsavedsearch.oc1..ops-coldstart",
+          "row": 4,
+          "column": 9,
+          "height": 4,
+          "width": 3,
+          "nls": {},
+          "uiConfig": {},
+          "dataConfig": [],
+          "state": "DEFAULT",
+          "drilldownConfig": [],
+          "parametersMap": {
+            "compartmentId": "$(dashboard.params.compartmentId)",
+            "time": "$(dashboard.params.time)",
+            "regionName": "$(dashboard.params.regionName)"
+          }
+        },
+        {
+          "displayName": "API GW Responses by Category",
+          "savedSearchId": "ocid1.custommanagementsavedsearch.oc1..ops-apigw-responses",
+          "row": 8,
+          "column": 0,
+          "height": 4,
+          "width": 6,
+          "nls": {},
+          "uiConfig": {},
+          "dataConfig": [],
+          "state": "DEFAULT",
+          "drilldownConfig": [],
+          "parametersMap": {
+            "compartmentId": "$(dashboard.params.compartmentId)",
+            "time": "$(dashboard.params.time)",
+            "regionName": "$(dashboard.params.regionName)"
+          }
+        },
+        {
+          "displayName": "API GW Latency",
+          "savedSearchId": "ocid1.custommanagementsavedsearch.oc1..ops-apigw-latency",
+          "row": 8,
+          "column": 6,
+          "height": 4,
+          "width": 6,
+          "nls": {},
+          "uiConfig": {},
+          "dataConfig": [],
+          "state": "DEFAULT",
+          "drilldownConfig": [],
+          "parametersMap": {
+            "compartmentId": "$(dashboard.params.compartmentId)",
+            "time": "$(dashboard.params.time)",
+            "regionName": "$(dashboard.params.regionName)"
+          }
+        },
+        {
+          "displayName": "Function Response Count",
+          "savedSearchId": "ocid1.custommanagementsavedsearch.oc1..ops-response-count",
+          "row": 12,
+          "column": 0,
+          "height": 4,
+          "width": 12,
+          "nls": {},
+          "uiConfig": {},
+          "dataConfig": [],
+          "state": "DEFAULT",
+          "drilldownConfig": [],
+          "parametersMap": {
+            "compartmentId": "$(dashboard.params.compartmentId)",
+            "time": "$(dashboard.params.time)",
+            "regionName": "$(dashboard.params.regionName)"
+          }
+        }
+      ],
+      "savedSearches": [
+        {
+          "id": "ocid1.custommanagementsavedsearch.oc1..ops-invocations",
+          "displayName": "Invocations",
+          "providerId": "management-dashboard",
+          "providerVersion": "3.0.0",
+          "providerName": "Management Dashboard",
+          "compartmentId": "${compartment_ocid}",
+          "isOobSavedSearch": false,
+          "description": "FunctionInvocationCount por 1m (oci_faas).",
+          "nls": {},
+          "type": "WIDGET_SHOW_IN_DASHBOARD",
+          "uiConfig": {
+            "vizType": "chart",
+            "chartInfo": {
+              "jetConfig": {
+                "type": "lineWithArea",
+                "timeAxisType": "enabled",
+                "xAxis": {
+                  "viewportMin": "$(params.time.start)",
+                  "viewportMax": "$(params.time.end)"
+                },
+                "yAxis": {
+                  "title": ""
+                },
+                "dataCursor": "on"
+              },
+              "value": "aggregatedDatapoints.value",
+              "group": "aggregatedDatapoints.timestamp",
+              "colorBy": "_allDimensionConglomerate",
+              "series": "_allDimensionConglomerate"
+            },
+            "defaultDataSource": "Invocations"
+          },
+          "dataConfig": [
+            {
+              "name": "Invocations",
+              "type": "monitoringDataSource",
+              "parameters": {
+                "compartmentId": "$(params.compartmentId)",
+                "startTime": "$(params.time.start)",
+                "endTime": "$(params.time.end)",
+                "regionName": "$(params.regionName)",
+                "namespace": "oci_faas",
+                "mql": "FunctionInvocationCount[1m]{applicationId=\"${application_id}\"}.sum()",
+                "maxDataPoints": "useIntervalExact"
+              }
+            }
+          ],
+          "metadataVersion": "2.0",
+          "screenImage": "",
+          "widgetTemplate": "visualizations/chartWidgetTemplate.html",
+          "widgetVM": "visualizations/chartWidget",
+          "parametersConfig": [
+            {
+              "name": "time",
+              "displayName": "$(bundle.globalSavedSearch.TIME_PARAMETER_NAME)",
+              "required": true,
+              "editUi": {
+                "inputType": "savedSearch",
+                "filterTile": {
+                  "filterId": "OOBSS-management-dashboard-time-selector-filter",
+                  "parametersMap": {
+                    "maxDurationDays": 89
+                  }
+                }
+              }
+            },
+            {
+              "name": "compartmentId",
+              "displayName": "$(bundle.globalSavedSearch.COMPARTMENT)",
+              "required": true,
+              "defaultFilterIds": [
+                "OOBSS-management-dashboard-compartment-filter"
+              ],
+              "valueFormat": {
+                "type": "object"
+              },
+              "editUi": {
+                "inputType": "compartmentSelect"
+              }
+            },
+            {
+              "name": "regionName",
+              "displayName": "$(bundle.globalSavedSearch.REGION)",
+              "required": false,
+              "defaultFilterIds": [
+                "OOBSS-management-dashboard-region-filter"
+              ],
+              "valueFormat": {
+                "type": "string"
+              },
+              "editUi": {
+                "inputType": "savedSearch",
+                "filterTile": {
+                  "filterId": "OOBSS-management-dashboard-region-filter",
+                  "parametersMap": {
+                    "selectionMode": "single"
+                  }
+                }
+              }
+            }
+          ],
+          "featuresConfig": {
+            "crossService": {
+              "shared": false
+            }
+          },
+          "drilldownConfig": []
+        },
+        {
+          "id": "ocid1.custommanagementsavedsearch.oc1..ops-errors",
+          "displayName": "Errors",
+          "providerId": "management-dashboard",
+          "providerVersion": "3.0.0",
+          "providerName": "Management Dashboard",
+          "compartmentId": "${compartment_ocid}",
+          "isOobSavedSearch": false,
+          "description": "FunctionErrorCount por 1m (oci_faas).",
+          "nls": {},
+          "type": "WIDGET_SHOW_IN_DASHBOARD",
+          "uiConfig": {
+            "vizType": "chart",
+            "chartInfo": {
+              "jetConfig": {
+                "type": "lineWithArea",
+                "timeAxisType": "enabled",
+                "xAxis": {
+                  "viewportMin": "$(params.time.start)",
+                  "viewportMax": "$(params.time.end)"
+                },
+                "yAxis": {
+                  "title": ""
+                },
+                "dataCursor": "on"
+              },
+              "value": "aggregatedDatapoints.value",
+              "group": "aggregatedDatapoints.timestamp",
+              "colorBy": "_allDimensionConglomerate",
+              "series": "_allDimensionConglomerate"
+            },
+            "defaultDataSource": "Errors"
+          },
+          "dataConfig": [
+            {
+              "name": "Errors",
+              "type": "monitoringDataSource",
+              "parameters": {
+                "compartmentId": "$(params.compartmentId)",
+                "startTime": "$(params.time.start)",
+                "endTime": "$(params.time.end)",
+                "regionName": "$(params.regionName)",
+                "namespace": "oci_faas",
+                "mql": "FunctionErrorCount[1m]{applicationId=\"${application_id}\"}.sum()",
+                "maxDataPoints": "useIntervalExact"
+              }
+            }
+          ],
+          "metadataVersion": "2.0",
+          "screenImage": "",
+          "widgetTemplate": "visualizations/chartWidgetTemplate.html",
+          "widgetVM": "visualizations/chartWidget",
+          "parametersConfig": [
+            {
+              "name": "time",
+              "displayName": "$(bundle.globalSavedSearch.TIME_PARAMETER_NAME)",
+              "required": true,
+              "editUi": {
+                "inputType": "savedSearch",
+                "filterTile": {
+                  "filterId": "OOBSS-management-dashboard-time-selector-filter",
+                  "parametersMap": {
+                    "maxDurationDays": 89
+                  }
+                }
+              }
+            },
+            {
+              "name": "compartmentId",
+              "displayName": "$(bundle.globalSavedSearch.COMPARTMENT)",
+              "required": true,
+              "defaultFilterIds": [
+                "OOBSS-management-dashboard-compartment-filter"
+              ],
+              "valueFormat": {
+                "type": "object"
+              },
+              "editUi": {
+                "inputType": "compartmentSelect"
+              }
+            },
+            {
+              "name": "regionName",
+              "displayName": "$(bundle.globalSavedSearch.REGION)",
+              "required": false,
+              "defaultFilterIds": [
+                "OOBSS-management-dashboard-region-filter"
+              ],
+              "valueFormat": {
+                "type": "string"
+              },
+              "editUi": {
+                "inputType": "savedSearch",
+                "filterTile": {
+                  "filterId": "OOBSS-management-dashboard-region-filter",
+                  "parametersMap": {
+                    "selectionMode": "single"
+                  }
+                }
+              }
+            }
+          ],
+          "featuresConfig": {
+            "crossService": {
+              "shared": false
+            }
+          },
+          "drilldownConfig": []
+        },
+        {
+          "id": "ocid1.custommanagementsavedsearch.oc1..ops-latency",
+          "displayName": "Latency p50/p95/p99",
+          "providerId": "management-dashboard",
+          "providerVersion": "3.0.0",
+          "providerName": "Management Dashboard",
+          "compartmentId": "${compartment_ocid}",
+          "isOobSavedSearch": false,
+          "description": "FunctionExecutionDuration percentis (oci_faas).",
+          "nls": {},
+          "type": "WIDGET_SHOW_IN_DASHBOARD",
+          "uiConfig": {
+            "vizType": "chart",
+            "chartInfo": {
+              "jetConfig": {
+                "type": "lineWithArea",
+                "timeAxisType": "enabled",
+                "xAxis": {
+                  "viewportMin": "$(params.time.start)",
+                  "viewportMax": "$(params.time.end)"
+                },
+                "yAxis": {
+                  "title": ""
+                },
+                "dataCursor": "on"
+              },
+              "value": "aggregatedDatapoints.value",
+              "group": "aggregatedDatapoints.timestamp",
+              "colorBy": "_allDimensionConglomerate",
+              "series": "_allDimensionConglomerate"
+            },
+            "defaultDataSource": "Latency p50/p95/p99"
+          },
+          "dataConfig": [
+            {
+              "name": "Latency p50/p95/p99",
+              "type": "monitoringDataSource",
+              "parameters": {
+                "compartmentId": "$(params.compartmentId)",
+                "startTime": "$(params.time.start)",
+                "endTime": "$(params.time.end)",
+                "regionName": "$(params.regionName)",
+                "namespace": "oci_faas",
+                "mql": "FunctionExecutionDuration[1m]{applicationId=\"${application_id}\"}.percentile(0.50)",
+                "maxDataPoints": "useIntervalExact"
+              }
+            }
+          ],
+          "metadataVersion": "2.0",
+          "screenImage": "",
+          "widgetTemplate": "visualizations/chartWidgetTemplate.html",
+          "widgetVM": "visualizations/chartWidget",
+          "parametersConfig": [
+            {
+              "name": "time",
+              "displayName": "$(bundle.globalSavedSearch.TIME_PARAMETER_NAME)",
+              "required": true,
+              "editUi": {
+                "inputType": "savedSearch",
+                "filterTile": {
+                  "filterId": "OOBSS-management-dashboard-time-selector-filter",
+                  "parametersMap": {
+                    "maxDurationDays": 89
+                  }
+                }
+              }
+            },
+            {
+              "name": "compartmentId",
+              "displayName": "$(bundle.globalSavedSearch.COMPARTMENT)",
+              "required": true,
+              "defaultFilterIds": [
+                "OOBSS-management-dashboard-compartment-filter"
+              ],
+              "valueFormat": {
+                "type": "object"
+              },
+              "editUi": {
+                "inputType": "compartmentSelect"
+              }
+            },
+            {
+              "name": "regionName",
+              "displayName": "$(bundle.globalSavedSearch.REGION)",
+              "required": false,
+              "defaultFilterIds": [
+                "OOBSS-management-dashboard-region-filter"
+              ],
+              "valueFormat": {
+                "type": "string"
+              },
+              "editUi": {
+                "inputType": "savedSearch",
+                "filterTile": {
+                  "filterId": "OOBSS-management-dashboard-region-filter",
+                  "parametersMap": {
+                    "selectionMode": "single"
+                  }
+                }
+              }
+            }
+          ],
+          "featuresConfig": {
+            "crossService": {
+              "shared": false
+            }
+          },
+          "drilldownConfig": []
+        },
+        {
+          "id": "ocid1.custommanagementsavedsearch.oc1..ops-throttles",
+          "displayName": "Throttles",
+          "providerId": "management-dashboard",
+          "providerVersion": "3.0.0",
+          "providerName": "Management Dashboard",
+          "compartmentId": "${compartment_ocid}",
+          "isOobSavedSearch": false,
+          "description": "FunctionThrottleCount por 5m (oci_faas).",
+          "nls": {},
+          "type": "WIDGET_SHOW_IN_DASHBOARD",
+          "uiConfig": {
+            "vizType": "chart",
+            "chartInfo": {
+              "jetConfig": {
+                "type": "bar",
+                "timeAxisType": "enabled",
+                "xAxis": {
+                  "viewportMin": "$(params.time.start)",
+                  "viewportMax": "$(params.time.end)"
+                },
+                "yAxis": {
+                  "title": ""
+                },
+                "dataCursor": "on"
+              },
+              "value": "aggregatedDatapoints.value",
+              "group": "aggregatedDatapoints.timestamp",
+              "colorBy": "_allDimensionConglomerate",
+              "series": "_allDimensionConglomerate"
+            },
+            "defaultDataSource": "Throttles"
+          },
+          "dataConfig": [
+            {
+              "name": "Throttles",
+              "type": "monitoringDataSource",
+              "parameters": {
+                "compartmentId": "$(params.compartmentId)",
+                "startTime": "$(params.time.start)",
+                "endTime": "$(params.time.end)",
+                "regionName": "$(params.regionName)",
+                "namespace": "oci_faas",
+                "mql": "FunctionThrottleCount[5m]{applicationId=\"${application_id}\"}.sum()",
+                "maxDataPoints": "useIntervalExact"
+              }
+            }
+          ],
+          "metadataVersion": "2.0",
+          "screenImage": "",
+          "widgetTemplate": "visualizations/chartWidgetTemplate.html",
+          "widgetVM": "visualizations/chartWidget",
+          "parametersConfig": [
+            {
+              "name": "time",
+              "displayName": "$(bundle.globalSavedSearch.TIME_PARAMETER_NAME)",
+              "required": true,
+              "editUi": {
+                "inputType": "savedSearch",
+                "filterTile": {
+                  "filterId": "OOBSS-management-dashboard-time-selector-filter",
+                  "parametersMap": {
+                    "maxDurationDays": 89
+                  }
+                }
+              }
+            },
+            {
+              "name": "compartmentId",
+              "displayName": "$(bundle.globalSavedSearch.COMPARTMENT)",
+              "required": true,
+              "defaultFilterIds": [
+                "OOBSS-management-dashboard-compartment-filter"
+              ],
+              "valueFormat": {
+                "type": "object"
+              },
+              "editUi": {
+                "inputType": "compartmentSelect"
+              }
+            },
+            {
+              "name": "regionName",
+              "displayName": "$(bundle.globalSavedSearch.REGION)",
+              "required": false,
+              "defaultFilterIds": [
+                "OOBSS-management-dashboard-region-filter"
+              ],
+              "valueFormat": {
+                "type": "string"
+              },
+              "editUi": {
+                "inputType": "savedSearch",
+                "filterTile": {
+                  "filterId": "OOBSS-management-dashboard-region-filter",
+                  "parametersMap": {
+                    "selectionMode": "single"
+                  }
+                }
+              }
+            }
+          ],
+          "featuresConfig": {
+            "crossService": {
+              "shared": false
+            }
+          },
+          "drilldownConfig": []
+        },
+        {
+          "id": "ocid1.custommanagementsavedsearch.oc1..ops-coldstart",
+          "displayName": "Cold-start count",
+          "providerId": "management-dashboard",
+          "providerVersion": "3.0.0",
+          "providerName": "Management Dashboard",
+          "compartmentId": "${compartment_ocid}",
+          "isOobSavedSearch": false,
+          "description": "RestProxyInvocation cold_start=true por 5m (custom namespace).",
+          "nls": {},
+          "type": "WIDGET_SHOW_IN_DASHBOARD",
+          "uiConfig": {
+            "vizType": "chart",
+            "chartInfo": {
+              "jetConfig": {
+                "type": "bar",
+                "timeAxisType": "enabled",
+                "xAxis": {
+                  "viewportMin": "$(params.time.start)",
+                  "viewportMax": "$(params.time.end)"
+                },
+                "yAxis": {
+                  "title": ""
+                },
+                "dataCursor": "on"
+              },
+              "value": "aggregatedDatapoints.value",
+              "group": "aggregatedDatapoints.timestamp",
+              "colorBy": "_allDimensionConglomerate",
+              "series": "_allDimensionConglomerate"
+            },
+            "defaultDataSource": "Cold-start count"
+          },
+          "dataConfig": [
+            {
+              "name": "Cold-start count",
+              "type": "monitoringDataSource",
+              "parameters": {
+                "compartmentId": "$(params.compartmentId)",
+                "startTime": "$(params.time.start)",
+                "endTime": "$(params.time.end)",
+                "regionName": "$(params.regionName)",
+                "namespace": "${metric_namespace}",
+                "mql": "RestProxyInvocation[5m]{cold_start=\"true\"}.sum()",
+                "maxDataPoints": "useIntervalExact"
+              }
+            }
+          ],
+          "metadataVersion": "2.0",
+          "screenImage": "",
+          "widgetTemplate": "visualizations/chartWidgetTemplate.html",
+          "widgetVM": "visualizations/chartWidget",
+          "parametersConfig": [
+            {
+              "name": "time",
+              "displayName": "$(bundle.globalSavedSearch.TIME_PARAMETER_NAME)",
+              "required": true,
+              "editUi": {
+                "inputType": "savedSearch",
+                "filterTile": {
+                  "filterId": "OOBSS-management-dashboard-time-selector-filter",
+                  "parametersMap": {
+                    "maxDurationDays": 89
+                  }
+                }
+              }
+            },
+            {
+              "name": "compartmentId",
+              "displayName": "$(bundle.globalSavedSearch.COMPARTMENT)",
+              "required": true,
+              "defaultFilterIds": [
+                "OOBSS-management-dashboard-compartment-filter"
+              ],
+              "valueFormat": {
+                "type": "object"
+              },
+              "editUi": {
+                "inputType": "compartmentSelect"
+              }
+            },
+            {
+              "name": "regionName",
+              "displayName": "$(bundle.globalSavedSearch.REGION)",
+              "required": false,
+              "defaultFilterIds": [
+                "OOBSS-management-dashboard-region-filter"
+              ],
+              "valueFormat": {
+                "type": "string"
+              },
+              "editUi": {
+                "inputType": "savedSearch",
+                "filterTile": {
+                  "filterId": "OOBSS-management-dashboard-region-filter",
+                  "parametersMap": {
+                    "selectionMode": "single"
+                  }
+                }
+              }
+            }
+          ],
+          "featuresConfig": {
+            "crossService": {
+              "shared": false
+            }
+          },
+          "drilldownConfig": []
+        },
+        {
+          "id": "ocid1.custommanagementsavedsearch.oc1..ops-apigw-responses",
+          "displayName": "API GW Responses by Category",
+          "providerId": "management-dashboard",
+          "providerVersion": "3.0.0",
+          "providerName": "Management Dashboard",
+          "compartmentId": "${compartment_ocid}",
+          "isOobSavedSearch": false,
+          "description": "HttpResponses agrupado por httpStatusCategory (oci_apigateway).",
+          "nls": {},
+          "type": "WIDGET_SHOW_IN_DASHBOARD",
+          "uiConfig": {
+            "vizType": "chart",
+            "chartInfo": {
+              "jetConfig": {
+                "type": "bar",
+                "timeAxisType": "enabled",
+                "xAxis": {
+                  "viewportMin": "$(params.time.start)",
+                  "viewportMax": "$(params.time.end)"
+                },
+                "yAxis": {
+                  "title": ""
+                },
+                "dataCursor": "on"
+              },
+              "value": "aggregatedDatapoints.value",
+              "group": "aggregatedDatapoints.timestamp",
+              "colorBy": "_allDimensionConglomerate",
+              "series": "_allDimensionConglomerate"
+            },
+            "defaultDataSource": "API GW Responses by Category"
+          },
+          "dataConfig": [
+            {
+              "name": "API GW Responses by Category",
+              "type": "monitoringDataSource",
+              "parameters": {
+                "compartmentId": "$(params.compartmentId)",
+                "startTime": "$(params.time.start)",
+                "endTime": "$(params.time.end)",
+                "regionName": "$(params.regionName)",
+                "namespace": "oci_apigateway",
+                "mql": "HttpResponses[1m]{deploymentId=\"${api_deployment_id}\"}.grouping(httpStatusCategory).sum()",
+                "maxDataPoints": "useIntervalExact"
+              }
+            }
+          ],
+          "metadataVersion": "2.0",
+          "screenImage": "",
+          "widgetTemplate": "visualizations/chartWidgetTemplate.html",
+          "widgetVM": "visualizations/chartWidget",
+          "parametersConfig": [
+            {
+              "name": "time",
+              "displayName": "$(bundle.globalSavedSearch.TIME_PARAMETER_NAME)",
+              "required": true,
+              "editUi": {
+                "inputType": "savedSearch",
+                "filterTile": {
+                  "filterId": "OOBSS-management-dashboard-time-selector-filter",
+                  "parametersMap": {
+                    "maxDurationDays": 89
+                  }
+                }
+              }
+            },
+            {
+              "name": "compartmentId",
+              "displayName": "$(bundle.globalSavedSearch.COMPARTMENT)",
+              "required": true,
+              "defaultFilterIds": [
+                "OOBSS-management-dashboard-compartment-filter"
+              ],
+              "valueFormat": {
+                "type": "object"
+              },
+              "editUi": {
+                "inputType": "compartmentSelect"
+              }
+            },
+            {
+              "name": "regionName",
+              "displayName": "$(bundle.globalSavedSearch.REGION)",
+              "required": false,
+              "defaultFilterIds": [
+                "OOBSS-management-dashboard-region-filter"
+              ],
+              "valueFormat": {
+                "type": "string"
+              },
+              "editUi": {
+                "inputType": "savedSearch",
+                "filterTile": {
+                  "filterId": "OOBSS-management-dashboard-region-filter",
+                  "parametersMap": {
+                    "selectionMode": "single"
+                  }
+                }
+              }
+            }
+          ],
+          "featuresConfig": {
+            "crossService": {
+              "shared": false
+            }
+          },
+          "drilldownConfig": []
+        },
+        {
+          "id": "ocid1.custommanagementsavedsearch.oc1..ops-apigw-latency",
+          "displayName": "API GW Latency",
+          "providerId": "management-dashboard",
+          "providerVersion": "3.0.0",
+          "providerName": "Management Dashboard",
+          "compartmentId": "${compartment_ocid}",
+          "isOobSavedSearch": false,
+          "description": "Latency média (oci_apigateway).",
+          "nls": {},
+          "type": "WIDGET_SHOW_IN_DASHBOARD",
+          "uiConfig": {
+            "vizType": "chart",
+            "chartInfo": {
+              "jetConfig": {
+                "type": "lineWithArea",
+                "timeAxisType": "enabled",
+                "xAxis": {
+                  "viewportMin": "$(params.time.start)",
+                  "viewportMax": "$(params.time.end)"
+                },
+                "yAxis": {
+                  "title": ""
+                },
+                "dataCursor": "on"
+              },
+              "value": "aggregatedDatapoints.value",
+              "group": "aggregatedDatapoints.timestamp",
+              "colorBy": "_allDimensionConglomerate",
+              "series": "_allDimensionConglomerate"
+            },
+            "defaultDataSource": "API GW Latency"
+          },
+          "dataConfig": [
+            {
+              "name": "API GW Latency",
+              "type": "monitoringDataSource",
+              "parameters": {
+                "compartmentId": "$(params.compartmentId)",
+                "startTime": "$(params.time.start)",
+                "endTime": "$(params.time.end)",
+                "regionName": "$(params.regionName)",
+                "namespace": "oci_apigateway",
+                "mql": "Latency[1m]{deploymentId=\"${api_deployment_id}\"}.mean()",
+                "maxDataPoints": "useIntervalExact"
+              }
+            }
+          ],
+          "metadataVersion": "2.0",
+          "screenImage": "",
+          "widgetTemplate": "visualizations/chartWidgetTemplate.html",
+          "widgetVM": "visualizations/chartWidget",
+          "parametersConfig": [
+            {
+              "name": "time",
+              "displayName": "$(bundle.globalSavedSearch.TIME_PARAMETER_NAME)",
+              "required": true,
+              "editUi": {
+                "inputType": "savedSearch",
+                "filterTile": {
+                  "filterId": "OOBSS-management-dashboard-time-selector-filter",
+                  "parametersMap": {
+                    "maxDurationDays": 89
+                  }
+                }
+              }
+            },
+            {
+              "name": "compartmentId",
+              "displayName": "$(bundle.globalSavedSearch.COMPARTMENT)",
+              "required": true,
+              "defaultFilterIds": [
+                "OOBSS-management-dashboard-compartment-filter"
+              ],
+              "valueFormat": {
+                "type": "object"
+              },
+              "editUi": {
+                "inputType": "compartmentSelect"
+              }
+            },
+            {
+              "name": "regionName",
+              "displayName": "$(bundle.globalSavedSearch.REGION)",
+              "required": false,
+              "defaultFilterIds": [
+                "OOBSS-management-dashboard-region-filter"
+              ],
+              "valueFormat": {
+                "type": "string"
+              },
+              "editUi": {
+                "inputType": "savedSearch",
+                "filterTile": {
+                  "filterId": "OOBSS-management-dashboard-region-filter",
+                  "parametersMap": {
+                    "selectionMode": "single"
+                  }
+                }
+              }
+            }
+          ],
+          "featuresConfig": {
+            "crossService": {
+              "shared": false
+            }
+          },
+          "drilldownConfig": []
+        },
+        {
+          "id": "ocid1.custommanagementsavedsearch.oc1..ops-response-count",
+          "displayName": "Function Response Count",
+          "providerId": "management-dashboard",
+          "providerVersion": "3.0.0",
+          "providerName": "Management Dashboard",
+          "compartmentId": "${compartment_ocid}",
+          "isOobSavedSearch": false,
+          "description": "FunctionResponseCount por 1m (oci_faas).",
+          "nls": {},
+          "type": "WIDGET_SHOW_IN_DASHBOARD",
+          "uiConfig": {
+            "vizType": "chart",
+            "chartInfo": {
+              "jetConfig": {
+                "type": "lineWithArea",
+                "timeAxisType": "enabled",
+                "xAxis": {
+                  "viewportMin": "$(params.time.start)",
+                  "viewportMax": "$(params.time.end)"
+                },
+                "yAxis": {
+                  "title": ""
+                },
+                "dataCursor": "on"
+              },
+              "value": "aggregatedDatapoints.value",
+              "group": "aggregatedDatapoints.timestamp",
+              "colorBy": "_allDimensionConglomerate",
+              "series": "_allDimensionConglomerate"
+            },
+            "defaultDataSource": "Function Response Count"
+          },
+          "dataConfig": [
+            {
+              "name": "Function Response Count",
+              "type": "monitoringDataSource",
+              "parameters": {
+                "compartmentId": "$(params.compartmentId)",
+                "startTime": "$(params.time.start)",
+                "endTime": "$(params.time.end)",
+                "regionName": "$(params.regionName)",
+                "namespace": "oci_faas",
+                "mql": "FunctionResponseCount[1m]{applicationId=\"${application_id}\"}.sum()",
+                "maxDataPoints": "useIntervalExact"
+              }
+            }
+          ],
+          "metadataVersion": "2.0",
+          "screenImage": "",
+          "widgetTemplate": "visualizations/chartWidgetTemplate.html",
+          "widgetVM": "visualizations/chartWidget",
+          "parametersConfig": [
+            {
+              "name": "time",
+              "displayName": "$(bundle.globalSavedSearch.TIME_PARAMETER_NAME)",
+              "required": true,
+              "editUi": {
+                "inputType": "savedSearch",
+                "filterTile": {
+                  "filterId": "OOBSS-management-dashboard-time-selector-filter",
+                  "parametersMap": {
+                    "maxDurationDays": 89
+                  }
+                }
+              }
+            },
+            {
+              "name": "compartmentId",
+              "displayName": "$(bundle.globalSavedSearch.COMPARTMENT)",
+              "required": true,
+              "defaultFilterIds": [
+                "OOBSS-management-dashboard-compartment-filter"
+              ],
+              "valueFormat": {
+                "type": "object"
+              },
+              "editUi": {
+                "inputType": "compartmentSelect"
+              }
+            },
+            {
+              "name": "regionName",
+              "displayName": "$(bundle.globalSavedSearch.REGION)",
+              "required": false,
+              "defaultFilterIds": [
+                "OOBSS-management-dashboard-region-filter"
+              ],
+              "valueFormat": {
+                "type": "string"
+              },
+              "editUi": {
+                "inputType": "savedSearch",
+                "filterTile": {
+                  "filterId": "OOBSS-management-dashboard-region-filter",
+                  "parametersMap": {
+                    "selectionMode": "single"
+                  }
+                }
+              }
+            }
+          ],
+          "featuresConfig": {
+            "crossService": {
+              "shared": false
+            }
+          },
+          "drilldownConfig": []
+        }
+      ],
+      "parametersConfig": [
+        {
+          "savedSearchId": "OOBSS-management-dashboard-compartment-filter",
+          "displayName": "Compartment",
+          "width": 3,
+          "state": "DEFAULT",
+          "parametersMap": {
+            "isStoreInLocalStorage": false,
+            "isActiveCompartment": "true"
+          },
+          "name": "compartmentId",
+          "localStorageKey": "compartmentId"
+        },
+        {
+          "name": "time",
+          "displayName": "Time",
+          "src": "$(context.time)"
+        },
+        {
+          "savedSearchId": "OOBSS-management-dashboard-region-filter",
+          "width": 2,
+          "state": "DEFAULT",
+          "parametersMap": {
+            "isStoreInLocalStorage": true
+          },
+          "name": "regionName",
+          "localStorageKey": "regionName"
+        }
+      ],
+      "drilldownConfig": []
+    }
+  ]
+}

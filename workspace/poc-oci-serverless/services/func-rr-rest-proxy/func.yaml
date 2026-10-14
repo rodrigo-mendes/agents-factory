@@ -1,0 +1,18 @@
+schema_version: 20180708
+name: func-rr-rest-proxy
+version: 0.0.19
+runtime: java
+build_image: fnproject/fn-java-fdk-build:jdk17-latest
+run_image: fnproject/fn-java-fdk:jre17-latest
+cmd: com.brx.functions.rr.restproxy.RestProxyFunction::handler
+memory: 256
+timeout: 60
+config:
+  ENVIRONMENT: dev
+  STORE_SOURCE_BASE_URL: https://rex-npe.retail.sa-vinhedo-1.ocs.oraclecloud.com/rgbu-rex-brxs-par1-mfcs/RmsReSTServices
+  STORE_DESTINATION_BASE_URL: http://129.148.63.45:8080/ords/brxoper/BrxServices/Store
+  STORE_TIMEOUT_MS: "10000"
+  STORE_OAUTH_TOKEN_URL: https://idcs-a23fd2fe5f18408c865bfc16a04cddb8.identity.oraclecloud.com/oauth2/v1/token
+  STORE_OAUTH_SCOPE: rgbu:merch:MFCS-PAR1
+  STORE_OAUTH_CLIENT_ID_OCID: "" # Managed by Terraform (Vault secret OCID)
+  STORE_OAUTH_CLIENT_SECRET_OCID: "" # Managed by Terraform (Vault secret OCID)

@@ -1,0 +1,729 @@
+{
+  "dashboards": [
+    {
+      "dashboardId": "ocid1.custommanagementdashboard.oc1..rest-proxy-upstream-dependencies",
+      "displayName": "REST Proxy — Upstream Dependencies (${environment})",
+      "description": "Dependências downstream do func-rr-rest-proxy via APM traces (tracesDataSource): latência por span, erros por peer, throughput, traces lentos.",
+      "compartmentId": "${compartment_ocid}",
+      "isOobDashboard": false,
+      "isShowInHome": false,
+      "providerId": "management-dashboard",
+      "providerName": "Management Dashboard",
+      "providerVersion": "3.0.0",
+      "isShowDescription": true,
+      "screenImage": "",
+      "nls": {},
+      "type": "normal",
+      "metadataVersion": "2.0",
+      "uiConfig": {
+        "isFilteringEnabled": false,
+        "isTimeRangeEnabled": true,
+        "isRefreshEnabled": true
+      },
+      "dataConfig": [],
+      "isFavorite": false,
+      "featuresConfig": {
+        "crossService": {
+          "shared": true
+        },
+        "serviceTypes": [
+          "APM"
+        ]
+      },
+      "parametersConfig": [
+        {
+          "savedSearchId": "OOBSS-APM-domain-filter",
+          "width": 2,
+          "state": "DEFAULT",
+          "parametersMap": {
+            "isStoreInLocalStorage": true,
+            "compartmentId": "$(dashboard.params.compartmentId)"
+          },
+          "name": "apmDomain",
+          "localStorageKey": "apmDomain"
+        },
+        {
+          "savedSearchId": "OOBSS-management-dashboard-compartment-filter",
+          "width": 4,
+          "state": "DEFAULT",
+          "parametersMap": {
+            "isStoreInLocalStorage": false,
+            "isActiveCompartment": "true"
+          },
+          "name": "compartmentId",
+          "localStorageKey": "compartmentId"
+        },
+        {
+          "name": "time",
+          "displayName": "$(bundle.globalSavedSearch.TIME)",
+          "src": "$(context.time)"
+        }
+      ],
+      "drilldownConfig": [],
+      "tiles": [
+        {
+          "displayName": "Latency by Downstream Span",
+          "savedSearchId": "ocid1.custommanagementsavedsearch.oc1..dep-latency-by-span",
+          "row": 0,
+          "column": 0,
+          "height": 4,
+          "width": 6,
+          "nls": {},
+          "uiConfig": {},
+          "dataConfig": [],
+          "state": "DEFAULT",
+          "drilldownConfig": [],
+          "parametersMap": {
+            "compartmentId": "$(dashboard.params.compartmentId)",
+            "time": "$(dashboard.params.time)",
+            "apmDomain": "$(dashboard.params.apmDomain)"
+          }
+        },
+        {
+          "displayName": "Errors by Peer Service",
+          "savedSearchId": "ocid1.custommanagementsavedsearch.oc1..dep-errors-by-peer",
+          "row": 0,
+          "column": 6,
+          "height": 4,
+          "width": 6,
+          "nls": {},
+          "uiConfig": {},
+          "dataConfig": [],
+          "state": "DEFAULT",
+          "drilldownConfig": [],
+          "parametersMap": {
+            "compartmentId": "$(dashboard.params.compartmentId)",
+            "time": "$(dashboard.params.time)",
+            "apmDomain": "$(dashboard.params.apmDomain)"
+          }
+        },
+        {
+          "displayName": "Error Traces",
+          "savedSearchId": "ocid1.custommanagementsavedsearch.oc1..dep-error-traces",
+          "row": 4,
+          "column": 0,
+          "height": 4,
+          "width": 6,
+          "nls": {},
+          "uiConfig": {},
+          "dataConfig": [],
+          "state": "DEFAULT",
+          "drilldownConfig": [],
+          "parametersMap": {
+            "compartmentId": "$(dashboard.params.compartmentId)",
+            "time": "$(dashboard.params.time)",
+            "apmDomain": "$(dashboard.params.apmDomain)"
+          }
+        },
+        {
+          "displayName": "Top-10 Slowest Traces",
+          "savedSearchId": "ocid1.custommanagementsavedsearch.oc1..dep-top-slow-traces",
+          "row": 4,
+          "column": 6,
+          "height": 4,
+          "width": 6,
+          "nls": {},
+          "uiConfig": {},
+          "dataConfig": [],
+          "state": "DEFAULT",
+          "drilldownConfig": [],
+          "parametersMap": {
+            "compartmentId": "$(dashboard.params.compartmentId)",
+            "time": "$(dashboard.params.time)",
+            "apmDomain": "$(dashboard.params.apmDomain)"
+          }
+        },
+        {
+          "displayName": "Throughput by Route (SERVER spans)",
+          "savedSearchId": "ocid1.custommanagementsavedsearch.oc1..dep-throughput-route",
+          "row": 8,
+          "column": 0,
+          "height": 4,
+          "width": 6,
+          "nls": {},
+          "uiConfig": {},
+          "dataConfig": [],
+          "state": "DEFAULT",
+          "drilldownConfig": [],
+          "parametersMap": {
+            "compartmentId": "$(dashboard.params.compartmentId)",
+            "time": "$(dashboard.params.time)",
+            "apmDomain": "$(dashboard.params.apmDomain)"
+          }
+        },
+        {
+          "displayName": "Duration Breakdown by Span",
+          "savedSearchId": "ocid1.custommanagementsavedsearch.oc1..dep-duration-breakdown",
+          "row": 8,
+          "column": 6,
+          "height": 4,
+          "width": 6,
+          "nls": {},
+          "uiConfig": {},
+          "dataConfig": [],
+          "state": "DEFAULT",
+          "drilldownConfig": [],
+          "parametersMap": {
+            "compartmentId": "$(dashboard.params.compartmentId)",
+            "time": "$(dashboard.params.time)",
+            "apmDomain": "$(dashboard.params.apmDomain)"
+          }
+        }
+      ],
+      "savedSearches": [
+        {
+          "id": "ocid1.custommanagementsavedsearch.oc1..dep-latency-by-span",
+          "displayName": "Latency by Downstream Span",
+          "providerId": "management-dashboard",
+          "providerName": "Management Dashboard",
+          "providerVersion": "3.0.0",
+          "compartmentId": "${compartment_ocid}",
+          "isOobSavedSearch": false,
+          "description": "Latency by Downstream Span",
+          "nls": {},
+          "type": "WIDGET_SHOW_IN_DASHBOARD",
+          "metadataVersion": "2.0",
+          "screenImage": "",
+          "widgetTemplate": "visualizations/chartWidgetTemplate.html",
+          "widgetVM": "visualizations/chartWidget",
+          "parametersConfig": [
+            {
+              "name": "time",
+              "displayName": "Time",
+              "required": true,
+              "defaultFilterIds": [
+                "OOBSS-management-dashboard-time-selector-filter"
+              ],
+              "editUi": {
+                "inputType": "savedSearch",
+                "filterTile": {
+                  "filterId": "OOBSS-management-dashboard-time-selector-filter"
+                }
+              }
+            },
+            {
+              "name": "apmDomain",
+              "displayName": "Apm Domain",
+              "required": true,
+              "defaultFilterIds": [
+                "OOBSS-APM-domain-filter"
+              ],
+              "editUi": {
+                "filterTile": {
+                  "filterId": "OOBSS-APM-domain-filter"
+                }
+              }
+            },
+            {
+              "name": "flex"
+            }
+          ],
+          "drilldownConfig": [],
+          "featuresConfig": {
+            "crossService": {
+              "shared": true
+            }
+          },
+          "uiConfig": {
+            "vizType": "table",
+            "tableInfo": {
+              "cols": [
+                {
+                  "val": "OperationName",
+                  "header": {
+                    "name": "OperationName"
+                  },
+                  "sortable": "enable"
+                },
+                {
+                  "val": "Latency",
+                  "header": {
+                    "name": "Latency"
+                  },
+                  "sortable": "enable"
+                }
+              ]
+            },
+            "defaultDataSource": "traceData"
+          },
+          "dataConfig": [
+            {
+              "name": "traceData",
+              "type": "tracesDataSource",
+              "parameters": {
+                "compartmentId": "$(params.compartmentId)",
+                "startTime": "$(params.startTime)",
+                "endTime": "$(params.endTime)",
+                "apmDomain": "$(params.apmDomain)",
+                "maxDesiredDataPoints": 320,
+                "dimensionFilters": "$(params.flex)",
+                "apmQuery": "show spans avg(SpanDuration) as \"Latency\" where ServiceName = 'func-rr-rest-proxy' and SpanKind = 'CLIENT' group by OperationName",
+                "simplifyDataSource": true
+              }
+            }
+          ]
+        },
+        {
+          "id": "ocid1.custommanagementsavedsearch.oc1..dep-errors-by-peer",
+          "displayName": "Errors by Peer Service",
+          "providerId": "management-dashboard",
+          "providerName": "Management Dashboard",
+          "providerVersion": "3.0.0",
+          "compartmentId": "${compartment_ocid}",
+          "isOobSavedSearch": false,
+          "description": "Errors by Peer Service",
+          "nls": {},
+          "type": "WIDGET_SHOW_IN_DASHBOARD",
+          "metadataVersion": "2.0",
+          "screenImage": "",
+          "widgetTemplate": "visualizations/chartWidgetTemplate.html",
+          "widgetVM": "visualizations/chartWidget",
+          "parametersConfig": [
+            {
+              "name": "time",
+              "displayName": "Time",
+              "required": true,
+              "defaultFilterIds": [
+                "OOBSS-management-dashboard-time-selector-filter"
+              ],
+              "editUi": {
+                "inputType": "savedSearch",
+                "filterTile": {
+                  "filterId": "OOBSS-management-dashboard-time-selector-filter"
+                }
+              }
+            },
+            {
+              "name": "apmDomain",
+              "displayName": "Apm Domain",
+              "required": true,
+              "defaultFilterIds": [
+                "OOBSS-APM-domain-filter"
+              ],
+              "editUi": {
+                "filterTile": {
+                  "filterId": "OOBSS-APM-domain-filter"
+                }
+              }
+            },
+            {
+              "name": "flex"
+            }
+          ],
+          "drilldownConfig": [],
+          "featuresConfig": {
+            "crossService": {
+              "shared": true
+            }
+          },
+          "uiConfig": {
+            "vizType": "table",
+            "tableInfo": {
+              "cols": [
+                {
+                  "val": "peer.service",
+                  "header": {
+                    "name": "peer.service"
+                  },
+                  "sortable": "enable"
+                },
+                {
+                  "val": "Errors",
+                  "header": {
+                    "name": "Errors"
+                  },
+                  "sortable": "enable"
+                }
+              ]
+            },
+            "defaultDataSource": "traceData"
+          },
+          "dataConfig": [
+            {
+              "name": "traceData",
+              "type": "tracesDataSource",
+              "parameters": {
+                "compartmentId": "$(params.compartmentId)",
+                "startTime": "$(params.startTime)",
+                "endTime": "$(params.endTime)",
+                "apmDomain": "$(params.apmDomain)",
+                "maxDesiredDataPoints": 320,
+                "dimensionFilters": "$(params.flex)",
+                "apmQuery": "show spans count(*) as \"Errors\" where ServiceName = 'func-rr-rest-proxy' and SpanErrorCount > 0 group by peer.service",
+                "simplifyDataSource": true
+              }
+            }
+          ]
+        },
+        {
+          "id": "ocid1.custommanagementsavedsearch.oc1..dep-error-traces",
+          "displayName": "Error Traces",
+          "providerId": "management-dashboard",
+          "providerName": "Management Dashboard",
+          "providerVersion": "3.0.0",
+          "compartmentId": "${compartment_ocid}",
+          "isOobSavedSearch": false,
+          "description": "Error Traces",
+          "nls": {},
+          "type": "WIDGET_SHOW_IN_DASHBOARD",
+          "metadataVersion": "2.0",
+          "screenImage": "",
+          "widgetTemplate": "visualizations/chartWidgetTemplate.html",
+          "widgetVM": "visualizations/chartWidget",
+          "parametersConfig": [
+            {
+              "name": "time",
+              "displayName": "Time",
+              "required": true,
+              "defaultFilterIds": [
+                "OOBSS-management-dashboard-time-selector-filter"
+              ],
+              "editUi": {
+                "inputType": "savedSearch",
+                "filterTile": {
+                  "filterId": "OOBSS-management-dashboard-time-selector-filter"
+                }
+              }
+            },
+            {
+              "name": "apmDomain",
+              "displayName": "Apm Domain",
+              "required": true,
+              "defaultFilterIds": [
+                "OOBSS-APM-domain-filter"
+              ],
+              "editUi": {
+                "filterTile": {
+                  "filterId": "OOBSS-APM-domain-filter"
+                }
+              }
+            },
+            {
+              "name": "flex"
+            }
+          ],
+          "drilldownConfig": [],
+          "featuresConfig": {
+            "crossService": {
+              "shared": true
+            }
+          },
+          "uiConfig": {
+            "vizType": "table",
+            "tableInfo": {
+              "cols": [
+                {
+                  "val": "ErrorTraces",
+                  "header": {
+                    "name": "ErrorTraces"
+                  },
+                  "sortable": "enable"
+                }
+              ]
+            },
+            "defaultDataSource": "traceData"
+          },
+          "dataConfig": [
+            {
+              "name": "traceData",
+              "type": "tracesDataSource",
+              "parameters": {
+                "compartmentId": "$(params.compartmentId)",
+                "startTime": "$(params.startTime)",
+                "endTime": "$(params.endTime)",
+                "apmDomain": "$(params.apmDomain)",
+                "maxDesiredDataPoints": 320,
+                "dimensionFilters": "$(params.flex)",
+                "apmQuery": "show traces count(*) as \"ErrorTraces\" where ServiceName = 'func-rr-rest-proxy' and TraceStatus = 'ERROR'",
+                "simplifyDataSource": true
+              }
+            }
+          ]
+        },
+        {
+          "id": "ocid1.custommanagementsavedsearch.oc1..dep-top-slow-traces",
+          "displayName": "Top-10 Slowest Traces",
+          "providerId": "management-dashboard",
+          "providerName": "Management Dashboard",
+          "providerVersion": "3.0.0",
+          "compartmentId": "${compartment_ocid}",
+          "isOobSavedSearch": false,
+          "description": "Top-10 Slowest Traces",
+          "nls": {},
+          "type": "WIDGET_SHOW_IN_DASHBOARD",
+          "metadataVersion": "2.0",
+          "screenImage": "",
+          "widgetTemplate": "visualizations/chartWidgetTemplate.html",
+          "widgetVM": "visualizations/chartWidget",
+          "parametersConfig": [
+            {
+              "name": "time",
+              "displayName": "Time",
+              "required": true,
+              "defaultFilterIds": [
+                "OOBSS-management-dashboard-time-selector-filter"
+              ],
+              "editUi": {
+                "inputType": "savedSearch",
+                "filterTile": {
+                  "filterId": "OOBSS-management-dashboard-time-selector-filter"
+                }
+              }
+            },
+            {
+              "name": "apmDomain",
+              "displayName": "Apm Domain",
+              "required": true,
+              "defaultFilterIds": [
+                "OOBSS-APM-domain-filter"
+              ],
+              "editUi": {
+                "filterTile": {
+                  "filterId": "OOBSS-APM-domain-filter"
+                }
+              }
+            },
+            {
+              "name": "flex"
+            }
+          ],
+          "drilldownConfig": [],
+          "featuresConfig": {
+            "crossService": {
+              "shared": true
+            }
+          },
+          "uiConfig": {
+            "vizType": "table",
+            "tableInfo": {
+              "cols": [
+                {
+                  "val": "TraceId",
+                  "header": {
+                    "name": "TraceId"
+                  },
+                  "sortable": "enable"
+                },
+                {
+                  "val": "OperationName",
+                  "header": {
+                    "name": "OperationName"
+                  },
+                  "sortable": "enable"
+                },
+                {
+                  "val": "TraceDuration",
+                  "header": {
+                    "name": "TraceDuration"
+                  },
+                  "sortable": "enable"
+                }
+              ]
+            },
+            "defaultDataSource": "traceData"
+          },
+          "dataConfig": [
+            {
+              "name": "traceData",
+              "type": "tracesDataSource",
+              "parameters": {
+                "compartmentId": "$(params.compartmentId)",
+                "startTime": "$(params.startTime)",
+                "endTime": "$(params.endTime)",
+                "apmDomain": "$(params.apmDomain)",
+                "maxDesiredDataPoints": 320,
+                "dimensionFilters": "$(params.flex)",
+                "apmQuery": "show traces TraceId, OperationName, TraceDuration where ServiceName = 'func-rr-rest-proxy' order by TraceDuration desc",
+                "simplifyDataSource": true
+              }
+            }
+          ]
+        },
+        {
+          "id": "ocid1.custommanagementsavedsearch.oc1..dep-throughput-route",
+          "displayName": "Throughput by Route (SERVER spans)",
+          "providerId": "management-dashboard",
+          "providerName": "Management Dashboard",
+          "providerVersion": "3.0.0",
+          "compartmentId": "${compartment_ocid}",
+          "isOobSavedSearch": false,
+          "description": "Throughput by Route (SERVER spans)",
+          "nls": {},
+          "type": "WIDGET_SHOW_IN_DASHBOARD",
+          "metadataVersion": "2.0",
+          "screenImage": "",
+          "widgetTemplate": "visualizations/chartWidgetTemplate.html",
+          "widgetVM": "visualizations/chartWidget",
+          "parametersConfig": [
+            {
+              "name": "time",
+              "displayName": "Time",
+              "required": true,
+              "defaultFilterIds": [
+                "OOBSS-management-dashboard-time-selector-filter"
+              ],
+              "editUi": {
+                "inputType": "savedSearch",
+                "filterTile": {
+                  "filterId": "OOBSS-management-dashboard-time-selector-filter"
+                }
+              }
+            },
+            {
+              "name": "apmDomain",
+              "displayName": "Apm Domain",
+              "required": true,
+              "defaultFilterIds": [
+                "OOBSS-APM-domain-filter"
+              ],
+              "editUi": {
+                "filterTile": {
+                  "filterId": "OOBSS-APM-domain-filter"
+                }
+              }
+            },
+            {
+              "name": "flex"
+            }
+          ],
+          "drilldownConfig": [],
+          "featuresConfig": {
+            "crossService": {
+              "shared": true
+            }
+          },
+          "uiConfig": {
+            "vizType": "table",
+            "tableInfo": {
+              "cols": [
+                {
+                  "val": "OperationName",
+                  "header": {
+                    "name": "OperationName"
+                  },
+                  "sortable": "enable"
+                },
+                {
+                  "val": "Throughput",
+                  "header": {
+                    "name": "Throughput"
+                  },
+                  "sortable": "enable"
+                }
+              ]
+            },
+            "defaultDataSource": "traceData"
+          },
+          "dataConfig": [
+            {
+              "name": "traceData",
+              "type": "tracesDataSource",
+              "parameters": {
+                "compartmentId": "$(params.compartmentId)",
+                "startTime": "$(params.startTime)",
+                "endTime": "$(params.endTime)",
+                "apmDomain": "$(params.apmDomain)",
+                "maxDesiredDataPoints": 320,
+                "dimensionFilters": "$(params.flex)",
+                "apmQuery": "show spans count(*) as \"Throughput\" where ServiceName = 'func-rr-rest-proxy' and SpanKind = 'SERVER' group by OperationName",
+                "simplifyDataSource": true
+              }
+            }
+          ]
+        },
+        {
+          "id": "ocid1.custommanagementsavedsearch.oc1..dep-duration-breakdown",
+          "displayName": "Duration Breakdown by Span",
+          "providerId": "management-dashboard",
+          "providerName": "Management Dashboard",
+          "providerVersion": "3.0.0",
+          "compartmentId": "${compartment_ocid}",
+          "isOobSavedSearch": false,
+          "description": "Duration Breakdown by Span",
+          "nls": {},
+          "type": "WIDGET_SHOW_IN_DASHBOARD",
+          "metadataVersion": "2.0",
+          "screenImage": "",
+          "widgetTemplate": "visualizations/chartWidgetTemplate.html",
+          "widgetVM": "visualizations/chartWidget",
+          "parametersConfig": [
+            {
+              "name": "time",
+              "displayName": "Time",
+              "required": true,
+              "defaultFilterIds": [
+                "OOBSS-management-dashboard-time-selector-filter"
+              ],
+              "editUi": {
+                "inputType": "savedSearch",
+                "filterTile": {
+                  "filterId": "OOBSS-management-dashboard-time-selector-filter"
+                }
+              }
+            },
+            {
+              "name": "apmDomain",
+              "displayName": "Apm Domain",
+              "required": true,
+              "defaultFilterIds": [
+                "OOBSS-APM-domain-filter"
+              ],
+              "editUi": {
+                "filterTile": {
+                  "filterId": "OOBSS-APM-domain-filter"
+                }
+              }
+            },
+            {
+              "name": "flex"
+            }
+          ],
+          "drilldownConfig": [],
+          "featuresConfig": {
+            "crossService": {
+              "shared": true
+            }
+          },
+          "uiConfig": {
+            "vizType": "table",
+            "tableInfo": {
+              "cols": [
+                {
+                  "val": "OperationName",
+                  "header": {
+                    "name": "OperationName"
+                  },
+                  "sortable": "enable"
+                },
+                {
+                  "val": "TotalDuration",
+                  "header": {
+                    "name": "TotalDuration"
+                  },
+                  "sortable": "enable"
+                }
+              ]
+            },
+            "defaultDataSource": "traceData"
+          },
+          "dataConfig": [
+            {
+              "name": "traceData",
+              "type": "tracesDataSource",
+              "parameters": {
+                "compartmentId": "$(params.compartmentId)",
+                "startTime": "$(params.startTime)",
+                "endTime": "$(params.endTime)",
+                "apmDomain": "$(params.apmDomain)",
+                "maxDesiredDataPoints": 320,
+                "dimensionFilters": "$(params.flex)",
+                "apmQuery": "show spans sum(SpanDuration) as \"TotalDuration\" where ServiceName = 'func-rr-rest-proxy' group by OperationName",
+                "simplifyDataSource": true
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
