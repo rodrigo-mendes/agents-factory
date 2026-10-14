@@ -1,11 +1,13 @@
 # Agents Factory — CLAUDE.md
 
-AI artifact factory (**Skills, Prompts/Commands, Subagents, Rules**) with an
-**anti-hallucination** focus. This repository **produces** artifacts for code agents and **also runs on
-Claude Code**: operational prompts are exposed as skills/commands that fork to subagents.
+AI artifact factory (**Skills, Subagents, Rules**) with an **anti-hallucination** focus. This
+repository **produces** artifacts for code agents and **also runs on Claude Code**: operational
+prompts are exposed as skills/commands that fork to subagents.
 
-> **Claude Code-first.** The factory documents adoption for **Claude Code** (see `docs/`).
-> Config in `.github/` (Copilot) and `.claude/` (Claude Code) coexist — do not delete `.github/`.
+> **`.claude/` is the only source of truth — there is no `.github/`.** The pre-migration Copilot
+> mirror was retired (see `.claude/MIGRATION.md`, Copilot Decommission). `audit-architecture-*`
+> and `copilot-compatibility-review` still exist as generic tools for auditing *other* projects
+> that target Copilot — they are not about this repo's own state.
 
 ## Principles (non-negotiable)
 
@@ -15,29 +17,52 @@ Claude Code**: operational prompts are exposed as skills/commands that fork to s
 - **Executable Truth** — every claim links to a dated official source; without a source, mark as "unverified".
 - **Workflow P0–P5** — Verify Docs → Analyze → Consult → Propose → Implement → Validate.
 - **Three-Tier** — ✅ Always-Do · ⚠️ Ask-First · 🚫 Never-Do (with alternative).
-- **Progressive disclosure** — `SKILL.md` lean (< 500 lines) linking blueprints; no giant inline content.
+- **Progressive disclosure** — `SKILL.md` lean (< 500 lines) linking blueprints; templates live in
+  the `assets/` of the skill that owns them (no `.claude/templates/` — see Structure below).
 
 ## Naming conventions (kebab-case)
 
 | Artifact | Pattern | Example |
 |---|---|---|
-| Skill | `gerund-noun` | `researching-technical-frameworks` |
-| Command/Prompt | `action-noun` | `cloud-architecture-researcher` |
+| Skill — knowledge (auto-invocable, no `context: fork`) | `gerund-noun` | `researching-technical-frameworks` |
+| Skill — action command (`context: fork`, routes to a subagent) | `action-noun` / `domain-role` | `cloud-architecture-researcher`, `skill-best-practices-validator` |
 | Subagent | `domain-role` | `framework-researcher` |
 | Rule | `scope-noun` | `skill-frontmatter` |
 
+> Both skill kinds live under `.claude/skills/` — the distinction is the frontmatter shape (see
+> [`skill-frontmatter.md`](.claude/rules/skill-frontmatter.md) and
+> [`skill-creator/assets/TEMPLATE.KNOWLEDGE-SKILL.md`](.claude/skills/skill-creator/assets/TEMPLATE.KNOWLEDGE-SKILL.md) vs
+> [`skill-creator/assets/TEMPLATE.SKILL.md`](.claude/skills/skill-creator/assets/TEMPLATE.SKILL.md)), not a separate folder.
+
 ## Routing — Skill (`/command`) → Subagent → Skills
 
-Operational commands fork (`context: fork`) to a subagent. The 5 subagents live in
-[.claude/agents/](.claude/agents/):
+Operational commands fork (`context: fork`) to a subagent. The 5 **routing-level** subagents
+(directly invoked by a `/command`) live in [.claude/agents/](.claude/agents/):
 
 | Subagent | Does | Commands it routes |
 |---|---|---|
 | [framework-researcher](.claude/agents/framework-researcher.md) | anti-hallucination research (uses WebSearch/WebFetch) | `researching-technical-frameworks`, `technical-framework-researcher-terraform`, `cloud-architecture-researcher`, `business-domain-researcher`, `requirements-methodology-researcher`, `architecture-methodology-researcher`, `terraform-engineering-best-practices-researcher`, **platform-software family** (orchestrator `researching-platform-software` → siblings: `researching-streaming-broker`, `researching-cache-store`, `researching-coordination-service`, `researching-search-engine`, `researching-api-gateway`, `researching-rdbms`, `researching-document-store`, `researching-kv-store`, `researching-wide-column-store`, `researching-graph-database`, `researching-timeseries-db`, `researching-columnar-analytics`, `researching-vector-store`, `researching-object-storage`) |
-| [skill-author](.claude/agents/skill-author.md) | generates SKILL.md / rules | `skill-creator`, `methodologies-skill-generator`, `architecture-approaches-skill-generator`, `terraform-instructions-compiler` |
-| [architecture-auditor](.claude/agents/architecture-auditor.md) | audits architecture (consensus = 3 lenses in parallel via Agent tool) | `audit-architecture-scope`, `audit-architecture-flow`, `audit-architecture-engine`, `audit-architecture-consensus` (Copilot); `audit-cc-architecture-scope`, `audit-cc-architecture-flow`, `audit-cc-architecture-engine`, `audit-cc-architecture-consensus` (Claude Code) |
+| [artifact-author](.claude/agents/artifact-author.md) | generates SKILL.md / agents / rules (renamed from `skill-author` — it authors 3 of the 4 artifact types) | `skill-creator`, `agent-creator`, `rules-compiler`, `methodologies-skill-generator`, `architecture-approaches-skill-generator`, `terraform-instructions-compiler` |
+| [architecture-auditor](.claude/agents/architecture-auditor.md) | audits architecture (consensus = 3 lenses in parallel via Agent tool) | `audit-architecture-scope`, `audit-architecture-flow`, `audit-architecture-engine`, `audit-architecture-consensus` (Copilot target); `audit-cc-architecture-scope`, `audit-cc-architecture-flow`, `audit-cc-architecture-engine`, `audit-cc-architecture-consensus` (Claude Code target) |
 | [quality-validator](.claude/agents/quality-validator.md) | validates quality/adherence | `skill-best-practices-validator`, `instructions-best-practices-validator`, `agent-router-pattern-validator`, `copilot-compatibility-review`, `project-analysis-validator` |
 | [skill-evaluator](.claude/agents/skill-evaluator.md) | evaluates skill behavior via LLM-as-judge (runs evaluation-scenarios.md and verifies real responses) | `evaluating-skill-scenarios` |
+
+`.claude/agents/` also has 2 **internal helper** subagents, not routed by any `/command` — invoked
+directly by `framework-researcher` via the Agent tool during deep research: `research-synthesizer`
+(assembles parallel findings into the output-format skeleton) and `section-investigator` (fetches
+one research section in parallel). See [docs/manual/](docs/manual/) for details.
+
+The **book-writing** package adds its own self-contained pipeline: `book-orchestrator` (routes
+`writing-technical-book`, `writing-book-toc`, `rewriting-book-chapter`, `rewriting-book-introduction`,
+`switching-book-language`, `enriching-book-chapter`), plus `book-translator`, `book-formatter`,
+`epub-repairer` and `mermaid-renderer` (each fronted by one command) and 7 worker subagents spawned
+by the orchestrator. Output goes to `Books/{slug}/` (gitignored); details in
+[packages/book-writing/README.md](packages/book-writing/README.md).
+
+Note `rules-compiler` in the table above: it is itself a **knowledge skill** (no `context: fork`)
+— a reference engine that `terraform-instructions-compiler` (an action command) links into for
+its generic phases. It doesn't route on its own; it's listed because `artifact-author` maintains
+it.
 
 **Fallback (no matching command):** If a request does not match any `/command` listed above, respond with the closest matching command and its description. Do not attempt to fulfill the request inline — route or decline.
 
@@ -47,6 +72,8 @@ Not compiled code — artifacts run **in Claude Code** via `/<command>`:
 
 - Search for a technology: `/researching-technical-frameworks <tech> <version>`
 - Create a skill from a research file: `/skill-creator StoryBeat/research_X_v1.md`
+- Create a subagent: `/agent-creator <domain-role> [advisory|orchestrator]`
+- Compile Terraform research into scoped rules: `/terraform-instructions-compiler <research-file>`
 - Create a methodology skill (all-in-one): `/methodologies-skill-generator <methodology>`
 - Audit a Claude Code project (consensus): `/audit-cc-architecture-consensus <target>`
 - Audit a GitHub Copilot project (consensus): `/audit-architecture-consensus <target>`
@@ -58,32 +85,70 @@ Not compiled code — artifacts run **in Claude Code** via `/<command>`:
 - Datastore with modeling: `/researching-document-store MongoDB 7.0 deployment=kubernetes-operator`
 - API gateway: `/researching-api-gateway Kong 3.7 deployment=kubernetes-operator`
 
-The 40 commands use `disable-model-invocation: true` (deliberate actions) — accessible via `/name`,
-with no auto-listing cost.
+The 52 commands use `disable-model-invocation: true` (deliberate actions) — accessible via `/name`,
+with no auto-listing cost. (2 of the 52 skills, `rules-compiler` and any future knowledge skill,
+are the exception — they auto-invoke instead of routing via `/name`.)
 
 ## Structure
 
 ```
-.claude/
-├── agents/     ← 5 subagents (framework-researcher, skill-author, architecture-auditor, quality-validator, skill-evaluator)
-├── skills/     ← 40 operational commands (fork → subagent); includes the platform-software family (1 orchestrator + 14 siblings)
-├── rules/      ← rules by path (paths:)
-├── templates/  ← scaffolding: agents/, skills/, rules/, prompts/, reports/; platform-research/ (shared output-format, research-scope, deployment-guides for the platform-software family)
-├── MIGRATION.md ← migration history Copilot → Claude Code
-├── worktrees/  ← temporary Git worktrees (auto-generated; do not edit) [created on demand]
-└── settings.json
+.claude/            ← GENERATED by `apm install --target claude`. Edit packages/, not this.
+├── agents/     ← 20 subagents: 5 routing-level (framework-researcher, artifact-author,
+│                 architecture-auditor, quality-validator, skill-evaluator) +
+│                 2 internal helpers (research-synthesizer, section-investigator) +
+│                 13 book-writing agents
+├── skills/     ← 52 skills (fork → subagent, or knowledge/auto-invoke); includes the
+│                 platform-software family (1 orchestrator + 14 siblings) and each skill's own
+│                 assets/ (former .claude/templates/ content) + blueprints/
+├── rules/      ← 5 rules by path (paths:)
+├── MIGRATION.md ← migration history Copilot → Claude Code (hand-authored, not generated)
+├── settings.json         ← hand-authored, not generated (APM only merges `hooks:`, unused here)
+└── settings.local.json   ← hand-authored, gitignored
+
+packages/           ← the actual source of truth — 10 APM packages, each with its own apm.yml
+├── factory-core/                 ← 5 rules (frontmatter + naming schemas), no skills/agents
+├── research-core/                ← framework-researcher + its 2 internal helpers, no skills
+├── researching-frameworks/       ← 5 generic research skills
+├── researching-platform/         ← 15 platform-software skills (indivisible — see its apm.yml)
+├── terraform/                    ← 3 Terraform-specific skills, isolated because not agnostic
+├── artifact-authoring/           ← artifact-author + 5 skill/agent/rule-authoring skills
+├── auditing/                     ← architecture-auditor + 8 audit skills
+├── validating/                   ← quality-validator + 5 validation skills
+├── book-writing/                 ← 13 agents + 10 commands for the technical-book pipeline
+└── evaluating/                   ← skill-evaluator + 1 skill (runtime dep on every package)
+
+apm.yml             ← root manifest: aggregates the 10 packages (factory-core/research-core are
+                       NOT listed directly — they resolve transitively; listing them twice
+                       triggers a real `apm audit --ci` failure, "ambiguous resolved_by")
+apm.lock.yaml       ← committed; `apm install --frozen` in CI must reproduce it exactly
+scripts/            ← 2 defensive post-install fixups (see NOTE in apm.yml above `lifecycle:`)
 docs/
 ├── capacidades/  ← skills/commands catalog
 ├── como-usar/    ← operational guides
 ├── fluxos/       ← flow diagrams
 ├── manual/       ← subagent reference manual
+├── templates/    ← POST_MORTEM_TEMPLATE.md (human procedure, not a Claude Code artifact)
 └── referencia/   ← glossary and conventions
 StoryBeat/      ← agent-generated research outputs (untracked)
-.github/        ← Copilot config (coexistence; do not delete)
 ```
+
+There is **no `.claude/templates/`** — every template lives in the `assets/` of the skill that
+owns it (`skill-creator/assets/`, `agent-creator/assets/`, `rules-compiler/assets/`,
+`terraform-instructions-compiler/assets/`). This is required for APM packaging: there is no
+`templates` primitive, only skill subfolders (`assets/`, `references/`, `scripts/`) that deploy
+with the skill.
+
+**`.claude/{agents,skills,rules}/` are generated, and committed anyway** — a clone with no
+network access and no `apm` CLI still has every `/command` working, exactly as before this
+migration. CI (`.github/workflows/apm.yml`) proves there's no drift between `packages/` and the
+committed `.claude/` on every push: `apm install --frozen` (pinned CLI) then `git diff --exit-code`.
+To change a skill/agent/rule: edit it under `packages/*/.apm/`, then
+`apm install --target claude` to regenerate `.claude/` locally before committing both.
 
 ## Gotchas
 
 - **Frontmatter conventions** (field names, model values, YAML quoting): see
   [`.claude/rules/skill-frontmatter.md`](.claude/rules/skill-frontmatter.md).
 - Do not trust audit counts — verify with `ls`/`wc`/`grep`.
+- `.claude/worktrees/` does not exist by default — Git worktrees are created on demand by
+  worktree-based workflows, not a fixture of this repo.

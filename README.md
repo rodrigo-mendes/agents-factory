@@ -1,14 +1,18 @@
 # Agents Factory
 
-Framework sistemático para criação de **Skills, Prompts e Agentes** — com suporte a **Claude Code** (`.claude/`) e **GitHub Copilot** (`.github/`) em coexistência — focado em prevenir alucinações de IA através de pesquisa validada, versionamento rigoroso e padrões de qualidade.
+Framework sistemático para criação de **Skills, Subagentes e Rules** em **Claude Code**
+(`.claude/`, única fonte de verdade) — focado em prevenir alucinações de IA através de pesquisa
+validada, versionamento rigoroso e padrões de qualidade. O espelho GitHub Copilot (`.github/`)
+pré-migração foi retirado (ver `.claude/MIGRATION.md`); `audit-architecture-*` e
+`copilot-compatibility-review` continuam a existir como ferramentas genéricas para auditar
+*outros* projetos que tenham `.github/`.
 
 ## O que é
 
 O Agents Factory é uma fábrica de artefatos de IA que oferece:
 
-- **2 Meta-Skills** — Padrões de criação de skills e pesquisa de tecnologias
-- **40 Skills Operacionais** (Claude Code) / **20 Prompts** (Copilot) — Pesquisa, compilação, validação e auditoria — inclui a **família platform-software** (15: orquestradora + 14 irmãs para Kafka, Redis, MongoDB, Postgres…)
-- **24 Templates** — Scaffolding + assets compartilhados de platform-research
+- **52 Skills** (Claude Code) — Pesquisa, autoria de skills/agentes/rules, compilação, validação e auditoria — inclui a **família platform-software** (15: orquestradora + 14 irmãs para Kafka, Redis, MongoDB, Postgres…) e o **pipeline de livros técnicos** (pacote `book-writing`: 10 comandos + 13 agentes, saída em `Books/`)
+- **9 ficheiros de `assets/`** distribuídos pelas 4 skills que os possuem (`skill-creator`, `agent-creator`, `rules-compiler`, `terraform-instructions-compiler`) — não existe mais `.claude/templates/`
 - **4 Fluxos Combinados** — Pipelines de ponta-a-ponta
 
 ## Início Rápido
@@ -30,30 +34,15 @@ O Agents Factory é uma fábrica de artefatos de IA que oferece:
 ```
 > Auditoria multi-modelo de projetos Claude Code com relatório de consenso priorizado.
 
-### GitHub Copilot
-
-```
-@workspace /researching-technical-frameworks
-```
-
-```
-@workspace /project-analysis-validator
-```
-
 ## Estrutura do Repositório
 
 ```
-.claude/                    ← Claude Code (runtime principal)
-├── agents/                 ← 7 subagentes: 5 roteadores (framework-researcher, skill-author, architecture-auditor, quality-validator, skill-evaluator) + 2 helpers de pesquisa (research-synthesizer, section-investigator)
-├── skills/                 ← 40 skills (todas com context: fork), incl. a família platform-software (15)
+.claude/                    ← Claude Code (única fonte de verdade — não há .github/)
+├── agents/                 ← 20 subagentes: 5 roteadores (framework-researcher, artifact-author, architecture-auditor, quality-validator, skill-evaluator) + 2 helpers de pesquisa (research-synthesizer, section-investigator) + 13 do pipeline de livros (book-writing)
+├── skills/                 ← 52 skills; incl. a família platform-software (15) e 4 skills com assets/ próprio
+│                              (skill-creator, agent-creator, rules-compiler, terraform-instructions-compiler)
 ├── rules/                  ← 5 rules (agent/rules/skill-frontmatter, naming-conventions, skill-structure)
-├── templates/              ← 24 arquivos: scaffolding (agents/, prompts/, rules/, skills/, reports/) + platform-research/ (exclusivo CC)
 └── settings.json
-
-.github/                    ← GitHub Copilot (coexistência; não remover)
-├── skills/                 ← 2 meta-skills
-├── prompts/                ← 20 prompts operacionais
-└── templates/              ← 15 templates (agents/, instructions/, prompts/, skills/, reports/)
 ```
 
 ## Documentação
@@ -65,19 +54,12 @@ O Agents Factory é uma fábrica de artefatos de IA que oferece:
 | [Família Platform Software](docs/manual/platform-software-family.md) | 15 comandos para pesquisar plataformas auto-hospedadas (Kafka, Redis, Mongo…) |
 | [Como Usar](docs/como-usar/README.md) | Guias passo-a-passo por jornada |
 | [Fluxos Combinados](docs/fluxos/README.md) | Pipelines de ponta-a-ponta com diagramas |
-| [Mapeamento .github/ ↔ .claude/](docs/referencia/mapeamento-github-claude.md) | Equivalência entre artefatos Copilot e Claude Code |
 | [Referência](docs/referencia/convencoes.md) | Convenções, padrões e glossário |
 
 ## Pré-requisitos
 
-**Claude Code (recomendado):**
 - Claude Code CLI instalado
 - Este repositório clonado
-
-**GitHub Copilot (coexistência):**
-- VS Code com GitHub Copilot Chat ativo
-- Extensão GitHub Copilot Chat (≥ 0.20)
-- Este repositório clonado ou adicionado como workspace
 
 ## Princípios
 
