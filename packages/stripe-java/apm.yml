@@ -1,0 +1,6 @@
+name: agents-factory-stripe-java
+version: 1.0.0
+dependencies:
+  - ../factory-core
+includes: auto
+scripts: {}
