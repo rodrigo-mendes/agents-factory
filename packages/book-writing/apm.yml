@@ -1,0 +1,11 @@
+name: agents-factory-book-writing
+version: 1.0.0
+description: Technical book pipeline — 13 subagents + 10 commands (TOC, chapters, code/diagram assets, reviews, pt-BR/es translation, EPUB 3.0 for KDP)
+author: rodrigo-mendes
+license: MIT
+dependencies:
+  apm:
+    - path: ../factory-core
+  mcp: []
+includes: auto
+scripts: {}

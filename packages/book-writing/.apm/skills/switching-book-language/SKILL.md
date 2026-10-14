@@ -1,6 +1,6 @@
 ---
 name: switching-book-language
-description: Troca ou unifica a linguagem de código de um livro técnico já gerado, regenerando os artefatos de código em todos os capítulos e remontando book.md, traduções e EPUBs.
+description: Switches or unifies the code language of an already generated technical book, regenerating code assets across all chapters and reassembling book.md, translations, and EPUBs. Use when a completed book needs its code examples in a different programming language.
 argument-hint: "<book-slug> language=<lang> [style=working-code|pseudocode-first|pseudocode-only] [additional=go,typescript] [translate=yes|no] [epub=yes|no]"
 context: fork
 agent: book-orchestrator

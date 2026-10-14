@@ -204,5 +204,5 @@ Next step (orchestrator):
   # 1. Copy rendered diagram PNGs (skip if IMAGE_REFS is empty):
   cp Books/{SLUG}/assets/diagrams/*.png {OUTPUT_DIR}/OEBPS/images/
   # 2. Pack EPUB:
-  python book-agent/.claude/skills/repairing-book-epub/blueprints/build-epub.py {OUTPUT_DIR} {OUTPUT_DIR}/../book.epub
+  python .claude/skills/repairing-book-epub/blueprints/build-epub.py {OUTPUT_DIR} {OUTPUT_DIR}/../book.epub
 ```
