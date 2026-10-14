@@ -24,6 +24,7 @@ dependencies:
     # depends on ../camel-quarkus-skills, so it resolves transitively (same
     # "ambiguous resolved_by" reason as factory-core above).
     - path: ./packages/camel-quarkus-integrator
+    - path: ./packages/agent-package-builder
     - git: microsoft/apm
   mcp: []
 includes: auto

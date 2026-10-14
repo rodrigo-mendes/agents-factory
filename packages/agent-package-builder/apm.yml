@@ -1,0 +1,15 @@
+name: agents-factory-agent-package-builder
+version: 1.0.0
+description: >-
+  building-agent-packages — inline orchestrator skill that drives the existing research, authoring,
+  validation, evaluation and audit workers from a brief to a committed APM package (agent + skills +
+  rules). Runtime dependency only on the worker packages (not declared, to avoid cycles): install
+  alongside research-core, researching-*, artifact-authoring, validating, evaluating and auditing.
+author: rodrigo-mendes
+license: MIT
+dependencies:
+  apm:
+    - path: ../factory-core
+  mcp: []
+includes: auto
+scripts: {}
