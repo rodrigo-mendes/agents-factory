@@ -73,7 +73,7 @@ if os.path.isdir(idir):
 repo_skills = set()
 for root in ('packages',):
     for r, ds, fs in os.walk(root):
-        if r.endswith('/.apm/skills'):
+        if r.replace(os.sep, '/').endswith('/.apm/skills'):
             repo_skills.update(ds)
 for n, t in list(skills.items()) + list(agents.items()):
     for ref in set(re.findall(r'`((?:developing|integrating|structuring|building)-[a-z0-9-]+)`', t)):
