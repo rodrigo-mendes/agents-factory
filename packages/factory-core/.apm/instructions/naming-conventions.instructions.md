@@ -18,6 +18,10 @@ which pattern applies (see [skill-frontmatter.md](./skill-frontmatter.md)), not 
 | Agent file | `domain-role` | Identity-oriented — describes *who* the agent is (e.g., `framework-researcher`, `artifact-author`) |
 | Rule file | `scope-noun` | Scope-oriented — describes *what* the rule governs (e.g., `skill-frontmatter`, `naming-conventions`) |
 
+**Version-locked knowledge skills** (one skill = one version) append `-v<major>-<minor>` to the
+`gerund-noun` name, with hyphens instead of dots because `name` allows only lowercase letters,
+digits and hyphens (e.g., `developing-camel-quarkus-core-v3-40`). A new version is a new skill.
+
 ## ✅ Correct examples
 
 | Type | Correct name | Why |

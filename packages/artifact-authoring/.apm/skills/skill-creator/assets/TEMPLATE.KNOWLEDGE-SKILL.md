@@ -5,7 +5,9 @@ description: "[What it teaches or explains]. Use when [trigger — when should C
 
 > ⚙️ **Knowledge skill template.** Use this for auto-invocable reference skills with NO fork/agent/blueprints.
 > For action commands that fork to a subagent, use `TEMPLATE.SKILL.md` instead.
-> Keep this file under 150 lines. If it grows larger, convert to an action command with blueprints/.
+> Keep this file under 150 lines. If it grows larger or the skill is version-locked and research-derived,
+> use `TEMPLATE.KNOWLEDGE-SKILL.HYBRID.md` (lean SKILL.md + blueprints/) instead; convert to an action
+> command only if it needs to fork to a subagent.
 
 ## Overview
 
