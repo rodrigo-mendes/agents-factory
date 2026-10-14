@@ -11,7 +11,7 @@ disable-model-invocation: true
 
 Runs the `book-orchestrator` in `mode=enrich-chapter`. Takes an existing `chapter.md` written outside the pipeline (without `[CODE:]` / `[DIAGRAM:]` markers), infers injection points using heuristic rules, writes an enriched `prose.md`, then runs the standard P4.2+P4.3 sub-pipeline to generate all chapter assets and produce a fully assembled `chapter.md`.
 
-1. **Loads heuristics:** reads `book-agent/.claude/skills/enriching-book-chapter/blueprints/injection-heuristics.md`
+1. **Loads heuristics:** reads `.claude/skills/enriching-book-chapter/blueprints/injection-heuristics.md`
 2. **Optionally loads TOC context:** if `toc=` is provided (or `Books/{slug}/toc.md` exists), reads chapter objective and key concepts for better marker descriptions
 3. **Enriches prose:** spawns `chapter-enricher` → writes `Books/{slug}/chapters/ch{N:02d}/prose.md` with `[CODE:]` and `[DIAGRAM:]` markers inserted, original prose preserved verbatim
 4. **Runs P4.2 in parallel:** spawns `code-illustrator`, `diagram-illustrator`, `expert-reviewer`, `skeptic-reviewer`

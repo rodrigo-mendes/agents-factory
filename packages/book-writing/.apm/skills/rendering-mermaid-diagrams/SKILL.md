@@ -1,9 +1,9 @@
 ---
 name: rendering-mermaid-diagrams
-description: Renders all Mermaid diagram blocks in a completed book.md to PNG images and rewrites the file with Markdown image references, making diagrams visible in EPUB/Kindle readers.
-version: "1.0"
-model: claude-sonnet-5
+description: "Renders all Mermaid diagram blocks in a completed book.md to PNG images and rewrites the file with Markdown image references, making diagrams visible in EPUB/Kindle readers. Use when a book.md contains mermaid blocks that must appear as images in EPUB/Kindle output."
+argument-hint: "<path/to/book.md>"
 context: fork
+agent: mermaid-renderer
 disable-model-invocation: true
 ---
 

@@ -27,7 +27,7 @@ All fields are injected by book-orchestrator in the prompt:
 - `CHAPTER_NUM` — target chapter slot (e.g., `01`)
 - `SLUG` — book slug for output directory
 - `OUTPUT_PATH` — `Books/{SLUG}/chapters/ch{N:02d}/prose.md`
-- `INJECTION_HEURISTICS_PATH` — path to `book-agent/.claude/skills/enriching-book-chapter/blueprints/injection-heuristics.md`
+- `INJECTION_HEURISTICS_PATH` — path to `.claude/skills/enriching-book-chapter/blueprints/injection-heuristics.md`
 - `TOC_PATH` — optional; path to `toc.md` for chapter objective and key concepts context
 - `CHAPTER_TITLE` — chapter title (from TOC if available, otherwise from first `#` heading)
 

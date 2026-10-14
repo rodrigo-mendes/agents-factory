@@ -14,8 +14,8 @@ You are an EPUB 3.0 repair agent. You validate `.epub` files produced by the boo
 Before doing anything else, resolve the absolute paths to both blueprints by reading the skill directory. The scripts live at:
 
 ```
-book-agent/.claude/skills/repairing-book-epub/blueprints/build-epub.py
-book-agent/.claude/skills/repairing-book-epub/blueprints/validate-epub.py
+.claude/skills/repairing-book-epub/blueprints/build-epub.py
+.claude/skills/repairing-book-epub/blueprints/validate-epub.py
 ```
 
 Use `Read` on each file to confirm they exist, then store their absolute paths for use in Bash calls.

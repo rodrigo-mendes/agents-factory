@@ -6,12 +6,13 @@ Self-contained multi-agent system for generating complete, publication-ready tec
 
 ## Installation
 
-Copy agents and skills into the root `.claude/` of your project:
+Installed through APM as the `agents-factory-book-writing` package (listed in the root `apm.yml`):
 
 ```bash
-cp -r book-agent/.claude/agents/* .claude/agents/
-cp -r book-agent/.claude/skills/*  .claude/skills/
+apm install --target claude
 ```
+
+Generated books are written to `Books/{slug}/` at the repo root (gitignored). `/rendering-mermaid-diagrams` requires Node.js with `npx`. Edit sources here under `.apm/`, never in `.claude/`.
 
 ---
 
@@ -861,6 +862,8 @@ Books/{slug}/chapters/ch{N:02d}/
 | `chapter-assembler` | sonnet | Merges all 5 chapter assets; resolves markers; integrates callouts; writes `chapter.md` |
 | `book-translator` | sonnet | Translates `book.md` to pt-BR or es; preserves code, Mermaid, and technical terms |
 | `book-formatter` | sonnet | Converts `book.md` to EPUB 3.0 source tree (XHTML, OPF, nav, NCX, CSS) |
+| `epub-repairer` | sonnet | Validates generated EPUBs and repacks them from `epub-src/` |
+| `mermaid-renderer` | sonnet | Renders Mermaid blocks of `book.md` to PNG via the blueprint script |
 
 ### Diagram type selection (diagram-illustrator)
 

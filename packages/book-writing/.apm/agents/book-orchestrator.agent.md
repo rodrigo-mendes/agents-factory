@@ -72,7 +72,7 @@ Parse `$ARGUMENTS` at P0 to detect the mode:
 2. Validate: `topic`, `audience`, `context` present — abort if any missing
 3. Derive `SLUG` = kebab-case of topic (lowercase, spaces→dashes, remove special chars)
 4. Set `OUTPUT_DIR = Books/{SLUG}/`
-5. Read `book-agent/.claude/skills/writing-technical-book/blueprints/writing-style-guide.md` — load style rules for chapter-writer; if not readable log a warning but do NOT halt
+5. Read `.claude/skills/writing-technical-book/blueprints/writing-style-guide.md` — load style rules for chapter-writer; if not readable log a warning but do NOT halt
 6. Parse code parameters:
    - `CODE_LANGUAGE` = `code_language` arg, default `pseudocode`
    - `CODE_STYLE` = `code_style` arg, default `pseudocode-only`
@@ -292,7 +292,7 @@ EXTERNAL_CHAPTER_PATH: {EXTERNAL_CHAPTER_PATH}
 CHAPTER_NUM: {CHAPTER_NUM}
 SLUG: {SLUG}
 OUTPUT_PATH: {CHAPTER_DIR}prose.md
-INJECTION_HEURISTICS_PATH: book-agent/.claude/skills/enriching-book-chapter/blueprints/injection-heuristics.md
+INJECTION_HEURISTICS_PATH: .claude/skills/enriching-book-chapter/blueprints/injection-heuristics.md
 TOC_PATH: {TOC_PATH or ""}
 CHAPTER_TITLE: {CHAPTER_TITLE}
 ```
@@ -418,7 +418,7 @@ AUDIENCE: {AUDIENCE}
 MARKET_CONTEXT: {CONTEXT}
 PREVIOUS_CHAPTER_SUMMARY: {captured from previous chapter-writer return, empty for ch01}
 OUTPUT_PATH: Books/{SLUG}/chapters/ch{N:02d}/prose.md
-STYLE_GUIDE_PATH: book-agent/.claude/skills/writing-technical-book/blueprints/writing-style-guide.md
+STYLE_GUIDE_PATH: .claude/skills/writing-technical-book/blueprints/writing-style-guide.md
 DECISION_DIAGRAMS: {DECISION_DIAGRAMS}
 ```
 
@@ -564,7 +564,7 @@ npx --yes @mermaid-js/mermaid-cli --version
 
 **Render (Bash):**
 ```bash
-python book-agent/.claude/skills/rendering-mermaid-diagrams/blueprints/render-mermaid.py \
+python .claude/skills/rendering-mermaid-diagrams/blueprints/render-mermaid.py \
   Books/{SLUG}/book.md \
   Books/{SLUG}/assets/diagrams
 ```
@@ -679,7 +679,7 @@ fi
 
 Then pack each epub-src using the canonical blueprint (guarantees forward-slash ZIP paths and `mimetype` first/STORED — `zip` on Windows produces backslashes that break all EPUB readers):
 ```bash
-PACK="book-agent/.claude/skills/repairing-book-epub/blueprints/build-epub.py"
+PACK=".claude/skills/repairing-book-epub/blueprints/build-epub.py"
 python "$PACK" Books/{SLUG}/kindle/en/epub-src    Books/{SLUG}/kindle/en/book.epub
 python "$PACK" Books/{SLUG}/kindle/pt-BR/epub-src Books/{SLUG}/kindle/pt-BR/book.epub
 python "$PACK" Books/{SLUG}/kindle/es/epub-src    Books/{SLUG}/kindle/es/book.epub
@@ -834,7 +834,7 @@ When all chapters are VERIFIED (or FAILED): update Summary rows in traceability 
 Same rules as P5.5 in the full pipeline. Run after `SL-P5` (book.md reassembled) and before `SL-P6` (translations).
 
 ```bash
-python book-agent/.claude/skills/rendering-mermaid-diagrams/blueprints/render-mermaid.py \
+python .claude/skills/rendering-mermaid-diagrams/blueprints/render-mermaid.py \
   Books/{slug}/book.md \
   Books/{slug}/assets/diagrams
 ```
@@ -901,7 +901,7 @@ fi
 
 Then pack — only languages that were regenerated:
 ```bash
-PACK="book-agent/.claude/skills/repairing-book-epub/blueprints/build-epub.py"
+PACK=".claude/skills/repairing-book-epub/blueprints/build-epub.py"
 # Run only for languages where epub was regenerated (evaluate HAS_EPUB_* before running)
 if {HAS_EPUB_EN_bool}:   python "$PACK" Books/{slug}/kindle/en/epub-src    Books/{slug}/kindle/en/book.epub
 if {HAS_EPUB_PTBR_bool}: python "$PACK" Books/{slug}/kindle/pt-BR/epub-src Books/{slug}/kindle/pt-BR/book.epub
