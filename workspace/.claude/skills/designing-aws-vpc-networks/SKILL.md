@@ -243,7 +243,7 @@ aws ec2 describe-flow-logs --filter Name=resource-id,Values=<vpc-id> \
 ## Blueprints Directory Structure
 
 ```
-StoryBeat/.claude/skills/designing-aws-vpc-networks/
+workspace/.claude/skills/designing-aws-vpc-networks/
 ├── SKILL.md                              ← This file (guardrails + quick reference)
 └── blueprints/
     ├── evaluation-scenarios.md           ← 6 test scenarios for skill-evaluator

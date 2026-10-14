@@ -209,7 +209,7 @@ aws iam simulate-principal-policy --policy-source-arn <role-arn> \
 ## Blueprints Directory Structure
 
 ```
-StoryBeat/.claude/skills/architecting-lambda-serverless-patterns/
+workspace/.claude/skills/architecting-lambda-serverless-patterns/
 ├── SKILL.md                          <- This file (guardrails + integration patterns)
 └── blueprints/
     └── evaluation-scenarios.md       <- 6 test cases for skill validation

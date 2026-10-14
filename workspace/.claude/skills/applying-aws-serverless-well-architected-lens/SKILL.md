@@ -245,7 +245,7 @@ aws s3api get-bucket-encryption --bucket <BUCKET_NAME>
 ## Blueprints Directory Structure
 
 ```
-StoryBeat/.claude/skills/applying-aws-serverless-well-architected-lens/
+workspace/.claude/skills/applying-aws-serverless-well-architected-lens/
 ├── SKILL.md                              <- This file (summaries + guardrails)
 └── blueprints/
     ├── always-do-patterns.md             <- 8 mandatory patterns with full config detail

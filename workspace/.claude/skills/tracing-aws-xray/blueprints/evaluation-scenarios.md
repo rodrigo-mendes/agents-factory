@@ -1,7 +1,7 @@
 # Evaluation Scenarios — tracing-aws-xray
 
 Skill under test: `tracing-aws-xray`
-Research base: `StoryBeat/docs/research_cloud_AWS_X-Ray_Distributed_Tracing_2026.md` (2026-08-31)
+Research base: `workspace/docs/research_cloud_AWS_X-Ray_Distributed_Tracing_2026.md` (2026-08-31)
 
 ---
 

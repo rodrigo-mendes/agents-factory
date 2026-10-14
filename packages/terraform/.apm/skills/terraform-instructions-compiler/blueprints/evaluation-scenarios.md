@@ -13,7 +13,7 @@ are enforced.
 ```json
 {
   "skills": ["terraform-instructions-compiler"],
-  "query": "Compile Terraform instruction files from StoryBeat/research_Terraform_AWS_v1.9.md for our AWS project. We use modules, remote S3 state, GitHub Actions CI, and Terratest.",
+  "query": "Compile Terraform instruction files from workspace/research_Terraform_AWS_v1.9.md for our AWS project. We use modules, remote S3 state, GitHub Actions CI, and Terratest.",
   "expected_behavior": [
     "Loads research file at the specified path before asking any interview questions",
     "Classifies research findings into ✅ mandatory, ⚠️ conditional, and 🚫 forbidden before the interview",
@@ -55,11 +55,11 @@ are enforced.
 ```json
 {
   "skills": ["terraform-instructions-compiler"],
-  "query": "Generate Terraform instructions for OCI, Terraform 1.10. Research file: StoryBeat/nonexistent_research.md",
+  "query": "Generate Terraform instructions for OCI, Terraform 1.10. Research file: workspace/nonexistent_research.md",
   "expected_behavior": [
     "Attempts to read the research file at the specified path",
     "Detects the file is missing and triggers the error-handling path",
-    "Displays the structured error message: 'No research file found at StoryBeat/nonexistent_research.md'",
+    "Displays the structured error message: 'No research file found at workspace/nonexistent_research.md'",
     "Instructs the user to run /terraform-engineering-best-practices-researcher with TERRAFORM_VERSION: 1.10 and CLOUD_PROVIDER: OCI",
     "Does NOT proceed with interview or generate any files",
     "Does NOT invent research findings to substitute for the missing file"

@@ -258,7 +258,7 @@ aws sesv2 get-account --query 'ReputationMetrics'
 ## Blueprints Directory Structure
 
 ```
-StoryBeat/.claude/skills/architecting-aws-ses-email/
+workspace/.claude/skills/architecting-aws-ses-email/
 ├── SKILL.md                          <- This file (summary + guardrails)
 └── blueprints/
     └── evaluation-scenarios.md       <- 5 test scenarios for skill-evaluator

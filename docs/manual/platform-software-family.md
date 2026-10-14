@@ -39,7 +39,7 @@ framework-researcher                                  ← the research engine (P
         ├─ section-investigator   (parallel sub-investigation, depth=deep/exhaustive)
         └─ research-synthesizer   (merges findings into output-format-base.md)
         ↓
-StoryBeat/docs/research_platform_<Platform>_v<Version>.md
+workspace/docs/research_platform_<Platform>_v<Version>.md
 ```
 
 - **Orchestrator** (`researching-platform-software`): identifies the platform, consults
@@ -150,7 +150,7 @@ This keeps research for, say, APISIX from being contaminated by Kong-specific as
 ## Output Produced
 
 ```
-StoryBeat/docs/research_platform_<Platform>_v<Version>.md
+workspace/docs/research_platform_<Platform>_v<Version>.md
 ```
 
 13 mandatory sections (from `output-format-base.md`) plus conditional sections when triggered:
@@ -161,15 +161,15 @@ Specifics** (`researching-api-gateway`), **§Data Modeling** (datastore families
 
 ```bash
 grep -E "^## (Executive Summary|Platform Glossary|Operational Guardrails|Installation|Configuration Reference|HA & Failover|Backup|Upgrade|Observability|Security Hardening|Failure Modes)" \
-  StoryBeat/docs/research_platform_*.md
-grep -c "references/" StoryBeat/docs/research_platform_*.md   # cites the vendor reference card
+  workspace/docs/research_platform_*.md
+grep -c "references/" workspace/docs/research_platform_*.md   # cites the vendor reference card
 ```
 
 ---
 
 ## Next Steps
 
-- Turn a platform research file into an operational skill → `/skill-creator StoryBeat/docs/research_platform_<Platform>_v<Version>.md`
+- Turn a platform research file into an operational skill → `/skill-creator workspace/docs/research_platform_<Platform>_v<Version>.md`
 - Evaluate a sibling's behavior (cross-vendor, anti-bias) → `/evaluating-skill-scenarios researching-api-gateway`
 
 ---

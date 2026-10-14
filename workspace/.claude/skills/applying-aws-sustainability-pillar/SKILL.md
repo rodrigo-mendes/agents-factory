@@ -214,7 +214,7 @@ aws compute-optimizer get-ec2-instance-recommendations \
 ## Blueprints Directory Structure
 
 ```
-StoryBeat/.claude/skills/applying-aws-sustainability-pillar/
+workspace/.claude/skills/applying-aws-sustainability-pillar/
 ├── SKILL.md                              <- This file (summary + guardrails)
 └── blueprints/
     └── evaluation-scenarios.md           <- Test scenarios for skill-evaluator

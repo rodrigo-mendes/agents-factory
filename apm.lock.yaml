@@ -354,66 +354,66 @@ dependencies:
   - .claude/skills/researching-wide-column-store/blueprints/data-modeling.md
   - .claude/skills/researching-wide-column-store/blueprints/evaluation-scenarios.md
   deployed_file_hashes:
-    .claude/skills/researching-api-gateway/SKILL.md: sha256:3102639b855b4f26a06a22f36fd20c9359e085c8bb7e6ac4bbd2f7a8417640c7
+    .claude/skills/researching-api-gateway/SKILL.md: sha256:6c848b861cff13a066ee471d3e0859113abcfc8fc38ac86e7fe32b4c57d27786
     .claude/skills/researching-api-gateway/blueprints/category-specifics.md: sha256:9c23985ce964a9084d15cafdaf0a394bd1ea0766c8df6c098bd95142edb11140
     .claude/skills/researching-api-gateway/blueprints/evaluation-scenarios.md: sha256:90cb893e6b1b7ddc244d96593a83530340679cf0b603e379977c5b9ae6e7bfce
-    .claude/skills/researching-cache-store/SKILL.md: sha256:5bab1e2d3bd5510ca312ed766678f594f379cc7fd8fc9183663db1f64cc781f2
+    .claude/skills/researching-cache-store/SKILL.md: sha256:8c1570b710f9772fd21e96ccfd7d4b4076596c210cd421cdcecae19f90bd17d3
     .claude/skills/researching-cache-store/blueprints/category-specifics.md: sha256:85d368ae5f839d31d0be93f8ca9d43e5e4dd83bdbdab2e035573f51c3422e392
     .claude/skills/researching-cache-store/blueprints/evaluation-scenarios.md: sha256:e498a9ab44eef1117efef54cae89bc4074a8d73e99d26a46ef727da252e4d372
-    .claude/skills/researching-columnar-analytics/SKILL.md: sha256:553de57cc76555d0819730bf9cf5f325569556ac2c4bec1a48d3c069c78ed85c
-    .claude/skills/researching-columnar-analytics/blueprints/category-specifics.md: sha256:51c493ac67d46325c02ef2f39be568f493ebdebdfeab6af4df54a88b41320dbe
-    .claude/skills/researching-columnar-analytics/blueprints/data-modeling.md: sha256:75f08ced985b2e978c45773f4045714b828ee372920b5d8b340ede748c3ee9c5
+    .claude/skills/researching-columnar-analytics/SKILL.md: sha256:18df751a7483851e79f32a3e2234df72162298a7801c866c5f1475f3f1624ed3
+    .claude/skills/researching-columnar-analytics/blueprints/category-specifics.md: sha256:c5d25ce1bb38f37f4b901ac6a7e699d8073143b045dce6e78bdfc61f6397ffb4
+    .claude/skills/researching-columnar-analytics/blueprints/data-modeling.md: sha256:c683ae7c8543f596584c93cd75ed57c47c0b25f42defad51ae9a7c430fc3da8b
     .claude/skills/researching-columnar-analytics/blueprints/evaluation-scenarios.md: sha256:598a2d8cdaaeebc57ee6bb86b187e060ea4792421f3fbaf87b94c0970cf11ac4
-    .claude/skills/researching-coordination-service/SKILL.md: sha256:a6c651414e427c7e18d60fcac59bc0ec6710c74f376970656908c1251d240f5c
+    .claude/skills/researching-coordination-service/SKILL.md: sha256:562e3cf2241ea71fd6870cefa6a18e8e917b6b5bdd1516e216d043db30947a9a
     .claude/skills/researching-coordination-service/blueprints/category-specifics.md: sha256:fce8d619c765599bc1b82b7528bb3d61ce481aadc06b6e365a414cb448470c18
     .claude/skills/researching-coordination-service/blueprints/evaluation-scenarios.md: sha256:1e04bd67ec3b302a909d419a79010a444e078a051270c06e86d6528055519230
-    .claude/skills/researching-document-store/SKILL.md: sha256:326430ed37389145bb001b048f2b9c1662dc476f127faafafaef4058fd19d46f
-    .claude/skills/researching-document-store/blueprints/category-specifics.md: sha256:2c77400a3704e5e0d66c319c0555ce48ed8e378345e71c44b45e80f1f1578b37
+    .claude/skills/researching-document-store/SKILL.md: sha256:0a78713559bc64a7684b329b9cd399a35bb354cf91d2b83b4cdb672742d881d6
+    .claude/skills/researching-document-store/blueprints/category-specifics.md: sha256:f3537976ab94601fd850842fb06c8bbd84ddf4991937fb1ab1987610f54ca57f
     .claude/skills/researching-document-store/blueprints/data-modeling.md: sha256:a386501c558a6e3848cd6e3c0ff27def5ba310d8a1177d532cc031c4623f61c9
     .claude/skills/researching-document-store/blueprints/evaluation-scenarios.md: sha256:33358c29dce4a21dd481a97283deb144fae7e86ce65378f88a3a19b1ec9b6f5d
-    .claude/skills/researching-graph-database/SKILL.md: sha256:5cbbd5f87df1326c036c2fc0295cf014a9d822297e5e58bea2b357597a4305da
-    .claude/skills/researching-graph-database/blueprints/category-specifics.md: sha256:e6ed5783638255a1198bd153d28e4c4defcf2c27ab9915da582e68f958afe345
+    .claude/skills/researching-graph-database/SKILL.md: sha256:410e3986425ec441bea9f0c023258f64a2ee8cd6dbc3028e5c8e2dc630cd7cf1
+    .claude/skills/researching-graph-database/blueprints/category-specifics.md: sha256:50fde0c6052451cd9a7bbed7fed795559d6375b9ea775adcb171af90c82ba49a
     .claude/skills/researching-graph-database/blueprints/data-modeling.md: sha256:7930ac6916a6cd7a42835a25c33150e6e8668280387fbb70c5838eda47cb2c38
     .claude/skills/researching-graph-database/blueprints/evaluation-scenarios.md: sha256:fdc6aa8e016145c630d240555cb27e51ac4656aa47a4d0a98159f21fe0b7b443
-    .claude/skills/researching-kv-store/SKILL.md: sha256:11eb42489034b3c1a7620abde939403c4e8924a54caf87037318844ed9514eae
-    .claude/skills/researching-kv-store/blueprints/category-specifics.md: sha256:720167fe1bcbdcf9162cf289678c407fdc4bd3a7ad9642514f93b1a03a7880af
-    .claude/skills/researching-kv-store/blueprints/data-modeling.md: sha256:e5cdbbb1a26f45c141fd614996cb019f0d9dffdfe4672c6d09ed9579bd186635
+    .claude/skills/researching-kv-store/SKILL.md: sha256:18696df59e241dcc7de863346389542ce0afa17ec943d23770ffbdadd2d8e3c4
+    .claude/skills/researching-kv-store/blueprints/category-specifics.md: sha256:aebbe87f1a00648e5abdfe2ab793a2a2956b27e034a8b7f93cbb68c0561ed989
+    .claude/skills/researching-kv-store/blueprints/data-modeling.md: sha256:18ab259b9765fa10b976140c8fc3eb37ae71ba920267ce94f919e79ec96a370d
     .claude/skills/researching-kv-store/blueprints/evaluation-scenarios.md: sha256:23a7dff0b87caeef51e7875fd751ba70c7cb5b82905551b7b4faec413a6fa8f9
-    .claude/skills/researching-object-storage/SKILL.md: sha256:da9c7c9949351507320f359e77d3ba49c3f5d765121d358a3f8f24a3c441cae3
-    .claude/skills/researching-object-storage/blueprints/category-specifics.md: sha256:7265475e12ba50ee1fb303b2c3b808cd2724056063f544d037c002f57fd93b1d
-    .claude/skills/researching-object-storage/blueprints/data-modeling.md: sha256:61e8843cbb6e34767afa747d0d5ed703a5e05dc5d8f67675820c739785c12fac
+    .claude/skills/researching-object-storage/SKILL.md: sha256:bbe75527b2232063e2d1c1c050de48ecbcdd538e52e685e5092db5b8b151d6ba
+    .claude/skills/researching-object-storage/blueprints/category-specifics.md: sha256:343cc8428b36f26c3f0c359e7630acca1bb923c6e88f4ed43e502eba97064d35
+    .claude/skills/researching-object-storage/blueprints/data-modeling.md: sha256:270c53e5b0bd13966e9c877926c7c62203220e6d32afa45be48cc03ac20a0d4e
     .claude/skills/researching-object-storage/blueprints/evaluation-scenarios.md: sha256:e1f0b4a2fe9511e59c8d5e47a54c7fd82f6133a090ae408d90a67022ec180d2c
-    .claude/skills/researching-platform-software/SKILL.md: sha256:d538ca23a8557b71c9fa940d8a03cc2fd448ae9d5f9e543b3bd2a7e1a0e36624
+    .claude/skills/researching-platform-software/SKILL.md: sha256:c2d2d61bbb8906ba0d6babb50ba58379db1e860516dda3b081530ca523564f0c
     .claude/skills/researching-platform-software/blueprints/evaluation-scenarios.md: sha256:b5d9eae477d53304845d7b0e55a9590ed300f3fda5f66348f0598ae8333cb502
     .claude/skills/researching-platform-software/blueprints/routing-decision-tree.md: sha256:fc282828a9f3c3f0a9a359c41fadcbad157470ae499f667de4823b5884e4b9f5
     .claude/skills/researching-platform-software/blueprints/shared/data-modeling-principles.md: sha256:86e5d4b8c7566d737f662f49cfefdf921163ac58a35ffadfc7d1b63fbebf65d8
     .claude/skills/researching-platform-software/blueprints/shared/deployment-guides/container-compose-guide.md: sha256:468bc3a471bee36b4e2442dc476a3157af8fa4823d7dbc59812a1efe6fcb2771
     .claude/skills/researching-platform-software/blueprints/shared/deployment-guides/kubernetes-operator-guide.md: sha256:6d362d93154e41199404407b35816c56ea64e10adbdd48d9b0de2efadab03f8a
     .claude/skills/researching-platform-software/blueprints/shared/deployment-guides/vm-and-bare-metal-guide.md: sha256:c23e614f7c6ed14040f14fba7d91bbee87666873340e9fb08c5de7d0f13b8515
-    .claude/skills/researching-platform-software/blueprints/shared/output-format-base.md: sha256:2bc371cb97a9e17e3627d750ad6a1b1bf2019401a42ca2f3c22a5901c1fd943a
+    .claude/skills/researching-platform-software/blueprints/shared/output-format-base.md: sha256:79add30cedbe8bf33ada9cef4b83a0a08fb5c6f2029c9cfdadf91ce5ff88b469
     .claude/skills/researching-platform-software/blueprints/shared/reference-card-example-kafka-3.7.md: sha256:cba3a865d9c3c7d8bee7c1c29878264ef2367dc8940ec64222a7fa5c6b33dd2b
     .claude/skills/researching-platform-software/blueprints/shared/reference-card-template.md: sha256:dda9703de786c7b008a3ebd5b2f70f69a522ed81e97c0a1652a0fdd59bb293ed
     .claude/skills/researching-platform-software/blueprints/shared/research-scope-operations.md: sha256:a8327c302d79d466acddba33b711434f7b2f8c475e50abaa89fb4f2a43112950
-    .claude/skills/researching-rdbms/SKILL.md: sha256:11b41735385a67555658dcba619c79929252cd6ea6c1b2563137ce18d184e6c4
+    .claude/skills/researching-rdbms/SKILL.md: sha256:0263683725a07f3e6873453087b7f526f7ee18cacd1faa51849efee5746aa9df
     .claude/skills/researching-rdbms/blueprints/category-specifics.md: sha256:d8ca433077fdb42ffb07eacd2d1ef85ab93eaf83cb8c05952618649cc38e2d61
-    .claude/skills/researching-rdbms/blueprints/data-modeling.md: sha256:73ca1b0af30655c885e1b6c6f14c22b1be4078119bc46732285e31ea41301c90
+    .claude/skills/researching-rdbms/blueprints/data-modeling.md: sha256:ea14eace7396e741fae07025920b556abeca2f9c84c0fcd575b9744dea39e5b3
     .claude/skills/researching-rdbms/blueprints/evaluation-scenarios.md: sha256:b8729e7a9cce833aabefd5a63a257e90bceeeafc13fcb8f6cc267c847668eb16
-    .claude/skills/researching-search-engine/SKILL.md: sha256:cc0d3cfc5c71db273eece3b4331ddb475a553e6ffa2ea6ad0dd1e3b39798a434
-    .claude/skills/researching-search-engine/blueprints/category-specifics.md: sha256:722690e41dc816a0ea896a20a8f5b12b95a28d0e8fa5067ea513ac3fcbb8cfa1
+    .claude/skills/researching-search-engine/SKILL.md: sha256:565cbb194360038a2e961917be9e345c0f963230682db7af4e951b713c780424
+    .claude/skills/researching-search-engine/blueprints/category-specifics.md: sha256:424fcff3cfa7495e4664df214d2634765315b17b572f0697c7908d5b6743385e
     .claude/skills/researching-search-engine/blueprints/evaluation-scenarios.md: sha256:f96ed99328b3b3442238e3203d4ecf7cb6252fce6c5434f1fe976bc7228565ae
-    .claude/skills/researching-streaming-broker/SKILL.md: sha256:b58106591817754f1bc20538cf60bd203af636faa104b4f4b841634498052874
+    .claude/skills/researching-streaming-broker/SKILL.md: sha256:9a58e604ffa1ef9c1b6135b18ceec4d82c1555f807ee4c9a85b444bac56a2978
     .claude/skills/researching-streaming-broker/blueprints/category-specifics.md: sha256:9b3ec2969e90af5613b60ef156e8ff1a20aa87ac9461cd1910f090bc0bbe782e
     .claude/skills/researching-streaming-broker/blueprints/evaluation-scenarios.md: sha256:83dd70703ba8d5fcabcfa96ea33a5bfe37594bb3898e3b55835754ed5bdbe810
-    .claude/skills/researching-timeseries-db/SKILL.md: sha256:c99441279fe1e39b379d84f0f9fcf9160537f37343a5a9b4b1355c1aa38a6cf9
-    .claude/skills/researching-timeseries-db/blueprints/category-specifics.md: sha256:b1855dffc8c0b4b81c3516f1d384bddc18bd3105a3285a1adcba4cc66d57d0c5
+    .claude/skills/researching-timeseries-db/SKILL.md: sha256:d3a3b7f6c21b6408374fb3256a998653c2f7bea6a7a212b4b89dfaf0a6a7e04d
+    .claude/skills/researching-timeseries-db/blueprints/category-specifics.md: sha256:7f36625810174642b21ef4df0815ad12c0cfadcc33e247187f4982005ea65ccd
     .claude/skills/researching-timeseries-db/blueprints/data-modeling.md: sha256:3192a0b138a661effa16ee104b926da15ed1c77a12e01f54926f7c3368329f83
     .claude/skills/researching-timeseries-db/blueprints/evaluation-scenarios.md: sha256:dfedd039c7248daa56fcdb4dba75523a700d4040ae7dfdbe25921c08e4068c67
-    .claude/skills/researching-vector-store/SKILL.md: sha256:ab935bec7549e7562ab287b4edbc15831c7ed87c1ea728919202cdaf72dfd074
-    .claude/skills/researching-vector-store/blueprints/category-specifics.md: sha256:fca08bc844cb82588e89f6155dd70ffa47d1caf00a947dd48679088223a0608c
+    .claude/skills/researching-vector-store/SKILL.md: sha256:536dc719f86a7500f1cd1531e080d7e9f7f31d4413ab5875d5e4b34e58d7f648
+    .claude/skills/researching-vector-store/blueprints/category-specifics.md: sha256:eda48311f84ef7546cf5c85a85b8835dd87fdfff971ffd3f03fa0e9ffa5f1fe4
     .claude/skills/researching-vector-store/blueprints/data-modeling.md: sha256:a22dfbf2738c98cfe06ffdb0c43ada3c9071bf9bc04bd1bb049759620b75917c
     .claude/skills/researching-vector-store/blueprints/evaluation-scenarios.md: sha256:712af979ec887e44e12a53fb722368f65347c47573d7c67abf84a6e0d8057471
-    .claude/skills/researching-wide-column-store/SKILL.md: sha256:ea87f8ea99eb44e090a3a0b240461d297257fe8a0aa5952b14f29388ae629e66
-    .claude/skills/researching-wide-column-store/blueprints/category-specifics.md: sha256:3cceee3fb456510283abd60e9db9b9469f143bbacf4bfbe90232ec962a08d853
+    .claude/skills/researching-wide-column-store/SKILL.md: sha256:fa079e0b7261497c5e607737dfb5f564071a7bed289efb1511b7d476f952765f
+    .claude/skills/researching-wide-column-store/blueprints/category-specifics.md: sha256:50365a1e16c52d686ce78e11ce22fed4074f0df4b2b6e230385045f53d00f3a8
     .claude/skills/researching-wide-column-store/blueprints/data-modeling.md: sha256:fc4a87f5879872eb24b7bc153bca264b31b5cf5292ddd2e3e7a8c6a6e27ce38a
     .claude/skills/researching-wide-column-store/blueprints/evaluation-scenarios.md: sha256:5095de0ca31192f6f6c54b805b6415753c57a740c2b176cfed801f70ed5073ea
   source: local
@@ -468,9 +468,9 @@ dependencies:
     .claude/skills/terraform-engineering-best-practices-researcher/blueprints/research-scope-environments-state.md: sha256:89715198ac4945d6afc5f65dc1a614478e4ff43fe360a04201660ca7ec9265e9
     .claude/skills/terraform-engineering-best-practices-researcher/blueprints/research-scope-project-modules.md: sha256:1d9d7360017da899e229dd073df48ff64d874dcabd562c6b9ea81ac5b1244a9e
     .claude/skills/terraform-engineering-best-practices-researcher/blueprints/research-scope-quality-advanced-governance.md: sha256:20a52fa315cf3a446f46279c31debe069b70b5cc9a40903ac6f6f50e131769ec
-    .claude/skills/terraform-instructions-compiler/SKILL.md: sha256:ecf60e01c63eba0153860d8dedc9cd52ddae5d6cf5063e1b4d555bb31a534ce7
+    .claude/skills/terraform-instructions-compiler/SKILL.md: sha256:9fadf54a0c5755755da253a5dba201f53b3b6401dfb5031cde288ee22708fe95
     .claude/skills/terraform-instructions-compiler/assets/terraform-standards-reference.md: sha256:3cd36ab1a34bd3752c3eb6c8730d11b4619cede59cb82ffabb6920c2b4382b6e
-    .claude/skills/terraform-instructions-compiler/blueprints/evaluation-scenarios.md: sha256:20012d76610dda62f457fc782427c58deb2c505d6ce9eadd85767e6bcbf83c28
+    .claude/skills/terraform-instructions-compiler/blueprints/evaluation-scenarios.md: sha256:7fac58ed2f418765648e578cc77ce2c7fa5a00f7b966e80559529cf483c894cc
     .claude/skills/terraform-instructions-compiler/blueprints/interview-questions.md: sha256:d000bddd4d6299924cb7ff8b1b0ed378ce9080c183b67b52a1d6be1a9b24cb72
   source: local
   local_path: ./packages/terraform
@@ -580,13 +580,13 @@ dependencies:
     .claude/skills/rules-compiler/assets/TEMPLATE.SKILLS.md: sha256:674c706aa032415af67c12264bee57a108bff931bec5984716c35db4447af876
     .claude/skills/rules-compiler/assets/TEMPLATE.STANDARDS.md: sha256:e61d1bd6a44d3f9807a8b395ba7e83ee4aabd8404ea22ee7927d8bfc5b106aa2
     .claude/skills/rules-compiler/blueprints/domain-compiler-contract.md: sha256:b5788bf42dd1364c5da5589261badcc91310d8b861569dd94a390adaa6594c2b
-    .claude/skills/skill-creator/SKILL.md: sha256:d8f19134e27db6045086cc2a35370ab0e96dd109e0649558550e4c86b7910bb5
+    .claude/skills/skill-creator/SKILL.md: sha256:3451308129584fe72cf92c1c259eb0e45c943a58ffd7580c55beebb62dc3991a
     .claude/skills/skill-creator/assets/TEMPLATE.EVALUATION-SCENARIOS.md: sha256:5a0d97d141d77f3e985700afb5a4f6ca25b6713b5ec451b21dba4c583146626f
     .claude/skills/skill-creator/assets/TEMPLATE.KNOWLEDGE-SKILL.HYBRID.md: sha256:554f371ddd0b02f3a730cf8972839229f49a8ba8f6168b2a3775cc5566e85bdd
     .claude/skills/skill-creator/assets/TEMPLATE.KNOWLEDGE-SKILL.md: sha256:36190f31b443c5d123fe3342eb98eeea849661f84b24de31b78deea54b194d18
     .claude/skills/skill-creator/assets/TEMPLATE.SKILL.md: sha256:b0289b78e9323d95e355aa7a1842f3bff28a927a30d3f35c5db93fd98440ea89
     .claude/skills/skill-creator/blueprints/evaluation-iteration.md: sha256:0a5b8ce27eb5824bb5845172ef421c07289616437232320c8ec36bbfda33c54a
-    .claude/skills/skill-creator/blueprints/evaluation-scenarios.md: sha256:97201f1c30f1a8fa3707af3b11fde92b8d35c9a90f09105fe5ecd45dedbb00ed
+    .claude/skills/skill-creator/blueprints/evaluation-scenarios.md: sha256:eaace2c5a95de5a10dc29b699b2ed34414a3c9be7636bcc0274145228648e539
     .claude/skills/skill-creator/blueprints/three-tier-architecture.md: sha256:bf86feff5f52ea6a2fa64459a042ad206cb92be091a6f49acee4a7fb1cc9ce8e
   source: local
   local_path: ../artifact-authoring
@@ -891,7 +891,7 @@ dependencies:
     .claude/rules/agent-frontmatter.md: sha256:5d9ea57fc54bcd225ed60a049239381954b30391fa5d2088200e96d8a6b09205
     .claude/rules/naming-conventions.md: sha256:459ebc86e72e6baa18b998a92dd1acde19d2fea6aeabf69520f1fe4d27b22842
     .claude/rules/rules-frontmatter.md: sha256:1fe2afc6176a02c41e8e312c75b9d6b02b6ce560b745689400dd1f12ab596fef
-    .claude/rules/skill-frontmatter.md: sha256:59253084ec1038ef1171fb22ed165664a9276b58003dde8cb9fff2f110e77c2e
+    .claude/rules/skill-frontmatter.md: sha256:1d2151c4ce1666f9dd95f683ca4af715be4bf9ec0178de01017e64f079c22e81
     .claude/rules/skill-structure.md: sha256:5f9db35b8e9050ed5f793e10582cadd4a6224d25382087d00d03df2a4f4282ca
   source: local
   local_path: ../factory-core
@@ -909,7 +909,7 @@ dependencies:
   - .claude/agents/research-synthesizer.md
   - .claude/agents/section-investigator.md
   deployed_file_hashes:
-    .claude/agents/framework-researcher.md: sha256:906786a1bb3a6eabb34ed593d3fed52f3925c7a9cf134f0c1c8a46eb64b234b8
+    .claude/agents/framework-researcher.md: sha256:6e3a076e481f5a3ead5b87f4a6fa5dbec06a39b823711f0a3b8076b066b72296
     .claude/agents/research-synthesizer.md: sha256:5673be272ba3df39e24a6fcf562315944708214f78b541bd300d8822e05b14a1
     .claude/agents/section-investigator.md: sha256:152a22adc6f32c2b508bda76a6f9262242d90e1687a5624ad5dcab6733b9b931
   source: local
@@ -1403,7 +1403,7 @@ deployments:
   owners:
   - local:packages/research-core
   active_owner: local:packages/research-core
-  content_hash: sha256:906786a1bb3a6eabb34ed593d3fed52f3925c7a9cf134f0c1c8a46eb64b234b8
+  content_hash: sha256:6e3a076e481f5a3ead5b87f4a6fa5dbec06a39b823711f0a3b8076b066b72296
 - kind: project-relative
   target: claude
   value: .claude/agents/mermaid-renderer.md
@@ -1520,7 +1520,7 @@ deployments:
   owners:
   - local:packages/factory-core
   active_owner: local:packages/factory-core
-  content_hash: sha256:59253084ec1038ef1171fb22ed165664a9276b58003dde8cb9fff2f110e77c2e
+  content_hash: sha256:1d2151c4ce1666f9dd95f683ca4af715be4bf9ec0178de01017e64f079c22e81
 - kind: project-relative
   target: claude
   value: .claude/rules/skill-structure.md
@@ -4670,7 +4670,7 @@ deployments:
   owners:
   - ./packages/researching-platform
   active_owner: ./packages/researching-platform
-  content_hash: sha256:3102639b855b4f26a06a22f36fd20c9359e085c8bb7e6ac4bbd2f7a8417640c7
+  content_hash: sha256:6c848b861cff13a066ee471d3e0859113abcfc8fc38ac86e7fe32b4c57d27786
 - kind: project-relative
   target: claude
   value: .claude/skills/researching-api-gateway/blueprints/category-specifics.md
@@ -4706,7 +4706,7 @@ deployments:
   owners:
   - ./packages/researching-platform
   active_owner: ./packages/researching-platform
-  content_hash: sha256:5bab1e2d3bd5510ca312ed766678f594f379cc7fd8fc9183663db1f64cc781f2
+  content_hash: sha256:8c1570b710f9772fd21e96ccfd7d4b4076596c210cd421cdcecae19f90bd17d3
 - kind: project-relative
   target: claude
   value: .claude/skills/researching-cache-store/blueprints/category-specifics.md
@@ -4742,7 +4742,7 @@ deployments:
   owners:
   - ./packages/researching-platform
   active_owner: ./packages/researching-platform
-  content_hash: sha256:553de57cc76555d0819730bf9cf5f325569556ac2c4bec1a48d3c069c78ed85c
+  content_hash: sha256:18df751a7483851e79f32a3e2234df72162298a7801c866c5f1475f3f1624ed3
 - kind: project-relative
   target: claude
   value: .claude/skills/researching-columnar-analytics/blueprints/category-specifics.md
@@ -4751,7 +4751,7 @@ deployments:
   owners:
   - ./packages/researching-platform
   active_owner: ./packages/researching-platform
-  content_hash: sha256:51c493ac67d46325c02ef2f39be568f493ebdebdfeab6af4df54a88b41320dbe
+  content_hash: sha256:c5d25ce1bb38f37f4b901ac6a7e699d8073143b045dce6e78bdfc61f6397ffb4
 - kind: project-relative
   target: claude
   value: .claude/skills/researching-columnar-analytics/blueprints/data-modeling.md
@@ -4760,7 +4760,7 @@ deployments:
   owners:
   - ./packages/researching-platform
   active_owner: ./packages/researching-platform
-  content_hash: sha256:75f08ced985b2e978c45773f4045714b828ee372920b5d8b340ede748c3ee9c5
+  content_hash: sha256:c683ae7c8543f596584c93cd75ed57c47c0b25f42defad51ae9a7c430fc3da8b
 - kind: project-relative
   target: claude
   value: .claude/skills/researching-columnar-analytics/blueprints/evaluation-scenarios.md
@@ -4787,7 +4787,7 @@ deployments:
   owners:
   - ./packages/researching-platform
   active_owner: ./packages/researching-platform
-  content_hash: sha256:a6c651414e427c7e18d60fcac59bc0ec6710c74f376970656908c1251d240f5c
+  content_hash: sha256:562e3cf2241ea71fd6870cefa6a18e8e917b6b5bdd1516e216d043db30947a9a
 - kind: project-relative
   target: claude
   value: .claude/skills/researching-coordination-service/blueprints/category-specifics.md
@@ -4823,7 +4823,7 @@ deployments:
   owners:
   - ./packages/researching-platform
   active_owner: ./packages/researching-platform
-  content_hash: sha256:326430ed37389145bb001b048f2b9c1662dc476f127faafafaef4058fd19d46f
+  content_hash: sha256:0a78713559bc64a7684b329b9cd399a35bb354cf91d2b83b4cdb672742d881d6
 - kind: project-relative
   target: claude
   value: .claude/skills/researching-document-store/blueprints/category-specifics.md
@@ -4832,7 +4832,7 @@ deployments:
   owners:
   - ./packages/researching-platform
   active_owner: ./packages/researching-platform
-  content_hash: sha256:2c77400a3704e5e0d66c319c0555ce48ed8e378345e71c44b45e80f1f1578b37
+  content_hash: sha256:f3537976ab94601fd850842fb06c8bbd84ddf4991937fb1ab1987610f54ca57f
 - kind: project-relative
   target: claude
   value: .claude/skills/researching-document-store/blueprints/data-modeling.md
@@ -4868,7 +4868,7 @@ deployments:
   owners:
   - ./packages/researching-platform
   active_owner: ./packages/researching-platform
-  content_hash: sha256:5cbbd5f87df1326c036c2fc0295cf014a9d822297e5e58bea2b357597a4305da
+  content_hash: sha256:410e3986425ec441bea9f0c023258f64a2ee8cd6dbc3028e5c8e2dc630cd7cf1
 - kind: project-relative
   target: claude
   value: .claude/skills/researching-graph-database/blueprints/category-specifics.md
@@ -4877,7 +4877,7 @@ deployments:
   owners:
   - ./packages/researching-platform
   active_owner: ./packages/researching-platform
-  content_hash: sha256:e6ed5783638255a1198bd153d28e4c4defcf2c27ab9915da582e68f958afe345
+  content_hash: sha256:50fde0c6052451cd9a7bbed7fed795559d6375b9ea775adcb171af90c82ba49a
 - kind: project-relative
   target: claude
   value: .claude/skills/researching-graph-database/blueprints/data-modeling.md
@@ -4913,7 +4913,7 @@ deployments:
   owners:
   - ./packages/researching-platform
   active_owner: ./packages/researching-platform
-  content_hash: sha256:11eb42489034b3c1a7620abde939403c4e8924a54caf87037318844ed9514eae
+  content_hash: sha256:18696df59e241dcc7de863346389542ce0afa17ec943d23770ffbdadd2d8e3c4
 - kind: project-relative
   target: claude
   value: .claude/skills/researching-kv-store/blueprints/category-specifics.md
@@ -4922,7 +4922,7 @@ deployments:
   owners:
   - ./packages/researching-platform
   active_owner: ./packages/researching-platform
-  content_hash: sha256:720167fe1bcbdcf9162cf289678c407fdc4bd3a7ad9642514f93b1a03a7880af
+  content_hash: sha256:aebbe87f1a00648e5abdfe2ab793a2a2956b27e034a8b7f93cbb68c0561ed989
 - kind: project-relative
   target: claude
   value: .claude/skills/researching-kv-store/blueprints/data-modeling.md
@@ -4931,7 +4931,7 @@ deployments:
   owners:
   - ./packages/researching-platform
   active_owner: ./packages/researching-platform
-  content_hash: sha256:e5cdbbb1a26f45c141fd614996cb019f0d9dffdfe4672c6d09ed9579bd186635
+  content_hash: sha256:18ab259b9765fa10b976140c8fc3eb37ae71ba920267ce94f919e79ec96a370d
 - kind: project-relative
   target: claude
   value: .claude/skills/researching-kv-store/blueprints/evaluation-scenarios.md
@@ -4958,7 +4958,7 @@ deployments:
   owners:
   - ./packages/researching-platform
   active_owner: ./packages/researching-platform
-  content_hash: sha256:da9c7c9949351507320f359e77d3ba49c3f5d765121d358a3f8f24a3c441cae3
+  content_hash: sha256:bbe75527b2232063e2d1c1c050de48ecbcdd538e52e685e5092db5b8b151d6ba
 - kind: project-relative
   target: claude
   value: .claude/skills/researching-object-storage/blueprints/category-specifics.md
@@ -4967,7 +4967,7 @@ deployments:
   owners:
   - ./packages/researching-platform
   active_owner: ./packages/researching-platform
-  content_hash: sha256:7265475e12ba50ee1fb303b2c3b808cd2724056063f544d037c002f57fd93b1d
+  content_hash: sha256:343cc8428b36f26c3f0c359e7630acca1bb923c6e88f4ed43e502eba97064d35
 - kind: project-relative
   target: claude
   value: .claude/skills/researching-object-storage/blueprints/data-modeling.md
@@ -4976,7 +4976,7 @@ deployments:
   owners:
   - ./packages/researching-platform
   active_owner: ./packages/researching-platform
-  content_hash: sha256:61e8843cbb6e34767afa747d0d5ed703a5e05dc5d8f67675820c739785c12fac
+  content_hash: sha256:270c53e5b0bd13966e9c877926c7c62203220e6d32afa45be48cc03ac20a0d4e
 - kind: project-relative
   target: claude
   value: .claude/skills/researching-object-storage/blueprints/evaluation-scenarios.md
@@ -5003,7 +5003,7 @@ deployments:
   owners:
   - ./packages/researching-platform
   active_owner: ./packages/researching-platform
-  content_hash: sha256:d538ca23a8557b71c9fa940d8a03cc2fd448ae9d5f9e543b3bd2a7e1a0e36624
+  content_hash: sha256:c2d2d61bbb8906ba0d6babb50ba58379db1e860516dda3b081530ca523564f0c
 - kind: project-relative
   target: claude
   value: .claude/skills/researching-platform-software/blueprints/evaluation-scenarios.md
@@ -5066,7 +5066,7 @@ deployments:
   owners:
   - ./packages/researching-platform
   active_owner: ./packages/researching-platform
-  content_hash: sha256:2bc371cb97a9e17e3627d750ad6a1b1bf2019401a42ca2f3c22a5901c1fd943a
+  content_hash: sha256:79add30cedbe8bf33ada9cef4b83a0a08fb5c6f2029c9cfdadf91ce5ff88b469
 - kind: project-relative
   target: claude
   value: .claude/skills/researching-platform-software/blueprints/shared/reference-card-example-kafka-3.7.md
@@ -5111,7 +5111,7 @@ deployments:
   owners:
   - ./packages/researching-platform
   active_owner: ./packages/researching-platform
-  content_hash: sha256:11b41735385a67555658dcba619c79929252cd6ea6c1b2563137ce18d184e6c4
+  content_hash: sha256:0263683725a07f3e6873453087b7f526f7ee18cacd1faa51849efee5746aa9df
 - kind: project-relative
   target: claude
   value: .claude/skills/researching-rdbms/blueprints/category-specifics.md
@@ -5129,7 +5129,7 @@ deployments:
   owners:
   - ./packages/researching-platform
   active_owner: ./packages/researching-platform
-  content_hash: sha256:73ca1b0af30655c885e1b6c6f14c22b1be4078119bc46732285e31ea41301c90
+  content_hash: sha256:ea14eace7396e741fae07025920b556abeca2f9c84c0fcd575b9744dea39e5b3
 - kind: project-relative
   target: claude
   value: .claude/skills/researching-rdbms/blueprints/evaluation-scenarios.md
@@ -5156,7 +5156,7 @@ deployments:
   owners:
   - ./packages/researching-platform
   active_owner: ./packages/researching-platform
-  content_hash: sha256:cc0d3cfc5c71db273eece3b4331ddb475a553e6ffa2ea6ad0dd1e3b39798a434
+  content_hash: sha256:565cbb194360038a2e961917be9e345c0f963230682db7af4e951b713c780424
 - kind: project-relative
   target: claude
   value: .claude/skills/researching-search-engine/blueprints/category-specifics.md
@@ -5165,7 +5165,7 @@ deployments:
   owners:
   - ./packages/researching-platform
   active_owner: ./packages/researching-platform
-  content_hash: sha256:722690e41dc816a0ea896a20a8f5b12b95a28d0e8fa5067ea513ac3fcbb8cfa1
+  content_hash: sha256:424fcff3cfa7495e4664df214d2634765315b17b572f0697c7908d5b6743385e
 - kind: project-relative
   target: claude
   value: .claude/skills/researching-search-engine/blueprints/evaluation-scenarios.md
@@ -5192,7 +5192,7 @@ deployments:
   owners:
   - ./packages/researching-platform
   active_owner: ./packages/researching-platform
-  content_hash: sha256:b58106591817754f1bc20538cf60bd203af636faa104b4f4b841634498052874
+  content_hash: sha256:9a58e604ffa1ef9c1b6135b18ceec4d82c1555f807ee4c9a85b444bac56a2978
 - kind: project-relative
   target: claude
   value: .claude/skills/researching-streaming-broker/blueprints/category-specifics.md
@@ -5300,7 +5300,7 @@ deployments:
   owners:
   - ./packages/researching-platform
   active_owner: ./packages/researching-platform
-  content_hash: sha256:c99441279fe1e39b379d84f0f9fcf9160537f37343a5a9b4b1355c1aa38a6cf9
+  content_hash: sha256:d3a3b7f6c21b6408374fb3256a998653c2f7bea6a7a212b4b89dfaf0a6a7e04d
 - kind: project-relative
   target: claude
   value: .claude/skills/researching-timeseries-db/blueprints/category-specifics.md
@@ -5309,7 +5309,7 @@ deployments:
   owners:
   - ./packages/researching-platform
   active_owner: ./packages/researching-platform
-  content_hash: sha256:b1855dffc8c0b4b81c3516f1d384bddc18bd3105a3285a1adcba4cc66d57d0c5
+  content_hash: sha256:7f36625810174642b21ef4df0815ad12c0cfadcc33e247187f4982005ea65ccd
 - kind: project-relative
   target: claude
   value: .claude/skills/researching-timeseries-db/blueprints/data-modeling.md
@@ -5345,7 +5345,7 @@ deployments:
   owners:
   - ./packages/researching-platform
   active_owner: ./packages/researching-platform
-  content_hash: sha256:ab935bec7549e7562ab287b4edbc15831c7ed87c1ea728919202cdaf72dfd074
+  content_hash: sha256:536dc719f86a7500f1cd1531e080d7e9f7f31d4413ab5875d5e4b34e58d7f648
 - kind: project-relative
   target: claude
   value: .claude/skills/researching-vector-store/blueprints/category-specifics.md
@@ -5354,7 +5354,7 @@ deployments:
   owners:
   - ./packages/researching-platform
   active_owner: ./packages/researching-platform
-  content_hash: sha256:fca08bc844cb82588e89f6155dd70ffa47d1caf00a947dd48679088223a0608c
+  content_hash: sha256:eda48311f84ef7546cf5c85a85b8835dd87fdfff971ffd3f03fa0e9ffa5f1fe4
 - kind: project-relative
   target: claude
   value: .claude/skills/researching-vector-store/blueprints/data-modeling.md
@@ -5390,7 +5390,7 @@ deployments:
   owners:
   - ./packages/researching-platform
   active_owner: ./packages/researching-platform
-  content_hash: sha256:ea87f8ea99eb44e090a3a0b240461d297257fe8a0aa5952b14f29388ae629e66
+  content_hash: sha256:fa079e0b7261497c5e607737dfb5f564071a7bed289efb1511b7d476f952765f
 - kind: project-relative
   target: claude
   value: .claude/skills/researching-wide-column-store/blueprints/category-specifics.md
@@ -5399,7 +5399,7 @@ deployments:
   owners:
   - ./packages/researching-platform
   active_owner: ./packages/researching-platform
-  content_hash: sha256:3cceee3fb456510283abd60e9db9b9469f143bbacf4bfbe90232ec962a08d853
+  content_hash: sha256:50365a1e16c52d686ce78e11ce22fed4074f0df4b2b6e230385045f53d00f3a8
 - kind: project-relative
   target: claude
   value: .claude/skills/researching-wide-column-store/blueprints/data-modeling.md
@@ -5561,7 +5561,7 @@ deployments:
   owners:
   - local:packages/artifact-authoring
   active_owner: local:packages/artifact-authoring
-  content_hash: sha256:d8f19134e27db6045086cc2a35370ab0e96dd109e0649558550e4c86b7910bb5
+  content_hash: sha256:3451308129584fe72cf92c1c259eb0e45c943a58ffd7580c55beebb62dc3991a
 - kind: project-relative
   target: claude
   value: .claude/skills/skill-creator/assets/TEMPLATE.EVALUATION-SCENARIOS.md
@@ -5615,7 +5615,7 @@ deployments:
   owners:
   - local:packages/artifact-authoring
   active_owner: local:packages/artifact-authoring
-  content_hash: sha256:97201f1c30f1a8fa3707af3b11fde92b8d35c9a90f09105fe5ecd45dedbb00ed
+  content_hash: sha256:eaace2c5a95de5a10dc29b699b2ed34414a3c9be7636bcc0274145228648e539
 - kind: project-relative
   target: claude
   value: .claude/skills/skill-creator/blueprints/three-tier-architecture.md
@@ -5885,7 +5885,7 @@ deployments:
   owners:
   - ./packages/terraform
   active_owner: ./packages/terraform
-  content_hash: sha256:ecf60e01c63eba0153860d8dedc9cd52ddae5d6cf5063e1b4d555bb31a534ce7
+  content_hash: sha256:9fadf54a0c5755755da253a5dba201f53b3b6401dfb5031cde288ee22708fe95
 - kind: project-relative
   target: claude
   value: .claude/skills/terraform-instructions-compiler/assets/terraform-standards-reference.md
@@ -5903,7 +5903,7 @@ deployments:
   owners:
   - ./packages/terraform
   active_owner: ./packages/terraform
-  content_hash: sha256:20012d76610dda62f457fc782427c58deb2c505d6ce9eadd85767e6bcbf83c28
+  content_hash: sha256:7fac58ed2f418765648e578cc77ce2c7fa5a00f7b966e80559529cf483c894cc
 - kind: project-relative
   target: claude
   value: .claude/skills/terraform-instructions-compiler/blueprints/interview-questions.md

@@ -197,7 +197,7 @@ aws cognito-identity describe-identity-pool --identity-pool-id <id> \
 ## Blueprints Directory Structure
 
 ```
-StoryBeat/.claude/skills/securing-aws-cognito/
+workspace/.claude/skills/securing-aws-cognito/
 ├── SKILL.md                              <- This file (summaries + guardrails)
 └── blueprints/
     ├── always-do-patterns.md             <- 9 mandatory patterns with CLI verification

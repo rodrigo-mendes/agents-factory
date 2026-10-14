@@ -157,7 +157,7 @@ flowchart TD
 1. /researching-technical-frameworks
         │ → research_FastAPI_v0.115.md
         ↓
-2. /skill-creator StoryBeat/research_FastAPI_v0.115.md
+2. /skill-creator workspace/research_FastAPI_v0.115.md
         │ → .claude/skills/fastapi-async-api/SKILL.md
         ↓
 3. /skill-best-practices-validator .claude/skills/fastapi-async-api/

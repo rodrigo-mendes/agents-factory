@@ -53,7 +53,7 @@ Partners: PostgreSQL, pytest, Pydantic v2, Docker
 ### Output Produced
 
 ```
-StoryBeat/research_FastAPI_v0.115.md
+workspace/research_FastAPI_v0.115.md
 ```
 
 Main sections of the generated file:
@@ -75,7 +75,7 @@ grep -c "🚫" research_FastAPI_v0.115.md   # should have ≥ 2
 
 ### Next Steps
 
-- Generic technology → `/skill-creator StoryBeat/research_FastAPI_v0.115.md`
+- Generic technology → `/skill-creator workspace/research_FastAPI_v0.115.md`
 - Methodology → `/methodologies-skill-generator`
 - Architecture → `/architecture-approaches-skill-generator`
 - Terraform → `/terraform-instructions-compiler`
@@ -125,7 +125,7 @@ Use modules: yes (terraform-aws-modules/lambda)
 ### Output Produced
 
 ```
-StoryBeat/research_AWS_Lambda_aws5.60.md
+workspace/research_AWS_Lambda_aws5.60.md
 ```
 
 Additional IaC-specific sections:
@@ -137,7 +137,7 @@ Additional IaC-specific sections:
 
 ### Next Steps
 
-- Generate provisioning skill → `/skill-creator StoryBeat/research_AWS_Lambda_aws5.60.md`
+- Generate provisioning skill → `/skill-creator workspace/research_AWS_Lambda_aws5.60.md`
 
 > **When to use this vs. `/terraform-engineering-best-practices-researcher`:**
 > This one researches **a specific service** (e.g. Lambda, S3). The other researches **the general project structure** of Terraform (modules, CI/CD, state, tests) — use both in a complementary manner.
@@ -179,7 +179,7 @@ Context: serverless workloads
 ### Output Produced
 
 ```
-StoryBeat/research_cloud_AWS_Security_2024.md
+workspace/research_cloud_AWS_Security_2024.md
 ```
 
 ---
@@ -219,7 +219,7 @@ Systems: SAP FICO, Salesforce
 ### Output Produced
 
 ```
-StoryBeat/research_Finance_banco-de-varejo.md
+workspace/research_Finance_banco-de-varejo.md
 ```
 
 Sections: key processes, ubiquitous vocabulary (DDD), suggested bounded contexts, regulatory requirements, stakeholders and SLAs.
@@ -344,14 +344,14 @@ Compliance: SOC2
 ### Output Produced
 
 ```
-StoryBeat/research_Terraform_Engineering_Best_Practices_v1.9.md
+workspace/research_Terraform_Engineering_Best_Practices_v1.9.md
 ```
 
 Sections: recommended directory structure, module design, environment strategy, state management, CI/CD pipeline, test pyramid, code quality, governance.
 
 ### Next Steps
 
-- `/terraform-instructions-compiler StoryBeat/research_Terraform_Engineering_Best_Practices_v1.9.md`
+- `/terraform-instructions-compiler workspace/research_Terraform_Engineering_Best_Practices_v1.9.md`
 
 ---
 
@@ -389,7 +389,7 @@ also invoke a sibling directly (`/researching-streaming-broker Kafka 3.7`).
 | `researching-vector-store` | Milvus, Qdrant, Weaviate, pgvector, Chroma |
 | `researching-object-storage` | MinIO, Ceph RGW, SeaweedFS, GarageHQ |
 
-**Output:** `StoryBeat/docs/research_platform_<Platform>_v<Version>.md`.
+**Output:** `workspace/docs/research_platform_<Platform>_v<Version>.md`.
 
 > Full detail — routing rules, ambiguity handling (Redis → cache/kv/coordination), shared templates
 > (`researching-platform-software/blueprints/shared/`), and the neutral `category-specifics.md` +

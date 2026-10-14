@@ -221,7 +221,7 @@ aws ec2 create-flow-logs --resource-type VPC --resource-ids vpc-xxxx \
 ## Blueprints Directory Structure
 
 ```
-StoryBeat/.claude/skills/securing-vpc-network-access/
+workspace/.claude/skills/securing-vpc-network-access/
 ├── SKILL.md                          ← This file (guardrails + patterns)
 └── blueprints/
     └── evaluation-scenarios.md       ← 6 test cases for skill-evaluator

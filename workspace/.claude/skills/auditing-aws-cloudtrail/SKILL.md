@@ -230,7 +230,7 @@ aws s3api get-public-access-block --bucket <log-archive-bucket>
 ## Blueprints Directory Structure
 
 ```
-StoryBeat/.claude/skills/auditing-aws-cloudtrail/
+workspace/.claude/skills/auditing-aws-cloudtrail/
 ├── SKILL.md                              <- This file (summary + guardrails)
 └── blueprints/
     └── evaluation-scenarios.md          <- 6 test cases for skill-evaluator

@@ -234,7 +234,7 @@ aws logs tail /aws/lambda/<FunctionName> --since 5m | head -20
 ## Blueprints Directory Structure
 
 ```
-StoryBeat/.claude/skills/implementing-lambda-powertools-java/
+workspace/.claude/skills/implementing-lambda-powertools-java/
 ├── SKILL.md                              ← This file (summary + guardrails)
 └── blueprints/
     ├── always-do-patterns.md             ← ✅ 7 mandatory patterns with full code

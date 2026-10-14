@@ -163,7 +163,7 @@ scaffolding a generic agent's companion rules.
    - {domain}-skills.md: keyword → skill-name table
 
 4. Create the skills (if they don't exist yet):
-   /skill-creator StoryBeat/research_{Tech}_v{Version}.md
+   /skill-creator workspace/research_{Tech}_v{Version}.md
 ```
 
 ### Minimum frontmatter by type

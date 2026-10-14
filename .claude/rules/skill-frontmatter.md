@@ -41,7 +41,7 @@ Add four extra fields. All four are required together — omitting any one break
 ---
 name: my-action-command
 description: "Creates X from Y. Use when authoring a new X from a research file."
-argument-hint: "Path to research file (e.g. StoryBeat/research_X_v1.md)"
+argument-hint: "Path to research file (e.g. workspace/research_X_v1.md)"
 context: fork
 agent: artifact-author
 disable-model-invocation: true
