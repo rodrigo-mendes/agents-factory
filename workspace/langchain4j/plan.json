@@ -1,0 +1,10 @@
+[
+ {"message": "feat(langchain4j): add LangChain4j 1.22.0 chat + streaming package\n\n3 version-locked knowledge skills (core, openai, provider-a/Anthropic), the\nnon-interactive langchain4j-integrator subagent and 2 scoped rules; wire it\ninto the root manifest.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>",
+  "paths": ["packages/langchain4j/", "apm.yml"]},
+ {"message": "chore(apm): regenerate .claude with the langchain4j package\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>",
+  "paths": [".claude/agents/langchain4j-integrator.md", ".claude/rules/langchain4j-code-standards.md", ".claude/rules/langchain4j-project-config.md", ".claude/skills/developing-langchain4j-core-v1-22/", ".claude/skills/integrating-langchain4j-openai-v1-22/", ".claude/skills/integrating-langchain4j-provider-a-v1-22/"]},
+ {"message": "docs(claude-md): add the langchain4j package and update counts\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>",
+  "paths": ["CLAUDE.md"]},
+ {"message": "docs(workspace): add langchain4j 1.22.0 research, family facts/rules and validation\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>",
+  "paths": ["workspace/langchain4j/"]}
+]
