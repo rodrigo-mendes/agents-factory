@@ -34,7 +34,8 @@ dependencies:
     - path: ./packages/oci-observability
     - path: ./packages/oci-architecture
     - path: ./packages/stripe-java
-    - git: microsoft/apm
+    - path: ./packages/langchain4j
+#    - git: microsoft/apm
   mcp: []
 includes: auto
 scripts: {}
