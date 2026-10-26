@@ -20,7 +20,7 @@ disable-model-invocation: true
 - **[Blueprints & Guardrails](#blueprints--guardrails)** — Three-tier operational rules for this skill's execution
 - **[Category Specifics](./blueprints/category-specifics.md)** — Neutral streaming/messaging patterns (topology, ordering, delivery guarantees)
 - **[Reference Card Template](../researching-platform-software/blueprints/shared/reference-card-template.md)** — Skeleton every per-vendor card follows (worked example: [reference-card-example-kafka-3.7.md](../researching-platform-software/blueprints/shared/reference-card-example-kafka-3.7.md))
-- **[Reference Cards](./blueprints/references/)** — Per-vendor pinned instances following the template (`<vendor>-<version>.md`, e.g. `rabbitmq-3.13.md`, `pulsar-3.2.md`)
+- **[Reference Cards](./blueprints/references/README.md)** — Per-vendor pinned instances following the template (`<vendor>-<version>.md`, e.g. `rabbitmq-3.13.md`, `pulsar-3.2.md`)
 - **[Evaluation Scenarios](./blueprints/evaluation-scenarios.md)** — Cross-vendor tests (must cover ≥ 2 different brokers)
 - **[Shared Output Template](../researching-platform-software/blueprints/shared/output-format-base.md)** — 13-section skeleton
 - **[Shared Research Scope](../researching-platform-software/blueprints/shared/research-scope-operations.md)** — §1–§12 operational scope
