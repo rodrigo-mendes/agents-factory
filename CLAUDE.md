@@ -100,9 +100,8 @@ Not compiled code — artifacts run **in Claude Code** via `/<command>`:
 - API gateway: `/researching-api-gateway Kong 3.7 deployment=kubernetes-operator`
 
 The 64 commands use `disable-model-invocation: true` (deliberate actions) — accessible via `/name`,
-with no auto-listing cost. The other 146 skills are knowledge skills and auto-invoke instead of
-routing via `/name`: `rules-compiler`, the 11 skills that arrive from `microsoft/apm`
-(`autopilot-*`, `pr-description-skill`), the 15 Camel Quarkus skills, the 26 `provisioning-aws-<service>-v6` skills, and the AWS architecture (`aws-skills`), OCI, Stripe and LangChain4j knowledge skills (their descriptions are
+with no auto-listing cost. The other 135 skills are knowledge skills and auto-invoke instead of
+routing via `/name`: `rules-compiler`, the 15 Camel Quarkus skills, the 26 `provisioning-aws-<service>-v6` skills, and the AWS architecture (`aws-skills`), OCI, Stripe and LangChain4j knowledge skills (their descriptions are
 listed in every session of a project that installs them, so keep them short and specific).
 
 ## Structure
@@ -116,8 +115,8 @@ listed in every session of a project that installs them, so keep them short and 
 │                 terraform-rules-author + aws-terraform-engineer + aws-architect +
 │                 7 OCI agents + 2 Stripe agents (stripe-advisor, stripe-integrator) +
 │                 langchain4j-integrator
-├── skills/     ← 210 skills: 64 fork → subagent commands + 146 knowledge/auto-invoke; includes the
-│                 platform-software family (1 orchestrator + 14 siblings), 11 from microsoft/apm,
+├── skills/     ← 199 skills: 64 fork → subagent commands + 135 knowledge/auto-invoke; includes the
+│                 platform-software family (1 orchestrator + 14 siblings),
 │                 15 Camel Quarkus, 26 AWS Terraform (provisioning-aws-*-v6), the AWS/OCI/Stripe/LangChain4j knowledge skills, and each skill's own assets/ (former .claude/templates/
 │                 content) + blueprints/
 ├── rules/      ← 44 rules by path (paths:): 5 factory rules + 3 Camel Quarkus + 3 AWS Terraform + OCI (incl. 2 oci-architecture guardrails), AWS-architect, Stripe and 2 LangChain4j rules
