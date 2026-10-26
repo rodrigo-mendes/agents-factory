@@ -323,6 +323,8 @@ dependencies:
   deployed_files:
   - .claude/agents/oci-serverless-architect.md
   - .claude/agents/oci-serverless-stack.md
+  - .claude/rules/oci-architecture-data-events-guardrails.md
+  - .claude/rules/oci-architecture-guardrails.md
   - .claude/skills/architecting-oci-serverless
   - .claude/skills/architecting-oci-serverless/SKILL.md
   - .claude/skills/architecting-oci-serverless/architecting-oci-serverless-best-practices-review.md
@@ -383,8 +385,10 @@ dependencies:
   - .claude/skills/provision-oci-serverless-stack/SKILL.md
   - .claude/skills/provision-oci-serverless-stack/blueprints/evaluation-scenarios.md
   deployed_file_hashes:
-    .claude/agents/oci-serverless-architect.md: sha256:7affed24e0f39908c5f3c8dec33becca6dc562a09e1231de77e8abdb04009f66
+    .claude/agents/oci-serverless-architect.md: sha256:247cd0e3b4cf3a06f35585375661014aa25227688bc22c080de9f0bbddcbd912
     .claude/agents/oci-serverless-stack.md: sha256:b1ff443d13086e3c2fc9dd63cc58ee73483cebb8b2c6fec9da54a7f3cb411af6
+    .claude/rules/oci-architecture-data-events-guardrails.md: sha256:9a60309f16681691f550be091444888b3067427ee03ab95532c002545c00a86c
+    .claude/rules/oci-architecture-guardrails.md: sha256:2fa7dec5a13c86c0de0b1e261bb446370a1a28ae9941572c1ab90135dcaf3697
     .claude/skills/architecting-oci-serverless/SKILL.md: sha256:c1923daa6eb3e1a5c6010a349f81fff17da35712aa773b600f7a981e4c4cf562
     .claude/skills/architecting-oci-serverless/architecting-oci-serverless-best-practices-review.md: sha256:1f193eccbe76290ac361c4bc589f48928b8fcbce1447729c7914026a8aa8e942
     .claude/skills/architecting-oci-serverless/blueprints/always-do-patterns.md: sha256:f3dcca1baa1b5206b144a1f76c0516e2f68d8df85a2c48e37d22a83afb3052f0
@@ -396,8 +400,8 @@ dependencies:
     .claude/skills/architecting-oci-serverless/blueprints/quick-reference.md: sha256:81b45d91280ee9bebd23fc82dc4e6ee90d0b4bc88d80435d46a6ec0e59f753ae
     .claude/skills/architecting-oci-serverless/blueprints/reference-architecture-diagram.md: sha256:e52d20c81152a52b14c8c7e8175c11e68b04ebac4e719d3d10533008085f693c
     .claude/skills/architecting-oci-serverless/blueprints/verification-loop.md: sha256:a82e77bddf5ce79362c4cb7d553bfdfe41dae2b3981d7c268317f05365c2ff12
-    .claude/skills/design-oci-architecture/SKILL.md: sha256:59368a343663a6272b76a96cbbcd87f1ccb220afbaa19552fcd6aea5376469f8
-    .claude/skills/design-oci-architecture/blueprints/evaluation-scenarios.md: sha256:49434966525e3c6da65aae1e5db459905a6f7c6e6ec495dbb403c5d8d0ddba1d
+    .claude/skills/design-oci-architecture/SKILL.md: sha256:f82f360150a6b99890fb03929d3794b52c7ae1a7310d190073b6dacd61b1eea0
+    .claude/skills/design-oci-architecture/blueprints/evaluation-scenarios.md: sha256:9ad28fe95a19d70c17955443b9ed7f386ac9f974d8fe67588bf75a55afeccaeb
     .claude/skills/designing-oci-api-gateway/SKILL.md: sha256:1c5bebbfc35ac1694e55fe2169c4cd7dbb62e77fa601eed300ba96c955cb9bd6
     .claude/skills/designing-oci-api-gateway/blueprints/always-do-patterns.md: sha256:e61601e1dc827db73d92a4387bdef7132fa20b20f1963de955b79525447200a9
     .claude/skills/designing-oci-api-gateway/blueprints/ask-first-decisions.md: sha256:33b0251dc6dfc82ddb515ebce836a1a36da0990c87f074fd124522b03d161863
@@ -438,7 +442,7 @@ dependencies:
     .claude/skills/provision-oci-serverless-stack/blueprints/evaluation-scenarios.md: sha256:4bfe68d639ce0a9bc3e2ba5a8d2b83d6c3015b846ff0a1ae75ba4f1202008a73
   source: local
   local_path: ./packages/oci-architecture
-  content_hash: sha256:935515c666dc2155be7c6ede4f73d1745a5141cc41cbfec260771e707b6d2134
+  content_hash: sha256:e41b7465dc8c00cdc2a2485bb8c65e57727c506c0f4b9e59d11d7321a9a194ce
   declared_license: MIT
 - repo_url: _local/oci-functions-java
   name: agents-factory-oci-functions-java
@@ -640,7 +644,7 @@ dependencies:
     .claude/skills/publishing-events-from-oci-functions/blueprints/integration-patterns.md: sha256:40f2e21cb17df5e008c71c644c1a734407c409d90e071cf514e98420b2ad7d5d
     .claude/skills/publishing-events-from-oci-functions/blueprints/never-do-patterns.md: sha256:054620e0052dabc1b7e2484456dfae3601de6b05500ebe948f6351dff5d4618c
     .claude/skills/publishing-events-from-oci-functions/publishing-events-from-oci-functions-best-practices-review.md: sha256:d0fd8377f7c3a39ef14f96720e7b1ba36c8a7f941891c833ab09f3970d26dbf9
-    .claude/skills/refactoring-oci-java/SKILL.md: sha256:8c2a17312be1d8ba87adc75d1ca69e3b9bf487ad8f4c1826e47c1237501b0923
+    .claude/skills/refactoring-oci-java/SKILL.md: sha256:12f394b80f4c8daa067bfcb6d75bc61dffba8d9d9fa866a724a0a0b1d418907c
     .claude/skills/refactoring-oci-java/blueprints/evaluation-scenarios.md: sha256:d8d522604ddad427284924dd306bb958f9fd0b3b56e03343a7fda80f06b57ff8
     .claude/skills/refactoring-oci-java/refactoring-oci-java-best-practices-review.md: sha256:2aaa9ff604df6248e04da40ae5f27cc31ebb63a7f6efae11ad3335f595fc853b
     .claude/skills/scaffolding-oci-function/SKILL.md: sha256:b7e27416a87611fbcf1efcf082027ff9da2e80e89dc97188475a4e4993743fc7
@@ -1043,7 +1047,7 @@ dependencies:
     .claude/skills/provisioning-custom-dashboard-oci-observability/blueprints/poc-examples.md: sha256:a015750802e909599575e0b30f804689dad8551fd03260925d81337c8222c9f7
     ? .claude/skills/provisioning-custom-dashboard-oci-observability/provisioning-custom-dashboard-oci-observability-best-practices-review.md
     : sha256:8ecb6798d354cc82576739bb0be2da3a89dba0002b8236d3646a9360bdcfd4c6
-    .claude/skills/provisioning-oci-api-gateway/SKILL.md: sha256:bc8b021035950e362c1a4770e4dfba342cac4842c71ce0b86939171cba31a4c2
+    .claude/skills/provisioning-oci-api-gateway/SKILL.md: sha256:6efc2038c60b10d1b5937bbb5db3557da1690c8d390eb8c40332e49b1fb1aa29
     .claude/skills/provisioning-oci-api-gateway/blueprints/always-do-patterns.md: sha256:f572eead597b78d2afc9d72a2bbff71accad69d63a132de89f249997befb8f98
     .claude/skills/provisioning-oci-api-gateway/blueprints/ask-first-decisions.md: sha256:ba3bfebd7ce57834832713aa7ec4b12c835dae60501f5c80a46d1b84afaafc20
     .claude/skills/provisioning-oci-api-gateway/blueprints/evaluation-scenarios.md: sha256:802a324a4d1a71022843234268455ce60abb1596539d4028be78576cbbb0abd8
@@ -1068,14 +1072,14 @@ dependencies:
     .claude/skills/provisioning-oci-connector-hub/blueprints/poc-examples.md: sha256:2e5f983065c1e9f987ecd1b3d73ca8a766024cbfc4f80128532f6e3e2c313cf6
     .claude/skills/provisioning-oci-connector-hub/evaluations.json: sha256:99f7bcab08a7b52716f86fcb14d03cb5455e16f01c6f734fd9e3b74a8e3b7cb6
     .claude/skills/provisioning-oci-connector-hub/provisioning-oci-connector-hub-best-practices-review.md: sha256:b7cbf5ed7e8870cff293be3b5af4dd5c087e41753a04becd81852a7186476fcd
-    .claude/skills/provisioning-oci-event-driven-pubsub/SKILL.md: sha256:8d814eb77c7c86d3ad542dd1306639384acf1942e7ed43839c7fea407b85205b
+    .claude/skills/provisioning-oci-event-driven-pubsub/SKILL.md: sha256:168f8bc83fff08f9f4804d2671a0a71d342bf567812171dd6648a1bc2afbc88d
     .claude/skills/provisioning-oci-event-driven-pubsub/blueprints/always-do-patterns.md: sha256:804a10e3e5a0fce1d27863465abd33da1b3e9c1695e718b1b11728bc4bd5d42a
     .claude/skills/provisioning-oci-event-driven-pubsub/blueprints/ask-first-decisions.md: sha256:bf4120ce80e387895a4816a3c0d8297af1ddd282f0d56afd988c2d4bd9f2dfbb
     .claude/skills/provisioning-oci-event-driven-pubsub/blueprints/evaluation-scenarios.md: sha256:53c12bbf75fe0c7a7be686598f6d5cbc230de4979578cbbfa2d6f3430b4f1201
     .claude/skills/provisioning-oci-event-driven-pubsub/blueprints/integration-patterns.md: sha256:f4b57d64cc01db5760db0d1455186d699573149d2feb369d8d49a0605d06d655
     .claude/skills/provisioning-oci-event-driven-pubsub/blueprints/never-do-patterns.md: sha256:76df4f8ff94b42b3b34e1aeb90e327121cac05635c0520b585809255bb60f61a
     .claude/skills/provisioning-oci-event-driven-pubsub/provisioning-oci-event-driven-pubsub-best-practices-review.md: sha256:3f36efaafb119ce3dfb426d7366e544a346a0dd873acadbdd9644487d460c301
-    .claude/skills/provisioning-oci-events/SKILL.md: sha256:3103e9b1ba32e2697988d48c6471afd782da72265ac52965bb0d3d69af5d6fb9
+    .claude/skills/provisioning-oci-events/SKILL.md: sha256:97d30c2343c1fd3a09cba7a2e6c81d65a01a4318f8c79a331d918960961580c7
     .claude/skills/provisioning-oci-events/blueprints/always-do-patterns.md: sha256:cd9ffddac394fbfe0e9c18af1e61d11818fb3ee643cefa809d6dc821c340a485
     .claude/skills/provisioning-oci-events/blueprints/ask-first-decisions.md: sha256:c7e5f796b3515d040c8ea4dd10fbb03eca750e3816c97969657e88b8d952af9b
     .claude/skills/provisioning-oci-events/blueprints/evaluation-scenarios.md: sha256:054df2e8b3bc62f123033f7789abf9db64fc88e629ef2657400bf2798d2a2cbc
@@ -1497,7 +1501,7 @@ dependencies:
     .claude/skills/terraform-instructions-compiler/assets/terraform-standards-reference.md: sha256:3cd36ab1a34bd3752c3eb6c8730d11b4619cede59cb82ffabb6920c2b4382b6e
     .claude/skills/terraform-instructions-compiler/blueprints/evaluation-scenarios.md: sha256:7fac58ed2f418765648e578cc77ce2c7fa5a00f7b966e80559529cf483c894cc
     .claude/skills/terraform-instructions-compiler/blueprints/interview-questions.md: sha256:d000bddd4d6299924cb7ff8b1b0ed378ce9080c183b67b52a1d6be1a9b24cb72
-    .claude/skills/terraform-rules-author/SKILL.md: sha256:c59dbf8644c09fcabf0111b83801dc88b7e697e4341580af8371d0166f97d3fc
+    .claude/skills/terraform-rules-author/SKILL.md: sha256:f936e39b2e2e1ebe9cdf8d0382dc1bfee1daa4cb9e157f08cbb7efeee318436a
     .claude/skills/terraform-rules-author/blueprints/evaluation-scenarios.md: sha256:6dcfce7178d778724a0f2dd2e048b2b929f77ed80ed735c93e53e2a42a2f4441
   source: local
   local_path: ./packages/terraform
@@ -1592,7 +1596,7 @@ dependencies:
   - .claude/skills/skill-creator/blueprints/evaluation-scenarios.md
   - .claude/skills/skill-creator/blueprints/three-tier-architecture.md
   deployed_file_hashes:
-    .claude/agents/artifact-author.md: sha256:588078c845be419812f3bf79696e77dd99bc64060fe43a7d5389cb5be5535328
+    .claude/agents/artifact-author.md: sha256:4772431645c3247b886c90ef19da5b9c34b228bfda32ce4988f1a8787fcf0876
     .claude/skills/agent-creator/SKILL.md: sha256:de188d83392bcf93eded16535a2ffac43679a5ee975852b2211b60bd8e6ed237
     .claude/skills/agent-creator/assets/TEMPLATE.ADVISORY-AGENT.md: sha256:93d21ab18fced276e09b27024c087eebc347cc4f74aa4652f62fdf1e3d3f628f
     .claude/skills/agent-creator/assets/TEMPLATE.AGENT.md: sha256:6f4d9e7f2d1b0186e7b5caf4154878d17b3e8b2d356c746dcb630b4054e134b6
@@ -3355,7 +3359,7 @@ deployments:
   owners:
   - ./packages/oci-architecture
   active_owner: ./packages/oci-architecture
-  content_hash: sha256:7affed24e0f39908c5f3c8dec33becca6dc562a09e1231de77e8abdb04009f66
+  content_hash: sha256:247cd0e3b4cf3a06f35585375661014aa25227688bc22c080de9f0bbddcbd912
 - kind: project-relative
   target: claude
   value: .claude/agents/oci-serverless-stack.md
@@ -3698,6 +3702,24 @@ deployments:
   - ./packages/oci-observability
   active_owner: ./packages/oci-observability
   content_hash: sha256:529d88df556c7ae1570eeeb764432fa0e1cbc25634b220df9278a88af0b90f32
+- kind: project-relative
+  target: claude
+  value: .claude/rules/oci-architecture-data-events-guardrails.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/oci-architecture
+  active_owner: ./packages/oci-architecture
+  content_hash: sha256:9a60309f16681691f550be091444888b3067427ee03ab95532c002545c00a86c
+- kind: project-relative
+  target: claude
+  value: .claude/rules/oci-architecture-guardrails.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/oci-architecture
+  active_owner: ./packages/oci-architecture
+  content_hash: sha256:2fa7dec5a13c86c0de0b1e261bb446370a1a28ae9941572c1ab90135dcaf3697
 - kind: project-relative
   target: claude
   value: .claude/rules/rules-frontmatter.md
@@ -6595,7 +6617,7 @@ deployments:
   owners:
   - ./packages/oci-architecture
   active_owner: ./packages/oci-architecture
-  content_hash: sha256:59368a343663a6272b76a96cbbcd87f1ccb220afbaa19552fcd6aea5376469f8
+  content_hash: sha256:f82f360150a6b99890fb03929d3794b52c7ae1a7310d190073b6dacd61b1eea0
 - kind: project-relative
   target: claude
   value: .claude/skills/design-oci-architecture/blueprints/evaluation-scenarios.md
@@ -6604,7 +6626,7 @@ deployments:
   owners:
   - ./packages/oci-architecture
   active_owner: ./packages/oci-architecture
-  content_hash: sha256:49434966525e3c6da65aae1e5db459905a6f7c6e6ec495dbb403c5d8d0ddba1d
+  content_hash: sha256:9ad28fe95a19d70c17955443b9ed7f386ac9f974d8fe67588bf75a55afeccaeb
 - kind: project-relative
   target: claude
   value: .claude/skills/designing-aws-api-gateway-serverless
@@ -13138,7 +13160,7 @@ deployments:
   owners:
   - ./packages/oci-terraform
   active_owner: ./packages/oci-terraform
-  content_hash: sha256:a102e9a0a4a4cbcf69e4aac798c618bd8da2e7140d99c262b8cdd302bb6c5847
+  content_hash: sha256:6efc2038c60b10d1b5937bbb5db3557da1690c8d390eb8c40332e49b1fb1aa29
 - kind: project-relative
   target: claude
   value: .claude/skills/provisioning-oci-api-gateway/blueprints/always-do-patterns.md
@@ -13390,7 +13412,7 @@ deployments:
   owners:
   - ./packages/oci-terraform
   active_owner: ./packages/oci-terraform
-  content_hash: sha256:c65982d0b5db14b3a979290ff0cbfb0f7a384f576a48574333f024466c798b78
+  content_hash: sha256:168f8bc83fff08f9f4804d2671a0a71d342bf567812171dd6648a1bc2afbc88d
 - kind: project-relative
   target: claude
   value: .claude/skills/provisioning-oci-event-driven-pubsub/blueprints/always-do-patterns.md
@@ -13462,7 +13484,7 @@ deployments:
   owners:
   - ./packages/oci-terraform
   active_owner: ./packages/oci-terraform
-  content_hash: sha256:a745f31d69b9f3ca10850104a7c43f2aee4a8f6cbd053c29833160a24d0853f4
+  content_hash: sha256:97d30c2343c1fd3a09cba7a2e6c81d65a01a4318f8c79a331d918960961580c7
 - kind: project-relative
   target: claude
   value: .claude/skills/provisioning-oci-events/blueprints/always-do-patterns.md
