@@ -85,7 +85,7 @@ For each parameter document:
 | Deployment note | If value differs by `DEPLOYMENT_MODEL`, note each |
 | Source | Official docs URL with section name (DATE) |
 
-Category-specific parameter guidance: see `blueprints/category-templates/`.
+Category-specific parameter guidance: see `blueprints/shared/category-templates/`.
 
 ---
 

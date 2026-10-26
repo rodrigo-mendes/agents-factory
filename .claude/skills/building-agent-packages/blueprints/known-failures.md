@@ -11,7 +11,7 @@ Back to [SKILL.md](../SKILL.md).
 | Inferred claims presented as High (e.g. "mandatory", "must start with") | extrapolation beyond the page | evidence rule; orchestrator re-fetches the page; correct and record in `_family_facts` |
 | Same fact differs between sibling skills | each author resolved it alone | `_family_facts` / `_family_rules`; P7 sweep |
 | Validator HIGH is wrong or already fixed | validators over-flag or read stale files | re-check every HIGH against the file before fixing |
-| Counts in docs wrong | numbers came from agent estimates | `scripts/check_counts.sh`; never copy a documented count |
+| Counts in docs wrong | numbers came from agent estimates | `scripts/check_counts.py`; never copy a documented count |
 | Lockfile hashes stale after edits | `apm.lock.yaml` not regenerated | `apm install`, then `--frozen` + `git diff --exit-code` |
 | Foreign files staged (IDE), gitignored files added | `git add -A`, shared index | `scripts/commit_groups.py` explicit paths; `git reset -q` first |
 | Files vanish or change by an unknown actor | external cleanup/IDE | `git status` before each commit; ask the user, do not "restore" blindly |

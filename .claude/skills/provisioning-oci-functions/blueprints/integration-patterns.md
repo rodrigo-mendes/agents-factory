@@ -22,7 +22,7 @@ resource "oci_apigateway_deployment" "api" {
 }
 ```
 **Dependency**: API Gateway needs IAM policy: `Allow dynamic-group <apigw-dg> to use functions-family in compartment <name>`
-**Source**: See [designing-oci-api-gateway](../designing-oci-api-gateway/SKILL.md) skill for complete API Gateway patterns.
+**Source**: See [designing-oci-api-gateway](../../designing-oci-api-gateway/SKILL.md) skill for complete API Gateway patterns.
 
 ---
 
@@ -50,7 +50,7 @@ resource "oci_identity_policy" "functions" {
   ]
 }
 ```
-**Source**: See [provisioning-oci-iam](../provisioning-oci-iam/SKILL.md) skill for complete IAM patterns.
+**Source**: See [provisioning-oci-iam](../../provisioning-oci-iam/SKILL.md) skill for complete IAM patterns.
 
 ---
 
@@ -69,7 +69,7 @@ module "app_my_function" {
 }
 ```
 **Dependency**: Private subnet must have Service Gateway in its route table for OCIR access. Without it, function image pulls fail with "SubnetNotAuthorized".
-**Source**: See [designing-oci-networking](../designing-oci-networking/SKILL.md) skill for complete networking patterns.
+**Source**: See [designing-oci-networking](../../designing-oci-networking/SKILL.md) skill for complete networking patterns.
 
 ---
 
@@ -93,7 +93,7 @@ resource "oci_functions_function" "this" {
 # GetSecretBundleResponse response = client.getSecretBundle(
 #   GetSecretBundleRequest.builder().secretId(secretOcid).build());
 ```
-**Source**: See [designing-oci-vault-security](../designing-oci-vault-security/SKILL.md) skill for complete Vault patterns.
+**Source**: See [designing-oci-vault-security](../../designing-oci-vault-security/SKILL.md) skill for complete Vault patterns.
 
 ---
 
