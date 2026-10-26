@@ -437,7 +437,7 @@ spec:
 
 ## Data Modeling
 
-> **Conditional section** — include when `PLATFORM_CATEGORY=datastore`. Content driven by `DATASTORE_TYPE`. Full guidance in [data-modeling/modeling-{{DATASTORE_TYPE}}.md](./data-modeling/).
+> **Conditional section** — include when `PLATFORM_CATEGORY=datastore`. Content driven by `DATASTORE_TYPE`. Full guidance in [data-modeling/modeling-{{DATASTORE_TYPE}}.md](./data-modeling/README.md).
 
 **Access-Pattern-First Principle**: All schema decisions must start from the documented `WORKLOAD_PROFILE` read/write patterns — not from the entity model.
 
@@ -480,5 +480,5 @@ spec:
 |---|---|---|---|
 | [anti-pattern name] | [type] | [consequence] | [correct approach] |
 
-> Full type-specific modeling guidance: [data-modeling/modeling-{{DATASTORE_TYPE}}.md](./data-modeling/)
+> Full type-specific modeling guidance: [data-modeling/modeling-{{DATASTORE_TYPE}}.md](./data-modeling/README.md)
 > Source: [Official data modeling docs URL] (DATE)

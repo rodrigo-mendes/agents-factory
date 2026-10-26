@@ -40,7 +40,7 @@ module "events" {
 }
 ```
 
-**Required IAM Policy** (see [provisioning-oci-iam](../provisioning-oci-iam/SKILL.md)):
+**Required IAM Policy** (see [provisioning-oci-iam](../../provisioning-oci-iam/SKILL.md)):
 ```hcl
 "Allow service cloudevents to use fn-invocation in compartment ${var.compartment_name}"
 "Allow service cloudevents to use virtual-network-family in compartment ${var.compartment_name}"
