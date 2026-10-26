@@ -135,3 +135,6 @@ Other changes in the same pass:
 Net result: **42 skills, 7 agents, 5 rules** — up from 40/7/5 (2 new skills, 0 new agents/rules).
 `.claude/templates/` no longer exists. `.github/` is unaffected by this phase — its own
 descommission remains the separate, later step described above.
+
+> **Current state (2026-10-26):** this file is history. For live counts run
+> `python3 .claude/skills/building-agent-packages/scripts/check_counts.py` (199 skills, 34 agents, 44 rules, 23 packages at this date).

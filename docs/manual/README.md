@@ -1,6 +1,6 @@
 # Agent Usage Manual — Agents Factory
 
-Complete reference for the 7 sub-agents (5 routers + 2 research helpers) and the 51 command skills that invoke them. The 13 agents of the book-writing pipeline are documented separately in [packages/book-writing/README.md](../../packages/book-writing/README.md), and the `camel-quarkus-integrator` subagent with its skills in [packages/camel-quarkus-integrator/README.md](../../packages/camel-quarkus-integrator/README.md).
+Complete reference for the 7 factory sub-agents (5 routers + 2 research helpers) and the 40 factory command skills that invoke them. The project has 34 subagents and 64 commands in total; domain agents are documented in their package READMEs: `aws-architect`, `aws-terraform-engineer`, `terraform-rules-author` ([aws-terraform](../../packages/aws-terraform/README.md), [aws-architect](../../packages/aws-architect/README.md)), the 7 OCI agents ([oci-functions-java](../../packages/oci-functions-java/README.md), [oci-terraform](../../packages/oci-terraform/README.md), [oci-observability](../../packages/oci-observability/README.md), [oci-architecture](../../packages/oci-architecture/README.md)), `stripe-advisor`/`stripe-integrator` ([stripe-java](../../packages/stripe-java/README.md)) and `langchain4j-integrator` ([langchain4j](../../packages/langchain4j/README.md)). The 13 agents of the book-writing pipeline are documented separately in [packages/book-writing/README.md](../../packages/book-writing/README.md), and the `camel-quarkus-integrator` subagent with its skills in [packages/camel-quarkus-integrator/README.md](../../packages/camel-quarkus-integrator/README.md).
 
 ---
 
@@ -21,7 +21,7 @@ Complete reference for the 7 sub-agents (5 routers + 2 research helpers) and the
 
 ---
 
-## Quick Reference — All 52 Skills
+## Quick Reference — Factory Commands (domain packages: see their READMEs)
 
 ### Research (`framework-researcher`)
 
