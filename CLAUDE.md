@@ -117,7 +117,7 @@ listed in every session of a project that installs them, so keep them short and 
 │                 platform-software family (1 orchestrator + 14 siblings), 11 from microsoft/apm,
 │                 15 Camel Quarkus, 26 AWS Terraform (provisioning-aws-*-v6), the AWS/OCI/Stripe knowledge skills, and each skill's own assets/ (former .claude/templates/
 │                 content) + blueprints/
-├── rules/      ← 40 rules by path (paths:): 5 factory rules + 3 Camel Quarkus + 3 AWS Terraform + OCI, AWS-architect and Stripe rules
+├── rules/      ← 42 rules by path (paths:): 5 factory rules + 3 Camel Quarkus + 3 AWS Terraform + OCI (incl. 2 oci-architecture guardrails), AWS-architect and Stripe rules
 ├── MIGRATION.md ← migration history Copilot → Claude Code (hand-authored, not generated)
 ├── settings.json         ← hand-authored, not generated (APM only merges `hooks:`, unused here)
 └── settings.local.json   ← hand-authored, gitignored
