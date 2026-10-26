@@ -36,7 +36,7 @@ COST 11 ("How do you evaluate the cost of effort?") consolidated into the curren
 ⚠️ **CRITICAL — Agent Warning**:
 This skill targets the 2024-06-27 whitepaper revision (current stable).
 Reject any pattern claiming to come from a "2026 Cost Optimization Pillar edition" — no such edition exists.
-Discount percentages (Savings Plans ~72%, RIs ~75%, Spot ~90%) vary by term/family/Region — treat as indicative, not contractual.
+Discount percentages (Compute Savings Plans up to 66%, EC2 Instance Savings Plans and RIs up to 72%, Spot ~90%) vary by term/family/Region — treat as indicative, not contractual.
 
 ## Quick Navigation
 
@@ -64,7 +64,7 @@ For full patterns with CLI examples, see [Always-Do Patterns](./blueprints/alway
 - **Attribute every cost to an owner via account structure + tagging** (COST 2, COST 3) — Create a multi-account structure (Organizations/Control Tower); enforce a mandatory tag taxonomy (cost center, owner, environment, workload); activate cost allocation tags in the Billing console. Unattributed spend cannot be governed.
 - **Monitor cost with proactive Budgets and Anomaly Detection** (COST 2, COST 3) — Configure AWS Budgets per account/service/tag with both forecast and actual thresholds; enable Cost Anomaly Detection monitors. Optionally wire Budget Actions for automated guardrails.
 - **Right-size resources with data before committing** (COST 6, COST 9) — Run AWS Compute Optimizer and Trusted Advisor to right-size EC2/EBS/Lambda/ASG/RDS from real utilization metrics before purchasing Savings Plans or Reserved Instances.
-- **Apply the correct pricing model per workload profile** (COST 7) — On-Demand for spiky/unknown; Savings Plans/RIs for steady baseline (up to ~72–75% off); Spot for stateless/fault-tolerant/batch (up to ~90% off). See [Ask-First Decisions](./blueprints/ask-first-decisions.md) for the decision matrix.
+- **Apply the correct pricing model per workload profile** (COST 7) — On-Demand for spiky/unknown; Savings Plans/RIs for steady baseline (up to 66–72% off); Spot for stateless/fault-tolerant/batch (up to ~90% off). See [Ask-First Decisions](./blueprints/ask-first-decisions.md) for the decision matrix.
 - **Match supply to demand with elasticity and demand shaping** (COST 9) — Use demand- or time-based Auto Scaling; throttle with API Gateway; buffer spikes with SQS; schedule shutdown of non-production environments outside working hours (~75% savings at 40 vs 168 hrs/week).
 - **Plan and minimize data transfer charges before design lock-in** (COST 8) — Use CloudFront to reduce origin egress; VPC Gateway/Interface endpoints to avoid NAT/internet egress for AWS-service traffic; AZ-affinity for chatty internal paths; model cross-AZ/cross-Region/internet egress during architecture.
 - **Decommission aggressively and optimize over time** (COST 4, COST 10, COST 11) — Automate detection and shutdown of orphaned/idle resources (Trusted Advisor + Config + Lambda); run recurring architecture reviews to adopt newer cheaper services; track lifecycle with tags from project inception.
@@ -181,8 +181,8 @@ COST 10, 11         → Optimize over time
 **Pricing model decision shortcut**:
 ```
 Spiky / unknown duration      → On-Demand
-Steady baseline, evolving mix → Compute Savings Plans (~72% off, 1-3yr)
-Stable, specific instance     → Reserved Instance (~75% off, 1-3yr)
+Steady baseline, evolving mix → Compute Savings Plans (up to 66% off, 1-3yr)
+Stable, specific instance     → Reserved Instance (up to 72% off, 1-3yr)
 Stateless / fault-tolerant    → Spot (~90% off, interruptible)
 ```
 
@@ -191,8 +191,8 @@ Stateless / fault-tolerant    → Spot (~90% off, interruptible)
 | Item | Value | Notes |
 |------|-------|-------|
 | Dev/test shutdown savings | ~75% | 40 hrs vs 168 hrs/week on-time |
-| Savings Plans max discount | ~72% off On-Demand | Varies by term/family/Region |
-| Reserved Instance max discount | ~75% off On-Demand | Standard RI, 3-year, all-upfront |
+| Savings Plans max discount | up to 66% (Compute) / 72% (EC2 Instance) off On-Demand | Varies by term/family/Region |
+| Reserved Instance max discount | up to 72% off On-Demand | Standard RI, 3-year, all-upfront |
 | Spot max discount | ~90% off On-Demand | Interruptible with 2-min notice |
 | Spot interruption notice | 2 minutes | Architecture must tolerate this |
 | Cost allocation tag activation | Manual | Applied tag ≠ activated tag — activate in Billing console |

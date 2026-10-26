@@ -81,7 +81,7 @@ public void configure(RuntimeContext ctx) {
 allow dynamic-group <dg-name> to read secret-bundles in compartment <compartment>
 ```
 
-**Source**: [OCI Vault Security Skill](../../skills/designing-oci-vault-security/SKILL.md)
+**Source**: [OCI Vault Security Skill](../../designing-oci-vault-security/SKILL.md)
 
 ---
 

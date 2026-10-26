@@ -1,15 +1,36 @@
 #!/usr/bin/env python3
 """Mechanical checks for an APM package (stdlib only, read-only).
-Usage: verify_package.py <package_dir>   e.g. packages/camel-quarkus-integrator
+Usage: verify_package.py <package_dir> [--installed <claude_dir>]
+  e.g. verify_package.py packages/aws-skills --installed .claude
+With --installed, a link that is broken in the source tree is re-checked at its deployed location
+(<claude_dir>/skills|agents/...) and reported as a note, not a problem, when it resolves there.
 Checks apm.yml, skill/agent/rule frontmatter, dependency paths, skill names referenced in prose,
 and local markdown links. Exit 1 when any problem is found."""
 import os
 import re
 import sys
 
-pkg = sys.argv[1].rstrip('/')
+sys.stdout.reconfigure(encoding='utf-8', errors='replace')
+args = sys.argv[1:]
+installed = None
+if '--installed' in args:
+    i = args.index('--installed')
+    installed = args[i + 1]
+    del args[i:i + 2]
+pkg = args[0].rstrip('/')
 apm = os.path.join(pkg, '.apm')
 problems = []
+notes = []
+PLACEHOLDER = re.compile(r'[{}<>]|diag[N0-9]*\.png$|^x\.md$|/x\.md$')
+
+
+def deployed(src_file, target):
+    """Resolve target relative to where src_file lands after `apm install --target claude`."""
+    rel = os.path.relpath(src_file, apm).replace(os.sep, '/')
+    top = rel.split('/', 1)[0]
+    if not installed or top not in ('skills', 'agents'):
+        return None
+    return os.path.normpath(os.path.join(installed, os.path.dirname(rel), target))
 
 
 def fm(path):
@@ -88,13 +109,26 @@ for r, _, fs in os.walk(pkg):
         t = open(p, encoding='utf-8').read()
         if t.startswith('\ufeff'):
             problems.append(f'BOM in {os.path.relpath(p, pkg)}')
+        t = re.sub(r'```.*?```', '', t, flags=re.S)
         for mm in re.finditer(r'\]\((?!http|#|mailto)([^)\s#]+)', t):
-            tgt = os.path.normpath(os.path.join(os.path.dirname(p), mm.group(1)))
-            if not os.path.exists(tgt):
-                problems.append(f'broken link {os.path.relpath(p, pkg)} -> {mm.group(1)}')
+            link = mm.group(1)
+            if PLACEHOLDER.search(link):
+                continue
+            where = f'{os.path.relpath(p, pkg)} -> {link}'
+            tgt = os.path.normpath(os.path.join(os.path.dirname(p), link))
+            if os.path.isdir(tgt):
+                problems.append(f'link to directory {where}')
+            elif not os.path.isfile(tgt):
+                dep = deployed(p, link)
+                if dep and os.path.isfile(dep):
+                    notes.append(f'resolves after install {where}')
+                else:
+                    problems.append(f'broken link {where}')
 
 print(f'{pkg}: {len(skills)} skills, {len(agents)} agents, '
       f'{len(os.listdir(idir)) if os.path.isdir(idir) else 0} rules')
+for n in notes:
+    print('  note:', n)
 print('PROBLEMS:' if problems else 'OK, no problems')
 for p in problems:
     print('  -', p)

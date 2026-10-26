@@ -35,20 +35,20 @@ dependencies:
   - .claude/skills/building-agent-packages/blueprints/worker-briefs/researcher.md
   - .claude/skills/building-agent-packages/blueprints/worker-briefs/skill-author-hybrid.md
   - .claude/skills/building-agent-packages/blueprints/worker-briefs/validator.md
-  - .claude/skills/building-agent-packages/scripts/check_counts.sh
+  - .claude/skills/building-agent-packages/scripts/check_counts.py
   - .claude/skills/building-agent-packages/scripts/commit_groups.py
   - .claude/skills/building-agent-packages/scripts/inspect_workspace.py
   - .claude/skills/building-agent-packages/scripts/normalize_tags.py
   - .claude/skills/building-agent-packages/scripts/verify_package.py
   - .claude/skills/building-agent-packages/scripts/verify_skill.py
   deployed_file_hashes:
-    .claude/skills/building-agent-packages/SKILL.md: sha256:2518dd7acaf4fbe5456243df4f1e776c9e8761dda43972a5f55db322722f9365
+    .claude/skills/building-agent-packages/SKILL.md: sha256:31c4ed7915c4ac1616ba09e9071212520e79e2291fef91042aa6e1f1fe6513c0
     .claude/skills/building-agent-packages/assets/FAMILY_FACTS.template.md: sha256:3344ba313640b7dce289749eed777846727e9c8fbc13910d77dbc0ecb429c58f
     .claude/skills/building-agent-packages/assets/FAMILY_RULES.template.md: sha256:c4d2e0022a8adc906120da2c40445b8dc5adfd2173b765364de3e394b68e7ae1
     .claude/skills/building-agent-packages/assets/PACKAGE_BRIEF.template.md: sha256:e9473755c6d9a9b78d16b9198a4f84499e966ff30ab7d72a032726f56acb98b6
     .claude/skills/building-agent-packages/assets/PIPELINE_STATE.template.md: sha256:1cfdbbb5431e815fdddc2a6a53cd61fbb0abfc70b7fc0c317e26157035099f3d
     .claude/skills/building-agent-packages/blueprints/evaluation-scenarios.md: sha256:ce597068036ecd50ceb67289737657a1c6886290449942881043a6fe8137ba29
-    .claude/skills/building-agent-packages/blueprints/known-failures.md: sha256:ec50616cd4049780204812e12f4357c45cf50429df3514e62015156663434610
+    .claude/skills/building-agent-packages/blueprints/known-failures.md: sha256:026cc44bb87dcaa97ec94135f0ec85aa3660f24415fe53f8dbf38c597bfabfb3
     .claude/skills/building-agent-packages/blueprints/modes.md: sha256:89c6caa466a6ce2e1209db50afcc301e14eb498498487987ae289d696c684c30
     .claude/skills/building-agent-packages/blueprints/phases/p0-intake.md: sha256:e0dc0ba759253b21344483b7fbfa674a669af3facc6beba55af3d01f57d58b36
     .claude/skills/building-agent-packages/blueprints/phases/p1-version-gate.md: sha256:ba28243a48bf4d8fdabe9c2278bdc13cd2dc00e0d74e7145b9dd0a55b6b6569e
@@ -58,7 +58,7 @@ dependencies:
     .claude/skills/building-agent-packages/blueprints/phases/p5-package-assembly.md: sha256:673736034dc6b69b70f618f5e06456f8121d91adcafb518f77a01a3f4a3d9ed1
     .claude/skills/building-agent-packages/blueprints/phases/p6-quality-loop.md: sha256:1b29e94d35777104a06b400faff7e15ec548088440af47821ce21af1ab36819c
     .claude/skills/building-agent-packages/blueprints/phases/p7-fact-sweep.md: sha256:707d1458330adff549491093f6c99e6b15fb964c5e635b9b65c41240c68d84f4
-    .claude/skills/building-agent-packages/blueprints/phases/p8-mechanical-close.md: sha256:a3a4962eae07a6e4ca7972a923659466e55e83f9b3af20280cd82489148a8808
+    .claude/skills/building-agent-packages/blueprints/phases/p8-mechanical-close.md: sha256:e6915ac48535b2dec93b66aa9d25049a7ab4ab9fb9811bf727c3471ae3a5173c
     .claude/skills/building-agent-packages/blueprints/phases/p9-commit.md: sha256:faf956ef2bb4b34d2e60882ce0e4368545f1435c278f0f0797e6243f57fa6cbe
     .claude/skills/building-agent-packages/blueprints/policy/evidence-rule.md: sha256:7d6e3d9a1932ec9fd39253518dd4a41a3d9be82589a418cf013d6f99455ca07d
     .claude/skills/building-agent-packages/blueprints/policy/hybrid-format-checklist.md: sha256:94ad98f27eac4c6165eeab284476686a3ee5fdc5ec3c0e94f257d1a1391158ac
@@ -70,15 +70,15 @@ dependencies:
     .claude/skills/building-agent-packages/blueprints/worker-briefs/researcher.md: sha256:cf9181da4e3ece5bc1005d04cf53f60e5e2afa0e8d68bcbe1d6b2ee547e1540d
     .claude/skills/building-agent-packages/blueprints/worker-briefs/skill-author-hybrid.md: sha256:38227ded06618d81a752eb4af7893a28cb0b1a87399b47610e0c727096df6f8f
     .claude/skills/building-agent-packages/blueprints/worker-briefs/validator.md: sha256:d6988309ec47e8ce405312b8dc4aea5ef587fdfe697e3ce640be45c8af03a12e
-    .claude/skills/building-agent-packages/scripts/check_counts.sh: sha256:85aed6482d05b1fdaf1fa0c3ec774cb256358c4473a03612db4ccc2c431f98b5
+    .claude/skills/building-agent-packages/scripts/check_counts.py: sha256:0e5b44cdd3b700f3854b526a314c571f0164940a8480ea07aeda054af8f13497
     .claude/skills/building-agent-packages/scripts/commit_groups.py: sha256:f814b5ee62f471630773ad27d9ff94553b14d250797a9f3dd7c3e5ea2ed0e271
     .claude/skills/building-agent-packages/scripts/inspect_workspace.py: sha256:141dac996cbfc16cdb570a8481847158fb69e34b5ed1abd7f335f6488e8f6ae9
     .claude/skills/building-agent-packages/scripts/normalize_tags.py: sha256:52afbe4e693be8f340c95726184a0ddf808dba50ce166671dab51cf3d8023a1f
-    .claude/skills/building-agent-packages/scripts/verify_package.py: sha256:bfe7fc2b122bd562413bce72937b5244a5ec62b87aa9fa58b3488ae31362382b
-    .claude/skills/building-agent-packages/scripts/verify_skill.py: sha256:b3a5bfb530217c4ecde541c11396c588240c1b1a1a7874debb0d88e21c2c0021
+    .claude/skills/building-agent-packages/scripts/verify_package.py: sha256:02bae1a0dd80f7777c6c18fafdab2aad2b15bd193e88c3d1ba0af30eab99cea4
+    .claude/skills/building-agent-packages/scripts/verify_skill.py: sha256:5373b8ab38e4965b38fcda2505a187c7f5d20eaa3083644f0a0bd5fc194c0cc6
   source: local
   local_path: ./packages/agent-package-builder
-  content_hash: sha256:e6f7bb0377b670886db57ae024bda76c3fd3f4f46ac10407c0f743d1319259ab
+  content_hash: sha256:ef2fc4b0c02ae79691a432a6823e546d67942967021ea65368bedaf8fa025565
   declared_license: MIT
 - repo_url: _local/artifact-authoring
   name: agents-factory-artifact-authoring
@@ -171,7 +171,7 @@ dependencies:
     .claude/skills/aws-architecture-advisor/blueprints/evaluation-scenarios.md: sha256:31dae533ffa46ed4ce7dfe45fd89fd305621f536b1c79bde972c295200195980
   source: local
   local_path: ./packages/aws-architect
-  content_hash: sha256:bd3e7176cca0faf66cc39f9f232d7e1f222656aa90130d94494e017d7682a81b
+  content_hash: sha256:06074e3e328b24d39f0169c3d82efbe11cff0393132fb62138f792716667539e
   declared_license: MIT
 - repo_url: _local/book-writing
   name: agents-factory-book-writing
@@ -316,6 +316,71 @@ dependencies:
   local_path: ./packages/evaluating
   content_hash: sha256:5fef8e2e424f7530aa4dbaffaa97aacea801802dd7ea0c26bf5e702b3cec38ae
   declared_license: MIT
+- repo_url: _local/langchain4j
+  name: agents-factory-langchain4j
+  version: 1.0.0
+  package_type: apm_package
+  deployed_files:
+  - .claude/agents/langchain4j-integrator.md
+  - .claude/rules/langchain4j-code-standards.md
+  - .claude/rules/langchain4j-project-config.md
+  - .claude/skills/developing-langchain4j-core-v1-22
+  - .claude/skills/developing-langchain4j-core-v1-22/SKILL.md
+  - .claude/skills/developing-langchain4j-core-v1-22/blueprints/always-do-patterns.md
+  - .claude/skills/developing-langchain4j-core-v1-22/blueprints/errors-and-retry.md
+  - .claude/skills/developing-langchain4j-core-v1-22/blueprints/evaluation-scenarios.md
+  - .claude/skills/developing-langchain4j-core-v1-22/blueprints/never-do-patterns.md
+  - .claude/skills/developing-langchain4j-core-v1-22/blueprints/streaming-and-listeners.md
+  - .claude/skills/developing-langchain4j-core-v1-22/blueprints/testing.md
+  - .claude/skills/developing-langchain4j-core-v1-22/blueprints/unverified-and-risks.md
+  - .claude/skills/integrating-langchain4j-openai-v1-22
+  - .claude/skills/integrating-langchain4j-openai-v1-22/SKILL.md
+  - .claude/skills/integrating-langchain4j-openai-v1-22/blueprints/always-do-patterns.md
+  - .claude/skills/integrating-langchain4j-openai-v1-22/blueprints/builder-options.md
+  - .claude/skills/integrating-langchain4j-openai-v1-22/blueprints/evaluation-scenarios.md
+  - .claude/skills/integrating-langchain4j-openai-v1-22/blueprints/gpt-6-and-reasoning.md
+  - .claude/skills/integrating-langchain4j-openai-v1-22/blueprints/never-do-patterns.md
+  - .claude/skills/integrating-langchain4j-openai-v1-22/blueprints/unverified-and-risks.md
+  - .claude/skills/integrating-langchain4j-provider-a-v1-22
+  - .claude/skills/integrating-langchain4j-provider-a-v1-22/SKILL.md
+  - .claude/skills/integrating-langchain4j-provider-a-v1-22/blueprints/always-do-patterns.md
+  - .claude/skills/integrating-langchain4j-provider-a-v1-22/blueprints/builder-options.md
+  - .claude/skills/integrating-langchain4j-provider-a-v1-22/blueprints/caching-and-system-messages.md
+  - .claude/skills/integrating-langchain4j-provider-a-v1-22/blueprints/evaluation-scenarios.md
+  - .claude/skills/integrating-langchain4j-provider-a-v1-22/blueprints/never-do-patterns.md
+  - .claude/skills/integrating-langchain4j-provider-a-v1-22/blueprints/thinking-and-effort.md
+  - .claude/skills/integrating-langchain4j-provider-a-v1-22/blueprints/unverified-and-risks.md
+  deployed_file_hashes:
+    .claude/agents/langchain4j-integrator.md: sha256:cbde9bedf822d28fed802c6fa6f6efeb48612e25b361f61c4d78a6b001c86ff9
+    .claude/rules/langchain4j-code-standards.md: sha256:0525ac4cf2ebc6f6866c221db94bdb58ddfad3e7781128c5f1710b25e7b78ef6
+    .claude/rules/langchain4j-project-config.md: sha256:efe292a0bf057eb357d1d634fac8bbd03315592bd91d9e43c6cdef9788acf58f
+    .claude/skills/developing-langchain4j-core-v1-22/SKILL.md: sha256:92e2145b91e8836755eb607c5ca44439b98db17939c5148644fe22b063cfce7e
+    .claude/skills/developing-langchain4j-core-v1-22/blueprints/always-do-patterns.md: sha256:33256cac5b16b4867b7040a0a5f3141ba040f2f52b65f13d236ef4913e1a607a
+    .claude/skills/developing-langchain4j-core-v1-22/blueprints/errors-and-retry.md: sha256:b09cbfc565f73c6742b801762bc6b88e59a61e13088856aa6deef98cfd40a1b1
+    .claude/skills/developing-langchain4j-core-v1-22/blueprints/evaluation-scenarios.md: sha256:8e3d933a0af32e6abe9cb01dc3dfe55ff4c8d7bd65d359ba180b08df8242e15e
+    .claude/skills/developing-langchain4j-core-v1-22/blueprints/never-do-patterns.md: sha256:dbc1dc4897663b511618c8d3994e20fa999bcade2b2c9abc5642767edb1ed6ad
+    .claude/skills/developing-langchain4j-core-v1-22/blueprints/streaming-and-listeners.md: sha256:bc78f18b725324799cec5fc516c2f7cabcc77d661689eb1957d1033e9f1d4d69
+    .claude/skills/developing-langchain4j-core-v1-22/blueprints/testing.md: sha256:f5a466c7d1cfd4c358f259fdfbba15beb9e1fd9dcd2adda17d7228c83a807d82
+    .claude/skills/developing-langchain4j-core-v1-22/blueprints/unverified-and-risks.md: sha256:ec2fdcbe25210c7b3d4798ce18d8a007ce52b60eefa43e251c5bc8a6061d1cda
+    .claude/skills/integrating-langchain4j-openai-v1-22/SKILL.md: sha256:0c09a19e019f10e103548148b5374d1769f95b9f2e015ff9694ca560cfa34d27
+    .claude/skills/integrating-langchain4j-openai-v1-22/blueprints/always-do-patterns.md: sha256:098e77d2cb6dbe7645c257cf5a0ce8fdca097e887adb5a37b5c6be6dbfc5721b
+    .claude/skills/integrating-langchain4j-openai-v1-22/blueprints/builder-options.md: sha256:06b95c05c8b7e16798aa59e5c72b10e7130bc214bbd64db9011a7e08b38214c5
+    .claude/skills/integrating-langchain4j-openai-v1-22/blueprints/evaluation-scenarios.md: sha256:59d24e1e32cb6de96d9aa41dccbc24f50599b8ba6ceec419bd090a0435681ac1
+    .claude/skills/integrating-langchain4j-openai-v1-22/blueprints/gpt-6-and-reasoning.md: sha256:dcf9324ca0ca4cb47b2abfe75b9e66403babdd1a4e60e748058dbee9324313cb
+    .claude/skills/integrating-langchain4j-openai-v1-22/blueprints/never-do-patterns.md: sha256:84f9dd02e245c3c30b47c257d8df8df968d8820c992f4bc05be016090264867c
+    .claude/skills/integrating-langchain4j-openai-v1-22/blueprints/unverified-and-risks.md: sha256:03816da303e9ddb2193b124bd2a66f5d216554c4c64ea2e3d44ed95f2a29be36
+    .claude/skills/integrating-langchain4j-provider-a-v1-22/SKILL.md: sha256:768c15096d5c1f645b5cce1b56f902295002c1bfaafed9f4b974d58148017c82
+    .claude/skills/integrating-langchain4j-provider-a-v1-22/blueprints/always-do-patterns.md: sha256:cba4899c2eac5a005630e683251728bfc4f6e7237818c242b16ea4fe83c4a138
+    .claude/skills/integrating-langchain4j-provider-a-v1-22/blueprints/builder-options.md: sha256:5beeebb7071e16f360e23574a78de60767985392ba80f1f4b41fd09bcf8ec1e8
+    .claude/skills/integrating-langchain4j-provider-a-v1-22/blueprints/caching-and-system-messages.md: sha256:72fb6ffd734c2e6a1cd2edd637ebdd88a0898c5482eef73d095e5bde67b78a03
+    .claude/skills/integrating-langchain4j-provider-a-v1-22/blueprints/evaluation-scenarios.md: sha256:2dc8360cf4718829387dae2e0c60e747a714d991ad1b83a4b003984a5fdaf72a
+    .claude/skills/integrating-langchain4j-provider-a-v1-22/blueprints/never-do-patterns.md: sha256:9f3b3888891e72e3b9d5fc1fff426a139d796cf03753ed1c0d2f03ddf0d450f6
+    .claude/skills/integrating-langchain4j-provider-a-v1-22/blueprints/thinking-and-effort.md: sha256:7e8f2869f729ba289a916a661d98da2332765a7a939ff00b3ee1983d55871178
+    .claude/skills/integrating-langchain4j-provider-a-v1-22/blueprints/unverified-and-risks.md: sha256:7ac42fcc3a7b9f1eab383ef81a4075ab1126b044e63999515e2699d4c826d396
+  source: local
+  local_path: ./packages/langchain4j
+  content_hash: sha256:ad5897d14f3b5df051051e334eab01d0dbf95fbebdd8ad83d130488b75750752
+  declared_license: MIT
 - repo_url: _local/oci-architecture
   name: agents-factory-oci-architecture
   version: 1.0.0
@@ -442,7 +507,7 @@ dependencies:
     .claude/skills/provision-oci-serverless-stack/blueprints/evaluation-scenarios.md: sha256:4bfe68d639ce0a9bc3e2ba5a8d2b83d6c3015b846ff0a1ae75ba4f1202008a73
   source: local
   local_path: ./packages/oci-architecture
-  content_hash: sha256:e41b7465dc8c00cdc2a2485bb8c65e57727c506c0f4b9e59d11d7321a9a194ce
+  content_hash: sha256:b4a552e4193885e6b8a16c6d2a1d8f56db07069f7c11ebdbf6e391ec20c236e9
   declared_license: MIT
 - repo_url: _local/oci-functions-java
   name: agents-factory-oci-functions-java
@@ -634,7 +699,7 @@ dependencies:
     .claude/skills/invoking-rest-apis-from-oci-functions/blueprints/always-do-patterns.md: sha256:e18cb5111ec83decd37713d3fa78621fc053333c06e004c0c3f4133d73d7027a
     .claude/skills/invoking-rest-apis-from-oci-functions/blueprints/ask-first-decisions.md: sha256:bdc63800ee3704d8a6ee6b1e08446043dbd80579859497020f44af7a85add6a6
     .claude/skills/invoking-rest-apis-from-oci-functions/blueprints/evaluation-scenarios.md: sha256:2a76c2615d5230f73419faf1624fe31a4e8d2244df569260dd2b7e6000f7b630
-    .claude/skills/invoking-rest-apis-from-oci-functions/blueprints/integration-patterns.md: sha256:fa7065b666a76a063249534ab6cfc10884ef8a6a78dddea7a1c29f474a68dc52
+    .claude/skills/invoking-rest-apis-from-oci-functions/blueprints/integration-patterns.md: sha256:773575f5469f5dce60f1bbb6476099ea80b3797b314f4441df04d5721bb49c0f
     .claude/skills/invoking-rest-apis-from-oci-functions/blueprints/never-do-patterns.md: sha256:865ae7c7f9c52f7cfaf3aa5c214d868b6932fc258c0cc4c789cd59c9dd18bbca
     .claude/skills/invoking-rest-apis-from-oci-functions/invoking-rest-apis-from-oci-functions-best-practices-review.md: sha256:d3ee5a90ccdcbdd0046b54f2bf9fbb5b465af93815ef3f428a3b9959541ee50f
     .claude/skills/publishing-events-from-oci-functions/SKILL.md: sha256:8850fb3ce3a0b0b464cc9fe423b955e4ed33b9a0734f9512b071263be1c2852c
@@ -644,7 +709,7 @@ dependencies:
     .claude/skills/publishing-events-from-oci-functions/blueprints/integration-patterns.md: sha256:40f2e21cb17df5e008c71c644c1a734407c409d90e071cf514e98420b2ad7d5d
     .claude/skills/publishing-events-from-oci-functions/blueprints/never-do-patterns.md: sha256:054620e0052dabc1b7e2484456dfae3601de6b05500ebe948f6351dff5d4618c
     .claude/skills/publishing-events-from-oci-functions/publishing-events-from-oci-functions-best-practices-review.md: sha256:d0fd8377f7c3a39ef14f96720e7b1ba36c8a7f941891c833ab09f3970d26dbf9
-    .claude/skills/refactoring-oci-java/SKILL.md: sha256:12f394b80f4c8daa067bfcb6d75bc61dffba8d9d9fa866a724a0a0b1d418907c
+    .claude/skills/refactoring-oci-java/SKILL.md: sha256:fc2f747e32e25717562581a0fe4282b7550929347cb87480f5472d188263e863
     .claude/skills/refactoring-oci-java/blueprints/evaluation-scenarios.md: sha256:d8d522604ddad427284924dd306bb958f9fd0b3b56e03343a7fda80f06b57ff8
     .claude/skills/refactoring-oci-java/refactoring-oci-java-best-practices-review.md: sha256:2aaa9ff604df6248e04da40ae5f27cc31ebb63a7f6efae11ad3335f595fc853b
     .claude/skills/scaffolding-oci-function/SKILL.md: sha256:b7e27416a87611fbcf1efcf082027ff9da2e80e89dc97188475a4e4993743fc7
@@ -666,7 +731,7 @@ dependencies:
     .claude/skills/testing-oci-functions-java/testing-oci-functions-java-best-practices-review.md: sha256:fb0fa27539e193ab257cb2530e1c6729d32523fbc779f15bcd30055417aeefcb
   source: local
   local_path: ./packages/oci-functions-java
-  content_hash: sha256:f9a44742794e5bb77e09915aeb953202182bb2b5b4f2acd5de754f5a0d0d827b
+  content_hash: sha256:9c5729499df255f5c39cb5542934039d6a1e314f8819da2fda81b0802f4e0312
   declared_license: MIT
 - repo_url: _local/oci-observability
   name: agents-factory-oci-observability
@@ -838,7 +903,7 @@ dependencies:
     .claude/skills/validating-oci-observability/validating-oci-observability-best-practices-review.md: sha256:5049e7655ef40ff8cc469da642080b3484a3dc2aaacb0342476a2bec7823ea38
   source: local
   local_path: ./packages/oci-observability
-  content_hash: sha256:aa8560f1e9476cc02ddb4740e15cede166226fe48a558a2177fd9ec616333efe
+  content_hash: sha256:5ab4b05f85fc49103a5a2fd9b6ed367aca0356b0e46562fb73dfcb058abcfefb
   declared_license: MIT
 - repo_url: _local/oci-terraform
   name: agents-factory-oci-terraform
@@ -1051,7 +1116,7 @@ dependencies:
     .claude/skills/provisioning-oci-api-gateway/blueprints/always-do-patterns.md: sha256:f572eead597b78d2afc9d72a2bbff71accad69d63a132de89f249997befb8f98
     .claude/skills/provisioning-oci-api-gateway/blueprints/ask-first-decisions.md: sha256:ba3bfebd7ce57834832713aa7ec4b12c835dae60501f5c80a46d1b84afaafc20
     .claude/skills/provisioning-oci-api-gateway/blueprints/evaluation-scenarios.md: sha256:802a324a4d1a71022843234268455ce60abb1596539d4028be78576cbbb0abd8
-    .claude/skills/provisioning-oci-api-gateway/blueprints/integration-patterns.md: sha256:c0e4d78be25ab36ff90fb9babfce567d67485c1d9cf2c596657dcc0dc295a386
+    .claude/skills/provisioning-oci-api-gateway/blueprints/integration-patterns.md: sha256:ceaa663056ba49cd73d008911674e96a1a044d851d0110ef287f0d79a8635c54
     .claude/skills/provisioning-oci-api-gateway/blueprints/never-do-patterns.md: sha256:a2987fd5897171d5308347fbc16d9f32e2406e1ec55e420fc89cecabfa0dce75
     .claude/skills/provisioning-oci-api-gateway/blueprints/poc-examples.md: sha256:b440b6ca9b5919ea0892e97f5b0cee697e79e84243fe9726fda0471fcbbd2926
     .claude/skills/provisioning-oci-api-gateway/provisioning-oci-api-gateway-best-practices-review.md: sha256:0ab219296ec36c1661fe663d6075f46b7afd55f88d5e46ab87a4528ca06d1ddc
@@ -1083,14 +1148,14 @@ dependencies:
     .claude/skills/provisioning-oci-events/blueprints/always-do-patterns.md: sha256:cd9ffddac394fbfe0e9c18af1e61d11818fb3ee643cefa809d6dc821c340a485
     .claude/skills/provisioning-oci-events/blueprints/ask-first-decisions.md: sha256:c7e5f796b3515d040c8ea4dd10fbb03eca750e3816c97969657e88b8d952af9b
     .claude/skills/provisioning-oci-events/blueprints/evaluation-scenarios.md: sha256:054df2e8b3bc62f123033f7789abf9db64fc88e629ef2657400bf2798d2a2cbc
-    .claude/skills/provisioning-oci-events/blueprints/integration-patterns.md: sha256:14b89851ae6c95e136cf1818a90e08d36097114590d1a14dd479ad43c728174c
+    .claude/skills/provisioning-oci-events/blueprints/integration-patterns.md: sha256:e223f3790da02249bcbc4eb4a85dce54336ce5c8c29928d0b2a4276dbfe1661a
     .claude/skills/provisioning-oci-events/blueprints/never-do-patterns.md: sha256:4acc848c8f37a21746b7fc466169ab9408db0c665a7c2ba6be69611c7a9f9c2e
     .claude/skills/provisioning-oci-events/provisioning-oci-events-best-practices-review.md: sha256:b67b1c495977bffc173c3ad0793219d43560a347df34e4f64be122a960820397
     .claude/skills/provisioning-oci-functions/SKILL.md: sha256:fa8efc192211e6524f01647bc49e97530508c4fa3931b0c061c2bf8e3787f6a2
     .claude/skills/provisioning-oci-functions/blueprints/always-do-patterns.md: sha256:7482ec98be7b8ef9afcbc2adf7292b6a31dd2c6d50b7b11fe2f1e5f6beb40d35
     .claude/skills/provisioning-oci-functions/blueprints/ask-first-decisions.md: sha256:dc86841d0dff2939878707f65b81e71e6d036b295e3e17e1b142500af00527bc
     .claude/skills/provisioning-oci-functions/blueprints/evaluation-scenarios.md: sha256:e8b5978a1529d9ae26d5283d221f3c4d4b6ab6e80f97c02421b60792f25ca234
-    .claude/skills/provisioning-oci-functions/blueprints/integration-patterns.md: sha256:a4612f04fbff0c2b8cc2b0241ceb88a3739e9aaad1d7e193d8b80770c6bf0001
+    .claude/skills/provisioning-oci-functions/blueprints/integration-patterns.md: sha256:7812c2f8d0ee6aaeaa285e735a51d3e385f3f50b71ac6aefe7aef281bc867cf0
     .claude/skills/provisioning-oci-functions/blueprints/never-do-patterns.md: sha256:604719eb46bf29adb1d53d3dc10202fa6060ace4cffa777146f7809913f411e4
     .claude/skills/provisioning-oci-functions/blueprints/poc-examples.md: sha256:8e506f43667283366a1fd30e9bd6594a46a5182c21a88ce0e64a9c5d9166f849
     .claude/skills/provisioning-oci-functions/provisioning-oci-functions-best-practices-review.md: sha256:038d4e15dfd1c1ce3d029bd21f091c6846931e11d1c32b1b6512e09ce575945f
@@ -1155,7 +1220,7 @@ dependencies:
     .claude/skills/testing-terraform-modules/testing-terraform-modules-best-practices-review.md: sha256:b028eb04065276aa90bce6b21d44901486a831080e78c44634032af8a8d0a122
   source: local
   local_path: ./packages/oci-terraform
-  content_hash: sha256:400ff8c841e5b34fa4490e84d5366bb4771cc3de40205cca01076480ee94fb88
+  content_hash: sha256:78fe72882bb58d6e9d35f4e49d18d0df2a88e411db08d20ca559ee43651b7cce
   declared_license: MIT
 - repo_url: _local/researching-frameworks
   name: agents-factory-researching-frameworks
@@ -1227,44 +1292,54 @@ dependencies:
   - .claude/skills/researching-api-gateway/SKILL.md
   - .claude/skills/researching-api-gateway/blueprints/category-specifics.md
   - .claude/skills/researching-api-gateway/blueprints/evaluation-scenarios.md
+  - .claude/skills/researching-api-gateway/blueprints/references/README.md
   - .claude/skills/researching-cache-store
   - .claude/skills/researching-cache-store/SKILL.md
   - .claude/skills/researching-cache-store/blueprints/category-specifics.md
   - .claude/skills/researching-cache-store/blueprints/evaluation-scenarios.md
+  - .claude/skills/researching-cache-store/blueprints/references/README.md
   - .claude/skills/researching-columnar-analytics
   - .claude/skills/researching-columnar-analytics/SKILL.md
   - .claude/skills/researching-columnar-analytics/blueprints/category-specifics.md
   - .claude/skills/researching-columnar-analytics/blueprints/data-modeling.md
   - .claude/skills/researching-columnar-analytics/blueprints/evaluation-scenarios.md
+  - .claude/skills/researching-columnar-analytics/blueprints/references/README.md
   - .claude/skills/researching-coordination-service
   - .claude/skills/researching-coordination-service/SKILL.md
   - .claude/skills/researching-coordination-service/blueprints/category-specifics.md
   - .claude/skills/researching-coordination-service/blueprints/evaluation-scenarios.md
+  - .claude/skills/researching-coordination-service/blueprints/references/README.md
   - .claude/skills/researching-document-store
   - .claude/skills/researching-document-store/SKILL.md
   - .claude/skills/researching-document-store/blueprints/category-specifics.md
   - .claude/skills/researching-document-store/blueprints/data-modeling.md
   - .claude/skills/researching-document-store/blueprints/evaluation-scenarios.md
+  - .claude/skills/researching-document-store/blueprints/references/README.md
   - .claude/skills/researching-graph-database
   - .claude/skills/researching-graph-database/SKILL.md
   - .claude/skills/researching-graph-database/blueprints/category-specifics.md
   - .claude/skills/researching-graph-database/blueprints/data-modeling.md
   - .claude/skills/researching-graph-database/blueprints/evaluation-scenarios.md
+  - .claude/skills/researching-graph-database/blueprints/references/README.md
   - .claude/skills/researching-kv-store
   - .claude/skills/researching-kv-store/SKILL.md
   - .claude/skills/researching-kv-store/blueprints/category-specifics.md
   - .claude/skills/researching-kv-store/blueprints/data-modeling.md
   - .claude/skills/researching-kv-store/blueprints/evaluation-scenarios.md
+  - .claude/skills/researching-kv-store/blueprints/references/README.md
   - .claude/skills/researching-object-storage
   - .claude/skills/researching-object-storage/SKILL.md
   - .claude/skills/researching-object-storage/blueprints/category-specifics.md
   - .claude/skills/researching-object-storage/blueprints/data-modeling.md
   - .claude/skills/researching-object-storage/blueprints/evaluation-scenarios.md
+  - .claude/skills/researching-object-storage/blueprints/references/README.md
   - .claude/skills/researching-platform-software
   - .claude/skills/researching-platform-software/SKILL.md
   - .claude/skills/researching-platform-software/blueprints/evaluation-scenarios.md
   - .claude/skills/researching-platform-software/blueprints/routing-decision-tree.md
+  - .claude/skills/researching-platform-software/blueprints/shared/category-templates/api-management-template.md
   - .claude/skills/researching-platform-software/blueprints/shared/data-modeling-principles.md
+  - .claude/skills/researching-platform-software/blueprints/shared/data-modeling/README.md
   - .claude/skills/researching-platform-software/blueprints/shared/deployment-guides/container-compose-guide.md
   - .claude/skills/researching-platform-software/blueprints/shared/deployment-guides/kubernetes-operator-guide.md
   - .claude/skills/researching-platform-software/blueprints/shared/deployment-guides/vm-and-bare-metal-guide.md
@@ -1277,95 +1352,117 @@ dependencies:
   - .claude/skills/researching-rdbms/blueprints/category-specifics.md
   - .claude/skills/researching-rdbms/blueprints/data-modeling.md
   - .claude/skills/researching-rdbms/blueprints/evaluation-scenarios.md
+  - .claude/skills/researching-rdbms/blueprints/references/README.md
   - .claude/skills/researching-search-engine
   - .claude/skills/researching-search-engine/SKILL.md
   - .claude/skills/researching-search-engine/blueprints/category-specifics.md
   - .claude/skills/researching-search-engine/blueprints/evaluation-scenarios.md
+  - .claude/skills/researching-search-engine/blueprints/references/README.md
   - .claude/skills/researching-streaming-broker
   - .claude/skills/researching-streaming-broker/SKILL.md
   - .claude/skills/researching-streaming-broker/blueprints/category-specifics.md
   - .claude/skills/researching-streaming-broker/blueprints/evaluation-scenarios.md
+  - .claude/skills/researching-streaming-broker/blueprints/references/README.md
   - .claude/skills/researching-timeseries-db
   - .claude/skills/researching-timeseries-db/SKILL.md
   - .claude/skills/researching-timeseries-db/blueprints/category-specifics.md
   - .claude/skills/researching-timeseries-db/blueprints/data-modeling.md
   - .claude/skills/researching-timeseries-db/blueprints/evaluation-scenarios.md
+  - .claude/skills/researching-timeseries-db/blueprints/references/README.md
   - .claude/skills/researching-vector-store
   - .claude/skills/researching-vector-store/SKILL.md
   - .claude/skills/researching-vector-store/blueprints/category-specifics.md
   - .claude/skills/researching-vector-store/blueprints/data-modeling.md
   - .claude/skills/researching-vector-store/blueprints/evaluation-scenarios.md
+  - .claude/skills/researching-vector-store/blueprints/references/README.md
   - .claude/skills/researching-wide-column-store
   - .claude/skills/researching-wide-column-store/SKILL.md
   - .claude/skills/researching-wide-column-store/blueprints/category-specifics.md
   - .claude/skills/researching-wide-column-store/blueprints/data-modeling.md
   - .claude/skills/researching-wide-column-store/blueprints/evaluation-scenarios.md
+  - .claude/skills/researching-wide-column-store/blueprints/references/README.md
   deployed_file_hashes:
-    .claude/skills/researching-api-gateway/SKILL.md: sha256:a5a700af4b0b0aada1e0dc19716a67105de8e86eb7b5896d8e4de554db2e9bef
+    .claude/skills/researching-api-gateway/SKILL.md: sha256:d665c3855db7248b461f0a1b76e37cd26e819ed4e1f27afd35685938f25aeb36
     .claude/skills/researching-api-gateway/blueprints/category-specifics.md: sha256:9c23985ce964a9084d15cafdaf0a394bd1ea0766c8df6c098bd95142edb11140
     .claude/skills/researching-api-gateway/blueprints/evaluation-scenarios.md: sha256:90cb893e6b1b7ddc244d96593a83530340679cf0b603e379977c5b9ae6e7bfce
-    .claude/skills/researching-cache-store/SKILL.md: sha256:13da8470ec4f7f699fe47029f187211aea3227d1b3a87bcf3ab0994be283a06a
+    .claude/skills/researching-api-gateway/blueprints/references/README.md: sha256:c89e62b3a66bb0db0549c23f97661366fb64b27711e130c12bd05b610dd0c531
+    .claude/skills/researching-cache-store/SKILL.md: sha256:a4448d19124bca2f6f4b3cb2010fdd6a5144e40561b338a2afc39c9b35476712
     .claude/skills/researching-cache-store/blueprints/category-specifics.md: sha256:85d368ae5f839d31d0be93f8ca9d43e5e4dd83bdbdab2e035573f51c3422e392
     .claude/skills/researching-cache-store/blueprints/evaluation-scenarios.md: sha256:e498a9ab44eef1117efef54cae89bc4074a8d73e99d26a46ef727da252e4d372
-    .claude/skills/researching-columnar-analytics/SKILL.md: sha256:01c47d79ac9d3f0f1ab5cf61e5de79301f7c45c76ae2b32afbcb5a4513949a1c
-    .claude/skills/researching-columnar-analytics/blueprints/category-specifics.md: sha256:51c493ac67d46325c02ef2f39be568f493ebdebdfeab6af4df54a88b41320dbe
-    .claude/skills/researching-columnar-analytics/blueprints/data-modeling.md: sha256:75f08ced985b2e978c45773f4045714b828ee372920b5d8b340ede748c3ee9c5
+    .claude/skills/researching-cache-store/blueprints/references/README.md: sha256:80e26129b3a2357bafdace9a642e90306806d3d1ffa58394dc647945eb92583f
+    .claude/skills/researching-columnar-analytics/SKILL.md: sha256:a73fb989701f8e520b645c7b10cdddd30a97fba150ced0bde253e64a8d9e87ac
+    .claude/skills/researching-columnar-analytics/blueprints/category-specifics.md: sha256:c5d25ce1bb38f37f4b901ac6a7e699d8073143b045dce6e78bdfc61f6397ffb4
+    .claude/skills/researching-columnar-analytics/blueprints/data-modeling.md: sha256:c683ae7c8543f596584c93cd75ed57c47c0b25f42defad51ae9a7c430fc3da8b
     .claude/skills/researching-columnar-analytics/blueprints/evaluation-scenarios.md: sha256:598a2d8cdaaeebc57ee6bb86b187e060ea4792421f3fbaf87b94c0970cf11ac4
-    .claude/skills/researching-coordination-service/SKILL.md: sha256:8f795a484e5ffcaacf3fc38b31dc66cb01a185a550d3058bc67cca05a9879063
+    .claude/skills/researching-columnar-analytics/blueprints/references/README.md: sha256:e0765c71dd674213fca0ebb863fe20c613a25a00940ca03259081ad5c0a9839a
+    .claude/skills/researching-coordination-service/SKILL.md: sha256:9c8027c5a82ff497fe44adce73d26676df6b2b57fd2e6b66d9eee65e0ab272ba
     .claude/skills/researching-coordination-service/blueprints/category-specifics.md: sha256:fce8d619c765599bc1b82b7528bb3d61ce481aadc06b6e365a414cb448470c18
     .claude/skills/researching-coordination-service/blueprints/evaluation-scenarios.md: sha256:1e04bd67ec3b302a909d419a79010a444e078a051270c06e86d6528055519230
-    .claude/skills/researching-document-store/SKILL.md: sha256:d2a41c69d69411030592ac10c9678ac9881a3c9c3b8ebac3cdd56b34c29f9a3b
-    .claude/skills/researching-document-store/blueprints/category-specifics.md: sha256:2c77400a3704e5e0d66c319c0555ce48ed8e378345e71c44b45e80f1f1578b37
+    .claude/skills/researching-coordination-service/blueprints/references/README.md: sha256:d34e93dc1e62a2bcae4df24536b396aa7faa0a121496d5f3f63d9f2f32902ab3
+    .claude/skills/researching-document-store/SKILL.md: sha256:e063ec272fd52b4461a0d99c5690161ff94a813fb75722ad97ebecec6742fca8
+    .claude/skills/researching-document-store/blueprints/category-specifics.md: sha256:f3537976ab94601fd850842fb06c8bbd84ddf4991937fb1ab1987610f54ca57f
     .claude/skills/researching-document-store/blueprints/data-modeling.md: sha256:a386501c558a6e3848cd6e3c0ff27def5ba310d8a1177d532cc031c4623f61c9
     .claude/skills/researching-document-store/blueprints/evaluation-scenarios.md: sha256:33358c29dce4a21dd481a97283deb144fae7e86ce65378f88a3a19b1ec9b6f5d
-    .claude/skills/researching-graph-database/SKILL.md: sha256:f544a9ad7da3fb21ab92cc7178846141334bfe949f66fbc2041e79efc7b270e0
-    .claude/skills/researching-graph-database/blueprints/category-specifics.md: sha256:e6ed5783638255a1198bd153d28e4c4defcf2c27ab9915da582e68f958afe345
+    .claude/skills/researching-document-store/blueprints/references/README.md: sha256:f050e6b64d66d6557bea7e025a798e2836155ed733be5670c13f32fb3b638b5f
+    .claude/skills/researching-graph-database/SKILL.md: sha256:de795e70336309d98c8a7bbd4e4ebe0ed0e39b2b0406feb1a663697cb0623860
+    .claude/skills/researching-graph-database/blueprints/category-specifics.md: sha256:50fde0c6052451cd9a7bbed7fed795559d6375b9ea775adcb171af90c82ba49a
     .claude/skills/researching-graph-database/blueprints/data-modeling.md: sha256:7930ac6916a6cd7a42835a25c33150e6e8668280387fbb70c5838eda47cb2c38
     .claude/skills/researching-graph-database/blueprints/evaluation-scenarios.md: sha256:fdc6aa8e016145c630d240555cb27e51ac4656aa47a4d0a98159f21fe0b7b443
-    .claude/skills/researching-kv-store/SKILL.md: sha256:9ed79b32ac8eee0078fef7a904b34cf6d06070aa43081c05aed954e34b14f899
-    .claude/skills/researching-kv-store/blueprints/category-specifics.md: sha256:720167fe1bcbdcf9162cf289678c407fdc4bd3a7ad9642514f93b1a03a7880af
-    .claude/skills/researching-kv-store/blueprints/data-modeling.md: sha256:e5cdbbb1a26f45c141fd614996cb019f0d9dffdfe4672c6d09ed9579bd186635
+    .claude/skills/researching-graph-database/blueprints/references/README.md: sha256:d83c291fc54354cbad2e8d52f488ecfb12bdc79b68f2eda0e2485bdb55940b12
+    .claude/skills/researching-kv-store/SKILL.md: sha256:b324e7fb8aaf8c83d2fbd5b18b4b68e15a36a755934143c18260f639e715626a
+    .claude/skills/researching-kv-store/blueprints/category-specifics.md: sha256:aebbe87f1a00648e5abdfe2ab793a2a2956b27e034a8b7f93cbb68c0561ed989
+    .claude/skills/researching-kv-store/blueprints/data-modeling.md: sha256:18ab259b9765fa10b976140c8fc3eb37ae71ba920267ce94f919e79ec96a370d
     .claude/skills/researching-kv-store/blueprints/evaluation-scenarios.md: sha256:23a7dff0b87caeef51e7875fd751ba70c7cb5b82905551b7b4faec413a6fa8f9
-    .claude/skills/researching-object-storage/SKILL.md: sha256:cc82982651208a37902aef086e9c6c8c20d0bf67334cc15c05450f73709ffd91
-    .claude/skills/researching-object-storage/blueprints/category-specifics.md: sha256:7265475e12ba50ee1fb303b2c3b808cd2724056063f544d037c002f57fd93b1d
-    .claude/skills/researching-object-storage/blueprints/data-modeling.md: sha256:61e8843cbb6e34767afa747d0d5ed703a5e05dc5d8f67675820c739785c12fac
+    .claude/skills/researching-kv-store/blueprints/references/README.md: sha256:f215db1f41b99f0f93096ed25829b7ec4442da5774aca64ba84215243096e77e
+    .claude/skills/researching-object-storage/SKILL.md: sha256:02f6c2ce55840fb64d29052ab0900f94ed1b8c6480b9ffc4ebdaae1c2209e5c1
+    .claude/skills/researching-object-storage/blueprints/category-specifics.md: sha256:343cc8428b36f26c3f0c359e7630acca1bb923c6e88f4ed43e502eba97064d35
+    .claude/skills/researching-object-storage/blueprints/data-modeling.md: sha256:270c53e5b0bd13966e9c877926c7c62203220e6d32afa45be48cc03ac20a0d4e
     .claude/skills/researching-object-storage/blueprints/evaluation-scenarios.md: sha256:e1f0b4a2fe9511e59c8d5e47a54c7fd82f6133a090ae408d90a67022ec180d2c
-    .claude/skills/researching-platform-software/SKILL.md: sha256:d538ca23a8557b71c9fa940d8a03cc2fd448ae9d5f9e543b3bd2a7e1a0e36624
+    .claude/skills/researching-object-storage/blueprints/references/README.md: sha256:85a1d14d0cb810da96881141a7602c7102053f069919202dc623c77466fd4c83
+    .claude/skills/researching-platform-software/SKILL.md: sha256:c2d2d61bbb8906ba0d6babb50ba58379db1e860516dda3b081530ca523564f0c
     .claude/skills/researching-platform-software/blueprints/evaluation-scenarios.md: sha256:b5d9eae477d53304845d7b0e55a9590ed300f3fda5f66348f0598ae8333cb502
     .claude/skills/researching-platform-software/blueprints/routing-decision-tree.md: sha256:fc282828a9f3c3f0a9a359c41fadcbad157470ae499f667de4823b5884e4b9f5
+    .claude/skills/researching-platform-software/blueprints/shared/category-templates/api-management-template.md: sha256:34016bc36027696c4adbed487ac76da0b65e2a09b36fca29b931f0dd319da86f
     .claude/skills/researching-platform-software/blueprints/shared/data-modeling-principles.md: sha256:86e5d4b8c7566d737f662f49cfefdf921163ac58a35ffadfc7d1b63fbebf65d8
+    .claude/skills/researching-platform-software/blueprints/shared/data-modeling/README.md: sha256:ea810c002db7db6f12ea19939fd3989c354d013fd6a3eaec0a4ea9fe149da1eb
     .claude/skills/researching-platform-software/blueprints/shared/deployment-guides/container-compose-guide.md: sha256:468bc3a471bee36b4e2442dc476a3157af8fa4823d7dbc59812a1efe6fcb2771
     .claude/skills/researching-platform-software/blueprints/shared/deployment-guides/kubernetes-operator-guide.md: sha256:6d362d93154e41199404407b35816c56ea64e10adbdd48d9b0de2efadab03f8a
     .claude/skills/researching-platform-software/blueprints/shared/deployment-guides/vm-and-bare-metal-guide.md: sha256:c23e614f7c6ed14040f14fba7d91bbee87666873340e9fb08c5de7d0f13b8515
-    .claude/skills/researching-platform-software/blueprints/shared/output-format-base.md: sha256:79add30cedbe8bf33ada9cef4b83a0a08fb5c6f2029c9cfdadf91ce5ff88b469
+    .claude/skills/researching-platform-software/blueprints/shared/output-format-base.md: sha256:8bfa86e4e66c7528eb4c22baafd234863810355f91db68e1ea936c180ff52873
     .claude/skills/researching-platform-software/blueprints/shared/reference-card-example-kafka-3.7.md: sha256:cba3a865d9c3c7d8bee7c1c29878264ef2367dc8940ec64222a7fa5c6b33dd2b
     .claude/skills/researching-platform-software/blueprints/shared/reference-card-template.md: sha256:dda9703de786c7b008a3ebd5b2f70f69a522ed81e97c0a1652a0fdd59bb293ed
-    .claude/skills/researching-platform-software/blueprints/shared/research-scope-operations.md: sha256:a8327c302d79d466acddba33b711434f7b2f8c475e50abaa89fb4f2a43112950
-    .claude/skills/researching-rdbms/SKILL.md: sha256:1257e2508d15fc5c279e89e06561bc4c092cdcc6e3f1eda4729b4a333e7f5cc8
+    .claude/skills/researching-platform-software/blueprints/shared/research-scope-operations.md: sha256:15c76d16cd5aa6b6e2c25aed835ce402849d3755b79738887f8c60c812f19328
+    .claude/skills/researching-rdbms/SKILL.md: sha256:112222ee30e5c0d5e75b38e392d100a8e386093f4b9fad214d45f734e89badce
     .claude/skills/researching-rdbms/blueprints/category-specifics.md: sha256:d8ca433077fdb42ffb07eacd2d1ef85ab93eaf83cb8c05952618649cc38e2d61
-    .claude/skills/researching-rdbms/blueprints/data-modeling.md: sha256:73ca1b0af30655c885e1b6c6f14c22b1be4078119bc46732285e31ea41301c90
+    .claude/skills/researching-rdbms/blueprints/data-modeling.md: sha256:ea14eace7396e741fae07025920b556abeca2f9c84c0fcd575b9744dea39e5b3
     .claude/skills/researching-rdbms/blueprints/evaluation-scenarios.md: sha256:b8729e7a9cce833aabefd5a63a257e90bceeeafc13fcb8f6cc267c847668eb16
-    .claude/skills/researching-search-engine/SKILL.md: sha256:4308ba4f0ac0e0886b04b20ca7978377011f0c8556e90b8124f2a210508958d1
-    .claude/skills/researching-search-engine/blueprints/category-specifics.md: sha256:722690e41dc816a0ea896a20a8f5b12b95a28d0e8fa5067ea513ac3fcbb8cfa1
+    .claude/skills/researching-rdbms/blueprints/references/README.md: sha256:f6feca4985c50a4c5ff7808406e82b19fecd4ad99263dc2238681294c36e3f25
+    .claude/skills/researching-search-engine/SKILL.md: sha256:c4b1b22ae5a54a9582ded9736e79671555f3767247214918127bac0e5bc13ae9
+    .claude/skills/researching-search-engine/blueprints/category-specifics.md: sha256:424fcff3cfa7495e4664df214d2634765315b17b572f0697c7908d5b6743385e
     .claude/skills/researching-search-engine/blueprints/evaluation-scenarios.md: sha256:f96ed99328b3b3442238e3203d4ecf7cb6252fce6c5434f1fe976bc7228565ae
-    .claude/skills/researching-streaming-broker/SKILL.md: sha256:07513c28c3e17905c624ce6b1df0ff4da41f9ba613e94de225b77f99d8fa6644
+    .claude/skills/researching-search-engine/blueprints/references/README.md: sha256:09e2bcb10f28292e502cf019095300440905d37ef2e22593a62bba50eb9ec6e4
+    .claude/skills/researching-streaming-broker/SKILL.md: sha256:da9a7041f7c93a8e81d61a1bd7cdaa3aa65e583be80c8ba9a4b781942ff2cbee
     .claude/skills/researching-streaming-broker/blueprints/category-specifics.md: sha256:9b3ec2969e90af5613b60ef156e8ff1a20aa87ac9461cd1910f090bc0bbe782e
     .claude/skills/researching-streaming-broker/blueprints/evaluation-scenarios.md: sha256:83dd70703ba8d5fcabcfa96ea33a5bfe37594bb3898e3b55835754ed5bdbe810
-    .claude/skills/researching-timeseries-db/SKILL.md: sha256:d7c118570ca7a7f847df98ae1b2d27de269596c5f46bdd9956b30bdb2fde1465
-    .claude/skills/researching-timeseries-db/blueprints/category-specifics.md: sha256:b1855dffc8c0b4b81c3516f1d384bddc18bd3105a3285a1adcba4cc66d57d0c5
+    .claude/skills/researching-streaming-broker/blueprints/references/README.md: sha256:f68c8bdd7da8958b7176dfe1b991c898899cfe56aa8c2c8809f6dfb4d9ee076b
+    .claude/skills/researching-timeseries-db/SKILL.md: sha256:57b28f138cbf1183af6c3bb0050691ba3b45fb3a20c9f981504f822c6ae312c0
+    .claude/skills/researching-timeseries-db/blueprints/category-specifics.md: sha256:7f36625810174642b21ef4df0815ad12c0cfadcc33e247187f4982005ea65ccd
     .claude/skills/researching-timeseries-db/blueprints/data-modeling.md: sha256:3192a0b138a661effa16ee104b926da15ed1c77a12e01f54926f7c3368329f83
     .claude/skills/researching-timeseries-db/blueprints/evaluation-scenarios.md: sha256:dfedd039c7248daa56fcdb4dba75523a700d4040ae7dfdbe25921c08e4068c67
-    .claude/skills/researching-vector-store/SKILL.md: sha256:e0208db5c0088fe91960b54e6cd978518245e821579ba7f5e58f7b0a9a510b27
-    .claude/skills/researching-vector-store/blueprints/category-specifics.md: sha256:fca08bc844cb82588e89f6155dd70ffa47d1caf00a947dd48679088223a0608c
+    .claude/skills/researching-timeseries-db/blueprints/references/README.md: sha256:6c519951bc61a5366cc9a9d02c285e14e3599a592a033bfcd1de26bc6c040413
+    .claude/skills/researching-vector-store/SKILL.md: sha256:f0aeecd7e13d1a1157c197fbe82a2101a9437935f5bec7f1571267a277f3ed07
+    .claude/skills/researching-vector-store/blueprints/category-specifics.md: sha256:eda48311f84ef7546cf5c85a85b8835dd87fdfff971ffd3f03fa0e9ffa5f1fe4
     .claude/skills/researching-vector-store/blueprints/data-modeling.md: sha256:a22dfbf2738c98cfe06ffdb0c43ada3c9071bf9bc04bd1bb049759620b75917c
     .claude/skills/researching-vector-store/blueprints/evaluation-scenarios.md: sha256:712af979ec887e44e12a53fb722368f65347c47573d7c67abf84a6e0d8057471
-    .claude/skills/researching-wide-column-store/SKILL.md: sha256:a5365f5f20c08bd1022ca38ddb76537aa4ef419ac9e8dd20de317fd203887101
-    .claude/skills/researching-wide-column-store/blueprints/category-specifics.md: sha256:3cceee3fb456510283abd60e9db9b9469f143bbacf4bfbe90232ec962a08d853
+    .claude/skills/researching-vector-store/blueprints/references/README.md: sha256:17333f12db1f12149bcab4bcfa658f9943d538ec14e27b79435d1c0d5a14e765
+    .claude/skills/researching-wide-column-store/SKILL.md: sha256:326fb8b91d1179b8b9a2b21e06d9ac11e81bf0a61b77808a503a6234a872f74d
+    .claude/skills/researching-wide-column-store/blueprints/category-specifics.md: sha256:50365a1e16c52d686ce78e11ce22fed4074f0df4b2b6e230385045f53d00f3a8
     .claude/skills/researching-wide-column-store/blueprints/data-modeling.md: sha256:fc4a87f5879872eb24b7bc153bca264b31b5cf5292ddd2e3e7a8c6a6e27ce38a
     .claude/skills/researching-wide-column-store/blueprints/evaluation-scenarios.md: sha256:5095de0ca31192f6f6c54b805b6415753c57a740c2b176cfed801f70ed5073ea
+    .claude/skills/researching-wide-column-store/blueprints/references/README.md: sha256:951d4d8761cf99cbc692d553f0930f090bed6ace45b1ac66def391985599c666
   source: local
   local_path: ./packages/researching-platform
-  content_hash: sha256:a011241ef084883da800a3a7efdd1fd5b3fb3a350f98de79555bb13addec8e3a
+  content_hash: sha256:8cce68f94acf3b5e3531dc8e6b562e403e0c6f8018c28d9e9a6ab2636967e27a
   declared_license: MIT
 - repo_url: _local/stripe-java
   name: agents-factory-stripe-java
@@ -1435,7 +1532,7 @@ dependencies:
     .claude/skills/review-stripe-integration/blueprints/evaluation-scenarios.md: sha256:d647ca8526ee4b5f0a19fea2c2907e05f452c6f59c851b31e65049b11338af2c
   source: local
   local_path: ./packages/stripe-java
-  content_hash: sha256:1beb220b51762fb6de89a21e678d8b47e947e2346b3e9513186f9b1ad9042941
+  content_hash: sha256:59d50621ef93c7561f638c8f7dbf3511a341ba05986279b35447fa14456644d7
 - repo_url: _local/terraform
   name: agents-factory-terraform
   version: 1.2.0
@@ -1501,11 +1598,11 @@ dependencies:
     .claude/skills/terraform-instructions-compiler/assets/terraform-standards-reference.md: sha256:3cd36ab1a34bd3752c3eb6c8730d11b4619cede59cb82ffabb6920c2b4382b6e
     .claude/skills/terraform-instructions-compiler/blueprints/evaluation-scenarios.md: sha256:7fac58ed2f418765648e578cc77ce2c7fa5a00f7b966e80559529cf483c894cc
     .claude/skills/terraform-instructions-compiler/blueprints/interview-questions.md: sha256:d000bddd4d6299924cb7ff8b1b0ed378ce9080c183b67b52a1d6be1a9b24cb72
-    .claude/skills/terraform-rules-author/SKILL.md: sha256:f936e39b2e2e1ebe9cdf8d0382dc1bfee1daa4cb9e157f08cbb7efeee318436a
+    .claude/skills/terraform-rules-author/SKILL.md: sha256:3e2904a33d12ac74e39d8af83d4339b13497fbde7c9ec678fa9136313ca607fa
     .claude/skills/terraform-rules-author/blueprints/evaluation-scenarios.md: sha256:6dcfce7178d778724a0f2dd2e048b2b929f77ed80ed735c93e53e2a42a2f4441
   source: local
   local_path: ./packages/terraform
-  content_hash: sha256:17c88f01d18e0d565326b03d61b8a8222a19eabfe19a88e23ef7a74104b35378
+  content_hash: sha256:84b0358430805168a1284d7b83cec82f1f42457c647323e98c1283f94d4f9de4
   declared_license: MIT
 - repo_url: _local/validating
   name: agents-factory-validating
@@ -1549,14 +1646,6 @@ dependencies:
   source: local
   local_path: ./packages/validating
   content_hash: sha256:1a4dec8bb7f7c4952c9837b7f731161b6a67112e66415805bb8ca9924b0b68bd
-  declared_license: MIT
-- repo_url: microsoft/apm
-  name: apm
-  host: github.com
-  resolved_commit: 280b8a7b115b7a0c9b232467c376480c7cfde04e
-  version: 0.10.0
-  package_type: apm_package
-  content_hash: sha256:2f64827637c38ab0e65887f62c0c787763bcd2aa686c8f36eea5f5ff695e16df
   declared_license: MIT
 - repo_url: _local/artifact-authoring
   name: agents-factory-artifact-authoring
@@ -1646,16 +1735,27 @@ dependencies:
   - .claude/skills/applying-aws-reliability-pillar/blueprints/evaluation-scenarios.md
   - .claude/skills/applying-aws-serverless-well-architected-lens
   - .claude/skills/applying-aws-serverless-well-architected-lens/SKILL.md
+  - .claude/skills/applying-aws-serverless-well-architected-lens/blueprints/always-do-patterns.md
+  - .claude/skills/applying-aws-serverless-well-architected-lens/blueprints/ask-first-decisions.md
   - .claude/skills/applying-aws-serverless-well-architected-lens/blueprints/evaluation-scenarios.md
+  - .claude/skills/applying-aws-serverless-well-architected-lens/blueprints/never-do-patterns.md
+  - .claude/skills/applying-aws-serverless-well-architected-lens/blueprints/post-2022-gaps.md
   - .claude/skills/applying-aws-sustainability-pillar
   - .claude/skills/applying-aws-sustainability-pillar/SKILL.md
   - .claude/skills/applying-aws-sustainability-pillar/blueprints/evaluation-scenarios.md
   - .claude/skills/applying-aws-well-architected
   - .claude/skills/applying-aws-well-architected/SKILL.md
+  - .claude/skills/applying-aws-well-architected/blueprints/always-do-patterns.md
+  - .claude/skills/applying-aws-well-architected/blueprints/ask-first-decisions.md
   - .claude/skills/applying-aws-well-architected/blueprints/evaluation-scenarios.md
+  - .claude/skills/applying-aws-well-architected/blueprints/never-do-patterns.md
+  - .claude/skills/applying-aws-well-architected/blueprints/reference-architectures.md
   - .claude/skills/applying-waf-cost-optimization
   - .claude/skills/applying-waf-cost-optimization/SKILL.md
+  - .claude/skills/applying-waf-cost-optimization/blueprints/always-do-patterns.md
+  - .claude/skills/applying-waf-cost-optimization/blueprints/ask-first-decisions.md
   - .claude/skills/applying-waf-cost-optimization/blueprints/evaluation-scenarios.md
+  - .claude/skills/applying-waf-cost-optimization/blueprints/never-do-patterns.md
   - .claude/skills/applying-waf-operational-excellence-pillar
   - .claude/skills/applying-waf-operational-excellence-pillar/SKILL.md
   - .claude/skills/applying-waf-operational-excellence-pillar/blueprints/always-do-patterns.md
@@ -1669,7 +1769,10 @@ dependencies:
   - .claude/skills/applying-waf-sustainability-pillar/blueprints/evaluation-scenarios.md
   - .claude/skills/architecting-aws-multi-account-organizations
   - .claude/skills/architecting-aws-multi-account-organizations/SKILL.md
+  - .claude/skills/architecting-aws-multi-account-organizations/blueprints/always-do-patterns.md
+  - .claude/skills/architecting-aws-multi-account-organizations/blueprints/ask-first-decisions.md
   - .claude/skills/architecting-aws-multi-account-organizations/blueprints/evaluation-scenarios.md
+  - .claude/skills/architecting-aws-multi-account-organizations/blueprints/never-do-patterns.md
   - .claude/skills/architecting-aws-s3-storage
   - .claude/skills/architecting-aws-s3-storage/SKILL.md
   - .claude/skills/architecting-aws-s3-storage/blueprints/evaluation-scenarios.md
@@ -1698,7 +1801,10 @@ dependencies:
   - .claude/skills/architecting-cloudtrail-audit-logging/blueprints/never-do-patterns.md
   - .claude/skills/architecting-eventbridge-eda
   - .claude/skills/architecting-eventbridge-eda/SKILL.md
+  - .claude/skills/architecting-eventbridge-eda/blueprints/always-do-patterns.md
+  - .claude/skills/architecting-eventbridge-eda/blueprints/ask-first-decisions.md
   - .claude/skills/architecting-eventbridge-eda/blueprints/evaluation-scenarios.md
+  - .claude/skills/architecting-eventbridge-eda/blueprints/never-do-patterns.md
   - .claude/skills/architecting-lambda-serverless-patterns
   - .claude/skills/architecting-lambda-serverless-patterns/SKILL.md
   - .claude/skills/architecting-lambda-serverless-patterns/blueprints/evaluation-scenarios.md
@@ -1710,16 +1816,23 @@ dependencies:
   - .claude/skills/auditing-aws-cloudtrail/blueprints/evaluation-scenarios.md
   - .claude/skills/configuring-aws-route53-dns
   - .claude/skills/configuring-aws-route53-dns/SKILL.md
+  - .claude/skills/configuring-aws-route53-dns/blueprints/always-do-patterns.md
+  - .claude/skills/configuring-aws-route53-dns/blueprints/ask-first-decisions.md
   - .claude/skills/configuring-aws-route53-dns/blueprints/evaluation-scenarios.md
+  - .claude/skills/configuring-aws-route53-dns/blueprints/never-do-patterns.md
   - .claude/skills/delivering-cloudfront-cdn
   - .claude/skills/delivering-cloudfront-cdn/SKILL.md
+  - .claude/skills/delivering-cloudfront-cdn/blueprints/always-do-patterns.md
+  - .claude/skills/delivering-cloudfront-cdn/blueprints/ask-first-decisions.md
   - .claude/skills/delivering-cloudfront-cdn/blueprints/evaluation-scenarios.md
+  - .claude/skills/delivering-cloudfront-cdn/blueprints/never-do-patterns.md
   - .claude/skills/designing-aws-api-gateway-serverless
   - .claude/skills/designing-aws-api-gateway-serverless/SKILL.md
   - .claude/skills/designing-aws-api-gateway-serverless/blueprints/evaluation-scenarios.md
   - .claude/skills/designing-aws-vpc-networks
   - .claude/skills/designing-aws-vpc-networks/SKILL.md
   - .claude/skills/designing-aws-vpc-networks/blueprints/evaluation-scenarios.md
+  - .claude/skills/designing-aws-vpc-networks/blueprints/reference-architectures.md
   - .claude/skills/designing-dynamodb-nosql
   - .claude/skills/designing-dynamodb-nosql/SKILL.md
   - .claude/skills/designing-dynamodb-nosql/blueprints/evaluation-scenarios.md
@@ -1729,13 +1842,20 @@ dependencies:
   - .claude/skills/designing-multi-cloud-network-topology/blueprints/service-equivalence-lock-in.md
   - .claude/skills/implementing-lambda-powertools-java
   - .claude/skills/implementing-lambda-powertools-java/SKILL.md
+  - .claude/skills/implementing-lambda-powertools-java/blueprints/always-do-patterns.md
+  - .claude/skills/implementing-lambda-powertools-java/blueprints/ask-first-decisions.md
   - .claude/skills/implementing-lambda-powertools-java/blueprints/evaluation-scenarios.md
+  - .claude/skills/implementing-lambda-powertools-java/blueprints/integration-patterns.md
+  - .claude/skills/implementing-lambda-powertools-java/blueprints/never-do-patterns.md
   - .claude/skills/managing-aws-costs
   - .claude/skills/managing-aws-costs/SKILL.md
   - .claude/skills/managing-aws-costs/blueprints/evaluation-scenarios.md
   - .claude/skills/monitoring-cloudwatch-observability
   - .claude/skills/monitoring-cloudwatch-observability/SKILL.md
+  - .claude/skills/monitoring-cloudwatch-observability/blueprints/always-do-patterns.md
+  - .claude/skills/monitoring-cloudwatch-observability/blueprints/ask-first-decisions.md
   - .claude/skills/monitoring-cloudwatch-observability/blueprints/evaluation-scenarios.md
+  - .claude/skills/monitoring-cloudwatch-observability/blueprints/never-do-patterns.md
   - .claude/skills/optimizing-aws-costs
   - .claude/skills/optimizing-aws-costs/SKILL.md
   - .claude/skills/optimizing-aws-costs/blueprints/evaluation-scenarios.md
@@ -1779,13 +1899,24 @@ dependencies:
     .claude/skills/applying-aws-reliability-pillar/SKILL.md: sha256:fa26326841ed5f98803c98d073bf0f45dd2d2b11f19cff35915863aa5de68f7d
     .claude/skills/applying-aws-reliability-pillar/blueprints/evaluation-scenarios.md: sha256:02be2c3d7cb0046b8a42ced74f06ea05285758cea927739d86129feb8786acf5
     .claude/skills/applying-aws-serverless-well-architected-lens/SKILL.md: sha256:84e387951469f535878a7d9631805c08e65d1d73701be83db3df612302bec2a7
+    .claude/skills/applying-aws-serverless-well-architected-lens/blueprints/always-do-patterns.md: sha256:46c03b4f4de15bd6a4873ce2fbd3807770033fc87e589a21bdc2cb4a88aec206
+    .claude/skills/applying-aws-serverless-well-architected-lens/blueprints/ask-first-decisions.md: sha256:46b4f83d5bcc2c1a0cdf8e16fb854622b44fb234fcd395c91cae2e15ebd429bf
     .claude/skills/applying-aws-serverless-well-architected-lens/blueprints/evaluation-scenarios.md: sha256:f945910c1824cef5ca7d4d97e9bf57ac833e49ee56617ce469968dd4bcf59c48
+    .claude/skills/applying-aws-serverless-well-architected-lens/blueprints/never-do-patterns.md: sha256:047e7599823bdf9b261ce26df4fb69d2de0b879f0a0d1ec169a21838416ca3b7
+    .claude/skills/applying-aws-serverless-well-architected-lens/blueprints/post-2022-gaps.md: sha256:88acf949a404e0e79107b457e5ef13c9647000afaa3ba7d39faafa710b9c5a67
     .claude/skills/applying-aws-sustainability-pillar/SKILL.md: sha256:06a227c042e9d30280cdef16be90bf8c995c120bfb5b29cc23489d091b1e144f
     .claude/skills/applying-aws-sustainability-pillar/blueprints/evaluation-scenarios.md: sha256:9b796248655c596b0221a6988e758ed7cb88d26dae4103e3f5e9e570f707824e
     .claude/skills/applying-aws-well-architected/SKILL.md: sha256:e85ace2cd5b442e6868e4b1e60191a9bec193a18d55e1634d2333d6377c25bd1
+    .claude/skills/applying-aws-well-architected/blueprints/always-do-patterns.md: sha256:e2c091dedf2091f90211b607650ac9b4735d43c37f9a143f7c43e0c099295843
+    .claude/skills/applying-aws-well-architected/blueprints/ask-first-decisions.md: sha256:83914f07f1e83a3a77f9e1ed5e94e769785c00d05a3c7aff2b7481bbdfa71bf6
     .claude/skills/applying-aws-well-architected/blueprints/evaluation-scenarios.md: sha256:7de4bf118e39f0429ade33bec1b9fc57349b97b9980e947c1e8aa1ad04d844df
-    .claude/skills/applying-waf-cost-optimization/SKILL.md: sha256:4e29fc8c6e342c72ec3a4f7fc35e5a76ce71fe93f9947d83b1cd516d6d942f52
+    .claude/skills/applying-aws-well-architected/blueprints/never-do-patterns.md: sha256:ca5a1d7e8d9db3ee405c905a6ca984df241bbafdcae3b2b4f66b7ed2c156fdc2
+    .claude/skills/applying-aws-well-architected/blueprints/reference-architectures.md: sha256:41c3c187edf756c3dd105904b139242c94d43c401aa54ad1e00e8a89e3adf89d
+    .claude/skills/applying-waf-cost-optimization/SKILL.md: sha256:81944e1fc8eb15b38a7b7c96630f1e31745c56993391e5c1ed7753fa94753cb2
+    .claude/skills/applying-waf-cost-optimization/blueprints/always-do-patterns.md: sha256:fc8704ce3b450d77e29cc7dfb8dd88226d5b057a55194a031881824bcd1c1952
+    .claude/skills/applying-waf-cost-optimization/blueprints/ask-first-decisions.md: sha256:7460beea6c48769ec11d39b192670779e449fe51a5b17bafe684e26f6e44a1e4
     .claude/skills/applying-waf-cost-optimization/blueprints/evaluation-scenarios.md: sha256:d1a9cdbbabad5e572a737fe5d35e4cf7c804e556eb02b1df7d7c02a5218b6046
+    .claude/skills/applying-waf-cost-optimization/blueprints/never-do-patterns.md: sha256:71ad439f5bba79205de5bc437250175fcdbd95a55fdce2ce4e77ca565a10433b
     .claude/skills/applying-waf-operational-excellence-pillar/SKILL.md: sha256:45e6867f34372ee694521e6416487adb1fefc843b32e4b67447679763274bbcb
     .claude/skills/applying-waf-operational-excellence-pillar/blueprints/always-do-patterns.md: sha256:05cea4bf7f319f67fbb347f00c6709d553cff2885096ba8c94e52ba1e139d9b5
     .claude/skills/applying-waf-operational-excellence-pillar/blueprints/architecture-decisions.md: sha256:eb1470b4d40b26823f9462fada207c34a2f2fce44c8e2265601f7e62b07064a3
@@ -1795,7 +1926,10 @@ dependencies:
     .claude/skills/applying-waf-sustainability-pillar/SKILL.md: sha256:18e7140915ecd1e93e0ffb01c0506bdd055cf58a2c74131d477a8c1f6ec02d71
     .claude/skills/applying-waf-sustainability-pillar/blueprints/evaluation-scenarios.md: sha256:8a60b7e9c73ff84df884da5e3f5ab5bb9a24e843ef5f9c2e0a70516b3d19fae0
     .claude/skills/architecting-aws-multi-account-organizations/SKILL.md: sha256:3d6086317d724dbe1d1b238af75331106904b20af93a8d158b369ad031375c29
+    .claude/skills/architecting-aws-multi-account-organizations/blueprints/always-do-patterns.md: sha256:ee5af6c26ef4b8c5efcf8c29a2e5cdb5f1093dd931b30fe199bec98f15dc246a
+    .claude/skills/architecting-aws-multi-account-organizations/blueprints/ask-first-decisions.md: sha256:06eead91a47aa4478ee4668b108990498672907cebd18632066c021eba3d9025
     .claude/skills/architecting-aws-multi-account-organizations/blueprints/evaluation-scenarios.md: sha256:1df9f5f8cec359cfc9592845a4122ffacc8c5aff140b798dff94efdfc0d9cfb8
+    .claude/skills/architecting-aws-multi-account-organizations/blueprints/never-do-patterns.md: sha256:b9fcc4514c779bd551a1c89c1e35ce89e0afc8587c77fee5729ec2f2ec0da779
     .claude/skills/architecting-aws-s3-storage/SKILL.md: sha256:6fe62689510bc68441cc7f5f5afb82951a645ee78ceaeb6328643aba9b9c8ed0
     .claude/skills/architecting-aws-s3-storage/blueprints/evaluation-scenarios.md: sha256:7486947015f65081b8f2533b5e1dbbd25182e9fff7d042186e5d908f6958a7fe
     .claude/skills/architecting-aws-saas-multitenant/SKILL.md: sha256:d6e4bc95c6dc52dedef14f2207bca3bb041529de5cb8ba88d6c274b2b0306ac1
@@ -1816,7 +1950,10 @@ dependencies:
     .claude/skills/architecting-cloudtrail-audit-logging/blueprints/evaluation-scenarios.md: sha256:0d2e97cdc4b62a6d7df57e2c03bd68e08e47f4d30d4604ac3a02dd832b3e29e7
     .claude/skills/architecting-cloudtrail-audit-logging/blueprints/never-do-patterns.md: sha256:94ebd8d2f753c837ab657c0902628addefeb56783eda99a609102dc351e8e815
     .claude/skills/architecting-eventbridge-eda/SKILL.md: sha256:49178aede5f8c9a663d830d1511740c47116185b56fa541b792e4cfac875a494
+    .claude/skills/architecting-eventbridge-eda/blueprints/always-do-patterns.md: sha256:86614cf2c84b56956f6d103fca37b6636214e8c7c075c0d30949566ff8eecd89
+    .claude/skills/architecting-eventbridge-eda/blueprints/ask-first-decisions.md: sha256:9e713703c6fcd737a417d606ab173ed725cb6f0124f06d0854e786f983e4d4a3
     .claude/skills/architecting-eventbridge-eda/blueprints/evaluation-scenarios.md: sha256:37577043b2a9ce0c80ed894ea430e483a40d624769b874e3feaf5dfbaf5b7925
+    .claude/skills/architecting-eventbridge-eda/blueprints/never-do-patterns.md: sha256:30d972daa58ef722959c675924d6bf5a70bdc2239b334dca5a3e178fd6262acc
     .claude/skills/architecting-lambda-serverless-patterns/SKILL.md: sha256:74f689789944e76df3e809b3948febb834a32d90dec847dd7051aab9217a12c1
     .claude/skills/architecting-lambda-serverless-patterns/blueprints/evaluation-scenarios.md: sha256:b6428acbbc1c3d1252d820bd280c60f74482838cc8cfb11722d839f53517ac02
     .claude/skills/architecting-sam-serverless-patterns/SKILL.md: sha256:e2b24c6b9fb63712c4092e4bd787d16f5a8fa95b3788d86542bdf3e0b02971ed
@@ -1824,24 +1961,38 @@ dependencies:
     .claude/skills/auditing-aws-cloudtrail/SKILL.md: sha256:41090836df3b7097d7d8e761462b5b563dba232fcbbd8f477c0cb0cbec3ec0cb
     .claude/skills/auditing-aws-cloudtrail/blueprints/evaluation-scenarios.md: sha256:1891a5dd5d84868297df6ef5ca390fac82b4561254aa286bb4d910bab8fcf60e
     .claude/skills/configuring-aws-route53-dns/SKILL.md: sha256:92292342e49406939fad9a89ec0667f7a2f70a5752cb366f0fddaad18de1b08a
+    .claude/skills/configuring-aws-route53-dns/blueprints/always-do-patterns.md: sha256:b64eaac06b42da654802999dfe1722f767e86d69f11abb12f06adf2a30fc1010
+    .claude/skills/configuring-aws-route53-dns/blueprints/ask-first-decisions.md: sha256:1956b9eef480ec12fae4f644062f620ddff91ff536fdfc368a8f68e68e1435d0
     .claude/skills/configuring-aws-route53-dns/blueprints/evaluation-scenarios.md: sha256:52e5609f9d585a1be630bdca0b689fa172d8cd84129012d5cd7c4eea808a30b3
+    .claude/skills/configuring-aws-route53-dns/blueprints/never-do-patterns.md: sha256:d52c3b61ec7aff30284d07d10e68544a04dd2476a485e84221ecf02c7135c9c0
     .claude/skills/delivering-cloudfront-cdn/SKILL.md: sha256:ceeaf72623ee3364b54c480dd1807f86210f5ad715bb039381d3061d5cd8b426
+    .claude/skills/delivering-cloudfront-cdn/blueprints/always-do-patterns.md: sha256:d3e759b2fe16290ddf3b162d61bef3b457a79db032b3a571164fcf9323545414
+    .claude/skills/delivering-cloudfront-cdn/blueprints/ask-first-decisions.md: sha256:7c77e376aa1bfcd60f1cc20d14cf2b95c066fb4c6cdb24aecd9c09d93b7a0aff
     .claude/skills/delivering-cloudfront-cdn/blueprints/evaluation-scenarios.md: sha256:1a2373623096b8abc00ac6476e47d32b6cc8a8bf56391f2eec2ca5642ef9c51f
+    .claude/skills/delivering-cloudfront-cdn/blueprints/never-do-patterns.md: sha256:783c766195e4fc812acbad49466a32858b12fd1a3078431b1a4336d05205f2f5
     .claude/skills/designing-aws-api-gateway-serverless/SKILL.md: sha256:153493c190b5dedb16342ec1fdca055af1ceb5d09f8088eff8c919f1ed55c81f
     .claude/skills/designing-aws-api-gateway-serverless/blueprints/evaluation-scenarios.md: sha256:3a637c390c9eab5910b3c9eb759dba0b638f866ed9e9adecbcc15cfbbc4c6960
-    .claude/skills/designing-aws-vpc-networks/SKILL.md: sha256:2e47c5c438616367a89330c28f09696136ffeadf8e34e3fdea33ac1eccbf4ab7
+    .claude/skills/designing-aws-vpc-networks/SKILL.md: sha256:160cddaf9b563810b65db8ef7d732ce1fa6f3cd3d70b8d550ecb10e9f21a1ce9
     .claude/skills/designing-aws-vpc-networks/blueprints/evaluation-scenarios.md: sha256:0a56df05ff62ea4d7414fff7c31d38671b02afcd20c9f5c42debd5b8c9943ae6
+    .claude/skills/designing-aws-vpc-networks/blueprints/reference-architectures.md: sha256:f8eab832e6afa678bcf51fddc459ef062b4160ac64867bfe10a653ea401903b7
     .claude/skills/designing-dynamodb-nosql/SKILL.md: sha256:0bed08d315baebd441389ed2245ed8bcfd743418e76961a4a22e372da21078ff
     .claude/skills/designing-dynamodb-nosql/blueprints/evaluation-scenarios.md: sha256:7b9d73e20ebec34b0b24f972d0d9fe74d1f94c6ba58dbb92fd1f7b44a48e2802
     .claude/skills/designing-multi-cloud-network-topology/SKILL.md: sha256:2b427f9b3484111c9fa98dd7a6742086324318718ad3d2cb4ae37b43db5b1905
     .claude/skills/designing-multi-cloud-network-topology/blueprints/evaluation-scenarios.md: sha256:9ad44881424c7da731715d17d4a29782c62763c5833fc483c310f1e43bc5f744
     .claude/skills/designing-multi-cloud-network-topology/blueprints/service-equivalence-lock-in.md: sha256:4274ae668fbc81ae3e24278d5441046c90ca2c7d62e4ca6178a358fb7435f3d9
     .claude/skills/implementing-lambda-powertools-java/SKILL.md: sha256:818ee136e7b02263010553d802d46cb9cc82e1c059451e67b4f43191bce330d2
+    .claude/skills/implementing-lambda-powertools-java/blueprints/always-do-patterns.md: sha256:5899d0d58fe36c17c6ce3fc965bb1f5498c19cb007f221c5a9be9ee6e38db21e
+    .claude/skills/implementing-lambda-powertools-java/blueprints/ask-first-decisions.md: sha256:3e0f3e8b40f23cc0d62590c2b65871f3f3c25d18ea966b3fdc5f130d4a2f4d00
     .claude/skills/implementing-lambda-powertools-java/blueprints/evaluation-scenarios.md: sha256:fb44daa6c857ee0bc734eed71a3abc081db37f3837e328cea447b61942c133c6
+    .claude/skills/implementing-lambda-powertools-java/blueprints/integration-patterns.md: sha256:854ef5197fef616c3ca329ad7ad817c8083deefe743091ff2752ac4834156328
+    .claude/skills/implementing-lambda-powertools-java/blueprints/never-do-patterns.md: sha256:2e4bb5888fbd2bd64fc8dbce1e2094c4a8eecd135da33585e83d2441cb0a0c56
     .claude/skills/managing-aws-costs/SKILL.md: sha256:f8d20e6cda6227d36ec282666ecec86c581992b5546026bc048e54f7db671c0c
     .claude/skills/managing-aws-costs/blueprints/evaluation-scenarios.md: sha256:9927ee661cf2a61174b6762fe10f902da25b4a21157f766e1b114b69a29a79a9
     .claude/skills/monitoring-cloudwatch-observability/SKILL.md: sha256:ccf94f8c657a0b4b153d0207bdf3fe03d96fb87ea2ea28a5e681b02e3f4a220c
+    .claude/skills/monitoring-cloudwatch-observability/blueprints/always-do-patterns.md: sha256:51e91009edce7d4808bdb56a707d1b83077598ef10a974b7b8b98dac1c97082d
+    .claude/skills/monitoring-cloudwatch-observability/blueprints/ask-first-decisions.md: sha256:034b386a1cf3f8502e707241903b3cc291d68124b72a8bd345f5ad1179c73459
     .claude/skills/monitoring-cloudwatch-observability/blueprints/evaluation-scenarios.md: sha256:5828dd917a13450d4a06fc4f22cc4787acb1013e1baa1c7e247d327a046be517
+    .claude/skills/monitoring-cloudwatch-observability/blueprints/never-do-patterns.md: sha256:43837b4057eb49b4b6eb16637fdd0cee5d0d3a977774c5f0b11835e8331d1c18
     .claude/skills/optimizing-aws-costs/SKILL.md: sha256:7bc692fbe220c33127c15f81a69a09e57906b7cb55930f9410d7e2571a35ea63
     .claude/skills/optimizing-aws-costs/blueprints/evaluation-scenarios.md: sha256:cce1a2c17eb4c4fdc56d93ab3df90262c8c96be11b162377abe7a10888415166
     .claude/skills/orchestrating-aws-step-functions/SKILL.md: sha256:453a7a0e14da024f275029723c1c4028b86f8f841a1032aa600d1a113294a39f
@@ -1871,7 +2022,7 @@ dependencies:
   local_path: ../aws-skills
   declaring_parent: ./packages/aws-architect
   anchored_local_path: packages/aws-skills
-  content_hash: sha256:f162f10c17f85c1f41380c0e1f241f3a6dc9ef2d935df68c0f72e56c02ecabfb
+  content_hash: sha256:4bb2ac7979c81ae1964d1823b6a5758d36598c1798b388ce29bfda59b72db202
   declared_license: MIT
 - repo_url: _local/aws-terraform
   name: agents-factory-aws-terraform
@@ -2445,7 +2596,7 @@ dependencies:
   local_path: ../aws-terraform
   declaring_parent: ./packages/terraform
   anchored_local_path: packages/aws-terraform
-  content_hash: sha256:b60ebf10c0b5b9b580c833a30abdbe7f3a37cf4663082600321a29e681631021
+  content_hash: sha256:589e6103a79cb88662b0d4ef42cf9e0938c440e38a8685d66d035a296dba0b0d
   declared_license: MIT
 - repo_url: _local/camel-quarkus-skills
   name: agents-factory-camel-quarkus-skills
@@ -2779,7 +2930,7 @@ dependencies:
   local_path: ../oci-core
   declaring_parent: ./packages/oci-functions-java
   anchored_local_path: packages/oci-core
-  content_hash: sha256:54123df6c1528589d9f19171094a950add58c0b4d590416b9c348f3e6f6e70f0
+  content_hash: sha256:c2494bd7deb8169a48a110af195ba5b0d44f93dc3ca6b1028188598a36a62247
   declared_license: MIT
 - repo_url: _local/research-core
   name: agents-factory-research-core
@@ -2800,357 +2951,6 @@ dependencies:
   declaring_parent: ./packages/researching-frameworks
   anchored_local_path: packages/research-core
   content_hash: sha256:309ccb9607f6181afcdbbfa4f1963965851759c2d5ca63c7d9a78ce61ee98d5a
-  declared_license: MIT
-- repo_url: microsoft/apm
-  name: autopilot-issue-delivery-scheduler
-  host: github.com
-  resolved_commit: 280b8a7b115b7a0c9b232467c376480c7cfde04e
-  version: 0.1.0
-  virtual_path: packages/autopilot/autopilot-issue-delivery-scheduler
-  is_virtual: true
-  depth: 2
-  resolved_by: microsoft/apm
-  package_type: apm_package
-  deployed_files:
-  - .claude/skills/autopilot-issue-delivery-scheduler
-  - .claude/skills/autopilot-issue-delivery-scheduler/SKILL.md
-  - .claude/skills/autopilot-issue-delivery-scheduler/assets/fan-out-pool.md
-  deployed_file_hashes:
-    .claude/skills/autopilot-issue-delivery-scheduler/SKILL.md: sha256:7c66ce23e4418a9d40111821779f9c1360d3513f808652159a41719f93c02307
-    .claude/skills/autopilot-issue-delivery-scheduler/assets/fan-out-pool.md: sha256:a971df108f648c10d738a85204d6d34d81997b7002aa3951c70f110b255598ee
-  content_hash: sha256:7d14f759ebb29b8c9737a8210e1247aa5fe3f64e07215b6ac4a01e94459c88c0
-  declared_license: MIT
-- repo_url: microsoft/apm
-  name: autopilot-issue-triage-scheduler
-  host: github.com
-  resolved_commit: 280b8a7b115b7a0c9b232467c376480c7cfde04e
-  version: 0.1.0
-  virtual_path: packages/autopilot/autopilot-issue-triage-scheduler
-  is_virtual: true
-  depth: 2
-  resolved_by: microsoft/apm
-  package_type: apm_package
-  deployed_files:
-  - .claude/skills/autopilot-issue-triage-scheduler
-  - .claude/skills/autopilot-issue-triage-scheduler/SKILL.md
-  - .claude/skills/autopilot-issue-triage-scheduler/assets/fan-out-pool.md
-  - .claude/skills/autopilot-issue-triage-scheduler/assets/label-contract.json
-  - .claude/skills/autopilot-issue-triage-scheduler/scripts/fetch_queue.py
-  - .claude/skills/autopilot-issue-triage-scheduler/scripts/triage_state.py
-  deployed_file_hashes:
-    .claude/skills/autopilot-issue-triage-scheduler/SKILL.md: sha256:ec2544ba86f1fd1064397ea3abc8dab4200d26f752001a6f07020cda32943951
-    .claude/skills/autopilot-issue-triage-scheduler/assets/fan-out-pool.md: sha256:b7c780cf9ec1d73ea5d4d8bc2cda031287aa2a478872339a3d6a8cc2cc329677
-    .claude/skills/autopilot-issue-triage-scheduler/assets/label-contract.json: sha256:a9a2030f24aa3f211aab49aad9805e81445a61b5800cb001fcc1de422d4660a4
-    .claude/skills/autopilot-issue-triage-scheduler/scripts/fetch_queue.py: sha256:8dbfbf8846f72c1b481e3d222001e4944d6a02f5bca367efef9396e26d20be9d
-    .claude/skills/autopilot-issue-triage-scheduler/scripts/triage_state.py: sha256:edd8f016bc45372a31638d6c72ad2d88378b371383ff3c1fb73bd40424c8206c
-  content_hash: sha256:3363991ecb9dbf21472d428a4010a202d226c65b62c02085a58053a2e1a4e1a1
-  declared_license: MIT
-- repo_url: microsoft/apm
-  name: autopilot-pr-merge-worker
-  host: github.com
-  resolved_commit: 280b8a7b115b7a0c9b232467c376480c7cfde04e
-  version: 0.1.0
-  virtual_path: packages/autopilot/autopilot-pr-merge-worker
-  is_virtual: true
-  depth: 2
-  resolved_by: microsoft/apm
-  package_type: hybrid
-  deployed_files:
-  - .claude/skills/autopilot-pr-merge-worker
-  - .claude/skills/autopilot-pr-merge-worker/SKILL.md
-  - .claude/skills/autopilot-pr-merge-worker/apm.yml
-  - .claude/skills/autopilot-pr-merge-worker/assets/ci-recovery-checklist.md
-  - .claude/skills/autopilot-pr-merge-worker/assets/completion-schema.json
-  - .claude/skills/autopilot-pr-merge-worker/assets/conflict-resolution-prompt.md
-  - .claude/skills/autopilot-pr-merge-worker/assets/copilot-classification-prompt.md
-  - .claude/skills/autopilot-pr-merge-worker/assets/fold-vs-defer-rubric.md
-  - .claude/skills/autopilot-pr-merge-worker/assets/pr-comment-templates.md
-  - .claude/skills/autopilot-pr-merge-worker/assets/worker-prompt.md
-  - .claude/skills/autopilot-pr-merge-worker/references/mergeability-gate.md
-  - .claude/skills/autopilot-pr-merge-worker/scripts/owner_touch_gate.py
-  deployed_file_hashes:
-    .claude/skills/autopilot-pr-merge-worker/SKILL.md: sha256:bff587a94c928a8d3e0104edde83cf4323939a737f5ee17fed4918f00810f981
-    .claude/skills/autopilot-pr-merge-worker/apm.yml: sha256:efae1514c8d1ca5469e2c38c361e3953c3f38e659c7a3f4f49cf1298c272ab67
-    .claude/skills/autopilot-pr-merge-worker/assets/ci-recovery-checklist.md: sha256:99a56f316d6f8c859703e281d4c8177771e47d642dc098da0d8441813336d59b
-    .claude/skills/autopilot-pr-merge-worker/assets/completion-schema.json: sha256:6e0a06fa98f3e0544f5ebd6039da28f9cbdfeccd807565365b761265f8515a5c
-    .claude/skills/autopilot-pr-merge-worker/assets/conflict-resolution-prompt.md: sha256:18d2476f70df6154849e7a6c06a906d7eb4a73a844455e7562b37af1f095e1bb
-    .claude/skills/autopilot-pr-merge-worker/assets/copilot-classification-prompt.md: sha256:911f8b2e2203d3847d08dbc52e34393b457c4d4b2486ea43847d609d092012ce
-    .claude/skills/autopilot-pr-merge-worker/assets/fold-vs-defer-rubric.md: sha256:7d9deefac69ea044ee3d2fc0cdb92767e66711dafb79f1000dabd8f372d19cf4
-    .claude/skills/autopilot-pr-merge-worker/assets/pr-comment-templates.md: sha256:9306b9342e6fcce0ec68c72663461972267228c44f69b893e0f1848cd5ce7aed
-    .claude/skills/autopilot-pr-merge-worker/assets/worker-prompt.md: sha256:84150a8e1a66793b284c0cb12cfb8191e0944e42b00790edc6cb82f9ee8e79fc
-    .claude/skills/autopilot-pr-merge-worker/references/mergeability-gate.md: sha256:156f5eaaf1494b1aa23b9ac65e73bd06b5e44312c3cff0ded3b1ac0442ebfff3
-    .claude/skills/autopilot-pr-merge-worker/scripts/owner_touch_gate.py: sha256:7cc26972deb8f44fb070c964ae28a289324ae5387a96bb442760fe0b2026f1e5
-  content_hash: sha256:bde4eeed39d953ffcefa1d59754e6da12570c9974f5747b62a521d2e9ecc5e5a
-  declared_license: MIT
-- repo_url: microsoft/apm
-  name: autopilot-pr-review-scheduler
-  host: github.com
-  resolved_commit: 280b8a7b115b7a0c9b232467c376480c7cfde04e
-  version: 0.1.0
-  virtual_path: packages/autopilot/autopilot-pr-review-scheduler
-  is_virtual: true
-  depth: 2
-  resolved_by: microsoft/apm
-  package_type: apm_package
-  deployed_files:
-  - .claude/skills/autopilot-pr-review-scheduler
-  - .claude/skills/autopilot-pr-review-scheduler/SKILL.md
-  - .claude/skills/autopilot-pr-review-scheduler/assets/fan-out-pool.md
-  deployed_file_hashes:
-    .claude/skills/autopilot-pr-review-scheduler/SKILL.md: sha256:2f3d2e905f2e38e8551a03918aedc68a78ce8a620a75630c52fc298d430d9cb9
-    .claude/skills/autopilot-pr-review-scheduler/assets/fan-out-pool.md: sha256:6c4c5802109cbbb76ecf28ab2299410f4f6f3f9dd9cb2586624c1783538d20a5
-  content_hash: sha256:38c718b08b4a26f91e02ddff26913d2007ab139c33047da62cf8c7dfcafac4bd
-  declared_license: MIT
-- repo_url: microsoft/apm
-  name: autopilot-pr-triage-scheduler
-  host: github.com
-  resolved_commit: 280b8a7b115b7a0c9b232467c376480c7cfde04e
-  version: 0.1.0
-  virtual_path: packages/autopilot/autopilot-pr-triage-scheduler
-  is_virtual: true
-  depth: 2
-  resolved_by: microsoft/apm
-  package_type: apm_package
-  deployed_files:
-  - .claude/skills/autopilot-pr-triage-scheduler
-  - .claude/skills/autopilot-pr-triage-scheduler/SKILL.md
-  - .claude/skills/autopilot-pr-triage-scheduler/assets/fan-out-pool.md
-  - .claude/skills/autopilot-pr-triage-scheduler/assets/label-contract.json
-  - .claude/skills/autopilot-pr-triage-scheduler/scripts/fetch_queue.py
-  - .claude/skills/autopilot-pr-triage-scheduler/scripts/triage_state.py
-  deployed_file_hashes:
-    .claude/skills/autopilot-pr-triage-scheduler/SKILL.md: sha256:6b1eedeb452b4af4c1a43fe94e7dded7e2893ba16da3f727669fa2891d02d075
-    .claude/skills/autopilot-pr-triage-scheduler/assets/fan-out-pool.md: sha256:c6c997d5bc1a941b10afafd35b06313b2ed34d7d484a29b82680019ec97e160d
-    .claude/skills/autopilot-pr-triage-scheduler/assets/label-contract.json: sha256:a9a2030f24aa3f211aab49aad9805e81445a61b5800cb001fcc1de422d4660a4
-    .claude/skills/autopilot-pr-triage-scheduler/scripts/fetch_queue.py: sha256:8dbfbf8846f72c1b481e3d222001e4944d6a02f5bca367efef9396e26d20be9d
-    .claude/skills/autopilot-pr-triage-scheduler/scripts/triage_state.py: sha256:edd8f016bc45372a31638d6c72ad2d88378b371383ff3c1fb73bd40424c8206c
-  content_hash: sha256:4842fc91f4b2671688885d639939f36497aa3e58275146fa1353112ee794765a
-  declared_license: MIT
-- repo_url: microsoft/apm
-  name: autopilot-comment
-  host: github.com
-  resolved_commit: 280b8a7b115b7a0c9b232467c376480c7cfde04e
-  version: 0.1.0
-  virtual_path: packages/autopilot/autopilot-comment
-  is_virtual: true
-  depth: 3
-  resolved_by: microsoft/apm
-  package_type: hybrid
-  deployed_files:
-  - .claude/skills/autopilot-comment
-  - .claude/skills/autopilot-comment/SKILL.md
-  - .claude/skills/autopilot-comment/apm.yml
-  deployed_file_hashes:
-    .claude/skills/autopilot-comment/SKILL.md: sha256:8707dbc45d8327dceab976f12008fe8384854c9fddf1b399c175d87e74041339
-    .claude/skills/autopilot-comment/apm.yml: sha256:4db657c42507061d9bfbd795a498e32f2492817b91343e4ff158886619c17fd0
-  content_hash: sha256:99f30af2deabe503620dfdb31d5f9c9d475b6649933d0e9acca5f1a2b3cc31dd
-  declared_license: MIT
-- repo_url: microsoft/apm
-  name: autopilot-issue-delivery-worker
-  host: github.com
-  resolved_commit: 280b8a7b115b7a0c9b232467c376480c7cfde04e
-  version: 0.1.0
-  virtual_path: packages/autopilot/autopilot-issue-delivery-worker
-  is_virtual: true
-  depth: 3
-  resolved_by: microsoft/apm
-  package_type: apm_package
-  deployed_files:
-  - .claude/skills/autopilot-issue-delivery-worker
-  - .claude/skills/autopilot-issue-delivery-worker/SKILL.md
-  - .claude/skills/autopilot-issue-delivery-worker/assets/acceptance-observer.md
-  - .claude/skills/autopilot-issue-delivery-worker/assets/autopilot-triage-schema.json
-  - .claude/skills/autopilot-issue-delivery-worker/assets/confidence-gate-rubric.md
-  - .claude/skills/autopilot-issue-delivery-worker/assets/final-report-template.md
-  - .claude/skills/autopilot-issue-delivery-worker/assets/fix-prompt.md
-  - .claude/skills/autopilot-issue-delivery-worker/assets/ground-truth-table.md
-  - .claude/skills/autopilot-issue-delivery-worker/assets/ideate-prompt.md
-  - .claude/skills/autopilot-issue-delivery-worker/assets/implement-bug.md
-  - .claude/skills/autopilot-issue-delivery-worker/assets/implement-docs.md
-  - .claude/skills/autopilot-issue-delivery-worker/assets/implement-feature.md
-  - .claude/skills/autopilot-issue-delivery-worker/assets/implement-refactor.md
-  - .claude/skills/autopilot-issue-delivery-worker/assets/model-routing.md
-  - .claude/skills/autopilot-issue-delivery-worker/assets/plan-panel-prompt.md
-  - .claude/skills/autopilot-issue-delivery-worker/assets/plan-schema.json
-  - .claude/skills/autopilot-issue-delivery-worker/assets/solution-pipeline-prompt.md
-  - .claude/skills/autopilot-issue-delivery-worker/assets/strategic-alignment-prompt.md
-  - .claude/skills/autopilot-issue-delivery-worker/assets/task-implement-prompt.md
-  - .claude/skills/autopilot-issue-delivery-worker/assets/triage-digest-template.md
-  - .claude/skills/autopilot-issue-delivery-worker/assets/triage-prompt.md
-  - .claude/skills/autopilot-issue-delivery-worker/assets/verdict-schema.json
-  - .claude/skills/autopilot-issue-delivery-worker/assets/wave-gate-rubric.md
-  - .claude/skills/autopilot-issue-delivery-worker/references/strategic-alignment-gate.md
-  deployed_file_hashes:
-    .claude/skills/autopilot-issue-delivery-worker/SKILL.md: sha256:75609428a685790d9d4420e53fe916798773733ef6ee056febc6813bbb4ded84
-    .claude/skills/autopilot-issue-delivery-worker/assets/acceptance-observer.md: sha256:6dad4abe396bff62d755322258ac014ff6175768dc91e178348a851cd4e2c3a3
-    .claude/skills/autopilot-issue-delivery-worker/assets/autopilot-triage-schema.json: sha256:8b36b127ec4906fac50fedaeeb9fc75106be89cdb73605c39aca08f2366b73ab
-    .claude/skills/autopilot-issue-delivery-worker/assets/confidence-gate-rubric.md: sha256:9c33253d0bdc0bef86be54c53cdab566e767b7aca8b3c4ac92a11225a84c755b
-    .claude/skills/autopilot-issue-delivery-worker/assets/final-report-template.md: sha256:770edb0abee803a329262faedb0a3339c7c75565a25658e3b4e9d3ca2445194a
-    .claude/skills/autopilot-issue-delivery-worker/assets/fix-prompt.md: sha256:495efd7f4d68bf8dc9d15bfaaac1dfe1e44155b1534b0051338a2644e8f0b52e
-    .claude/skills/autopilot-issue-delivery-worker/assets/ground-truth-table.md: sha256:c767ecc1d1477586c49680f504cb75f1917d63f27e78472930faebfb47de1c0b
-    .claude/skills/autopilot-issue-delivery-worker/assets/ideate-prompt.md: sha256:abab1a5e2a765229d1cdd215b90c57036cdb4b2764866b68399eb81a51362ddc
-    .claude/skills/autopilot-issue-delivery-worker/assets/implement-bug.md: sha256:650e1c70fe456ac51347311c6d19a4a9e7ee195f0793a97947e4561cc63b8d71
-    .claude/skills/autopilot-issue-delivery-worker/assets/implement-docs.md: sha256:81f2f9b617587df4a6f422838b05c63a5e05e0c8afd6d80952a9aa5cdad88b5a
-    .claude/skills/autopilot-issue-delivery-worker/assets/implement-feature.md: sha256:394b25a0b0b41b0f99b250590af782968c0f25673c156d0b87d4f1f9b205de75
-    .claude/skills/autopilot-issue-delivery-worker/assets/implement-refactor.md: sha256:5175ea7edefdaaf787d1701ba6f7fce8433d04134718d9a6445ca524ececa3bc
-    .claude/skills/autopilot-issue-delivery-worker/assets/model-routing.md: sha256:14c80e3795a387615248b63784997a2fe97948ab0b7a4ae12f02d2142b8cbce6
-    .claude/skills/autopilot-issue-delivery-worker/assets/plan-panel-prompt.md: sha256:422daafc8fcdf26f1096787075b2e8c15722df6b51e1d1784ea3b1435809b09f
-    .claude/skills/autopilot-issue-delivery-worker/assets/plan-schema.json: sha256:f766382fbac2a2b99c0dad1d0327659103c4482cc155854ea7ef2e3c82fce8f2
-    .claude/skills/autopilot-issue-delivery-worker/assets/solution-pipeline-prompt.md: sha256:756c8068c36ba255ff8fd19015712663ac98a29610c608f16e2646cca5c15e50
-    .claude/skills/autopilot-issue-delivery-worker/assets/strategic-alignment-prompt.md: sha256:1c48fa9103d47f3673938acda1988d8c55adc5bb888a74cda8d7a60e69c004f9
-    .claude/skills/autopilot-issue-delivery-worker/assets/task-implement-prompt.md: sha256:397ab60c270f0312a3ddaac0fbc03e853fa16552a962f6b2ebca5ed27bab2818
-    .claude/skills/autopilot-issue-delivery-worker/assets/triage-digest-template.md: sha256:c404d45be5629bf197b1d6ed30fa1224d0b4bc3dd352019e6b27c0bda4fe6d78
-    .claude/skills/autopilot-issue-delivery-worker/assets/triage-prompt.md: sha256:890bfb20d18bb93f83ece7f2b9ea7ccfcbf2bc5aa3e030e61fa92dddeb3654a8
-    .claude/skills/autopilot-issue-delivery-worker/assets/verdict-schema.json: sha256:1ee856daff1912d38d76c7f01509c69654327355db7a7b1a2f31c8d61059f694
-    .claude/skills/autopilot-issue-delivery-worker/assets/wave-gate-rubric.md: sha256:a8bf5270c8d63c1d9ffcf0b3f18ba22d591b062e7b969982320150986ab211cd
-    .claude/skills/autopilot-issue-delivery-worker/references/strategic-alignment-gate.md: sha256:17c872d668907fbee8fb1069244e5ac893dffdc1c5a36f898b7aee76397e91c8
-  content_hash: sha256:92d235f5e94fc408eb8807fe21d03253fa9e5bedc2ca42777ddaf0ed272da742
-  declared_license: MIT
-- repo_url: microsoft/apm
-  name: autopilot-issue-triage-worker
-  host: github.com
-  resolved_commit: 280b8a7b115b7a0c9b232467c376480c7cfde04e
-  version: 0.1.0
-  virtual_path: packages/autopilot/autopilot-issue-triage-worker
-  is_virtual: true
-  depth: 3
-  resolved_by: microsoft/apm
-  package_type: hybrid
-  deployed_files:
-  - .claude/skills/autopilot-issue-triage-worker
-  - .claude/skills/autopilot-issue-triage-worker/SKILL.md
-  - .claude/skills/autopilot-issue-triage-worker/apm.yml
-  - .claude/skills/autopilot-issue-triage-worker/assets/label-contract.json
-  - .claude/skills/autopilot-issue-triage-worker/assets/triage-template.md
-  deployed_file_hashes:
-    .claude/skills/autopilot-issue-triage-worker/SKILL.md: sha256:671433a866ce90de3aa2864ead74c5939eec49081e4065589eb63fe9cb0e032a
-    .claude/skills/autopilot-issue-triage-worker/apm.yml: sha256:e30032b751ffbeda9944024052b8ac51de0fe5e8e1a1f79f1fed13dcf9f9c42a
-    .claude/skills/autopilot-issue-triage-worker/assets/label-contract.json: sha256:a9a2030f24aa3f211aab49aad9805e81445a61b5800cb001fcc1de422d4660a4
-    .claude/skills/autopilot-issue-triage-worker/assets/triage-template.md: sha256:e37365e25911cca25775b1b111f38bbd1ccd09f6b57b7739ea09471d245d3d35
-  content_hash: sha256:9c3b431664852a2c80cb2b92026477ea28db38681ab4fccdd6af21e6c055d612
-  declared_license: MIT
-- repo_url: microsoft/apm
-  name: autopilot-pr-review-worker
-  host: github.com
-  resolved_commit: 280b8a7b115b7a0c9b232467c376480c7cfde04e
-  version: 0.1.0
-  virtual_path: packages/autopilot/autopilot-pr-review-worker
-  is_virtual: true
-  depth: 3
-  resolved_by: microsoft/apm
-  package_type: hybrid
-  deployed_files:
-  - .claude/skills/autopilot-pr-review-worker
-  - .claude/skills/autopilot-pr-review-worker/SKILL.md
-  - .claude/skills/autopilot-pr-review-worker/apm.yml
-  - .claude/skills/autopilot-pr-review-worker/assets/ceo-return-schema.json
-  - .claude/skills/autopilot-pr-review-worker/assets/panel-mode.md
-  - .claude/skills/autopilot-pr-review-worker/assets/panelist-return-schema.json
-  - .claude/skills/autopilot-pr-review-worker/assets/recommendation-template.md
-  - .claude/skills/autopilot-pr-review-worker/assets/shared-brief.example.json
-  - .claude/skills/autopilot-pr-review-worker/evals/README.md
-  - .claude/skills/autopilot-pr-review-worker/evals/fixtures/01-ship-now-pr1084-shape.json
-  - .claude/skills/autopilot-pr-review-worker/evals/fixtures/01-ship-now-pr1084-shape.rendered.md
-  - .claude/skills/autopilot-pr-review-worker/evals/fixtures/02-needs-rework-shape.json
-  - .claude/skills/autopilot-pr-review-worker/evals/fixtures/02-needs-rework-shape.rendered.md
-  - .claude/skills/autopilot-pr-review-worker/evals/fixtures/03-panel-mode-walkthrough.md
-  - .claude/skills/autopilot-pr-review-worker/evals/render_eval.py
-  - .claude/skills/autopilot-pr-review-worker/evals/trigger-evals.json
-  deployed_file_hashes:
-    .claude/skills/autopilot-pr-review-worker/SKILL.md: sha256:9f648dd0bc893b1368ecd858480a8e2f5425b5a05ca3d94e9187ca43a1693258
-    .claude/skills/autopilot-pr-review-worker/apm.yml: sha256:140ac5ad227d28c8f7ed26b8e9ba7c262ce8abc598497fcbfb228258018d468f
-    .claude/skills/autopilot-pr-review-worker/assets/ceo-return-schema.json: sha256:30e38bcb18cfdca8d5d56b384febf84e726e7376872d75e194277d3e1cb12293
-    .claude/skills/autopilot-pr-review-worker/assets/panel-mode.md: sha256:2d535e4ee141fcb865df7689f2be100d636e3dfa0410054d610cf9a1d9623c8d
-    .claude/skills/autopilot-pr-review-worker/assets/panelist-return-schema.json: sha256:959a9e744cf3a062c906ca7ec716731cfc440561c8ef6c1b57f3c7fc108c8c44
-    .claude/skills/autopilot-pr-review-worker/assets/recommendation-template.md: sha256:b757b09997a900f0f1e07b47c7815736b33f6824fa13bfabd5192491c4664321
-    .claude/skills/autopilot-pr-review-worker/assets/shared-brief.example.json: sha256:ed29ab0264be660d1796d19b2c51aa974879743d1b5617afb86e1b7705a241f8
-    .claude/skills/autopilot-pr-review-worker/evals/README.md: sha256:3f458fad235db5750336a9cb7622fc2331562364de7728251f023bee35e57108
-    .claude/skills/autopilot-pr-review-worker/evals/fixtures/01-ship-now-pr1084-shape.json: sha256:108fc261680f17bdade3e2bdf8e64fc908d16a37ec9c29c53169b394530bdd67
-    .claude/skills/autopilot-pr-review-worker/evals/fixtures/01-ship-now-pr1084-shape.rendered.md: sha256:ca1fdd3cd24e0fd8ec15b37690c597921ebf1c872270166edb2727d54ee155d8
-    .claude/skills/autopilot-pr-review-worker/evals/fixtures/02-needs-rework-shape.json: sha256:faa41c6c83c4a7955447bcb8fc0ad5a3b8afb4235db257462f649ba0a901913e
-    .claude/skills/autopilot-pr-review-worker/evals/fixtures/02-needs-rework-shape.rendered.md: sha256:b69cd113a428b61d8bbb9381a85261b3ee3acd3f101c08d06419e26aab03bba8
-    .claude/skills/autopilot-pr-review-worker/evals/fixtures/03-panel-mode-walkthrough.md: sha256:42388926b5147daedc5a4205778f8b4edac1beec650f15b5e70008e81116c660
-    .claude/skills/autopilot-pr-review-worker/evals/render_eval.py: sha256:690baf6267775077ad011b98839eda1001e207bbae78a7a8454c4d39bb8a2864
-    .claude/skills/autopilot-pr-review-worker/evals/trigger-evals.json: sha256:76d6da23bde1c6b6f0b0bf883ba8b5bf065f0db73f69182cfd98449716bc0d84
-  content_hash: sha256:154423a450bd1a75727f7cf373344998542ee38310ec038b0f41f741e67206b1
-  declared_license: MIT
-- repo_url: microsoft/apm
-  name: autopilot-pr-triage-worker
-  host: github.com
-  resolved_commit: 280b8a7b115b7a0c9b232467c376480c7cfde04e
-  version: 0.1.0
-  virtual_path: packages/autopilot/autopilot-pr-triage-worker
-  is_virtual: true
-  depth: 3
-  resolved_by: microsoft/apm
-  package_type: apm_package
-  deployed_files:
-  - .claude/skills/autopilot-pr-triage-worker
-  - .claude/skills/autopilot-pr-triage-worker/SKILL.md
-  - .claude/skills/autopilot-pr-triage-worker/assets/label-contract.json
-  - .claude/skills/autopilot-pr-triage-worker/assets/pr-triage-template.md
-  deployed_file_hashes:
-    .claude/skills/autopilot-pr-triage-worker/SKILL.md: sha256:33e5daa2f1f096b94a6e0583f751279fa41dc46175f92c569e20f0ca5f055a78
-    .claude/skills/autopilot-pr-triage-worker/assets/label-contract.json: sha256:a9a2030f24aa3f211aab49aad9805e81445a61b5800cb001fcc1de422d4660a4
-    .claude/skills/autopilot-pr-triage-worker/assets/pr-triage-template.md: sha256:d5155b45b2fa10badd82945582a9e3968cfaece5ca29678f3091f78e9dffae70
-  content_hash: sha256:0158981d171b3cc5d7ed3edfd31bc0f6f246175f454f18c7e6558cb113008c5a
-  declared_license: MIT
-- repo_url: microsoft/apm
-  name: pr-description-skill
-  host: github.com
-  resolved_commit: 280b8a7b115b7a0c9b232467c376480c7cfde04e
-  version: 0.1.0
-  virtual_path: packages/pr-description-skill
-  is_virtual: true
-  depth: 3
-  resolved_by: microsoft/apm
-  package_type: hybrid
-  deployed_files:
-  - .claude/skills/pr-description-skill
-  - .claude/skills/pr-description-skill/SKILL.md
-  - .claude/skills/pr-description-skill/apm.yml
-  - .claude/skills/pr-description-skill/assets/mermaid-conventions.md
-  - .claude/skills/pr-description-skill/assets/pr-body-template.md
-  - .claude/skills/pr-description-skill/assets/scenario-evidence-rubric.md
-  - .claude/skills/pr-description-skill/assets/section-rubric.md
-  - .claude/skills/pr-description-skill/evals/.gitignore
-  - .claude/skills/pr-description-skill/evals/README.md
-  - .claude/skills/pr-description-skill/evals/content/auth-refactor.json
-  - .claude/skills/pr-description-skill/evals/content/dep-bump.json
-  - .claude/skills/pr-description-skill/evals/content/docs-only.json
-  - .claude/skills/pr-description-skill/evals/evals.json
-  - .claude/skills/pr-description-skill/evals/fixtures/auth-refactor__with_skill.md
-  - .claude/skills/pr-description-skill/evals/fixtures/auth-refactor__without_skill.md
-  - .claude/skills/pr-description-skill/evals/fixtures/dep-bump__with_skill.md
-  - .claude/skills/pr-description-skill/evals/fixtures/dep-bump__without_skill.md
-  - .claude/skills/pr-description-skill/evals/fixtures/docs-only__with_skill.md
-  - .claude/skills/pr-description-skill/evals/fixtures/docs-only__without_skill.md
-  - .claude/skills/pr-description-skill/evals/results/.gitkeep
-  - .claude/skills/pr-description-skill/evals/triggers.json
-  - .claude/skills/pr-description-skill/scripts/run_evals.py
-  deployed_file_hashes:
-    .claude/skills/pr-description-skill/SKILL.md: sha256:d07254e9d0b95ea52d1a81d3262ca42da8c4c51d801eac4f11b6bc454cfb01a0
-    .claude/skills/pr-description-skill/apm.yml: sha256:ee9bb48581e62279708a9a12dc57174c9f5f7d347a384e4ca6b99c050c63879d
-    .claude/skills/pr-description-skill/assets/mermaid-conventions.md: sha256:3d9c7adf95d40db00833ec087d699a7d04b3d799e9b9d07271cf2ae7d51524ca
-    .claude/skills/pr-description-skill/assets/pr-body-template.md: sha256:aaeb885fbfa87364724f575eb150c9c39dc3cb60ab0459972e76185df9c98f97
-    .claude/skills/pr-description-skill/assets/scenario-evidence-rubric.md: sha256:bbb386b6f48974bbb78a380fd4674ed7a3a81810a6c2136e30c80158153596ae
-    .claude/skills/pr-description-skill/assets/section-rubric.md: sha256:f07fbbc5c741c4fd30f32edec985d8301d20e3deebb1761dd92b04da51c5e42d
-    .claude/skills/pr-description-skill/evals/.gitignore: sha256:dc810cf3561d22d2d47b89fd0697de46aff0068819b3514577842cb2a2a1c332
-    .claude/skills/pr-description-skill/evals/README.md: sha256:92b4529515917d25cbf5e597d1d46751e602dd4eb80be20a97ac81597f410cd0
-    .claude/skills/pr-description-skill/evals/content/auth-refactor.json: sha256:86791ada2f4983fde709237eaae9ef9c5a0f87a28f14e8b0f26b4b7e5b0e73c9
-    .claude/skills/pr-description-skill/evals/content/dep-bump.json: sha256:5136278ecf83a6c3a618176810ef62634cc988527dcdb8bd343ae83278f9e1d7
-    .claude/skills/pr-description-skill/evals/content/docs-only.json: sha256:78a6f98f939b1b8e0efa1b67a57a4b9008ddffd3b4f02fbde4f9843c4f29b39a
-    .claude/skills/pr-description-skill/evals/evals.json: sha256:1d137370f60955469a089a7ef085371aa14bbb74a80675957f4d6e0a694252cc
-    .claude/skills/pr-description-skill/evals/fixtures/auth-refactor__with_skill.md: sha256:b5ebacb04c4ace19e0d634e9b9104ef70b72330afb9f29ac0de07a03f1e78628
-    .claude/skills/pr-description-skill/evals/fixtures/auth-refactor__without_skill.md: sha256:81c42403d4f1406ba2689106bb6e1cdf0a74f1921681f6e096cefac0c46efd46
-    .claude/skills/pr-description-skill/evals/fixtures/dep-bump__with_skill.md: sha256:60df233958541ed42b94c1751a3d2d99324ec83f263fa0becc3abcb4a682ee91
-    .claude/skills/pr-description-skill/evals/fixtures/dep-bump__without_skill.md: sha256:1410a89d81b6745d14242181197d2d05ec5aba5078f1ad3ae702e3341a3fc798
-    .claude/skills/pr-description-skill/evals/fixtures/docs-only__with_skill.md: sha256:e4ca53c7dc8c8a65f4945e2e4e4cc878b433c5662d13c5b613d957d6d505029c
-    .claude/skills/pr-description-skill/evals/fixtures/docs-only__without_skill.md: sha256:7e790d6711b8a33702c6bf0f7486e1928c58c60b4dad0a998c570a07d6a05fec
-    .claude/skills/pr-description-skill/evals/results/.gitkeep: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
-    .claude/skills/pr-description-skill/evals/triggers.json: sha256:6762c7f071195491700cc59ce5329ff185b0493682c93efdcf01db8fb522bbe4
-    .claude/skills/pr-description-skill/scripts/run_evals.py: sha256:a1792f8cb95b4fb37a4133af079908e2a3b5643c1a81d97e4dcda399bac069a2
-  content_hash: sha256:6bda4645f6a5e190f0649c17d6a72a5ac3d88a71eaafc0fca4cb4b16cb973530
   declared_license: MIT
 deployments:
 - kind: project-relative
@@ -3306,6 +3106,15 @@ deployments:
   - local:packages/research-core
   active_owner: local:packages/research-core
   content_hash: sha256:6e3a076e481f5a3ead5b87f4a6fa5dbec06a39b823711f0a3b8076b066b72296
+- kind: project-relative
+  target: claude
+  value: .claude/agents/langchain4j-integrator.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/langchain4j
+  active_owner: ./packages/langchain4j
+  content_hash: sha256:cbde9bedf822d28fed802c6fa6f6efeb48612e25b361f61c4d78a6b001c86ff9
 - kind: project-relative
   target: claude
   value: .claude/agents/mermaid-renderer.md
@@ -3686,6 +3495,24 @@ deployments:
   content_hash: sha256:b2815cddb0b501d958d642fd3923f2187e890868bb852ccf4aa0168d8a4221fc
 - kind: project-relative
   target: claude
+  value: .claude/rules/langchain4j-code-standards.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/langchain4j
+  active_owner: ./packages/langchain4j
+  content_hash: sha256:0525ac4cf2ebc6f6866c221db94bdb58ddfad3e7781128c5f1710b25e7b78ef6
+- kind: project-relative
+  target: claude
+  value: .claude/rules/langchain4j-project-config.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/langchain4j
+  active_owner: ./packages/langchain4j
+  content_hash: sha256:efe292a0bf057eb357d1d634fac8bbd03315592bd91d9e43c6cdef9788acf58f
+- kind: project-relative
+  target: claude
   value: .claude/rules/naming-conventions.md
   runtime: null
   scope: project
@@ -4037,6 +3864,24 @@ deployments:
   content_hash: sha256:84e387951469f535878a7d9631805c08e65d1d73701be83db3df612302bec2a7
 - kind: project-relative
   target: claude
+  value: .claude/skills/applying-aws-serverless-well-architected-lens/blueprints/always-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-skills
+  active_owner: local:packages/aws-skills
+  content_hash: sha256:46c03b4f4de15bd6a4873ce2fbd3807770033fc87e589a21bdc2cb4a88aec206
+- kind: project-relative
+  target: claude
+  value: .claude/skills/applying-aws-serverless-well-architected-lens/blueprints/ask-first-decisions.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-skills
+  active_owner: local:packages/aws-skills
+  content_hash: sha256:46b4f83d5bcc2c1a0cdf8e16fb854622b44fb234fcd395c91cae2e15ebd429bf
+- kind: project-relative
+  target: claude
   value: .claude/skills/applying-aws-serverless-well-architected-lens/blueprints/evaluation-scenarios.md
   runtime: null
   scope: project
@@ -4044,6 +3889,24 @@ deployments:
   - local:packages/aws-skills
   active_owner: local:packages/aws-skills
   content_hash: sha256:f945910c1824cef5ca7d4d97e9bf57ac833e49ee56617ce469968dd4bcf59c48
+- kind: project-relative
+  target: claude
+  value: .claude/skills/applying-aws-serverless-well-architected-lens/blueprints/never-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-skills
+  active_owner: local:packages/aws-skills
+  content_hash: sha256:047e7599823bdf9b261ce26df4fb69d2de0b879f0a0d1ec169a21838416ca3b7
+- kind: project-relative
+  target: claude
+  value: .claude/skills/applying-aws-serverless-well-architected-lens/blueprints/post-2022-gaps.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-skills
+  active_owner: local:packages/aws-skills
+  content_hash: sha256:88acf949a404e0e79107b457e5ef13c9647000afaa3ba7d39faafa710b9c5a67
 - kind: project-relative
   target: claude
   value: .claude/skills/applying-aws-sustainability-pillar
@@ -4091,6 +3954,24 @@ deployments:
   content_hash: sha256:e85ace2cd5b442e6868e4b1e60191a9bec193a18d55e1634d2333d6377c25bd1
 - kind: project-relative
   target: claude
+  value: .claude/skills/applying-aws-well-architected/blueprints/always-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-skills
+  active_owner: local:packages/aws-skills
+  content_hash: sha256:e2c091dedf2091f90211b607650ac9b4735d43c37f9a143f7c43e0c099295843
+- kind: project-relative
+  target: claude
+  value: .claude/skills/applying-aws-well-architected/blueprints/ask-first-decisions.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-skills
+  active_owner: local:packages/aws-skills
+  content_hash: sha256:83914f07f1e83a3a77f9e1ed5e94e769785c00d05a3c7aff2b7481bbdfa71bf6
+- kind: project-relative
+  target: claude
   value: .claude/skills/applying-aws-well-architected/blueprints/evaluation-scenarios.md
   runtime: null
   scope: project
@@ -4098,6 +3979,24 @@ deployments:
   - local:packages/aws-skills
   active_owner: local:packages/aws-skills
   content_hash: sha256:7de4bf118e39f0429ade33bec1b9fc57349b97b9980e947c1e8aa1ad04d844df
+- kind: project-relative
+  target: claude
+  value: .claude/skills/applying-aws-well-architected/blueprints/never-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-skills
+  active_owner: local:packages/aws-skills
+  content_hash: sha256:ca5a1d7e8d9db3ee405c905a6ca984df241bbafdcae3b2b4f66b7ed2c156fdc2
+- kind: project-relative
+  target: claude
+  value: .claude/skills/applying-aws-well-architected/blueprints/reference-architectures.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-skills
+  active_owner: local:packages/aws-skills
+  content_hash: sha256:41c3c187edf756c3dd105904b139242c94d43c401aa54ad1e00e8a89e3adf89d
 - kind: project-relative
   target: claude
   value: .claude/skills/applying-waf-cost-optimization
@@ -4115,7 +4014,25 @@ deployments:
   owners:
   - local:packages/aws-skills
   active_owner: local:packages/aws-skills
-  content_hash: sha256:4e29fc8c6e342c72ec3a4f7fc35e5a76ce71fe93f9947d83b1cd516d6d942f52
+  content_hash: sha256:81944e1fc8eb15b38a7b7c96630f1e31745c56993391e5c1ed7753fa94753cb2
+- kind: project-relative
+  target: claude
+  value: .claude/skills/applying-waf-cost-optimization/blueprints/always-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-skills
+  active_owner: local:packages/aws-skills
+  content_hash: sha256:fc8704ce3b450d77e29cc7dfb8dd88226d5b057a55194a031881824bcd1c1952
+- kind: project-relative
+  target: claude
+  value: .claude/skills/applying-waf-cost-optimization/blueprints/ask-first-decisions.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-skills
+  active_owner: local:packages/aws-skills
+  content_hash: sha256:7460beea6c48769ec11d39b192670779e449fe51a5b17bafe684e26f6e44a1e4
 - kind: project-relative
   target: claude
   value: .claude/skills/applying-waf-cost-optimization/blueprints/evaluation-scenarios.md
@@ -4125,6 +4042,15 @@ deployments:
   - local:packages/aws-skills
   active_owner: local:packages/aws-skills
   content_hash: sha256:d1a9cdbbabad5e572a737fe5d35e4cf7c804e556eb02b1df7d7c02a5218b6046
+- kind: project-relative
+  target: claude
+  value: .claude/skills/applying-waf-cost-optimization/blueprints/never-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-skills
+  active_owner: local:packages/aws-skills
+  content_hash: sha256:71ad439f5bba79205de5bc437250175fcdbd95a55fdce2ce4e77ca565a10433b
 - kind: project-relative
   target: claude
   value: .claude/skills/applying-waf-operational-excellence-pillar
@@ -4244,6 +4170,24 @@ deployments:
   content_hash: sha256:3d6086317d724dbe1d1b238af75331106904b20af93a8d158b369ad031375c29
 - kind: project-relative
   target: claude
+  value: .claude/skills/architecting-aws-multi-account-organizations/blueprints/always-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-skills
+  active_owner: local:packages/aws-skills
+  content_hash: sha256:ee5af6c26ef4b8c5efcf8c29a2e5cdb5f1093dd931b30fe199bec98f15dc246a
+- kind: project-relative
+  target: claude
+  value: .claude/skills/architecting-aws-multi-account-organizations/blueprints/ask-first-decisions.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-skills
+  active_owner: local:packages/aws-skills
+  content_hash: sha256:06eead91a47aa4478ee4668b108990498672907cebd18632066c021eba3d9025
+- kind: project-relative
+  target: claude
   value: .claude/skills/architecting-aws-multi-account-organizations/blueprints/evaluation-scenarios.md
   runtime: null
   scope: project
@@ -4251,6 +4195,15 @@ deployments:
   - local:packages/aws-skills
   active_owner: local:packages/aws-skills
   content_hash: sha256:1df9f5f8cec359cfc9592845a4122ffacc8c5aff140b798dff94efdfc0d9cfb8
+- kind: project-relative
+  target: claude
+  value: .claude/skills/architecting-aws-multi-account-organizations/blueprints/never-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-skills
+  active_owner: local:packages/aws-skills
+  content_hash: sha256:b9fcc4514c779bd551a1c89c1e35ce89e0afc8587c77fee5729ec2f2ec0da779
 - kind: project-relative
   target: claude
   value: .claude/skills/architecting-aws-s3-storage
@@ -4505,6 +4458,24 @@ deployments:
   content_hash: sha256:49178aede5f8c9a663d830d1511740c47116185b56fa541b792e4cfac875a494
 - kind: project-relative
   target: claude
+  value: .claude/skills/architecting-eventbridge-eda/blueprints/always-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-skills
+  active_owner: local:packages/aws-skills
+  content_hash: sha256:86614cf2c84b56956f6d103fca37b6636214e8c7c075c0d30949566ff8eecd89
+- kind: project-relative
+  target: claude
+  value: .claude/skills/architecting-eventbridge-eda/blueprints/ask-first-decisions.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-skills
+  active_owner: local:packages/aws-skills
+  content_hash: sha256:9e713703c6fcd737a417d606ab173ed725cb6f0124f06d0854e786f983e4d4a3
+- kind: project-relative
+  target: claude
   value: .claude/skills/architecting-eventbridge-eda/blueprints/evaluation-scenarios.md
   runtime: null
   scope: project
@@ -4512,6 +4483,15 @@ deployments:
   - local:packages/aws-skills
   active_owner: local:packages/aws-skills
   content_hash: sha256:37577043b2a9ce0c80ed894ea430e483a40d624769b874e3feaf5dfbaf5b7925
+- kind: project-relative
+  target: claude
+  value: .claude/skills/architecting-eventbridge-eda/blueprints/never-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-skills
+  active_owner: local:packages/aws-skills
+  content_hash: sha256:30d972daa58ef722959c675924d6bf5a70bdc2239b334dca5a3e178fd6262acc
 - kind: project-relative
   target: claude
   value: .claude/skills/architecting-lambda-serverless-patterns
@@ -5054,744 +5034,6 @@ deployments:
   content_hash: sha256:1891a5dd5d84868297df6ef5ca390fac82b4561254aa286bb4d910bab8fcf60e
 - kind: project-relative
   target: claude
-  value: .claude/skills/autopilot-comment
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-comment
-  active_owner: microsoft/apm/packages/autopilot/autopilot-comment
-  content_hash: null
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-comment/SKILL.md
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-comment
-  active_owner: microsoft/apm/packages/autopilot/autopilot-comment
-  content_hash: sha256:8707dbc45d8327dceab976f12008fe8384854c9fddf1b399c175d87e74041339
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-comment/apm.yml
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-comment
-  active_owner: microsoft/apm/packages/autopilot/autopilot-comment
-  content_hash: sha256:4db657c42507061d9bfbd795a498e32f2492817b91343e4ff158886619c17fd0
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-issue-delivery-scheduler
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-issue-delivery-scheduler
-  active_owner: microsoft/apm/packages/autopilot/autopilot-issue-delivery-scheduler
-  content_hash: null
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-issue-delivery-scheduler/SKILL.md
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-issue-delivery-scheduler
-  active_owner: microsoft/apm/packages/autopilot/autopilot-issue-delivery-scheduler
-  content_hash: sha256:7c66ce23e4418a9d40111821779f9c1360d3513f808652159a41719f93c02307
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-issue-delivery-scheduler/assets/fan-out-pool.md
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-issue-delivery-scheduler
-  active_owner: microsoft/apm/packages/autopilot/autopilot-issue-delivery-scheduler
-  content_hash: sha256:a971df108f648c10d738a85204d6d34d81997b7002aa3951c70f110b255598ee
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-issue-delivery-worker
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-issue-delivery-worker
-  active_owner: microsoft/apm/packages/autopilot/autopilot-issue-delivery-worker
-  content_hash: null
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-issue-delivery-worker/SKILL.md
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-issue-delivery-worker
-  active_owner: microsoft/apm/packages/autopilot/autopilot-issue-delivery-worker
-  content_hash: sha256:75609428a685790d9d4420e53fe916798773733ef6ee056febc6813bbb4ded84
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-issue-delivery-worker/assets/acceptance-observer.md
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-issue-delivery-worker
-  active_owner: microsoft/apm/packages/autopilot/autopilot-issue-delivery-worker
-  content_hash: sha256:6dad4abe396bff62d755322258ac014ff6175768dc91e178348a851cd4e2c3a3
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-issue-delivery-worker/assets/autopilot-triage-schema.json
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-issue-delivery-worker
-  active_owner: microsoft/apm/packages/autopilot/autopilot-issue-delivery-worker
-  content_hash: sha256:8b36b127ec4906fac50fedaeeb9fc75106be89cdb73605c39aca08f2366b73ab
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-issue-delivery-worker/assets/confidence-gate-rubric.md
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-issue-delivery-worker
-  active_owner: microsoft/apm/packages/autopilot/autopilot-issue-delivery-worker
-  content_hash: sha256:9c33253d0bdc0bef86be54c53cdab566e767b7aca8b3c4ac92a11225a84c755b
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-issue-delivery-worker/assets/final-report-template.md
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-issue-delivery-worker
-  active_owner: microsoft/apm/packages/autopilot/autopilot-issue-delivery-worker
-  content_hash: sha256:770edb0abee803a329262faedb0a3339c7c75565a25658e3b4e9d3ca2445194a
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-issue-delivery-worker/assets/fix-prompt.md
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-issue-delivery-worker
-  active_owner: microsoft/apm/packages/autopilot/autopilot-issue-delivery-worker
-  content_hash: sha256:495efd7f4d68bf8dc9d15bfaaac1dfe1e44155b1534b0051338a2644e8f0b52e
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-issue-delivery-worker/assets/ground-truth-table.md
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-issue-delivery-worker
-  active_owner: microsoft/apm/packages/autopilot/autopilot-issue-delivery-worker
-  content_hash: sha256:c767ecc1d1477586c49680f504cb75f1917d63f27e78472930faebfb47de1c0b
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-issue-delivery-worker/assets/ideate-prompt.md
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-issue-delivery-worker
-  active_owner: microsoft/apm/packages/autopilot/autopilot-issue-delivery-worker
-  content_hash: sha256:abab1a5e2a765229d1cdd215b90c57036cdb4b2764866b68399eb81a51362ddc
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-issue-delivery-worker/assets/implement-bug.md
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-issue-delivery-worker
-  active_owner: microsoft/apm/packages/autopilot/autopilot-issue-delivery-worker
-  content_hash: sha256:650e1c70fe456ac51347311c6d19a4a9e7ee195f0793a97947e4561cc63b8d71
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-issue-delivery-worker/assets/implement-docs.md
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-issue-delivery-worker
-  active_owner: microsoft/apm/packages/autopilot/autopilot-issue-delivery-worker
-  content_hash: sha256:81f2f9b617587df4a6f422838b05c63a5e05e0c8afd6d80952a9aa5cdad88b5a
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-issue-delivery-worker/assets/implement-feature.md
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-issue-delivery-worker
-  active_owner: microsoft/apm/packages/autopilot/autopilot-issue-delivery-worker
-  content_hash: sha256:394b25a0b0b41b0f99b250590af782968c0f25673c156d0b87d4f1f9b205de75
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-issue-delivery-worker/assets/implement-refactor.md
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-issue-delivery-worker
-  active_owner: microsoft/apm/packages/autopilot/autopilot-issue-delivery-worker
-  content_hash: sha256:5175ea7edefdaaf787d1701ba6f7fce8433d04134718d9a6445ca524ececa3bc
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-issue-delivery-worker/assets/model-routing.md
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-issue-delivery-worker
-  active_owner: microsoft/apm/packages/autopilot/autopilot-issue-delivery-worker
-  content_hash: sha256:14c80e3795a387615248b63784997a2fe97948ab0b7a4ae12f02d2142b8cbce6
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-issue-delivery-worker/assets/plan-panel-prompt.md
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-issue-delivery-worker
-  active_owner: microsoft/apm/packages/autopilot/autopilot-issue-delivery-worker
-  content_hash: sha256:422daafc8fcdf26f1096787075b2e8c15722df6b51e1d1784ea3b1435809b09f
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-issue-delivery-worker/assets/plan-schema.json
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-issue-delivery-worker
-  active_owner: microsoft/apm/packages/autopilot/autopilot-issue-delivery-worker
-  content_hash: sha256:f766382fbac2a2b99c0dad1d0327659103c4482cc155854ea7ef2e3c82fce8f2
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-issue-delivery-worker/assets/solution-pipeline-prompt.md
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-issue-delivery-worker
-  active_owner: microsoft/apm/packages/autopilot/autopilot-issue-delivery-worker
-  content_hash: sha256:756c8068c36ba255ff8fd19015712663ac98a29610c608f16e2646cca5c15e50
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-issue-delivery-worker/assets/strategic-alignment-prompt.md
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-issue-delivery-worker
-  active_owner: microsoft/apm/packages/autopilot/autopilot-issue-delivery-worker
-  content_hash: sha256:1c48fa9103d47f3673938acda1988d8c55adc5bb888a74cda8d7a60e69c004f9
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-issue-delivery-worker/assets/task-implement-prompt.md
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-issue-delivery-worker
-  active_owner: microsoft/apm/packages/autopilot/autopilot-issue-delivery-worker
-  content_hash: sha256:397ab60c270f0312a3ddaac0fbc03e853fa16552a962f6b2ebca5ed27bab2818
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-issue-delivery-worker/assets/triage-digest-template.md
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-issue-delivery-worker
-  active_owner: microsoft/apm/packages/autopilot/autopilot-issue-delivery-worker
-  content_hash: sha256:c404d45be5629bf197b1d6ed30fa1224d0b4bc3dd352019e6b27c0bda4fe6d78
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-issue-delivery-worker/assets/triage-prompt.md
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-issue-delivery-worker
-  active_owner: microsoft/apm/packages/autopilot/autopilot-issue-delivery-worker
-  content_hash: sha256:890bfb20d18bb93f83ece7f2b9ea7ccfcbf2bc5aa3e030e61fa92dddeb3654a8
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-issue-delivery-worker/assets/verdict-schema.json
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-issue-delivery-worker
-  active_owner: microsoft/apm/packages/autopilot/autopilot-issue-delivery-worker
-  content_hash: sha256:1ee856daff1912d38d76c7f01509c69654327355db7a7b1a2f31c8d61059f694
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-issue-delivery-worker/assets/wave-gate-rubric.md
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-issue-delivery-worker
-  active_owner: microsoft/apm/packages/autopilot/autopilot-issue-delivery-worker
-  content_hash: sha256:a8bf5270c8d63c1d9ffcf0b3f18ba22d591b062e7b969982320150986ab211cd
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-issue-delivery-worker/references/strategic-alignment-gate.md
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-issue-delivery-worker
-  active_owner: microsoft/apm/packages/autopilot/autopilot-issue-delivery-worker
-  content_hash: sha256:17c872d668907fbee8fb1069244e5ac893dffdc1c5a36f898b7aee76397e91c8
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-issue-triage-scheduler
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-issue-triage-scheduler
-  active_owner: microsoft/apm/packages/autopilot/autopilot-issue-triage-scheduler
-  content_hash: null
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-issue-triage-scheduler/SKILL.md
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-issue-triage-scheduler
-  active_owner: microsoft/apm/packages/autopilot/autopilot-issue-triage-scheduler
-  content_hash: sha256:ec2544ba86f1fd1064397ea3abc8dab4200d26f752001a6f07020cda32943951
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-issue-triage-scheduler/assets/fan-out-pool.md
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-issue-triage-scheduler
-  active_owner: microsoft/apm/packages/autopilot/autopilot-issue-triage-scheduler
-  content_hash: sha256:b7c780cf9ec1d73ea5d4d8bc2cda031287aa2a478872339a3d6a8cc2cc329677
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-issue-triage-scheduler/assets/label-contract.json
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-issue-triage-scheduler
-  active_owner: microsoft/apm/packages/autopilot/autopilot-issue-triage-scheduler
-  content_hash: sha256:a9a2030f24aa3f211aab49aad9805e81445a61b5800cb001fcc1de422d4660a4
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-issue-triage-scheduler/scripts/fetch_queue.py
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-issue-triage-scheduler
-  active_owner: microsoft/apm/packages/autopilot/autopilot-issue-triage-scheduler
-  content_hash: sha256:8dbfbf8846f72c1b481e3d222001e4944d6a02f5bca367efef9396e26d20be9d
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-issue-triage-scheduler/scripts/triage_state.py
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-issue-triage-scheduler
-  active_owner: microsoft/apm/packages/autopilot/autopilot-issue-triage-scheduler
-  content_hash: sha256:edd8f016bc45372a31638d6c72ad2d88378b371383ff3c1fb73bd40424c8206c
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-issue-triage-worker
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-issue-triage-worker
-  active_owner: microsoft/apm/packages/autopilot/autopilot-issue-triage-worker
-  content_hash: null
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-issue-triage-worker/SKILL.md
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-issue-triage-worker
-  active_owner: microsoft/apm/packages/autopilot/autopilot-issue-triage-worker
-  content_hash: sha256:671433a866ce90de3aa2864ead74c5939eec49081e4065589eb63fe9cb0e032a
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-issue-triage-worker/apm.yml
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-issue-triage-worker
-  active_owner: microsoft/apm/packages/autopilot/autopilot-issue-triage-worker
-  content_hash: sha256:e30032b751ffbeda9944024052b8ac51de0fe5e8e1a1f79f1fed13dcf9f9c42a
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-issue-triage-worker/assets/label-contract.json
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-issue-triage-worker
-  active_owner: microsoft/apm/packages/autopilot/autopilot-issue-triage-worker
-  content_hash: sha256:a9a2030f24aa3f211aab49aad9805e81445a61b5800cb001fcc1de422d4660a4
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-issue-triage-worker/assets/triage-template.md
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-issue-triage-worker
-  active_owner: microsoft/apm/packages/autopilot/autopilot-issue-triage-worker
-  content_hash: sha256:e37365e25911cca25775b1b111f38bbd1ccd09f6b57b7739ea09471d245d3d35
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-pr-merge-worker
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-pr-merge-worker
-  active_owner: microsoft/apm/packages/autopilot/autopilot-pr-merge-worker
-  content_hash: null
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-pr-merge-worker/SKILL.md
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-pr-merge-worker
-  active_owner: microsoft/apm/packages/autopilot/autopilot-pr-merge-worker
-  content_hash: sha256:bff587a94c928a8d3e0104edde83cf4323939a737f5ee17fed4918f00810f981
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-pr-merge-worker/apm.yml
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-pr-merge-worker
-  active_owner: microsoft/apm/packages/autopilot/autopilot-pr-merge-worker
-  content_hash: sha256:efae1514c8d1ca5469e2c38c361e3953c3f38e659c7a3f4f49cf1298c272ab67
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-pr-merge-worker/assets/ci-recovery-checklist.md
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-pr-merge-worker
-  active_owner: microsoft/apm/packages/autopilot/autopilot-pr-merge-worker
-  content_hash: sha256:99a56f316d6f8c859703e281d4c8177771e47d642dc098da0d8441813336d59b
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-pr-merge-worker/assets/completion-schema.json
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-pr-merge-worker
-  active_owner: microsoft/apm/packages/autopilot/autopilot-pr-merge-worker
-  content_hash: sha256:6e0a06fa98f3e0544f5ebd6039da28f9cbdfeccd807565365b761265f8515a5c
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-pr-merge-worker/assets/conflict-resolution-prompt.md
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-pr-merge-worker
-  active_owner: microsoft/apm/packages/autopilot/autopilot-pr-merge-worker
-  content_hash: sha256:18d2476f70df6154849e7a6c06a906d7eb4a73a844455e7562b37af1f095e1bb
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-pr-merge-worker/assets/copilot-classification-prompt.md
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-pr-merge-worker
-  active_owner: microsoft/apm/packages/autopilot/autopilot-pr-merge-worker
-  content_hash: sha256:911f8b2e2203d3847d08dbc52e34393b457c4d4b2486ea43847d609d092012ce
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-pr-merge-worker/assets/fold-vs-defer-rubric.md
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-pr-merge-worker
-  active_owner: microsoft/apm/packages/autopilot/autopilot-pr-merge-worker
-  content_hash: sha256:7d9deefac69ea044ee3d2fc0cdb92767e66711dafb79f1000dabd8f372d19cf4
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-pr-merge-worker/assets/pr-comment-templates.md
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-pr-merge-worker
-  active_owner: microsoft/apm/packages/autopilot/autopilot-pr-merge-worker
-  content_hash: sha256:9306b9342e6fcce0ec68c72663461972267228c44f69b893e0f1848cd5ce7aed
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-pr-merge-worker/assets/worker-prompt.md
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-pr-merge-worker
-  active_owner: microsoft/apm/packages/autopilot/autopilot-pr-merge-worker
-  content_hash: sha256:84150a8e1a66793b284c0cb12cfb8191e0944e42b00790edc6cb82f9ee8e79fc
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-pr-merge-worker/references/mergeability-gate.md
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-pr-merge-worker
-  active_owner: microsoft/apm/packages/autopilot/autopilot-pr-merge-worker
-  content_hash: sha256:156f5eaaf1494b1aa23b9ac65e73bd06b5e44312c3cff0ded3b1ac0442ebfff3
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-pr-merge-worker/scripts/owner_touch_gate.py
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-pr-merge-worker
-  active_owner: microsoft/apm/packages/autopilot/autopilot-pr-merge-worker
-  content_hash: sha256:7cc26972deb8f44fb070c964ae28a289324ae5387a96bb442760fe0b2026f1e5
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-pr-review-scheduler
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-pr-review-scheduler
-  active_owner: microsoft/apm/packages/autopilot/autopilot-pr-review-scheduler
-  content_hash: null
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-pr-review-scheduler/SKILL.md
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-pr-review-scheduler
-  active_owner: microsoft/apm/packages/autopilot/autopilot-pr-review-scheduler
-  content_hash: sha256:2f3d2e905f2e38e8551a03918aedc68a78ce8a620a75630c52fc298d430d9cb9
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-pr-review-scheduler/assets/fan-out-pool.md
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-pr-review-scheduler
-  active_owner: microsoft/apm/packages/autopilot/autopilot-pr-review-scheduler
-  content_hash: sha256:6c4c5802109cbbb76ecf28ab2299410f4f6f3f9dd9cb2586624c1783538d20a5
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-pr-review-worker
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-pr-review-worker
-  active_owner: microsoft/apm/packages/autopilot/autopilot-pr-review-worker
-  content_hash: null
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-pr-review-worker/SKILL.md
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-pr-review-worker
-  active_owner: microsoft/apm/packages/autopilot/autopilot-pr-review-worker
-  content_hash: sha256:9f648dd0bc893b1368ecd858480a8e2f5425b5a05ca3d94e9187ca43a1693258
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-pr-review-worker/apm.yml
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-pr-review-worker
-  active_owner: microsoft/apm/packages/autopilot/autopilot-pr-review-worker
-  content_hash: sha256:140ac5ad227d28c8f7ed26b8e9ba7c262ce8abc598497fcbfb228258018d468f
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-pr-review-worker/assets/ceo-return-schema.json
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-pr-review-worker
-  active_owner: microsoft/apm/packages/autopilot/autopilot-pr-review-worker
-  content_hash: sha256:30e38bcb18cfdca8d5d56b384febf84e726e7376872d75e194277d3e1cb12293
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-pr-review-worker/assets/panel-mode.md
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-pr-review-worker
-  active_owner: microsoft/apm/packages/autopilot/autopilot-pr-review-worker
-  content_hash: sha256:2d535e4ee141fcb865df7689f2be100d636e3dfa0410054d610cf9a1d9623c8d
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-pr-review-worker/assets/panelist-return-schema.json
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-pr-review-worker
-  active_owner: microsoft/apm/packages/autopilot/autopilot-pr-review-worker
-  content_hash: sha256:959a9e744cf3a062c906ca7ec716731cfc440561c8ef6c1b57f3c7fc108c8c44
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-pr-review-worker/assets/recommendation-template.md
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-pr-review-worker
-  active_owner: microsoft/apm/packages/autopilot/autopilot-pr-review-worker
-  content_hash: sha256:b757b09997a900f0f1e07b47c7815736b33f6824fa13bfabd5192491c4664321
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-pr-review-worker/assets/shared-brief.example.json
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-pr-review-worker
-  active_owner: microsoft/apm/packages/autopilot/autopilot-pr-review-worker
-  content_hash: sha256:ed29ab0264be660d1796d19b2c51aa974879743d1b5617afb86e1b7705a241f8
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-pr-review-worker/evals/README.md
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-pr-review-worker
-  active_owner: microsoft/apm/packages/autopilot/autopilot-pr-review-worker
-  content_hash: sha256:3f458fad235db5750336a9cb7622fc2331562364de7728251f023bee35e57108
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-pr-review-worker/evals/fixtures/01-ship-now-pr1084-shape.json
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-pr-review-worker
-  active_owner: microsoft/apm/packages/autopilot/autopilot-pr-review-worker
-  content_hash: sha256:108fc261680f17bdade3e2bdf8e64fc908d16a37ec9c29c53169b394530bdd67
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-pr-review-worker/evals/fixtures/01-ship-now-pr1084-shape.rendered.md
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-pr-review-worker
-  active_owner: microsoft/apm/packages/autopilot/autopilot-pr-review-worker
-  content_hash: sha256:ca1fdd3cd24e0fd8ec15b37690c597921ebf1c872270166edb2727d54ee155d8
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-pr-review-worker/evals/fixtures/02-needs-rework-shape.json
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-pr-review-worker
-  active_owner: microsoft/apm/packages/autopilot/autopilot-pr-review-worker
-  content_hash: sha256:faa41c6c83c4a7955447bcb8fc0ad5a3b8afb4235db257462f649ba0a901913e
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-pr-review-worker/evals/fixtures/02-needs-rework-shape.rendered.md
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-pr-review-worker
-  active_owner: microsoft/apm/packages/autopilot/autopilot-pr-review-worker
-  content_hash: sha256:b69cd113a428b61d8bbb9381a85261b3ee3acd3f101c08d06419e26aab03bba8
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-pr-review-worker/evals/fixtures/03-panel-mode-walkthrough.md
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-pr-review-worker
-  active_owner: microsoft/apm/packages/autopilot/autopilot-pr-review-worker
-  content_hash: sha256:42388926b5147daedc5a4205778f8b4edac1beec650f15b5e70008e81116c660
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-pr-review-worker/evals/render_eval.py
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-pr-review-worker
-  active_owner: microsoft/apm/packages/autopilot/autopilot-pr-review-worker
-  content_hash: sha256:690baf6267775077ad011b98839eda1001e207bbae78a7a8454c4d39bb8a2864
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-pr-review-worker/evals/trigger-evals.json
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-pr-review-worker
-  active_owner: microsoft/apm/packages/autopilot/autopilot-pr-review-worker
-  content_hash: sha256:76d6da23bde1c6b6f0b0bf883ba8b5bf065f0db73f69182cfd98449716bc0d84
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-pr-triage-scheduler
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-pr-triage-scheduler
-  active_owner: microsoft/apm/packages/autopilot/autopilot-pr-triage-scheduler
-  content_hash: null
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-pr-triage-scheduler/SKILL.md
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-pr-triage-scheduler
-  active_owner: microsoft/apm/packages/autopilot/autopilot-pr-triage-scheduler
-  content_hash: sha256:6b1eedeb452b4af4c1a43fe94e7dded7e2893ba16da3f727669fa2891d02d075
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-pr-triage-scheduler/assets/fan-out-pool.md
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-pr-triage-scheduler
-  active_owner: microsoft/apm/packages/autopilot/autopilot-pr-triage-scheduler
-  content_hash: sha256:c6c997d5bc1a941b10afafd35b06313b2ed34d7d484a29b82680019ec97e160d
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-pr-triage-scheduler/assets/label-contract.json
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-pr-triage-scheduler
-  active_owner: microsoft/apm/packages/autopilot/autopilot-pr-triage-scheduler
-  content_hash: sha256:a9a2030f24aa3f211aab49aad9805e81445a61b5800cb001fcc1de422d4660a4
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-pr-triage-scheduler/scripts/fetch_queue.py
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-pr-triage-scheduler
-  active_owner: microsoft/apm/packages/autopilot/autopilot-pr-triage-scheduler
-  content_hash: sha256:8dbfbf8846f72c1b481e3d222001e4944d6a02f5bca367efef9396e26d20be9d
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-pr-triage-scheduler/scripts/triage_state.py
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-pr-triage-scheduler
-  active_owner: microsoft/apm/packages/autopilot/autopilot-pr-triage-scheduler
-  content_hash: sha256:edd8f016bc45372a31638d6c72ad2d88378b371383ff3c1fb73bd40424c8206c
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-pr-triage-worker
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-pr-triage-worker
-  active_owner: microsoft/apm/packages/autopilot/autopilot-pr-triage-worker
-  content_hash: null
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-pr-triage-worker/SKILL.md
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-pr-triage-worker
-  active_owner: microsoft/apm/packages/autopilot/autopilot-pr-triage-worker
-  content_hash: sha256:33e5daa2f1f096b94a6e0583f751279fa41dc46175f92c569e20f0ca5f055a78
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-pr-triage-worker/assets/label-contract.json
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-pr-triage-worker
-  active_owner: microsoft/apm/packages/autopilot/autopilot-pr-triage-worker
-  content_hash: sha256:a9a2030f24aa3f211aab49aad9805e81445a61b5800cb001fcc1de422d4660a4
-- kind: project-relative
-  target: claude
-  value: .claude/skills/autopilot-pr-triage-worker/assets/pr-triage-template.md
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/autopilot/autopilot-pr-triage-worker
-  active_owner: microsoft/apm/packages/autopilot/autopilot-pr-triage-worker
-  content_hash: sha256:d5155b45b2fa10badd82945582a9e3968cfaece5ca29678f3091f78e9dffae70
-- kind: project-relative
-  target: claude
   value: .claude/skills/aws-architecture-advisor
   runtime: null
   scope: project
@@ -5834,7 +5076,7 @@ deployments:
   owners:
   - ./packages/agent-package-builder
   active_owner: ./packages/agent-package-builder
-  content_hash: sha256:2518dd7acaf4fbe5456243df4f1e776c9e8761dda43972a5f55db322722f9365
+  content_hash: sha256:31c4ed7915c4ac1616ba09e9071212520e79e2291fef91042aa6e1f1fe6513c0
 - kind: project-relative
   target: claude
   value: .claude/skills/building-agent-packages/assets/FAMILY_FACTS.template.md
@@ -5888,7 +5130,7 @@ deployments:
   owners:
   - ./packages/agent-package-builder
   active_owner: ./packages/agent-package-builder
-  content_hash: sha256:ec50616cd4049780204812e12f4357c45cf50429df3514e62015156663434610
+  content_hash: sha256:026cc44bb87dcaa97ec94135f0ec85aa3660f24415fe53f8dbf38c597bfabfb3
 - kind: project-relative
   target: claude
   value: .claude/skills/building-agent-packages/blueprints/modes.md
@@ -5978,7 +5220,7 @@ deployments:
   owners:
   - ./packages/agent-package-builder
   active_owner: ./packages/agent-package-builder
-  content_hash: sha256:a3a4962eae07a6e4ca7972a923659466e55e83f9b3af20280cd82489148a8808
+  content_hash: sha256:e6915ac48535b2dec93b66aa9d25049a7ab4ab9fb9811bf727c3471ae3a5173c
 - kind: project-relative
   target: claude
   value: .claude/skills/building-agent-packages/blueprints/phases/p9-commit.md
@@ -6080,13 +5322,13 @@ deployments:
   content_hash: sha256:d6988309ec47e8ce405312b8dc4aea5ef587fdfe697e3ce640be45c8af03a12e
 - kind: project-relative
   target: claude
-  value: .claude/skills/building-agent-packages/scripts/check_counts.sh
+  value: .claude/skills/building-agent-packages/scripts/check_counts.py
   runtime: null
   scope: project
   owners:
   - ./packages/agent-package-builder
   active_owner: ./packages/agent-package-builder
-  content_hash: sha256:85aed6482d05b1fdaf1fa0c3ec774cb256358c4473a03612db4ccc2c431f98b5
+  content_hash: sha256:0e5b44cdd3b700f3854b526a314c571f0164940a8480ea07aeda054af8f13497
 - kind: project-relative
   target: claude
   value: .claude/skills/building-agent-packages/scripts/commit_groups.py
@@ -6122,7 +5364,7 @@ deployments:
   owners:
   - ./packages/agent-package-builder
   active_owner: ./packages/agent-package-builder
-  content_hash: sha256:bfe7fc2b122bd562413bce72937b5244a5ec62b87aa9fa58b3488ae31362382b
+  content_hash: sha256:02bae1a0dd80f7777c6c18fafdab2aad2b15bd193e88c3d1ba0af30eab99cea4
 - kind: project-relative
   target: claude
   value: .claude/skills/building-agent-packages/scripts/verify_skill.py
@@ -6131,7 +5373,7 @@ deployments:
   owners:
   - ./packages/agent-package-builder
   active_owner: ./packages/agent-package-builder
-  content_hash: sha256:b3a5bfb530217c4ecde541c11396c588240c1b1a1a7874debb0d88e21c2c0021
+  content_hash: sha256:5373b8ab38e4965b38fcda2505a187c7f5d20eaa3083644f0a0bd5fc194c0cc6
 - kind: project-relative
   target: claude
   value: .claude/skills/business-domain-researcher
@@ -6278,6 +5520,24 @@ deployments:
   content_hash: sha256:92292342e49406939fad9a89ec0667f7a2f70a5752cb366f0fddaad18de1b08a
 - kind: project-relative
   target: claude
+  value: .claude/skills/configuring-aws-route53-dns/blueprints/always-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-skills
+  active_owner: local:packages/aws-skills
+  content_hash: sha256:b64eaac06b42da654802999dfe1722f767e86d69f11abb12f06adf2a30fc1010
+- kind: project-relative
+  target: claude
+  value: .claude/skills/configuring-aws-route53-dns/blueprints/ask-first-decisions.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-skills
+  active_owner: local:packages/aws-skills
+  content_hash: sha256:1956b9eef480ec12fae4f644062f620ddff91ff536fdfc368a8f68e68e1435d0
+- kind: project-relative
+  target: claude
   value: .claude/skills/configuring-aws-route53-dns/blueprints/evaluation-scenarios.md
   runtime: null
   scope: project
@@ -6285,6 +5545,15 @@ deployments:
   - local:packages/aws-skills
   active_owner: local:packages/aws-skills
   content_hash: sha256:52e5609f9d585a1be630bdca0b689fa172d8cd84129012d5cd7c4eea808a30b3
+- kind: project-relative
+  target: claude
+  value: .claude/skills/configuring-aws-route53-dns/blueprints/never-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-skills
+  active_owner: local:packages/aws-skills
+  content_hash: sha256:d52c3b61ec7aff30284d07d10e68544a04dd2476a485e84221ecf02c7135c9c0
 - kind: project-relative
   target: claude
   value: .claude/skills/configuring-oci-monitoring-alarms
@@ -6530,6 +5799,24 @@ deployments:
   content_hash: sha256:ceeaf72623ee3364b54c480dd1807f86210f5ad715bb039381d3061d5cd8b426
 - kind: project-relative
   target: claude
+  value: .claude/skills/delivering-cloudfront-cdn/blueprints/always-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-skills
+  active_owner: local:packages/aws-skills
+  content_hash: sha256:d3e759b2fe16290ddf3b162d61bef3b457a79db032b3a571164fcf9323545414
+- kind: project-relative
+  target: claude
+  value: .claude/skills/delivering-cloudfront-cdn/blueprints/ask-first-decisions.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-skills
+  active_owner: local:packages/aws-skills
+  content_hash: sha256:7c77e376aa1bfcd60f1cc20d14cf2b95c066fb4c6cdb24aecd9c09d93b7a0aff
+- kind: project-relative
+  target: claude
   value: .claude/skills/delivering-cloudfront-cdn/blueprints/evaluation-scenarios.md
   runtime: null
   scope: project
@@ -6537,6 +5824,15 @@ deployments:
   - local:packages/aws-skills
   active_owner: local:packages/aws-skills
   content_hash: sha256:1a2373623096b8abc00ac6476e47d32b6cc8a8bf56391f2eec2ca5642ef9c51f
+- kind: project-relative
+  target: claude
+  value: .claude/skills/delivering-cloudfront-cdn/blueprints/never-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-skills
+  active_owner: local:packages/aws-skills
+  content_hash: sha256:783c766195e4fc812acbad49466a32858b12fd1a3078431b1a4336d05205f2f5
 - kind: project-relative
   target: claude
   value: .claude/skills/deploy-oci-function
@@ -6671,7 +5967,7 @@ deployments:
   owners:
   - local:packages/aws-skills
   active_owner: local:packages/aws-skills
-  content_hash: sha256:2e47c5c438616367a89330c28f09696136ffeadf8e34e3fdea33ac1eccbf4ab7
+  content_hash: sha256:160cddaf9b563810b65db8ef7d732ce1fa6f3cd3d70b8d550ecb10e9f21a1ce9
 - kind: project-relative
   target: claude
   value: .claude/skills/designing-aws-vpc-networks/blueprints/evaluation-scenarios.md
@@ -6681,6 +5977,15 @@ deployments:
   - local:packages/aws-skills
   active_owner: local:packages/aws-skills
   content_hash: sha256:0a56df05ff62ea4d7414fff7c31d38671b02afcd20c9f5c42debd5b8c9943ae6
+- kind: project-relative
+  target: claude
+  value: .claude/skills/designing-aws-vpc-networks/blueprints/reference-architectures.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-skills
+  active_owner: local:packages/aws-skills
+  content_hash: sha256:f8eab832e6afa678bcf51fddc459ef062b4160ac64867bfe10a653ea401903b7
 - kind: project-relative
   target: claude
   value: .claude/skills/designing-dynamodb-nosql
@@ -8258,6 +7563,87 @@ deployments:
   content_hash: sha256:b055298672d9fcc66529c712140aec0ad01a816f341890fd12ff510c8977ca2b
 - kind: project-relative
   target: claude
+  value: .claude/skills/developing-langchain4j-core-v1-22
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/langchain4j
+  active_owner: ./packages/langchain4j
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-langchain4j-core-v1-22/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/langchain4j
+  active_owner: ./packages/langchain4j
+  content_hash: sha256:92e2145b91e8836755eb607c5ca44439b98db17939c5148644fe22b063cfce7e
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-langchain4j-core-v1-22/blueprints/always-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/langchain4j
+  active_owner: ./packages/langchain4j
+  content_hash: sha256:33256cac5b16b4867b7040a0a5f3141ba040f2f52b65f13d236ef4913e1a607a
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-langchain4j-core-v1-22/blueprints/errors-and-retry.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/langchain4j
+  active_owner: ./packages/langchain4j
+  content_hash: sha256:b09cbfc565f73c6742b801762bc6b88e59a61e13088856aa6deef98cfd40a1b1
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-langchain4j-core-v1-22/blueprints/evaluation-scenarios.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/langchain4j
+  active_owner: ./packages/langchain4j
+  content_hash: sha256:8e3d933a0af32e6abe9cb01dc3dfe55ff4c8d7bd65d359ba180b08df8242e15e
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-langchain4j-core-v1-22/blueprints/never-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/langchain4j
+  active_owner: ./packages/langchain4j
+  content_hash: sha256:dbc1dc4897663b511618c8d3994e20fa999bcade2b2c9abc5642767edb1ed6ad
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-langchain4j-core-v1-22/blueprints/streaming-and-listeners.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/langchain4j
+  active_owner: ./packages/langchain4j
+  content_hash: sha256:bc78f18b725324799cec5fc516c2f7cabcc77d661689eb1957d1033e9f1d4d69
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-langchain4j-core-v1-22/blueprints/testing.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/langchain4j
+  active_owner: ./packages/langchain4j
+  content_hash: sha256:f5a466c7d1cfd4c358f259fdfbba15beb9e1fd9dcd2adda17d7228c83a807d82
+- kind: project-relative
+  target: claude
+  value: .claude/skills/developing-langchain4j-core-v1-22/blueprints/unverified-and-risks.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/langchain4j
+  active_owner: ./packages/langchain4j
+  content_hash: sha256:ec2fdcbe25210c7b3d4798ce18d8a007ce52b60eefa43e251c5bc8a6061d1cda
+- kind: project-relative
+  target: claude
   value: .claude/skills/developing-oci-functions-java
   runtime: null
   scope: project
@@ -8906,6 +8292,24 @@ deployments:
   content_hash: sha256:818ee136e7b02263010553d802d46cb9cc82e1c059451e67b4f43191bce330d2
 - kind: project-relative
   target: claude
+  value: .claude/skills/implementing-lambda-powertools-java/blueprints/always-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-skills
+  active_owner: local:packages/aws-skills
+  content_hash: sha256:5899d0d58fe36c17c6ce3fc965bb1f5498c19cb007f221c5a9be9ee6e38db21e
+- kind: project-relative
+  target: claude
+  value: .claude/skills/implementing-lambda-powertools-java/blueprints/ask-first-decisions.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-skills
+  active_owner: local:packages/aws-skills
+  content_hash: sha256:3e0f3e8b40f23cc0d62590c2b65871f3f3c25d18ea966b3fdc5f130d4a2f4d00
+- kind: project-relative
+  target: claude
   value: .claude/skills/implementing-lambda-powertools-java/blueprints/evaluation-scenarios.md
   runtime: null
   scope: project
@@ -8913,6 +8317,24 @@ deployments:
   - local:packages/aws-skills
   active_owner: local:packages/aws-skills
   content_hash: sha256:fb44daa6c857ee0bc734eed71a3abc081db37f3837e328cea447b61942c133c6
+- kind: project-relative
+  target: claude
+  value: .claude/skills/implementing-lambda-powertools-java/blueprints/integration-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-skills
+  active_owner: local:packages/aws-skills
+  content_hash: sha256:854ef5197fef616c3ca329ad7ad817c8083deefe743091ff2752ac4834156328
+- kind: project-relative
+  target: claude
+  value: .claude/skills/implementing-lambda-powertools-java/blueprints/never-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-skills
+  active_owner: local:packages/aws-skills
+  content_hash: sha256:2e4bb5888fbd2bd64fc8dbce1e2094c4a8eecd135da33585e83d2441cb0a0c56
 - kind: project-relative
   target: claude
   value: .claude/skills/implementing-oci-functions-events
@@ -9120,6 +8542,159 @@ deployments:
   - ./packages/camel-quarkus-integrator
   active_owner: ./packages/camel-quarkus-integrator
   content_hash: sha256:4949d32220f5ecb8e5a420a082e4c231641910ec3686d3679b96525ce0b6ff97
+- kind: project-relative
+  target: claude
+  value: .claude/skills/integrating-langchain4j-openai-v1-22
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/langchain4j
+  active_owner: ./packages/langchain4j
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/integrating-langchain4j-openai-v1-22/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/langchain4j
+  active_owner: ./packages/langchain4j
+  content_hash: sha256:0c09a19e019f10e103548148b5374d1769f95b9f2e015ff9694ca560cfa34d27
+- kind: project-relative
+  target: claude
+  value: .claude/skills/integrating-langchain4j-openai-v1-22/blueprints/always-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/langchain4j
+  active_owner: ./packages/langchain4j
+  content_hash: sha256:098e77d2cb6dbe7645c257cf5a0ce8fdca097e887adb5a37b5c6be6dbfc5721b
+- kind: project-relative
+  target: claude
+  value: .claude/skills/integrating-langchain4j-openai-v1-22/blueprints/builder-options.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/langchain4j
+  active_owner: ./packages/langchain4j
+  content_hash: sha256:06b95c05c8b7e16798aa59e5c72b10e7130bc214bbd64db9011a7e08b38214c5
+- kind: project-relative
+  target: claude
+  value: .claude/skills/integrating-langchain4j-openai-v1-22/blueprints/evaluation-scenarios.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/langchain4j
+  active_owner: ./packages/langchain4j
+  content_hash: sha256:59d24e1e32cb6de96d9aa41dccbc24f50599b8ba6ceec419bd090a0435681ac1
+- kind: project-relative
+  target: claude
+  value: .claude/skills/integrating-langchain4j-openai-v1-22/blueprints/gpt-6-and-reasoning.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/langchain4j
+  active_owner: ./packages/langchain4j
+  content_hash: sha256:dcf9324ca0ca4cb47b2abfe75b9e66403babdd1a4e60e748058dbee9324313cb
+- kind: project-relative
+  target: claude
+  value: .claude/skills/integrating-langchain4j-openai-v1-22/blueprints/never-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/langchain4j
+  active_owner: ./packages/langchain4j
+  content_hash: sha256:84f9dd02e245c3c30b47c257d8df8df968d8820c992f4bc05be016090264867c
+- kind: project-relative
+  target: claude
+  value: .claude/skills/integrating-langchain4j-openai-v1-22/blueprints/unverified-and-risks.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/langchain4j
+  active_owner: ./packages/langchain4j
+  content_hash: sha256:03816da303e9ddb2193b124bd2a66f5d216554c4c64ea2e3d44ed95f2a29be36
+- kind: project-relative
+  target: claude
+  value: .claude/skills/integrating-langchain4j-provider-a-v1-22
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/langchain4j
+  active_owner: ./packages/langchain4j
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/integrating-langchain4j-provider-a-v1-22/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/langchain4j
+  active_owner: ./packages/langchain4j
+  content_hash: sha256:768c15096d5c1f645b5cce1b56f902295002c1bfaafed9f4b974d58148017c82
+- kind: project-relative
+  target: claude
+  value: .claude/skills/integrating-langchain4j-provider-a-v1-22/blueprints/always-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/langchain4j
+  active_owner: ./packages/langchain4j
+  content_hash: sha256:cba4899c2eac5a005630e683251728bfc4f6e7237818c242b16ea4fe83c4a138
+- kind: project-relative
+  target: claude
+  value: .claude/skills/integrating-langchain4j-provider-a-v1-22/blueprints/builder-options.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/langchain4j
+  active_owner: ./packages/langchain4j
+  content_hash: sha256:5beeebb7071e16f360e23574a78de60767985392ba80f1f4b41fd09bcf8ec1e8
+- kind: project-relative
+  target: claude
+  value: .claude/skills/integrating-langchain4j-provider-a-v1-22/blueprints/caching-and-system-messages.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/langchain4j
+  active_owner: ./packages/langchain4j
+  content_hash: sha256:72fb6ffd734c2e6a1cd2edd637ebdd88a0898c5482eef73d095e5bde67b78a03
+- kind: project-relative
+  target: claude
+  value: .claude/skills/integrating-langchain4j-provider-a-v1-22/blueprints/evaluation-scenarios.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/langchain4j
+  active_owner: ./packages/langchain4j
+  content_hash: sha256:2dc8360cf4718829387dae2e0c60e747a714d991ad1b83a4b003984a5fdaf72a
+- kind: project-relative
+  target: claude
+  value: .claude/skills/integrating-langchain4j-provider-a-v1-22/blueprints/never-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/langchain4j
+  active_owner: ./packages/langchain4j
+  content_hash: sha256:9f3b3888891e72e3b9d5fc1fff426a139d796cf03753ed1c0d2f03ddf0d450f6
+- kind: project-relative
+  target: claude
+  value: .claude/skills/integrating-langchain4j-provider-a-v1-22/blueprints/thinking-and-effort.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/langchain4j
+  active_owner: ./packages/langchain4j
+  content_hash: sha256:7e8f2869f729ba289a916a661d98da2332765a7a939ff00b3ee1983d55871178
+- kind: project-relative
+  target: claude
+  value: .claude/skills/integrating-langchain4j-provider-a-v1-22/blueprints/unverified-and-risks.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/langchain4j
+  active_owner: ./packages/langchain4j
+  content_hash: sha256:7ac42fcc3a7b9f1eab383ef81a4075ab1126b044e63999515e2699d4c826d396
 - kind: project-relative
   target: claude
   value: .claude/skills/integrating-oci-functions-objectstorage
@@ -9362,7 +8937,7 @@ deployments:
   owners:
   - ./packages/oci-functions-java
   active_owner: ./packages/oci-functions-java
-  content_hash: sha256:fa7065b666a76a063249534ab6cfc10884ef8a6a78dddea7a1c29f474a68dc52
+  content_hash: sha256:773575f5469f5dce60f1bbb6476099ea80b3797b314f4441df04d5721bb49c0f
 - kind: project-relative
   target: claude
   value: .claude/skills/invoking-rest-apis-from-oci-functions/blueprints/never-do-patterns.md
@@ -9671,6 +9246,24 @@ deployments:
   content_hash: sha256:ccf94f8c657a0b4b153d0207bdf3fe03d96fb87ea2ea28a5e681b02e3f4a220c
 - kind: project-relative
   target: claude
+  value: .claude/skills/monitoring-cloudwatch-observability/blueprints/always-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-skills
+  active_owner: local:packages/aws-skills
+  content_hash: sha256:51e91009edce7d4808bdb56a707d1b83077598ef10a974b7b8b98dac1c97082d
+- kind: project-relative
+  target: claude
+  value: .claude/skills/monitoring-cloudwatch-observability/blueprints/ask-first-decisions.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-skills
+  active_owner: local:packages/aws-skills
+  content_hash: sha256:034b386a1cf3f8502e707241903b3cc291d68124b72a8bd345f5ad1179c73459
+- kind: project-relative
+  target: claude
   value: .claude/skills/monitoring-cloudwatch-observability/blueprints/evaluation-scenarios.md
   runtime: null
   scope: project
@@ -9678,6 +9271,15 @@ deployments:
   - local:packages/aws-skills
   active_owner: local:packages/aws-skills
   content_hash: sha256:5828dd917a13450d4a06fc4f22cc4787acb1013e1baa1c7e247d327a046be517
+- kind: project-relative
+  target: claude
+  value: .claude/skills/monitoring-cloudwatch-observability/blueprints/never-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-skills
+  active_owner: local:packages/aws-skills
+  content_hash: sha256:43837b4057eb49b4b6eb16637fdd0cee5d0d3a977774c5f0b11835e8331d1c18
 - kind: project-relative
   target: claude
   value: .claude/skills/monitoring-oci-apm
@@ -10056,204 +9658,6 @@ deployments:
   - local:packages/aws-skills
   active_owner: local:packages/aws-skills
   content_hash: sha256:2f2d7bb8211adb823a55f9952ca0834403dbb1f7340d1d192b43f0732aa7203b
-- kind: project-relative
-  target: claude
-  value: .claude/skills/pr-description-skill
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/pr-description-skill
-  active_owner: microsoft/apm/packages/pr-description-skill
-  content_hash: null
-- kind: project-relative
-  target: claude
-  value: .claude/skills/pr-description-skill/SKILL.md
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/pr-description-skill
-  active_owner: microsoft/apm/packages/pr-description-skill
-  content_hash: sha256:d07254e9d0b95ea52d1a81d3262ca42da8c4c51d801eac4f11b6bc454cfb01a0
-- kind: project-relative
-  target: claude
-  value: .claude/skills/pr-description-skill/apm.yml
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/pr-description-skill
-  active_owner: microsoft/apm/packages/pr-description-skill
-  content_hash: sha256:ee9bb48581e62279708a9a12dc57174c9f5f7d347a384e4ca6b99c050c63879d
-- kind: project-relative
-  target: claude
-  value: .claude/skills/pr-description-skill/assets/mermaid-conventions.md
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/pr-description-skill
-  active_owner: microsoft/apm/packages/pr-description-skill
-  content_hash: sha256:3d9c7adf95d40db00833ec087d699a7d04b3d799e9b9d07271cf2ae7d51524ca
-- kind: project-relative
-  target: claude
-  value: .claude/skills/pr-description-skill/assets/pr-body-template.md
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/pr-description-skill
-  active_owner: microsoft/apm/packages/pr-description-skill
-  content_hash: sha256:aaeb885fbfa87364724f575eb150c9c39dc3cb60ab0459972e76185df9c98f97
-- kind: project-relative
-  target: claude
-  value: .claude/skills/pr-description-skill/assets/scenario-evidence-rubric.md
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/pr-description-skill
-  active_owner: microsoft/apm/packages/pr-description-skill
-  content_hash: sha256:bbb386b6f48974bbb78a380fd4674ed7a3a81810a6c2136e30c80158153596ae
-- kind: project-relative
-  target: claude
-  value: .claude/skills/pr-description-skill/assets/section-rubric.md
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/pr-description-skill
-  active_owner: microsoft/apm/packages/pr-description-skill
-  content_hash: sha256:f07fbbc5c741c4fd30f32edec985d8301d20e3deebb1761dd92b04da51c5e42d
-- kind: project-relative
-  target: claude
-  value: .claude/skills/pr-description-skill/evals/.gitignore
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/pr-description-skill
-  active_owner: microsoft/apm/packages/pr-description-skill
-  content_hash: sha256:dc810cf3561d22d2d47b89fd0697de46aff0068819b3514577842cb2a2a1c332
-- kind: project-relative
-  target: claude
-  value: .claude/skills/pr-description-skill/evals/README.md
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/pr-description-skill
-  active_owner: microsoft/apm/packages/pr-description-skill
-  content_hash: sha256:92b4529515917d25cbf5e597d1d46751e602dd4eb80be20a97ac81597f410cd0
-- kind: project-relative
-  target: claude
-  value: .claude/skills/pr-description-skill/evals/content/auth-refactor.json
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/pr-description-skill
-  active_owner: microsoft/apm/packages/pr-description-skill
-  content_hash: sha256:86791ada2f4983fde709237eaae9ef9c5a0f87a28f14e8b0f26b4b7e5b0e73c9
-- kind: project-relative
-  target: claude
-  value: .claude/skills/pr-description-skill/evals/content/dep-bump.json
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/pr-description-skill
-  active_owner: microsoft/apm/packages/pr-description-skill
-  content_hash: sha256:5136278ecf83a6c3a618176810ef62634cc988527dcdb8bd343ae83278f9e1d7
-- kind: project-relative
-  target: claude
-  value: .claude/skills/pr-description-skill/evals/content/docs-only.json
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/pr-description-skill
-  active_owner: microsoft/apm/packages/pr-description-skill
-  content_hash: sha256:78a6f98f939b1b8e0efa1b67a57a4b9008ddffd3b4f02fbde4f9843c4f29b39a
-- kind: project-relative
-  target: claude
-  value: .claude/skills/pr-description-skill/evals/evals.json
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/pr-description-skill
-  active_owner: microsoft/apm/packages/pr-description-skill
-  content_hash: sha256:1d137370f60955469a089a7ef085371aa14bbb74a80675957f4d6e0a694252cc
-- kind: project-relative
-  target: claude
-  value: .claude/skills/pr-description-skill/evals/fixtures/auth-refactor__with_skill.md
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/pr-description-skill
-  active_owner: microsoft/apm/packages/pr-description-skill
-  content_hash: sha256:b5ebacb04c4ace19e0d634e9b9104ef70b72330afb9f29ac0de07a03f1e78628
-- kind: project-relative
-  target: claude
-  value: .claude/skills/pr-description-skill/evals/fixtures/auth-refactor__without_skill.md
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/pr-description-skill
-  active_owner: microsoft/apm/packages/pr-description-skill
-  content_hash: sha256:81c42403d4f1406ba2689106bb6e1cdf0a74f1921681f6e096cefac0c46efd46
-- kind: project-relative
-  target: claude
-  value: .claude/skills/pr-description-skill/evals/fixtures/dep-bump__with_skill.md
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/pr-description-skill
-  active_owner: microsoft/apm/packages/pr-description-skill
-  content_hash: sha256:60df233958541ed42b94c1751a3d2d99324ec83f263fa0becc3abcb4a682ee91
-- kind: project-relative
-  target: claude
-  value: .claude/skills/pr-description-skill/evals/fixtures/dep-bump__without_skill.md
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/pr-description-skill
-  active_owner: microsoft/apm/packages/pr-description-skill
-  content_hash: sha256:1410a89d81b6745d14242181197d2d05ec5aba5078f1ad3ae702e3341a3fc798
-- kind: project-relative
-  target: claude
-  value: .claude/skills/pr-description-skill/evals/fixtures/docs-only__with_skill.md
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/pr-description-skill
-  active_owner: microsoft/apm/packages/pr-description-skill
-  content_hash: sha256:e4ca53c7dc8c8a65f4945e2e4e4cc878b433c5662d13c5b613d957d6d505029c
-- kind: project-relative
-  target: claude
-  value: .claude/skills/pr-description-skill/evals/fixtures/docs-only__without_skill.md
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/pr-description-skill
-  active_owner: microsoft/apm/packages/pr-description-skill
-  content_hash: sha256:7e790d6711b8a33702c6bf0f7486e1928c58c60b4dad0a998c570a07d6a05fec
-- kind: project-relative
-  target: claude
-  value: .claude/skills/pr-description-skill/evals/results/.gitkeep
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/pr-description-skill
-  active_owner: microsoft/apm/packages/pr-description-skill
-  content_hash: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
-- kind: project-relative
-  target: claude
-  value: .claude/skills/pr-description-skill/evals/triggers.json
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/pr-description-skill
-  active_owner: microsoft/apm/packages/pr-description-skill
-  content_hash: sha256:6762c7f071195491700cc59ce5329ff185b0493682c93efdcf01db8fb522bbe4
-- kind: project-relative
-  target: claude
-  value: .claude/skills/pr-description-skill/scripts/run_evals.py
-  runtime: null
-  scope: project
-  owners:
-  - microsoft/apm/packages/pr-description-skill
-  active_owner: microsoft/apm/packages/pr-description-skill
-  content_hash: sha256:a1792f8cb95b4fb37a4133af079908e2a3b5643c1a81d97e4dcda399bac069a2
 - kind: project-relative
   target: claude
   value: .claude/skills/processing-stripe-payments-v34
@@ -13196,7 +12600,7 @@ deployments:
   owners:
   - ./packages/oci-terraform
   active_owner: ./packages/oci-terraform
-  content_hash: sha256:c0e4d78be25ab36ff90fb9babfce567d67485c1d9cf2c596657dcc0dc295a386
+  content_hash: sha256:ceaa663056ba49cd73d008911674e96a1a044d851d0110ef287f0d79a8635c54
 - kind: project-relative
   target: claude
   value: .claude/skills/provisioning-oci-api-gateway/blueprints/never-do-patterns.md
@@ -13520,7 +12924,7 @@ deployments:
   owners:
   - ./packages/oci-terraform
   active_owner: ./packages/oci-terraform
-  content_hash: sha256:14b89851ae6c95e136cf1818a90e08d36097114590d1a14dd479ad43c728174c
+  content_hash: sha256:e223f3790da02249bcbc4eb4a85dce54336ce5c8c29928d0b2a4276dbfe1661a
 - kind: project-relative
   target: claude
   value: .claude/skills/provisioning-oci-events/blueprints/never-do-patterns.md
@@ -13592,7 +12996,7 @@ deployments:
   owners:
   - ./packages/oci-terraform
   active_owner: ./packages/oci-terraform
-  content_hash: sha256:a4612f04fbff0c2b8cc2b0241ceb88a3739e9aaad1d7e193d8b80770c6bf0001
+  content_hash: sha256:7812c2f8d0ee6aaeaa285e735a51d3e385f3f50b71ac6aefe7aef281bc867cf0
 - kind: project-relative
   target: claude
   value: .claude/skills/provisioning-oci-functions/blueprints/never-do-patterns.md
@@ -14267,7 +13671,7 @@ deployments:
   owners:
   - ./packages/oci-functions-java
   active_owner: ./packages/oci-functions-java
-  content_hash: sha256:12f394b80f4c8daa067bfcb6d75bc61dffba8d9d9fa866a724a0a0b1d418907c
+  content_hash: sha256:fc2f747e32e25717562581a0fe4282b7550929347cb87480f5472d188263e863
 - kind: project-relative
   target: claude
   value: .claude/skills/refactoring-oci-java/blueprints/evaluation-scenarios.md
@@ -14411,7 +13815,7 @@ deployments:
   owners:
   - ./packages/researching-platform
   active_owner: ./packages/researching-platform
-  content_hash: sha256:a5a700af4b0b0aada1e0dc19716a67105de8e86eb7b5896d8e4de554db2e9bef
+  content_hash: sha256:d665c3855db7248b461f0a1b76e37cd26e819ed4e1f27afd35685938f25aeb36
 - kind: project-relative
   target: claude
   value: .claude/skills/researching-api-gateway/blueprints/category-specifics.md
@@ -14432,6 +13836,15 @@ deployments:
   content_hash: sha256:90cb893e6b1b7ddc244d96593a83530340679cf0b603e379977c5b9ae6e7bfce
 - kind: project-relative
   target: claude
+  value: .claude/skills/researching-api-gateway/blueprints/references/README.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/researching-platform
+  active_owner: ./packages/researching-platform
+  content_hash: sha256:c89e62b3a66bb0db0549c23f97661366fb64b27711e130c12bd05b610dd0c531
+- kind: project-relative
+  target: claude
   value: .claude/skills/researching-cache-store
   runtime: null
   scope: project
@@ -14447,7 +13860,7 @@ deployments:
   owners:
   - ./packages/researching-platform
   active_owner: ./packages/researching-platform
-  content_hash: sha256:13da8470ec4f7f699fe47029f187211aea3227d1b3a87bcf3ab0994be283a06a
+  content_hash: sha256:a4448d19124bca2f6f4b3cb2010fdd6a5144e40561b338a2afc39c9b35476712
 - kind: project-relative
   target: claude
   value: .claude/skills/researching-cache-store/blueprints/category-specifics.md
@@ -14468,6 +13881,15 @@ deployments:
   content_hash: sha256:e498a9ab44eef1117efef54cae89bc4074a8d73e99d26a46ef727da252e4d372
 - kind: project-relative
   target: claude
+  value: .claude/skills/researching-cache-store/blueprints/references/README.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/researching-platform
+  active_owner: ./packages/researching-platform
+  content_hash: sha256:80e26129b3a2357bafdace9a642e90306806d3d1ffa58394dc647945eb92583f
+- kind: project-relative
+  target: claude
   value: .claude/skills/researching-columnar-analytics
   runtime: null
   scope: project
@@ -14483,7 +13905,7 @@ deployments:
   owners:
   - ./packages/researching-platform
   active_owner: ./packages/researching-platform
-  content_hash: sha256:01c47d79ac9d3f0f1ab5cf61e5de79301f7c45c76ae2b32afbcb5a4513949a1c
+  content_hash: sha256:a73fb989701f8e520b645c7b10cdddd30a97fba150ced0bde253e64a8d9e87ac
 - kind: project-relative
   target: claude
   value: .claude/skills/researching-columnar-analytics/blueprints/category-specifics.md
@@ -14492,7 +13914,7 @@ deployments:
   owners:
   - ./packages/researching-platform
   active_owner: ./packages/researching-platform
-  content_hash: sha256:51c493ac67d46325c02ef2f39be568f493ebdebdfeab6af4df54a88b41320dbe
+  content_hash: sha256:c5d25ce1bb38f37f4b901ac6a7e699d8073143b045dce6e78bdfc61f6397ffb4
 - kind: project-relative
   target: claude
   value: .claude/skills/researching-columnar-analytics/blueprints/data-modeling.md
@@ -14501,7 +13923,7 @@ deployments:
   owners:
   - ./packages/researching-platform
   active_owner: ./packages/researching-platform
-  content_hash: sha256:75f08ced985b2e978c45773f4045714b828ee372920b5d8b340ede748c3ee9c5
+  content_hash: sha256:c683ae7c8543f596584c93cd75ed57c47c0b25f42defad51ae9a7c430fc3da8b
 - kind: project-relative
   target: claude
   value: .claude/skills/researching-columnar-analytics/blueprints/evaluation-scenarios.md
@@ -14511,6 +13933,15 @@ deployments:
   - ./packages/researching-platform
   active_owner: ./packages/researching-platform
   content_hash: sha256:598a2d8cdaaeebc57ee6bb86b187e060ea4792421f3fbaf87b94c0970cf11ac4
+- kind: project-relative
+  target: claude
+  value: .claude/skills/researching-columnar-analytics/blueprints/references/README.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/researching-platform
+  active_owner: ./packages/researching-platform
+  content_hash: sha256:e0765c71dd674213fca0ebb863fe20c613a25a00940ca03259081ad5c0a9839a
 - kind: project-relative
   target: claude
   value: .claude/skills/researching-coordination-service
@@ -14528,7 +13959,7 @@ deployments:
   owners:
   - ./packages/researching-platform
   active_owner: ./packages/researching-platform
-  content_hash: sha256:8f795a484e5ffcaacf3fc38b31dc66cb01a185a550d3058bc67cca05a9879063
+  content_hash: sha256:9c8027c5a82ff497fe44adce73d26676df6b2b57fd2e6b66d9eee65e0ab272ba
 - kind: project-relative
   target: claude
   value: .claude/skills/researching-coordination-service/blueprints/category-specifics.md
@@ -14549,6 +13980,15 @@ deployments:
   content_hash: sha256:1e04bd67ec3b302a909d419a79010a444e078a051270c06e86d6528055519230
 - kind: project-relative
   target: claude
+  value: .claude/skills/researching-coordination-service/blueprints/references/README.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/researching-platform
+  active_owner: ./packages/researching-platform
+  content_hash: sha256:d34e93dc1e62a2bcae4df24536b396aa7faa0a121496d5f3f63d9f2f32902ab3
+- kind: project-relative
+  target: claude
   value: .claude/skills/researching-document-store
   runtime: null
   scope: project
@@ -14564,7 +14004,7 @@ deployments:
   owners:
   - ./packages/researching-platform
   active_owner: ./packages/researching-platform
-  content_hash: sha256:d2a41c69d69411030592ac10c9678ac9881a3c9c3b8ebac3cdd56b34c29f9a3b
+  content_hash: sha256:e063ec272fd52b4461a0d99c5690161ff94a813fb75722ad97ebecec6742fca8
 - kind: project-relative
   target: claude
   value: .claude/skills/researching-document-store/blueprints/category-specifics.md
@@ -14573,7 +14013,7 @@ deployments:
   owners:
   - ./packages/researching-platform
   active_owner: ./packages/researching-platform
-  content_hash: sha256:2c77400a3704e5e0d66c319c0555ce48ed8e378345e71c44b45e80f1f1578b37
+  content_hash: sha256:f3537976ab94601fd850842fb06c8bbd84ddf4991937fb1ab1987610f54ca57f
 - kind: project-relative
   target: claude
   value: .claude/skills/researching-document-store/blueprints/data-modeling.md
@@ -14594,6 +14034,15 @@ deployments:
   content_hash: sha256:33358c29dce4a21dd481a97283deb144fae7e86ce65378f88a3a19b1ec9b6f5d
 - kind: project-relative
   target: claude
+  value: .claude/skills/researching-document-store/blueprints/references/README.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/researching-platform
+  active_owner: ./packages/researching-platform
+  content_hash: sha256:f050e6b64d66d6557bea7e025a798e2836155ed733be5670c13f32fb3b638b5f
+- kind: project-relative
+  target: claude
   value: .claude/skills/researching-graph-database
   runtime: null
   scope: project
@@ -14609,7 +14058,7 @@ deployments:
   owners:
   - ./packages/researching-platform
   active_owner: ./packages/researching-platform
-  content_hash: sha256:f544a9ad7da3fb21ab92cc7178846141334bfe949f66fbc2041e79efc7b270e0
+  content_hash: sha256:de795e70336309d98c8a7bbd4e4ebe0ed0e39b2b0406feb1a663697cb0623860
 - kind: project-relative
   target: claude
   value: .claude/skills/researching-graph-database/blueprints/category-specifics.md
@@ -14618,7 +14067,7 @@ deployments:
   owners:
   - ./packages/researching-platform
   active_owner: ./packages/researching-platform
-  content_hash: sha256:e6ed5783638255a1198bd153d28e4c4defcf2c27ab9915da582e68f958afe345
+  content_hash: sha256:50fde0c6052451cd9a7bbed7fed795559d6375b9ea775adcb171af90c82ba49a
 - kind: project-relative
   target: claude
   value: .claude/skills/researching-graph-database/blueprints/data-modeling.md
@@ -14639,6 +14088,15 @@ deployments:
   content_hash: sha256:fdc6aa8e016145c630d240555cb27e51ac4656aa47a4d0a98159f21fe0b7b443
 - kind: project-relative
   target: claude
+  value: .claude/skills/researching-graph-database/blueprints/references/README.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/researching-platform
+  active_owner: ./packages/researching-platform
+  content_hash: sha256:d83c291fc54354cbad2e8d52f488ecfb12bdc79b68f2eda0e2485bdb55940b12
+- kind: project-relative
+  target: claude
   value: .claude/skills/researching-kv-store
   runtime: null
   scope: project
@@ -14654,7 +14112,7 @@ deployments:
   owners:
   - ./packages/researching-platform
   active_owner: ./packages/researching-platform
-  content_hash: sha256:9ed79b32ac8eee0078fef7a904b34cf6d06070aa43081c05aed954e34b14f899
+  content_hash: sha256:b324e7fb8aaf8c83d2fbd5b18b4b68e15a36a755934143c18260f639e715626a
 - kind: project-relative
   target: claude
   value: .claude/skills/researching-kv-store/blueprints/category-specifics.md
@@ -14663,7 +14121,7 @@ deployments:
   owners:
   - ./packages/researching-platform
   active_owner: ./packages/researching-platform
-  content_hash: sha256:720167fe1bcbdcf9162cf289678c407fdc4bd3a7ad9642514f93b1a03a7880af
+  content_hash: sha256:aebbe87f1a00648e5abdfe2ab793a2a2956b27e034a8b7f93cbb68c0561ed989
 - kind: project-relative
   target: claude
   value: .claude/skills/researching-kv-store/blueprints/data-modeling.md
@@ -14672,7 +14130,7 @@ deployments:
   owners:
   - ./packages/researching-platform
   active_owner: ./packages/researching-platform
-  content_hash: sha256:e5cdbbb1a26f45c141fd614996cb019f0d9dffdfe4672c6d09ed9579bd186635
+  content_hash: sha256:18ab259b9765fa10b976140c8fc3eb37ae71ba920267ce94f919e79ec96a370d
 - kind: project-relative
   target: claude
   value: .claude/skills/researching-kv-store/blueprints/evaluation-scenarios.md
@@ -14682,6 +14140,15 @@ deployments:
   - ./packages/researching-platform
   active_owner: ./packages/researching-platform
   content_hash: sha256:23a7dff0b87caeef51e7875fd751ba70c7cb5b82905551b7b4faec413a6fa8f9
+- kind: project-relative
+  target: claude
+  value: .claude/skills/researching-kv-store/blueprints/references/README.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/researching-platform
+  active_owner: ./packages/researching-platform
+  content_hash: sha256:f215db1f41b99f0f93096ed25829b7ec4442da5774aca64ba84215243096e77e
 - kind: project-relative
   target: claude
   value: .claude/skills/researching-object-storage
@@ -14699,7 +14166,7 @@ deployments:
   owners:
   - ./packages/researching-platform
   active_owner: ./packages/researching-platform
-  content_hash: sha256:cc82982651208a37902aef086e9c6c8c20d0bf67334cc15c05450f73709ffd91
+  content_hash: sha256:02f6c2ce55840fb64d29052ab0900f94ed1b8c6480b9ffc4ebdaae1c2209e5c1
 - kind: project-relative
   target: claude
   value: .claude/skills/researching-object-storage/blueprints/category-specifics.md
@@ -14708,7 +14175,7 @@ deployments:
   owners:
   - ./packages/researching-platform
   active_owner: ./packages/researching-platform
-  content_hash: sha256:7265475e12ba50ee1fb303b2c3b808cd2724056063f544d037c002f57fd93b1d
+  content_hash: sha256:343cc8428b36f26c3f0c359e7630acca1bb923c6e88f4ed43e502eba97064d35
 - kind: project-relative
   target: claude
   value: .claude/skills/researching-object-storage/blueprints/data-modeling.md
@@ -14717,7 +14184,7 @@ deployments:
   owners:
   - ./packages/researching-platform
   active_owner: ./packages/researching-platform
-  content_hash: sha256:61e8843cbb6e34767afa747d0d5ed703a5e05dc5d8f67675820c739785c12fac
+  content_hash: sha256:270c53e5b0bd13966e9c877926c7c62203220e6d32afa45be48cc03ac20a0d4e
 - kind: project-relative
   target: claude
   value: .claude/skills/researching-object-storage/blueprints/evaluation-scenarios.md
@@ -14727,6 +14194,15 @@ deployments:
   - ./packages/researching-platform
   active_owner: ./packages/researching-platform
   content_hash: sha256:e1f0b4a2fe9511e59c8d5e47a54c7fd82f6133a090ae408d90a67022ec180d2c
+- kind: project-relative
+  target: claude
+  value: .claude/skills/researching-object-storage/blueprints/references/README.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/researching-platform
+  active_owner: ./packages/researching-platform
+  content_hash: sha256:85a1d14d0cb810da96881141a7602c7102053f069919202dc623c77466fd4c83
 - kind: project-relative
   target: claude
   value: .claude/skills/researching-platform-software
@@ -14744,7 +14220,7 @@ deployments:
   owners:
   - ./packages/researching-platform
   active_owner: ./packages/researching-platform
-  content_hash: sha256:d538ca23a8557b71c9fa940d8a03cc2fd448ae9d5f9e543b3bd2a7e1a0e36624
+  content_hash: sha256:c2d2d61bbb8906ba0d6babb50ba58379db1e860516dda3b081530ca523564f0c
 - kind: project-relative
   target: claude
   value: .claude/skills/researching-platform-software/blueprints/evaluation-scenarios.md
@@ -14765,6 +14241,15 @@ deployments:
   content_hash: sha256:fc282828a9f3c3f0a9a359c41fadcbad157470ae499f667de4823b5884e4b9f5
 - kind: project-relative
   target: claude
+  value: .claude/skills/researching-platform-software/blueprints/shared/category-templates/api-management-template.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/researching-platform
+  active_owner: ./packages/researching-platform
+  content_hash: sha256:34016bc36027696c4adbed487ac76da0b65e2a09b36fca29b931f0dd319da86f
+- kind: project-relative
+  target: claude
   value: .claude/skills/researching-platform-software/blueprints/shared/data-modeling-principles.md
   runtime: null
   scope: project
@@ -14772,6 +14257,15 @@ deployments:
   - ./packages/researching-platform
   active_owner: ./packages/researching-platform
   content_hash: sha256:86e5d4b8c7566d737f662f49cfefdf921163ac58a35ffadfc7d1b63fbebf65d8
+- kind: project-relative
+  target: claude
+  value: .claude/skills/researching-platform-software/blueprints/shared/data-modeling/README.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/researching-platform
+  active_owner: ./packages/researching-platform
+  content_hash: sha256:ea810c002db7db6f12ea19939fd3989c354d013fd6a3eaec0a4ea9fe149da1eb
 - kind: project-relative
   target: claude
   value: .claude/skills/researching-platform-software/blueprints/shared/deployment-guides/container-compose-guide.md
@@ -14807,7 +14301,7 @@ deployments:
   owners:
   - ./packages/researching-platform
   active_owner: ./packages/researching-platform
-  content_hash: sha256:79add30cedbe8bf33ada9cef4b83a0a08fb5c6f2029c9cfdadf91ce5ff88b469
+  content_hash: sha256:8bfa86e4e66c7528eb4c22baafd234863810355f91db68e1ea936c180ff52873
 - kind: project-relative
   target: claude
   value: .claude/skills/researching-platform-software/blueprints/shared/reference-card-example-kafka-3.7.md
@@ -14834,7 +14328,7 @@ deployments:
   owners:
   - ./packages/researching-platform
   active_owner: ./packages/researching-platform
-  content_hash: sha256:a8327c302d79d466acddba33b711434f7b2f8c475e50abaa89fb4f2a43112950
+  content_hash: sha256:15c76d16cd5aa6b6e2c25aed835ce402849d3755b79738887f8c60c812f19328
 - kind: project-relative
   target: claude
   value: .claude/skills/researching-rdbms
@@ -14852,7 +14346,7 @@ deployments:
   owners:
   - ./packages/researching-platform
   active_owner: ./packages/researching-platform
-  content_hash: sha256:1257e2508d15fc5c279e89e06561bc4c092cdcc6e3f1eda4729b4a333e7f5cc8
+  content_hash: sha256:112222ee30e5c0d5e75b38e392d100a8e386093f4b9fad214d45f734e89badce
 - kind: project-relative
   target: claude
   value: .claude/skills/researching-rdbms/blueprints/category-specifics.md
@@ -14870,7 +14364,7 @@ deployments:
   owners:
   - ./packages/researching-platform
   active_owner: ./packages/researching-platform
-  content_hash: sha256:73ca1b0af30655c885e1b6c6f14c22b1be4078119bc46732285e31ea41301c90
+  content_hash: sha256:ea14eace7396e741fae07025920b556abeca2f9c84c0fcd575b9744dea39e5b3
 - kind: project-relative
   target: claude
   value: .claude/skills/researching-rdbms/blueprints/evaluation-scenarios.md
@@ -14880,6 +14374,15 @@ deployments:
   - ./packages/researching-platform
   active_owner: ./packages/researching-platform
   content_hash: sha256:b8729e7a9cce833aabefd5a63a257e90bceeeafc13fcb8f6cc267c847668eb16
+- kind: project-relative
+  target: claude
+  value: .claude/skills/researching-rdbms/blueprints/references/README.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/researching-platform
+  active_owner: ./packages/researching-platform
+  content_hash: sha256:f6feca4985c50a4c5ff7808406e82b19fecd4ad99263dc2238681294c36e3f25
 - kind: project-relative
   target: claude
   value: .claude/skills/researching-search-engine
@@ -14897,7 +14400,7 @@ deployments:
   owners:
   - ./packages/researching-platform
   active_owner: ./packages/researching-platform
-  content_hash: sha256:4308ba4f0ac0e0886b04b20ca7978377011f0c8556e90b8124f2a210508958d1
+  content_hash: sha256:c4b1b22ae5a54a9582ded9736e79671555f3767247214918127bac0e5bc13ae9
 - kind: project-relative
   target: claude
   value: .claude/skills/researching-search-engine/blueprints/category-specifics.md
@@ -14906,7 +14409,7 @@ deployments:
   owners:
   - ./packages/researching-platform
   active_owner: ./packages/researching-platform
-  content_hash: sha256:722690e41dc816a0ea896a20a8f5b12b95a28d0e8fa5067ea513ac3fcbb8cfa1
+  content_hash: sha256:424fcff3cfa7495e4664df214d2634765315b17b572f0697c7908d5b6743385e
 - kind: project-relative
   target: claude
   value: .claude/skills/researching-search-engine/blueprints/evaluation-scenarios.md
@@ -14916,6 +14419,15 @@ deployments:
   - ./packages/researching-platform
   active_owner: ./packages/researching-platform
   content_hash: sha256:f96ed99328b3b3442238e3203d4ecf7cb6252fce6c5434f1fe976bc7228565ae
+- kind: project-relative
+  target: claude
+  value: .claude/skills/researching-search-engine/blueprints/references/README.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/researching-platform
+  active_owner: ./packages/researching-platform
+  content_hash: sha256:09e2bcb10f28292e502cf019095300440905d37ef2e22593a62bba50eb9ec6e4
 - kind: project-relative
   target: claude
   value: .claude/skills/researching-streaming-broker
@@ -14933,7 +14445,7 @@ deployments:
   owners:
   - ./packages/researching-platform
   active_owner: ./packages/researching-platform
-  content_hash: sha256:07513c28c3e17905c624ce6b1df0ff4da41f9ba613e94de225b77f99d8fa6644
+  content_hash: sha256:da9a7041f7c93a8e81d61a1bd7cdaa3aa65e583be80c8ba9a4b781942ff2cbee
 - kind: project-relative
   target: claude
   value: .claude/skills/researching-streaming-broker/blueprints/category-specifics.md
@@ -14952,6 +14464,15 @@ deployments:
   - ./packages/researching-platform
   active_owner: ./packages/researching-platform
   content_hash: sha256:83dd70703ba8d5fcabcfa96ea33a5bfe37594bb3898e3b55835754ed5bdbe810
+- kind: project-relative
+  target: claude
+  value: .claude/skills/researching-streaming-broker/blueprints/references/README.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/researching-platform
+  active_owner: ./packages/researching-platform
+  content_hash: sha256:f68c8bdd7da8958b7176dfe1b991c898899cfe56aa8c2c8809f6dfb4d9ee076b
 - kind: project-relative
   target: claude
   value: .claude/skills/researching-technical-frameworks
@@ -15041,7 +14562,7 @@ deployments:
   owners:
   - ./packages/researching-platform
   active_owner: ./packages/researching-platform
-  content_hash: sha256:d7c118570ca7a7f847df98ae1b2d27de269596c5f46bdd9956b30bdb2fde1465
+  content_hash: sha256:57b28f138cbf1183af6c3bb0050691ba3b45fb3a20c9f981504f822c6ae312c0
 - kind: project-relative
   target: claude
   value: .claude/skills/researching-timeseries-db/blueprints/category-specifics.md
@@ -15050,7 +14571,7 @@ deployments:
   owners:
   - ./packages/researching-platform
   active_owner: ./packages/researching-platform
-  content_hash: sha256:b1855dffc8c0b4b81c3516f1d384bddc18bd3105a3285a1adcba4cc66d57d0c5
+  content_hash: sha256:7f36625810174642b21ef4df0815ad12c0cfadcc33e247187f4982005ea65ccd
 - kind: project-relative
   target: claude
   value: .claude/skills/researching-timeseries-db/blueprints/data-modeling.md
@@ -15071,6 +14592,15 @@ deployments:
   content_hash: sha256:dfedd039c7248daa56fcdb4dba75523a700d4040ae7dfdbe25921c08e4068c67
 - kind: project-relative
   target: claude
+  value: .claude/skills/researching-timeseries-db/blueprints/references/README.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/researching-platform
+  active_owner: ./packages/researching-platform
+  content_hash: sha256:6c519951bc61a5366cc9a9d02c285e14e3599a592a033bfcd1de26bc6c040413
+- kind: project-relative
+  target: claude
   value: .claude/skills/researching-vector-store
   runtime: null
   scope: project
@@ -15086,7 +14616,7 @@ deployments:
   owners:
   - ./packages/researching-platform
   active_owner: ./packages/researching-platform
-  content_hash: sha256:e0208db5c0088fe91960b54e6cd978518245e821579ba7f5e58f7b0a9a510b27
+  content_hash: sha256:f0aeecd7e13d1a1157c197fbe82a2101a9437935f5bec7f1571267a277f3ed07
 - kind: project-relative
   target: claude
   value: .claude/skills/researching-vector-store/blueprints/category-specifics.md
@@ -15095,7 +14625,7 @@ deployments:
   owners:
   - ./packages/researching-platform
   active_owner: ./packages/researching-platform
-  content_hash: sha256:fca08bc844cb82588e89f6155dd70ffa47d1caf00a947dd48679088223a0608c
+  content_hash: sha256:eda48311f84ef7546cf5c85a85b8835dd87fdfff971ffd3f03fa0e9ffa5f1fe4
 - kind: project-relative
   target: claude
   value: .claude/skills/researching-vector-store/blueprints/data-modeling.md
@@ -15116,6 +14646,15 @@ deployments:
   content_hash: sha256:712af979ec887e44e12a53fb722368f65347c47573d7c67abf84a6e0d8057471
 - kind: project-relative
   target: claude
+  value: .claude/skills/researching-vector-store/blueprints/references/README.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/researching-platform
+  active_owner: ./packages/researching-platform
+  content_hash: sha256:17333f12db1f12149bcab4bcfa658f9943d538ec14e27b79435d1c0d5a14e765
+- kind: project-relative
+  target: claude
   value: .claude/skills/researching-wide-column-store
   runtime: null
   scope: project
@@ -15131,7 +14670,7 @@ deployments:
   owners:
   - ./packages/researching-platform
   active_owner: ./packages/researching-platform
-  content_hash: sha256:a5365f5f20c08bd1022ca38ddb76537aa4ef419ac9e8dd20de317fd203887101
+  content_hash: sha256:326fb8b91d1179b8b9a2b21e06d9ac11e81bf0a61b77808a503a6234a872f74d
 - kind: project-relative
   target: claude
   value: .claude/skills/researching-wide-column-store/blueprints/category-specifics.md
@@ -15140,7 +14679,7 @@ deployments:
   owners:
   - ./packages/researching-platform
   active_owner: ./packages/researching-platform
-  content_hash: sha256:3cceee3fb456510283abd60e9db9b9469f143bbacf4bfbe90232ec962a08d853
+  content_hash: sha256:50365a1e16c52d686ce78e11ce22fed4074f0df4b2b6e230385045f53d00f3a8
 - kind: project-relative
   target: claude
   value: .claude/skills/researching-wide-column-store/blueprints/data-modeling.md
@@ -15159,6 +14698,15 @@ deployments:
   - ./packages/researching-platform
   active_owner: ./packages/researching-platform
   content_hash: sha256:5095de0ca31192f6f6c54b805b6415753c57a740c2b176cfed801f70ed5073ea
+- kind: project-relative
+  target: claude
+  value: .claude/skills/researching-wide-column-store/blueprints/references/README.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/researching-platform
+  active_owner: ./packages/researching-platform
+  content_hash: sha256:951d4d8761cf99cbc692d553f0930f090bed6ace45b1ac66def391985599c666
 - kind: project-relative
   target: claude
   value: .claude/skills/review-stripe-integration
@@ -15995,7 +15543,7 @@ deployments:
   owners:
   - ./packages/terraform
   active_owner: ./packages/terraform
-  content_hash: sha256:f936e39b2e2e1ebe9cdf8d0382dc1bfee1daa4cb9e157f08cbb7efeee318436a
+  content_hash: sha256:3e2904a33d12ac74e39d8af83d4339b13497fbde7c9ec678fa9136313ca607fa
 - kind: project-relative
   target: claude
   value: .claude/skills/terraform-rules-author/blueprints/evaluation-scenarios.md

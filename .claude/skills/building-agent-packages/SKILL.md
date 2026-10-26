@@ -84,7 +84,7 @@ State always comes from disk (`scripts/inspect_workspace.py`); the state file on
 - Verify every worker output file with `ls` before moving a unit forward.
 - Verify every fact shared by two or more skills against an official page before it enters `_family_facts`.
 - Re-check each reported HIGH against the file before sending it to a fix brief.
-- Run `scripts/check_counts.sh` before writing any count in documentation.
+- Run `scripts/check_counts.py` before writing any count in documentation.
 - Commit with `scripts/commit_groups.py` (explicit paths); finish with `git status`.
 
 ### ⚠️ Ask First
@@ -103,7 +103,7 @@ State always comes from disk (`scripts/inspect_workspace.py`); the state file on
 - Never use `git add -A` or `git add .` -> `scripts/commit_groups.py` with explicit paths.
 - Never author into `.claude/` -> write to `packages/<pkg>/.apm/` and run `apm install`.
 - Never fan out before G2 or generate any skill before G1 -> pilot first.
-- Never trust a documented or agent-estimated count -> `scripts/check_counts.sh`.
+- Never trust a documented or agent-estimated count -> `scripts/check_counts.py`.
 
 ## Quick Reference
 
@@ -115,6 +115,6 @@ Run from the repo root. Skill scripts live in `.claude/skills/building-agent-pac
 | Check one skill | `python3 scripts/verify_skill.py <skill_dir>` |
 | Check a package | `python3 scripts/verify_package.py packages/<pkg>` |
 | Normalize tags | `python3 scripts/normalize_tags.py <dir> [--write]` |
-| Real counts | `bash scripts/check_counts.sh` |
+| Real counts | `python3 scripts/check_counts.py` |
 | Commit groups | `python3 scripts/commit_groups.py plan.json [--apply]` |
 | Regenerate `.claude/` | `apm install --target claude`, then the repo-root `scripts/restore-rule-metadata.py` and `scripts/fix-cross-package-links.py` |
