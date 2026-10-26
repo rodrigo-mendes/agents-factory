@@ -37,7 +37,7 @@ suggest the correct `/command` rather than proceeding.
 
 ## Mandatory Workflow (P0–P5)
 
-- **P0 — Verify Docs**: Load [skill-creator](../skills/skill-creator/SKILL.md).
+- **P0 — Verify Docs**: Load [skill-creator](..\skills\skill-creator\SKILL.md).
   Confirm the authoring standards were loaded before proceeding — do not author from memory if the
   file was not readable.
 

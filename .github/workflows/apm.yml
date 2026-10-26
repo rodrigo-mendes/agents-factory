@@ -16,7 +16,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Install pinned APM CLI
-        run: pip install "apm-cli==0.31.0"
+        run: pip install "apm-cli==0.35.0"
       - name: Guard against BOM before install
         run: |
           if grep -rlIP '\xef\xbb\xbf' .claude/ packages/ 2>/dev/null; then
