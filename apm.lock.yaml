@@ -1,5 +1,5 @@
 lockfile_version: '1'
-apm_version: 0.33.0
+apm_version: 0.35.0
 dependencies:
 - repo_url: _local/agent-package-builder
   name: agents-factory-agent-package-builder
@@ -42,7 +42,7 @@ dependencies:
   - .claude/skills/building-agent-packages/scripts/verify_package.py
   - .claude/skills/building-agent-packages/scripts/verify_skill.py
   deployed_file_hashes:
-    .claude/skills/building-agent-packages/SKILL.md: sha256:7d804408de06808aa3b49d62c0a918c2f4f38a659a38d08a1855b2e3d94d944d
+    .claude/skills/building-agent-packages/SKILL.md: sha256:2518dd7acaf4fbe5456243df4f1e776c9e8761dda43972a5f55db322722f9365
     .claude/skills/building-agent-packages/assets/FAMILY_FACTS.template.md: sha256:3344ba313640b7dce289749eed777846727e9c8fbc13910d77dbc0ecb429c58f
     .claude/skills/building-agent-packages/assets/FAMILY_RULES.template.md: sha256:c4d2e0022a8adc906120da2c40445b8dc5adfd2173b765364de3e394b68e7ae1
     .claude/skills/building-agent-packages/assets/PACKAGE_BRIEF.template.md: sha256:e9473755c6d9a9b78d16b9198a4f84499e966ff30ab7d72a032726f56acb98b6
@@ -74,10 +74,11 @@ dependencies:
     .claude/skills/building-agent-packages/scripts/commit_groups.py: sha256:f814b5ee62f471630773ad27d9ff94553b14d250797a9f3dd7c3e5ea2ed0e271
     .claude/skills/building-agent-packages/scripts/inspect_workspace.py: sha256:141dac996cbfc16cdb570a8481847158fb69e34b5ed1abd7f335f6488e8f6ae9
     .claude/skills/building-agent-packages/scripts/normalize_tags.py: sha256:52afbe4e693be8f340c95726184a0ddf808dba50ce166671dab51cf3d8023a1f
-    .claude/skills/building-agent-packages/scripts/verify_package.py: sha256:084b1286eb9201a77d7043ad3b9a42ee286ae7c90c6441adae27761695e5ec24
+    .claude/skills/building-agent-packages/scripts/verify_package.py: sha256:bfe7fc2b122bd562413bce72937b5244a5ec62b87aa9fa58b3488ae31362382b
     .claude/skills/building-agent-packages/scripts/verify_skill.py: sha256:b3a5bfb530217c4ecde541c11396c588240c1b1a1a7874debb0d88e21c2c0021
   source: local
   local_path: ./packages/agent-package-builder
+  content_hash: sha256:df7ce31de1abe87a5a3b1e480da21e35e6f84fd74279cce7309b277afb41be1a
   declared_license: MIT
 - repo_url: _local/artifact-authoring
   name: agents-factory-artifact-authoring
@@ -85,6 +86,7 @@ dependencies:
   package_type: apm_package
   source: local
   local_path: ./packages/artifact-authoring
+  content_hash: sha256:f60aab721953017fcd54dfca647e52329a597ad5fbec58735260aba4e3872e00
   declared_license: MIT
 - repo_url: _local/auditing
   name: agents-factory-auditing
@@ -148,6 +150,7 @@ dependencies:
     .claude/skills/audit-cc-architecture-scope/blueprints/report-template.md: sha256:acfa5501674a1ffebf1b70dab89702101a54bfebc5ba26729348bc4eb1ca6d63
   source: local
   local_path: ./packages/auditing
+  content_hash: sha256:46fd98b47486dfaa6185e8a13be51e224aa9515a58dd3c4458792c54adeab4d9
   declared_license: MIT
 - repo_url: _local/book-writing
   name: agents-factory-book-writing
@@ -229,6 +232,7 @@ dependencies:
     .claude/skills/writing-technical-book/blueprints/writing-style-guide.md: sha256:6eb978bfd7ebc2451f944764f93a81336282546634db68052718e0e337311742
   source: local
   local_path: ./packages/book-writing
+  content_hash: sha256:aa16984b2f724b7ca17e9f51c91a644cb5acd617917ecab53f0c4412c7712978
   declared_license: MIT
 - repo_url: _local/camel-quarkus-integrator
   name: agents-factory-camel-quarkus-integrator
@@ -272,6 +276,7 @@ dependencies:
     .claude/skills/structuring-camel-quarkus-projects/blueprints/project-structure-loader.md: sha256:910ffa809b74ba72d5a01c5982bacc22512fd3c152347874f6af060a40cfcdc7
   source: local
   local_path: ./packages/camel-quarkus-integrator
+  content_hash: sha256:ff0eecbadd3eae41a440521ce68d7148862c26a6c251aec8b78554e10cbe7196
   declared_license: MIT
 - repo_url: _local/evaluating
   name: agents-factory-evaluating
@@ -288,6 +293,7 @@ dependencies:
     .claude/skills/evaluating-skill-scenarios/blueprints/evaluation-scenarios.md: sha256:f2fa32962eb3306f1eb338c456aaa71b19dc3b2a59ef53a40e270a6fa20979d2
   source: local
   local_path: ./packages/evaluating
+  content_hash: sha256:5fef8e2e424f7530aa4dbaffaa97aacea801802dd7ea0c26bf5e702b3cec38ae
   declared_license: MIT
 - repo_url: _local/researching-frameworks
   name: agents-factory-researching-frameworks
@@ -348,6 +354,7 @@ dependencies:
     .claude/skills/researching-technical-frameworks/blueprints/output-format-template.md: sha256:b9d58f6492cfea9e1331606bc01d73e5d3e1d1c280c0dd68f138204f76d0fa4e
   source: local
   local_path: ./packages/researching-frameworks
+  content_hash: sha256:1b524614baaceec832d438668fc00b704ccbde9231977970df55e415cebd4249
   declared_license: MIT
 - repo_url: _local/researching-platform
   name: agents-factory-researching-platform
@@ -496,12 +503,18 @@ dependencies:
     .claude/skills/researching-wide-column-store/blueprints/evaluation-scenarios.md: sha256:5095de0ca31192f6f6c54b805b6415753c57a740c2b176cfed801f70ed5073ea
   source: local
   local_path: ./packages/researching-platform
+  content_hash: sha256:a011241ef084883da800a3a7efdd1fd5b3fb3a350f98de79555bb13addec8e3a
   declared_license: MIT
 - repo_url: _local/terraform
   name: agents-factory-terraform
-  version: 1.0.0
+  version: 1.2.0
   package_type: apm_package
   deployed_files:
+  - .claude/agents/aws-terraform-engineer.md
+  - .claude/agents/terraform-rules-author.md
+  - .claude/skills/provision-aws-terraform
+  - .claude/skills/provision-aws-terraform/SKILL.md
+  - .claude/skills/provision-aws-terraform/blueprints/evaluation-scenarios.md
   - .claude/skills/technical-framework-researcher-terraform
   - .claude/skills/technical-framework-researcher-terraform/SKILL.md
   - .claude/skills/technical-framework-researcher-terraform/blueprints/evaluation-scenarios.md
@@ -527,7 +540,14 @@ dependencies:
   - .claude/skills/terraform-instructions-compiler/assets/terraform-standards-reference.md
   - .claude/skills/terraform-instructions-compiler/blueprints/evaluation-scenarios.md
   - .claude/skills/terraform-instructions-compiler/blueprints/interview-questions.md
+  - .claude/skills/terraform-rules-author
+  - .claude/skills/terraform-rules-author/SKILL.md
+  - .claude/skills/terraform-rules-author/blueprints/evaluation-scenarios.md
   deployed_file_hashes:
+    .claude/agents/aws-terraform-engineer.md: sha256:ea082f0fa8d011eb7541058d1e6dd1bb5bf34664d77c3eab151bb65da8d88122
+    .claude/agents/terraform-rules-author.md: sha256:de82dcaa43ef33df7ca4307b73a55217bf9bdbd732396cb76c12b87925745dca
+    .claude/skills/provision-aws-terraform/SKILL.md: sha256:84c71ccf20395b3f6425fb5e9535548f217931322d8e9cad54ef543a236fe494
+    .claude/skills/provision-aws-terraform/blueprints/evaluation-scenarios.md: sha256:ee4c34412c5354eab68e901730a1f0afddb158acadbf01c430165b53e359a317
     .claude/skills/technical-framework-researcher-terraform/SKILL.md: sha256:76cf650bc23c0cbbda15236e9b9a8aa2c9d8b6e0a1617846ba2fb4814c667fd1
     .claude/skills/technical-framework-researcher-terraform/blueprints/evaluation-scenarios.md: sha256:ca9c0cfb2f82ef1fa58cb77c65486d8bb56f25f375d88ff2fbc4f075e3964a3b
     .claude/skills/technical-framework-researcher-terraform/blueprints/research-scope-formats.md: sha256:332918309fd5a2d90de94b97c84bb1277b3314372c8b8cdbc124b063a3a9779b
@@ -550,8 +570,11 @@ dependencies:
     .claude/skills/terraform-instructions-compiler/assets/terraform-standards-reference.md: sha256:3cd36ab1a34bd3752c3eb6c8730d11b4619cede59cb82ffabb6920c2b4382b6e
     .claude/skills/terraform-instructions-compiler/blueprints/evaluation-scenarios.md: sha256:7fac58ed2f418765648e578cc77ce2c7fa5a00f7b966e80559529cf483c894cc
     .claude/skills/terraform-instructions-compiler/blueprints/interview-questions.md: sha256:d000bddd4d6299924cb7ff8b1b0ed378ce9080c183b67b52a1d6be1a9b24cb72
+    .claude/skills/terraform-rules-author/SKILL.md: sha256:f936e39b2e2e1ebe9cdf8d0382dc1bfee1daa4cb9e157f08cbb7efeee318436a
+    .claude/skills/terraform-rules-author/blueprints/evaluation-scenarios.md: sha256:6dcfce7178d778724a0f2dd2e048b2b929f77ed80ed735c93e53e2a42a2f4441
   source: local
   local_path: ./packages/terraform
+  content_hash: sha256:17c88f01d18e0d565326b03d61b8a8222a19eabfe19a88e23ef7a74104b35378
   declared_license: MIT
 - repo_url: _local/validating
   name: agents-factory-validating
@@ -594,6 +617,7 @@ dependencies:
     .claude/skills/skill-best-practices-validator/blueprints/output-templates.md: sha256:bbf85f4e2a1247d0d90e4313dadaa5731eae950ab28b3da4ba5077c17180b88a
   source: local
   local_path: ./packages/validating
+  content_hash: sha256:1a4dec8bb7f7c4952c9837b7f731161b6a67112e66415805bb8ca9924b0b68bd
   declared_license: MIT
 - repo_url: microsoft/apm
   name: apm
@@ -641,7 +665,7 @@ dependencies:
   - .claude/skills/skill-creator/blueprints/evaluation-scenarios.md
   - .claude/skills/skill-creator/blueprints/three-tier-architecture.md
   deployed_file_hashes:
-    .claude/agents/artifact-author.md: sha256:70d463b8f323d73b56946c6caaef4725bb50fd8b899ef7cabc31a5613f8f1a77
+    .claude/agents/artifact-author.md: sha256:0dce32b97f18590ed2d1577c2e12669cf46654620f02dc5c71faaffc3780311a
     .claude/skills/agent-creator/SKILL.md: sha256:de188d83392bcf93eded16535a2ffac43679a5ee975852b2211b60bd8e6ed237
     .claude/skills/agent-creator/assets/TEMPLATE.ADVISORY-AGENT.md: sha256:93d21ab18fced276e09b27024c087eebc347cc4f74aa4652f62fdf1e3d3f628f
     .claude/skills/agent-creator/assets/TEMPLATE.AGENT.md: sha256:6f4d9e7f2d1b0186e7b5caf4154878d17b3e8b2d356c746dcb630b4054e134b6
@@ -670,6 +694,581 @@ dependencies:
   local_path: ../artifact-authoring
   declaring_parent: ./packages/terraform
   anchored_local_path: packages/artifact-authoring
+  content_hash: sha256:f60aab721953017fcd54dfca647e52329a597ad5fbec58735260aba4e3872e00
+  declared_license: MIT
+- repo_url: _local/aws-terraform
+  name: agents-factory-aws-terraform
+  version: 1.0.0
+  depth: 2
+  resolved_by: _local/terraform
+  package_type: apm_package
+  deployed_files:
+  - .claude/rules/aws-terraform-code-standards.md
+  - .claude/rules/aws-terraform-project-config.md
+  - .claude/rules/aws-terraform-skills-management.md
+  - .claude/skills/provisioning-aws-acm-v6
+  - .claude/skills/provisioning-aws-acm-v6/SKILL.md
+  - .claude/skills/provisioning-aws-acm-v6/blueprints/always-do-import-private-lookup.md
+  - .claude/skills/provisioning-aws-acm-v6/blueprints/always-do-patterns.md
+  - .claude/skills/provisioning-aws-acm-v6/blueprints/always-do-public-certificates.md
+  - .claude/skills/provisioning-aws-acm-v6/blueprints/evaluation-scenarios.md
+  - .claude/skills/provisioning-aws-acm-v6/blueprints/never-do-certificates.md
+  - .claude/skills/provisioning-aws-acm-v6/blueprints/never-do-patterns.md
+  - .claude/skills/provisioning-aws-acm-v6/blueprints/unverified-and-risks.md
+  - .claude/skills/provisioning-aws-api-gateway-v6
+  - .claude/skills/provisioning-aws-api-gateway-v6/SKILL.md
+  - .claude/skills/provisioning-aws-api-gateway-v6/blueprints/always-do-http-domain-access.md
+  - .claude/skills/provisioning-aws-api-gateway-v6/blueprints/always-do-http-websocket.md
+  - .claude/skills/provisioning-aws-api-gateway-v6/blueprints/always-do-patterns.md
+  - .claude/skills/provisioning-aws-api-gateway-v6/blueprints/always-do-rest-auth-domain.md
+  - .claude/skills/provisioning-aws-api-gateway-v6/blueprints/always-do-rest-core.md
+  - .claude/skills/provisioning-aws-api-gateway-v6/blueprints/always-do-rest-deployment.md
+  - .claude/skills/provisioning-aws-api-gateway-v6/blueprints/evaluation-scenarios.md
+  - .claude/skills/provisioning-aws-api-gateway-v6/blueprints/never-do-http-websocket.md
+  - .claude/skills/provisioning-aws-api-gateway-v6/blueprints/never-do-patterns.md
+  - .claude/skills/provisioning-aws-api-gateway-v6/blueprints/never-do-provider-migration.md
+  - .claude/skills/provisioning-aws-api-gateway-v6/blueprints/never-do-rest.md
+  - .claude/skills/provisioning-aws-api-gateway-v6/blueprints/unverified-and-risks.md
+  - .claude/skills/provisioning-aws-cloudfront-v6
+  - .claude/skills/provisioning-aws-cloudfront-v6/SKILL.md
+  - .claude/skills/provisioning-aws-cloudfront-v6/blueprints/always-do-dns-logging.md
+  - .claude/skills/provisioning-aws-cloudfront-v6/blueprints/always-do-foundation.md
+  - .claude/skills/provisioning-aws-cloudfront-v6/blueprints/always-do-origins-policies.md
+  - .claude/skills/provisioning-aws-cloudfront-v6/blueprints/always-do-patterns.md
+  - .claude/skills/provisioning-aws-cloudfront-v6/blueprints/evaluation-scenarios.md
+  - .claude/skills/provisioning-aws-cloudfront-v6/blueprints/never-do-patterns.md
+  - .claude/skills/provisioning-aws-cloudfront-v6/blueprints/never-do-provider-operations.md
+  - .claude/skills/provisioning-aws-cloudfront-v6/blueprints/never-do-security.md
+  - .claude/skills/provisioning-aws-cloudfront-v6/blueprints/unverified-and-risks.md
+  - .claude/skills/provisioning-aws-cloudtrail-v6
+  - .claude/skills/provisioning-aws-cloudtrail-v6/SKILL.md
+  - .claude/skills/provisioning-aws-cloudtrail-v6/blueprints/always-do-kms-lake.md
+  - .claude/skills/provisioning-aws-cloudtrail-v6/blueprints/always-do-patterns.md
+  - .claude/skills/provisioning-aws-cloudtrail-v6/blueprints/always-do-trail.md
+  - .claude/skills/provisioning-aws-cloudtrail-v6/blueprints/evaluation-scenarios.md
+  - .claude/skills/provisioning-aws-cloudtrail-v6/blueprints/never-do-patterns.md
+  - .claude/skills/provisioning-aws-cloudtrail-v6/blueprints/never-do-provider-migration.md
+  - .claude/skills/provisioning-aws-cloudtrail-v6/blueprints/never-do-trail.md
+  - .claude/skills/provisioning-aws-cloudtrail-v6/blueprints/unverified-and-risks.md
+  - .claude/skills/provisioning-aws-cloudwatch-v6
+  - .claude/skills/provisioning-aws-cloudwatch-v6/SKILL.md
+  - .claude/skills/provisioning-aws-cloudwatch-v6/blueprints/always-do-alarms.md
+  - .claude/skills/provisioning-aws-cloudwatch-v6/blueprints/always-do-foundation.md
+  - .claude/skills/provisioning-aws-cloudwatch-v6/blueprints/always-do-patterns.md
+  - .claude/skills/provisioning-aws-cloudwatch-v6/blueprints/always-do-security.md
+  - .claude/skills/provisioning-aws-cloudwatch-v6/blueprints/evaluation-scenarios.md
+  - .claude/skills/provisioning-aws-cloudwatch-v6/blueprints/never-do-alarms.md
+  - .claude/skills/provisioning-aws-cloudwatch-v6/blueprints/never-do-logs.md
+  - .claude/skills/provisioning-aws-cloudwatch-v6/blueprints/never-do-patterns.md
+  - .claude/skills/provisioning-aws-cloudwatch-v6/blueprints/unverified-and-risks.md
+  - .claude/skills/provisioning-aws-cognito-v6
+  - .claude/skills/provisioning-aws-cognito-v6/SKILL.md
+  - .claude/skills/provisioning-aws-cognito-v6/blueprints/always-do-client-domain.md
+  - .claude/skills/provisioning-aws-cognito-v6/blueprints/always-do-patterns.md
+  - .claude/skills/provisioning-aws-cognito-v6/blueprints/always-do-pool.md
+  - .claude/skills/provisioning-aws-cognito-v6/blueprints/evaluation-scenarios.md
+  - .claude/skills/provisioning-aws-cognito-v6/blueprints/never-do-client-oauth.md
+  - .claude/skills/provisioning-aws-cognito-v6/blueprints/never-do-patterns.md
+  - .claude/skills/provisioning-aws-cognito-v6/blueprints/never-do-pool-domain.md
+  - .claude/skills/provisioning-aws-cognito-v6/blueprints/unverified-and-risks.md
+  - .claude/skills/provisioning-aws-cost-management-v6
+  - .claude/skills/provisioning-aws-cost-management-v6/SKILL.md
+  - .claude/skills/provisioning-aws-cost-management-v6/blueprints/always-do-budgets.md
+  - .claude/skills/provisioning-aws-cost-management-v6/blueprints/always-do-cost-intelligence.md
+  - .claude/skills/provisioning-aws-cost-management-v6/blueprints/always-do-patterns.md
+  - .claude/skills/provisioning-aws-cost-management-v6/blueprints/always-do-reporting-commitments.md
+  - .claude/skills/provisioning-aws-cost-management-v6/blueprints/evaluation-scenarios.md
+  - .claude/skills/provisioning-aws-cost-management-v6/blueprints/never-do-budgets-and-region.md
+  - .claude/skills/provisioning-aws-cost-management-v6/blueprints/never-do-patterns.md
+  - .claude/skills/provisioning-aws-cost-management-v6/blueprints/never-do-reporting-migration.md
+  - .claude/skills/provisioning-aws-cost-management-v6/blueprints/unverified-and-risks.md
+  - .claude/skills/provisioning-aws-dynamodb-v6
+  - .claude/skills/provisioning-aws-dynamodb-v6/SKILL.md
+  - .claude/skills/provisioning-aws-dynamodb-v6/blueprints/always-do-foundation.md
+  - .claude/skills/provisioning-aws-dynamodb-v6/blueprints/always-do-indexes-capacity.md
+  - .claude/skills/provisioning-aws-dynamodb-v6/blueprints/always-do-patterns.md
+  - .claude/skills/provisioning-aws-dynamodb-v6/blueprints/always-do-replication-satellites.md
+  - .claude/skills/provisioning-aws-dynamodb-v6/blueprints/evaluation-scenarios.md
+  - .claude/skills/provisioning-aws-dynamodb-v6/blueprints/never-do-patterns.md
+  - .claude/skills/provisioning-aws-dynamodb-v6/blueprints/never-do-replication-provider.md
+  - .claude/skills/provisioning-aws-dynamodb-v6/blueprints/never-do-table-indexes.md
+  - .claude/skills/provisioning-aws-dynamodb-v6/blueprints/unverified-and-risks.md
+  - .claude/skills/provisioning-aws-eventbridge-v6
+  - .claude/skills/provisioning-aws-eventbridge-v6/SKILL.md
+  - .claude/skills/provisioning-aws-eventbridge-v6/blueprints/always-do-foundation.md
+  - .claude/skills/provisioning-aws-eventbridge-v6/blueprints/always-do-patterns.md
+  - .claude/skills/provisioning-aws-eventbridge-v6/blueprints/always-do-rules-targets.md
+  - .claude/skills/provisioning-aws-eventbridge-v6/blueprints/always-do-scheduler-integrations.md
+  - .claude/skills/provisioning-aws-eventbridge-v6/blueprints/evaluation-scenarios.md
+  - .claude/skills/provisioning-aws-eventbridge-v6/blueprints/never-do-bus-and-rules.md
+  - .claude/skills/provisioning-aws-eventbridge-v6/blueprints/never-do-patterns.md
+  - .claude/skills/provisioning-aws-eventbridge-v6/blueprints/never-do-scheduler-and-versions.md
+  - .claude/skills/provisioning-aws-eventbridge-v6/blueprints/never-do-targets.md
+  - .claude/skills/provisioning-aws-eventbridge-v6/blueprints/unverified-and-risks.md
+  - .claude/skills/provisioning-aws-iam-v6
+  - .claude/skills/provisioning-aws-iam-v6/SKILL.md
+  - .claude/skills/provisioning-aws-iam-v6/blueprints/always-do-oidc-users.md
+  - .claude/skills/provisioning-aws-iam-v6/blueprints/always-do-patterns.md
+  - .claude/skills/provisioning-aws-iam-v6/blueprints/always-do-roles-policies.md
+  - .claude/skills/provisioning-aws-iam-v6/blueprints/always-do-testing.md
+  - .claude/skills/provisioning-aws-iam-v6/blueprints/evaluation-scenarios.md
+  - .claude/skills/provisioning-aws-iam-v6/blueprints/never-do-identity.md
+  - .claude/skills/provisioning-aws-iam-v6/blueprints/never-do-patterns.md
+  - .claude/skills/provisioning-aws-iam-v6/blueprints/never-do-provider-migration.md
+  - .claude/skills/provisioning-aws-iam-v6/blueprints/never-do-roles-policies.md
+  - .claude/skills/provisioning-aws-iam-v6/blueprints/unverified-and-risks.md
+  - .claude/skills/provisioning-aws-kms-v6
+  - .claude/skills/provisioning-aws-kms-v6/SKILL.md
+  - .claude/skills/provisioning-aws-kms-v6/blueprints/always-do-key-basics.md
+  - .claude/skills/provisioning-aws-kms-v6/blueprints/always-do-key-policy.md
+  - .claude/skills/provisioning-aws-kms-v6/blueprints/always-do-patterns.md
+  - .claude/skills/provisioning-aws-kms-v6/blueprints/evaluation-scenarios.md
+  - .claude/skills/provisioning-aws-kms-v6/blueprints/never-do-patterns.md
+  - .claude/skills/provisioning-aws-kms-v6/blueprints/never-do-policy.md
+  - .claude/skills/provisioning-aws-kms-v6/blueprints/never-do-usage.md
+  - .claude/skills/provisioning-aws-kms-v6/blueprints/unverified-and-risks.md
+  - .claude/skills/provisioning-aws-lambda-v6
+  - .claude/skills/provisioning-aws-lambda-v6/SKILL.md
+  - .claude/skills/provisioning-aws-lambda-v6/blueprints/always-do-events-layers.md
+  - .claude/skills/provisioning-aws-lambda-v6/blueprints/always-do-function-config.md
+  - .claude/skills/provisioning-aws-lambda-v6/blueprints/always-do-function.md
+  - .claude/skills/provisioning-aws-lambda-v6/blueprints/always-do-invocation.md
+  - .claude/skills/provisioning-aws-lambda-v6/blueprints/always-do-patterns.md
+  - .claude/skills/provisioning-aws-lambda-v6/blueprints/evaluation-scenarios.md
+  - .claude/skills/provisioning-aws-lambda-v6/blueprints/never-do-access-provider.md
+  - .claude/skills/provisioning-aws-lambda-v6/blueprints/never-do-events.md
+  - .claude/skills/provisioning-aws-lambda-v6/blueprints/never-do-function.md
+  - .claude/skills/provisioning-aws-lambda-v6/blueprints/never-do-patterns.md
+  - .claude/skills/provisioning-aws-lambda-v6/blueprints/unverified-and-risks.md
+  - .claude/skills/provisioning-aws-organizations-v6
+  - .claude/skills/provisioning-aws-organizations-v6/SKILL.md
+  - .claude/skills/provisioning-aws-organizations-v6/blueprints/always-do-foundation.md
+  - .claude/skills/provisioning-aws-organizations-v6/blueprints/always-do-patterns.md
+  - .claude/skills/provisioning-aws-organizations-v6/blueprints/always-do-policies.md
+  - .claude/skills/provisioning-aws-organizations-v6/blueprints/evaluation-scenarios.md
+  - .claude/skills/provisioning-aws-organizations-v6/blueprints/never-do-organization.md
+  - .claude/skills/provisioning-aws-organizations-v6/blueprints/never-do-patterns.md
+  - .claude/skills/provisioning-aws-organizations-v6/blueprints/never-do-provider.md
+  - .claude/skills/provisioning-aws-organizations-v6/blueprints/unverified-and-risks.md
+  - .claude/skills/provisioning-aws-parameter-store-v6
+  - .claude/skills/provisioning-aws-parameter-store-v6/SKILL.md
+  - .claude/skills/provisioning-aws-parameter-store-v6/blueprints/always-do-foundation.md
+  - .claude/skills/provisioning-aws-parameter-store-v6/blueprints/always-do-patterns.md
+  - .claude/skills/provisioning-aws-parameter-store-v6/blueprints/always-do-secrets.md
+  - .claude/skills/provisioning-aws-parameter-store-v6/blueprints/ask-first-ephemeral.md
+  - .claude/skills/provisioning-aws-parameter-store-v6/blueprints/evaluation-scenarios.md
+  - .claude/skills/provisioning-aws-parameter-store-v6/blueprints/never-do-names-version.md
+  - .claude/skills/provisioning-aws-parameter-store-v6/blueprints/never-do-patterns.md
+  - .claude/skills/provisioning-aws-parameter-store-v6/blueprints/never-do-secrets.md
+  - .claude/skills/provisioning-aws-parameter-store-v6/blueprints/unverified-and-risks.md
+  - .claude/skills/provisioning-aws-route53-v6
+  - .claude/skills/provisioning-aws-route53-v6/SKILL.md
+  - .claude/skills/provisioning-aws-route53-v6/blueprints/always-do-logging-dnssec.md
+  - .claude/skills/provisioning-aws-route53-v6/blueprints/always-do-patterns.md
+  - .claude/skills/provisioning-aws-route53-v6/blueprints/always-do-zones-records.md
+  - .claude/skills/provisioning-aws-route53-v6/blueprints/evaluation-scenarios.md
+  - .claude/skills/provisioning-aws-route53-v6/blueprints/never-do-patterns.md
+  - .claude/skills/provisioning-aws-route53-v6/blueprints/never-do-region-logging-dnssec.md
+  - .claude/skills/provisioning-aws-route53-v6/blueprints/never-do-zones-records.md
+  - .claude/skills/provisioning-aws-route53-v6/blueprints/unverified-and-risks.md
+  - .claude/skills/provisioning-aws-s3-v6
+  - .claude/skills/provisioning-aws-s3-v6/SKILL.md
+  - .claude/skills/provisioning-aws-s3-v6/blueprints/always-do-bucket-foundation.md
+  - .claude/skills/provisioning-aws-s3-v6/blueprints/always-do-lifecycle-versioning.md
+  - .claude/skills/provisioning-aws-s3-v6/blueprints/always-do-objects-testing.md
+  - .claude/skills/provisioning-aws-s3-v6/blueprints/always-do-patterns.md
+  - .claude/skills/provisioning-aws-s3-v6/blueprints/always-do-security-encryption.md
+  - .claude/skills/provisioning-aws-s3-v6/blueprints/evaluation-scenarios.md
+  - .claude/skills/provisioning-aws-s3-v6/blueprints/never-do-naming-endpoints.md
+  - .claude/skills/provisioning-aws-s3-v6/blueprints/never-do-ownership-acl.md
+  - .claude/skills/provisioning-aws-s3-v6/blueprints/never-do-patterns.md
+  - .claude/skills/provisioning-aws-s3-v6/blueprints/never-do-provider-migration.md
+  - .claude/skills/provisioning-aws-s3-v6/blueprints/never-do-resource-conflicts.md
+  - .claude/skills/provisioning-aws-s3-v6/blueprints/unverified-and-risks.md
+  - .claude/skills/provisioning-aws-sam-v6
+  - .claude/skills/provisioning-aws-sam-v6/SKILL.md
+  - .claude/skills/provisioning-aws-sam-v6/blueprints/always-do-cloudformation.md
+  - .claude/skills/provisioning-aws-sam-v6/blueprints/always-do-foundation.md
+  - .claude/skills/provisioning-aws-sam-v6/blueprints/always-do-patterns.md
+  - .claude/skills/provisioning-aws-sam-v6/blueprints/always-do-sam-cli.md
+  - .claude/skills/provisioning-aws-sam-v6/blueprints/evaluation-scenarios.md
+  - .claude/skills/provisioning-aws-sam-v6/blueprints/never-do-cloudformation.md
+  - .claude/skills/provisioning-aws-sam-v6/blueprints/never-do-patterns.md
+  - .claude/skills/provisioning-aws-sam-v6/blueprints/never-do-provider-migration.md
+  - .claude/skills/provisioning-aws-sam-v6/blueprints/never-do-sam-cli.md
+  - .claude/skills/provisioning-aws-sam-v6/blueprints/unverified-and-risks.md
+  - .claude/skills/provisioning-aws-secrets-manager-v6
+  - .claude/skills/provisioning-aws-secrets-manager-v6/SKILL.md
+  - .claude/skills/provisioning-aws-secrets-manager-v6/blueprints/always-do-patterns.md
+  - .claude/skills/provisioning-aws-secrets-manager-v6/blueprints/always-do-rotation-policy.md
+  - .claude/skills/provisioning-aws-secrets-manager-v6/blueprints/always-do-secrets.md
+  - .claude/skills/provisioning-aws-secrets-manager-v6/blueprints/evaluation-scenarios.md
+  - .claude/skills/provisioning-aws-secrets-manager-v6/blueprints/never-do-patterns.md
+  - .claude/skills/provisioning-aws-secrets-manager-v6/blueprints/never-do-rotation-policy.md
+  - .claude/skills/provisioning-aws-secrets-manager-v6/blueprints/never-do-secrets.md
+  - .claude/skills/provisioning-aws-secrets-manager-v6/blueprints/unverified-and-risks.md
+  - .claude/skills/provisioning-aws-ses-v6
+  - .claude/skills/provisioning-aws-ses-v6/SKILL.md
+  - .claude/skills/provisioning-aws-ses-v6/blueprints/always-do-classic-family.md
+  - .claude/skills/provisioning-aws-ses-v6/blueprints/always-do-identity-dns.md
+  - .claude/skills/provisioning-aws-ses-v6/blueprints/always-do-patterns.md
+  - .claude/skills/provisioning-aws-ses-v6/blueprints/always-do-sending-config.md
+  - .claude/skills/provisioning-aws-ses-v6/blueprints/evaluation-scenarios.md
+  - .claude/skills/provisioning-aws-ses-v6/blueprints/never-do-patterns.md
+  - .claude/skills/provisioning-aws-ses-v6/blueprints/never-do-provider-migration.md
+  - .claude/skills/provisioning-aws-ses-v6/blueprints/never-do-ses-config.md
+  - .claude/skills/provisioning-aws-ses-v6/blueprints/unverified-and-risks.md
+  - .claude/skills/provisioning-aws-shield-v6
+  - .claude/skills/provisioning-aws-shield-v6/SKILL.md
+  - .claude/skills/provisioning-aws-shield-v6/blueprints/always-do-detection-response.md
+  - .claude/skills/provisioning-aws-shield-v6/blueprints/always-do-patterns.md
+  - .claude/skills/provisioning-aws-shield-v6/blueprints/always-do-subscription-protection.md
+  - .claude/skills/provisioning-aws-shield-v6/blueprints/evaluation-scenarios.md
+  - .claude/skills/provisioning-aws-shield-v6/blueprints/never-do-patterns.md
+  - .claude/skills/provisioning-aws-shield-v6/blueprints/never-do-shield.md
+  - .claude/skills/provisioning-aws-shield-v6/blueprints/unverified-and-risks.md
+  - .claude/skills/provisioning-aws-sns-v6
+  - .claude/skills/provisioning-aws-sns-v6/SKILL.md
+  - .claude/skills/provisioning-aws-sns-v6/blueprints/always-do-access-delivery.md
+  - .claude/skills/provisioning-aws-sns-v6/blueprints/always-do-patterns.md
+  - .claude/skills/provisioning-aws-sns-v6/blueprints/always-do-topic.md
+  - .claude/skills/provisioning-aws-sns-v6/blueprints/evaluation-scenarios.md
+  - .claude/skills/provisioning-aws-sns-v6/blueprints/never-do-access-kms.md
+  - .claude/skills/provisioning-aws-sns-v6/blueprints/never-do-patterns.md
+  - .claude/skills/provisioning-aws-sns-v6/blueprints/never-do-subscriptions.md
+  - .claude/skills/provisioning-aws-sns-v6/blueprints/unverified-and-risks.md
+  - .claude/skills/provisioning-aws-sqs-v6
+  - .claude/skills/provisioning-aws-sqs-v6/SKILL.md
+  - .claude/skills/provisioning-aws-sqs-v6/blueprints/always-do-dlq.md
+  - .claude/skills/provisioning-aws-sqs-v6/blueprints/always-do-patterns.md
+  - .claude/skills/provisioning-aws-sqs-v6/blueprints/always-do-policies.md
+  - .claude/skills/provisioning-aws-sqs-v6/blueprints/always-do-queues.md
+  - .claude/skills/provisioning-aws-sqs-v6/blueprints/evaluation-scenarios.md
+  - .claude/skills/provisioning-aws-sqs-v6/blueprints/never-do-patterns.md
+  - .claude/skills/provisioning-aws-sqs-v6/blueprints/never-do-policies-access.md
+  - .claude/skills/provisioning-aws-sqs-v6/blueprints/never-do-queue-config.md
+  - .claude/skills/provisioning-aws-sqs-v6/blueprints/unverified-and-risks.md
+  - .claude/skills/provisioning-aws-step-functions-v6
+  - .claude/skills/provisioning-aws-step-functions-v6/SKILL.md
+  - .claude/skills/provisioning-aws-step-functions-v6/blueprints/always-do-encryption-testing.md
+  - .claude/skills/provisioning-aws-step-functions-v6/blueprints/always-do-foundation.md
+  - .claude/skills/provisioning-aws-step-functions-v6/blueprints/always-do-patterns.md
+  - .claude/skills/provisioning-aws-step-functions-v6/blueprints/always-do-state-machine.md
+  - .claude/skills/provisioning-aws-step-functions-v6/blueprints/corrections-and-limits.md
+  - .claude/skills/provisioning-aws-step-functions-v6/blueprints/evaluation-scenarios.md
+  - .claude/skills/provisioning-aws-step-functions-v6/blueprints/never-do-configuration.md
+  - .claude/skills/provisioning-aws-step-functions-v6/blueprints/never-do-iam-asl.md
+  - .claude/skills/provisioning-aws-step-functions-v6/blueprints/never-do-patterns.md
+  - .claude/skills/provisioning-aws-step-functions-v6/blueprints/unverified-and-risks.md
+  - .claude/skills/provisioning-aws-vpc-v6
+  - .claude/skills/provisioning-aws-vpc-v6/SKILL.md
+  - .claude/skills/provisioning-aws-vpc-v6/blueprints/always-do-foundation.md
+  - .claude/skills/provisioning-aws-vpc-v6/blueprints/always-do-gateways-routing.md
+  - .claude/skills/provisioning-aws-vpc-v6/blueprints/always-do-observability-testing.md
+  - .claude/skills/provisioning-aws-vpc-v6/blueprints/always-do-patterns.md
+  - .claude/skills/provisioning-aws-vpc-v6/blueprints/always-do-security.md
+  - .claude/skills/provisioning-aws-vpc-v6/blueprints/evaluation-scenarios.md
+  - .claude/skills/provisioning-aws-vpc-v6/blueprints/never-do-networking.md
+  - .claude/skills/provisioning-aws-vpc-v6/blueprints/never-do-patterns.md
+  - .claude/skills/provisioning-aws-vpc-v6/blueprints/never-do-provider-migration.md
+  - .claude/skills/provisioning-aws-vpc-v6/blueprints/never-do-security.md
+  - .claude/skills/provisioning-aws-vpc-v6/blueprints/unverified-and-risks.md
+  - .claude/skills/provisioning-aws-waf-v6
+  - .claude/skills/provisioning-aws-waf-v6/SKILL.md
+  - .claude/skills/provisioning-aws-waf-v6/blueprints/always-do-attach-logging.md
+  - .claude/skills/provisioning-aws-waf-v6/blueprints/always-do-foundation.md
+  - .claude/skills/provisioning-aws-waf-v6/blueprints/always-do-patterns.md
+  - .claude/skills/provisioning-aws-waf-v6/blueprints/always-do-resources.md
+  - .claude/skills/provisioning-aws-waf-v6/blueprints/evaluation-scenarios.md
+  - .claude/skills/provisioning-aws-waf-v6/blueprints/never-do-attachment-scope.md
+  - .claude/skills/provisioning-aws-waf-v6/blueprints/never-do-limits-provider.md
+  - .claude/skills/provisioning-aws-waf-v6/blueprints/never-do-patterns.md
+  - .claude/skills/provisioning-aws-waf-v6/blueprints/never-do-web-acl.md
+  - .claude/skills/provisioning-aws-waf-v6/blueprints/unverified-and-risks.md
+  - .claude/skills/provisioning-aws-xray-v6
+  - .claude/skills/provisioning-aws-xray-v6/SKILL.md
+  - .claude/skills/provisioning-aws-xray-v6/blueprints/always-do-cross-service.md
+  - .claude/skills/provisioning-aws-xray-v6/blueprints/always-do-foundation.md
+  - .claude/skills/provisioning-aws-xray-v6/blueprints/always-do-patterns.md
+  - .claude/skills/provisioning-aws-xray-v6/blueprints/always-do-sampling-groups.md
+  - .claude/skills/provisioning-aws-xray-v6/blueprints/evaluation-scenarios.md
+  - .claude/skills/provisioning-aws-xray-v6/blueprints/never-do-encryption.md
+  - .claude/skills/provisioning-aws-xray-v6/blueprints/never-do-patterns.md
+  - .claude/skills/provisioning-aws-xray-v6/blueprints/never-do-provider-migration.md
+  - .claude/skills/provisioning-aws-xray-v6/blueprints/unverified-and-risks.md
+  deployed_file_hashes:
+    .claude/rules/aws-terraform-code-standards.md: sha256:539a407a5dd5190715fcf73d26b0f42fb3647c16f0eaf19f9838a13969c53fa0
+    .claude/rules/aws-terraform-project-config.md: sha256:fdd5eb776441176bb17a562efdcf836baf8f0010364e13cc14a34df209c24aef
+    .claude/rules/aws-terraform-skills-management.md: sha256:f5eaee17d5aee147af5c77e10889133017ce50cf680e0d8f758277ca6f53996a
+    .claude/skills/provisioning-aws-acm-v6/SKILL.md: sha256:5afd88f6c140446e807e341fcaffc054b7e686203064469f265bd5fc26bc7988
+    .claude/skills/provisioning-aws-acm-v6/blueprints/always-do-import-private-lookup.md: sha256:e957b5723994195fd7475b5e04a0cb82cc8c647f08caf65f34b2f5a314fa6495
+    .claude/skills/provisioning-aws-acm-v6/blueprints/always-do-patterns.md: sha256:a4f4beccb7160d722d93c85c3ee88e85bcb3b2c179d817a70d6ed5e67f5cace5
+    .claude/skills/provisioning-aws-acm-v6/blueprints/always-do-public-certificates.md: sha256:9301caf5e1613147bfa02e47095c7967760211998a78db32c8eb30c313918910
+    .claude/skills/provisioning-aws-acm-v6/blueprints/evaluation-scenarios.md: sha256:62ce150db0730062f3201f1347c62a502557c7792dd7b82d019a1749df69860e
+    .claude/skills/provisioning-aws-acm-v6/blueprints/never-do-certificates.md: sha256:7b4bd0fd4a4b07570cd7ce0f8e1019a2ecdd0a7996b2bb8d762d36b7b17f2751
+    .claude/skills/provisioning-aws-acm-v6/blueprints/never-do-patterns.md: sha256:7a59e13622b5d4568825cfd040ad361dfc9a651a129bbdccc1becc3b69d256f7
+    .claude/skills/provisioning-aws-acm-v6/blueprints/unverified-and-risks.md: sha256:79fbc478c46305bab2283bb337a743ef00958c2c4216826970469f667e728e85
+    .claude/skills/provisioning-aws-api-gateway-v6/SKILL.md: sha256:a5a3b01cd82197c06f2622c2197434a561dfda746366481b5f2fd0012ef2f9dc
+    .claude/skills/provisioning-aws-api-gateway-v6/blueprints/always-do-http-domain-access.md: sha256:fa7c6dc363fd4a64d5f955a6c8e4c0dc025411a0c9121152bf87870732ee76b6
+    .claude/skills/provisioning-aws-api-gateway-v6/blueprints/always-do-http-websocket.md: sha256:d46b0e9312c6dd6e14b5a6d4214423e238e9599a7f53be0bdfa30c807e31578d
+    .claude/skills/provisioning-aws-api-gateway-v6/blueprints/always-do-patterns.md: sha256:151f8b5e5a6cf1f24f1470f6a4fc8dc79d900fc7ea5d7bea0d71e42570af6ab6
+    .claude/skills/provisioning-aws-api-gateway-v6/blueprints/always-do-rest-auth-domain.md: sha256:22ad2cdc28d1edeaf996f1a157a665ab43d1e60a58b3c6d13ef19ba35bb53618
+    .claude/skills/provisioning-aws-api-gateway-v6/blueprints/always-do-rest-core.md: sha256:2252f4afe8021d76d13ff569934428dbdba6a76055dd1e91405b7a2ca22c44be
+    .claude/skills/provisioning-aws-api-gateway-v6/blueprints/always-do-rest-deployment.md: sha256:2a2856b8552640e4c4135ff9e4ec1c785ded335097a8cb89009ef1f4e9d94560
+    .claude/skills/provisioning-aws-api-gateway-v6/blueprints/evaluation-scenarios.md: sha256:b333daa68a0b86ecabce9a3fee08575e8c806bd4dfdf540e07e3ef9df4b35003
+    .claude/skills/provisioning-aws-api-gateway-v6/blueprints/never-do-http-websocket.md: sha256:702c11654ddd0919551262bca32910b607ab2a0da959c50e5ca3b211e167f2e6
+    .claude/skills/provisioning-aws-api-gateway-v6/blueprints/never-do-patterns.md: sha256:f8cfb34238c9481cce72a1aff5f65120afcc840b2b08da309c1f72084c2a0c5b
+    .claude/skills/provisioning-aws-api-gateway-v6/blueprints/never-do-provider-migration.md: sha256:08c627832e47dde75e3761effc1d979caa2b8dceaf72520ee40fc783505cada7
+    .claude/skills/provisioning-aws-api-gateway-v6/blueprints/never-do-rest.md: sha256:ec64b6a72cd0c84b2941ebfbb4920a8d9a4b161889bbb608facf437c6b2fcc06
+    .claude/skills/provisioning-aws-api-gateway-v6/blueprints/unverified-and-risks.md: sha256:ea90500451a538be9c1e0f4f4a2dce9d4b60ddd128c6a5dfbb6713b931498313
+    .claude/skills/provisioning-aws-cloudfront-v6/SKILL.md: sha256:769804fa5e47c7c5af7ffaad822a22ca5d9714ee1b891ef404675747f19eb1f5
+    .claude/skills/provisioning-aws-cloudfront-v6/blueprints/always-do-dns-logging.md: sha256:4069758937fa50463b589b87270d4315bfa96d6edf6292cf9350f21743d7acfd
+    .claude/skills/provisioning-aws-cloudfront-v6/blueprints/always-do-foundation.md: sha256:093397ac68e7bd2efd94dd6d378ce381aca5fa3127d21952df9f9e407c5e5352
+    .claude/skills/provisioning-aws-cloudfront-v6/blueprints/always-do-origins-policies.md: sha256:ebcc03dd835070dcf3d5c2eaf6cf0c73035fb9f04ec548e1b3537a5a5f5360cf
+    .claude/skills/provisioning-aws-cloudfront-v6/blueprints/always-do-patterns.md: sha256:746ef6f659f65b6688a81bdd1005e6b57e75c272fe321c67957af91c44ed1f9c
+    .claude/skills/provisioning-aws-cloudfront-v6/blueprints/evaluation-scenarios.md: sha256:a2e81b21b4a3e8cbddcf1d94e3bcb3f04ac4aa26159b9b6e8cfb03690d1b0d48
+    .claude/skills/provisioning-aws-cloudfront-v6/blueprints/never-do-patterns.md: sha256:509fffd1807d35a164d33bd30cf54d28e7a15996ca112019db4ab4c4baaa9da5
+    .claude/skills/provisioning-aws-cloudfront-v6/blueprints/never-do-provider-operations.md: sha256:bb691addf76e576c2e5f10ba0c505919b93ed03d3a20cf7f6a22ed31bd68e36a
+    .claude/skills/provisioning-aws-cloudfront-v6/blueprints/never-do-security.md: sha256:8888e1e994afad74efa4882678928d45a138d95817c8f627db87ec51baaa2a21
+    .claude/skills/provisioning-aws-cloudfront-v6/blueprints/unverified-and-risks.md: sha256:7e591951fc03a868a7ef250d4e567b65b94f02df651c388306b458db31ae71a2
+    .claude/skills/provisioning-aws-cloudtrail-v6/SKILL.md: sha256:85957842734314143dfc04cf0884486bd8a5a619d5863565af85fe46e1f0d477
+    .claude/skills/provisioning-aws-cloudtrail-v6/blueprints/always-do-kms-lake.md: sha256:5e628603872068c217325ffc9d3be91694b14aa4c7de32ee627d572f3926a289
+    .claude/skills/provisioning-aws-cloudtrail-v6/blueprints/always-do-patterns.md: sha256:7356c194d0ef4e06c1dbae699e3f86a266b3118a2eae831acecca785bf5297eb
+    .claude/skills/provisioning-aws-cloudtrail-v6/blueprints/always-do-trail.md: sha256:d56a85904cec606598829359f0ea24a1fd591b8facd326104bb367112f4c7c30
+    .claude/skills/provisioning-aws-cloudtrail-v6/blueprints/evaluation-scenarios.md: sha256:dd02bc0ac26a621664eb3c0253debbbdfa044dd4cc98a42b426b6e81da8d4292
+    .claude/skills/provisioning-aws-cloudtrail-v6/blueprints/never-do-patterns.md: sha256:9d7dc1fa6a3c8e911751e8aff8d28ebace0463f0ebc5cbfd319236a1fe673ecb
+    .claude/skills/provisioning-aws-cloudtrail-v6/blueprints/never-do-provider-migration.md: sha256:4028ed5fafc0dc91efeb8a0856f48785bc1b350f45370f0ca4b34809ed5dd9de
+    .claude/skills/provisioning-aws-cloudtrail-v6/blueprints/never-do-trail.md: sha256:22065e034e94faa0155a6adc1d3780748852c8635097304c3725c1afcd5925f6
+    .claude/skills/provisioning-aws-cloudtrail-v6/blueprints/unverified-and-risks.md: sha256:3e9bfd93470eb1555e589cf91f6ef56290c135edfc026f727b7d8336e5946ed3
+    .claude/skills/provisioning-aws-cloudwatch-v6/SKILL.md: sha256:0f04538b61243d50d0aecf5aca0571118963854ef12fc92b0aaf1bfbc35f77bf
+    .claude/skills/provisioning-aws-cloudwatch-v6/blueprints/always-do-alarms.md: sha256:64f322f028d4e752336fb126e8822c3f0349ee30fb8c9bbb4ac49b6528672809
+    .claude/skills/provisioning-aws-cloudwatch-v6/blueprints/always-do-foundation.md: sha256:5573a6623f4defc99437175bfb780da51cfa8c35728d3798fd924a3ec067c224
+    .claude/skills/provisioning-aws-cloudwatch-v6/blueprints/always-do-patterns.md: sha256:06957e7ff3d137dd539051ca7c9ec2336e4fd243c21216000144435e60797466
+    .claude/skills/provisioning-aws-cloudwatch-v6/blueprints/always-do-security.md: sha256:cee29e65c77a3393a1d1322181bbe0353a1dcc17ab4bff8956f363a271f940fd
+    .claude/skills/provisioning-aws-cloudwatch-v6/blueprints/evaluation-scenarios.md: sha256:01563ad2f567819e77ac304e86d76e2e6bbae356bc9df0fdc4f5976744a1bbad
+    .claude/skills/provisioning-aws-cloudwatch-v6/blueprints/never-do-alarms.md: sha256:03f29a371c586bfd0c3dd36ee97e42ccd0a0a0e9fccdf98ee97136853b74b335
+    .claude/skills/provisioning-aws-cloudwatch-v6/blueprints/never-do-logs.md: sha256:acf179f01f9e03a584d19609d96d72a21dd089548661b6404ff9fddd138251ad
+    .claude/skills/provisioning-aws-cloudwatch-v6/blueprints/never-do-patterns.md: sha256:db6a508c8397068617c4d004c1fde3cd6bfe568518fe6e0985e71ac0bd77edf2
+    .claude/skills/provisioning-aws-cloudwatch-v6/blueprints/unverified-and-risks.md: sha256:0e23d09eac6fe43a0f50c1893d05d3e88a02d0a13284be036521c71b656a2c65
+    .claude/skills/provisioning-aws-cognito-v6/SKILL.md: sha256:7e1df43799b43f95289b96f15034e5aa01632eb7c943e15b29ebbd48989aa651
+    .claude/skills/provisioning-aws-cognito-v6/blueprints/always-do-client-domain.md: sha256:a7093b6dbc75d3e7c0433a8bfca7bd9a2ae84ada4aa557a8effc4a3de8603cca
+    .claude/skills/provisioning-aws-cognito-v6/blueprints/always-do-patterns.md: sha256:d76b26c276d5414fc40dc3330050138b53c50a7ae030e883c39fd94306b7d18f
+    .claude/skills/provisioning-aws-cognito-v6/blueprints/always-do-pool.md: sha256:832bea1889dfa1d2dac019603168fb2cc1ae504c7056a33cf5243bfb8e0e71fd
+    .claude/skills/provisioning-aws-cognito-v6/blueprints/evaluation-scenarios.md: sha256:cdfd154b6a40aa12e5241a133b2f2ebd0cfded018ba7a6e521b34b793e4be9f6
+    .claude/skills/provisioning-aws-cognito-v6/blueprints/never-do-client-oauth.md: sha256:36139aaaa4c434f80e470f67f22d17919d3f1ddd4b92a6a0a22a43018cd7f3cf
+    .claude/skills/provisioning-aws-cognito-v6/blueprints/never-do-patterns.md: sha256:51f3a6a70180584ceca1eab0c7a5576f4072a7c3285d92781d6fba00ce90f4c9
+    .claude/skills/provisioning-aws-cognito-v6/blueprints/never-do-pool-domain.md: sha256:6c79d28fd88bb9b02b9b7cfe3f6a17b71aef67b1f514f80146d09528f653f845
+    .claude/skills/provisioning-aws-cognito-v6/blueprints/unverified-and-risks.md: sha256:c200a0459d19ef67081a14bde812126dbd689fb1b2ca301e3ba78fec0ed86710
+    .claude/skills/provisioning-aws-cost-management-v6/SKILL.md: sha256:33c438eca5990ad75ab860cc6e91a055172678e139f528edb6996dd81e0f28e6
+    .claude/skills/provisioning-aws-cost-management-v6/blueprints/always-do-budgets.md: sha256:01eb32d767d12857b228acad03018c48abb0cbe2d48f44e4f4ae72cc4589cada
+    .claude/skills/provisioning-aws-cost-management-v6/blueprints/always-do-cost-intelligence.md: sha256:1b159afe97d4a5824146f9676755bc4aa54288330ad0609a8d9be769c7677c89
+    .claude/skills/provisioning-aws-cost-management-v6/blueprints/always-do-patterns.md: sha256:5e86572c4f8944ff23e008857dffc63aa588132f141e25847057d9923c89492b
+    .claude/skills/provisioning-aws-cost-management-v6/blueprints/always-do-reporting-commitments.md: sha256:09aae0a22903c73ef0895b0cf5705abeedc1c9f622dd794ca831febda6924c27
+    .claude/skills/provisioning-aws-cost-management-v6/blueprints/evaluation-scenarios.md: sha256:edbae58d0c4e9a895dccd0bd1377e16b7d5ba53b733f6914d4be06e7b77948cc
+    .claude/skills/provisioning-aws-cost-management-v6/blueprints/never-do-budgets-and-region.md: sha256:6aafd8b21e7d000c739a928f5fdaac588753cdcdfde9b2d57b53d9e250004d2a
+    .claude/skills/provisioning-aws-cost-management-v6/blueprints/never-do-patterns.md: sha256:159396d9d6623326420a1cf843c0ba519f882f2c8c3ce8c1a220bcdc24e4c8a9
+    .claude/skills/provisioning-aws-cost-management-v6/blueprints/never-do-reporting-migration.md: sha256:aa6d7952421d913f559aff16cfc597704c100776c4bce7ce869a186d03068bea
+    .claude/skills/provisioning-aws-cost-management-v6/blueprints/unverified-and-risks.md: sha256:39b31f6865e28460569b7d6f7c4c283d1a35d182f33d59d31fc43a6d903e09ef
+    .claude/skills/provisioning-aws-dynamodb-v6/SKILL.md: sha256:2b8e9d711c3e46cac822bfd343e2336c0fa1a9e242434375a820531e0f1b72a9
+    .claude/skills/provisioning-aws-dynamodb-v6/blueprints/always-do-foundation.md: sha256:f8aa9b723d46e21b7d6e21011a6431067d8e4fe169153917abbaa3b240a5dfa1
+    .claude/skills/provisioning-aws-dynamodb-v6/blueprints/always-do-indexes-capacity.md: sha256:4c7c6c451f9a2e9b7f2800eb27f39ee84587bb5fc63e1d53c86f1e39e8d56f20
+    .claude/skills/provisioning-aws-dynamodb-v6/blueprints/always-do-patterns.md: sha256:0dec15b9a2a21d2c48bc6449f4aaa4e272f37f841f97c32bb6a311926ad64f0d
+    .claude/skills/provisioning-aws-dynamodb-v6/blueprints/always-do-replication-satellites.md: sha256:8803746759c833eaf2d2117ee23819682cee9783e64286ac1e8563ea95f16f64
+    .claude/skills/provisioning-aws-dynamodb-v6/blueprints/evaluation-scenarios.md: sha256:f4bf8ad7baf5c6971468e26a975882ad7ef45dc98faeb2ec16bc8c2b85097ee4
+    .claude/skills/provisioning-aws-dynamodb-v6/blueprints/never-do-patterns.md: sha256:771d7e803635d30325e4c3d7939069e9d47e58c59e77a3b24b60a0227547ebfd
+    .claude/skills/provisioning-aws-dynamodb-v6/blueprints/never-do-replication-provider.md: sha256:fe61ebb7197fdbbe5bc3c5e4715e88d357cdeb70c2804a3d26c6877e2359653e
+    .claude/skills/provisioning-aws-dynamodb-v6/blueprints/never-do-table-indexes.md: sha256:d29ab286fb467118dc9796122c473eff3d7abbe847fbb1f6b2bd9b0574b2d4d0
+    .claude/skills/provisioning-aws-dynamodb-v6/blueprints/unverified-and-risks.md: sha256:ac56a70320501bf90b57b81c3a43855947cf322fd5e85add4a54bef507e15d74
+    .claude/skills/provisioning-aws-eventbridge-v6/SKILL.md: sha256:75a95218398bfb9462c5dc180f117a5ae8007586f6352dc46a3f1cb7e79f399c
+    .claude/skills/provisioning-aws-eventbridge-v6/blueprints/always-do-foundation.md: sha256:9ea5dafd2fb04e736442bd0d9bbd8d42fba36d2847b90f8d1baf17604e80e0f0
+    .claude/skills/provisioning-aws-eventbridge-v6/blueprints/always-do-patterns.md: sha256:7d65a7108c8d35b250bb2b3336054c9e17f608ba939d5d126384100ea7ff79d8
+    .claude/skills/provisioning-aws-eventbridge-v6/blueprints/always-do-rules-targets.md: sha256:261e7de1d04fcd00c6e7c98878b8265ab9c8cb304afe94586d115d2b9618e2a1
+    .claude/skills/provisioning-aws-eventbridge-v6/blueprints/always-do-scheduler-integrations.md: sha256:add6c01b12672eee7172ec4f8fc407ca07e3e33b9f416c0ff41775382a358c59
+    .claude/skills/provisioning-aws-eventbridge-v6/blueprints/evaluation-scenarios.md: sha256:1c69ce7693c382f92303322f2828abbe15fc95d05b83a896b84cb53828819dce
+    .claude/skills/provisioning-aws-eventbridge-v6/blueprints/never-do-bus-and-rules.md: sha256:31a3cb3213a410c5cdc6fae70616605f5e66704c8c187f17249657317e5a2849
+    .claude/skills/provisioning-aws-eventbridge-v6/blueprints/never-do-patterns.md: sha256:4f7d9e2b4f438b302ff4e033cfb8a37173d6e2d4f687c2107058c44ee5fa0e1a
+    .claude/skills/provisioning-aws-eventbridge-v6/blueprints/never-do-scheduler-and-versions.md: sha256:981f96855d3c6bae87eaf4f13f97afbaa1788e9bcec759188f72e15e0c45f58b
+    .claude/skills/provisioning-aws-eventbridge-v6/blueprints/never-do-targets.md: sha256:439b923823173a2ba9002ff6a8831b9a3e8da80fd4d6caed1e6f4c619c4a1f0c
+    .claude/skills/provisioning-aws-eventbridge-v6/blueprints/unverified-and-risks.md: sha256:7770676450fcf483e0647e47959c134b4fd716279e9a9022a351ef1c9628cdee
+    .claude/skills/provisioning-aws-iam-v6/SKILL.md: sha256:3a2129883623b13433f939a3525c61e162cf92fbfe48b2666ab959c60f6b9cc5
+    .claude/skills/provisioning-aws-iam-v6/blueprints/always-do-oidc-users.md: sha256:7eba1897df36098dde65f3c460a970dae137070e769346bc263484061f46081e
+    .claude/skills/provisioning-aws-iam-v6/blueprints/always-do-patterns.md: sha256:fe094eaa9fc6308524427ce4572cc950e2cb9e5eafb735e4e80f7a7c9d588295
+    .claude/skills/provisioning-aws-iam-v6/blueprints/always-do-roles-policies.md: sha256:952359103b7c9a7d55519be1fabb7d681f58166a3ce761e6eb051667dfe1cadd
+    .claude/skills/provisioning-aws-iam-v6/blueprints/always-do-testing.md: sha256:e52e3250b46e1deebf89a3e52ad80406861918d089063502d73bdab403457257
+    .claude/skills/provisioning-aws-iam-v6/blueprints/evaluation-scenarios.md: sha256:59f152268f2783678504354f2543cb4c30ba294dba4ebc5de4cd6cf1d461fa36
+    .claude/skills/provisioning-aws-iam-v6/blueprints/never-do-identity.md: sha256:4eacec9dedce3def3c781adb17d83fd5b938312dcb4099329fe941d64a7f0c9f
+    .claude/skills/provisioning-aws-iam-v6/blueprints/never-do-patterns.md: sha256:8b763f067ad97d77271e24dbe9ab80f7506573cdf73faab5a513c140a5cd651e
+    .claude/skills/provisioning-aws-iam-v6/blueprints/never-do-provider-migration.md: sha256:69f70d12665014d5ae263b47c72e010a7e5273dd73fc24c972240c2b41511a05
+    .claude/skills/provisioning-aws-iam-v6/blueprints/never-do-roles-policies.md: sha256:3483ee18a9477d7656065b7594df5080264d9eebde9dd9f00647c13e5d0d8d52
+    .claude/skills/provisioning-aws-iam-v6/blueprints/unverified-and-risks.md: sha256:67258a0052ab8e426fa86b573e76fe2ea1436440d659f65b8e47a350e8e82528
+    .claude/skills/provisioning-aws-kms-v6/SKILL.md: sha256:061787e5fe3a68a2d0dba7b137348154ccc987700c96aa395245a2eca3d8388e
+    .claude/skills/provisioning-aws-kms-v6/blueprints/always-do-key-basics.md: sha256:8ff80c72f73500d07e96aeebf8121bc85f07f451deafc6d877ed3643af9c3feb
+    .claude/skills/provisioning-aws-kms-v6/blueprints/always-do-key-policy.md: sha256:bc7291d191f6455f5ed63f1047f620171200050d84a0464273c754d56d81b5ba
+    .claude/skills/provisioning-aws-kms-v6/blueprints/always-do-patterns.md: sha256:e03e2537ccca8895099949e9b5ea36754f8ca440e608df8a4e44deddc9c8b788
+    .claude/skills/provisioning-aws-kms-v6/blueprints/evaluation-scenarios.md: sha256:d82858831f373721cdccabaf65051948ed050fcf4d351acc706d73d1b7511fa4
+    .claude/skills/provisioning-aws-kms-v6/blueprints/never-do-patterns.md: sha256:a7675e5a839da90a0c19d42b175a848e3357356ba3b2d1445a7de072ff396321
+    .claude/skills/provisioning-aws-kms-v6/blueprints/never-do-policy.md: sha256:53c6a5e62d4b2878b9a9aa4b0010830d48284f2df629e213bcdd7094e7e5713a
+    .claude/skills/provisioning-aws-kms-v6/blueprints/never-do-usage.md: sha256:a3e25583acdc402dc223d92747b118bd58f483f3380bcbb9afd4beaea0d93da5
+    .claude/skills/provisioning-aws-kms-v6/blueprints/unverified-and-risks.md: sha256:2e820e3d57a8f8d90055162e86c15ead03752b91b224d1592537ad108f8145ff
+    .claude/skills/provisioning-aws-lambda-v6/SKILL.md: sha256:913d18ce44aad5dd91298a977982af6689dc4b5dfa0136eace3679ffb222281a
+    .claude/skills/provisioning-aws-lambda-v6/blueprints/always-do-events-layers.md: sha256:477e58bf8ff18d2bf0219288c24ab33628cfd8932fac858a151dc6772253db75
+    .claude/skills/provisioning-aws-lambda-v6/blueprints/always-do-function-config.md: sha256:74cc96efbebdf86a96b3847448242b921f5b2a9353b5e8848eb928fbb0ae5c9f
+    .claude/skills/provisioning-aws-lambda-v6/blueprints/always-do-function.md: sha256:e93aceb6608b4800f64225b0f8752848866b657896ee362cd325cc4525e30a4f
+    .claude/skills/provisioning-aws-lambda-v6/blueprints/always-do-invocation.md: sha256:dc51037a1c4a0af7444cae09dd21a150a97a28828693bbd6680329a8f84f035c
+    .claude/skills/provisioning-aws-lambda-v6/blueprints/always-do-patterns.md: sha256:fe8ebec8d82cb940d5e3977f52f1f612f5336022e6490a0238cfd7f36702df01
+    .claude/skills/provisioning-aws-lambda-v6/blueprints/evaluation-scenarios.md: sha256:847d11c9c5ed3277b81bb87e373d50aa63477c289433b63c8b35deec291e2445
+    .claude/skills/provisioning-aws-lambda-v6/blueprints/never-do-access-provider.md: sha256:7ea75678555c4c6237d7f430910075a7e3c4cebe8842701f74568fae21c8eed6
+    .claude/skills/provisioning-aws-lambda-v6/blueprints/never-do-events.md: sha256:a03dde2798aa3684963dc2ec556103c22f24584bea25453cad20fc7222660107
+    .claude/skills/provisioning-aws-lambda-v6/blueprints/never-do-function.md: sha256:d6a765daa726d71a699691ab8fbbebdd137d0eb11ddd1614cb0357660f53514c
+    .claude/skills/provisioning-aws-lambda-v6/blueprints/never-do-patterns.md: sha256:14f3e13b0781e7c4d6ce4914e25fdd317d176cd11135ac4b871ff04048f8499e
+    .claude/skills/provisioning-aws-lambda-v6/blueprints/unverified-and-risks.md: sha256:0890327669cb2f978a8a6ae014bec824f2d206deb222e2d644f3ea99753de5c9
+    .claude/skills/provisioning-aws-organizations-v6/SKILL.md: sha256:1c6c41e064a645568f75b6dff20639ff5ebd7c69a14e582e802b519b87d47e30
+    .claude/skills/provisioning-aws-organizations-v6/blueprints/always-do-foundation.md: sha256:7a8544c8b81a0046fe895249d02ebcfde0e5ab39a2e06c0c494ae98bbec1357f
+    .claude/skills/provisioning-aws-organizations-v6/blueprints/always-do-patterns.md: sha256:b438629851e5a5bacb4d4e7cfd54d46b9972719ed040fb8ae47d6b3527830f29
+    .claude/skills/provisioning-aws-organizations-v6/blueprints/always-do-policies.md: sha256:158abe58e419de0455eb938d2357055688ef76b2191bc39605a5fd0a83285cc0
+    .claude/skills/provisioning-aws-organizations-v6/blueprints/evaluation-scenarios.md: sha256:ac45691f7b783ed4b0145ee3e5230596159deb0707844b8aafaa14c17e6580f0
+    .claude/skills/provisioning-aws-organizations-v6/blueprints/never-do-organization.md: sha256:4ead22f9461fa77f5100fa2663dd1008f7da7c6e99b8e5a350b8299850a0e615
+    .claude/skills/provisioning-aws-organizations-v6/blueprints/never-do-patterns.md: sha256:fb965e3f034b9c2cf176d8f4386ad85a46bf9258d5dbcb5780183533a5ba7015
+    .claude/skills/provisioning-aws-organizations-v6/blueprints/never-do-provider.md: sha256:e8625f220996fcc2d4127e06374ef17e21c327040bb13a61c09954fddfa8010d
+    .claude/skills/provisioning-aws-organizations-v6/blueprints/unverified-and-risks.md: sha256:4861a0013184ab194631ef524fac22a679c60496d263a168fa01d7710beaa8bb
+    .claude/skills/provisioning-aws-parameter-store-v6/SKILL.md: sha256:6c43a686876c4da18db759ce4a35eb2f89b06964afc5ff39c547a1d100855468
+    .claude/skills/provisioning-aws-parameter-store-v6/blueprints/always-do-foundation.md: sha256:f484d0dc5155f43c06656cfda893610c3e408231a5a627bd643357b1eb4797e9
+    .claude/skills/provisioning-aws-parameter-store-v6/blueprints/always-do-patterns.md: sha256:255237ec802e31bc95a3fee87c28a0438865b1521ccdf4de42b7b76fa0d6f5ca
+    .claude/skills/provisioning-aws-parameter-store-v6/blueprints/always-do-secrets.md: sha256:0efa469f11a3a71eb471b49f1b8d7762415bdab6a2edda845bd97b0e50370e48
+    .claude/skills/provisioning-aws-parameter-store-v6/blueprints/ask-first-ephemeral.md: sha256:2cdaad4ca64717e4c265118aac9348f8d3b81f7d5b4f4cfcfda15b3748104d41
+    .claude/skills/provisioning-aws-parameter-store-v6/blueprints/evaluation-scenarios.md: sha256:afd062f15781fcf6c79ef71ea52705494a850a64e8d7911c7730d7e3e5e1cbfe
+    .claude/skills/provisioning-aws-parameter-store-v6/blueprints/never-do-names-version.md: sha256:35f8a567b4559c73031ca1cf16a56a71ae901da8998e2be527d05457bebbce34
+    .claude/skills/provisioning-aws-parameter-store-v6/blueprints/never-do-patterns.md: sha256:dd4e40ecca8709584178a61dbe6cbc1a2e7e9cf4af7a6ba8d80995c7b06b3110
+    .claude/skills/provisioning-aws-parameter-store-v6/blueprints/never-do-secrets.md: sha256:52ebe7c3cdfaa8a0d07a47493537f62a74bf4f0113579845e12c90ec664757b7
+    .claude/skills/provisioning-aws-parameter-store-v6/blueprints/unverified-and-risks.md: sha256:e548516cd2a14313b3a6ce8490ff059defed5f5276cac325b18d17a7dc14b7c6
+    .claude/skills/provisioning-aws-route53-v6/SKILL.md: sha256:4012a1b77c63ef5f0f40d85c31b1c6ab4039dfdb0c7f98c8cf1a7cbac5e369fe
+    .claude/skills/provisioning-aws-route53-v6/blueprints/always-do-logging-dnssec.md: sha256:b28cc31248bce23aba019b0fdbb42671b4910428cd826c74c723b3d0c5829fe5
+    .claude/skills/provisioning-aws-route53-v6/blueprints/always-do-patterns.md: sha256:3719ab8a2980c1014bce6f9600d1e4c45359d574b30566a60b5540c5ce73ec8a
+    .claude/skills/provisioning-aws-route53-v6/blueprints/always-do-zones-records.md: sha256:e48ea7afe26518590d088cf6e3b688c9e227cbaea910533f89175bc1ad7c6146
+    .claude/skills/provisioning-aws-route53-v6/blueprints/evaluation-scenarios.md: sha256:7c4ae91bcebeccc443283221906924e2f53ca82d54f7360357797950e87df76c
+    .claude/skills/provisioning-aws-route53-v6/blueprints/never-do-patterns.md: sha256:41d1a500d52a0cbc821d750f59338df64fae1984019fd4754228391dc3a55e6f
+    .claude/skills/provisioning-aws-route53-v6/blueprints/never-do-region-logging-dnssec.md: sha256:24f5acd0c83901bbc05ed4f0d6bfaba99723ad529af00cad26133aaa9c76720c
+    .claude/skills/provisioning-aws-route53-v6/blueprints/never-do-zones-records.md: sha256:62ceaf669234c575e8811162fb00562ea5d39b20d37f163a20cf90308e1e71ce
+    .claude/skills/provisioning-aws-route53-v6/blueprints/unverified-and-risks.md: sha256:11dba7595d78ca738dd8c66bb36ab4e77eb026e8c491451ab306a27a0803cd76
+    .claude/skills/provisioning-aws-s3-v6/SKILL.md: sha256:4f58bb136717c10e79469e06a57dccb4bfb92e9bd0e77917e29a66efa5f4d54d
+    .claude/skills/provisioning-aws-s3-v6/blueprints/always-do-bucket-foundation.md: sha256:8225edccdd01d343e45362b848177090ceef8e3e8574e6a66ee83c21a1928352
+    .claude/skills/provisioning-aws-s3-v6/blueprints/always-do-lifecycle-versioning.md: sha256:656e6fbcf0b4c6d62c3166a299c84d29b2bb50667bf9bf17577447c23e54c5b4
+    .claude/skills/provisioning-aws-s3-v6/blueprints/always-do-objects-testing.md: sha256:b8796ff87841fbbb604233759ac9eec394cb7bcaf1d6e973ffa8745eed2f92e9
+    .claude/skills/provisioning-aws-s3-v6/blueprints/always-do-patterns.md: sha256:8408050b61854267382853a5c58a42425bc4c50c216fa473fa4401df67817cc6
+    .claude/skills/provisioning-aws-s3-v6/blueprints/always-do-security-encryption.md: sha256:d1637a8a8c837ba4ba867f8a2352f1ad656c0e2bc01823bc320d8c13886dab09
+    .claude/skills/provisioning-aws-s3-v6/blueprints/evaluation-scenarios.md: sha256:a1eecdc89667d05b3b5fc83855cf2d024ec4c53f5a38cee0b0cd3f138e188631
+    .claude/skills/provisioning-aws-s3-v6/blueprints/never-do-naming-endpoints.md: sha256:b6430be64beb94432c1725450fcf61c864567103f6231641fceb2a3a8d926038
+    .claude/skills/provisioning-aws-s3-v6/blueprints/never-do-ownership-acl.md: sha256:faf723917d5a65fb31bb9d65cd0726ab28b6fe74a394e7df9b2ee65711639292
+    .claude/skills/provisioning-aws-s3-v6/blueprints/never-do-patterns.md: sha256:c26b67a274e604b825f385ae2802bed58230ce738ebc0c6e14295e8d894f917e
+    .claude/skills/provisioning-aws-s3-v6/blueprints/never-do-provider-migration.md: sha256:f8987c71e5b84e8f34e5650e8876d0b29429ba00a33b0493cfd4d46c449f5f32
+    .claude/skills/provisioning-aws-s3-v6/blueprints/never-do-resource-conflicts.md: sha256:bb10df98a35af48560caf28ba2d532c6f95805b2e23924b7e727e3d0468a0ed2
+    .claude/skills/provisioning-aws-s3-v6/blueprints/unverified-and-risks.md: sha256:b32f6c3526962b1dcc95bc111364bf22f5b0b965eeb513f8fc456e2f8f797224
+    .claude/skills/provisioning-aws-sam-v6/SKILL.md: sha256:fa277087034d6dec6646ca407b473b40890117cdc7aa41a768d251193c40d395
+    .claude/skills/provisioning-aws-sam-v6/blueprints/always-do-cloudformation.md: sha256:cfba74f36d764d7b2cda088219acd1483469638b2af5c863b3dad1f32d47d55c
+    .claude/skills/provisioning-aws-sam-v6/blueprints/always-do-foundation.md: sha256:77c8a2ba8bec4caf86628d6e4aa0cfafdf80dcba8bf62faca0f06a11e33f98eb
+    .claude/skills/provisioning-aws-sam-v6/blueprints/always-do-patterns.md: sha256:91b654daf1b71a124479acb5551e0ae2caed1ea1f64e45e73ed53e664a3e199c
+    .claude/skills/provisioning-aws-sam-v6/blueprints/always-do-sam-cli.md: sha256:ea6045d1f37d0cae762467188d604222beca515f31851efc825f864a3b6f3b0f
+    .claude/skills/provisioning-aws-sam-v6/blueprints/evaluation-scenarios.md: sha256:8fcf558fdd467ebeefa979cee0363cc98b524f606d995478c5cf3ec42421f429
+    .claude/skills/provisioning-aws-sam-v6/blueprints/never-do-cloudformation.md: sha256:dc0614b6631c2d6fd7cfa5e7b16eaf7b54d5c917d6758807c5201fdd56070a7e
+    .claude/skills/provisioning-aws-sam-v6/blueprints/never-do-patterns.md: sha256:bec4a24f9b2dcde182f407504ca794a3c96f27a9f482ec5d929bb56cc60c5858
+    .claude/skills/provisioning-aws-sam-v6/blueprints/never-do-provider-migration.md: sha256:23614e54fbc67b4261e02d165b6be7fbc9df6e132b8f4df925ff4cfeee67c737
+    .claude/skills/provisioning-aws-sam-v6/blueprints/never-do-sam-cli.md: sha256:0489def21baf5dd1355189497c8b005630f6085f321703ac4433a4c5f33340b9
+    .claude/skills/provisioning-aws-sam-v6/blueprints/unverified-and-risks.md: sha256:83c18179277a1c3855fc66d499222466f8657035b7be0be97c61265a97118e1d
+    .claude/skills/provisioning-aws-secrets-manager-v6/SKILL.md: sha256:f61d0bd04dc100972c6c8d44a9e4abcba2f6e43b4176fdc7df64ee8360a153c4
+    .claude/skills/provisioning-aws-secrets-manager-v6/blueprints/always-do-patterns.md: sha256:855924c0e6c29ce8e25313d9d394732f76978295670e2e5b297085202a2259a4
+    .claude/skills/provisioning-aws-secrets-manager-v6/blueprints/always-do-rotation-policy.md: sha256:c2f79bd3ec8f50bb267d15f6dd9382f5620f661e32473b91b705ed082f043ae9
+    .claude/skills/provisioning-aws-secrets-manager-v6/blueprints/always-do-secrets.md: sha256:056838049ae3c768aa39da75b424be9abb923899d46309ec2177d3835de86ed6
+    .claude/skills/provisioning-aws-secrets-manager-v6/blueprints/evaluation-scenarios.md: sha256:7de8060eb2e3cde35c2274a65d08ade72c1b78c884d894d79ed300a461bc50db
+    .claude/skills/provisioning-aws-secrets-manager-v6/blueprints/never-do-patterns.md: sha256:eb80e6a82930a947e6f9166c9889f20c18f8bc3afcedf5c95409b99b031be275
+    .claude/skills/provisioning-aws-secrets-manager-v6/blueprints/never-do-rotation-policy.md: sha256:42540d0cdbcbfb94c81a7058be2b54c64f97a06bd3ad00c312a44c9f9a1e5209
+    .claude/skills/provisioning-aws-secrets-manager-v6/blueprints/never-do-secrets.md: sha256:9e9635691fa76b713879f55978ab2a5ffde306bd33efcb4257afc60065ae4315
+    .claude/skills/provisioning-aws-secrets-manager-v6/blueprints/unverified-and-risks.md: sha256:ea4a0c3c1425dca37f85f54bc5a6096d291b0dfc9ccddd9c6c44a263c32fa0d2
+    .claude/skills/provisioning-aws-ses-v6/SKILL.md: sha256:364e0227dd1cc5243a26e8b007a6d38afdbe5efb64dd54e0e682589c283ab841
+    .claude/skills/provisioning-aws-ses-v6/blueprints/always-do-classic-family.md: sha256:9ebcf871ba4ca0ac5d8f4b80c9f8cd6233c67b2504594b8660b1693b52ab07f7
+    .claude/skills/provisioning-aws-ses-v6/blueprints/always-do-identity-dns.md: sha256:aa83096001bdf5ece8e5e965f972603a78823858b60dffaad33b6d87b7ae57d0
+    .claude/skills/provisioning-aws-ses-v6/blueprints/always-do-patterns.md: sha256:73050e5bc1c78bac19c3b901b8033287491b07f74a003c00dfeeec1f2d333183
+    .claude/skills/provisioning-aws-ses-v6/blueprints/always-do-sending-config.md: sha256:32195abf56fb58cc4bc907564324078b06af4c8e09f389b282b11db78e7d65e3
+    .claude/skills/provisioning-aws-ses-v6/blueprints/evaluation-scenarios.md: sha256:ff872d3b212f09ddbc6936a822a14a70e97abeec4ded4b016c9cf2d6d1eac0e0
+    .claude/skills/provisioning-aws-ses-v6/blueprints/never-do-patterns.md: sha256:abed02c5c2c9a366d78e624f2c16efc53df7cdc42f497b8f6e2e86e014683a03
+    .claude/skills/provisioning-aws-ses-v6/blueprints/never-do-provider-migration.md: sha256:cd9bd929d2d6ff6a5b166acb4436715e11b2b7a8026e3a86460c2f975622c47f
+    .claude/skills/provisioning-aws-ses-v6/blueprints/never-do-ses-config.md: sha256:db7fdf147c158a36850a1d53f66c7f6a862598b5a4eb851385bc5de5d7f57534
+    .claude/skills/provisioning-aws-ses-v6/blueprints/unverified-and-risks.md: sha256:5f02b42276889ecbb3fb7de2d7a51d00e32a8610afb3313bbad2f8d1f2a9fde4
+    .claude/skills/provisioning-aws-shield-v6/SKILL.md: sha256:de679d2896a47c12442e692f8be8b579632e47e19767aa3ef6d058a5f73cd70e
+    .claude/skills/provisioning-aws-shield-v6/blueprints/always-do-detection-response.md: sha256:09de2b2c2e5085013bb8bc30909d9bca8763e4b304a6ee37c635a309df5811ef
+    .claude/skills/provisioning-aws-shield-v6/blueprints/always-do-patterns.md: sha256:5723c7a2036fd9f0cb6f5eef5d38feee6c5fc2cac830883de8408548397bf83a
+    .claude/skills/provisioning-aws-shield-v6/blueprints/always-do-subscription-protection.md: sha256:16d9e96fd8d569f4278bd199f9d82f956579e18d1936257f97d9190214391e44
+    .claude/skills/provisioning-aws-shield-v6/blueprints/evaluation-scenarios.md: sha256:8d050bab6876c1233398e4bf4f2663e81a8ee9384970581428d0491a8011de40
+    .claude/skills/provisioning-aws-shield-v6/blueprints/never-do-patterns.md: sha256:859d19a3b25657100149ca9ed679914e61600eb752f64dc9d8787348bff95ac2
+    .claude/skills/provisioning-aws-shield-v6/blueprints/never-do-shield.md: sha256:6521b2dec0081561f03887c8c5288fb389f9f0571b4c6de643d2bc4a675fe14a
+    .claude/skills/provisioning-aws-shield-v6/blueprints/unverified-and-risks.md: sha256:a031583f6cf4dc285378e8d77baf4ed50d157f8673539b8756a03c29cf4f2143
+    .claude/skills/provisioning-aws-sns-v6/SKILL.md: sha256:586e97a80329e06070b6e23d2dc35019253bbe784c3ffd22a5e9926f10f90ff3
+    .claude/skills/provisioning-aws-sns-v6/blueprints/always-do-access-delivery.md: sha256:90e8b9276ebf52abb5920a00daae82ffdffc140b2b0e7c0143c4b8e4dcecf733
+    .claude/skills/provisioning-aws-sns-v6/blueprints/always-do-patterns.md: sha256:0611dee0e198c04873bb859aa79aaadde16516ee714e64ab01030402cdeab487
+    .claude/skills/provisioning-aws-sns-v6/blueprints/always-do-topic.md: sha256:fc1c6b102f313651cc76a080574da261229f42a4da1bbaafb85ae062638c4ca7
+    .claude/skills/provisioning-aws-sns-v6/blueprints/evaluation-scenarios.md: sha256:b6dc6c7dd05346e3bc52996173dca3317ba8c99e03d10fdb265e06cd1491b1ea
+    .claude/skills/provisioning-aws-sns-v6/blueprints/never-do-access-kms.md: sha256:9afd4d5ca96473baddab001f6d82c549fff7efe1e83dd44bac843c94aa93a9bb
+    .claude/skills/provisioning-aws-sns-v6/blueprints/never-do-patterns.md: sha256:00d5a5208d4af669a40418834cb3b05ef27f0eff3864ef24de76af0353244d79
+    .claude/skills/provisioning-aws-sns-v6/blueprints/never-do-subscriptions.md: sha256:ffb77c5094ebfceebd09810963e5408bb7b254f4ff4efbdb017b74727d1ed3cf
+    .claude/skills/provisioning-aws-sns-v6/blueprints/unverified-and-risks.md: sha256:c56dc9acc540acf5492da95a902ff39f19b9f90635f07e07c740bc1d71e6d53e
+    .claude/skills/provisioning-aws-sqs-v6/SKILL.md: sha256:acb70113169f37d27d64c4ef0700805b6bdc7f963158d6c8353bd198710045cf
+    .claude/skills/provisioning-aws-sqs-v6/blueprints/always-do-dlq.md: sha256:97a163a0b4398b5b1424cd6d67a75533e83ad5f4ebe413b9b575aeeb71164153
+    .claude/skills/provisioning-aws-sqs-v6/blueprints/always-do-patterns.md: sha256:4727321de8b9a768b8282a4a349b63096481e8af12ad8b288a9880a018095a2c
+    .claude/skills/provisioning-aws-sqs-v6/blueprints/always-do-policies.md: sha256:237c0fadc737b662b195ba0383a2d9f3883d11502c87684e69e309de464516f2
+    .claude/skills/provisioning-aws-sqs-v6/blueprints/always-do-queues.md: sha256:84792e26464b46a67e117063cc5044193e642cf3a9e1052db1dcbd3c5890cfdf
+    .claude/skills/provisioning-aws-sqs-v6/blueprints/evaluation-scenarios.md: sha256:f05caa68545d7d5f81f3e5b55b0fb8c0b17bfa3f396cbb141bed7798a898f0c4
+    .claude/skills/provisioning-aws-sqs-v6/blueprints/never-do-patterns.md: sha256:613149b8d03b122e2b1fef9d31f7efc28a202186e5e566c3d6f5d3affff807af
+    .claude/skills/provisioning-aws-sqs-v6/blueprints/never-do-policies-access.md: sha256:d4b7ed5dc9cca2cd4ea86bafc69375e58dd2580c21668298dde1e7502af07ff6
+    .claude/skills/provisioning-aws-sqs-v6/blueprints/never-do-queue-config.md: sha256:d8fe2d04da81cf8fbf238f13ee4d77dd65e9bc5a21a5358716667b457e455769
+    .claude/skills/provisioning-aws-sqs-v6/blueprints/unverified-and-risks.md: sha256:cc08e1a7830773694f155cd90923b968ac9e2d1ba64bba12e8ea04d00ac39d11
+    .claude/skills/provisioning-aws-step-functions-v6/SKILL.md: sha256:8af6659bde7e52abb570a8e77e7be38b0bcd0be2e22bb83ce0df363a6f083ff7
+    .claude/skills/provisioning-aws-step-functions-v6/blueprints/always-do-encryption-testing.md: sha256:aab48dcd054a0873faebbe6de4ad1384f7e0b03e2c0dabaf223e8dc39ee3d12b
+    .claude/skills/provisioning-aws-step-functions-v6/blueprints/always-do-foundation.md: sha256:066388d251ab9ac8fce4fe77c102f776c8a437a82e0c4d68508a67926131c130
+    .claude/skills/provisioning-aws-step-functions-v6/blueprints/always-do-patterns.md: sha256:0eb09c18370148c9b536ec8e68e8a32b2f122c43d124359d0661eb9b6535cb1d
+    .claude/skills/provisioning-aws-step-functions-v6/blueprints/always-do-state-machine.md: sha256:fb3635876991d4d57129cc8b541616ec1a450940d1efe383c0082fb3e6698b4f
+    .claude/skills/provisioning-aws-step-functions-v6/blueprints/corrections-and-limits.md: sha256:e2d17d3468761ffb8a10b90de2d04f23ddfd9022cb1c3bbaaede4977bce27b2a
+    .claude/skills/provisioning-aws-step-functions-v6/blueprints/evaluation-scenarios.md: sha256:01e2de07cea4609e346b22c071dab9558e6f7e705598bbf92ae2be04e8824216
+    .claude/skills/provisioning-aws-step-functions-v6/blueprints/never-do-configuration.md: sha256:a25a874d46d57d4849c9c2bf889ec52d54e0b03677026191fd449fe59ae189b0
+    .claude/skills/provisioning-aws-step-functions-v6/blueprints/never-do-iam-asl.md: sha256:ec22df6d9ed3e4c5159d180ce9704d86aba149d7544073b9fd3340d125630aef
+    .claude/skills/provisioning-aws-step-functions-v6/blueprints/never-do-patterns.md: sha256:a990f7e3b088ee5a75499099b11027b10a208e9faf7d6d2ace303910b057a9b2
+    .claude/skills/provisioning-aws-step-functions-v6/blueprints/unverified-and-risks.md: sha256:ebfaa430e0392a00f6e4149ded033c361cf9e127e8bd8ce580d230654999ecaf
+    .claude/skills/provisioning-aws-vpc-v6/SKILL.md: sha256:e74b8f78cabda138f008c8f788e0cff275cfaa1407f9578ef2a37d6f384bff0a
+    .claude/skills/provisioning-aws-vpc-v6/blueprints/always-do-foundation.md: sha256:e35ac2c32edcca0b20e08164a8ed365dd80ba63916c041f51be10c3d76470b63
+    .claude/skills/provisioning-aws-vpc-v6/blueprints/always-do-gateways-routing.md: sha256:27f6affff33d0c23d54d36914ebdec4c2f01c427a731c2720c34e99132a34e5b
+    .claude/skills/provisioning-aws-vpc-v6/blueprints/always-do-observability-testing.md: sha256:0ea20445a93e32f32f98ad75e0c607d281aebc8591f7b8f8cc418c3a6f2b93dd
+    .claude/skills/provisioning-aws-vpc-v6/blueprints/always-do-patterns.md: sha256:1bfa92b990fe66e63fdfe1adff2b542a8e0a04d4f2417d5bd40845fa5d0958ae
+    .claude/skills/provisioning-aws-vpc-v6/blueprints/always-do-security.md: sha256:444399d256e2dad89ebe4f63c458e3777b8625d5b4d935920d5373cf1950a059
+    .claude/skills/provisioning-aws-vpc-v6/blueprints/evaluation-scenarios.md: sha256:486cb3e0040914b8e8ea937efa1ba64834ac1073b674093034c81720b12e829d
+    .claude/skills/provisioning-aws-vpc-v6/blueprints/never-do-networking.md: sha256:b38e5c543252416358724b3aee781fc0238d8d6864c0347295cba57baedcf007
+    .claude/skills/provisioning-aws-vpc-v6/blueprints/never-do-patterns.md: sha256:ba1260ff48a72ddfadf8c0c4ccbaa3612cd6ab1afcfa2d29b4f4f4875b39f22c
+    .claude/skills/provisioning-aws-vpc-v6/blueprints/never-do-provider-migration.md: sha256:f6b79b3813c8e4a9a2cb6ee556068b3505f6eb0cbd7a7af34a80fd8d435dd968
+    .claude/skills/provisioning-aws-vpc-v6/blueprints/never-do-security.md: sha256:47e69a8d6e9b817c91a70fd5f93b9dae471cfc599ac4c4f442b0478dab7fa450
+    .claude/skills/provisioning-aws-vpc-v6/blueprints/unverified-and-risks.md: sha256:a822bbafd496ad3c356c39e30be8d4b9ebb777ff1d9e9d2b495803488f3d349d
+    .claude/skills/provisioning-aws-waf-v6/SKILL.md: sha256:53b47f51da15d3f6aa2bf64b4feacc40c383b318f972172b1040892b74c413a7
+    .claude/skills/provisioning-aws-waf-v6/blueprints/always-do-attach-logging.md: sha256:9d09d648028b004e48b86b7b910d098de3d59dfdf98e5e92d2aa51ebb8f25617
+    .claude/skills/provisioning-aws-waf-v6/blueprints/always-do-foundation.md: sha256:fee0d42211be53361b03af00c92cb68280895509067b7390f40ea608fd6de200
+    .claude/skills/provisioning-aws-waf-v6/blueprints/always-do-patterns.md: sha256:b3d422ea0782225d35187f67cf38087e9fc688dba2951e6fb9e352961ae2064b
+    .claude/skills/provisioning-aws-waf-v6/blueprints/always-do-resources.md: sha256:d39960407f4b5f18b54b42a723d8f70a414b9efc1f00109e3622907bccbaecad
+    .claude/skills/provisioning-aws-waf-v6/blueprints/evaluation-scenarios.md: sha256:f0993e9bc5151a1193398fafb87bc4b2f535e4df318de8ccd856d44672f6fa9d
+    .claude/skills/provisioning-aws-waf-v6/blueprints/never-do-attachment-scope.md: sha256:4c149ba51531891e30fdffbe6bda1afbe3fc6092eedd040492061b40e1ee817e
+    .claude/skills/provisioning-aws-waf-v6/blueprints/never-do-limits-provider.md: sha256:1a770be176f8106d647834929fbe6fb410eed004170dacc92d12f91c63e45821
+    .claude/skills/provisioning-aws-waf-v6/blueprints/never-do-patterns.md: sha256:237305ae1e68db23197284439be2fd7ec49f4136f0beddc4f0175306ab8af75c
+    .claude/skills/provisioning-aws-waf-v6/blueprints/never-do-web-acl.md: sha256:a04dae2468c9be3fe6b5fc02c5191ffeb4ad40b6a55eb5ea6b174e5cc4081d32
+    .claude/skills/provisioning-aws-waf-v6/blueprints/unverified-and-risks.md: sha256:b56c017741521d20532f9280518fbf7d231962d46a9d200d4bbdb729e8ddf034
+    .claude/skills/provisioning-aws-xray-v6/SKILL.md: sha256:39c4a57ec93b4752a8d48903e88a1cf07e83c47323eb0674b262812df17aa335
+    .claude/skills/provisioning-aws-xray-v6/blueprints/always-do-cross-service.md: sha256:53d545b722a664465d0d9ce3960f0b968f98ca9e38fd2c6f00164135efe6c7e1
+    .claude/skills/provisioning-aws-xray-v6/blueprints/always-do-foundation.md: sha256:d728e4dc31957408f0db6621d93a989373f39eaedc8548d875fef53a8431a5d8
+    .claude/skills/provisioning-aws-xray-v6/blueprints/always-do-patterns.md: sha256:78ee39ddc61b564b6a72d9f0ac9c31ef2dec53278643d0a59605537a6757eb26
+    .claude/skills/provisioning-aws-xray-v6/blueprints/always-do-sampling-groups.md: sha256:1353a866c29ae4597fc73d95d61a163958ed6c469d05ca6a2672dc10fe4ede5f
+    .claude/skills/provisioning-aws-xray-v6/blueprints/evaluation-scenarios.md: sha256:16f9df320d57a65d6fee914a087a7ec58644aaff599037db92043250f7421aac
+    .claude/skills/provisioning-aws-xray-v6/blueprints/never-do-encryption.md: sha256:d6c97a71235973170ba365ce0342074dbb567c5dcdf82836c932970dce05813c
+    .claude/skills/provisioning-aws-xray-v6/blueprints/never-do-patterns.md: sha256:f52a3a0f4e844d644bbc1ffb71c7327102d528aea9e88af40d1afc0c0cc0335c
+    .claude/skills/provisioning-aws-xray-v6/blueprints/never-do-provider-migration.md: sha256:243a46435fbfa792e59f76846609ee16c945013e0c9746165ccdc0613bfa60d2
+    .claude/skills/provisioning-aws-xray-v6/blueprints/unverified-and-risks.md: sha256:b06ff406a2e5e5f2d1b7494fd8fd2c0d2806b4490148665e6e4fa8c4fffa1a8e
+  source: local
+  local_path: ../aws-terraform
+  declaring_parent: ./packages/terraform
+  anchored_local_path: packages/aws-terraform
+  content_hash: sha256:b60ebf10c0b5b9b580c833a30abdbe7f3a37cf4663082600321a29e681631021
   declared_license: MIT
 - repo_url: _local/camel-quarkus-skills
   name: agents-factory-camel-quarkus-skills
@@ -952,6 +1551,7 @@ dependencies:
   local_path: ../camel-quarkus-skills
   declaring_parent: ./packages/camel-quarkus-integrator
   anchored_local_path: packages/camel-quarkus-skills
+  content_hash: sha256:afc8ea7257177c146a3dcbc31ea3c3a1f1539db111cb7e2085542b9c3e78729b
   declared_license: MIT
 - repo_url: _local/factory-core
   name: agents-factory-factory-core
@@ -975,6 +1575,7 @@ dependencies:
   local_path: ../factory-core
   declaring_parent: ./packages/researching-frameworks
   anchored_local_path: packages/factory-core
+  content_hash: sha256:0542063bf7be45e1598bf7cec9cbd7553dfbc09bac887144a712aba002226f96
   declared_license: MIT
 - repo_url: _local/research-core
   name: agents-factory-research-core
@@ -994,6 +1595,7 @@ dependencies:
   local_path: ../research-core
   declaring_parent: ./packages/researching-frameworks
   anchored_local_path: packages/research-core
+  content_hash: sha256:309ccb9607f6181afcdbbfa4f1963965851759c2d5ca63c7d9a78ce61ee98d5a
   declared_license: MIT
 - repo_url: microsoft/apm
   name: autopilot-issue-delivery-scheduler
@@ -1364,7 +1966,16 @@ deployments:
   owners:
   - local:packages/artifact-authoring
   active_owner: local:packages/artifact-authoring
-  content_hash: sha256:70d463b8f323d73b56946c6caaef4725bb50fd8b899ef7cabc31a5613f8f1a77
+  content_hash: sha256:4772431645c3247b886c90ef19da5b9c34b228bfda32ce4988f1a8787fcf0876
+- kind: project-relative
+  target: claude
+  value: .claude/agents/aws-terraform-engineer.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/terraform
+  active_owner: ./packages/terraform
+  content_hash: sha256:ea082f0fa8d011eb7541058d1e6dd1bb5bf34664d77c3eab151bb65da8d88122
 - kind: project-relative
   target: claude
   value: .claude/agents/book-formatter.md
@@ -1538,6 +2149,15 @@ deployments:
   content_hash: sha256:58507d43fcf576e05bacb2fc8c3821164cb7d5eda8cfa743b5c7d41ee327fc61
 - kind: project-relative
   target: claude
+  value: .claude/agents/terraform-rules-author.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/terraform
+  active_owner: ./packages/terraform
+  content_hash: sha256:de82dcaa43ef33df7ca4307b73a55217bf9bdbd732396cb76c12b87925745dca
+- kind: project-relative
+  target: claude
   value: .claude/rules/agent-frontmatter.md
   runtime: null
   scope: project
@@ -1545,6 +2165,33 @@ deployments:
   - local:packages/factory-core
   active_owner: local:packages/factory-core
   content_hash: sha256:5d9ea57fc54bcd225ed60a049239381954b30391fa5d2088200e96d8a6b09205
+- kind: project-relative
+  target: claude
+  value: .claude/rules/aws-terraform-code-standards.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:539a407a5dd5190715fcf73d26b0f42fb3647c16f0eaf19f9838a13969c53fa0
+- kind: project-relative
+  target: claude
+  value: .claude/rules/aws-terraform-project-config.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:fdd5eb776441176bb17a562efdcf836baf8f0010364e13cc14a34df209c24aef
+- kind: project-relative
+  target: claude
+  value: .claude/rules/aws-terraform-skills-management.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:f5eaee17d5aee147af5c77e10889133017ce50cf680e0d8f758277ca6f53996a
 - kind: project-relative
   target: claude
   value: .claude/rules/camel-quarkus-integrator-code-standards.md
@@ -3101,7 +3748,7 @@ deployments:
   owners:
   - ./packages/agent-package-builder
   active_owner: ./packages/agent-package-builder
-  content_hash: sha256:084b1286eb9201a77d7043ad3b9a42ee286ae7c90c6441adae27761695e5ec24
+  content_hash: sha256:bfe7fc2b122bd562413bce72937b5244a5ec62b87aa9fa58b3488ae31362382b
 - kind: project-relative
   target: claude
   value: .claude/skills/building-agent-packages/scripts/verify_skill.py
@@ -4940,6 +5587,2643 @@ deployments:
   content_hash: sha256:cf233035ff1eaac81d2d6e9616d57ad0baca75d01e322b6529d3ebf4c8d8d5e2
 - kind: project-relative
   target: claude
+  value: .claude/skills/provision-aws-terraform
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/terraform
+  active_owner: ./packages/terraform
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provision-aws-terraform/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/terraform
+  active_owner: ./packages/terraform
+  content_hash: sha256:84c71ccf20395b3f6425fb5e9535548f217931322d8e9cad54ef543a236fe494
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provision-aws-terraform/blueprints/evaluation-scenarios.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/terraform
+  active_owner: ./packages/terraform
+  content_hash: sha256:ee4c34412c5354eab68e901730a1f0afddb158acadbf01c430165b53e359a317
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-acm-v6
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-acm-v6/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:5afd88f6c140446e807e341fcaffc054b7e686203064469f265bd5fc26bc7988
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-acm-v6/blueprints/always-do-import-private-lookup.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:e957b5723994195fd7475b5e04a0cb82cc8c647f08caf65f34b2f5a314fa6495
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-acm-v6/blueprints/always-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:a4f4beccb7160d722d93c85c3ee88e85bcb3b2c179d817a70d6ed5e67f5cace5
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-acm-v6/blueprints/always-do-public-certificates.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:9301caf5e1613147bfa02e47095c7967760211998a78db32c8eb30c313918910
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-acm-v6/blueprints/evaluation-scenarios.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:62ce150db0730062f3201f1347c62a502557c7792dd7b82d019a1749df69860e
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-acm-v6/blueprints/never-do-certificates.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:7b4bd0fd4a4b07570cd7ce0f8e1019a2ecdd0a7996b2bb8d762d36b7b17f2751
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-acm-v6/blueprints/never-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:7a59e13622b5d4568825cfd040ad361dfc9a651a129bbdccc1becc3b69d256f7
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-acm-v6/blueprints/unverified-and-risks.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:79fbc478c46305bab2283bb337a743ef00958c2c4216826970469f667e728e85
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-api-gateway-v6
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-api-gateway-v6/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:a5a3b01cd82197c06f2622c2197434a561dfda746366481b5f2fd0012ef2f9dc
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-api-gateway-v6/blueprints/always-do-http-domain-access.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:fa7c6dc363fd4a64d5f955a6c8e4c0dc025411a0c9121152bf87870732ee76b6
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-api-gateway-v6/blueprints/always-do-http-websocket.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:d46b0e9312c6dd6e14b5a6d4214423e238e9599a7f53be0bdfa30c807e31578d
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-api-gateway-v6/blueprints/always-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:151f8b5e5a6cf1f24f1470f6a4fc8dc79d900fc7ea5d7bea0d71e42570af6ab6
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-api-gateway-v6/blueprints/always-do-rest-auth-domain.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:22ad2cdc28d1edeaf996f1a157a665ab43d1e60a58b3c6d13ef19ba35bb53618
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-api-gateway-v6/blueprints/always-do-rest-core.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:2252f4afe8021d76d13ff569934428dbdba6a76055dd1e91405b7a2ca22c44be
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-api-gateway-v6/blueprints/always-do-rest-deployment.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:2a2856b8552640e4c4135ff9e4ec1c785ded335097a8cb89009ef1f4e9d94560
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-api-gateway-v6/blueprints/evaluation-scenarios.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:b333daa68a0b86ecabce9a3fee08575e8c806bd4dfdf540e07e3ef9df4b35003
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-api-gateway-v6/blueprints/never-do-http-websocket.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:702c11654ddd0919551262bca32910b607ab2a0da959c50e5ca3b211e167f2e6
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-api-gateway-v6/blueprints/never-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:f8cfb34238c9481cce72a1aff5f65120afcc840b2b08da309c1f72084c2a0c5b
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-api-gateway-v6/blueprints/never-do-provider-migration.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:08c627832e47dde75e3761effc1d979caa2b8dceaf72520ee40fc783505cada7
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-api-gateway-v6/blueprints/never-do-rest.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:ec64b6a72cd0c84b2941ebfbb4920a8d9a4b161889bbb608facf437c6b2fcc06
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-api-gateway-v6/blueprints/unverified-and-risks.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:ea90500451a538be9c1e0f4f4a2dce9d4b60ddd128c6a5dfbb6713b931498313
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-cloudfront-v6
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-cloudfront-v6/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:769804fa5e47c7c5af7ffaad822a22ca5d9714ee1b891ef404675747f19eb1f5
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-cloudfront-v6/blueprints/always-do-dns-logging.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:4069758937fa50463b589b87270d4315bfa96d6edf6292cf9350f21743d7acfd
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-cloudfront-v6/blueprints/always-do-foundation.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:093397ac68e7bd2efd94dd6d378ce381aca5fa3127d21952df9f9e407c5e5352
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-cloudfront-v6/blueprints/always-do-origins-policies.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:ebcc03dd835070dcf3d5c2eaf6cf0c73035fb9f04ec548e1b3537a5a5f5360cf
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-cloudfront-v6/blueprints/always-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:746ef6f659f65b6688a81bdd1005e6b57e75c272fe321c67957af91c44ed1f9c
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-cloudfront-v6/blueprints/evaluation-scenarios.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:a2e81b21b4a3e8cbddcf1d94e3bcb3f04ac4aa26159b9b6e8cfb03690d1b0d48
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-cloudfront-v6/blueprints/never-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:509fffd1807d35a164d33bd30cf54d28e7a15996ca112019db4ab4c4baaa9da5
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-cloudfront-v6/blueprints/never-do-provider-operations.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:bb691addf76e576c2e5f10ba0c505919b93ed03d3a20cf7f6a22ed31bd68e36a
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-cloudfront-v6/blueprints/never-do-security.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:8888e1e994afad74efa4882678928d45a138d95817c8f627db87ec51baaa2a21
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-cloudfront-v6/blueprints/unverified-and-risks.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:7e591951fc03a868a7ef250d4e567b65b94f02df651c388306b458db31ae71a2
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-cloudtrail-v6
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-cloudtrail-v6/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:85957842734314143dfc04cf0884486bd8a5a619d5863565af85fe46e1f0d477
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-cloudtrail-v6/blueprints/always-do-kms-lake.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:5e628603872068c217325ffc9d3be91694b14aa4c7de32ee627d572f3926a289
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-cloudtrail-v6/blueprints/always-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:7356c194d0ef4e06c1dbae699e3f86a266b3118a2eae831acecca785bf5297eb
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-cloudtrail-v6/blueprints/always-do-trail.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:d56a85904cec606598829359f0ea24a1fd591b8facd326104bb367112f4c7c30
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-cloudtrail-v6/blueprints/evaluation-scenarios.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:dd02bc0ac26a621664eb3c0253debbbdfa044dd4cc98a42b426b6e81da8d4292
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-cloudtrail-v6/blueprints/never-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:9d7dc1fa6a3c8e911751e8aff8d28ebace0463f0ebc5cbfd319236a1fe673ecb
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-cloudtrail-v6/blueprints/never-do-provider-migration.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:4028ed5fafc0dc91efeb8a0856f48785bc1b350f45370f0ca4b34809ed5dd9de
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-cloudtrail-v6/blueprints/never-do-trail.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:22065e034e94faa0155a6adc1d3780748852c8635097304c3725c1afcd5925f6
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-cloudtrail-v6/blueprints/unverified-and-risks.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:3e9bfd93470eb1555e589cf91f6ef56290c135edfc026f727b7d8336e5946ed3
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-cloudwatch-v6
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-cloudwatch-v6/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:0f04538b61243d50d0aecf5aca0571118963854ef12fc92b0aaf1bfbc35f77bf
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-cloudwatch-v6/blueprints/always-do-alarms.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:64f322f028d4e752336fb126e8822c3f0349ee30fb8c9bbb4ac49b6528672809
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-cloudwatch-v6/blueprints/always-do-foundation.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:5573a6623f4defc99437175bfb780da51cfa8c35728d3798fd924a3ec067c224
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-cloudwatch-v6/blueprints/always-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:06957e7ff3d137dd539051ca7c9ec2336e4fd243c21216000144435e60797466
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-cloudwatch-v6/blueprints/always-do-security.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:cee29e65c77a3393a1d1322181bbe0353a1dcc17ab4bff8956f363a271f940fd
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-cloudwatch-v6/blueprints/evaluation-scenarios.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:01563ad2f567819e77ac304e86d76e2e6bbae356bc9df0fdc4f5976744a1bbad
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-cloudwatch-v6/blueprints/never-do-alarms.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:03f29a371c586bfd0c3dd36ee97e42ccd0a0a0e9fccdf98ee97136853b74b335
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-cloudwatch-v6/blueprints/never-do-logs.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:acf179f01f9e03a584d19609d96d72a21dd089548661b6404ff9fddd138251ad
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-cloudwatch-v6/blueprints/never-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:db6a508c8397068617c4d004c1fde3cd6bfe568518fe6e0985e71ac0bd77edf2
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-cloudwatch-v6/blueprints/unverified-and-risks.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:0e23d09eac6fe43a0f50c1893d05d3e88a02d0a13284be036521c71b656a2c65
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-cognito-v6
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-cognito-v6/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:7e1df43799b43f95289b96f15034e5aa01632eb7c943e15b29ebbd48989aa651
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-cognito-v6/blueprints/always-do-client-domain.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:a7093b6dbc75d3e7c0433a8bfca7bd9a2ae84ada4aa557a8effc4a3de8603cca
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-cognito-v6/blueprints/always-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:d76b26c276d5414fc40dc3330050138b53c50a7ae030e883c39fd94306b7d18f
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-cognito-v6/blueprints/always-do-pool.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:832bea1889dfa1d2dac019603168fb2cc1ae504c7056a33cf5243bfb8e0e71fd
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-cognito-v6/blueprints/evaluation-scenarios.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:cdfd154b6a40aa12e5241a133b2f2ebd0cfded018ba7a6e521b34b793e4be9f6
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-cognito-v6/blueprints/never-do-client-oauth.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:36139aaaa4c434f80e470f67f22d17919d3f1ddd4b92a6a0a22a43018cd7f3cf
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-cognito-v6/blueprints/never-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:51f3a6a70180584ceca1eab0c7a5576f4072a7c3285d92781d6fba00ce90f4c9
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-cognito-v6/blueprints/never-do-pool-domain.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:6c79d28fd88bb9b02b9b7cfe3f6a17b71aef67b1f514f80146d09528f653f845
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-cognito-v6/blueprints/unverified-and-risks.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:c200a0459d19ef67081a14bde812126dbd689fb1b2ca301e3ba78fec0ed86710
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-cost-management-v6
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-cost-management-v6/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:33c438eca5990ad75ab860cc6e91a055172678e139f528edb6996dd81e0f28e6
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-cost-management-v6/blueprints/always-do-budgets.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:01eb32d767d12857b228acad03018c48abb0cbe2d48f44e4f4ae72cc4589cada
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-cost-management-v6/blueprints/always-do-cost-intelligence.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:1b159afe97d4a5824146f9676755bc4aa54288330ad0609a8d9be769c7677c89
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-cost-management-v6/blueprints/always-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:5e86572c4f8944ff23e008857dffc63aa588132f141e25847057d9923c89492b
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-cost-management-v6/blueprints/always-do-reporting-commitments.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:09aae0a22903c73ef0895b0cf5705abeedc1c9f622dd794ca831febda6924c27
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-cost-management-v6/blueprints/evaluation-scenarios.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:edbae58d0c4e9a895dccd0bd1377e16b7d5ba53b733f6914d4be06e7b77948cc
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-cost-management-v6/blueprints/never-do-budgets-and-region.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:6aafd8b21e7d000c739a928f5fdaac588753cdcdfde9b2d57b53d9e250004d2a
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-cost-management-v6/blueprints/never-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:159396d9d6623326420a1cf843c0ba519f882f2c8c3ce8c1a220bcdc24e4c8a9
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-cost-management-v6/blueprints/never-do-reporting-migration.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:aa6d7952421d913f559aff16cfc597704c100776c4bce7ce869a186d03068bea
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-cost-management-v6/blueprints/unverified-and-risks.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:39b31f6865e28460569b7d6f7c4c283d1a35d182f33d59d31fc43a6d903e09ef
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-dynamodb-v6
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-dynamodb-v6/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:2b8e9d711c3e46cac822bfd343e2336c0fa1a9e242434375a820531e0f1b72a9
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-dynamodb-v6/blueprints/always-do-foundation.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:f8aa9b723d46e21b7d6e21011a6431067d8e4fe169153917abbaa3b240a5dfa1
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-dynamodb-v6/blueprints/always-do-indexes-capacity.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:4c7c6c451f9a2e9b7f2800eb27f39ee84587bb5fc63e1d53c86f1e39e8d56f20
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-dynamodb-v6/blueprints/always-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:0dec15b9a2a21d2c48bc6449f4aaa4e272f37f841f97c32bb6a311926ad64f0d
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-dynamodb-v6/blueprints/always-do-replication-satellites.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:8803746759c833eaf2d2117ee23819682cee9783e64286ac1e8563ea95f16f64
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-dynamodb-v6/blueprints/evaluation-scenarios.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:f4bf8ad7baf5c6971468e26a975882ad7ef45dc98faeb2ec16bc8c2b85097ee4
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-dynamodb-v6/blueprints/never-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:771d7e803635d30325e4c3d7939069e9d47e58c59e77a3b24b60a0227547ebfd
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-dynamodb-v6/blueprints/never-do-replication-provider.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:fe61ebb7197fdbbe5bc3c5e4715e88d357cdeb70c2804a3d26c6877e2359653e
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-dynamodb-v6/blueprints/never-do-table-indexes.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:d29ab286fb467118dc9796122c473eff3d7abbe847fbb1f6b2bd9b0574b2d4d0
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-dynamodb-v6/blueprints/unverified-and-risks.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:ac56a70320501bf90b57b81c3a43855947cf322fd5e85add4a54bef507e15d74
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-eventbridge-v6
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-eventbridge-v6/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:75a95218398bfb9462c5dc180f117a5ae8007586f6352dc46a3f1cb7e79f399c
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-eventbridge-v6/blueprints/always-do-foundation.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:9ea5dafd2fb04e736442bd0d9bbd8d42fba36d2847b90f8d1baf17604e80e0f0
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-eventbridge-v6/blueprints/always-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:7d65a7108c8d35b250bb2b3336054c9e17f608ba939d5d126384100ea7ff79d8
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-eventbridge-v6/blueprints/always-do-rules-targets.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:261e7de1d04fcd00c6e7c98878b8265ab9c8cb304afe94586d115d2b9618e2a1
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-eventbridge-v6/blueprints/always-do-scheduler-integrations.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:add6c01b12672eee7172ec4f8fc407ca07e3e33b9f416c0ff41775382a358c59
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-eventbridge-v6/blueprints/evaluation-scenarios.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:1c69ce7693c382f92303322f2828abbe15fc95d05b83a896b84cb53828819dce
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-eventbridge-v6/blueprints/never-do-bus-and-rules.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:31a3cb3213a410c5cdc6fae70616605f5e66704c8c187f17249657317e5a2849
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-eventbridge-v6/blueprints/never-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:4f7d9e2b4f438b302ff4e033cfb8a37173d6e2d4f687c2107058c44ee5fa0e1a
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-eventbridge-v6/blueprints/never-do-scheduler-and-versions.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:981f96855d3c6bae87eaf4f13f97afbaa1788e9bcec759188f72e15e0c45f58b
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-eventbridge-v6/blueprints/never-do-targets.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:439b923823173a2ba9002ff6a8831b9a3e8da80fd4d6caed1e6f4c619c4a1f0c
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-eventbridge-v6/blueprints/unverified-and-risks.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:7770676450fcf483e0647e47959c134b4fd716279e9a9022a351ef1c9628cdee
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-iam-v6
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-iam-v6/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:3a2129883623b13433f939a3525c61e162cf92fbfe48b2666ab959c60f6b9cc5
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-iam-v6/blueprints/always-do-oidc-users.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:7eba1897df36098dde65f3c460a970dae137070e769346bc263484061f46081e
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-iam-v6/blueprints/always-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:fe094eaa9fc6308524427ce4572cc950e2cb9e5eafb735e4e80f7a7c9d588295
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-iam-v6/blueprints/always-do-roles-policies.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:952359103b7c9a7d55519be1fabb7d681f58166a3ce761e6eb051667dfe1cadd
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-iam-v6/blueprints/always-do-testing.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:e52e3250b46e1deebf89a3e52ad80406861918d089063502d73bdab403457257
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-iam-v6/blueprints/evaluation-scenarios.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:59f152268f2783678504354f2543cb4c30ba294dba4ebc5de4cd6cf1d461fa36
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-iam-v6/blueprints/never-do-identity.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:4eacec9dedce3def3c781adb17d83fd5b938312dcb4099329fe941d64a7f0c9f
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-iam-v6/blueprints/never-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:8b763f067ad97d77271e24dbe9ab80f7506573cdf73faab5a513c140a5cd651e
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-iam-v6/blueprints/never-do-provider-migration.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:69f70d12665014d5ae263b47c72e010a7e5273dd73fc24c972240c2b41511a05
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-iam-v6/blueprints/never-do-roles-policies.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:3483ee18a9477d7656065b7594df5080264d9eebde9dd9f00647c13e5d0d8d52
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-iam-v6/blueprints/unverified-and-risks.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:67258a0052ab8e426fa86b573e76fe2ea1436440d659f65b8e47a350e8e82528
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-kms-v6
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-kms-v6/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:061787e5fe3a68a2d0dba7b137348154ccc987700c96aa395245a2eca3d8388e
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-kms-v6/blueprints/always-do-key-basics.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:8ff80c72f73500d07e96aeebf8121bc85f07f451deafc6d877ed3643af9c3feb
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-kms-v6/blueprints/always-do-key-policy.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:bc7291d191f6455f5ed63f1047f620171200050d84a0464273c754d56d81b5ba
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-kms-v6/blueprints/always-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:e03e2537ccca8895099949e9b5ea36754f8ca440e608df8a4e44deddc9c8b788
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-kms-v6/blueprints/evaluation-scenarios.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:d82858831f373721cdccabaf65051948ed050fcf4d351acc706d73d1b7511fa4
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-kms-v6/blueprints/never-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:a7675e5a839da90a0c19d42b175a848e3357356ba3b2d1445a7de072ff396321
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-kms-v6/blueprints/never-do-policy.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:53c6a5e62d4b2878b9a9aa4b0010830d48284f2df629e213bcdd7094e7e5713a
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-kms-v6/blueprints/never-do-usage.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:a3e25583acdc402dc223d92747b118bd58f483f3380bcbb9afd4beaea0d93da5
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-kms-v6/blueprints/unverified-and-risks.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:2e820e3d57a8f8d90055162e86c15ead03752b91b224d1592537ad108f8145ff
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-lambda-v6
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-lambda-v6/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:913d18ce44aad5dd91298a977982af6689dc4b5dfa0136eace3679ffb222281a
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-lambda-v6/blueprints/always-do-events-layers.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:477e58bf8ff18d2bf0219288c24ab33628cfd8932fac858a151dc6772253db75
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-lambda-v6/blueprints/always-do-function-config.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:74cc96efbebdf86a96b3847448242b921f5b2a9353b5e8848eb928fbb0ae5c9f
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-lambda-v6/blueprints/always-do-function.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:e93aceb6608b4800f64225b0f8752848866b657896ee362cd325cc4525e30a4f
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-lambda-v6/blueprints/always-do-invocation.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:dc51037a1c4a0af7444cae09dd21a150a97a28828693bbd6680329a8f84f035c
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-lambda-v6/blueprints/always-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:fe8ebec8d82cb940d5e3977f52f1f612f5336022e6490a0238cfd7f36702df01
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-lambda-v6/blueprints/evaluation-scenarios.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:847d11c9c5ed3277b81bb87e373d50aa63477c289433b63c8b35deec291e2445
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-lambda-v6/blueprints/never-do-access-provider.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:7ea75678555c4c6237d7f430910075a7e3c4cebe8842701f74568fae21c8eed6
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-lambda-v6/blueprints/never-do-events.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:a03dde2798aa3684963dc2ec556103c22f24584bea25453cad20fc7222660107
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-lambda-v6/blueprints/never-do-function.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:d6a765daa726d71a699691ab8fbbebdd137d0eb11ddd1614cb0357660f53514c
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-lambda-v6/blueprints/never-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:14f3e13b0781e7c4d6ce4914e25fdd317d176cd11135ac4b871ff04048f8499e
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-lambda-v6/blueprints/unverified-and-risks.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:0890327669cb2f978a8a6ae014bec824f2d206deb222e2d644f3ea99753de5c9
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-organizations-v6
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-organizations-v6/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:1c6c41e064a645568f75b6dff20639ff5ebd7c69a14e582e802b519b87d47e30
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-organizations-v6/blueprints/always-do-foundation.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:7a8544c8b81a0046fe895249d02ebcfde0e5ab39a2e06c0c494ae98bbec1357f
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-organizations-v6/blueprints/always-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:b438629851e5a5bacb4d4e7cfd54d46b9972719ed040fb8ae47d6b3527830f29
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-organizations-v6/blueprints/always-do-policies.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:158abe58e419de0455eb938d2357055688ef76b2191bc39605a5fd0a83285cc0
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-organizations-v6/blueprints/evaluation-scenarios.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:ac45691f7b783ed4b0145ee3e5230596159deb0707844b8aafaa14c17e6580f0
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-organizations-v6/blueprints/never-do-organization.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:4ead22f9461fa77f5100fa2663dd1008f7da7c6e99b8e5a350b8299850a0e615
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-organizations-v6/blueprints/never-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:fb965e3f034b9c2cf176d8f4386ad85a46bf9258d5dbcb5780183533a5ba7015
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-organizations-v6/blueprints/never-do-provider.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:e8625f220996fcc2d4127e06374ef17e21c327040bb13a61c09954fddfa8010d
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-organizations-v6/blueprints/unverified-and-risks.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:4861a0013184ab194631ef524fac22a679c60496d263a168fa01d7710beaa8bb
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-parameter-store-v6
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-parameter-store-v6/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:6c43a686876c4da18db759ce4a35eb2f89b06964afc5ff39c547a1d100855468
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-parameter-store-v6/blueprints/always-do-foundation.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:f484d0dc5155f43c06656cfda893610c3e408231a5a627bd643357b1eb4797e9
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-parameter-store-v6/blueprints/always-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:255237ec802e31bc95a3fee87c28a0438865b1521ccdf4de42b7b76fa0d6f5ca
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-parameter-store-v6/blueprints/always-do-secrets.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:0efa469f11a3a71eb471b49f1b8d7762415bdab6a2edda845bd97b0e50370e48
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-parameter-store-v6/blueprints/ask-first-ephemeral.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:2cdaad4ca64717e4c265118aac9348f8d3b81f7d5b4f4cfcfda15b3748104d41
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-parameter-store-v6/blueprints/evaluation-scenarios.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:afd062f15781fcf6c79ef71ea52705494a850a64e8d7911c7730d7e3e5e1cbfe
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-parameter-store-v6/blueprints/never-do-names-version.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:35f8a567b4559c73031ca1cf16a56a71ae901da8998e2be527d05457bebbce34
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-parameter-store-v6/blueprints/never-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:dd4e40ecca8709584178a61dbe6cbc1a2e7e9cf4af7a6ba8d80995c7b06b3110
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-parameter-store-v6/blueprints/never-do-secrets.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:52ebe7c3cdfaa8a0d07a47493537f62a74bf4f0113579845e12c90ec664757b7
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-parameter-store-v6/blueprints/unverified-and-risks.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:e548516cd2a14313b3a6ce8490ff059defed5f5276cac325b18d17a7dc14b7c6
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-route53-v6
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-route53-v6/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:4012a1b77c63ef5f0f40d85c31b1c6ab4039dfdb0c7f98c8cf1a7cbac5e369fe
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-route53-v6/blueprints/always-do-logging-dnssec.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:b28cc31248bce23aba019b0fdbb42671b4910428cd826c74c723b3d0c5829fe5
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-route53-v6/blueprints/always-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:3719ab8a2980c1014bce6f9600d1e4c45359d574b30566a60b5540c5ce73ec8a
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-route53-v6/blueprints/always-do-zones-records.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:e48ea7afe26518590d088cf6e3b688c9e227cbaea910533f89175bc1ad7c6146
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-route53-v6/blueprints/evaluation-scenarios.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:7c4ae91bcebeccc443283221906924e2f53ca82d54f7360357797950e87df76c
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-route53-v6/blueprints/never-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:41d1a500d52a0cbc821d750f59338df64fae1984019fd4754228391dc3a55e6f
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-route53-v6/blueprints/never-do-region-logging-dnssec.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:24f5acd0c83901bbc05ed4f0d6bfaba99723ad529af00cad26133aaa9c76720c
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-route53-v6/blueprints/never-do-zones-records.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:62ceaf669234c575e8811162fb00562ea5d39b20d37f163a20cf90308e1e71ce
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-route53-v6/blueprints/unverified-and-risks.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:11dba7595d78ca738dd8c66bb36ab4e77eb026e8c491451ab306a27a0803cd76
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-s3-v6
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-s3-v6/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:4f58bb136717c10e79469e06a57dccb4bfb92e9bd0e77917e29a66efa5f4d54d
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-s3-v6/blueprints/always-do-bucket-foundation.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:8225edccdd01d343e45362b848177090ceef8e3e8574e6a66ee83c21a1928352
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-s3-v6/blueprints/always-do-lifecycle-versioning.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:656e6fbcf0b4c6d62c3166a299c84d29b2bb50667bf9bf17577447c23e54c5b4
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-s3-v6/blueprints/always-do-objects-testing.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:b8796ff87841fbbb604233759ac9eec394cb7bcaf1d6e973ffa8745eed2f92e9
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-s3-v6/blueprints/always-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:8408050b61854267382853a5c58a42425bc4c50c216fa473fa4401df67817cc6
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-s3-v6/blueprints/always-do-security-encryption.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:d1637a8a8c837ba4ba867f8a2352f1ad656c0e2bc01823bc320d8c13886dab09
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-s3-v6/blueprints/evaluation-scenarios.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:a1eecdc89667d05b3b5fc83855cf2d024ec4c53f5a38cee0b0cd3f138e188631
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-s3-v6/blueprints/never-do-naming-endpoints.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:b6430be64beb94432c1725450fcf61c864567103f6231641fceb2a3a8d926038
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-s3-v6/blueprints/never-do-ownership-acl.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:faf723917d5a65fb31bb9d65cd0726ab28b6fe74a394e7df9b2ee65711639292
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-s3-v6/blueprints/never-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:c26b67a274e604b825f385ae2802bed58230ce738ebc0c6e14295e8d894f917e
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-s3-v6/blueprints/never-do-provider-migration.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:f8987c71e5b84e8f34e5650e8876d0b29429ba00a33b0493cfd4d46c449f5f32
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-s3-v6/blueprints/never-do-resource-conflicts.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:bb10df98a35af48560caf28ba2d532c6f95805b2e23924b7e727e3d0468a0ed2
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-s3-v6/blueprints/unverified-and-risks.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:b32f6c3526962b1dcc95bc111364bf22f5b0b965eeb513f8fc456e2f8f797224
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-sam-v6
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-sam-v6/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:fa277087034d6dec6646ca407b473b40890117cdc7aa41a768d251193c40d395
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-sam-v6/blueprints/always-do-cloudformation.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:cfba74f36d764d7b2cda088219acd1483469638b2af5c863b3dad1f32d47d55c
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-sam-v6/blueprints/always-do-foundation.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:77c8a2ba8bec4caf86628d6e4aa0cfafdf80dcba8bf62faca0f06a11e33f98eb
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-sam-v6/blueprints/always-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:91b654daf1b71a124479acb5551e0ae2caed1ea1f64e45e73ed53e664a3e199c
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-sam-v6/blueprints/always-do-sam-cli.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:ea6045d1f37d0cae762467188d604222beca515f31851efc825f864a3b6f3b0f
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-sam-v6/blueprints/evaluation-scenarios.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:8fcf558fdd467ebeefa979cee0363cc98b524f606d995478c5cf3ec42421f429
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-sam-v6/blueprints/never-do-cloudformation.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:dc0614b6631c2d6fd7cfa5e7b16eaf7b54d5c917d6758807c5201fdd56070a7e
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-sam-v6/blueprints/never-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:bec4a24f9b2dcde182f407504ca794a3c96f27a9f482ec5d929bb56cc60c5858
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-sam-v6/blueprints/never-do-provider-migration.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:23614e54fbc67b4261e02d165b6be7fbc9df6e132b8f4df925ff4cfeee67c737
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-sam-v6/blueprints/never-do-sam-cli.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:0489def21baf5dd1355189497c8b005630f6085f321703ac4433a4c5f33340b9
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-sam-v6/blueprints/unverified-and-risks.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:83c18179277a1c3855fc66d499222466f8657035b7be0be97c61265a97118e1d
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-secrets-manager-v6
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-secrets-manager-v6/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:f61d0bd04dc100972c6c8d44a9e4abcba2f6e43b4176fdc7df64ee8360a153c4
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-secrets-manager-v6/blueprints/always-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:855924c0e6c29ce8e25313d9d394732f76978295670e2e5b297085202a2259a4
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-secrets-manager-v6/blueprints/always-do-rotation-policy.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:c2f79bd3ec8f50bb267d15f6dd9382f5620f661e32473b91b705ed082f043ae9
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-secrets-manager-v6/blueprints/always-do-secrets.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:056838049ae3c768aa39da75b424be9abb923899d46309ec2177d3835de86ed6
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-secrets-manager-v6/blueprints/evaluation-scenarios.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:7de8060eb2e3cde35c2274a65d08ade72c1b78c884d894d79ed300a461bc50db
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-secrets-manager-v6/blueprints/never-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:eb80e6a82930a947e6f9166c9889f20c18f8bc3afcedf5c95409b99b031be275
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-secrets-manager-v6/blueprints/never-do-rotation-policy.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:42540d0cdbcbfb94c81a7058be2b54c64f97a06bd3ad00c312a44c9f9a1e5209
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-secrets-manager-v6/blueprints/never-do-secrets.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:9e9635691fa76b713879f55978ab2a5ffde306bd33efcb4257afc60065ae4315
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-secrets-manager-v6/blueprints/unverified-and-risks.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:ea4a0c3c1425dca37f85f54bc5a6096d291b0dfc9ccddd9c6c44a263c32fa0d2
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-ses-v6
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-ses-v6/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:364e0227dd1cc5243a26e8b007a6d38afdbe5efb64dd54e0e682589c283ab841
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-ses-v6/blueprints/always-do-classic-family.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:9ebcf871ba4ca0ac5d8f4b80c9f8cd6233c67b2504594b8660b1693b52ab07f7
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-ses-v6/blueprints/always-do-identity-dns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:aa83096001bdf5ece8e5e965f972603a78823858b60dffaad33b6d87b7ae57d0
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-ses-v6/blueprints/always-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:73050e5bc1c78bac19c3b901b8033287491b07f74a003c00dfeeec1f2d333183
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-ses-v6/blueprints/always-do-sending-config.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:32195abf56fb58cc4bc907564324078b06af4c8e09f389b282b11db78e7d65e3
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-ses-v6/blueprints/evaluation-scenarios.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:ff872d3b212f09ddbc6936a822a14a70e97abeec4ded4b016c9cf2d6d1eac0e0
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-ses-v6/blueprints/never-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:abed02c5c2c9a366d78e624f2c16efc53df7cdc42f497b8f6e2e86e014683a03
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-ses-v6/blueprints/never-do-provider-migration.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:cd9bd929d2d6ff6a5b166acb4436715e11b2b7a8026e3a86460c2f975622c47f
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-ses-v6/blueprints/never-do-ses-config.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:db7fdf147c158a36850a1d53f66c7f6a862598b5a4eb851385bc5de5d7f57534
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-ses-v6/blueprints/unverified-and-risks.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:5f02b42276889ecbb3fb7de2d7a51d00e32a8610afb3313bbad2f8d1f2a9fde4
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-shield-v6
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-shield-v6/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:de679d2896a47c12442e692f8be8b579632e47e19767aa3ef6d058a5f73cd70e
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-shield-v6/blueprints/always-do-detection-response.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:09de2b2c2e5085013bb8bc30909d9bca8763e4b304a6ee37c635a309df5811ef
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-shield-v6/blueprints/always-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:5723c7a2036fd9f0cb6f5eef5d38feee6c5fc2cac830883de8408548397bf83a
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-shield-v6/blueprints/always-do-subscription-protection.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:16d9e96fd8d569f4278bd199f9d82f956579e18d1936257f97d9190214391e44
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-shield-v6/blueprints/evaluation-scenarios.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:8d050bab6876c1233398e4bf4f2663e81a8ee9384970581428d0491a8011de40
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-shield-v6/blueprints/never-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:859d19a3b25657100149ca9ed679914e61600eb752f64dc9d8787348bff95ac2
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-shield-v6/blueprints/never-do-shield.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:6521b2dec0081561f03887c8c5288fb389f9f0571b4c6de643d2bc4a675fe14a
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-shield-v6/blueprints/unverified-and-risks.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:a031583f6cf4dc285378e8d77baf4ed50d157f8673539b8756a03c29cf4f2143
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-sns-v6
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-sns-v6/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:586e97a80329e06070b6e23d2dc35019253bbe784c3ffd22a5e9926f10f90ff3
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-sns-v6/blueprints/always-do-access-delivery.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:90e8b9276ebf52abb5920a00daae82ffdffc140b2b0e7c0143c4b8e4dcecf733
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-sns-v6/blueprints/always-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:0611dee0e198c04873bb859aa79aaadde16516ee714e64ab01030402cdeab487
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-sns-v6/blueprints/always-do-topic.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:fc1c6b102f313651cc76a080574da261229f42a4da1bbaafb85ae062638c4ca7
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-sns-v6/blueprints/evaluation-scenarios.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:b6dc6c7dd05346e3bc52996173dca3317ba8c99e03d10fdb265e06cd1491b1ea
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-sns-v6/blueprints/never-do-access-kms.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:9afd4d5ca96473baddab001f6d82c549fff7efe1e83dd44bac843c94aa93a9bb
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-sns-v6/blueprints/never-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:00d5a5208d4af669a40418834cb3b05ef27f0eff3864ef24de76af0353244d79
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-sns-v6/blueprints/never-do-subscriptions.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:ffb77c5094ebfceebd09810963e5408bb7b254f4ff4efbdb017b74727d1ed3cf
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-sns-v6/blueprints/unverified-and-risks.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:c56dc9acc540acf5492da95a902ff39f19b9f90635f07e07c740bc1d71e6d53e
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-sqs-v6
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-sqs-v6/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:acb70113169f37d27d64c4ef0700805b6bdc7f963158d6c8353bd198710045cf
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-sqs-v6/blueprints/always-do-dlq.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:97a163a0b4398b5b1424cd6d67a75533e83ad5f4ebe413b9b575aeeb71164153
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-sqs-v6/blueprints/always-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:4727321de8b9a768b8282a4a349b63096481e8af12ad8b288a9880a018095a2c
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-sqs-v6/blueprints/always-do-policies.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:237c0fadc737b662b195ba0383a2d9f3883d11502c87684e69e309de464516f2
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-sqs-v6/blueprints/always-do-queues.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:84792e26464b46a67e117063cc5044193e642cf3a9e1052db1dcbd3c5890cfdf
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-sqs-v6/blueprints/evaluation-scenarios.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:f05caa68545d7d5f81f3e5b55b0fb8c0b17bfa3f396cbb141bed7798a898f0c4
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-sqs-v6/blueprints/never-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:613149b8d03b122e2b1fef9d31f7efc28a202186e5e566c3d6f5d3affff807af
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-sqs-v6/blueprints/never-do-policies-access.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:d4b7ed5dc9cca2cd4ea86bafc69375e58dd2580c21668298dde1e7502af07ff6
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-sqs-v6/blueprints/never-do-queue-config.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:d8fe2d04da81cf8fbf238f13ee4d77dd65e9bc5a21a5358716667b457e455769
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-sqs-v6/blueprints/unverified-and-risks.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:cc08e1a7830773694f155cd90923b968ac9e2d1ba64bba12e8ea04d00ac39d11
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-step-functions-v6
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-step-functions-v6/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:8af6659bde7e52abb570a8e77e7be38b0bcd0be2e22bb83ce0df363a6f083ff7
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-step-functions-v6/blueprints/always-do-encryption-testing.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:aab48dcd054a0873faebbe6de4ad1384f7e0b03e2c0dabaf223e8dc39ee3d12b
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-step-functions-v6/blueprints/always-do-foundation.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:066388d251ab9ac8fce4fe77c102f776c8a437a82e0c4d68508a67926131c130
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-step-functions-v6/blueprints/always-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:0eb09c18370148c9b536ec8e68e8a32b2f122c43d124359d0661eb9b6535cb1d
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-step-functions-v6/blueprints/always-do-state-machine.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:fb3635876991d4d57129cc8b541616ec1a450940d1efe383c0082fb3e6698b4f
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-step-functions-v6/blueprints/corrections-and-limits.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:e2d17d3468761ffb8a10b90de2d04f23ddfd9022cb1c3bbaaede4977bce27b2a
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-step-functions-v6/blueprints/evaluation-scenarios.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:01e2de07cea4609e346b22c071dab9558e6f7e705598bbf92ae2be04e8824216
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-step-functions-v6/blueprints/never-do-configuration.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:a25a874d46d57d4849c9c2bf889ec52d54e0b03677026191fd449fe59ae189b0
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-step-functions-v6/blueprints/never-do-iam-asl.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:ec22df6d9ed3e4c5159d180ce9704d86aba149d7544073b9fd3340d125630aef
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-step-functions-v6/blueprints/never-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:a990f7e3b088ee5a75499099b11027b10a208e9faf7d6d2ace303910b057a9b2
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-step-functions-v6/blueprints/unverified-and-risks.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:ebfaa430e0392a00f6e4149ded033c361cf9e127e8bd8ce580d230654999ecaf
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-vpc-v6
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-vpc-v6/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:e74b8f78cabda138f008c8f788e0cff275cfaa1407f9578ef2a37d6f384bff0a
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-vpc-v6/blueprints/always-do-foundation.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:e35ac2c32edcca0b20e08164a8ed365dd80ba63916c041f51be10c3d76470b63
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-vpc-v6/blueprints/always-do-gateways-routing.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:27f6affff33d0c23d54d36914ebdec4c2f01c427a731c2720c34e99132a34e5b
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-vpc-v6/blueprints/always-do-observability-testing.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:0ea20445a93e32f32f98ad75e0c607d281aebc8591f7b8f8cc418c3a6f2b93dd
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-vpc-v6/blueprints/always-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:1bfa92b990fe66e63fdfe1adff2b542a8e0a04d4f2417d5bd40845fa5d0958ae
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-vpc-v6/blueprints/always-do-security.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:444399d256e2dad89ebe4f63c458e3777b8625d5b4d935920d5373cf1950a059
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-vpc-v6/blueprints/evaluation-scenarios.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:486cb3e0040914b8e8ea937efa1ba64834ac1073b674093034c81720b12e829d
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-vpc-v6/blueprints/never-do-networking.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:b38e5c543252416358724b3aee781fc0238d8d6864c0347295cba57baedcf007
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-vpc-v6/blueprints/never-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:ba1260ff48a72ddfadf8c0c4ccbaa3612cd6ab1afcfa2d29b4f4f4875b39f22c
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-vpc-v6/blueprints/never-do-provider-migration.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:f6b79b3813c8e4a9a2cb6ee556068b3505f6eb0cbd7a7af34a80fd8d435dd968
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-vpc-v6/blueprints/never-do-security.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:47e69a8d6e9b817c91a70fd5f93b9dae471cfc599ac4c4f442b0478dab7fa450
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-vpc-v6/blueprints/unverified-and-risks.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:a822bbafd496ad3c356c39e30be8d4b9ebb777ff1d9e9d2b495803488f3d349d
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-waf-v6
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-waf-v6/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:53b47f51da15d3f6aa2bf64b4feacc40c383b318f972172b1040892b74c413a7
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-waf-v6/blueprints/always-do-attach-logging.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:9d09d648028b004e48b86b7b910d098de3d59dfdf98e5e92d2aa51ebb8f25617
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-waf-v6/blueprints/always-do-foundation.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:fee0d42211be53361b03af00c92cb68280895509067b7390f40ea608fd6de200
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-waf-v6/blueprints/always-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:b3d422ea0782225d35187f67cf38087e9fc688dba2951e6fb9e352961ae2064b
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-waf-v6/blueprints/always-do-resources.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:d39960407f4b5f18b54b42a723d8f70a414b9efc1f00109e3622907bccbaecad
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-waf-v6/blueprints/evaluation-scenarios.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:f0993e9bc5151a1193398fafb87bc4b2f535e4df318de8ccd856d44672f6fa9d
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-waf-v6/blueprints/never-do-attachment-scope.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:4c149ba51531891e30fdffbe6bda1afbe3fc6092eedd040492061b40e1ee817e
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-waf-v6/blueprints/never-do-limits-provider.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:1a770be176f8106d647834929fbe6fb410eed004170dacc92d12f91c63e45821
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-waf-v6/blueprints/never-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:237305ae1e68db23197284439be2fd7ec49f4136f0beddc4f0175306ab8af75c
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-waf-v6/blueprints/never-do-web-acl.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:a04dae2468c9be3fe6b5fc02c5191ffeb4ad40b6a55eb5ea6b174e5cc4081d32
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-waf-v6/blueprints/unverified-and-risks.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:b56c017741521d20532f9280518fbf7d231962d46a9d200d4bbdb729e8ddf034
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-xray-v6
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-xray-v6/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:39c4a57ec93b4752a8d48903e88a1cf07e83c47323eb0674b262812df17aa335
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-xray-v6/blueprints/always-do-cross-service.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:53d545b722a664465d0d9ce3960f0b968f98ca9e38fd2c6f00164135efe6c7e1
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-xray-v6/blueprints/always-do-foundation.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:d728e4dc31957408f0db6621d93a989373f39eaedc8548d875fef53a8431a5d8
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-xray-v6/blueprints/always-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:78ee39ddc61b564b6a72d9f0ac9c31ef2dec53278643d0a59605537a6757eb26
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-xray-v6/blueprints/always-do-sampling-groups.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:1353a866c29ae4597fc73d95d61a163958ed6c469d05ca6a2672dc10fe4ede5f
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-xray-v6/blueprints/evaluation-scenarios.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:16f9df320d57a65d6fee914a087a7ec58644aaff599037db92043250f7421aac
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-xray-v6/blueprints/never-do-encryption.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:d6c97a71235973170ba365ce0342074dbb567c5dcdf82836c932970dce05813c
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-xray-v6/blueprints/never-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:f52a3a0f4e844d644bbc1ffb71c7327102d528aea9e88af40d1afc0c0cc0335c
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-xray-v6/blueprints/never-do-provider-migration.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:243a46435fbfa792e59f76846609ee16c945013e0c9746165ccdc0613bfa60d2
+- kind: project-relative
+  target: claude
+  value: .claude/skills/provisioning-aws-xray-v6/blueprints/unverified-and-risks.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-terraform
+  active_owner: local:packages/aws-terraform
+  content_hash: sha256:b06ff406a2e5e5f2d1b7494fd8fd2c0d2806b4490148665e6e4fa8c4fffa1a8e
+- kind: project-relative
+  target: claude
   value: .claude/skills/rendering-mermaid-diagrams
   runtime: null
   scope: project
@@ -6306,6 +9590,33 @@ deployments:
   - ./packages/terraform
   active_owner: ./packages/terraform
   content_hash: sha256:d000bddd4d6299924cb7ff8b1b0ed378ce9080c183b67b52a1d6be1a9b24cb72
+- kind: project-relative
+  target: claude
+  value: .claude/skills/terraform-rules-author
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/terraform
+  active_owner: ./packages/terraform
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/terraform-rules-author/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/terraform
+  active_owner: ./packages/terraform
+  content_hash: sha256:f936e39b2e2e1ebe9cdf8d0382dc1bfee1daa4cb9e157f08cbb7efeee318436a
+- kind: project-relative
+  target: claude
+  value: .claude/skills/terraform-rules-author/blueprints/evaluation-scenarios.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/terraform
+  active_owner: ./packages/terraform
+  content_hash: sha256:6dcfce7178d778724a0f2dd2e048b2b929f77ed80ed735c93e53e2a42a2f4441
 - kind: project-relative
   target: claude
   value: .claude/skills/translating-book

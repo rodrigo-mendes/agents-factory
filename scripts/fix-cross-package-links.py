@@ -41,9 +41,10 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parent.parent
 CLAUDE_DIR = REPO_ROOT / ".claude"
 
-# Matches: apm_modules/_local/<pkg-or-hash>/.apm/(agents|skills)/<rest>
+# Matches: apm_modules/_local/<pkg-or-hash>[/<pkg>]/.apm/(agents|skills)/<rest>
+# (CLI >= 0.35 nests a hash directory before the package directory)
 BROKEN_LINK_RE = re.compile(
-    r"(?:\.\./)*apm_modules/_local/[^/]+/\.apm/(agents|skills)/([^)\]\s]+)"
+    r"(?:\.\./)*apm_modules/_local/(?:[^/]+/)+?\.apm/(agents|skills)/([^)\]\s]+)"
 )
 
 
