@@ -1,0 +1,163 @@
+[>] Installing dependencies from apm.yml...
+[!] [!] Skipped 2 untrusted project script(s). Run 'apm lifecycle trust' to 
+enable them.
+[>] Resolving ./packages/langchain4j...
+WARNING apm_cli.policy.discovery Policy repo rodrigo-mendes/.github-private not found (or [REDACTED] private-repo read scope). If your org publishes policy in .github-private, ensure the token has Contents:read permission on that repo.
+[i] Targets: claude  (source: --target flag)
+  [+] ./packages/agent-package-builder (local)
+  [+] ./packages/artifact-authoring (local)
+  [+] ./packages/auditing (local)
+  [+] ./packages/aws-architect (local)
+  [+] ./packages/book-writing (local)
+  [+] ./packages/camel-quarkus-integrator (local)
+  [+] ./packages/evaluating (local)
+  [+] ./packages/langchain4j (local)
+  [+] ./packages/oci-architecture (local)
+  [+] ./packages/oci-functions-java (local)
+  [+] ./packages/oci-observability (local)
+  [+] ./packages/oci-terraform (local)
+  [+] ./packages/researching-frameworks (local)
+  [+] ./packages/researching-platform (local)
+  [+] ./packages/stripe-java (local)
+  [+] ./packages/terraform (local)
+  [+] ./packages/validating (local)
+  [+] ../artifact-authoring (local)
+  [+] ../aws-skills (local)
+  [+] ../aws-terraform (local)
+  [+] ../camel-quarkus-skills (local)
+  [+] ../factory-core (local)
+  [+] ../oci-core (local)
+  [+] ../research-core (local)
+  |-- 1 skill(s) integrated -> .claude/skills/
+Warning: Failed to parse C:\agents\agents-factory\apm_modules\_local\artifact-authoring\.apm\skills\agent-creator\assets\TEMPLATE.AGENT.md: Failed to parse primitive file C:\agents\agents-factory\apm_modules\_local\artifact-authoring\.apm\skills\agent-creator\assets\TEMPLATE.AGENT.md: Unknown primitive file type: C:\agents\agents-factory\apm_modules\_local\artifact-authoring\.apm\skills\agent-creator\assets\TEMPLATE.AGENT.md
+  |-- 1 agents integrated -> .claude/agents/
+  |-- 5 skill(s) integrated -> .claude/skills/
+  |-- 1 agents adopted -> .claude/agents/
+  |-- 8 skill(s) integrated -> .claude/skills/
+  |-- 1 agents adopted -> .claude/agents/
+  |-- 2 rule(s) integrated -> .claude/rules/
+  |-- 1 skill(s) integrated -> .claude/skills/
+  |-- 13 agents adopted -> .claude/agents/
+  |-- 10 skill(s) integrated -> .claude/skills/
+  |-- 1 agents adopted -> .claude/agents/
+  |-- 3 rule(s) integrated -> .claude/rules/
+  |-- 2 skill(s) integrated -> .claude/skills/
+  |-- 1 agents adopted -> .claude/agents/
+  |-- 1 skill(s) integrated -> .claude/skills/
+  |-- 1 agents integrated -> .claude/agents/
+  |-- 2 rule(s) integrated -> .claude/rules/
+  |-- 3 skill(s) integrated -> .claude/skills/
+  |-- 2 agents adopted -> .claude/agents/
+  |-- 2 rule(s) integrated -> .claude/rules/
+  |-- 8 skill(s) integrated -> .claude/skills/
+  |-- 3 agents adopted -> .claude/agents/
+  |-- 17 rule(s) integrated -> .claude/rules/
+  |-- 14 skill(s) integrated -> .claude/skills/
+  |-- 1 agents adopted -> .claude/agents/
+  |-- 1 rule(s) integrated -> .claude/rules/
+  |-- 10 skill(s) integrated -> .claude/skills/
+  |-- 1 agents adopted -> .claude/agents/
+  |-- 8 rule(s) integrated -> .claude/rules/
+  |-- 20 skill(s) integrated -> .claude/skills/
+  |-- 5 skill(s) integrated -> .claude/skills/
+  |-- 15 skill(s) integrated -> .claude/skills/
+  |-- 2 agents adopted -> .claude/agents/
+  |-- 1 rule(s) integrated -> .claude/rules/
+  |-- 6 skill(s) integrated -> .claude/skills/
+  |-- 2 agents adopted -> .claude/agents/
+  |-- 5 skill(s) integrated -> .claude/skills/
+  |-- 1 agents adopted -> .claude/agents/
+  |-- 5 skill(s) integrated -> .claude/skills/
+Warning: Failed to parse C:\agents\agents-factory\apm_modules\_local\cb22016cafe9\artifact-authoring\.apm\skills\agent-creator\assets\TEMPLATE.AGENT.md: Failed to parse primitive file C:\agents\agents-factory\apm_modules\_local\cb22016cafe9\artifact-authoring\.apm\skills\agent-creator\assets\TEMPLATE.AGENT.md: Unknown primitive file type: C:\agents\agents-factory\apm_modules\_local\cb22016cafe9\artifact-authoring\.apm\skills\agent-creator\assets\TEMPLATE.AGENT.md
+  |-- 1 agents integrated -> .claude/agents/
+  |-- 5 skill(s) integrated -> .claude/skills/
+  |-- 40 skill(s) integrated -> .claude/skills/
+  |-- 3 rule(s) integrated -> .claude/rules/
+  |-- 26 skill(s) integrated -> .claude/skills/
+  |-- 13 skill(s) integrated -> .claude/skills/
+  |-- 5 rule(s) integrated -> .claude/rules/
+  |-- 1 skill(s) integrated -> .claude/skills/
+  |-- 3 agents adopted -> .claude/agents/
+  |-- (files unchanged)
+[!]   Kept user-edited file 
+.claude/skills/autopilot-issue-triage-scheduler/SKILL.md (from 
+microsoft/apm/packages/autopilot/autopilot-issue-triage-scheduler); delete 
+manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/autopilot-issue-triage-scheduler/scripts/fetch_queue.py (from 
+microsoft/apm/packages/autopilot/autopilot-issue-triage-scheduler); delete 
+manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/autopilot-issue-triage-scheduler/scripts/triage_state.py (from 
+microsoft/apm/packages/autopilot/autopilot-issue-triage-scheduler); delete 
+manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/autopilot-pr-triage-scheduler/scripts/fetch_queue.py (from 
+microsoft/apm/packages/autopilot/autopilot-pr-triage-scheduler); delete 
+manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/autopilot-pr-triage-scheduler/scripts/triage_state.py (from 
+microsoft/apm/packages/autopilot/autopilot-pr-triage-scheduler); delete 
+manually if no longer needed
+[i] Cleaned 97 files from packages no longer in apm.yml
+[!]   Kept user-edited file .claude/skills/refactoring-oci-java/SKILL.md (from 
+./packages/oci-functions-java); delete manually if no longer needed
+[!]   Kept user-edited file .claude/skills/terraform-rules-author/SKILL.md 
+(from ./packages/terraform); delete manually if no longer needed
+  [!] Skipped .claude/skills/refactoring-oci-java/SKILL.md: modified since 
+deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped .claude/skills/terraform-rules-author/SKILL.md: modified since 
+deployment. Preserve your changes before reinstalling with --force.
+  [!] [microsoft/apm/packages/autopilot/autopilot-issue-triage-scheduler] 
+Skipped removing .claude/skills/autopilot-issue-triage-scheduler/SKILL.md: file
+has been edited since APM deployed it. Delete it manually if you no longer need
+it, or ignore this warning to keep your changes.
+  [!] [microsoft/apm/packages/autopilot/autopilot-issue-triage-scheduler] 
+Skipped removing 
+.claude/skills/autopilot-issue-triage-scheduler/scripts/fetch_queue.py: file 
+has been edited since APM deployed it. Delete it manually if you no longer need
+it, or ignore this warning to keep your changes.
+  [!] [microsoft/apm/packages/autopilot/autopilot-issue-triage-scheduler] 
+Skipped removing 
+.claude/skills/autopilot-issue-triage-scheduler/scripts/triage_state.py: file 
+has been edited since APM deployed it. Delete it manually if you no longer need
+it, or ignore this warning to keep your changes.
+  [!] [microsoft/apm/packages/autopilot/autopilot-issue-triage-scheduler] 
+Skipped removing skill directory 
+.claude/skills/autopilot-issue-triage-scheduler: 3 file(s) not owned by APM or 
+modified since deployment: 
+.claude/skills/autopilot-issue-triage-scheduler/SKILL.md, 
+.claude/skills/autopilot-issue-triage-scheduler/scripts/fetch_queue.py, 
+.claude/skills/autopilot-issue-triage-scheduler/scripts/triage_state.py. Remove
+manually if no longer needed.
+  [!] [microsoft/apm/packages/autopilot/autopilot-pr-triage-scheduler] Skipped 
+removing .claude/skills/autopilot-pr-triage-scheduler/scripts/fetch_queue.py: 
+file has been edited since APM deployed it. Delete it manually if you no longer
+need it, or ignore this warning to keep your changes.
+  [!] [microsoft/apm/packages/autopilot/autopilot-pr-triage-scheduler] Skipped 
+removing .claude/skills/autopilot-pr-triage-scheduler/scripts/triage_state.py: 
+file has been edited since APM deployed it. Delete it manually if you no longer
+need it, or ignore this warning to keep your changes.
+  [!] [microsoft/apm/packages/autopilot/autopilot-pr-triage-scheduler] Skipped 
+removing skill directory .claude/skills/autopilot-pr-triage-scheduler: 2 
+file(s) not owned by APM or modified since deployment: 
+.claude/skills/autopilot-pr-triage-scheduler/scripts/fetch_queue.py, 
+.claude/skills/autopilot-pr-triage-scheduler/scripts/triage_state.py. Remove 
+manually if no longer needed.
+  [!] [./packages/oci-functions-java] Skipped removing 
+.claude/skills/refactoring-oci-java/SKILL.md: file has been edited since APM 
+deployed it. Delete it manually if you no longer need it, or ignore this 
+warning to keep your changes.
+  [!] [./packages/terraform] Skipped removing 
+.claude/skills/terraform-rules-author/SKILL.md: file has been edited since APM 
+deployed it. Delete it manually if you no longer need it, or ignore this 
+warning to keep your changes.
+  [!] [./packages/oci-functions-java] Skipped removing skill directory 
+.claude/skills/refactoring-oci-java: 1 file(s) not owned by APM or modified 
+since deployment: .claude/skills/refactoring-oci-java/SKILL.md. Remove manually
+if no longer needed.
+  [!] [./packages/terraform] Skipped removing skill directory 
+.claude/skills/terraform-rules-author: 1 file(s) not owned by APM or modified 
+since deployment: .claude/skills/terraform-rules-author/SKILL.md. Remove 
+manually if no longer needed.
+[*] Installed 24 APM dependencies (97 stale files cleaned) in 71.7s.
