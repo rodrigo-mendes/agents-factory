@@ -1,0 +1,59 @@
+# Evaluation Scenarios — observing-oci-java-functions
+
+## Scenario 1: Instrument a New Java Function with Metrics and Structured Logs
+
+```json
+{
+  "skills": ["observing-oci-java-functions"],
+  "query": "I need to add observability to a new OCI Java function — it should post a custom metric for each successful and failed order, and log all events as structured JSON.",
+  "expected_behavior": [
+    "Uses ResourcePrincipalAuthenticationDetailsProvider — no hardcoded API keys or PEM files",
+    "Initializes MonitoringClient in @FnConfiguration or static block (not inside handleRequest)",
+    "Writes structured JSON logs to System.out (not unstructured println)",
+    "Calls postMetricData synchronously inside handleRequest before returning",
+    "Uses PostMetricDataDetails.BatchAtomicity.NonAtomic",
+    "Reads COMPARTMENT_OCID and METRIC_NAMESPACE from RuntimeContext.getConfigurationByKey",
+    "Catches observability exceptions without rethrowing — observability failure does not fail the function",
+    "Generates a pom.xml that imports oci-java-sdk-bom:3.87.0 in dependencyManagement"
+  ]
+}
+```
+
+---
+
+## Scenario 2: Choose a Distributed Tracing Strategy for a Multi-Function Chain
+
+```json
+{
+  "skills": ["observing-oci-java-functions"],
+  "query": "We have three OCI Java Functions that call each other in a chain. We want to see end-to-end traces in OCI APM. Cold-start must stay under 1 second. We don't need portability to other backends.",
+  "expected_behavior": [
+    "Presents the tracing strategy decision matrix before generating code (OCI APM Agent, OTel Agent, Manual SDK, None)",
+    "Recommends OCI APM Java Agent or OpenTelemetry Agent given the cold-start budget > 800ms is feasible",
+    "Flags cold-start impact for each option (+80–150ms for APM agent, +120–200ms for OTel agent)",
+    "Confirms use of APM Private Data Key (not Public Data Key) for server-side functions",
+    "Shows APM_PRIVATE_DATA_KEY injected via function config — never hardcoded",
+    "Notes that OTLP endpoint URL must be retrieved from OCI Console, not constructed from documentation"
+  ]
+}
+```
+
+---
+
+## Scenario 3: Diagnose Missing Metrics and Empty APM Traces After Deployment
+
+```json
+{
+  "skills": ["observing-oci-java-functions"],
+  "query": "My OCI Java Function is deployed and invoked successfully, but custom metrics don't appear in OCI Monitoring and APM Trace Explorer is empty. No errors in function logs. What's wrong?",
+  "expected_behavior": [
+    "Checks whether oci_logging_log Terraform resource is configured with source_type = OCISERVICE for the function application (silent log loss)",
+    "Verifies IAM Dynamic Group matches the function OCID and policies grant 'use metrics' and 'use log-content'",
+    "Checks if function is in a private subnet without a Service Gateway — MonitoringClient calls to OCI APIs require Service Gateway, not Internet Gateway",
+    "Verifies APM_PRIVATE_DATA_KEY is correct and OTLP endpoint URL is retrieved from Console, not docs",
+    "Asks whether metric posts are happening inside a loop near the function timeout — advises batching with elapsed-time guard",
+    "Identifies OciMetadataServiceException as Emergency Stop condition requiring human intervention",
+    "Does not suggest creating SDK clients per invocation as a fix"
+  ]
+}
+```

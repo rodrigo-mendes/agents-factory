@@ -1,0 +1,59 @@
+[
+  {
+    "skills": ["provisioning-oci-connector-hub"],
+    "query": "Create a Terraform configuration (oracle/oci ~> 8.0, Terraform >= 1.7) to archive all application logs from our OCI Logging log group 'app-logs-prod' to an Object Storage bucket for 7-year compliance retention.",
+    "expected_behavior": [
+      "Generates a terraform {} block with required_version = \">= 1.7\" and oracle/oci version = \"~> 8.0\" provider constraint",
+      "Uses auth = \"ResourcePrincipal\" or private_key_path (never inline private key content) in the provider block",
+      "Adds validation blocks to compartment_ocid and environment variables",
+      "Creates oci_identity_policy before oci_sch_service_connector with an explicit depends_on reference",
+      "IAM policy uses minimum required verbs: 'read log-content' for source, 'manage objects where target.bucket.name = ...' for target — not manage all-resources",
+      "Sets log_group_id in the logging source log_sources block — does not omit it (avoids compartment-wide ingestion)",
+      "Sets object_name_prefix on the Object Storage target following {domain}/{purpose}/{env}/ naming convention",
+      "Configures batch_rollover_size_in_mbs = 100 and batch_rollover_time_in_ms = 60000 on the Object Storage target",
+      "Sets state = 'ACTIVE' on the connector",
+      "Applies defined_tags with at minimum environment, owner, and cost-center keys",
+      "Deploys oci_monitoring_alarm resources for ErrorCount[1m].sum() > 0 (CRITICAL) and BytesTransferred[5m].sum() == 0 (WARNING)",
+      "Uses lifecycle_details (correctly spelled) in any output — never the deprecated lifecyle_details typo"
+    ]
+  },
+  {
+    "skills": ["provisioning-oci-connector-hub"],
+    "query": "Our team wants to forward ERROR logs from OCI Logging to our Splunk SIEM. The Splunk HEC endpoint is external to OCI. What connector architecture should we use and how do we handle the API key securely?",
+    "expected_behavior": [
+      "Recommends OCI Logging → Connector Hub (with logRule task filtering level='ERROR') → OCI Functions target architecture",
+      "Explains that OCI Functions is the exit point for external HTTP targets — Connector Hub has no native external-HTTP target",
+      "Recommends a logRule task with condition logContent.data.level='ERROR' BEFORE the Functions target to reduce invocation cost",
+      "Advises storing the Splunk HEC API key in OCI Vault (not hardcoded in function code) and retrieving it via resource principal authentication",
+      "Provides IAM policy with 'use fn-invocation' on the specific function OCID — not manage functions-family",
+      "Tunes function target batch_size_in_kbs and batch_time_in_sec (does not leave at default)",
+      "Generates terraform {} block with required_version >= 1.7 and oracle/oci ~> 8.0 constraint",
+      "Includes oci_monitoring_alarm on ErrorCount metric for the connector",
+      "Does NOT suggest hardcoding the SIEM API key in the connector config or function environment variable"
+    ]
+  },
+  {
+    "skills": ["provisioning-oci-connector-hub"],
+    "query": "A developer proposes: 'Let's create one connector for the whole compartment, route all logs to a shared bucket, and let all teams read from it.' They also want to create the connector first and add IAM policies later. Should we approve? Also, we want the same log data to go to Logging Analytics AND Object Storage simultaneously.",
+    "expected_behavior": [
+      "Rejects compartment-wide logging source without log_group_id: explains it ingests _Audit logs and all service logs, causing cross-team data exposure and cost overrun",
+      "Rejects 'create connector first, add IAM later': explains connector enters FAILED state immediately and silently drops all data with no retry — requires depends_on pattern to enforce ordering",
+      "Rejects shared bucket with no access scoping: recommends per-team prefixed buckets and team-scoped IAM policies with where target.bucket.name conditions",
+      "For fan-out to Logging Analytics AND Object Storage: recommends parallel connectors pattern (2 separate connectors sharing the same log group source, independent targets)",
+      "Explains Streaming hub pattern as the alternative for 4+ targets or when replayability is needed",
+      "Flags all three proposals as documented anti-patterns: compartment-wide source, no pre-IAM, and overly broad shared access"
+    ]
+  },
+  {
+    "skills": ["provisioning-oci-connector-hub"],
+    "query": "We have existing Terraform code that references oci_sch_service_connector.example.lifecyle_details in an output block. We're upgrading to oracle/oci ~> 8.0. Will this break?",
+    "expected_behavior": [
+      "Identifies lifecyle_details as the deprecated typo attribute (missing 'c' in lifecycle) that was removed after January 27, 2026",
+      "Confirms this WILL break on oracle/oci >= 8.x provider with an 'An argument named lifecyle_details is not expected here' error",
+      "Provides the corrected attribute name: lifecycle_details (correctly spelled)",
+      "Shows the corrected output block using lifecycle_details",
+      "Recommends running 'grep -r lifecyle_details .' to find all occurrences across the codebase",
+      "Does NOT suggest downgrading the provider as the fix — fix is to rename the attribute reference"
+    ]
+  }
+]
