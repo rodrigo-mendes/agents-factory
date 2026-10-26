@@ -1,0 +1,11 @@
+name: agents-factory-aws-terraform
+version: 1.0.0
+description: "26 Terraform provisioning skills for AWS services (hashicorp/aws 6.x, Terraform ~> 1.16) plus 3 scoped instruction files. The aws-terraform-engineer agent lives in the terraform package."
+author: rodrigo-mendes
+license: MIT
+dependencies:
+  apm:
+    - path: ../factory-core
+  mcp: []
+includes: auto
+scripts: {}
