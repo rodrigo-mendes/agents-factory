@@ -41,10 +41,10 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parent.parent
 CLAUDE_DIR = REPO_ROOT / ".claude"
 
-# Matches: apm_modules/_local/<pkg-or-hash>[/<pkg>]/.apm/(agents|skills)/<rest>
+# Matches: apm_modules/_local/<pkg-or-hash>[/<pkg>]/.apm/(agents|skills|instructions)/<rest>
 # (CLI >= 0.35 nests a hash directory before the package directory)
 BROKEN_LINK_RE = re.compile(
-    r"(?:\.\./)*apm_modules/_local/(?:[^/]+/)+?\.apm/(agents|skills)/([^)\]\s]+)"
+    r"(?:\.\./)*apm_modules/_local/(?:[^/]+/)+?\.apm/(agents|skills|instructions)/([^)\]\s]+)"
 )
 
 
@@ -55,6 +55,12 @@ def target_path_under_claude(kind: str, rest: str) -> Path:
         anchor = rest[len(name):]
         stem = re.sub(r"\.agent\.md$", "", name)
         return CLAUDE_DIR / "agents" / f"{stem}.md{anchor}"
+    elif kind == "instructions":
+        # "<name>.instructions.md" is deployed as .claude/rules/<name>.md
+        name = rest.split("#")[0]
+        anchor = rest[len(name):]
+        stem = re.sub(r"\.instructions\.md$", "", name)
+        return CLAUDE_DIR / "rules" / f"{stem}.md{anchor}"
     else:  # skills
         return CLAUDE_DIR / "skills" / rest
 
@@ -68,7 +74,7 @@ def fix_file(path: Path) -> int:
         target_no_anchor = Path(str(target).split("#")[0])
         anchor = str(target)[len(str(target_no_anchor)):]
         rel = os.path.relpath(target_no_anchor, start=path.parent)
-        return rel + anchor
+        return rel.replace(os.sep, "/") + anchor
 
     new_text, n = BROKEN_LINK_RE.subn(repl, text)
     if n:
