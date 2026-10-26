@@ -1,6 +1,6 @@
 name: agents-factory-terraform
-version: 1.1.0
-description: Terraform-specific research (2 skills) + the terraform-instructions-compiler domain adapter that links into artifact-authoring's rules-compiler engine. Not agnostic by design — that's why it's its own package, separate from artifact-authoring.
+version: 1.2.0
+description: Terraform-specific research (2 skills), the terraform-instructions-compiler domain adapter (links into artifact-authoring's rules-compiler engine), the aws-terraform-engineer AWS executor agent and its /provision-aws-terraform command (depends on aws-terraform, so installing this package also installs its 26 AWS skills). Not agnostic by design — that's why it's its own package, separate from artifact-authoring.
 author: rodrigo-mendes
 license: MIT
 dependencies:
@@ -8,6 +8,7 @@ dependencies:
     - path: ../factory-core
     - path: ../research-core
     - path: ../artifact-authoring
+    - path: ../aws-terraform
   mcp: []
 includes: auto
 scripts: {}
