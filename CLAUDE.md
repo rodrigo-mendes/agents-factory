@@ -77,13 +77,13 @@ The **Terraform executors** live in `packages/terraform`: `terraform-rules-autho
 
 The **LangChain4j** package (`packages/langchain4j`) covers chat + streaming in plain Java on LangChain4j 1.22.0 with OpenAI and Anthropic: 3 version-locked knowledge skills (`developing-langchain4j-core-v1-22`, `integrating-langchain4j-openai-v1-22`, `integrating-langchain4j-provider-a-v1-22` — the Anthropic one, named without the reserved word), the non-interactive `langchain4j-integrator` subagent (no `/command`; spawned via the Agent tool) and 2 scoped rules. AiServices, `@Tool`, RAG, structured output and Spring/Quarkus are out of scope. Details: [packages/langchain4j/README.md](packages/langchain4j/README.md).
 
-The **Quarkus on AWS Lambda SaaS** set is 6 layered packages driven by the inline orchestrator
+The **Quarkus on AWS Lambda SaaS** set is 6 layered packages (plus the reusable OpenSpec and GitHub layers below) driven by the inline orchestrator
 `/building-quarkus-aws-saas` (spec-driven: interview, architecture spec + ADRs, OpenSpec functional spec,
 then an agent team via handoff records; it is the only one that talks to the user):
 - `handoff-core`: the generic handoff protocol v1 (`coordinating-agent-handoffs`, with the Python
-  scripts `check_records.py`, `board.py`, `detect_drift.py`), `specifying-changes-with-openspec-v1-15`,
+  scripts `check_records.py`, `board.py`, `detect_drift.py`; profiles may carry an optional `tracker:` block),
   the read-only `spec-synchronizer` subagent and the command `/syncing-spec-from-code`. The OCI profile
-  `coordinating-oci-handoffs` (in `oci-core`) uses the same protocol.
+  `coordinating-oci-handoffs` (in `oci-core`) uses the same protocol. Depends on `openspec-core`.
 - `quarkus-aws`: 11 knowledge skills (Lambda, HTTP, Cognito, data, messaging, testing, logging, tracing,
   metrics, observability umbrella, project structure), the executor `quarkus-lambda-integrator`, the
   read-only `quarkus-code-reviewer` and 2 rules.
@@ -95,6 +95,16 @@ then an agent team via handoff records; it is the only one that talks to the use
   `integrating-stripe-quarkus-v3-40` and `integrating-quarkus-langchain4j-v1-15` (pinned to 1.15.0.CR1,
   flagged as a candidate release).
 Details: [packages/quarkus-aws-saas/README.md](packages/quarkus-aws-saas/README.md).
+
+The **OpenSpec + GitHub** layer is 3 reusable packages: `openspec-core` (the OpenSpec 1.15 skill alone,
+split out of `handoff-core`), `github-core` (generic `managing-github-projects-gh-v2-103` and
+`automating-github-repos-with-actions`) and `openspec-github` (the bridge `syncing-openspec-with-github-projects`:
+`gh_projects_sync.py` bootstrap/push/pull/close/status, dry-run by default, 4 workflow templates for comment
+gates, spec CI, board sync and archive-by-PR; the non-interactive `openspec-github-syncer` agent, push/status only;
+the command `/syncing-openspec-to-github`; one scoped rule). Git stays canonical; GitHub is a mirror plus an
+optional approval channel that only the orchestrator reads (`pull`). Organization projects use a GitHub App,
+user projects a classic PAT. Off by default (`tracker.kind: none`). Details:
+[packages/openspec-github/README.md](packages/openspec-github/README.md).
 
 Note `rules-compiler` in the table above: it is itself a **knowledge skill** (no `context: fork`)
 — a reference engine that `terraform-instructions-compiler` (an action command) links into for
@@ -124,17 +134,18 @@ Not compiled code — artifacts run **in Claude Code** via `/<command>`:
 - Build or evolve a Quarkus SaaS on AWS Lambda (inline orchestrator): `/building-quarkus-aws-saas`
 - Propose a spec-delta after code drift: `/syncing-spec-from-code <change-dir>`
 - Review, provision or live-validate AWS observability: `/observe-aws-workload <work-order>`
+- Refresh or check the GitHub Project mirror of an OpenSpec change: `/syncing-openspec-to-github <change-id>`
 
-The 66 commands use `disable-model-invocation: true` (deliberate actions) — accessible via `/name`,
-with no auto-listing cost. The other 156 skills are knowledge skills and auto-invoke instead of
-routing via `/name`: `rules-compiler`, the 12 Camel Quarkus skills, the 4 `quarkus-core` skills, the 26 `provisioning-aws-<service>-v6` skills, the Quarkus on AWS Lambda SaaS skills, and the AWS architecture (`aws-skills`), OCI, Stripe and LangChain4j knowledge skills (their descriptions are
+The 67 commands use `disable-model-invocation: true` (deliberate actions) — accessible via `/name`,
+with no auto-listing cost. The other 159 skills are knowledge skills and auto-invoke instead of
+routing via `/name`: `rules-compiler`, the 12 Camel Quarkus skills, the 4 `quarkus-core` skills, the 26 `provisioning-aws-<service>-v6` skills, the Quarkus on AWS Lambda SaaS skills, and the AWS architecture (`aws-skills`), OCI, Stripe, LangChain4j, OpenSpec and GitHub (`github-core`, `syncing-openspec-with-github-projects`) knowledge skills (their descriptions are
 listed in every session of a project that installs them, so keep them short and specific).
 
 ## Structure
 
 ```
 .claude/            ← GENERATED by `apm install --target claude`. Edit packages/, not this.
-├── agents/     ← 40 subagents: 5 routing-level (framework-researcher, artifact-author,
+├── agents/     ← 41 subagents: 5 routing-level (framework-researcher, artifact-author,
 │                 architecture-auditor, quality-validator, skill-evaluator) +
 │                 2 internal helpers (research-synthesizer, section-investigator) +
 │                 13 book-writing agents + camel-quarkus-integrator +
@@ -142,17 +153,17 @@ listed in every session of a project that installs them, so keep them short and 
 │                 7 OCI agents + 2 Stripe agents (stripe-advisor, stripe-integrator) +
 │                 langchain4j-integrator + 6 Quarkus/AWS SaaS agents (quarkus-lambda-integrator,
 │                 quarkus-code-reviewer, aws-lambda-deployer, aws-lambda-debugger,
-│                 aws-observability, spec-synchronizer)
-├── skills/     ← 222 skills: 66 fork → subagent commands + 156 knowledge/auto-invoke; includes the
+│                 aws-observability, spec-synchronizer) + openspec-github-syncer
+├── skills/     ← 226 skills: 67 fork → subagent commands + 159 knowledge/auto-invoke; includes the
 │                 platform-software family (1 orchestrator + 14 siblings),
 │                 12 Camel Quarkus, 4 quarkus-core, 22 Quarkus/AWS SaaS, 26 AWS Terraform (provisioning-aws-*-v6), the AWS/OCI/Stripe/LangChain4j knowledge skills, and each skill's own assets/ (former .claude/templates/
 │                 content) + blueprints/
-├── rules/      ← 49 rules (most scoped by `paths:`): 5 factory rules + 3 Camel Quarkus + 3 AWS Terraform + OCI (incl. 2 oci-architecture guardrails), AWS-architect, Stripe, 2 LangChain4j and 5 Quarkus/AWS rules (quarkus-clean-code, 2 quarkus-lambda, aws-lambda-deployment-preflight, aws-observability-skills)
+├── rules/      ← 50 rules (most scoped by `paths:`): 5 factory rules + 3 Camel Quarkus + 3 AWS Terraform + OCI (incl. 2 oci-architecture guardrails), AWS-architect, Stripe, 2 LangChain4j and 5 Quarkus/AWS rules (quarkus-clean-code, 2 quarkus-lambda, aws-lambda-deployment-preflight, aws-observability-skills) + openspec-github-state
 ├── MIGRATION.md ← migration history Copilot → Claude Code (hand-authored, not generated)
 ├── settings.json         ← hand-authored, not generated (APM only merges `hooks:`, unused here)
 └── settings.local.json   ← hand-authored, gitignored
 
-packages/           ← the actual source of truth — 29 APM packages, all installed by the root manifest (directly or transitively), each with its own apm.yml
+packages/           ← the actual source of truth — 32 APM packages, all installed by the root manifest (directly or transitively), each with its own apm.yml
 ├── factory-core/                 ← 5 rules (frontmatter + naming schemas), no skills/agents
 ├── research-core/                ← framework-researcher + its 2 internal helpers, no skills
 ├── researching-frameworks/       ← 5 generic research skills
@@ -175,15 +186,18 @@ packages/           ← the actual source of truth — 29 APM packages, all inst
 │                                 ← OCI serverless family (shared handoff protocol in oci-core)
 ├── stripe-java/                  ← Stripe Java 34.x skills + advisor/integrator agents
 ├── langchain4j/                  ← LangChain4j 1.22.0 chat + streaming (3 skills, langchain4j-integrator, 2 rules)
-├── handoff-core/                 ← generic handoff protocol + scripts, OpenSpec skill, spec-synchronizer, 1 command
+├── openspec-core/                ← OpenSpec 1.15 skill (specifying-changes-with-openspec-v1-15), reusable without handoff
+├── handoff-core/                 ← generic handoff protocol + scripts (optional tracker: block), spec-synchronizer, 1 command
+├── github-core/                  ← gh 2.103 + Projects v2 skill, GitHub Actions automation skill (generic)
+├── openspec-github/              ← OpenSpec ↔ GitHub Projects bridge: skill + scripts + 4 workflow templates, syncer agent, 1 command, 1 rule
 ├── quarkus-aws/                  ← 11 Quarkus on Lambda skills, integrator + reviewer agents, 2 rules
 ├── aws-lambda/                   ← deployer + debugger agents, 2 skills, 1 rule (any Lambda runtime)
 ├── aws-observability/            ← aws-observability agent, /observe-aws-workload, live validation, 1 rule
 └── quarkus-aws-saas/             ← orchestrator, handoff profile, Stripe + LangChain4j on Quarkus (4 skills)
 
 apm.yml             ← root manifest: aggregates the packages (factory-core, research-core,
-                       camel-quarkus-skills, quarkus-core and the Quarkus/AWS SaaS layers below
-                       quarkus-aws-saas are NOT listed directly — they resolve transitively;
+                       camel-quarkus-skills, quarkus-core, openspec-core, github-core, openspec-github and the
+                       Quarkus/AWS SaaS layers below quarkus-aws-saas are NOT listed directly — they resolve transitively;
                        listing them twice triggers a real `apm audit --ci` failure,
                        "ambiguous resolved_by")
 apm.lock.yaml       ← committed; `apm install --frozen` in CI must reproduce it exactly

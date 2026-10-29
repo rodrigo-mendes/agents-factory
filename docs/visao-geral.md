@@ -24,11 +24,11 @@ graph LR
 ```mermaid
 graph TD
     subgraph "Input Layer"
-        P[Skills<br/>66 commands via /name + 156 knowledge skills]
+        P[Skills<br/>67 commands via /name + 159 knowledge skills]
     end
 
     subgraph "Orchestration Layer"
-        AG[Agents<br/>40 subagents: 5 routers + 2 research helpers + 13 book-writing + 20 domain agents]
+        AG[Agents<br/>41 subagents: 5 routers + 2 research helpers + 13 book-writing + 21 domain agents]
     end
 
     subgraph "Knowledge Layer"

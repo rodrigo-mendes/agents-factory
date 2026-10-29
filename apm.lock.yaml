@@ -1269,6 +1269,7 @@ dependencies:
   - .claude/skills/building-quarkus-aws-saas/blueprints/evaluation-scenarios.md
   - .claude/skills/building-quarkus-aws-saas/blueprints/knowledge-map.md
   - .claude/skills/building-quarkus-aws-saas/blueprints/never-do-patterns.md
+  - .claude/skills/building-quarkus-aws-saas/blueprints/tracker-github-projects.md
   - .claude/skills/building-quarkus-aws-saas/blueprints/unverified-and-risks.md
   - .claude/skills/building-quarkus-aws-saas/blueprints/worker-briefs.md
   - .claude/skills/coordinating-quarkus-aws-handoffs
@@ -1317,27 +1318,28 @@ dependencies:
   - .claude/skills/integrating-stripe-quarkus-v3-40/blueprints/verification-and-production.md
   - .claude/skills/integrating-stripe-quarkus-v3-40/blueprints/webhook-pipeline.md
   deployed_file_hashes:
-    .claude/skills/building-quarkus-aws-saas/SKILL.md: sha256:76079394ea955e423d24b5ffdd75e396437eb82b146a3c7834b6f5a3f77f85e9
+    .claude/skills/building-quarkus-aws-saas/SKILL.md: sha256:7ace1c4149d74c74838902a96ee68432c6e87f1377a7fdfb4f92520f72734210
     .claude/skills/building-quarkus-aws-saas/blueprints/always-do-patterns.md: sha256:184361bf50de8dd941790e9150ee6a3ad85219bb0d6df53cf6bd374b254417b9
-    .claude/skills/building-quarkus-aws-saas/blueprints/e1-interview.md: sha256:10bf7524d7603cf54ba37c4d065a7904c30cadc22f172573147fd8426b9ac439
+    .claude/skills/building-quarkus-aws-saas/blueprints/e1-interview.md: sha256:b4b7ef85f1135b9e059d1517dd24b92e32003585ceddd3073f1b9df9e6bff107
     .claude/skills/building-quarkus-aws-saas/blueprints/e2-architecture-and-adrs.md: sha256:c99cf5c29820688bf8b2cafd34003629397de3413cc7f977a6ebcec467a3db58
     .claude/skills/building-quarkus-aws-saas/blueprints/e3-functional-spec.md: sha256:09db2785d37cc1571b7b81a0c0eab3203fbf3755dc766238a70ed6c2a605c0f3
     .claude/skills/building-quarkus-aws-saas/blueprints/e4-e5-design-and-tasks.md: sha256:774d9842f88bc0dac382534f3494f325f74a5d1c2e43a6243e4a5efe8cedc24f
     .claude/skills/building-quarkus-aws-saas/blueprints/e6-implementation-cycle.md: sha256:6d8bf664d83cd46479caa255c9d7e8f5db053bbe707d7d6cc56cb80415075f59
     .claude/skills/building-quarkus-aws-saas/blueprints/e7-deploy-and-observability.md: sha256:0de034aae3da89f4134003c60d67f677b98b10c85c0a59914518473fc7d832ca
-    .claude/skills/building-quarkus-aws-saas/blueprints/e8-reverse-sync.md: sha256:3cf4c2e85532d4433f5899c0e11839e925fd2a61c890b74a4b11a7cf5290e73a
-    .claude/skills/building-quarkus-aws-saas/blueprints/e9-archive-gate.md: sha256:4341cf97ca41d5497155718493d4601b4a6de5a13d14483074775b61b72b438b
-    .claude/skills/building-quarkus-aws-saas/blueprints/evaluation-scenarios.md: sha256:8176c3939e78a512580be69cd01c6e53a3382cc4a236d1907772743cb61ad525
-    .claude/skills/building-quarkus-aws-saas/blueprints/knowledge-map.md: sha256:b5059ebf4c226a80f5720ffce8a43f2cb4d0d8a9f7a8805d63d25988675e2478
+    .claude/skills/building-quarkus-aws-saas/blueprints/e8-reverse-sync.md: sha256:9b3bfcd0d564bc5f42455e9b4e78170364e4794f485e9d14afb095b9a39b53b9
+    .claude/skills/building-quarkus-aws-saas/blueprints/e9-archive-gate.md: sha256:6678f0c62a98b44bb34a96c15a7e8f582defc52202d57b93674655290b255d67
+    .claude/skills/building-quarkus-aws-saas/blueprints/evaluation-scenarios.md: sha256:bf416a7cff52a742c7a2b5a123b68f1208b339999e53da841e5e08d786d6dc66
+    .claude/skills/building-quarkus-aws-saas/blueprints/knowledge-map.md: sha256:8601b75f64263baf6ce433f0829486da8df372c53d08f0bc1df7f66982b11a31
     .claude/skills/building-quarkus-aws-saas/blueprints/never-do-patterns.md: sha256:3c34d0cabe6f482f3cc50bbd910abb2e76f31f2c9c02000af81e1b0f11b74688
-    .claude/skills/building-quarkus-aws-saas/blueprints/unverified-and-risks.md: sha256:f04e13efe5456423d40126d5ca9ecace34bb784e739b6081866e09382771dc5e
-    .claude/skills/building-quarkus-aws-saas/blueprints/worker-briefs.md: sha256:7f52ef113d2d22c73348245d07971a8c6759902900db78a40eb71d9c25259348
+    .claude/skills/building-quarkus-aws-saas/blueprints/tracker-github-projects.md: sha256:17b578f617e20dcc34a3551e63c4112d50ae2e702b1e610331b04378903f9f19
+    .claude/skills/building-quarkus-aws-saas/blueprints/unverified-and-risks.md: sha256:58300812fcae8a6d0bf317b455cbbd6424c3a50b4148ec7419da17f72eb57ea2
+    .claude/skills/building-quarkus-aws-saas/blueprints/worker-briefs.md: sha256:75872ad055f6150233bd1859e1dcbb9a821d6b42b54ef89abb9de56c46eecbba
     .claude/skills/coordinating-quarkus-aws-handoffs/SKILL.md: sha256:658a40597c5e223d4e61d08af1a5aecc55d8362f9ff0f237cb55fde78b4f69a6
     .claude/skills/coordinating-quarkus-aws-handoffs/assets/adr.template.md: sha256:de46315aececa06122cf38fcce0d889d9cff95deb65d6c2786c49d990509d910
     .claude/skills/coordinating-quarkus-aws-handoffs/assets/deploy-report.template.md: sha256:dd4ed31229680efb314fa82d0bdc47fa982ccfda483ce42d8913933638b504d3
     .claude/skills/coordinating-quarkus-aws-handoffs/assets/diagnosis-report.template.md: sha256:74344b6881dcf220ed37c294f11b36c08cad30ae821c92116bc612a6a071426f
     .claude/skills/coordinating-quarkus-aws-handoffs/assets/escalation.template.md: sha256:5ad1dcff9d41eb7f253ea7712e0ecc8eecde0f1f8798c8c72d66392e75512f03
-    .claude/skills/coordinating-quarkus-aws-handoffs/assets/handoff-profile.yaml: sha256:6f5d3c8280d1b02aad22bb5a9c1367bcbb62a4ec98ded92eb3522440c941262a
+    .claude/skills/coordinating-quarkus-aws-handoffs/assets/handoff-profile.yaml: sha256:6c9ab1dca7a28b0a34512b457e110b2671614b94e9c131f906017a11319b109e
     .claude/skills/coordinating-quarkus-aws-handoffs/assets/result-code.template.md: sha256:3cf931ef0398369326608b1a934fe3bb5e185cce6b75e34e2012e6b223ca5b8c
     .claude/skills/coordinating-quarkus-aws-handoffs/assets/review.template.md: sha256:06595824306f86be324b36f915cbb6df51de8d9a1d58c746ad829b438ae07c64
     .claude/skills/coordinating-quarkus-aws-handoffs/assets/wo-code.template.md: sha256:eb6b8e916384a4b4b757e8996bb205ae9852703ea248d0f1211be19782a4209b
@@ -1352,7 +1354,7 @@ dependencies:
     .claude/skills/coordinating-quarkus-aws-handoffs/blueprints/approval-lines.md: sha256:369b3814cc5b3d84115d2f9fb7195dbd0f8f2bd8913e3e87cfcebb2d7d988dcd
     .claude/skills/coordinating-quarkus-aws-handoffs/blueprints/evaluation-scenarios.md: sha256:f973ae9502b44293ad7ab691a85205e994773a7b6b8d6cbfa3626a30f857ff2b
     .claude/skills/coordinating-quarkus-aws-handoffs/blueprints/never-do-patterns.md: sha256:af0df735f7da8011b473d7e20d0ea978520967fde77d10e3935d662f7ddc6854
-    .claude/skills/coordinating-quarkus-aws-handoffs/blueprints/openspec-integration.md: sha256:85f412bcb69251d57b7ee6bf07634e4429ca59011546ff5f682617495ea1f9dd
+    .claude/skills/coordinating-quarkus-aws-handoffs/blueprints/openspec-integration.md: sha256:d02b7587bf2d7e12db851afe13c356c575ff6b6fcc6956a0efb1b4bcb62b18e9
     .claude/skills/coordinating-quarkus-aws-handoffs/blueprints/roles-and-skills.md: sha256:bfd991c17eb62f3caf2b6ee62a5d6ec38a59504c37131f07353e078e7089f4d1
     .claude/skills/coordinating-quarkus-aws-handoffs/blueprints/unverified-and-risks.md: sha256:402a0b0852182b2a7687b7f40c37ab4ef71530c5ffe17288cb802bf64308ebde
     .claude/skills/integrating-quarkus-langchain4j-v1-15/SKILL.md: sha256:3f9a6151625e00d7dda110e689bd3ece268329253316c9df8c5797910ed317e9
@@ -1376,7 +1378,7 @@ dependencies:
     .claude/skills/integrating-stripe-quarkus-v3-40/blueprints/webhook-pipeline.md: sha256:f953cbc3262fdf7b2a51014af1941b9406111622785664c4f1a10e3a55455b4f
   source: local
   local_path: ./packages/quarkus-aws-saas
-  content_hash: sha256:9424e8773bfc77b454a3fd473683026cbcfa0f6139ea0088bb363ec4c39931ff
+  content_hash: sha256:478d190c6122770616cb26587f20ce4dfb8b79298078845f6dad6add8ffd7d3d
   declared_license: MIT
 - repo_url: _local/researching-frameworks
   name: agents-factory-researching-frameworks
@@ -2185,30 +2187,18 @@ dependencies:
   - .claude/skills/coordinating-agent-handoffs/scripts/tests/fixtures/quarkus/openspec/changes/list-tenant-items/handoff/status.md
   - .claude/skills/coordinating-agent-handoffs/scripts/tests/fixtures/quarkus/openspec/changes/list-tenant-items/handoff/wo-01-code.md
   - .claude/skills/coordinating-agent-handoffs/scripts/tests/test_handoff.py
-  - .claude/skills/specifying-changes-with-openspec-v1-15
-  - .claude/skills/specifying-changes-with-openspec-v1-15/SKILL.md
-  - .claude/skills/specifying-changes-with-openspec-v1-15/blueprints/always-do-patterns.md
-  - .claude/skills/specifying-changes-with-openspec-v1-15/blueprints/ask-first-decisions.md
-  - .claude/skills/specifying-changes-with-openspec-v1-15/blueprints/cli-lifecycle.md
-  - .claude/skills/specifying-changes-with-openspec-v1-15/blueprints/delta-format-and-archive.md
-  - .claude/skills/specifying-changes-with-openspec-v1-15/blueprints/doc-vs-validator-conflicts.md
-  - .claude/skills/specifying-changes-with-openspec-v1-15/blueprints/evaluation-scenarios.md
-  - .claude/skills/specifying-changes-with-openspec-v1-15/blueprints/migration-notes.md
-  - .claude/skills/specifying-changes-with-openspec-v1-15/blueprints/never-do-patterns.md
-  - .claude/skills/specifying-changes-with-openspec-v1-15/blueprints/non-interactive-and-windows.md
-  - .claude/skills/specifying-changes-with-openspec-v1-15/blueprints/unverified-and-risks.md
   - .claude/skills/syncing-spec-from-code
   - .claude/skills/syncing-spec-from-code/SKILL.md
   - .claude/skills/syncing-spec-from-code/blueprints/evaluation-scenarios.md
   deployed_file_hashes:
     .claude/agents/spec-synchronizer.md: sha256:0b5163aebce10c9fe40a9f791b95973ab8d74fe2e9358bf7b642d44c1920d522
-    .claude/skills/coordinating-agent-handoffs/SKILL.md: sha256:26772eebab542748a171083181c8cd778af0930cfdfc9feb08512522c0cd88da
+    .claude/skills/coordinating-agent-handoffs/SKILL.md: sha256:846c55b649697c8b7109ced6c435e99b12d8ee3359a21c445b78ebbc8b38ffb7
     .claude/skills/coordinating-agent-handoffs/assets/deploy-report.template.md: sha256:fb25c5c3dce988577ed0acfd69fe17966d819924a25a4eba44c75c617c7b0d0c
     .claude/skills/coordinating-agent-handoffs/assets/diagnosis-report.template.md: sha256:3a86db710b5221586ba0d4cf0824bcb9613dea87507c40a5504bcb92059e257f
     .claude/skills/coordinating-agent-handoffs/assets/escalation.template.md: sha256:d6eaffe5e8c1655b0c6881ff728b541c0450fecc7b65b399a7208746092c5e18
     .claude/skills/coordinating-agent-handoffs/assets/result.template.md: sha256:acf03d7a3c2253119b214e90cc859404ace2a99c1d59d0482656068a1843df54
     .claude/skills/coordinating-agent-handoffs/assets/review.template.md: sha256:f26841bf6ae49d1f5fafe3f19d298bf2d70362f124566585d2d4cab47b533709
-    .claude/skills/coordinating-agent-handoffs/assets/spec-delta.template.md: sha256:db32fc44948de8c1758483aef4dd5bba454ab79f94b80451738d2ed394125b16
+    .claude/skills/coordinating-agent-handoffs/assets/spec-delta.template.md: sha256:31778f98f671e6e8038ef4f3527c206db57f4414efbd733edd6e62b081d2c500
     .claude/skills/coordinating-agent-handoffs/assets/status.template.md: sha256:a85c04e6cddefc91f041126e18cad562581d534b295bca80154c5051784c155f
     .claude/skills/coordinating-agent-handoffs/assets/verify.template.md: sha256:fa02be5b2b0d87229df327765a7594afd6e747ec5555cb6a14642d94e09aab81
     .claude/skills/coordinating-agent-handoffs/assets/work-order.template.md: sha256:670eace3ca55958b61d2bbe354451748cdd8153ad9590c4c71f88bc0669631c2
@@ -2216,12 +2206,12 @@ dependencies:
     .claude/skills/coordinating-agent-handoffs/blueprints/drift-hook.md: sha256:7d7436e340edc100a94ae8fb6583a683a35f823c9cb92c65bce8af41313b82a9
     .claude/skills/coordinating-agent-handoffs/blueprints/evaluation-scenarios.md: sha256:40d45cc26793bea27c0c22dc3771ead14d38b5c278bcb981062ec9d8fbb7d884
     .claude/skills/coordinating-agent-handoffs/blueprints/never-do-patterns.md: sha256:cdf45c0a5a8eef60885d22a2e54c16bdc91b77b033eb14adb5f5893c34286db3
-    .claude/skills/coordinating-agent-handoffs/blueprints/profile-format.md: sha256:968ced98d68a8403c936bc239c63be782feb5d5a6fd3e7e4db02d18ccde217c2
+    .claude/skills/coordinating-agent-handoffs/blueprints/profile-format.md: sha256:790f81fcb9c58ec93b1e487bfa9842d4ac8a3af4fdf2476cc2933cda6a0667f7
     .claude/skills/coordinating-agent-handoffs/blueprints/protocol.md: sha256:9f13cc12cf37e049de8b851b8ed8f91f81f69b46d0728e7098989a9b37a05d92
     .claude/skills/coordinating-agent-handoffs/blueprints/record-kinds.md: sha256:89796e90a807f72ed442a432bc8f7bfa9d0d444c70f4af321b3916744e3cbf66
-    .claude/skills/coordinating-agent-handoffs/blueprints/spec-sync.md: sha256:b6b3991423911b4dbc4fccfbe8bb22a542f3e834d06b0dc9507e9c2925c92b60
-    .claude/skills/coordinating-agent-handoffs/blueprints/unverified-and-risks.md: sha256:cb9b6917ed20a399d458ca8a4a516e1ccc3ad8d08d949234b7d0c9ba6d940f1f
-    .claude/skills/coordinating-agent-handoffs/scripts/_handoff_lib.py: sha256:332b6663aa143a014afa1a12dd79b689f7683140fe78e154ab74ec1e4986af4c
+    .claude/skills/coordinating-agent-handoffs/blueprints/spec-sync.md: sha256:e581e76c70e2a14356420d0004f9658c45437b2a80078d36b54c8831faa5ab92
+    .claude/skills/coordinating-agent-handoffs/blueprints/unverified-and-risks.md: sha256:e365d3f6f8c5e2f201b9b89f7d767357c683117e44da02f0f8a68feab00d1d8c
+    .claude/skills/coordinating-agent-handoffs/scripts/_handoff_lib.py: sha256:1ce421807e24c67688e53f37d70f704a49a00b5638131c96bbf2f22cc0c89ba7
     .claude/skills/coordinating-agent-handoffs/scripts/_mini_yaml.py: sha256:465058f69f1a940e9aaa46a6d4d519121d086313223e829830474126ec7bab2b
     .claude/skills/coordinating-agent-handoffs/scripts/board.py: sha256:d5a7a9c7d6e06d6f177cb0f92a51793cee8ccc7c1566388ee5c28ac8adbfcb40
     .claude/skills/coordinating-agent-handoffs/scripts/check_records.py: sha256:e41d7d88d03f28c8eb0571bb8096f1d960646a0600e04c99326fe7abbfa647d5
@@ -2239,25 +2229,14 @@ dependencies:
     : sha256:482346d101c0fea1371971f15f9b8012c33af08007b8985a9786c5d9120a7259
     ? .claude/skills/coordinating-agent-handoffs/scripts/tests/fixtures/quarkus/openspec/changes/list-tenant-items/handoff/wo-01-code.md
     : sha256:056a0157fe3becdfa11989ca27c92c4286a1b5cc44b117fc4c8ef879e8dd9923
-    .claude/skills/coordinating-agent-handoffs/scripts/tests/test_handoff.py: sha256:5f3c6959cd19d4e9389a9cda268387a42aaff9fca828aa231ef8edef37c49e1d
-    .claude/skills/specifying-changes-with-openspec-v1-15/SKILL.md: sha256:32d2422a1ce525461aedc5c70b67553362821d41a129c7d2da31bb8f1a43d626
-    .claude/skills/specifying-changes-with-openspec-v1-15/blueprints/always-do-patterns.md: sha256:c563b21826d87284313a7b257a1fa65185f28c68124af51a1746869abfce30ff
-    .claude/skills/specifying-changes-with-openspec-v1-15/blueprints/ask-first-decisions.md: sha256:e01ff6d487dcc5b4ae889f82f86f98bd2ee7e3136da5f2f21ec378c1da6ef94e
-    .claude/skills/specifying-changes-with-openspec-v1-15/blueprints/cli-lifecycle.md: sha256:f5b321f348da0535c756d03a7a9456c35e2b1827b97f555dbc60a12e92d07104
-    .claude/skills/specifying-changes-with-openspec-v1-15/blueprints/delta-format-and-archive.md: sha256:50a53118d79e0121538a8b0a3fef035c71bd7c80a6b971f4e07b044d9ce656fa
-    .claude/skills/specifying-changes-with-openspec-v1-15/blueprints/doc-vs-validator-conflicts.md: sha256:6f664bb1e381381740e22b6f4ec028e5edb1b19ba1727c23014d3b8cb33f1ecd
-    .claude/skills/specifying-changes-with-openspec-v1-15/blueprints/evaluation-scenarios.md: sha256:fe884e3f1524e55395b4d094a48d1b4e6ca355dffeb0d2f9dd739bf73a47f067
-    .claude/skills/specifying-changes-with-openspec-v1-15/blueprints/migration-notes.md: sha256:4d2d555f3ef16d2c34dc210b1b6269059aaac2e794102cb3ef77dfc90e1923ad
-    .claude/skills/specifying-changes-with-openspec-v1-15/blueprints/never-do-patterns.md: sha256:f0071207ac41d9c42be9eed47fe7130221a7c5066de240ef4ed2ddd52f6b4907
-    .claude/skills/specifying-changes-with-openspec-v1-15/blueprints/non-interactive-and-windows.md: sha256:d5e2ccc9db83aa3ed2b5fa80bb366dc9ef850b063a576dad2fea90d3facea8ca
-    .claude/skills/specifying-changes-with-openspec-v1-15/blueprints/unverified-and-risks.md: sha256:444059fbdef3840846ed9be25353bb9993c66b9e885551b77c5aa38e7444b74f
+    .claude/skills/coordinating-agent-handoffs/scripts/tests/test_handoff.py: sha256:70dce6b2bd92b1f2ded19bafb08add00de62749ec4a62795f5e68ae4cf764825
     .claude/skills/syncing-spec-from-code/SKILL.md: sha256:59aca8429bc8da189423ffa1be17a3dd5d7b0cb44768f0f9f351bc4e415a0e0c
     .claude/skills/syncing-spec-from-code/blueprints/evaluation-scenarios.md: sha256:8ef44abe10c8ad821e632239b1f52da8cb749247d25bd22e8ec65ff88f2d4a96
   source: local
   local_path: ../handoff-core
   declaring_parent: ./packages/quarkus-aws-saas
   anchored_local_path: packages/handoff-core
-  content_hash: sha256:eafd236c588b8636f7e93df091e61f622336e84909e275ec226a6f997c7872bc
+  content_hash: sha256:4f83868bdb99f4997ce919e5c350713e734a8c94187ae494cc806cddd101b5e1
   declared_license: MIT
 - repo_url: _local/oci-core
   name: agents-factory-oci-core
@@ -2295,6 +2274,115 @@ dependencies:
   declaring_parent: ./packages/oci-functions-java
   anchored_local_path: packages/oci-core
   content_hash: sha256:01f39bf132ce4504cb88352fee7342337e7d2494b1400f38a7dda8e53dbfea79
+  declared_license: MIT
+- repo_url: _local/openspec-github
+  name: agents-factory-openspec-github
+  version: 1.0.0
+  depth: 2
+  resolved_by: _local/quarkus-aws-saas
+  package_type: apm_package
+  deployed_files:
+  - .claude/agents/openspec-github-syncer.md
+  - .claude/rules/openspec-github-state.md
+  - .claude/skills/syncing-openspec-to-github
+  - .claude/skills/syncing-openspec-to-github/SKILL.md
+  - .claude/skills/syncing-openspec-to-github/blueprints/evaluation-scenarios.md
+  - .claude/skills/syncing-openspec-with-github-projects
+  - .claude/skills/syncing-openspec-with-github-projects/SKILL.md
+  - .claude/skills/syncing-openspec-with-github-projects/assets/github.template.yaml
+  - .claude/skills/syncing-openspec-with-github-projects/assets/workflows/openspec-archive.yml
+  - .claude/skills/syncing-openspec-with-github-projects/assets/workflows/openspec-board-sync.yml
+  - .claude/skills/syncing-openspec-with-github-projects/assets/workflows/openspec-ci.yml
+  - .claude/skills/syncing-openspec-with-github-projects/assets/workflows/openspec-gate.yml
+  - .claude/skills/syncing-openspec-with-github-projects/blueprints/always-do-patterns.md
+  - .claude/skills/syncing-openspec-with-github-projects/blueprints/approvals-and-trust.md
+  - .claude/skills/syncing-openspec-with-github-projects/blueprints/bootstrap-and-credentials.md
+  - .claude/skills/syncing-openspec-with-github-projects/blueprints/cli-contract.md
+  - .claude/skills/syncing-openspec-with-github-projects/blueprints/evaluation-scenarios.md
+  - .claude/skills/syncing-openspec-with-github-projects/blueprints/mapping.md
+  - .claude/skills/syncing-openspec-with-github-projects/blueprints/never-do-patterns.md
+  - .claude/skills/syncing-openspec-with-github-projects/blueprints/unverified-and-risks.md
+  - .claude/skills/syncing-openspec-with-github-projects/blueprints/workflows.md
+  - .claude/skills/syncing-openspec-with-github-projects/scripts/_gh.py
+  - .claude/skills/syncing-openspec-with-github-projects/scripts/_model.py
+  - .claude/skills/syncing-openspec-with-github-projects/scripts/_vendor.py
+  - .claude/skills/syncing-openspec-with-github-projects/scripts/gate_command.py
+  - .claude/skills/syncing-openspec-with-github-projects/scripts/gh_projects_sync.py
+  - .claude/skills/syncing-openspec-with-github-projects/scripts/tests/fake_gh.py
+  - .claude/skills/syncing-openspec-with-github-projects/scripts/tests/fixtures/profiles/quarkus-aws.yaml
+  - .claude/skills/syncing-openspec-with-github-projects/scripts/tests/fixtures/repo/openspec/changes/list-tenant-items/design.md
+  - .claude/skills/syncing-openspec-with-github-projects/scripts/tests/fixtures/repo/openspec/changes/list-tenant-items/handoff/result-01-code.md
+  - .claude/skills/syncing-openspec-with-github-projects/scripts/tests/fixtures/repo/openspec/changes/list-tenant-items/handoff/review-01.md
+  - .claude/skills/syncing-openspec-with-github-projects/scripts/tests/fixtures/repo/openspec/changes/list-tenant-items/handoff/spec-delta-01.md
+  - .claude/skills/syncing-openspec-with-github-projects/scripts/tests/fixtures/repo/openspec/changes/list-tenant-items/handoff/status.md
+  - .claude/skills/syncing-openspec-with-github-projects/scripts/tests/fixtures/repo/openspec/changes/list-tenant-items/handoff/verify-01.md
+  - .claude/skills/syncing-openspec-with-github-projects/scripts/tests/fixtures/repo/openspec/changes/list-tenant-items/handoff/wo-01-code.md
+  - .claude/skills/syncing-openspec-with-github-projects/scripts/tests/fixtures/repo/openspec/changes/list-tenant-items/proposal.md
+  - .claude/skills/syncing-openspec-with-github-projects/scripts/tests/fixtures/repo/openspec/changes/list-tenant-items/tasks.md
+  - .claude/skills/syncing-openspec-with-github-projects/scripts/tests/fixtures/repo/openspec/github-tracker.yaml
+  - .claude/skills/syncing-openspec-with-github-projects/scripts/tests/fixtures/repo/openspec/specs/architecture/adr/003-tenant-isolation.md
+  - .claude/skills/syncing-openspec-with-github-projects/scripts/tests/fixtures/repo/openspec/specs/architecture/adr/004-unrelated.md
+  - .claude/skills/syncing-openspec-with-github-projects/scripts/tests/test_gate.py
+  - .claude/skills/syncing-openspec-with-github-projects/scripts/tests/test_model.py
+  - .claude/skills/syncing-openspec-with-github-projects/scripts/tests/test_sync.py
+  deployed_file_hashes:
+    .claude/agents/openspec-github-syncer.md: sha256:cc9749c202a2fe7299f4eec3f85d3861b9296cbaacae1948dac1bebd6325733b
+    .claude/rules/openspec-github-state.md: sha256:04863a237f76b8cdb036c49bd5468913b9714882baf771d2d959ed3f8b560df4
+    .claude/skills/syncing-openspec-to-github/SKILL.md: sha256:1f742bbb2c1f4e388f9323bbb5e1da924c4624e818a4aa998cda2f2e7d6bfa3f
+    .claude/skills/syncing-openspec-to-github/blueprints/evaluation-scenarios.md: sha256:b0dad1b84c1f49878bfb23ba766ab20a70a2a51ce5aaf01a7d55be0becb5b4f8
+    .claude/skills/syncing-openspec-with-github-projects/SKILL.md: sha256:400334a65354a0a513d88fe7bfd2e9392c5ef87883a6353e425383a096dea5b9
+    .claude/skills/syncing-openspec-with-github-projects/assets/github.template.yaml: sha256:53af1d9b5415727f609606de4ddbd55b96ae654a969b6b1642e5b92b87d96fba
+    .claude/skills/syncing-openspec-with-github-projects/assets/workflows/openspec-archive.yml: sha256:85f390c9bcc99ca21c117409c47660c1eb42d68483c1a1ca5863d50972511bca
+    .claude/skills/syncing-openspec-with-github-projects/assets/workflows/openspec-board-sync.yml: sha256:9fc71bcb03c1f25d6a11f66c51b2db4e080215457b9f36d1623513932dec1b2d
+    .claude/skills/syncing-openspec-with-github-projects/assets/workflows/openspec-ci.yml: sha256:bd204bffff6e29b8d928430cb29b8b6babe93b912e92c7098f4bf7c0965c2670
+    .claude/skills/syncing-openspec-with-github-projects/assets/workflows/openspec-gate.yml: sha256:7131293fcc6a24a4eff6c57870738e0af2b49c45d420ba8d9d1a4bbc7f7b0d7f
+    .claude/skills/syncing-openspec-with-github-projects/blueprints/always-do-patterns.md: sha256:223905b0729c195775e822aa5bbb1d7108f8bd6b9bcee5f9cd81917d2f56a1c8
+    .claude/skills/syncing-openspec-with-github-projects/blueprints/approvals-and-trust.md: sha256:6a7105591a88f00137f081a25c917b3d53ef49450d8d050018be7f80cca56cd4
+    .claude/skills/syncing-openspec-with-github-projects/blueprints/bootstrap-and-credentials.md: sha256:b37a1ab45111df3df16e5d48220015fd352a7d65a1dcd626804df91a5ff9b540
+    .claude/skills/syncing-openspec-with-github-projects/blueprints/cli-contract.md: sha256:19b7a083246a56b114b401030abc7543e741bde6601478ec0527aa01350c6709
+    .claude/skills/syncing-openspec-with-github-projects/blueprints/evaluation-scenarios.md: sha256:667f192489a9f4ae5a465fe20bdc320a8ab6b1cc0ccebbd99a5efe295c7fd5bd
+    .claude/skills/syncing-openspec-with-github-projects/blueprints/mapping.md: sha256:804bfc23beedb23b719636e2489db99de6b9428caee4541baccfd6ffbe957a53
+    .claude/skills/syncing-openspec-with-github-projects/blueprints/never-do-patterns.md: sha256:29a0de0aaba6b16a76c97306a1e422e849dc6189e0e047d9dce17367b0f0b2f0
+    .claude/skills/syncing-openspec-with-github-projects/blueprints/unverified-and-risks.md: sha256:4d8c14b2f5da47b66d366882ed64db3806142474ff3822fb31bc15bbedb10c78
+    .claude/skills/syncing-openspec-with-github-projects/blueprints/workflows.md: sha256:8e8955c4d39f9f13fbf56405b1389f4d4b607411ffb1817e4132509634b45461
+    .claude/skills/syncing-openspec-with-github-projects/scripts/_gh.py: sha256:0db7716acb7e895d8e5992607449fe67bed2088e3ed48c0c75e040b3555d2fc5
+    .claude/skills/syncing-openspec-with-github-projects/scripts/_model.py: sha256:1436a0c5f527860a9e5fa1b8607aa34a5227506d6bdcc54d0cd5c3ad9fb90d58
+    .claude/skills/syncing-openspec-with-github-projects/scripts/_vendor.py: sha256:516af27f60e3ce2f9437b6d37cebbe4ec7a971e6f6ac32b1d40dc1a76255d407
+    .claude/skills/syncing-openspec-with-github-projects/scripts/gate_command.py: sha256:f8c541eb013a3cafb06c4873c720785e7279aa97606d4b271dc10d91ae940652
+    .claude/skills/syncing-openspec-with-github-projects/scripts/gh_projects_sync.py: sha256:3c21edee0aa13677501714485b986d3fbc188a7ae8cb5f74c09bffa2f905e251
+    .claude/skills/syncing-openspec-with-github-projects/scripts/tests/fake_gh.py: sha256:de1d4085a98044cc3fd8a502d4ef1eb6eb73ee4e942ff2d379be740ea790b2c0
+    .claude/skills/syncing-openspec-with-github-projects/scripts/tests/fixtures/profiles/quarkus-aws.yaml: sha256:63125f3c100fba76a92a6da399eff5383b4dd4b52ed4531cb1b74b0a5fd85a7a
+    ? .claude/skills/syncing-openspec-with-github-projects/scripts/tests/fixtures/repo/openspec/changes/list-tenant-items/design.md
+    : sha256:b84066acdb60849e68119800545c58560c3d7e390e0331c452c4ccb334f05fb8
+    ? .claude/skills/syncing-openspec-with-github-projects/scripts/tests/fixtures/repo/openspec/changes/list-tenant-items/handoff/result-01-code.md
+    : sha256:5dd0016c575e1101e3f801c8a8d46f23b9913e67ac4df4fdb8f21ec520dad9c7
+    ? .claude/skills/syncing-openspec-with-github-projects/scripts/tests/fixtures/repo/openspec/changes/list-tenant-items/handoff/review-01.md
+    : sha256:7909616c074770ccb6f858a504edbaa9e30a865b47c667aa6db14a02a11e8068
+    ? .claude/skills/syncing-openspec-with-github-projects/scripts/tests/fixtures/repo/openspec/changes/list-tenant-items/handoff/spec-delta-01.md
+    : sha256:4a520982ed74c5341d418f3d83a1b7e4b96ab3d17c34af5659be8eba053dba47
+    ? .claude/skills/syncing-openspec-with-github-projects/scripts/tests/fixtures/repo/openspec/changes/list-tenant-items/handoff/status.md
+    : sha256:482346d101c0fea1371971f15f9b8012c33af08007b8985a9786c5d9120a7259
+    ? .claude/skills/syncing-openspec-with-github-projects/scripts/tests/fixtures/repo/openspec/changes/list-tenant-items/handoff/verify-01.md
+    : sha256:4ebc1d8cef84b3e5b54b89071f30c25b736f797c9869cdc963dba1862f3f0e36
+    ? .claude/skills/syncing-openspec-with-github-projects/scripts/tests/fixtures/repo/openspec/changes/list-tenant-items/handoff/wo-01-code.md
+    : sha256:056a0157fe3becdfa11989ca27c92c4286a1b5cc44b117fc4c8ef879e8dd9923
+    ? .claude/skills/syncing-openspec-with-github-projects/scripts/tests/fixtures/repo/openspec/changes/list-tenant-items/proposal.md
+    : sha256:4bb2abe01947e9769625c478e7be7ad252a61ff108c33132dbfad9c2b1079416
+    ? .claude/skills/syncing-openspec-with-github-projects/scripts/tests/fixtures/repo/openspec/changes/list-tenant-items/tasks.md
+    : sha256:3b621f04ab1aecf268f59bc05a6a5b112d61895129d41451a81c608c2d0c4765
+    .claude/skills/syncing-openspec-with-github-projects/scripts/tests/fixtures/repo/openspec/github-tracker.yaml: sha256:01e34d613d70fea16062230359ac79461d9f0499770543c7714697fd0b927b74
+    ? .claude/skills/syncing-openspec-with-github-projects/scripts/tests/fixtures/repo/openspec/specs/architecture/adr/003-tenant-isolation.md
+    : sha256:edd31aa5bbd204d0a86b358f38b7291d5b534f23ee8890ed6d6a861b35fc4943
+    ? .claude/skills/syncing-openspec-with-github-projects/scripts/tests/fixtures/repo/openspec/specs/architecture/adr/004-unrelated.md
+    : sha256:3892ecf20a2bb6f7b9aea1522e75f8c12b5767b50956b47291218b66bae99ea5
+    .claude/skills/syncing-openspec-with-github-projects/scripts/tests/test_gate.py: sha256:5e42bb30404b46b16ac75324c03f49c893e99e8d6a088f497d5c9beca16bd8ee
+    .claude/skills/syncing-openspec-with-github-projects/scripts/tests/test_model.py: sha256:3faaf7074096f9822ba92fea83f6738ba7e0c2c3d907125ec78a7c63763cc092
+    .claude/skills/syncing-openspec-with-github-projects/scripts/tests/test_sync.py: sha256:5d50e0d0845259520a0355b080535bc37b01a3b5d6de10925d25361b0eb31f6a
+  source: local
+  local_path: ../openspec-github
+  declaring_parent: ./packages/quarkus-aws-saas
+  anchored_local_path: packages/openspec-github
+  content_hash: sha256:fb391a94bad4b4d17c351c674263db8ec5fd8e8a28534bcaec3aa51fd315a55a
   declared_license: MIT
 - repo_url: _local/quarkus-aws
   name: agents-factory-quarkus-aws
@@ -3672,6 +3760,101 @@ dependencies:
   anchored_local_path: packages/aws-terraform
   content_hash: sha256:589e6103a79cb88662b0d4ef42cf9e0938c440e38a8685d66d035a296dba0b0d
   declared_license: MIT
+- repo_url: _local/github-core
+  name: agents-factory-github-core
+  version: 1.0.0
+  depth: 3
+  resolved_by: _local/openspec-github
+  package_type: apm_package
+  deployed_files:
+  - .claude/skills/automating-github-repos-with-actions
+  - .claude/skills/automating-github-repos-with-actions/SKILL.md
+  - .claude/skills/automating-github-repos-with-actions/blueprints/always-do-patterns.md
+  - .claude/skills/automating-github-repos-with-actions/blueprints/evaluation-scenarios.md
+  - .claude/skills/automating-github-repos-with-actions/blueprints/never-do-patterns.md
+  - .claude/skills/automating-github-repos-with-actions/blueprints/prs-and-status-checks.md
+  - .claude/skills/automating-github-repos-with-actions/blueprints/runners-and-scripts.md
+  - .claude/skills/automating-github-repos-with-actions/blueprints/security-hardening.md
+  - .claude/skills/automating-github-repos-with-actions/blueprints/tokens-app-and-pat.md
+  - .claude/skills/automating-github-repos-with-actions/blueprints/triggers-and-payloads.md
+  - .claude/skills/automating-github-repos-with-actions/blueprints/unverified-and-risks.md
+  - .claude/skills/managing-github-projects-gh-v2-103
+  - .claude/skills/managing-github-projects-gh-v2-103/SKILL.md
+  - .claude/skills/managing-github-projects-gh-v2-103/blueprints/always-do-patterns.md
+  - .claude/skills/managing-github-projects-gh-v2-103/blueprints/auth-and-tokens.md
+  - .claude/skills/managing-github-projects-gh-v2-103/blueprints/evaluation-scenarios.md
+  - .claude/skills/managing-github-projects-gh-v2-103/blueprints/graphql-and-rate-limits.md
+  - .claude/skills/managing-github-projects-gh-v2-103/blueprints/issues-sub-issues-and-comments.md
+  - .claude/skills/managing-github-projects-gh-v2-103/blueprints/never-do-patterns.md
+  - .claude/skills/managing-github-projects-gh-v2-103/blueprints/non-interactive-and-windows.md
+  - .claude/skills/managing-github-projects-gh-v2-103/blueprints/projects-fields-and-items.md
+  - .claude/skills/managing-github-projects-gh-v2-103/blueprints/unverified-and-risks.md
+  - .claude/skills/managing-github-projects-gh-v2-103/blueprints/version-changes.md
+  deployed_file_hashes:
+    .claude/skills/automating-github-repos-with-actions/SKILL.md: sha256:7a960903fb9dd6e5c44fe7f865dcf7683d5a12384cb9c90e2febcbd4bfa10d2b
+    .claude/skills/automating-github-repos-with-actions/blueprints/always-do-patterns.md: sha256:ba9c33a3b1837f932f7e7d64468d291f3ac5f0217de04d86696203c68b9861d2
+    .claude/skills/automating-github-repos-with-actions/blueprints/evaluation-scenarios.md: sha256:290b87426624246eee7f2918b4fb49568371ae504828c964eb5aa70e1374b81d
+    .claude/skills/automating-github-repos-with-actions/blueprints/never-do-patterns.md: sha256:d440ee70d9406eefde3ef4121333767a7cbde1e0ef5369236316e5a6dfb6e130
+    .claude/skills/automating-github-repos-with-actions/blueprints/prs-and-status-checks.md: sha256:08aeb46b5a339bb8d19cacb3c1139ee5fd26753018bb19f54a1888c8830e764e
+    .claude/skills/automating-github-repos-with-actions/blueprints/runners-and-scripts.md: sha256:01e9f6cc981e42861e8148aba3ef2ca79af2d6cf6fba4547b8b96841ddac1afe
+    .claude/skills/automating-github-repos-with-actions/blueprints/security-hardening.md: sha256:534cf60bca31dc51722319c5827ed21639225cd5a8862a5bf9c3ec4e27c4413c
+    .claude/skills/automating-github-repos-with-actions/blueprints/tokens-app-and-pat.md: sha256:eac014527190f3352c000be0d70406ee8af1bce0f7ca64edc28a79fa715c5642
+    .claude/skills/automating-github-repos-with-actions/blueprints/triggers-and-payloads.md: sha256:af8dfab3767eca722732b261ff7b403d87aad1e76282713fce3c9e032cf45ecd
+    .claude/skills/automating-github-repos-with-actions/blueprints/unverified-and-risks.md: sha256:5f1e6fe44f9fc5de290d96c2e5df54c16eef604c9d298a66df129808ac5374e7
+    .claude/skills/managing-github-projects-gh-v2-103/SKILL.md: sha256:b2d0fc2de6f6a07552fec214a1c2055bd9985e51b137d4b36e76e51ba36fe2ed
+    .claude/skills/managing-github-projects-gh-v2-103/blueprints/always-do-patterns.md: sha256:e950822981fef765fe723a40958c812d0ba4eeed13c5cc123f99e0667a18d8de
+    .claude/skills/managing-github-projects-gh-v2-103/blueprints/auth-and-tokens.md: sha256:55fe5f1fe43664f6e4c2c9289b59cd0cd8dfb523ee9811f56db52b2ab9b12a72
+    .claude/skills/managing-github-projects-gh-v2-103/blueprints/evaluation-scenarios.md: sha256:ad2c3f43809ffa181910024a351ad3dafed08e3d035acef3835461bdd509a712
+    .claude/skills/managing-github-projects-gh-v2-103/blueprints/graphql-and-rate-limits.md: sha256:eeba31174454d81a23672ee4df17bde94cec64209e42e3bdf95b5d6910638cd7
+    .claude/skills/managing-github-projects-gh-v2-103/blueprints/issues-sub-issues-and-comments.md: sha256:7d3bb196385c42b5cc370fe94c7a82287563f4ded331721ca6bbe20e0f69c06a
+    .claude/skills/managing-github-projects-gh-v2-103/blueprints/never-do-patterns.md: sha256:a6cdacbcde4a2c3c9d6dcbf362ebfc5bdac5fa18897519bc79536a825a59d7c1
+    .claude/skills/managing-github-projects-gh-v2-103/blueprints/non-interactive-and-windows.md: sha256:1e12aa2dc66e49b8ec880dceb60df001ce54e069edecda26692f16dbb6a458c6
+    .claude/skills/managing-github-projects-gh-v2-103/blueprints/projects-fields-and-items.md: sha256:21935574a0e9fa568db0cadfaddd66070c4b748784ca8d04f11fa315baf510b6
+    .claude/skills/managing-github-projects-gh-v2-103/blueprints/unverified-and-risks.md: sha256:645638a2405a2eb7e21cc02e3001f4cb581b0f5458de83934d1c666b97c1b02e
+    .claude/skills/managing-github-projects-gh-v2-103/blueprints/version-changes.md: sha256:34a28b67f274ce9bbfea5acd7da6c0b33b2001b9cf9f3672d398d094eddc216a
+  source: local
+  local_path: ../github-core
+  declaring_parent: local:packages/openspec-github
+  anchored_local_path: packages/github-core
+  content_hash: sha256:f87d80c3c8881638dbf9b0be867c14aca7fcc7b0b166b89439acd3ef27c6006d
+  declared_license: MIT
+- repo_url: _local/openspec-core
+  name: agents-factory-openspec-core
+  version: 1.0.0
+  depth: 3
+  resolved_by: _local/handoff-core
+  package_type: apm_package
+  deployed_files:
+  - .claude/skills/specifying-changes-with-openspec-v1-15
+  - .claude/skills/specifying-changes-with-openspec-v1-15/SKILL.md
+  - .claude/skills/specifying-changes-with-openspec-v1-15/blueprints/always-do-patterns.md
+  - .claude/skills/specifying-changes-with-openspec-v1-15/blueprints/ask-first-decisions.md
+  - .claude/skills/specifying-changes-with-openspec-v1-15/blueprints/cli-lifecycle.md
+  - .claude/skills/specifying-changes-with-openspec-v1-15/blueprints/delta-format-and-archive.md
+  - .claude/skills/specifying-changes-with-openspec-v1-15/blueprints/doc-vs-validator-conflicts.md
+  - .claude/skills/specifying-changes-with-openspec-v1-15/blueprints/evaluation-scenarios.md
+  - .claude/skills/specifying-changes-with-openspec-v1-15/blueprints/migration-notes.md
+  - .claude/skills/specifying-changes-with-openspec-v1-15/blueprints/never-do-patterns.md
+  - .claude/skills/specifying-changes-with-openspec-v1-15/blueprints/non-interactive-and-windows.md
+  - .claude/skills/specifying-changes-with-openspec-v1-15/blueprints/unverified-and-risks.md
+  deployed_file_hashes:
+    .claude/skills/specifying-changes-with-openspec-v1-15/SKILL.md: sha256:32d2422a1ce525461aedc5c70b67553362821d41a129c7d2da31bb8f1a43d626
+    .claude/skills/specifying-changes-with-openspec-v1-15/blueprints/always-do-patterns.md: sha256:c563b21826d87284313a7b257a1fa65185f28c68124af51a1746869abfce30ff
+    .claude/skills/specifying-changes-with-openspec-v1-15/blueprints/ask-first-decisions.md: sha256:e01ff6d487dcc5b4ae889f82f86f98bd2ee7e3136da5f2f21ec378c1da6ef94e
+    .claude/skills/specifying-changes-with-openspec-v1-15/blueprints/cli-lifecycle.md: sha256:f5b321f348da0535c756d03a7a9456c35e2b1827b97f555dbc60a12e92d07104
+    .claude/skills/specifying-changes-with-openspec-v1-15/blueprints/delta-format-and-archive.md: sha256:50a53118d79e0121538a8b0a3fef035c71bd7c80a6b971f4e07b044d9ce656fa
+    .claude/skills/specifying-changes-with-openspec-v1-15/blueprints/doc-vs-validator-conflicts.md: sha256:6f664bb1e381381740e22b6f4ec028e5edb1b19ba1727c23014d3b8cb33f1ecd
+    .claude/skills/specifying-changes-with-openspec-v1-15/blueprints/evaluation-scenarios.md: sha256:fe884e3f1524e55395b4d094a48d1b4e6ca355dffeb0d2f9dd739bf73a47f067
+    .claude/skills/specifying-changes-with-openspec-v1-15/blueprints/migration-notes.md: sha256:4d2d555f3ef16d2c34dc210b1b6269059aaac2e794102cb3ef77dfc90e1923ad
+    .claude/skills/specifying-changes-with-openspec-v1-15/blueprints/never-do-patterns.md: sha256:f0071207ac41d9c42be9eed47fe7130221a7c5066de240ef4ed2ddd52f6b4907
+    .claude/skills/specifying-changes-with-openspec-v1-15/blueprints/non-interactive-and-windows.md: sha256:d5e2ccc9db83aa3ed2b5fa80bb366dc9ef850b063a576dad2fea90d3facea8ca
+    .claude/skills/specifying-changes-with-openspec-v1-15/blueprints/unverified-and-risks.md: sha256:444059fbdef3840846ed9be25353bb9993c66b9e885551b77c5aa38e7444b74f
+  source: local
+  local_path: ../openspec-core
+  declaring_parent: local:packages/handoff-core
+  anchored_local_path: packages/openspec-core
+  content_hash: sha256:ab527a955c69db5de24263d867fa442c21c138517941ff57dce9de55cc26991d
+  declared_license: MIT
 - repo_url: _local/quarkus-core
   name: agents-factory-quarkus-core
   version: 1.0.0
@@ -4030,6 +4213,15 @@ deployments:
   - ./packages/oci-terraform
   active_owner: ./packages/oci-terraform
   content_hash: sha256:6f8a310ea398f0749cdf47c9dd9432c4e64917e994a891a928404ddd9ee24662
+- kind: project-relative
+  target: claude
+  value: .claude/agents/openspec-github-syncer.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/openspec-github
+  active_owner: local:packages/openspec-github
+  content_hash: sha256:cc9749c202a2fe7299f4eec3f85d3861b9296cbaacae1948dac1bebd6325733b
 - kind: project-relative
   target: claude
   value: .claude/agents/quality-validator.md
@@ -4435,6 +4627,15 @@ deployments:
   - ./packages/oci-architecture
   active_owner: ./packages/oci-architecture
   content_hash: sha256:2fa7dec5a13c86c0de0b1e261bb446370a1a28ae9941572c1ab90135dcaf3697
+- kind: project-relative
+  target: claude
+  value: .claude/rules/openspec-github-state.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/openspec-github
+  active_owner: local:packages/openspec-github
+  content_hash: sha256:04863a237f76b8cdb036c49bd5468913b9714882baf771d2d959ed3f8b560df4
 - kind: project-relative
   target: claude
   value: .claude/rules/quarkus-clean-code.md
@@ -5949,6 +6150,105 @@ deployments:
   content_hash: sha256:1891a5dd5d84868297df6ef5ca390fac82b4561254aa286bb4d910bab8fcf60e
 - kind: project-relative
   target: claude
+  value: .claude/skills/automating-github-repos-with-actions
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/github-core
+  active_owner: local:packages/github-core
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/automating-github-repos-with-actions/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/github-core
+  active_owner: local:packages/github-core
+  content_hash: sha256:7a960903fb9dd6e5c44fe7f865dcf7683d5a12384cb9c90e2febcbd4bfa10d2b
+- kind: project-relative
+  target: claude
+  value: .claude/skills/automating-github-repos-with-actions/blueprints/always-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/github-core
+  active_owner: local:packages/github-core
+  content_hash: sha256:ba9c33a3b1837f932f7e7d64468d291f3ac5f0217de04d86696203c68b9861d2
+- kind: project-relative
+  target: claude
+  value: .claude/skills/automating-github-repos-with-actions/blueprints/evaluation-scenarios.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/github-core
+  active_owner: local:packages/github-core
+  content_hash: sha256:290b87426624246eee7f2918b4fb49568371ae504828c964eb5aa70e1374b81d
+- kind: project-relative
+  target: claude
+  value: .claude/skills/automating-github-repos-with-actions/blueprints/never-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/github-core
+  active_owner: local:packages/github-core
+  content_hash: sha256:d440ee70d9406eefde3ef4121333767a7cbde1e0ef5369236316e5a6dfb6e130
+- kind: project-relative
+  target: claude
+  value: .claude/skills/automating-github-repos-with-actions/blueprints/prs-and-status-checks.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/github-core
+  active_owner: local:packages/github-core
+  content_hash: sha256:08aeb46b5a339bb8d19cacb3c1139ee5fd26753018bb19f54a1888c8830e764e
+- kind: project-relative
+  target: claude
+  value: .claude/skills/automating-github-repos-with-actions/blueprints/runners-and-scripts.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/github-core
+  active_owner: local:packages/github-core
+  content_hash: sha256:01e9f6cc981e42861e8148aba3ef2ca79af2d6cf6fba4547b8b96841ddac1afe
+- kind: project-relative
+  target: claude
+  value: .claude/skills/automating-github-repos-with-actions/blueprints/security-hardening.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/github-core
+  active_owner: local:packages/github-core
+  content_hash: sha256:534cf60bca31dc51722319c5827ed21639225cd5a8862a5bf9c3ec4e27c4413c
+- kind: project-relative
+  target: claude
+  value: .claude/skills/automating-github-repos-with-actions/blueprints/tokens-app-and-pat.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/github-core
+  active_owner: local:packages/github-core
+  content_hash: sha256:eac014527190f3352c000be0d70406ee8af1bce0f7ca64edc28a79fa715c5642
+- kind: project-relative
+  target: claude
+  value: .claude/skills/automating-github-repos-with-actions/blueprints/triggers-and-payloads.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/github-core
+  active_owner: local:packages/github-core
+  content_hash: sha256:af8dfab3767eca722732b261ff7b403d87aad1e76282713fce3c9e032cf45ecd
+- kind: project-relative
+  target: claude
+  value: .claude/skills/automating-github-repos-with-actions/blueprints/unverified-and-risks.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/github-core
+  active_owner: local:packages/github-core
+  content_hash: sha256:5f1e6fe44f9fc5de290d96c2e5df54c16eef604c9d298a66df129808ac5374e7
+- kind: project-relative
+  target: claude
   value: .claude/skills/aws-architecture-advisor
   runtime: null
   scope: project
@@ -6306,7 +6606,7 @@ deployments:
   owners:
   - ./packages/quarkus-aws-saas
   active_owner: ./packages/quarkus-aws-saas
-  content_hash: sha256:76079394ea955e423d24b5ffdd75e396437eb82b146a3c7834b6f5a3f77f85e9
+  content_hash: sha256:7ace1c4149d74c74838902a96ee68432c6e87f1377a7fdfb4f92520f72734210
 - kind: project-relative
   target: claude
   value: .claude/skills/building-quarkus-aws-saas/blueprints/always-do-patterns.md
@@ -6324,7 +6624,7 @@ deployments:
   owners:
   - ./packages/quarkus-aws-saas
   active_owner: ./packages/quarkus-aws-saas
-  content_hash: sha256:10bf7524d7603cf54ba37c4d065a7904c30cadc22f172573147fd8426b9ac439
+  content_hash: sha256:b4b7ef85f1135b9e059d1517dd24b92e32003585ceddd3073f1b9df9e6bff107
 - kind: project-relative
   target: claude
   value: .claude/skills/building-quarkus-aws-saas/blueprints/e2-architecture-and-adrs.md
@@ -6378,7 +6678,7 @@ deployments:
   owners:
   - ./packages/quarkus-aws-saas
   active_owner: ./packages/quarkus-aws-saas
-  content_hash: sha256:3cf4c2e85532d4433f5899c0e11839e925fd2a61c890b74a4b11a7cf5290e73a
+  content_hash: sha256:9b3bfcd0d564bc5f42455e9b4e78170364e4794f485e9d14afb095b9a39b53b9
 - kind: project-relative
   target: claude
   value: .claude/skills/building-quarkus-aws-saas/blueprints/e9-archive-gate.md
@@ -6387,7 +6687,7 @@ deployments:
   owners:
   - ./packages/quarkus-aws-saas
   active_owner: ./packages/quarkus-aws-saas
-  content_hash: sha256:4341cf97ca41d5497155718493d4601b4a6de5a13d14483074775b61b72b438b
+  content_hash: sha256:6678f0c62a98b44bb34a96c15a7e8f582defc52202d57b93674655290b255d67
 - kind: project-relative
   target: claude
   value: .claude/skills/building-quarkus-aws-saas/blueprints/evaluation-scenarios.md
@@ -6396,7 +6696,7 @@ deployments:
   owners:
   - ./packages/quarkus-aws-saas
   active_owner: ./packages/quarkus-aws-saas
-  content_hash: sha256:8176c3939e78a512580be69cd01c6e53a3382cc4a236d1907772743cb61ad525
+  content_hash: sha256:bf416a7cff52a742c7a2b5a123b68f1208b339999e53da841e5e08d786d6dc66
 - kind: project-relative
   target: claude
   value: .claude/skills/building-quarkus-aws-saas/blueprints/knowledge-map.md
@@ -6405,7 +6705,7 @@ deployments:
   owners:
   - ./packages/quarkus-aws-saas
   active_owner: ./packages/quarkus-aws-saas
-  content_hash: sha256:b5059ebf4c226a80f5720ffce8a43f2cb4d0d8a9f7a8805d63d25988675e2478
+  content_hash: sha256:8601b75f64263baf6ce433f0829486da8df372c53d08f0bc1df7f66982b11a31
 - kind: project-relative
   target: claude
   value: .claude/skills/building-quarkus-aws-saas/blueprints/never-do-patterns.md
@@ -6417,13 +6717,22 @@ deployments:
   content_hash: sha256:3c34d0cabe6f482f3cc50bbd910abb2e76f31f2c9c02000af81e1b0f11b74688
 - kind: project-relative
   target: claude
+  value: .claude/skills/building-quarkus-aws-saas/blueprints/tracker-github-projects.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/quarkus-aws-saas
+  active_owner: ./packages/quarkus-aws-saas
+  content_hash: sha256:17b578f617e20dcc34a3551e63c4112d50ae2e702b1e610331b04378903f9f19
+- kind: project-relative
+  target: claude
   value: .claude/skills/building-quarkus-aws-saas/blueprints/unverified-and-risks.md
   runtime: null
   scope: project
   owners:
   - ./packages/quarkus-aws-saas
   active_owner: ./packages/quarkus-aws-saas
-  content_hash: sha256:f04e13efe5456423d40126d5ca9ecace34bb784e739b6081866e09382771dc5e
+  content_hash: sha256:58300812fcae8a6d0bf317b455cbbd6424c3a50b4148ec7419da17f72eb57ea2
 - kind: project-relative
   target: claude
   value: .claude/skills/building-quarkus-aws-saas/blueprints/worker-briefs.md
@@ -6432,7 +6741,7 @@ deployments:
   owners:
   - ./packages/quarkus-aws-saas
   active_owner: ./packages/quarkus-aws-saas
-  content_hash: sha256:7f52ef113d2d22c73348245d07971a8c6759902900db78a40eb71d9c25259348
+  content_hash: sha256:75872ad055f6150233bd1859e1dcbb9a821d6b42b54ef89abb9de56c46eecbba
 - kind: project-relative
   target: claude
   value: .claude/skills/business-domain-researcher
@@ -6711,7 +7020,7 @@ deployments:
   owners:
   - local:packages/handoff-core
   active_owner: local:packages/handoff-core
-  content_hash: sha256:26772eebab542748a171083181c8cd778af0930cfdfc9feb08512522c0cd88da
+  content_hash: sha256:846c55b649697c8b7109ced6c435e99b12d8ee3359a21c445b78ebbc8b38ffb7
 - kind: project-relative
   target: claude
   value: .claude/skills/coordinating-agent-handoffs/assets/deploy-report.template.md
@@ -6765,7 +7074,7 @@ deployments:
   owners:
   - local:packages/handoff-core
   active_owner: local:packages/handoff-core
-  content_hash: sha256:db32fc44948de8c1758483aef4dd5bba454ab79f94b80451738d2ed394125b16
+  content_hash: sha256:31778f98f671e6e8038ef4f3527c206db57f4414efbd733edd6e62b081d2c500
 - kind: project-relative
   target: claude
   value: .claude/skills/coordinating-agent-handoffs/assets/status.template.md
@@ -6837,7 +7146,7 @@ deployments:
   owners:
   - local:packages/handoff-core
   active_owner: local:packages/handoff-core
-  content_hash: sha256:968ced98d68a8403c936bc239c63be782feb5d5a6fd3e7e4db02d18ccde217c2
+  content_hash: sha256:790f81fcb9c58ec93b1e487bfa9842d4ac8a3af4fdf2476cc2933cda6a0667f7
 - kind: project-relative
   target: claude
   value: .claude/skills/coordinating-agent-handoffs/blueprints/protocol.md
@@ -6864,7 +7173,7 @@ deployments:
   owners:
   - local:packages/handoff-core
   active_owner: local:packages/handoff-core
-  content_hash: sha256:b6b3991423911b4dbc4fccfbe8bb22a542f3e834d06b0dc9507e9c2925c92b60
+  content_hash: sha256:e581e76c70e2a14356420d0004f9658c45437b2a80078d36b54c8831faa5ab92
 - kind: project-relative
   target: claude
   value: .claude/skills/coordinating-agent-handoffs/blueprints/unverified-and-risks.md
@@ -6873,7 +7182,7 @@ deployments:
   owners:
   - local:packages/handoff-core
   active_owner: local:packages/handoff-core
-  content_hash: sha256:cb9b6917ed20a399d458ca8a4a516e1ccc3ad8d08d949234b7d0c9ba6d940f1f
+  content_hash: sha256:e365d3f6f8c5e2f201b9b89f7d767357c683117e44da02f0f8a68feab00d1d8c
 - kind: project-relative
   target: claude
   value: .claude/skills/coordinating-agent-handoffs/scripts/_handoff_lib.py
@@ -6882,7 +7191,7 @@ deployments:
   owners:
   - local:packages/handoff-core
   active_owner: local:packages/handoff-core
-  content_hash: sha256:332b6663aa143a014afa1a12dd79b689f7683140fe78e154ab74ec1e4986af4c
+  content_hash: sha256:1ce421807e24c67688e53f37d70f704a49a00b5638131c96bbf2f22cc0c89ba7
 - kind: project-relative
   target: claude
   value: .claude/skills/coordinating-agent-handoffs/scripts/_mini_yaml.py
@@ -7008,7 +7317,7 @@ deployments:
   owners:
   - local:packages/handoff-core
   active_owner: local:packages/handoff-core
-  content_hash: sha256:5f3c6959cd19d4e9389a9cda268387a42aaff9fca828aa231ef8edef37c49e1d
+  content_hash: sha256:70dce6b2bd92b1f2ded19bafb08add00de62749ec4a62795f5e68ae4cf764825
 - kind: project-relative
   target: claude
   value: .claude/skills/coordinating-oci-handoffs
@@ -7179,7 +7488,7 @@ deployments:
   owners:
   - ./packages/quarkus-aws-saas
   active_owner: ./packages/quarkus-aws-saas
-  content_hash: sha256:6f5d3c8280d1b02aad22bb5a9c1367bcbb62a4ec98ded92eb3522440c941262a
+  content_hash: sha256:6c9ab1dca7a28b0a34512b457e110b2671614b94e9c131f906017a11319b109e
 - kind: project-relative
   target: claude
   value: .claude/skills/coordinating-quarkus-aws-handoffs/assets/result-code.template.md
@@ -7314,7 +7623,7 @@ deployments:
   owners:
   - ./packages/quarkus-aws-saas
   active_owner: ./packages/quarkus-aws-saas
-  content_hash: sha256:85f412bcb69251d57b7ee6bf07634e4429ca59011546ff5f682617495ea1f9dd
+  content_hash: sha256:d02b7587bf2d7e12db851afe13c356c575ff6b6fcc6956a0efb1b4bcb62b18e9
 - kind: project-relative
   target: claude
   value: .claude/skills/coordinating-quarkus-aws-handoffs/blueprints/roles-and-skills.md
@@ -11707,6 +12016,114 @@ deployments:
   - local:packages/aws-skills
   active_owner: local:packages/aws-skills
   content_hash: sha256:9927ee661cf2a61174b6762fe10f902da25b4a21157f766e1b114b69a29a79a9
+- kind: project-relative
+  target: claude
+  value: .claude/skills/managing-github-projects-gh-v2-103
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/github-core
+  active_owner: local:packages/github-core
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/managing-github-projects-gh-v2-103/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/github-core
+  active_owner: local:packages/github-core
+  content_hash: sha256:b2d0fc2de6f6a07552fec214a1c2055bd9985e51b137d4b36e76e51ba36fe2ed
+- kind: project-relative
+  target: claude
+  value: .claude/skills/managing-github-projects-gh-v2-103/blueprints/always-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/github-core
+  active_owner: local:packages/github-core
+  content_hash: sha256:e950822981fef765fe723a40958c812d0ba4eeed13c5cc123f99e0667a18d8de
+- kind: project-relative
+  target: claude
+  value: .claude/skills/managing-github-projects-gh-v2-103/blueprints/auth-and-tokens.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/github-core
+  active_owner: local:packages/github-core
+  content_hash: sha256:55fe5f1fe43664f6e4c2c9289b59cd0cd8dfb523ee9811f56db52b2ab9b12a72
+- kind: project-relative
+  target: claude
+  value: .claude/skills/managing-github-projects-gh-v2-103/blueprints/evaluation-scenarios.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/github-core
+  active_owner: local:packages/github-core
+  content_hash: sha256:ad2c3f43809ffa181910024a351ad3dafed08e3d035acef3835461bdd509a712
+- kind: project-relative
+  target: claude
+  value: .claude/skills/managing-github-projects-gh-v2-103/blueprints/graphql-and-rate-limits.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/github-core
+  active_owner: local:packages/github-core
+  content_hash: sha256:eeba31174454d81a23672ee4df17bde94cec64209e42e3bdf95b5d6910638cd7
+- kind: project-relative
+  target: claude
+  value: .claude/skills/managing-github-projects-gh-v2-103/blueprints/issues-sub-issues-and-comments.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/github-core
+  active_owner: local:packages/github-core
+  content_hash: sha256:7d3bb196385c42b5cc370fe94c7a82287563f4ded331721ca6bbe20e0f69c06a
+- kind: project-relative
+  target: claude
+  value: .claude/skills/managing-github-projects-gh-v2-103/blueprints/never-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/github-core
+  active_owner: local:packages/github-core
+  content_hash: sha256:a6cdacbcde4a2c3c9d6dcbf362ebfc5bdac5fa18897519bc79536a825a59d7c1
+- kind: project-relative
+  target: claude
+  value: .claude/skills/managing-github-projects-gh-v2-103/blueprints/non-interactive-and-windows.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/github-core
+  active_owner: local:packages/github-core
+  content_hash: sha256:1e12aa2dc66e49b8ec880dceb60df001ce54e069edecda26692f16dbb6a458c6
+- kind: project-relative
+  target: claude
+  value: .claude/skills/managing-github-projects-gh-v2-103/blueprints/projects-fields-and-items.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/github-core
+  active_owner: local:packages/github-core
+  content_hash: sha256:21935574a0e9fa568db0cadfaddd66070c4b748784ca8d04f11fa315baf510b6
+- kind: project-relative
+  target: claude
+  value: .claude/skills/managing-github-projects-gh-v2-103/blueprints/unverified-and-risks.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/github-core
+  active_owner: local:packages/github-core
+  content_hash: sha256:645638a2405a2eb7e21cc02e3001f4cb581b0f5458de83934d1c666b97c1b02e
+- kind: project-relative
+  target: claude
+  value: .claude/skills/managing-github-projects-gh-v2-103/blueprints/version-changes.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/github-core
+  active_owner: local:packages/github-core
+  content_hash: sha256:34a28b67f274ce9bbfea5acd7da6c0b33b2001b9cf9f3672d398d094eddc216a
 - kind: project-relative
   target: claude
   value: .claude/skills/managing-stripe-subscriptions-v34
@@ -18319,8 +18736,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - local:packages/handoff-core
-  active_owner: local:packages/handoff-core
+  - local:packages/openspec-core
+  active_owner: local:packages/openspec-core
   content_hash: null
 - kind: project-relative
   target: claude
@@ -18328,8 +18745,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - local:packages/handoff-core
-  active_owner: local:packages/handoff-core
+  - local:packages/openspec-core
+  active_owner: local:packages/openspec-core
   content_hash: sha256:32d2422a1ce525461aedc5c70b67553362821d41a129c7d2da31bb8f1a43d626
 - kind: project-relative
   target: claude
@@ -18337,8 +18754,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - local:packages/handoff-core
-  active_owner: local:packages/handoff-core
+  - local:packages/openspec-core
+  active_owner: local:packages/openspec-core
   content_hash: sha256:c563b21826d87284313a7b257a1fa65185f28c68124af51a1746869abfce30ff
 - kind: project-relative
   target: claude
@@ -18346,8 +18763,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - local:packages/handoff-core
-  active_owner: local:packages/handoff-core
+  - local:packages/openspec-core
+  active_owner: local:packages/openspec-core
   content_hash: sha256:e01ff6d487dcc5b4ae889f82f86f98bd2ee7e3136da5f2f21ec378c1da6ef94e
 - kind: project-relative
   target: claude
@@ -18355,8 +18772,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - local:packages/handoff-core
-  active_owner: local:packages/handoff-core
+  - local:packages/openspec-core
+  active_owner: local:packages/openspec-core
   content_hash: sha256:f5b321f348da0535c756d03a7a9456c35e2b1827b97f555dbc60a12e92d07104
 - kind: project-relative
   target: claude
@@ -18364,8 +18781,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - local:packages/handoff-core
-  active_owner: local:packages/handoff-core
+  - local:packages/openspec-core
+  active_owner: local:packages/openspec-core
   content_hash: sha256:50a53118d79e0121538a8b0a3fef035c71bd7c80a6b971f4e07b044d9ce656fa
 - kind: project-relative
   target: claude
@@ -18373,8 +18790,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - local:packages/handoff-core
-  active_owner: local:packages/handoff-core
+  - local:packages/openspec-core
+  active_owner: local:packages/openspec-core
   content_hash: sha256:6f664bb1e381381740e22b6f4ec028e5edb1b19ba1727c23014d3b8cb33f1ecd
 - kind: project-relative
   target: claude
@@ -18382,8 +18799,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - local:packages/handoff-core
-  active_owner: local:packages/handoff-core
+  - local:packages/openspec-core
+  active_owner: local:packages/openspec-core
   content_hash: sha256:fe884e3f1524e55395b4d094a48d1b4e6ca355dffeb0d2f9dd739bf73a47f067
 - kind: project-relative
   target: claude
@@ -18391,8 +18808,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - local:packages/handoff-core
-  active_owner: local:packages/handoff-core
+  - local:packages/openspec-core
+  active_owner: local:packages/openspec-core
   content_hash: sha256:4d2d555f3ef16d2c34dc210b1b6269059aaac2e794102cb3ef77dfc90e1923ad
 - kind: project-relative
   target: claude
@@ -18400,8 +18817,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - local:packages/handoff-core
-  active_owner: local:packages/handoff-core
+  - local:packages/openspec-core
+  active_owner: local:packages/openspec-core
   content_hash: sha256:f0071207ac41d9c42be9eed47fe7130221a7c5066de240ef4ed2ddd52f6b4907
 - kind: project-relative
   target: claude
@@ -18409,8 +18826,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - local:packages/handoff-core
-  active_owner: local:packages/handoff-core
+  - local:packages/openspec-core
+  active_owner: local:packages/openspec-core
   content_hash: sha256:d5e2ccc9db83aa3ed2b5fa80bb366dc9ef850b063a576dad2fea90d3facea8ca
 - kind: project-relative
   target: claude
@@ -18418,8 +18835,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - local:packages/handoff-core
-  active_owner: local:packages/handoff-core
+  - local:packages/openspec-core
+  active_owner: local:packages/openspec-core
   content_hash: sha256:444059fbdef3840846ed9be25353bb9993c66b9e885551b77c5aa38e7444b74f
 - kind: project-relative
   target: claude
@@ -18565,6 +18982,375 @@ deployments:
   - ./packages/book-writing
   active_owner: ./packages/book-writing
   content_hash: sha256:987c44b3dbdc6a441fc2992201b08b56897383f67b15a70b8799ad7fdef709a3
+- kind: project-relative
+  target: claude
+  value: .claude/skills/syncing-openspec-to-github
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/openspec-github
+  active_owner: local:packages/openspec-github
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/syncing-openspec-to-github/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/openspec-github
+  active_owner: local:packages/openspec-github
+  content_hash: sha256:1f742bbb2c1f4e388f9323bbb5e1da924c4624e818a4aa998cda2f2e7d6bfa3f
+- kind: project-relative
+  target: claude
+  value: .claude/skills/syncing-openspec-to-github/blueprints/evaluation-scenarios.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/openspec-github
+  active_owner: local:packages/openspec-github
+  content_hash: sha256:b0dad1b84c1f49878bfb23ba766ab20a70a2a51ce5aaf01a7d55be0becb5b4f8
+- kind: project-relative
+  target: claude
+  value: .claude/skills/syncing-openspec-with-github-projects
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/openspec-github
+  active_owner: local:packages/openspec-github
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/syncing-openspec-with-github-projects/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/openspec-github
+  active_owner: local:packages/openspec-github
+  content_hash: sha256:400334a65354a0a513d88fe7bfd2e9392c5ef87883a6353e425383a096dea5b9
+- kind: project-relative
+  target: claude
+  value: .claude/skills/syncing-openspec-with-github-projects/assets/github.template.yaml
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/openspec-github
+  active_owner: local:packages/openspec-github
+  content_hash: sha256:53af1d9b5415727f609606de4ddbd55b96ae654a969b6b1642e5b92b87d96fba
+- kind: project-relative
+  target: claude
+  value: .claude/skills/syncing-openspec-with-github-projects/assets/workflows/openspec-archive.yml
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/openspec-github
+  active_owner: local:packages/openspec-github
+  content_hash: sha256:85f390c9bcc99ca21c117409c47660c1eb42d68483c1a1ca5863d50972511bca
+- kind: project-relative
+  target: claude
+  value: .claude/skills/syncing-openspec-with-github-projects/assets/workflows/openspec-board-sync.yml
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/openspec-github
+  active_owner: local:packages/openspec-github
+  content_hash: sha256:9fc71bcb03c1f25d6a11f66c51b2db4e080215457b9f36d1623513932dec1b2d
+- kind: project-relative
+  target: claude
+  value: .claude/skills/syncing-openspec-with-github-projects/assets/workflows/openspec-ci.yml
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/openspec-github
+  active_owner: local:packages/openspec-github
+  content_hash: sha256:bd204bffff6e29b8d928430cb29b8b6babe93b912e92c7098f4bf7c0965c2670
+- kind: project-relative
+  target: claude
+  value: .claude/skills/syncing-openspec-with-github-projects/assets/workflows/openspec-gate.yml
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/openspec-github
+  active_owner: local:packages/openspec-github
+  content_hash: sha256:7131293fcc6a24a4eff6c57870738e0af2b49c45d420ba8d9d1a4bbc7f7b0d7f
+- kind: project-relative
+  target: claude
+  value: .claude/skills/syncing-openspec-with-github-projects/blueprints/always-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/openspec-github
+  active_owner: local:packages/openspec-github
+  content_hash: sha256:223905b0729c195775e822aa5bbb1d7108f8bd6b9bcee5f9cd81917d2f56a1c8
+- kind: project-relative
+  target: claude
+  value: .claude/skills/syncing-openspec-with-github-projects/blueprints/approvals-and-trust.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/openspec-github
+  active_owner: local:packages/openspec-github
+  content_hash: sha256:6a7105591a88f00137f081a25c917b3d53ef49450d8d050018be7f80cca56cd4
+- kind: project-relative
+  target: claude
+  value: .claude/skills/syncing-openspec-with-github-projects/blueprints/bootstrap-and-credentials.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/openspec-github
+  active_owner: local:packages/openspec-github
+  content_hash: sha256:b37a1ab45111df3df16e5d48220015fd352a7d65a1dcd626804df91a5ff9b540
+- kind: project-relative
+  target: claude
+  value: .claude/skills/syncing-openspec-with-github-projects/blueprints/cli-contract.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/openspec-github
+  active_owner: local:packages/openspec-github
+  content_hash: sha256:19b7a083246a56b114b401030abc7543e741bde6601478ec0527aa01350c6709
+- kind: project-relative
+  target: claude
+  value: .claude/skills/syncing-openspec-with-github-projects/blueprints/evaluation-scenarios.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/openspec-github
+  active_owner: local:packages/openspec-github
+  content_hash: sha256:667f192489a9f4ae5a465fe20bdc320a8ab6b1cc0ccebbd99a5efe295c7fd5bd
+- kind: project-relative
+  target: claude
+  value: .claude/skills/syncing-openspec-with-github-projects/blueprints/mapping.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/openspec-github
+  active_owner: local:packages/openspec-github
+  content_hash: sha256:804bfc23beedb23b719636e2489db99de6b9428caee4541baccfd6ffbe957a53
+- kind: project-relative
+  target: claude
+  value: .claude/skills/syncing-openspec-with-github-projects/blueprints/never-do-patterns.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/openspec-github
+  active_owner: local:packages/openspec-github
+  content_hash: sha256:29a0de0aaba6b16a76c97306a1e422e849dc6189e0e047d9dce17367b0f0b2f0
+- kind: project-relative
+  target: claude
+  value: .claude/skills/syncing-openspec-with-github-projects/blueprints/unverified-and-risks.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/openspec-github
+  active_owner: local:packages/openspec-github
+  content_hash: sha256:4d8c14b2f5da47b66d366882ed64db3806142474ff3822fb31bc15bbedb10c78
+- kind: project-relative
+  target: claude
+  value: .claude/skills/syncing-openspec-with-github-projects/blueprints/workflows.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/openspec-github
+  active_owner: local:packages/openspec-github
+  content_hash: sha256:8e8955c4d39f9f13fbf56405b1389f4d4b607411ffb1817e4132509634b45461
+- kind: project-relative
+  target: claude
+  value: .claude/skills/syncing-openspec-with-github-projects/scripts/_gh.py
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/openspec-github
+  active_owner: local:packages/openspec-github
+  content_hash: sha256:0db7716acb7e895d8e5992607449fe67bed2088e3ed48c0c75e040b3555d2fc5
+- kind: project-relative
+  target: claude
+  value: .claude/skills/syncing-openspec-with-github-projects/scripts/_model.py
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/openspec-github
+  active_owner: local:packages/openspec-github
+  content_hash: sha256:1436a0c5f527860a9e5fa1b8607aa34a5227506d6bdcc54d0cd5c3ad9fb90d58
+- kind: project-relative
+  target: claude
+  value: .claude/skills/syncing-openspec-with-github-projects/scripts/_vendor.py
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/openspec-github
+  active_owner: local:packages/openspec-github
+  content_hash: sha256:516af27f60e3ce2f9437b6d37cebbe4ec7a971e6f6ac32b1d40dc1a76255d407
+- kind: project-relative
+  target: claude
+  value: .claude/skills/syncing-openspec-with-github-projects/scripts/gate_command.py
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/openspec-github
+  active_owner: local:packages/openspec-github
+  content_hash: sha256:f8c541eb013a3cafb06c4873c720785e7279aa97606d4b271dc10d91ae940652
+- kind: project-relative
+  target: claude
+  value: .claude/skills/syncing-openspec-with-github-projects/scripts/gh_projects_sync.py
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/openspec-github
+  active_owner: local:packages/openspec-github
+  content_hash: sha256:3c21edee0aa13677501714485b986d3fbc188a7ae8cb5f74c09bffa2f905e251
+- kind: project-relative
+  target: claude
+  value: .claude/skills/syncing-openspec-with-github-projects/scripts/tests/fake_gh.py
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/openspec-github
+  active_owner: local:packages/openspec-github
+  content_hash: sha256:de1d4085a98044cc3fd8a502d4ef1eb6eb73ee4e942ff2d379be740ea790b2c0
+- kind: project-relative
+  target: claude
+  value: .claude/skills/syncing-openspec-with-github-projects/scripts/tests/fixtures/profiles/quarkus-aws.yaml
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/openspec-github
+  active_owner: local:packages/openspec-github
+  content_hash: sha256:63125f3c100fba76a92a6da399eff5383b4dd4b52ed4531cb1b74b0a5fd85a7a
+- kind: project-relative
+  target: claude
+  value: .claude/skills/syncing-openspec-with-github-projects/scripts/tests/fixtures/repo/openspec/changes/list-tenant-items/design.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/openspec-github
+  active_owner: local:packages/openspec-github
+  content_hash: sha256:b84066acdb60849e68119800545c58560c3d7e390e0331c452c4ccb334f05fb8
+- kind: project-relative
+  target: claude
+  value: .claude/skills/syncing-openspec-with-github-projects/scripts/tests/fixtures/repo/openspec/changes/list-tenant-items/handoff/result-01-code.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/openspec-github
+  active_owner: local:packages/openspec-github
+  content_hash: sha256:5dd0016c575e1101e3f801c8a8d46f23b9913e67ac4df4fdb8f21ec520dad9c7
+- kind: project-relative
+  target: claude
+  value: .claude/skills/syncing-openspec-with-github-projects/scripts/tests/fixtures/repo/openspec/changes/list-tenant-items/handoff/review-01.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/openspec-github
+  active_owner: local:packages/openspec-github
+  content_hash: sha256:7909616c074770ccb6f858a504edbaa9e30a865b47c667aa6db14a02a11e8068
+- kind: project-relative
+  target: claude
+  value: .claude/skills/syncing-openspec-with-github-projects/scripts/tests/fixtures/repo/openspec/changes/list-tenant-items/handoff/spec-delta-01.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/openspec-github
+  active_owner: local:packages/openspec-github
+  content_hash: sha256:4a520982ed74c5341d418f3d83a1b7e4b96ab3d17c34af5659be8eba053dba47
+- kind: project-relative
+  target: claude
+  value: .claude/skills/syncing-openspec-with-github-projects/scripts/tests/fixtures/repo/openspec/changes/list-tenant-items/handoff/status.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/openspec-github
+  active_owner: local:packages/openspec-github
+  content_hash: sha256:482346d101c0fea1371971f15f9b8012c33af08007b8985a9786c5d9120a7259
+- kind: project-relative
+  target: claude
+  value: .claude/skills/syncing-openspec-with-github-projects/scripts/tests/fixtures/repo/openspec/changes/list-tenant-items/handoff/verify-01.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/openspec-github
+  active_owner: local:packages/openspec-github
+  content_hash: sha256:4ebc1d8cef84b3e5b54b89071f30c25b736f797c9869cdc963dba1862f3f0e36
+- kind: project-relative
+  target: claude
+  value: .claude/skills/syncing-openspec-with-github-projects/scripts/tests/fixtures/repo/openspec/changes/list-tenant-items/handoff/wo-01-code.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/openspec-github
+  active_owner: local:packages/openspec-github
+  content_hash: sha256:056a0157fe3becdfa11989ca27c92c4286a1b5cc44b117fc4c8ef879e8dd9923
+- kind: project-relative
+  target: claude
+  value: .claude/skills/syncing-openspec-with-github-projects/scripts/tests/fixtures/repo/openspec/changes/list-tenant-items/proposal.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/openspec-github
+  active_owner: local:packages/openspec-github
+  content_hash: sha256:4bb2abe01947e9769625c478e7be7ad252a61ff108c33132dbfad9c2b1079416
+- kind: project-relative
+  target: claude
+  value: .claude/skills/syncing-openspec-with-github-projects/scripts/tests/fixtures/repo/openspec/changes/list-tenant-items/tasks.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/openspec-github
+  active_owner: local:packages/openspec-github
+  content_hash: sha256:3b621f04ab1aecf268f59bc05a6a5b112d61895129d41451a81c608c2d0c4765
+- kind: project-relative
+  target: claude
+  value: .claude/skills/syncing-openspec-with-github-projects/scripts/tests/fixtures/repo/openspec/github-tracker.yaml
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/openspec-github
+  active_owner: local:packages/openspec-github
+  content_hash: sha256:01e34d613d70fea16062230359ac79461d9f0499770543c7714697fd0b927b74
+- kind: project-relative
+  target: claude
+  value: .claude/skills/syncing-openspec-with-github-projects/scripts/tests/fixtures/repo/openspec/specs/architecture/adr/003-tenant-isolation.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/openspec-github
+  active_owner: local:packages/openspec-github
+  content_hash: sha256:edd31aa5bbd204d0a86b358f38b7291d5b534f23ee8890ed6d6a861b35fc4943
+- kind: project-relative
+  target: claude
+  value: .claude/skills/syncing-openspec-with-github-projects/scripts/tests/fixtures/repo/openspec/specs/architecture/adr/004-unrelated.md
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/openspec-github
+  active_owner: local:packages/openspec-github
+  content_hash: sha256:3892ecf20a2bb6f7b9aea1522e75f8c12b5767b50956b47291218b66bae99ea5
+- kind: project-relative
+  target: claude
+  value: .claude/skills/syncing-openspec-with-github-projects/scripts/tests/test_gate.py
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/openspec-github
+  active_owner: local:packages/openspec-github
+  content_hash: sha256:5e42bb30404b46b16ac75324c03f49c893e99e8d6a088f497d5c9beca16bd8ee
+- kind: project-relative
+  target: claude
+  value: .claude/skills/syncing-openspec-with-github-projects/scripts/tests/test_model.py
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/openspec-github
+  active_owner: local:packages/openspec-github
+  content_hash: sha256:3faaf7074096f9822ba92fea83f6738ba7e0c2c3d907125ec78a7c63763cc092
+- kind: project-relative
+  target: claude
+  value: .claude/skills/syncing-openspec-with-github-projects/scripts/tests/test_sync.py
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/openspec-github
+  active_owner: local:packages/openspec-github
+  content_hash: sha256:5d50e0d0845259520a0355b080535bc37b01a3b5d6de10925d25361b0eb31f6a
 - kind: project-relative
   target: claude
   value: .claude/skills/syncing-spec-from-code
