@@ -8,7 +8,7 @@
   "query": "I need to deploy version 0.0.15 of my func-rr-rest-proxy function. Previous version was 0.0.14 and is working.",
   "expected_behavior": [
     "Starts with pre-flight checks before any build command",
-    "Runs ./build-push.sh 0.0.15 from the function's service directory",
+    "Runs python3 build-push.py 0.0.15 from the function's service directory",
     "Updates terraform.tfvars to reference the new image tag",
     "Runs terraform plan and confirms exactly 1 resource change (image attribute only)",
     "Runs terraform apply only after plan is verified",

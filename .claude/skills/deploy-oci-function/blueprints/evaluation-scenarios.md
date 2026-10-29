@@ -41,7 +41,7 @@
 - P5: Smoke test returns HTTP 500 "Function init failed: unknown cause"
 - P5.5: No pattern match found for error signal
 - After 2 auto-fix cycles with no resolution: writes `deploy-report.md` with error details
-- States: "Hand off to `/debug-function` for deeper diagnosis, or roll back to 0.0.9?"
+- States: "Hand off to `/debug-oci-function` for deeper diagnosis, or roll back to 0.0.9?"
 - On user choosing rollback: reverts terraform.tfvars, applies, confirms rollback with smoke test
 
 **Pass criteria**: Agent does not loop beyond 2 cycles; offers explicit choice; rollback verified with smoke test.
@@ -54,7 +54,7 @@
 
 **Expected agent behavior**:
 - Identifies this as infrastructure creation, NOT deployment
-- States: "This requires Terraform infrastructure — use `@oci-terraform` or `/add-functions-infra`"
+- States: "This requires Terraform infrastructure — use `@oci-terraform` or `/provision-oci-infra`"
 - Does NOT create Terraform modules
 
 **Pass criteria**: Agent declines scope correctly, routes to correct command, no Terraform code generated.

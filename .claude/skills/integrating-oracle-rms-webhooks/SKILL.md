@@ -74,15 +74,15 @@ webhook → parse envelope (payload.items) → per item: enrich by-id → transf
 
 ## Scripts
 
-Located in `.claude/skills/integrating-oracle-rms-webhooks/scripts/` (resolve repo root via `git`, run from any directory). See `scripts/README.md`.
+Located in `.claude/skills/integrating-oracle-rms-webhooks/scripts/` (Python 3, standard library only; resolve repo root via `git`, run from any directory). See `scripts/README.md`; offline tests: `python3 tests/run_tests.py`.
 
 | Script | Use |
 |--------|-----|
-| `rms-token.sh` | Obtains and prints an OAuth2 access_token (debug) |
-| `rms-get.sh` | `GET` foundation: `--entity item --id <id>` (by-id) or `--since/--before` (delta) |
-| `register-webhook.sh` | `--action register\|list\|disable` on `webhooks/manage` |
-| `simulate-webhook.sh` | POST EVENT/PAYLOAD envelope to `--listener <url>` (tests the function) |
-| `lib-rms.sh` | Config + helpers + `rms_token()` (creds via env or Vault) — sourced by others |
+| `rms-token.py` | Obtains and prints an OAuth2 access_token (debug) |
+| `rms-get.py` | `GET` foundation: `--entity item --id <id>` (by-id) or `--since/--before` (delta) |
+| `register-webhook.py` | `--action register\|list\|disable` on `webhooks/manage` |
+| `simulate-webhook.py` | POST EVENT/PAYLOAD envelope to `--listener <url>` (tests the function) |
+| `lib_rms.py` | Config + helpers + `rms_token()` (creds via env or Vault) — imported by the others |
 
 ## Quick Navigation
 
@@ -127,26 +127,26 @@ Run these from an OCI-internal host or allowlisted VPN (network allowlist requir
 
 ### 1. Obtain Token
 ```bash
-./scripts/rms-token.sh
-# Expected: prints a JWT access_token string
+python3 scripts/rms-token.py
+# Expected: an "[i] Credenciais ..." line, then the JWT access_token (last line)
 ```
 
 ### 2. Fetch Item by ID
 ```bash
-./scripts/rms-get.sh --entity item --id <item-id>
+python3 scripts/rms-get.py --entity item --id <item-id>
 # Expected: {"items":[{"item":"<item-id>","status":"A",...}]}
 # Exit code: 0
 ```
 
 ### 3. Fetch Delta
 ```bash
-./scripts/rms-get.sh --entity item --since 2026-01-01T00:00:00Z --before 2026-01-02T00:00:00Z
+python3 scripts/rms-get.py --entity item --since 2026-01-01T00:00:00Z --before 2026-01-02T00:00:00Z
 # Expected: {"items":[...], "hasMore":false, "count":N}
 ```
 
 ### 4. Simulate Webhook
 ```bash
-./scripts/simulate-webhook.sh --listener https://<apigw-host>/<path> --type EVENT
+python3 scripts/simulate-webhook.py --listener https://<apigw-host>/<path> --mode EVENT
 # Expected: HTTP 200 from the function
 ```
 

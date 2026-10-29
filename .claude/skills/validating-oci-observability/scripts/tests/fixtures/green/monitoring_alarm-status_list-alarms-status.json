@@ -1,0 +1,44 @@
+{
+ "data": [
+  {
+   "display-name": "alarm-fn-errors-api-handler",
+   "status": "FIRING"
+  },
+  {
+   "display-name": "alarm-fn-errors-facade",
+   "status": "OK"
+  },
+  {
+   "display-name": "alarm-fn-errors-rest-proxy",
+   "status": "OK"
+  },
+  {
+   "display-name": "alarm-fn-latency-api-handler",
+   "status": "OK"
+  },
+  {
+   "display-name": "alarm-fn-latency-facade",
+   "status": "OK"
+  },
+  {
+   "display-name": "alarm-fn-latency-rest-proxy",
+   "status": "OK"
+  },
+  {
+   "display-name": "alarm-fn-throttle-api-handler",
+   "status": "OK"
+  },
+  {
+   "display-name": "alarm-fn-throttle-facade",
+   "status": "OK"
+  },
+  {
+   "display-name": "alarm-fn-throttle-rest-proxy",
+   "status": "OK"
+  },
+  {
+   "display-name": "alarm-apigw-5xx",
+   "status": "OK"
+  }
+ ]
+}

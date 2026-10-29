@@ -24,7 +24,7 @@ description: Generates a complete, deploy-ready OCI Function project scaffold wi
 - **[What This Skill Produces](#what-this-skill-produces)**
 - **[Scaffold Parameters](#scaffold-parameters)**
 - **[Blueprints & Guardrails](#blueprints--guardrails)** — ✅ Always Do / ⚠️ Ask First / 🚫 Never Do
-- **[Templates](#templates)** — Handler, Response, Request, Dockerfile, build-push.sh
+- **[Templates](#templates)** — Handler, Response, Request, Dockerfile, build-push.py
 - **[Checklist: Scaffold Complete](#checklist-scaffold-complete)**
 - **[External Resources](#external-resources)**
 - **[Evaluation Scenarios](./blueprints/evaluation-scenarios.md)**
@@ -40,7 +40,7 @@ services/<function-name>/
 ├── Dockerfile          ← Multi-stage build with CMD (mandatory)
 ├── func.yaml           ← Function metadata, timeout=60s
 ├── pom.xml             ← FDK + OCI SDK BOM + httpclient-jersey
-├── build-push.sh       ← Build & push script (executable)
+├── build-push.py       ← Build & push script (Python 3, stdlib only)
 ├── README.md           ← Function description & endpoints
 └── src/
     ├── main/java/com/brx/functions/<package>/
@@ -81,7 +81,7 @@ Before generating, collect:
 - Implement the `initError` pattern in every handler: catch all `configure()` exceptions, store in `initError`, check `initError != null` as the FIRST action in `handler()`.
 - Include `elapsed_ms` in all response models.
 - Set `timeout` to 60s (or higher) for functions with external calls (OCI SDK, HTTP clients).
-- Make `build-push.sh` call `preflight.sh` before building.
+- Make `build-push.py` call `preflight.sh` before building (the template does it when `scripts/preflight.sh` exists).
 - Read FDK/SDK versions from an existing `services/*/pom.xml` — never hardcode.
 
 ### ⚠️ Ask First
@@ -217,9 +217,9 @@ See [blueprints/dockerfile-template.md](blueprints/dockerfile-template.md) — m
 
 ---
 
-### build-push.sh
+### build-push.py
 
-Runnable template: [assets/build-push.sh](assets/build-push.sh) — copy to `services/<function-name>/build-push.sh` and `chmod +x` it. No hardcoded values; reads `OCIR_REGION`, `OCIR_NAMESPACE`, `OCIR_REPO`, `OCIR_USERNAME`, `OCIR_PASSWORD` from `services/.env` and function name/version from `func.yaml`.
+Runnable template: [assets/build-push.py](assets/build-push.py) — copy to `services/<function-name>/build-push.py` and run `python3 build-push.py [TAG]` (Linux, macOS, Windows). No hardcoded values; reads `OCIR_REGION`, `OCIR_NAMESPACE`, `OCIR_REPO`, `OCIR_USERNAME`, `OCIR_PASSWORD` from `services/.env` and function name/version from `func.yaml`.
 
 Documentation and `.env` variable reference: [blueprints/build-push-script.md](blueprints/build-push-script.md).
 
@@ -236,7 +236,7 @@ After generating, verify ALL are true:
 - [ ] Handler checks `initError != null` as FIRST action
 - [ ] Response model includes `elapsed_ms` field
 - [ ] No credentials or secrets in `func.yaml`
-- [ ] `build-push.sh` is executable and calls `preflight.sh`
+- [ ] `build-push.py` is present and calls `preflight.sh`
 - [ ] `func.yaml` timeout >= 60s if OCI SDK is used
 - [ ] Test file exists with at least a smoke test
 
@@ -253,7 +253,7 @@ mvn clean package -DskipTests   # expected exit code 0; produces target/*.jar
 # 2. Run the test suite (must include the smoke test)
 mvn test                        # expected exit code 0; all tests green
 
-# 3. Build the container image (uses the generated Dockerfile; same as build-push.sh)
+# 3. Build the container image (uses the generated Dockerfile; same as build-push.py)
 docker build --platform linux/amd64 -t "$(grep '^name:' func.yaml | awk '{print $2}'):latest" .
                                 # expected exit code 0; image built successfully
 ```

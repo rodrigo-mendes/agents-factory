@@ -65,7 +65,7 @@ OCI serverless infrastructure authored in Terraform. Part of the OCI package fam
 
 | Script | Purpose |
 |---|---|
-| `cleaning-up-oci-resources/scripts/oci-cleanup.sh` | Parametrized 8-phase OCI compartment teardown |
+| `cleaning-up-oci-resources/scripts/oci-cleanup.py` | Parametrized 8-phase OCI compartment teardown (Python 3, stdlib only) |
 
 ## Quick Start
 
@@ -77,7 +77,7 @@ OCI serverless infrastructure authored in Terraform. Part of the OCI package fam
 export OCI_COMPARTMENT_OCID="ocid1.compartment.oc1...<value>"
 export OCI_TENANCY_OCID="ocid1.tenancy.oc1...<value>"
 export OCI_NAMESPACE="<your-namespace>"
-./.apm/skills/cleaning-up-oci-resources/scripts/oci-cleanup.sh --dry-run
+python3 ./.apm/skills/cleaning-up-oci-resources/scripts/oci-cleanup.py --dry-run
 ```
 
 ## Dependencies

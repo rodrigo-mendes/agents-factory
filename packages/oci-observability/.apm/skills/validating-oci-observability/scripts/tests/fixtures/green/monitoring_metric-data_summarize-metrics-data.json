@@ -1,0 +1,5 @@
+{"__rules__": [
+  {"contains": ["IngestedBytes"], "stdout": {"data": [{"aggregated-datapoints": [{"value": 1024.0}, {"value": 512}]}]}},
+  {"contains": ["PayloadRejections"], "stdout": {"data": [{"aggregated-datapoints": [{"value": 0}]}]}}
+ ],
+ "__default__": {"stdout": {"data": [{"aggregated-datapoints": [{"timestamp": "2026-10-28T10:00:00Z", "value": 3}]}]}, "rc": 0}}
