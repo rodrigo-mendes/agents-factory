@@ -63,7 +63,7 @@ Sources: https://quarkus.io/version/3.40/guides/cdi-reference ; https://camel.ap
 
 ## Inspecting removals
 
-Representative, adapt to your environment (dev mode only; page not recorded for the endpoint list):
+Representative, adapt to your environment (dev mode only; the endpoint list is unverified, U9):
 
 ```bash
 ./mvnw quarkus:dev -Dquarkus.log.category."io.quarkus.arc.processor".level=DEBUG

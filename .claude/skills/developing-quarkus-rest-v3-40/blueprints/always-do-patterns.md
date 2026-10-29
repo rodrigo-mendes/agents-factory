@@ -1,6 +1,6 @@
 # Always-Do Patterns: Quarkus REST 3.40.x
 
-Research date 2026-10-14. Back to [SKILL.md](../SKILL.md). Each pattern rests on a versioned `https://quarkus.io/version/3.40/guides/` page. Medium-confidence topics are in [server resources](./server-resources.md), [security and TLS](./security-and-tls.md) and [Camel integration](./camel-integration.md).
+Research date 2026-10-14. Back to [SKILL.md](../SKILL.md). Each pattern rests on a versioned `https://quarkus.io/version/3.40/guides/` page. Medium-confidence topics are in [server resources](./server-resources.md), [security and TLS](./security-and-tls.md). Camel with Quarkus REST: see `developing-camel-quarkus-rest-v3-40` (Quarkus + Camel package).
 
 ## Contents
 
@@ -14,7 +14,7 @@ Research date 2026-10-14. Back to [SKILL.md](../SKILL.md). Each pattern rests on
 
 ## 1. Server and client artifacts
 
-The 3.40 guide names `quarkus-rest`, `quarkus-rest-jackson`, `quarkus-rest-jsonb` and `quarkus-rest-jaxb`, and says `quarkus-resteasy-client` "may not be used with Quarkus REST".
+The 3.40 guide names `quarkus-rest`, `quarkus-rest-jackson`, `quarkus-rest-jsonb` and `quarkus-rest-jaxb` (medium confidence, L5), and says `quarkus-resteasy-client` "may not be used with Quarkus REST".
 
 ```xml
 <!-- Quarkus 3.40.x: versions come from the Quarkus/Camel Quarkus BOM -->
@@ -27,7 +27,7 @@ Sources: https://quarkus.io/version/3.40/guides/rest ; https://quarkus.io/versio
 
 ## 2. Thread by signature
 
-"The thread Quarkus REST will run endpoint methods on depends on the signature of the method". `Uni`, `Multi`, `CompletionStage`, `Publisher` and Kotlin `suspend` are non-blocking and run on the IO thread. `@Blocking` and `@NonBlocking` apply at method, class or `Application` level; `@Transactional` methods count as blocking.
+"The thread Quarkus REST will run endpoint methods on depends on the signature of the method". `Uni`, `Multi`, `CompletionStage`, `Publisher` and Kotlin `suspend` are non-blocking and run on the IO thread. `@Blocking` and `@NonBlocking` apply at method, class or `Application` level, and `@Transactional` methods count as blocking (medium confidence, L5).
 
 ```java
 // Quarkus 3.40.x

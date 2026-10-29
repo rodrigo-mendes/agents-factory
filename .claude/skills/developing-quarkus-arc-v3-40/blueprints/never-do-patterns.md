@@ -49,12 +49,9 @@ Only normal-scoped beans can be mocked ("basically every scope except @Singleton
 
 // ✅ CORRECT
 @ApplicationScoped class Clock { }  // test: @InjectMock Clock clock;
-
-// ✅ CORRECT (bean stays @Singleton)
-// test: @InjectMock @MockitoConfig(convertScopes = true) Clock clock;
 ```
 
-Without `@MockitoConfig(convertScopes = true)`, do not mock a `@Singleton` or `@Dependent` bean; see [testing](./testing.md).
+Do not mock a `@Singleton` or `@Dependent` bean without `@MockitoConfig(convertScopes = true)`. The `convertScopes` option is Ask First in SKILL.md (mocking strategy); see [testing](./testing.md).
 
 Source: https://quarkus.io/version/3.40/guides/getting-started-testing
 

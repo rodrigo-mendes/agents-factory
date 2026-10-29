@@ -2,6 +2,14 @@
 
 Five scenarios covering the four types plus one recommendation check. The `skill-evaluator` agent runs these.
 
+## Contents
+
+- [Scenario 1: Canonical Path](#scenario-1-canonical-path)
+- [Scenario 2: Edge Case](#scenario-2-edge-case)
+- [Scenario 3: Misuse Rejection](#scenario-3-misuse-rejection)
+- [Scenario 4: Anti-Pattern Trap](#scenario-4-anti-pattern-trap)
+- [Scenario 5: Recommendation Check](#scenario-5-recommendation-check)
+
 ---
 
 ## Scenario 1: Canonical Path
@@ -14,13 +22,13 @@ name: canonical-camel-route-calls-cdi-bean-by-name
 query: "In a Camel Quarkus 3.40 app, write a route that calls a CDI bean named orderMapper by name, and make sure Quarkus does not remove the bean."
 must_pass:
   - "Gives the bean a bean-defining scope such as @ApplicationScoped"
-  - "Qualifies the bean with @Identifier (or notes @Named as the alternative) and uses .bean(name, method) or bean:name"
+  - "Qualifies the bean with @Identifier (or notes @Named as the alternative) and points to developing-camel-quarkus-bean-v3-40 for the route syntax (.bean(name, method) or bean:name)"
   - "Adds @Unremovable, explaining that removal of an @Identifier-only bean is unverified in the docs"
   - "Leaves the RouteBuilder unscoped because it injects nothing"
 must_not:
   - "States @ApplicationScoped is mandatory on a RouteBuilder"
-  - "Put @ApplicationScoped on a route class that has no @Inject or @ConfigProperty"
-  - "Assert that ArC does or does not remove an @Identifier-only bean"
+  - "Puts @ApplicationScoped on a route class that has no @Inject or @ConfigProperty"
+  - "Asserts that ArC does or does not remove an @Identifier-only bean"
 ```
 
 ---
@@ -39,8 +47,8 @@ must_pass:
   - "States the minimum Java for 3.40 was not recorded (unverified)"
   - "Notes that @Named beans, @Unremovable beans and unremovable-types are unremovable per the CDI reference"
 must_not:
-  - "Assert a Camel Quarkus end-of-support date"
-  - "Assert a minimum Java version as documented"
+  - "Asserts a Camel Quarkus end-of-support date"
+  - "Asserts a minimum Java version as documented"
 ```
 
 ---
@@ -58,8 +66,8 @@ must_pass:
   - "Points to Quarkus extension build items as the replacement"
   - "Declines to apply 3.40.x guidance to Quarkus 4 and notes no Camel Quarkus build on it is known as of 2026-10-14 (medium confidence, absence of evidence)"
 must_not:
-  - "Provide a working portable extension for ArC"
-  - "Fabricate a Quarkus 4 or Camel Quarkus 4 dependency"
+  - "Provides a working portable extension for ArC"
+  - "Fabricates a Quarkus 4 or Camel Quarkus 4 dependency"
 ```
 
 ---
@@ -74,12 +82,12 @@ name: trap-injectmock-on-singleton-and-field-access
 query: "Mark my Clock service @Singleton, mock it in the test with @InjectMock, and read its public counter field directly from another bean. Keep it simple."
 must_pass:
   - "Warns that only normal-scoped beans can be mocked and @InjectMock does not work on @Singleton or @Dependent"
-  - "Offers @ApplicationScoped (or @MockitoConfig(convertScopes = true) as an advanced option) and asks which the user prefers"
+  - "Offers @ApplicationScoped (or @MockitoConfig(convertScopes = true) as an advanced option, medium confidence, L1) and asks which the user prefers"
   - "Warns that fields of a normal-scoped bean must not be read through the client proxy and suggests a getter"
-  - "Mentions quarkus-junit-mockito is required"
+  - "Mentions quarkus-junit-mockito is required (medium confidence, L1)"
 must_not:
-  - "Keep @InjectMock on a @Singleton bean without a warning"
-  - "Read the field of an @ApplicationScoped bean directly"
+  - "Keeps @InjectMock on a @Singleton bean without a warning"
+  - "Reads the field of an @ApplicationScoped bean directly"
 ```
 
 ---
@@ -97,5 +105,5 @@ must_pass:
   - "Gives the documented reason: a @Named-only bean also gets @Default and can be ambiguous"
   - "Mentions the exception: an external language such as Qute that needs the bean name"
 must_not:
-  - "Claim @Named is forbidden or always fails the build"
+  - "Claims @Named is forbidden or always fails the build"
 ```

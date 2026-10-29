@@ -32,6 +32,7 @@ description: "Guides Camel Quarkus 3.40.x bean binding (camel-quarkus-bean, Came
 - [Never-do patterns with examples](./blueprints/never-do-patterns.md)
 - [Bean binding, scope and method selection](./blueprints/bean-binding.md)
 - [CDI naming, ArC removal and native mode](./blueprints/cdi-and-native.md)
+- [Quarkus ArC integration: routes, Camel objects, config, REST](./blueprints/quarkus-arc-integration.md)
 - [Testing with InjectMock](./blueprints/testing-with-injectmock.md)
 - [Migration guide (3.15 baseline to 3.40)](./blueprints/migration-guide.md)
 - [Integration examples](./blueprints/integration-examples.md)

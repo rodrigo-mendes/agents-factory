@@ -31,14 +31,13 @@ The guide: "the `quarkus-resteasy-client` extension may not be used with Quarkus
 
 Source: https://quarkus.io/version/3.40/guides/rest
 
-## 3. trust-all or disabled hostname verification in production
+## 3. trust-all in production
 
-The rest-client guide: this property set "should not be used in production"; `verify-host` "should not be disabled in production as it makes the client vulnerable to MITM attacks". The TLS registry says `trust-all` "should not be used in production".
+The rest-client guide says this property "should not be used in production"; the TLS registry says `trust-all` "should not be used in production". Disabling `verify-host` on a client is an Ask First item in SKILL.md, not a Never Do (medium confidence, L3).
 
 ```properties
 # 🚫 WRONG
 quarkus.tls.partner.trust-all=true
-quarkus.tls.partner.hostname-verification-algorithm=NONE
 
 # ✅ CORRECT
 quarkus.tls.partner.trust-store.pem.certs=certs/partner-ca.pem

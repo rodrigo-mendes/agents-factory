@@ -21,7 +21,7 @@ Source: https://github.com/quarkusio/quarkus/wiki/Migration-Guide-3.40
 These are differences in the 3.40 documentation, not documented breaking changes.
 
 1. `@Named("primary")` qualifier becomes `@Identifier("primary")` (recommendation, https://quarkus.io/version/3.40/guides/cdi-reference).
-2. Test artifacts are `quarkus-junit` and `quarkus-junit-mockito`; `quarkus-junit5*` is absent from the 3.40 testing guide (https://quarkus.io/version/3.40/guides/getting-started-testing).
+2. Test artifacts are `quarkus-junit` and `quarkus-junit-mockito`; `quarkus-junit5*` is absent from the part of the 3.40 testing guide that was read (medium confidence, absence of evidence, M8; https://quarkus.io/version/3.40/guides/getting-started-testing).
 3. Camel test artifact `camel-quarkus-junit5` becomes `camel-quarkus-junit` (High; https://camel.apache.org/camel-quarkus/3.40.x/migration-guide/3.31.0.html). Details: skills `developing-camel-quarkus-junit-v3-40` and `developing-quarkus-junit-v3-40`.
 4. `@QuarkusComponentTest` was not verified for 3.40 and is not carried forward (unverified, U7).
 
@@ -30,7 +30,7 @@ These are differences in the 3.40 documentation, not documented breaking changes
 1. Bump the Quarkus platform BOM to 3.40.x; the Camel Quarkus 3.40.x BOM uses Quarkus 3.40.1 (https://camel.apache.org/camel-quarkus/latest/).
 2. Prefer `@Identifier` over general-purpose `@Named`. Add `@Unremovable` to beans looked up only by name (workaround for U1/U2).
 3. Rename the test dependencies as in changes 2 and 3.
-4. Run `./mvnw quarkus:dev` and inspect `/q/arc/removed-beans` (representative; page not recorded).
+4. Run `./mvnw quarkus:dev` and inspect `/q/arc/removed-beans` (representative; unverified, U9).
 
 ## Compatibility matrix
 
