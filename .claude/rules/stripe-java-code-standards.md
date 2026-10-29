@@ -18,17 +18,19 @@ too. Family rules source: `workspace/stripe-java/_family_rules_v34.md` (R01–R0
 ## Always
 
 - **R01 — Idempotency key on every mutating POST.** Every call to `.create()`, `.confirm()`,
-  `.capture()`, `.cancel()`, or any other POST operation must pass a `RequestOptions` with a UUID
-  v4 idempotency key (≤ 255 chars). Skill: `developing-stripe-java-core-v34`.
+  `.capture()`, `.cancel()`, or any other POST operation must pass a `RequestOptions` with an
+  idempotency key (≤ 255 chars): one key per logical operation, business-derived when possible,
+  persisted and reused on every retry of that operation; a UUID v4 only when no business key exists. Skill: `developing-stripe-java-core-v34`.
 
 - **R02 — Verify webhook signature BEFORE any side effect.** `client.constructEvent(raw, sig,
   secret)` or `client.parseEventNotification(...)` must be the first statement in every webhook
   handler method, before any DB write, queue publish, or external call.
   Skill: `handling-stripe-webhooks-v34`.
 
-- **R03 — Dedupe webhook events on `event.getId()`; return 2xx before async processing.**
-  Check the processed-event store before executing business logic. Return `200 OK` (or equivalent)
-  immediately; process asynchronously. Skill: `handling-stripe-webhooks-v34`.
+- **R03 — Dedupe webhook events on `event.getId()`; return 2xx after a durable hand-off.**
+  Dedupe in the handler or in the consumer it hands off to (e.g. an SQS consumer), before any
+  business logic. Return `200 OK` (or equivalent) once the event is verified and durably handed off;
+  process asynchronously. Skill: `handling-stripe-webhooks-v34`.
 
 - **R04 — Pin and align Stripe-Version.** Do not override `Stripe-Version` per-request without
   explicit justification. Webhook endpoint `api_versions` must match SDK default
