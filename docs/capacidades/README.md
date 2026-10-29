@@ -14,7 +14,7 @@ All Agents Factory capabilities organized by category.
 | [Framework](prompts-framework.md) | 1 | Validate agent projects |
 | [Evaluation](prompts-avaliacao.md) | 1 | Test skill behavior via LLM-as-judge |
 | **Total factory commands** | **40** | All via `/name` (`disable-model-invocation`) |
-| [Domain packages](#domain-packages) | 26 commands + 154 knowledge skills | book-writing, OCI, Stripe, AWS, Terraform, Camel Quarkus, Quarkus base, Quarkus/AWS SaaS, LangChain4j |
+| [Domain packages](#domain-packages) | 27 commands + 157 knowledge skills | book-writing, OCI, Stripe, AWS, Terraform, Camel Quarkus, Quarkus base, Quarkus/AWS SaaS, LangChain4j |
 | [Templates](templates.md) | 24 | Scaffolding + shared platform-research assets |
 
 ---
