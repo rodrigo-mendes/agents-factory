@@ -4,7 +4,7 @@ Back to [SKILL.md](../SKILL.md). Applies when the profile has `spec.kind: opensp
 `spec.kind: none` there is no spec side: reports still carry "Spec impact", but no spec-delta is
 written and the gate checks only records, limits and escalations. OpenSpec file formats (delta
 sections, archive order) are defined by the skill
-[specifying-changes-with-openspec-v1-15](../../specifying-changes-with-openspec-v1-15/SKILL.md);
+`specifying-changes-with-openspec-v1-15`;
 this protocol does not restate them.
 
 ## Where code diverges from the spec

@@ -55,7 +55,7 @@ U1 and U3-U6 are tagged in the skill text; U2 is mapped here and in the package 
 | Claim | Source | Date | Status |
 |---|---|---|---|
 | Python 3.8+ compatibility | none (design choice; see U1) | 2026-10-28 | unverified |
-| OpenSpec delta/archive formats | [specifying-changes-with-openspec-v1-15](../../specifying-changes-with-openspec-v1-15/SKILL.md) (OpenSpec 1.15, researched 2026-10-28) | 2026-10-28 | defers to that skill |
+| OpenSpec delta/archive formats | `specifying-changes-with-openspec-v1-15` (OpenSpec 1.15, researched 2026-10-28) | 2026-10-28 | defers to that skill |
 | Subagent write guard on file names starting with `report` | observed in this build; no official page | 2026-10-28 | unverified (U2) |
 | `Stop` hook behaviour (U3-U6) | page not recorded | 2026-10-28 | unverified |
 | Protocol v1 itself | factory-own, generalised from the skill `coordinating-oci-handoffs` (`blueprints/handoff-protocol.md`) | 2026-10-28 | no external source |

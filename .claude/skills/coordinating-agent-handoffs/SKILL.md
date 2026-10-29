@@ -17,7 +17,7 @@ count, decide the next step); agents do only what needs judgement.
 | Protocol | v1, set by `protocol_version` in the profile | factory-own protocol, no external source |
 | Scripts | Python 3.8+ (unverified, U1), standard library only, Windows and Linux (unverified) | [U1](./blueprints/unverified-and-risks.md) |
 | Lineage | generalised from the skill `coordinating-oci-handoffs` (user-mediated; its `blueprints/handoff-protocol.md`); the OCI and Quarkus/AWS families are *profiles* of this skill | factory-own, no external source |
-| Spec side (`spec.kind: openspec`) | OpenSpec 1.15 formats, not restated here | [specifying-changes-with-openspec-v1-15](../specifying-changes-with-openspec-v1-15/SKILL.md), researched 2026-10-28 |
+| Spec side (`spec.kind: openspec`) | OpenSpec 1.15 formats, not restated here | `specifying-changes-with-openspec-v1-15`, researched 2026-10-28 |
 
 ## Quick Navigation
 
@@ -197,4 +197,4 @@ python -m unittest discover -s scripts/tests                              # expe
 ## External Resources
 
 - No external source: factory's own protocol (v1), generalised from `coordinating-oci-handoffs`.
-- [OpenSpec skill (v1.15)](../specifying-changes-with-openspec-v1-15/SKILL.md) - spec and delta formats, researched 2026-10-28.
+- OpenSpec skill (v1.15) (`specifying-changes-with-openspec-v1-15`, package openspec-core) - spec and delta formats, researched 2026-10-28.
