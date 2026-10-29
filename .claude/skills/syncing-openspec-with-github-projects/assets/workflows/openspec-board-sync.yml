@@ -1,0 +1,97 @@
+# openspec-board-sync.yml - mirrors the OpenSpec changes merged into the default branch into the
+# GitHub Project (gh_projects_sync.py push --apply). Template from syncing-openspec-with-github-projects.
+#
+# Trust boundary: runs only for pushes to the DEFAULT branch, i.e. reviewed and merged content;
+# git stays canonical and this job only writes the mirror (issues, sub-issues, project fields,
+# bot comments). It never reads approvals and never pushes git. GITHUB_TOKEN is read-only
+# (contents: read); project writes use a GitHub App installation token (organization-owned
+# project) or the classic PAT secret OPENSPEC_PROJECT_PAT (user-owned), chosen by
+# vars.OPENSPEC_OWNER_TYPE. No npm or other third-party code runs in this job. Commit SHAs reach the shell only through env:.
+name: openspec-board-sync
+
+on:
+  push:
+    paths:
+      - "openspec/**"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: openspec-board-sync-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    if: ${{ github.ref == format('refs/heads/{0}', github.event.repository.default_branch) }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    permissions:
+      contents: read
+    steps:
+      - name: Check out the default branch
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0  # v7.1.0
+        with:
+          python-version: "3.12"
+
+      - name: Verify the vendored scripts (before any token or script runs)
+        run: python .github/openspec-github/_vendor.py verify .github/openspec-github
+
+      - name: Check the credential path
+        env:
+          OWNER_TYPE: ${{ vars.OPENSPEC_OWNER_TYPE }}
+        run: |
+          case "$OWNER_TYPE" in
+            organization) echo "credential: GitHub App installation token" ;;
+            user) echo "::warning::user-owned project: classic PAT with repo scope (broad access); prefer an organization project with a GitHub App" ;;
+            *) echo "::error::set the repository variable OPENSPEC_OWNER_TYPE to organization or user"; exit 1 ;;
+          esac
+
+      - name: Mint a GitHub App token (organization-owned project)
+        id: app-token
+        if: ${{ vars.OPENSPEC_OWNER_TYPE == 'organization' }}
+        uses: actions/create-github-app-token@64ab729a6294000f5aa4a4bc0b73d1f32bc45510  # v3.3.0
+        with:
+          client-id: ${{ vars.OPENSPEC_APP_CLIENT_ID }}
+          private-key: ${{ secrets.OPENSPEC_APP_PRIVATE_KEY }}
+          repositories: ${{ github.event.repository.name }}
+          permission-issues: write
+          permission-organization-projects: write
+
+      - name: Push the changed changes to the board
+        env:
+          GH_TOKEN: ${{ vars.OPENSPEC_OWNER_TYPE == 'organization' && steps.app-token.outputs.token || secrets.OPENSPEC_PROJECT_PAT }}
+          GH_PROMPT_DISABLED: "1"
+          BEFORE: ${{ github.event.before }}
+          AFTER: ${{ github.sha }}
+          PROFILE: ${{ vars.OPENSPEC_PROFILE || '.github/openspec-github/handoff-profile.yaml' }}
+        run: |
+          set -euo pipefail
+          gh --version
+          all_changes() {
+            for d in openspec/changes/*/; do
+              n=$(basename "$d"); [ "$n" = "archive" ] || echo "$n"
+            done
+          }
+          if [ -z "$BEFORE" ] || ! git cat-file -e "${BEFORE}^{commit}" 2>/dev/null; then
+            ids=$(all_changes)
+          elif git diff --name-only "$BEFORE" "$AFTER" -- openspec | grep -qv '^openspec/changes/'; then
+            ids=$(all_changes)        # specs or ADRs changed: refresh every active change
+          else
+            ids=$(git diff --name-only "$BEFORE" "$AFTER" -- openspec/changes \
+                  | awk -F/ 'NF>=4 && $3!="archive" {print $3}' | sort -u)
+          fi
+          for id in $ids; do
+            if ! [[ "$id" =~ ^[a-z0-9][a-z0-9._-]*$ ]]; then echo "::warning::skipping odd folder name"; continue; fi
+            [ -d "openspec/changes/$id" ] || continue
+            rc=0
+            python .github/openspec-github/gh_projects_sync.py push . --change "$id" --profile "$PROFILE" --apply || rc=$?
+            if [ "$rc" -eq 3 ]; then echo "tracker disabled"; exit 0; fi
+            if [ "$rc" -ne 0 ]; then exit "$rc"; fi
+          done
