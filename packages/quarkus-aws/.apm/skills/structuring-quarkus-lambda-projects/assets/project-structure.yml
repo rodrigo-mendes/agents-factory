@@ -1,0 +1,118 @@
+# Project structure configuration for Quarkus 3.40 AWS Lambda SaaS backends.
+#
+# Single place for repository layout, module layout and naming, read by the
+# structuring-quarkus-lambda-projects skill. It holds layout facts only: no
+# annotations, no HCL, no code templates. Framework behaviour belongs to the
+# version-specific skills; Terraform belongs to the provisioning skills.
+#
+# The "${...}" expressions are descriptive placeholders for the agent to resolve,
+# not a templating engine run by any tool.
+#
+# Confidence: the artifact contract and the openspec layout come from dated
+# sources (see the skill register). The directory names functions/, shared/ and
+# infra/ and the module naming are a team convention (medium confidence).
+
+project:
+  # PLACEHOLDER values. Replace them from the real project (root pom.xml, existing
+  # source tree). Never invent them.
+  base_package: "com.company.project"
+  maven_group_id: "com.company.project"
+  root_artifact_id: "saas-backend"
+  version: "1.0.0-SNAPSHOT"
+
+versions:
+  quarkus_bom: "3.40.1.1"            # io.quarkus.platform or quarkus-bom as the project already imports it
+  quarkiverse_bom: "3.23.0"          # io.quarkiverse.amazonservices:quarkus-amazon-services-bom (only if AWS clients are used)
+  openspec: "v1.15.0"
+
+repository:
+  root:
+    pom: "pom.xml"                   # packaging pom: BOM imports, plugin management, <modules>
+    wrapper: "mvnw"                  # or mvn when the project has no wrapper
+    gitignore: ".gitignore"
+  openspec: "openspec"               # repo root, not inside a module
+  infra: "infra"                     # Terraform root modules; layout inside owned by provisioning-aws-lambda-v6 and the aws-terraform rules
+  functions: "functions"             # one Maven module per deployable Lambda artifact
+  shared: "shared"                   # library modules (no function.zip), e.g. domain model, tenant context
+
+module_kinds:
+  function:                          # produces target/function.zip
+    path: "${repository.functions}/<name>"
+    packaging: "jar"
+    extension: "quarkus-amazon-lambda"          # or quarkus-amazon-lambda-http / quarkus-amazon-lambda-rest (one gateway kind, one HTTP framework)
+    artifact: "target/function.zip"
+  library:                           # consumed by function modules
+    path: "${repository.shared}/<name>"
+    packaging: "jar"
+    needs_bean_index: true           # beans.xml or META-INF/jandex.idx or quarkus.index-dependency.<name>.*
+
+directories:
+  source:
+    main:
+      java: "src/main/java"
+      resources: "src/main/resources"
+      zip_jvm: "src/main/zip.jvm"      # extra zip content, JVM build
+      zip_native: "src/main/zip.native" # extra zip content, native build
+    test:
+      java: "src/test/java"
+      resources: "src/test/resources"
+  build:
+    target: "target"
+
+packages:
+  base: "${project.base_package}.<function>"      # one base package per function module
+  entry: "${packages.base}"                       # Lambda handler class or REST resource stays at the package root
+  handler: "${packages.base}.handler"             # one class per use-case flow (not the Lambda handler class)
+  web: "${packages.base}.web"
+  client: "${packages.base}.client"
+  transform: "${packages.base}.transform"
+  obs: "${packages.base}.obs"
+  # shared libraries use ${project.base_package}.shared.<name>
+
+file_patterns:
+  lambda_handler: "[Functionality]Lambda.java"    # @Named; quarkus.lambda.handler equals the CDI name
+  rest_resource: "[Functionality]Resource.java"
+  flow: "[Functionality]Flow.java"
+  client: "[Functionality]Client.java"
+  mapper: "[Entity]Mapper.java"
+  test: "[ClassName]Test.java"                    # mirrors the main package
+  integration_test: "[ClassName]IT.java"          # @QuarkusIntegrationTest, if the project uses it
+
+test_policy:
+  framework: "quarkus-junit + RestAssured against the mock event server"   # quarkus-test-amazon-lambda was removed in 3.31
+  mock_event_server_test_port_key: "quarkus.lambda.mock-event-server.test-port"
+  location: "per module, src/test/java mirroring src/main/java"
+
+artifact_contract:                   # what a function module hands to Terraform (see developing-quarkus-amazon-lambda-v3-40, packaging blueprint)
+  package: "${repository.functions}/<name>/target/function.zip"
+  jvm_handler: "io.quarkus.amazon.lambda.runtime.QuarkusStreamHandler::handleRequest"
+  user_handler_selector: "quarkus.lambda.handler (env QUARKUS_LAMBDA_HANDLER)"
+  jvm_runtimes: ["java21", "java17.al2023"]  # java25: unverified (U4), see developing-quarkus-amazon-lambda-v3-40 Ask First C2
+  native_runtime: "provided.al2023"  # pairing is medium confidence
+  native_env: "DISABLE_SIGNAL_HANDLERS=true"
+  snapstart: "JVM only; published version or alias"
+
+openspec_layout:
+  specs: "openspec/specs"
+  changes: "openspec/changes/<id>/{proposal.md,specs/,design.md,tasks.md}"
+  archive: "openspec/changes/archive/<date>-<id>/"
+
+gitignore_entries:
+  - "target/"
+  - ".terraform/"
+  - "*.tfstate"
+  - "*.tfstate.*"
+  - "*.tfplan"
+  # NOT ignored: .terraform.lock.hcl (commit it next to each root module)
+
+verification_commands:
+  structure_check:
+    - "find ${repository.functions} -maxdepth 2 -name pom.xml"
+    - "find ${repository.functions} -type d -path '*src/main/java*'"
+    - "grep -n '<module>' pom.xml"
+  build_check:
+    - "./mvnw install"                # expected: <module>/target/function.zip per function module
+    - "unzip -l ${repository.functions}/<name>/target/function.zip"
+  git_check:
+    - "git check-ignore -v ${repository.functions}/<name>/target/function.zip"   # expected: ignored
+    - "git check-ignore -v infra/<root>/.terraform.lock.hcl"                      # expected: not ignored (no output)
