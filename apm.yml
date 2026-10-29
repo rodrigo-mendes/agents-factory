@@ -38,6 +38,7 @@ dependencies:
     # NOT listed directly any more (same "ambiguous resolved_by" reason as
     # factory-core above); they still install, transitively.
     - path: ./packages/quarkus-aws-saas
+    - path: ./packages/vercel-frontend
 #    - git: microsoft/apm
   mcp: []
 includes: auto
