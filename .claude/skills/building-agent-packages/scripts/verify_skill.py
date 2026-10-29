@@ -73,8 +73,13 @@ if os.path.isfile(ur):
             problems.append(f'unverified-and-risks lacks heading {h}')
 ev = os.path.join(bp, 'evaluation-scenarios.md')
 if os.path.isfile(ev):
-    n = len(re.findall(r'^#+\s*(Scenario|Escenario)', open(ev, encoding='utf-8').read(), re.M | re.I))
+    et = open(ev, encoding='utf-8').read()
+    # two accepted formats: "## Scenario N" headings, or numbered headings with a `query:` block each
+    n = max(len(re.findall(r'^#+\s*(Scenario|Escenario)', et, re.M | re.I)),
+            len(re.findall(r'^\s*query:', et, re.M)))
     print(f'  eval scenarios headings: {n}')
+    if not is_command and n < 3:
+        problems.append(f'evaluation-scenarios.md has {n} scenario headings (< 3)')
 
 for root, _, fs in os.walk(d):
     for f in fs:
@@ -100,7 +105,7 @@ for root, _, fs in os.walk(d):
                          open(fp, encoding='utf-8').read().splitlines() if l.startswith('#')]
                 if anc[1:] not in heads:
                     problems.append(f'MISSING ANCHOR {os.path.relpath(p, d)} -> {tgt}{anc}')
-        for pat, label in ((r'/Users/|/home/|C:\\\\', 'absolute path'), (r'\.github/', '.github'),
+        for pat, label in ((r'/Users/|/home/|\b[A-Za-z]:\\[A-Za-z]', 'absolute path'), (r'\.github/', '.github'),
                            (r'days? (old|ago)|weeks? old', 'relative date'),
                            (r'write_to_file', 'write_to_file')):
             if re.search(pat, t):

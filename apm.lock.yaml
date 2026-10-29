@@ -11,6 +11,7 @@ dependencies:
   - .claude/skills/building-agent-packages/assets/FAMILY_FACTS.template.md
   - .claude/skills/building-agent-packages/assets/FAMILY_RULES.template.md
   - .claude/skills/building-agent-packages/assets/PACKAGE_BRIEF.template.md
+  - .claude/skills/building-agent-packages/assets/PIPELINE_STATE.template.md
   - .claude/skills/building-agent-packages/blueprints/evaluation-scenarios.md
   - .claude/skills/building-agent-packages/blueprints/known-failures.md
   - .claude/skills/building-agent-packages/blueprints/modes.md
@@ -36,13 +37,16 @@ dependencies:
   - .claude/skills/building-agent-packages/blueprints/worker-briefs/validator.md
   - .claude/skills/building-agent-packages/scripts/check_counts.py
   - .claude/skills/building-agent-packages/scripts/commit_groups.py
+  - .claude/skills/building-agent-packages/scripts/inspect_workspace.py
   - .claude/skills/building-agent-packages/scripts/normalize_tags.py
   - .claude/skills/building-agent-packages/scripts/verify_package.py
+  - .claude/skills/building-agent-packages/scripts/verify_skill.py
   deployed_file_hashes:
     .claude/skills/building-agent-packages/SKILL.md: sha256:664f71a153ab6d57cf6812d885bb29dad2ab5608d4a2cd88b4781c995233f340
     .claude/skills/building-agent-packages/assets/FAMILY_FACTS.template.md: sha256:4ef5fed4c041b1432d70b208ed284175cd9d2c5486be55833fd50f8a271e3656
     .claude/skills/building-agent-packages/assets/FAMILY_RULES.template.md: sha256:c4d2e0022a8adc906120da2c40445b8dc5adfd2173b765364de3e394b68e7ae1
     .claude/skills/building-agent-packages/assets/PACKAGE_BRIEF.template.md: sha256:7c28d620ffe3b8f0ae3f198abf1fd90c627f74593edb9420bb6d5927899f2f05
+    .claude/skills/building-agent-packages/assets/PIPELINE_STATE.template.md: sha256:97aeaa5bf77b2852afc2f8b3366929c8340fe2f9ba8399b509d87a48c57cd5b9
     .claude/skills/building-agent-packages/blueprints/evaluation-scenarios.md: sha256:0fa545c8324a76a60ff3617c56a565bcf1bc919322b44e9a88f42f92a348792d
     .claude/skills/building-agent-packages/blueprints/known-failures.md: sha256:1a462c0f2fd432da4bb788481519d6b1342aa20638c3b02c53c05eccb08c221d
     .claude/skills/building-agent-packages/blueprints/modes.md: sha256:a0d75546d522b78b63c3d66ed108950f88ef5b312a1f45f00714aaa865d2b7cf
@@ -68,8 +72,10 @@ dependencies:
     .claude/skills/building-agent-packages/blueprints/worker-briefs/validator.md: sha256:839a89952cff2254f242513cf3375712624d42ea8e4c89289b8869d42419142e
     .claude/skills/building-agent-packages/scripts/check_counts.py: sha256:0e5b44cdd3b700f3854b526a314c571f0164940a8480ea07aeda054af8f13497
     .claude/skills/building-agent-packages/scripts/commit_groups.py: sha256:f814b5ee62f471630773ad27d9ff94553b14d250797a9f3dd7c3e5ea2ed0e271
+    .claude/skills/building-agent-packages/scripts/inspect_workspace.py: sha256:6cb2bcc5563bf57bc4cb10ee9e5d9a322e0feb1fc048678b5137ef33eaaa604e
     .claude/skills/building-agent-packages/scripts/normalize_tags.py: sha256:52afbe4e693be8f340c95726184a0ddf808dba50ce166671dab51cf3d8023a1f
     .claude/skills/building-agent-packages/scripts/verify_package.py: sha256:02bae1a0dd80f7777c6c18fafdab2aad2b15bd193e88c3d1ba0af30eab99cea4
+    .claude/skills/building-agent-packages/scripts/verify_skill.py: sha256:d83e843b72be0275b7e4e238c817c76659cc82408f851e8d9fd2f66970ce7c1f
   source: local
   local_path: ./packages/agent-package-builder
   content_hash: sha256:5ff057f962ca734b8d075cd19a781ce8ae1fc169c72901a417dd100378d67b5f
@@ -1665,7 +1671,7 @@ dependencies:
   package_type: apm_package
   source: local
   local_path: ./packages/vercel-frontend
-  content_hash: sha256:c7a423cc85d733af571c8108661e1a076b53844da59651bc99a5c9397ae8ff0b
+  content_hash: sha256:bc9a92c759faeb76555500d999620fa4c1e8949cdef188ff754bc1db2829d135
   declared_license: MIT
 - repo_url: _local/aws-architect
   name: agents-factory-aws-architect
@@ -8567,6 +8573,15 @@ deployments:
   content_hash: sha256:7c28d620ffe3b8f0ae3f198abf1fd90c627f74593edb9420bb6d5927899f2f05
 - kind: project-relative
   target: claude
+  value: .claude/skills/building-agent-packages/assets/PIPELINE_STATE.template.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/agent-package-builder
+  active_owner: ./packages/agent-package-builder
+  content_hash: sha256:97aeaa5bf77b2852afc2f8b3366929c8340fe2f9ba8399b509d87a48c57cd5b9
+- kind: project-relative
+  target: claude
   value: .claude/skills/building-agent-packages/blueprints/evaluation-scenarios.md
   runtime: null
   scope: project
@@ -8792,6 +8807,15 @@ deployments:
   content_hash: sha256:f814b5ee62f471630773ad27d9ff94553b14d250797a9f3dd7c3e5ea2ed0e271
 - kind: project-relative
   target: claude
+  value: .claude/skills/building-agent-packages/scripts/inspect_workspace.py
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/agent-package-builder
+  active_owner: ./packages/agent-package-builder
+  content_hash: sha256:6cb2bcc5563bf57bc4cb10ee9e5d9a322e0feb1fc048678b5137ef33eaaa604e
+- kind: project-relative
+  target: claude
   value: .claude/skills/building-agent-packages/scripts/normalize_tags.py
   runtime: null
   scope: project
@@ -8808,6 +8832,15 @@ deployments:
   - ./packages/agent-package-builder
   active_owner: ./packages/agent-package-builder
   content_hash: sha256:02bae1a0dd80f7777c6c18fafdab2aad2b15bd193e88c3d1ba0af30eab99cea4
+- kind: project-relative
+  target: claude
+  value: .claude/skills/building-agent-packages/scripts/verify_skill.py
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/agent-package-builder
+  active_owner: ./packages/agent-package-builder
+  content_hash: sha256:d83e843b72be0275b7e4e238c817c76659cc82408f851e8d9fd2f66970ce7c1f
 - kind: project-relative
   target: claude
   value: .claude/skills/building-components
