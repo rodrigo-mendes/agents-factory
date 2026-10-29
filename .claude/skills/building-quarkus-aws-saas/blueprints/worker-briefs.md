@@ -31,6 +31,8 @@ Approval (relayed by building-quarkus-aws-saas, not a new approval): gate=<id>; 
 
 Cite only gates of the current change (`## Approvals` of its `status.md`); the factory's build approvals are provenance, not runtime gates.
 
+Tracker on: an approval taken from GitHub is the line `pull` appended (`... | source=github <comment_url> login=<x> | user said: "..."`); cite it verbatim like a chat line. It never comes from an agent.
+
 Apply approval (consumed only by `aws-lambda-deployer`; one line = one apply of that exact plan):
 
 ```

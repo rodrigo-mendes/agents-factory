@@ -31,7 +31,7 @@ Count: 2.
 
 ## Medium confidence (M)
 
-Count: 2.
+Count: 2 here, plus M3-M5 in the tracker section below.
 
 - M1 (medium confidence): quarkus-amazon-services 3.23.0 is built on Quarkus 3.40.0 (High: parent POM, https://repo1.maven.org/maven2/io/quarkiverse/amazonservices/quarkus-amazon-services-parent/3.23.0/quarkus-amazon-services-parent-3.23.0.pom; releases https://github.com/quarkiverse/quarkus-amazon-services/releases); running it on patch 3.40.1.1 is not stated on a page, only that pairing is medium confidence. The data/messaging skills carry the tag.
 - M2 (medium confidence): OpenSpec 1.15.0 docs and CLI JSON shapes disagree in places; the validator/schema wins.
@@ -46,6 +46,14 @@ Count: 6.
 - L4: the Terraform engineer's verification uses a POSIX `env -u ... /dev/null` form; on Windows it needs a Bash shell. Say so to the user if the project runs on Windows without Bash.
 - L5: `detect_drift.py` without `--include-worktree` sees only commits; agents leave code uncommitted until E9 (see [E6](e6-implementation-cycle.md), [E8](e8-reverse-sync.md)).
 - L6: the E9 gate lists `verify-E1` to `verify-E4` as `pass`, but no script enforces them (the board's final-gate rule keys on `verify-E7`). Handling: I check them by `ls` and `check_records.py` before the gate.
+
+## GitHub Projects tracker
+
+Optional, off by default; items carried over from the bridge skill's register (`syncing-openspec-with-github-projects`). Count: 3 (all medium confidence).
+
+- M3 (medium confidence): the project field-value `updatedAt` (F11) is not confirmed as a reliable change marker; `status` may report divergence that `push` cannot explain. Handling: git wins; run `push`.
+- M4 (medium confidence): whether events created with an App token or PAT trigger the `openspec-archive` workflow (workflows triggered by `GITHUB_TOKEN` events do not). Handling: do not assume the Actions archive path works; verify once after `--install-workflows`, else use the local path.
+- M5 (medium confidence): the Status field has no "Blocked" value by default, so blocked items rely on the `blocked` label. Handling: tell the user; never rely on Status alone.
 
 ## Tag to register mapping
 
@@ -64,6 +72,7 @@ Count: 6.
 | `(unverified)` / `(medium confidence)` tags of the knowledge skills, relayed as is | SKILL.md Version Context, briefs | register of the owning knowledge skill |
 | LangChain4j pre-release-locked skill, adoption Ask First | SKILL.md Version Context and Ask First; knowledge map | I2 |
 | Quarkus 4 out of scope | SKILL.md Version Context | I1 |
+| tracker field-value `updatedAt`; App/PAT events triggering archive; Status lacks "Blocked" (medium confidence) | tracker blueprint; E9 Actions path | M3, M4, M5 |
 
 ## Agent contract mismatches (read from the agent files, 2026-10-28; re-verify at preflight)
 

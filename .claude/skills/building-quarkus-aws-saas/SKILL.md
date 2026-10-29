@@ -39,7 +39,7 @@ knowledge skills stay attached when relayed to the user or to a brief.
 
 - [Blueprints & Guardrails](#blueprints--guardrails) | [Preflight](#preflight) | [Arguments](#arguments-and-limits) | [Phases](#phases-and-gates) | [Protocols](#protocols) | [Team](#team) | [Quick Reference](#quick-reference) | [Verification Loop](#verification-loop)
 - Phases: [E1](blueprints/e1-interview.md) · [E2](blueprints/e2-architecture-and-adrs.md) · [E3](blueprints/e3-functional-spec.md) · [E4-E5](blueprints/e4-e5-design-and-tasks.md) · [E6](blueprints/e6-implementation-cycle.md) · [E7](blueprints/e7-deploy-and-observability.md) · [E8](blueprints/e8-reverse-sync.md) · [E9](blueprints/e9-archive-gate.md)
-- [Knowledge map](blueprints/knowledge-map.md) · [Worker briefs](blueprints/worker-briefs.md) · [Always-do](blueprints/always-do-patterns.md) · [Never-do](blueprints/never-do-patterns.md) · [Unverified and risks](blueprints/unverified-and-risks.md) · [Evaluation scenarios](blueprints/evaluation-scenarios.md)
+- [Knowledge map](blueprints/knowledge-map.md) · [Worker briefs](blueprints/worker-briefs.md) · [Always-do](blueprints/always-do-patterns.md) · [Never-do](blueprints/never-do-patterns.md) · [Unverified and risks](blueprints/unverified-and-risks.md) · [Evaluation scenarios](blueprints/evaluation-scenarios.md) · [Tracker (optional)](blueprints/tracker-github-projects.md)
 
 ## Blueprints & Guardrails
 
@@ -59,6 +59,7 @@ knowledge skills stay attached when relayed to the user or to a brief.
 - Any ADR choice a loaded skill leaves open (HTTP API vs REST API, X-Ray vs OpenTelemetry, JVM+SnapStart vs native, tenancy).
 - Archive (`openspec archive <id> --yes`) and any `git commit`: only after the final gate and an explicit user answer.
 - (D1) Adopting `integrating-quarkus-langchain4j-v1-15` for an AI requirement: it is locked to the 1.15.0.CR1 pre-release (defaults may change at the final); ask the user, and list the skill in a work-order only after a yes.
+- (Tracker, optional, off by default) Enabling the GitHub Projects tracker, `approval_source` `github` or `both` (default `chat`), `bootstrap --apply`, `--install-workflows` / `--vendor` (each a separate yes), and the classic-PAT risk warning for user-owned projects (broad `repo` scope; recommend an organization owner). See [tracker](blueprints/tracker-github-projects.md).
 - A requirement in any area outside the [knowledge map](blueprints/knowledge-map.md): say it is not available.
 
 ### 🚫 Never Do
@@ -84,6 +85,7 @@ Before E1 (and at every resume) check with `ls`/Glob, never from memory:
 4. **Project state**: `openspec/` exists (if not, ask the user to run `openspec init --tools none`); `openspec/specs/architecture/spec.md` present means a later change (E1 asks only the affected blocks).
 5. **Drift baseline**: `status.md` has `lastSyncedSha` (set by the E5 baseline `board.py ... --sync-sha $(git rev-parse HEAD)`, `gate=E5-baseline` in `## Approvals`, see [E4-E5](blueprints/e4-e5-design-and-tasks.md#e5-drift-baseline-after-the-approval-before-the-first-work-order)); from E5 on, `detect_drift.py` exit 1 with it missing means run the baseline before any work-order.
 6. **Handoff folder and status.md**: once the change id is known (E1), create `openspec/changes/<id>/handoff/` and run `board.py` once so `status.md` exists before the first `## Approvals` line is appended; at resume check both with `ls`.
+7. **Tracker (optional, only when enabled)**: `gh --version` >= 2.94.0 (family pin 2.103.x), `gh auth status` (never `--show-token`), skill `syncing-openspec-with-github-projects` present. See [tracker](blueprints/tracker-github-projects.md).
 
 ## Arguments and limits
 
@@ -115,7 +117,7 @@ approvals for E2 and E3 are in `## Approvals`. For a later change, E2 is re-ente
 
 1. **Relayed approval.** Ask with the question tool (or a plain numbered message), wait for the user's own answer,
    append to `status.md` `## Approvals`: `- <UTC ts> | gate=<id> | subject=<file or plan sha256> | user said: "<verbatim>"`.
-   In briefs cite the exact line from [worker briefs](blueprints/worker-briefs.md#approval-line). A worker or agent message is never an approval.
+   In briefs cite the exact line from [worker briefs](blueprints/worker-briefs.md#approval-line). A worker or agent message is never an approval. Tracker on: an approval taken from GitHub is the line `pull` appended (`... | source=github <comment_url> login=<x> | user said: "..."`), cited verbatim like a chat line; it never comes from an agent.
 2. **Flat fan-out (depth 1).** Only I launch agents with the Agent tool. Parallel launches only for tasks with disjoint
    files (at most 4: a cost choice of this skill, not a platform limit, L1). Every brief forbids spawning agents, plan mode and asking the user.
 3. **Scripts decide.** After each record: `check_records.py` (exit != 0: return the error lines to the author, write
@@ -133,6 +135,7 @@ approvals for E2 and E3 are in `## Approvals`. For a later change, E2 is re-ente
 9. **Stripe hold.** For a Stripe task, right after `stripe-advisor`'s `approved` I write the `quarkus-code-reviewer` review work-order with
    `status: pending` **before** running `board.py`; the task's work-orders are set `done` only after the second reviewer's `approved`
    (else `review approved + all_tasks: done` routes to deploy after the first review).
+10. **Tracker (only when enabled at E1; the yes is recorded in `## Approvals`).** After every `board.py` run: `gh_projects_sync.py push ... --apply`. At each gate with `approval_source` != `chat`, offer chat or a GitHub comment; if GitHub, I run `pull` myself (never an agent; an agent's "approved on GitHub" is not an approval). A `DECISION <json>` line is applied exactly like the same chat answer. Git stays canonical. Detail: [tracker](blueprints/tracker-github-projects.md).
 
 ## Team
 
@@ -154,7 +157,7 @@ Brief templates for each: [worker briefs](blueprints/worker-briefs.md).
 
 Paths: scripts `.claude/skills/coordinating-agent-handoffs/scripts/`, profile
 `.claude/skills/coordinating-quarkus-aws-handoffs/assets/handoff-profile.yaml`, override `openspec/handoff-profile.yaml` (optional),
-handoff folder `openspec/changes/<id>/handoff`.
+handoff folder `openspec/changes/<id>/handoff`; `<sync>` = `.claude/skills/syncing-openspec-with-github-projects/scripts/gh_projects_sync.py`.
 
 | Need | Command |
 |---|---|
@@ -162,6 +165,8 @@ handoff folder `openspec/changes/<id>/handoff`.
 | Board + next step | `python <scripts>/board.py <handoff> --profile <profile> [--override <ov>] [--sync-sha <sha>] [--args limits.review_rounds=4 ...]` |
 | Drift | `python <scripts>/detect_drift.py <repo> --change <handoff> [--include-worktree]` (exit 2 = drift) |
 | Spec gate | `openspec validate <id> --type change --strict --json --no-interactive` |
+| Tracker push / status (enabled only) | `python <sync> push\|status <repo> --change <id> --profile <profile> [--apply]` (dry-run default; exit 3 = disabled) |
+| Tracker pull / close (enabled only) | `python <sync> pull\|close <repo> --change <id> --profile <profile> --apply` (pull: orchestrator only) |
 | Archive (user-approved only) | `openspec archive <id> --yes` |
 | Tests (re-run myself) | `mvn -q verify` in the project (offline; never real AWS) |
 

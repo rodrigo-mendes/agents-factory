@@ -36,6 +36,15 @@ Back to [SKILL.md](../SKILL.md). Only the orchestrator talks to the user. Plan s
 - **B7**: region(s), existing AWS account/organization, domain and certificates, IaC = Terraform (already decided), LLM providers (OpenAI, Anthropic, Bedrock; LangChain4j on Quarkus exists only as a pre-release-locked skill, `integrating-quarkus-langchain4j-v1-15`: tell the user and ask), SPA frontend hosting.
 - **B8**: acceptance scenarios in WHEN/THEN form, demo path, explicitly out of scope.
 
+## Optional: GitHub Projects tracker (ask once, off by default)
+
+Ask after B8, in the same playback round: tracker on or off? If on: `owner`, `owner_type` (`organization` | `user`), `project_number`, `repo` (`owner/name`), `approval_source` (`chat` default | `github` | `both`), `bot_login` (always; not an approver) and, when not `chat`, `approvers` (logins). Details and Ask First list: [tracker](tracker-github-projects.md).
+
+- Write `openspec/github-tracker.yaml` only after the playback is confirmed; record the yes as `gate=E1-tracker` in `## Approvals`.
+- Run `gh_projects_sync.py bootstrap ... ` as a dry-run, show the PLAN, run `--apply` only after an explicit yes.
+- `--install-workflows` and `--vendor` are separate yeses. `owner_type: user`: give the classic-PAT risk warning first.
+- Answer off: change nothing; the profile keeps `tracker.kind: none`.
+
 ## Definition of Ready (DoR) to leave E1
 
 All must hold, else stay in E1:

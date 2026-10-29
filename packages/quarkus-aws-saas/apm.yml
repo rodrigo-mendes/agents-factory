@@ -1,7 +1,7 @@
 name: agents-factory-quarkus-aws-saas
 version: 1.0.0
 description: >-
-  Composition for building a SaaS on Quarkus 3.40 + AWS with continuous spec-driven development: the inline orchestrator /building-quarkus-aws-saas (OpenSpec-based E1-E9 process), the coordinating-quarkus-aws-handoffs profile, Stripe on Quarkus (integrating-stripe-quarkus-v3-40). LangChain4j on Quarkus (integrating-quarkus-langchain4j-v1-15, pre-release 1.15.0.CR1).
+  Composition for building a SaaS on Quarkus 3.40 + AWS with continuous spec-driven development: the inline orchestrator /building-quarkus-aws-saas (OpenSpec-based E1-E9 process), the coordinating-quarkus-aws-handoffs profile, Stripe on Quarkus (integrating-stripe-quarkus-v3-40). LangChain4j on Quarkus (integrating-quarkus-langchain4j-v1-15, pre-release 1.15.0.CR1). Optional GitHub Projects mirror of the spec cycle via openspec-github (off by default, tracker kind none).
 author: rodrigo-mendes
 license: MIT
 dependencies:
@@ -14,6 +14,7 @@ dependencies:
     - path: ../aws-architect
     - path: ../terraform
     - path: ../stripe-java
+    - path: ../openspec-github
   mcp: []
 includes: auto
 scripts: {}

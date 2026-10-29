@@ -37,6 +37,17 @@ archive and inspect the archived folder after the first real archive. The orches
 only after the final gate and with the user's approval (Ask-First C3 of the OpenSpec skill: archive
 only is the agent default).
 
+## GitHub Projects mirror (optional)
+
+Off by default (`tracker.kind: none` in the profile; project values in `openspec/github-tracker.yaml`).
+When enabled, the bridge skill `syncing-openspec-with-github-projects` mirrors the change, tasks, ADRs,
+escalations and deltas to GitHub issues and a project; git stays canonical and GitHub content is never a spec
+source. `openspec/changes/<id>/handoff/github.yaml` (issue ids) is written only by the bridge script; never edit it.
+Approvals trust model: only the Actions gate workflow interprets `/approve`-style comments, accepting authors in
+`tracker.approvers` and never `tracker.bot_login`; the orchestrator's `pull` trusts only confirmations authored
+by `bot_login`, re-checks the user comment, and appends `source=github <url> login=<x>` to `## Approvals`.
+Agents never run `pull` and a relayed "approved on GitHub" is not an approval.
+
 ## The final gate (E9)
 
 All must hold, re-run by the orchestrator (not trusted from earlier output):
