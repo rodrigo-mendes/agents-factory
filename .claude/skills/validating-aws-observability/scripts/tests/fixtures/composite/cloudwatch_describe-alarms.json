@@ -1,0 +1,1 @@
+{"MetricAlarms":[],"CompositeAlarms":[{"AlarmName":"orders-fn-composite","StateValue":"OK","ActionsEnabled":true,"AlarmActions":["arn:aws:sns:eu-west-1:111122223333:orders-alerts"],"AlarmRule":"ALARM(orders-fn-errors)","StateReason":"Child alarms are OK"}]}

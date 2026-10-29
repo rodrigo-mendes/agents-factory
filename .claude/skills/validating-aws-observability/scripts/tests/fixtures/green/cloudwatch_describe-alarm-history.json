@@ -1,0 +1,1 @@
+{"AlarmHistoryItems":[{"AlarmName":"orders-fn-errors","Timestamp":"2026-10-28T10:00:05Z","HistoryItemType":"Action","HistorySummary":"Successfully executed action arn:aws:sns:eu-west-1:111122223333:orders-alerts"}]}

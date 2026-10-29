@@ -1,0 +1,1 @@
+{"FunctionName":"orders-fn","LoggingConfig":{"LogGroup":"/aws/lambda/orders-fn"},"TracingConfig":{"Mode":"Active"}}
