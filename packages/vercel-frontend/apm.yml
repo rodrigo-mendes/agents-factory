@@ -1,0 +1,47 @@
+name: agents-factory-vercel-frontend
+version: 1.0.0
+description: >-
+  Reference-only aggregator of the official Vercel agent skill repositories listed at
+  https://vercel.com/docs/agent-resources/skills (React/Next.js, design and UI, AI SDK UI, extras).
+  No skill content lives here: each entry is a whole-repo git dependency pinned to a commit SHA,
+  so every skill each repo publishes is installed. SHAs resolved 2026-10-29 (see
+  workspace/vercel-frontend/provenance.md).
+author: rodrigo-mendes
+license: MIT
+dependencies:
+  apm:
+    - git: https://github.com/vercel-labs/agent-skills.git
+      ref: 1a2c79d4e6c4a2283dc2c614b6538cbe1ed5ca62
+    - git: https://github.com/vercel/next.js.git
+      ref: 4c6a3fa48041c70e5ebb77f11e49c2e5e4a14bd1
+    - git: https://github.com/vercel/components.build.git
+      ref: ba727450437385af662810329fa19896215f76d5
+    # vercel/ai commented out: on Windows its checkout aborts with "local changes would be
+    # overwritten" (packages/tool-bash/*, tool-web-fetch/*), even from a clean cache.
+    # - git: https://github.com/vercel/ai.git
+    #   ref: 48ab95d62a08b409311c110852e8083910ba438d
+    - git: https://github.com/vercel/ai-elements.git
+      ref: ca8be600bfd01b3131f9bf6134b51602a71f4374
+    - git: https://github.com/vercel/streamdown.git
+      ref: 7dcabc64df944edce6f3993732667652e6214af0
+    - git: https://github.com/vercel/turborepo.git
+      ref: e158e859f804019fa48dd1af15bc247e4759d81e
+    - git: https://github.com/vercel-labs/agent-browser.git
+      ref: 1453dd37a40c730fe00f592bc32198a896ff8747
+    # --- Subdirectory-only skills (need `path:`) -----------------------------
+    # Commented out: with APM 0.35.0 on Windows every `path:` dependency fails with
+    # "Unable to prepare Git clone configuration probe" and fails the whole install
+    # (workspace/vercel-frontend/execution-2/RESULT.md). Uncomment once a fixed
+    # APM version passes the test in workspace/vercel-frontend/execution-N/.
+    # - git: https://github.com/vercel-labs/json-render.git
+    #   path: skills/react          # path-scoped: whole repo ships `skill-creator` (collides)
+    #   ref: a0326b93c8e42ba33f4ad3d1dbf9990788de3b63
+    # - git: https://github.com/vercel-labs/migration-skills.git
+    #   path: cra-to-next-migration
+    #   ref: a9bdb175792cbb7cf816732790e8020d3c8e2370
+    # - git: https://github.com/vercel-labs/before-and-after.git
+    #   path: skill                 # license: PolyForm Shield 1.0.0 (non-OSI)
+    #   ref: 8306d34f459b6704e08e6adb5829fcddb0dc3557
+  mcp: []
+includes: auto
+scripts: {}
