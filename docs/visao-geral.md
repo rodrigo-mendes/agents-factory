@@ -24,7 +24,7 @@ graph LR
 ```mermaid
 graph TD
     subgraph "Input Layer"
-        P[Skills<br/>67 commands via /name + 159 knowledge skills]
+        P[Skills<br/>67 commands via /name + 179 knowledge skills]
     end
 
     subgraph "Orchestration Layer"
