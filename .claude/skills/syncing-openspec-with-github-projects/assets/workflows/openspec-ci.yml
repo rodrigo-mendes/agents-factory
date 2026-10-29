@@ -1,0 +1,78 @@
+# openspec-ci.yml - validates the OpenSpec changes and handoff records touched by a pull request.
+# Template from syncing-openspec-with-github-projects.
+#
+# Trust boundary: pull_request (never pull_request_target) runs the PR's own code, including its
+# copy of .github/openspec-github/, so this job gets NO secrets and a read-only GITHUB_TOKEN
+# (contents: read); third-party npm code (installed with --ignore-scripts) therefore never sees a
+# token (family rule 15). It never writes to GitHub or to a project. The PR base SHA reaches the shell
+# only through env:. Nothing it prints is an approval.
+#
+# Required status check? A workflow skipped by a paths: filter leaves its check "Pending" and
+# blocks merging: if you make this check required, delete the paths: filter below (the job skips
+# cheaply when no change folder is touched).
+name: openspec-ci
+
+on:
+  pull_request:
+    paths:
+      - "openspec/**"
+      - "src/**"            # placeholder: the code paths whose drift the change reports must cover
+
+permissions:
+  contents: read
+
+concurrency:
+  group: openspec-ci-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    steps:
+      - name: Check out the pull request
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0  # v7.1.0
+        with:
+          python-version: "3.12"
+
+      - name: Verify the vendored scripts (before any token or script runs)
+        run: python .github/openspec-github/_vendor.py verify .github/openspec-github
+
+      - name: Install OpenSpec 1.15.0 (pinned)
+        run: |
+          npm install --global --ignore-scripts @fission-ai/openspec@1.15.0
+          openspec --version
+
+      - name: Validate the changed OpenSpec changes
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          PROFILE: ${{ vars.OPENSPEC_PROFILE || '.github/openspec-github/handoff-profile.yaml' }}
+        run: |
+          set -euo pipefail
+          ids=$(git diff --name-only "$BASE_SHA"...HEAD -- openspec/changes \
+                | awk -F/ 'NF>=4 && $3!="archive" {print $3}' | sort -u)
+          if [ -z "$ids" ]; then echo "no OpenSpec change touched"; exit 0; fi
+          for id in $ids; do
+            if ! [[ "$id" =~ ^[a-z0-9][a-z0-9._-]*$ ]]; then echo "::warning::skipping odd folder name"; continue; fi
+            dir="openspec/changes/$id"
+            [ -d "$dir" ] || continue
+            echo "::group::$id"
+            openspec validate "$id" --type change --strict --json --no-interactive
+            if [ -d "$dir/handoff" ]; then
+              python .github/openspec-github/check_records.py "$dir/handoff" --profile "$PROFILE"
+              if grep -Eq '^lastSyncedSha: "?[0-9a-f]{7,40}"?' "$dir/handoff/status.md" 2>/dev/null; then
+                python .github/openspec-github/detect_drift.py . --change "$dir/handoff"
+              else
+                echo "::notice::$id has no lastSyncedSha yet; drift check skipped"
+              fi
+            fi
+            echo "::endgroup::"
+          done
