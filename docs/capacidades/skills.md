@@ -1,8 +1,8 @@
 # Skills — Framework Base Capabilities
 
-The Agents Factory has **226 skills** from 32 APM packages — 67 action commands (invoked via `/name` with `disable-model-invocation: true`) and 159 knowledge skills (auto-invocable: `rules-compiler`, the 12 Camel Quarkus skills, the 4 `quarkus-core` skills, the Quarkus on AWS Lambda SaaS skills, the `building-agent-packages` orchestrator, and the AWS, AWS Terraform, OCI, Stripe and LangChain4j knowledge skills; see the [package catalog](../../README.md#catálogo-de-pacotes)) — **built on 2 foundation skills**: `skill-creator` (authoring patterns) and `researching-technical-frameworks` (research methodology). These 2 foundation skills define the patterns all other skills follow. In Copilot, `authoring-agent-skills` is the skill equivalent to `skill-creator`.
+The Agents Factory has **246 skills** from 33 APM packages — 67 action commands (invoked via `/name` with `disable-model-invocation: true`) and 179 knowledge skills (auto-invocable: `rules-compiler`, the 12 Camel Quarkus skills, the 4 `quarkus-core` skills, the Quarkus on AWS Lambda SaaS skills, the `building-agent-packages` orchestrator, and the AWS, AWS Terraform, OCI, Stripe and LangChain4j knowledge skills; see the [package catalog](../../README.md#catálogo-de-pacotes)) — **built on 2 foundation skills**: `skill-creator` (authoring patterns) and `researching-technical-frameworks` (research methodology). These 2 foundation skills define the patterns all other skills follow. In Copilot, `authoring-agent-skills` is the skill equivalent to `skill-creator`.
 
-> The 226 skills include the **platform-software family** (15: 1 orchestrator + 14 siblings) — all following the same research methodology below. See [Platform Software Research Family](../manual/platform-software-family.md).
+> The 246 skills include the **platform-software family** (15: 1 orchestrator + 14 siblings) — all following the same research methodology below. See [Platform Software Research Family](../manual/platform-software-family.md).
 
 ---
 

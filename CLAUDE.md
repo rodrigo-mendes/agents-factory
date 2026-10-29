@@ -106,6 +106,8 @@ optional approval channel that only the orchestrator reads (`pull`). Organizatio
 user projects a classic PAT. Off by default (`tracker.kind: none`). Details:
 [packages/openspec-github/README.md](packages/openspec-github/README.md).
 
+The **Vercel front-end** package (`packages/vercel-frontend`) copies no skill content. Its `apm.yml` points to 7 official Vercel skill repositories (agent-skills, next.js, ai-elements, streamdown, components.build, turborepo, agent-browser), each pinned to a commit SHA, and `apm install` brings in the 20 knowledge skills they publish (React/Next.js performance, composition, Cache Components, web design guidelines, AI chat UI, Turborepo, browser automation). Their names come from the upstream folders and do not follow the factory naming rules. On Windows the install needs `git config --global core.longpaths true` and takes about 25-40 minutes. `vercel/ai` and 3 skills that can only be installed from a subfolder (`path:`) are commented out because the install fails for them on Windows. Details: [packages/vercel-frontend/README.md](packages/vercel-frontend/README.md).
+
 Note `rules-compiler` in the table above: it is itself a **knowledge skill** (no `context: fork`)
 — a reference engine that `terraform-instructions-compiler` (an action command) links into for
 its generic phases. It doesn't route on its own; it's listed because `artifact-author` maintains
@@ -137,7 +139,7 @@ Not compiled code — artifacts run **in Claude Code** via `/<command>`:
 - Refresh or check the GitHub Project mirror of an OpenSpec change: `/syncing-openspec-to-github <change-id>`
 
 The 67 commands use `disable-model-invocation: true` (deliberate actions) — accessible via `/name`,
-with no auto-listing cost. The other 159 skills are knowledge skills and auto-invoke instead of
+with no auto-listing cost. The other 179 skills are knowledge skills and auto-invoke instead of
 routing via `/name`: `rules-compiler`, the 12 Camel Quarkus skills, the 4 `quarkus-core` skills, the 26 `provisioning-aws-<service>-v6` skills, the Quarkus on AWS Lambda SaaS skills, and the AWS architecture (`aws-skills`), OCI, Stripe, LangChain4j, OpenSpec and GitHub (`github-core`, `syncing-openspec-with-github-projects`) knowledge skills (their descriptions are
 listed in every session of a project that installs them, so keep them short and specific).
 
@@ -154,7 +156,7 @@ listed in every session of a project that installs them, so keep them short and 
 │                 langchain4j-integrator + 6 Quarkus/AWS SaaS agents (quarkus-lambda-integrator,
 │                 quarkus-code-reviewer, aws-lambda-deployer, aws-lambda-debugger,
 │                 aws-observability, spec-synchronizer) + openspec-github-syncer
-├── skills/     ← 226 skills: 67 fork → subagent commands + 159 knowledge/auto-invoke; includes the
+├── skills/     ← 246 skills: 67 fork → subagent commands + 179 knowledge/auto-invoke; includes the
 │                 platform-software family (1 orchestrator + 14 siblings),
 │                 12 Camel Quarkus, 4 quarkus-core, 22 Quarkus/AWS SaaS, 26 AWS Terraform (provisioning-aws-*-v6), the AWS/OCI/Stripe/LangChain4j knowledge skills, and each skill's own assets/ (former .claude/templates/
 │                 content) + blueprints/
@@ -163,7 +165,7 @@ listed in every session of a project that installs them, so keep them short and 
 ├── settings.json         ← hand-authored, not generated (APM only merges `hooks:`, unused here)
 └── settings.local.json   ← hand-authored, gitignored
 
-packages/           ← the actual source of truth — 32 APM packages, all installed by the root manifest (directly or transitively), each with its own apm.yml
+packages/           ← the actual source of truth — 33 APM packages, all installed by the root manifest (directly or transitively), each with its own apm.yml
 ├── factory-core/                 ← 5 rules (frontmatter + naming schemas), no skills/agents
 ├── research-core/                ← framework-researcher + its 2 internal helpers, no skills
 ├── researching-frameworks/       ← 5 generic research skills
