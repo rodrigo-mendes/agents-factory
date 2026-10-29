@@ -14,7 +14,7 @@ All Agents Factory capabilities organized by category.
 | [Framework](prompts-framework.md) | 1 | Validate agent projects |
 | [Evaluation](prompts-avaliacao.md) | 1 | Test skill behavior via LLM-as-judge |
 | **Total factory commands** | **40** | All via `/name` (`disable-model-invocation`) |
-| [Domain packages](#domain-packages) | 24 commands + 133 knowledge skills | book-writing, OCI, Stripe, AWS, Terraform, Camel Quarkus, LangChain4j |
+| [Domain packages](#domain-packages) | 26 commands + 154 knowledge skills | book-writing, OCI, Stripe, AWS, Terraform, Camel Quarkus, Quarkus base, Quarkus/AWS SaaS, LangChain4j |
 | [Templates](templates.md) | 24 | Scaffolding + shared platform-research assets |
 
 ---
@@ -109,10 +109,12 @@ Beyond the 40 factory commands, the root manifest installs domain packages. Real
 | Package | Commands | Knowledge skills | Agents | Rules |
 |---|:-:|:-:|:-:|:-:|
 | `book-writing` | 10 | 0 | 13 | 0 |
-| `camel-quarkus-skills` + `camel-quarkus-integrator` | 0 | 15 | 1 | 3 |
+| `quarkus-core` | 0 | 4 | 0 | 1 |
+| `camel-quarkus-skills` + `camel-quarkus-integrator` | 0 | 12 | 1 | 3 |
 | `terraform` + `aws-terraform` | see catalog | 26 `provisioning-aws-*-v6` | 2 | 3 |
 | `aws-skills` + `aws-architect` | 1 | 40 | 1 | 2 |
 | `oci-core`, `oci-functions-java`, `oci-terraform`, `oci-observability`, `oci-architecture` | 8 | 45 | 7 | 28 |
 | `stripe-java` | 2 | 4 | 2 | 1 |
 | `langchain4j` | 0 | 3 | 1 | 2 |
+| `handoff-core`, `quarkus-aws`, `aws-lambda`, `aws-observability`, `quarkus-aws-saas` | 2 | 20 | 6 | 4 |
 

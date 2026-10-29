@@ -14,7 +14,6 @@ dependencies:
     # (confirmed, CLI v0.31.0) — this is not cosmetic, it fails CI.
     - path: ./packages/researching-frameworks
     - path: ./packages/researching-platform
-    - path: ./packages/terraform
     - path: ./packages/artifact-authoring
     - path: ./packages/auditing
     - path: ./packages/validating
@@ -25,16 +24,20 @@ dependencies:
     # "ambiguous resolved_by" reason as factory-core above).
     - path: ./packages/camel-quarkus-integrator
     - path: ./packages/agent-package-builder
-    # aws-skills and oci-core are NOT listed directly: aws-architect and the oci-*
-    # packages depend on them, so they resolve transitively (same "ambiguous
+    # aws-skills and oci-core are NOT listed directly: quarkus-aws-saas (via
+    # aws-architect) and the oci-* packages depend on them, so they resolve transitively (same "ambiguous
     # resolved_by" reason as factory-core above).
-    - path: ./packages/aws-architect
     - path: ./packages/oci-functions-java
     - path: ./packages/oci-terraform
     - path: ./packages/oci-observability
     - path: ./packages/oci-architecture
-    - path: ./packages/stripe-java
     - path: ./packages/langchain4j
+    # quarkus-aws-saas pulls in quarkus-aws, aws-lambda, aws-observability,
+    # handoff-core (and through them quarkus-core, aws-skills, aws-terraform),
+    # plus aws-architect, terraform and stripe-java. Those three are therefore
+    # NOT listed directly any more (same "ambiguous resolved_by" reason as
+    # factory-core above); they still install, transitively.
+    - path: ./packages/quarkus-aws-saas
 #    - git: microsoft/apm
   mcp: []
 includes: auto
