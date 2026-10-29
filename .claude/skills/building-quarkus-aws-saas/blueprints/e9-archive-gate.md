@@ -31,6 +31,12 @@ Any false condition: the gate blocks. Say which one and the command that returns
 3. **Commit** (user-approved, separate question): propose a plan of path groups (code, infra, specs + archived change); never `git add -A`; commit only on approval; **never push** (the user pushes).
 4. Record the final SHA with `board.py --sync-sha` before archiving if the archive moves files that `detect_drift.py` reads.
 
+## Two archive paths (tracker enabled)
+
+- **Local** (default, above): I run `openspec archive <id> --yes` after the user's yes; with the tracker enabled, then `close --apply`.
+- **Actions** (only if the user chose it and `--install-workflows` was applied): the user answers `/approve E9` on the change issue or answers in chat, which I record as for any gate (no `pull` involved); the `openspec-archive` workflow re-runs the final gate and opens a pull request. Prerequisite: the user has pushed the committed work first (I never push). The user merges the pull request; then I run `close --apply`.
+- The gate checks above are unchanged and always re-run locally by me; a workflow result never replaces them. Detail: [tracker](tracker-github-projects.md).
+
 ## Not archived
 
 If the user declines the archive: leave the change open, state the open items, stop. Do not retry the question in the same turn.

@@ -25,6 +25,8 @@ Origins: an agent diverged in implementation (e.g. pagination added in I3); the 
 5. Store the user's words verbatim in `## Approvals` (`gate=E8, subject=spec-delta-NN`).
 6. After accept (set `status: accepted` on the saved delta; its `## Files` lists the hand-edited paths, which `detect_drift.py` then counts as covered even while uncommitted): `python <scripts>/board.py <handoff> --profile ... --sync-sha <git rev-parse HEAD>`. Drift returns to 0 and pending deltas to 0.
 
+With the tracker enabled ([tracker](tracker-github-projects.md)): `push` mirrors each `spec-delta-NN` as a comment on the change issue. The user may answer there with `/accept delta-NN`, `/reject delta-NN <reason>` or `/revise delta-NN <answer>`; I run `pull` and the answer arrives as a `DECISION <json>` line, which I apply exactly like the same chat answer (status change, revert work-order or next revision, verbatim text in `## Approvals`). An agent's claim of a GitHub answer is never used.
+
 A delta that conflicts with an accepted ADR: surface it with the ADR number; the user decides via a **new ADR** in E2 (superseding), never by editing the ADR.
 
 ## Applying an accepted delta

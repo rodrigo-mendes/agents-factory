@@ -50,6 +50,11 @@ limits:
   record_rejections: 2
 quality:
   coverage_min: 80
+# Optional tracker mirror, off by default. Keys: coordinating-agent-handoffs/blueprints/profile-format.md#tracker.
+# Project values (owner, owner_type, project_number, repo, approval_source, approvers, bot_login) live in
+# openspec/github-tracker.yaml, written by the orchestrator at E1 only after the user confirms.
+tracker:
+  kind: none
 # build_attempts counts only build-producing roles (observability mode A/C partials are not build attempts).
 counters:
   build_attempts: {kind: report, outcome: [failed, partial], role: [code, stripe, infra, observability], scope: task}

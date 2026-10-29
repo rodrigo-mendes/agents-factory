@@ -12,6 +12,9 @@ Status column = state at authoring (2026-10-28, from `packages/*/.apm/skills/`);
 | OpenSpec format and CLI (v1.15) | `specifying-changes-with-openspec-v1-15` | exists |
 | Spec sync command | `syncing-spec-from-code` | exists |
 | Clean code and refactoring (I4/I5) | `refactoring-quarkus-java` | exists (in `quarkus-core`) |
+| Optional GitHub Projects mirror and approval channel (push/pull/close/status, bootstrap) | `syncing-openspec-with-github-projects` | exists (`openspec-github`), only when the tracker is enabled |
+| `gh` CLI v2 (Projects, issues, sub-issues, JSON output) | `managing-github-projects-gh-v2-103` | exists (`github-core`), tracker only |
+| GitHub Actions workflows (SHA pinning, permissions, tokens) | `automating-github-repos-with-actions` | exists (`github-core`), tracker only |
 
 ## Wave 1 - Lambda base, HTTP API, tests
 

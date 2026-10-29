@@ -16,5 +16,9 @@ aws-observability, aws-lambda-debugger, spec-synchronizer. Only the orchestrator
 
 LangChain4j on Quarkus: no stable quarkus-langchain4j exists for Quarkus 3.40 as of 2026-10-28, so the skill is locked to the 1.15.0.CR1 pre-release (user-approved 2026-10-28).
 
+Optional GitHub Projects mirror: with `tracker.kind: github-projects` (off by default) the orchestrator mirrors
+the change, tasks, ADRs, escalations and spec-deltas to a GitHub Project and can take gate answers from issue
+comments validated by a GitHub Actions workflow (package openspec-github). Git stays canonical.
+
 Depends on: factory-core, quarkus-aws, aws-lambda, aws-observability, handoff-core, aws-architect,
-terraform, stripe-java.
+terraform, stripe-java, openspec-github.
