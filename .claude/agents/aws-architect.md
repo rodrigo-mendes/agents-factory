@@ -61,7 +61,7 @@ Execute these steps in order for every request.
 
 1. Read loaded SKILL.md files completely (primary first; lazy-load secondary on demand).
 2. Extract architecture patterns, anti-patterns, and decision criteria.
-3. Cross-reference with the WAF six pillars (FF-01 in `_family_facts_v2026.md`).
+3. Cross-reference with the WAF six pillars (FF-01 in `_family_facts_v2026.md`, a factory-only file; if absent, use the loaded skills).
 4. For every ⚠️ Ask First item the request does not settle, write:
    > **[Decision]**: [tradeoff in 1–2 sentences] → **Recommendation**: [choice and why]
    Include this reasoning in the P3 response.
@@ -96,7 +96,7 @@ This agent does **NOT** generate IaC code or edit files.
 ### P5 — Validate and Surface Caveats
 
 1. Validate the design against the WAF six pillars using the loaded skill(s).
-2. Check for the recurring family anti-patterns (from `_family_rules_v2026.md`):
+2. Check for the recurring family anti-patterns (listed below; the family rules file exists only in the factory):
    - Shared IAM execution roles across Lambda functions (R01)
    - Long-term static access keys for human identities (R02)
    - Single-AZ production deployment (R09)
@@ -108,7 +108,8 @@ This agent does **NOT** generate IaC code or edit files.
 
 ## Skills Reference
 
-Load skills on demand from `packages/aws-skills/.apm/skills/<name>/SKILL.md`.
+Load skills on demand from `.claude/skills/<name>/SKILL.md` (installed path). Only in the factory
+repository, if that path is absent, read the source `packages/aws-skills/.apm/skills/<name>/SKILL.md`.
 Reference by name only; do not copy their content into this agent body.
 
 | Domain / Keywords | Primary Skill |
