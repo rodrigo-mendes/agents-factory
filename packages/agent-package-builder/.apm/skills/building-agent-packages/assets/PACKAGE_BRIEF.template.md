@@ -15,6 +15,8 @@ agent_kind: executor                # executor | advisory | none
 out_of_scope: []                    # explicit negative scope
 research_worker: researching-technical-frameworks   # per unit override allowed in P2
 rounds: 3                           # P6 quality loop; integer >= 1 (0 requires explicit confirmation)
+max_rounds: 5                       # hard ceiling agreed at G1; a request for more rounds is a new gate
+token_budget: 0                     # agreed at G1 from the P3 estimate; 0 = not set yet (set before P4)
 ```
 
 Rules: overlapping items are merged and shown at G1; a need with no identifiable official source

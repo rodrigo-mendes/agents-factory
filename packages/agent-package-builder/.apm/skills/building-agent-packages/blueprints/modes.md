@@ -10,9 +10,9 @@ Back to [SKILL.md](../SKILL.md). One skill, three entries, same phases.
 
 Detect by input type; if unclear, ask. Splitting into separate skills is not worth it unless a mode grows more than ~3 exclusive steps.
 
-## INSPECT (with or without PIPELINE_STATE.md)
+## INSPECT (new layout or legacy)
 
-Run `python3 scripts/inspect_workspace.py <workspace_dir> [--packages packages]`. It is read-only and reports, from disk: research files (COMPLETE/PARTIAL), family files, skills (OK/INCOMPLETE/CORRUPT/UNCHECKED), validation rounds, recorded phase. The disk always wins over the state file.
+Run `python3 scripts/inspect_workspace.py <workspace_dir> [--packages packages]`. It is read-only and reports, from disk: research files (COMPLETE/PARTIAL), family files, skills (OK/INCOMPLETE/CORRUPT/UNCHECKED), validation rounds, recorded phase. With `execution-<N>` folders it reads `state/` (LATEST unless `--execution N`); without them it reports the workspace as legacy (execution-0, read-only). The disk always wins over the dashboard.
 
 Then add git: `git log --oneline -15` and `git status --short` to see what is committed or pending.
 
@@ -24,7 +24,7 @@ Then add git: `git log --oneline -15` and `git status --short` to see what is co
 | skill dir without SKILL.md | CORRUPT | delete the folder content and redo |
 | state says ready, disk says no | the state lied | disk wins; log the discrepancy |
 
-Write the reconstructed state to `PIPELINE_STATE.md` with `reconstructed: true`; approvals not recorded there are asked again.
+A legacy or broken workspace is never patched in place: `state_event.py ... init` opens a new execution, the reconstruction is recorded as `event P0 DISCREPANCY "reconstructed from disk: ..."` plus one `unit` call per unit found, and approvals not in `state/gates/` are asked again. Resume order: the first phase without a `done` row (`render_state.py` names it).
 
 ## from-research
 
