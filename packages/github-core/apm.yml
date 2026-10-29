@@ -1,0 +1,12 @@
+name: agents-factory-github-core
+version: 1.0.0
+description: >-
+  Generic GitHub knowledge for non-interactive agents and scripts: managing-github-projects-gh-v2-103 (GitHub CLI 2.103.x driving Projects v2, Issues, sub-issues, labels, comments and gh api GraphQL/REST) and automating-github-repos-with-actions (GitHub Actions repository automation with App or PAT tokens). No OpenSpec content.
+author: rodrigo-mendes
+license: MIT
+dependencies:
+  apm:
+    - path: ../factory-core
+  mcp: []
+includes: auto
+scripts: {}
