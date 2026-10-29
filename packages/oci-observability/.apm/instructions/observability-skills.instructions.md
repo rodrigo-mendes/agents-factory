@@ -74,7 +74,7 @@ Custom Management Dashboards (`oci_management_dashboard_management_dashboards_im
 - **Source of truth = Console `{JSON}` editor**, not hand-authored. Capture the exact widget shape from Create query-based widget → Data source → `{JSON}`.
 - **oci_faas filter** = `applicationId` (Application OCID), NOT `resourceId` (Function OCID); `functionId` doesn't exist.
 - **Write-once + orphans**: edit JSON via `terraform apply -replace=`; `terraform destroy` does NOT delete the imported dashboard/saved-searches (delete orphans by OCID before re-import or hit `401 RelatedResourceNotAuthorizedOrNotFound`).
-- **Validate live** with `validating-oci-observability/scripts/check-dashboards.sh` (5th pillar). Full envelope + TQL syntax in `provisioning-custom-dashboard-oci-observability/blueprints/always-do-patterns.md`.
+- **Validate live** with `validating-oci-observability/scripts/check-dashboards.py` (5th pillar). Full envelope + TQL syntax in `provisioning-custom-dashboard-oci-observability/blueprints/always-do-patterns.md`.
 
 ## Mandatory Cross-Cutting Rules
 
@@ -108,9 +108,9 @@ When a request spans multiple pillars, load and compose in this order:
 For a full observability stack, prefer the integrated skill:
 `.claude/skills/provisioning-custom-dashboard-oci-observability/SKILL.md`
 
-## Agent Delegation
+## Agent Hand-offs
 
 For requests outside observability scope:
-- **Java function-level instrumentation** (custom metrics/logs/tracing in code) → Delegate to `@oci-functions-java`
-- **Non-observability infra** (Functions, API Gateway, Networking, Vault, Streaming) → Delegate to `@oci-terraform`
-- **Architecture review (broad serverless)** → Delegate to `@oci-serverless-architect`
+- **Java function-level instrumentation** (custom metrics/logs/tracing in code) → hand off: `/develop-java-function` (`@oci-functions-java`)
+- **Non-observability infra** (Functions, API Gateway, Networking, Vault, Streaming) → hand off: `/provision-oci-infra` (`@oci-terraform`)
+- **Architecture review (broad serverless)** → hand off: `/design-oci-architecture` (`@oci-serverless-architect`)

@@ -13,7 +13,7 @@ Execute these steps **in order** for every request. Never skip a step.
 
 ### P0 — Verify Docs
 
-0. **Handoff intake** — determine the capability slug (= function name) and read any existing records in `docs/handoff/<capability>/` (`stream-b-terraform-infra.md` / `stream-c-terraform-integration.md` work-orders, a `report-java.md` for OCIDs/func.yaml you must reference, or a `diagnosis-report.md` if you were reached from the debugger for an infra fix). Use them as context and skip re-analysis of anything already recorded. Protocol: the `coordinating-oci-handoffs` skill.
+0. **Handoff intake** — determine the capability slug (= function name) and read any existing records in `docs/handoff/<capability>/` (`stream-b-terraform-infra.md` / `stream-c-terraform-integration.md` work-orders, a `result-java.md` for OCIDs/func.yaml you must reference, or a `diagnosis-report.md` if you were reached from the debugger for an infra fix). Use them as context and skip re-analysis of anything already recorded. Protocol: the `coordinating-oci-handoffs` skill.
 1. Confirm that `terraform-skills.md` is loaded (it contains the skill routing table)
 2. From the user's request, identify which provisioning skill(s) are needed using the keyword table in that instruction
 3. Load the identified `.claude/skills/provisioning-oci-*/SKILL.md` file(s) by reading them
@@ -47,7 +47,7 @@ Present to the user:
 4. **Dependencies** — IAM implications, networking prerequisites
 5. **⚠️ Ask First items** — any decisions from P2 that need user input
 
-**Wait for user approval before proceeding to P4.**
+**End at P3** with the plan and numbered Ask-First questions in the result record (outcome `needs-input`); the relaunch carries the user's answers (and, where an apply happens, an `approve=tfplan sha256=<hash>` line as in `oci-deployer`).
 
 ### P4 — Implement
 
@@ -71,11 +71,11 @@ Present to the user:
    - Provider source is `oracle/oci` (never `hashicorp/oci`)
    - No `terraform_remote_state` usage
 4. **Write a report record** and hand off (standard closing — the `coordinating-oci-handoffs` skill (standard handshake)):
-   - Write `docs/handoff/<capability>/report-terraform-infra.md` (or `report-terraform-integration.md` for Stream C) from the `report.template.md` of the `coordinating-oci-handoffs` skill: files changed, **resources/OCIDs created** (function OCID, app OCID, vault/bucket/api-deployment OCIDs — downstream agents rely on these), validation (`terraform validate` result), acceptance status, `outcome`. You have Bash — stamp a real `createdAt` and fill any `<pending>` timestamp on the work-order.
+   - Write `docs/handoff/<capability>/result-terraform-infra.md` (or `result-terraform-integration.md` for Stream C) from the `result.template.md` of the `coordinating-oci-handoffs` skill: files changed, **resources/OCIDs created** (function OCID, app OCID, vault/bucket/api-deployment OCIDs — downstream agents rely on these), validation (`terraform validate` result), acceptance status, `outcome`. You have Bash — stamp a real `createdAt` and fill any `<pending>` timestamp on the work-order.
    - Then state the single next action:
-     - If corresponding Java function code needs to be created/modified → **Hand off:** run `/add-oci-function` (`@oci-functions-java`) — implement the function code. Context: `docs/handoff/<capability>/report-terraform-infra.md`.
-     - If the code is already prepared → **Hand off:** run `/deploy-function` (`@oci-deployer`) — build, push, deploy, smoke-test. Context: `docs/handoff/<capability>/report-terraform-infra.md`.
-   - If invoked programmatically by `@oci-serverless-stack`, the report **is** your return contract — write it before returning.
+     - If corresponding Java function code needs to be created/modified → **Hand off:** run `/develop-java-function` (`@oci-functions-java`) — implement the function code. Context: `docs/handoff/<capability>/result-terraform-infra.md`.
+     - If the code is already prepared → **Hand off:** run `/deploy-oci-function` (`@oci-deployer`) — build, push, deploy, smoke-test. Context: `docs/handoff/<capability>/result-terraform-infra.md`.
+   - The report is your return contract (it is read by `/provision-oci-serverless-stack <slug> --integrate`) — write it before finishing.
 
 ## What You Do
 
@@ -86,7 +86,7 @@ Present to the user:
 
 ## What You Do NOT Do
 
-- Write Java function code (delegate to `@oci-functions-java`)
+- Write Java function code (hand off: run `/develop-java-function` (`@oci-functions-java`))
 - Make architecture decisions without consulting design skills (load `designing-oci-*` first)
 - Generate code without user approval (always execute P3 before P4)
 - Skip any step in the P0–P5 workflow

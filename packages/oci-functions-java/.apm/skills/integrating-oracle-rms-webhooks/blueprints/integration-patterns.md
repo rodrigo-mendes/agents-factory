@@ -43,4 +43,4 @@ Validate with skill `validating-oci-observability`.
 - IAM: function dynamic group + policy `read secret-bundles` on Vault.
 
 ## Registering the webhook in RMS
-`scripts/register-webhook.sh --service foundation/item --listener <gw>/proxy/item/webhook` → POST `webhooks/manage` with `credentialName`, `includePayload`, `intervalSeconds`, `queryParameter=include=...`. See `scripts/README.md`.
+`python3 scripts/register-webhook.py --service foundation/item --listener <gw>/proxy/item/webhook` → POST `webhooks/manage` with `credentialName`, `includePayload`, `intervalSeconds`, `queryParameter=include=...`. See `scripts/README.md`.

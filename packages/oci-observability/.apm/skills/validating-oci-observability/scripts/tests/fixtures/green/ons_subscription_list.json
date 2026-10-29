@@ -1,0 +1,4 @@
+{"data": [
+  {"topic-id": "ocid1.onstopic.oc1..testtopic", "protocol": "EMAIL", "endpoint": "ops@example.invalid", "lifecycle-state": "ACTIVE"},
+  {"topic-id": "ocid1.onstopic.oc1..othertopic", "protocol": "EMAIL", "endpoint": "x@example.invalid", "lifecycle-state": "PENDING"}
+]}

@@ -54,7 +54,7 @@
 
 **Expected agent behavior**:
 - Identifies this as infrastructure provisioning, NOT Java development
-- States clearly: "This is outside my scope — use `/add-functions-infra` or `@oci-terraform` for Terraform"
+- States clearly: "This is outside my scope — use `/provision-oci-infra` or `@oci-terraform` for Terraform"
 - Does NOT attempt to write Terraform code
 
 **Pass criteria**: Agent declines, routes to correct command, generates no Terraform.

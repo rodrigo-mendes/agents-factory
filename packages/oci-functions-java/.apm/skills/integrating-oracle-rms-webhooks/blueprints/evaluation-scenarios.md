@@ -55,12 +55,12 @@
 ```json
 {
   "skills": ["integrating-oracle-rms-webhooks"],
-  "query": "When I run rms-get.sh from my laptop I get a 302 redirect to IDCS. But the function works fine in OCI. What is wrong?",
+  "query": "When I run rms-get.py from my laptop I get a 302 redirect to IDCS. But the function works fine in OCI. What is wrong?",
   "expected_behavior": [
     "Explains the MerchIntegrations host is behind the IDCS Cloud Gate with a network allowlist",
     "Local machine IP is not on the allowlist; OCI VCN egress is permitted",
     "Recommends running scripts from inside OCI (e.g., OCI Cloud Shell, Bastion) or from an allowlisted VPN",
-    "Notes simulate-webhook.sh can still be run locally to test the function's listener side",
+    "Notes simulate-webhook.py can still be run locally to test the function's listener side",
     "Does NOT suggest disabling the Cloud Gate or bypassing IDCS authentication"
   ]
 }

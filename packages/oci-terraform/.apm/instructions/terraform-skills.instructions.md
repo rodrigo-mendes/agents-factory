@@ -44,7 +44,7 @@ Use these skills based on trigger keywords:
 > **Observability moved out.** APM, Logging, Monitoring alarms, Connector Hub, and Management
 > Dashboards are owned by **`@oci-observability`** (routing table `observability-skills.md`).
 > For any observability request — "apm", "logging", "log group", "connector hub", "alarm",
-> "dashboard", "distributed tracing" — **delegate to `@oci-observability`** instead of loading
+> "dashboard", "distributed tracing" — **hand off: `/observe-oci-workload` (`@oci-observability`)** instead of loading
 > those skills here.
 
 ### Operations & Quality Skills
@@ -70,7 +70,7 @@ Use these skills based on trigger keywords:
 | "event-driven architecture", "pub/sub design", "streaming architecture", "SCH fan-out design", "producer pattern", "consumer variant" | `.claude/skills/designing-oci-event-driven-pubsub/SKILL.md` | Event-driven pub/sub architecture |
 
 > **Observability design also moved out** — logging/connector-hub/APM/alarms/dashboards design
-> is owned by **`@oci-observability`**. Delegate those requests rather than loading them here.
+> is owned by **`@oci-observability`**. Hand them off (`/observe-oci-workload`) rather than loading them here.
 
 ## Mandatory Cross-Cutting Rules
 
