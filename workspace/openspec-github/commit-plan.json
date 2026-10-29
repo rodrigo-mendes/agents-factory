@@ -1,0 +1,14 @@
+[
+ {"message": "refactor(openspec-core,handoff-core): split the OpenSpec 1.15 skill into openspec-core; add optional tracker: block to the handoff profile\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>",
+  "paths": ["packages/openspec-core/", "packages/handoff-core/", ".claude/skills/coordinating-agent-handoffs/"]},
+ {"message": "feat(github-core): add gh 2.103 Projects v2 and GitHub Actions automation knowledge skills\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>",
+  "paths": ["packages/github-core/", ".claude/skills/managing-github-projects-gh-v2-103/", ".claude/skills/automating-github-repos-with-actions/"]},
+ {"message": "feat(openspec-github): add the OpenSpec to GitHub Projects bridge (scripts, workflow templates, syncer agent, command, rule)\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>",
+  "paths": ["packages/openspec-github/", ".claude/skills/syncing-openspec-with-github-projects/", ".claude/skills/syncing-openspec-to-github/", ".claude/agents/openspec-github-syncer.md", ".claude/rules/openspec-github-state.md"]},
+ {"message": "feat(quarkus-aws-saas): optional GitHub Projects tracker in the SDD orchestrator (off by default)\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>",
+  "paths": ["packages/quarkus-aws-saas/", ".claude/skills/building-quarkus-aws-saas/", ".claude/skills/coordinating-quarkus-aws-handoffs/"]},
+ {"message": "chore(apm): regenerate lock for openspec-core, github-core, openspec-github; sync docs and counts\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>",
+  "paths": ["apm.lock.yaml", "CLAUDE.md", "README.md", "docs/capacidades/README.md", "docs/capacidades/skills.md", "docs/manual/README.md", "docs/visao-geral.md"]},
+ {"message": "docs(workspace): add openspec-github research, family facts/rules, design, state and validation rounds\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>",
+  "paths": ["workspace/openspec-github/"]}
+]
