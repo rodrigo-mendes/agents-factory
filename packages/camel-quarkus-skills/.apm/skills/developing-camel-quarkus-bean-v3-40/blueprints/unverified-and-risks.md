@@ -20,11 +20,11 @@ Research date 2026-10-14. Back to [SKILL.md](../SKILL.md). The research reports 
 
 ## Unverified items
 
-13 unverified items. U1 and U2 are not resolvable from documentation: do not assert them.
+14 unverified items (U1-U14; U14 moved from `developing-quarkus-arc-v3-40`, where it was U2; the ArC U1 is the same open question as U1 here and was merged into it). U1 and U2 are not resolvable from documentation: do not assert them.
 
 | ID | Item | Impact and workaround |
 |---|---|---|
-| U1 | Whether ArC removes a bean named only with `@Identifier` (no `@Named`, not injected) when it is only looked up through the Camel registry. The Quarkus CDI reference does not say; not resolvable from documentation. The `@Identifier` lookup from Camel routes itself is High (Camel Quarkus CDI page) | "no bean" in production paths that tests do not exercise; add `@Unremovable` |
+| U1 | Whether ArC removes a bean named only with `@Identifier` (no `@Named`, not injected) when it is only looked up through the Camel registry. The Quarkus CDI reference does not say; not resolvable from documentation. The `@Identifier` lookup from Camel routes itself is High (Camel Quarkus CDI page) | "no bean" in production paths that tests do not exercise; add `@Unremovable`, use `quarkus.arc.unremovable-types` or `remove-unused-beans=fwk`. Follow-up: ArC processor source on the 3.40 branch, or a test with `/q/arc/removed-beans` |
 | U2 | Camel Quarkus-specific support end date for 3.40 (the "LTS Until" column is blank); not resolvable from documentation | Support planning; do not infer from the Quarkus date |
 | U3 | Package of `org.apache.camel.spi.Registry` on the Camel Quarkus page | Confirm the import in your build |
 | U4 | Options of the Log component used after bean calls: the log extension page has no options of its own (see the skill `developing-camel-quarkus-log-v3-40`); the component options were not researched here | Check the Camel 4.22.x log component page |
@@ -37,10 +37,11 @@ Research date 2026-10-14. Back to [SKILL.md](../SKILL.md). The research reports 
 | U11 | Release in which the deprecated `camel-quarkus-junit5` stub will be removed (the 3.31 guide said "until 3.34.0 is released"; the stub is still published at 3.40.0, High, see [migration guide](./migration-guide.md)) | Use `camel-quarkus-junit` |
 | U12 | Redelivery defaults that apply when a bean method throws (not verified in this run; the Dead Letter Channel default of 6 redeliveries / 1 s was seen only in a tool summary) | Configure `onException` or the error handler explicitly |
 | U13 | Route metrics for bean calls through `camel-quarkus-micrometer` (the extension page lists no bean-specific metrics; the Micrometer route was not researched) | Check the micrometer extension page |
+| U14 | Moved from `developing-quarkus-arc-v3-40` (ID U2 there): whether Camel Quarkus 3.40 produces an `UnremovableBeanBuildItem` for beans referenced by name in routes. Not resolvable from documentation; the camel-quarkus-bean page does not cover it | Same as U1; `@Unremovable`. Follow-up: camel-quarkus core/bean deployment processors, 3.40.x branch |
 
 ## Medium-confidence items
 
-15 medium-confidence items.
+16 medium-confidence items (M1-M16; M16 moved from `developing-quarkus-arc-v3-40`).
 
 | ID | Item | Why medium |
 |---|---|---|
@@ -59,6 +60,7 @@ Research date 2026-10-14. Back to [SKILL.md](../SKILL.md). The research reports 
 | M13 | `scope=Request` gives one instance per exchange for a CDI-managed named bean | The component page states `Request` generally; the CDI case is not stated |
 | M14 | `@Named` adds `@Default` when it is the only qualifier | No page recorded |
 | M15 | `@InjectMock` needs `quarkus-junit-mockito`; works on normal scopes; `@Singleton` needs `@MockitoConfig(convertScopes = true)` | Unversioned Quarkus guide, partly read (L2) |
+| M16 | Moved from `developing-quarkus-arc-v3-40` (ID M5 there): "JAX-RS resources are unremovable roots" (Quarkus REST); default resource scope not covered | REST guide not read by that skill's research; skill `developing-quarkus-rest-v3-40` read it |
 
 ## Coverage limits
 
@@ -73,7 +75,7 @@ Research date 2026-10-14. Back to [SKILL.md](../SKILL.md). The research reports 
 
 | Tag text used in the skill | Where | Register id |
 |---|---|---|
-| (unverified) ArC removal of an `@Identifier`-only bean | SKILL.md Ask First; always-do-patterns; cdi-and-native; migration-guide; integration-examples | U1 |
+| (unverified) ArC removal of an `@Identifier`-only bean | SKILL.md Ask First; always-do-patterns; cdi-and-native; migration-guide; integration-examples; quarkus-arc-integration (as (unverified, U1)) | U1 |
 | (unverified) Camel Quarkus end date | SKILL.md Version-lifetime; this file | U2 |
 | (unverified) Registry package | SKILL.md Ask First; bean-binding | U3 |
 | (unverified) Log component options | integration-examples | U4 |
@@ -98,6 +100,9 @@ Research date 2026-10-14. Back to [SKILL.md](../SKILL.md). The research reports 
 | (medium confidence) JAXB body binding | integration-examples | M12 |
 | (medium confidence) `Request` scope on a CDI-managed bean | SKILL.md Ask First; always-do-patterns; never-do-patterns | M13 |
 | (medium confidence, no page recorded) `@Named` adds `@Default` | cdi-and-native | M14 |
+| (unverified, U1) ArC removal of an `@Identifier`-only bean (same row as U1 above) | quarkus-arc-integration | U1 |
+| (unverified, U14) Camel Quarkus marking name-looked-up beans unremovable | quarkus-arc-integration | U14 |
+| (medium confidence, M16) "JAX-RS resources are unremovable roots" | quarkus-arc-integration | M16 |
 
 ## Source Bibliography
 

@@ -96,7 +96,7 @@ Source: https://quarkus.io/version/3.40/guides/getting-started-testing (read to 
 # Representative: adapt to your environment (Quarkus 3.40.x)
 ./mvnw quarkus:dev                    # Swagger UI at /q/swagger-ui (dev/test only by default)
 curl -s localhost:8080/q/openapi      # Expected: OpenAPI 3.1.0 document
-./mvnw test                           # @QuarkusTest, port 8081 by default (quarkus.http.test-port)
+./mvnw test                           # @QuarkusTest, port 8081 by default (quarkus.http.test-port; medium confidence, L2)
 ./mvnw verify -DskipITs=false         # @QuarkusIntegrationTest against the built artifact
 ./mvnw install -Dnative               # native build
 ```

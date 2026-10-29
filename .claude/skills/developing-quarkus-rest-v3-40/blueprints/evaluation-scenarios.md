@@ -2,6 +2,14 @@
 
 Five scenarios, covering the four required types. The `skill-evaluator` agent runs these.
 
+## Contents
+
+- [Scenario 1: Canonical Path](#scenario-1-canonical-path)
+- [Scenario 2: Edge Case](#scenario-2-edge-case)
+- [Scenario 3: Misuse Rejection](#scenario-3-misuse-rejection)
+- [Scenario 4: Anti-Pattern Trap](#scenario-4-anti-pattern-trap)
+- [Scenario 5: Medium-Confidence Handling](#scenario-5-medium-confidence-handling)
+
 ---
 
 ## Scenario 1: Canonical Path
@@ -10,18 +18,18 @@ Five scenarios, covering the four required types. The `skill-evaluator` agent ru
 
 ```yaml
 id: 1
-name: canonical-rest-resource-calls-camel-route
-query: "In a Camel Quarkus 3.40 app, add POST /api/orders with Quarkus REST and JSON, validate the body, and hand it to the Camel route direct:processOrder."
+name: canonical-rest-resource-validation-thread-model
+query: "In a Quarkus 3.40 app, add POST /api/orders with Quarkus REST and JSON that validates the body and returns 201 with the created order. The service call uses blocking JDBC."
 must_pass:
   - "Uses quarkus-rest and quarkus-rest-jackson plus quarkus-hibernate-validator, without versions"
-  - "Injects ProducerTemplate into the resource and calls requestBody(\"direct:processOrder\", ...) from a blocking (plain return type) method"
-  - "Uses @Valid on the body and states invalid input returns 400"
-  - "Says the ProducerTemplate-in-resource pattern is shown on the camel-quarkus-examples main branch (medium confidence) and that no official source shows Quarkus REST and platform-http together"
-  - "Leaves the RouteBuilder without @ApplicationScoped since nothing is injected"
+  - "Uses @Valid on the body parameter and states a constraint failure on an endpoint parameter returns 400 with a violations report"
+  - "Uses a plain (blocking) return type so the JDBC call runs on a worker thread, and explains that a Uni/Multi signature would run on the IO thread"
+  - "Returns RestResponse<T> rather than a raw Response (type inferred at build time, relevant for native mode) and asks whether native mode is a target"
+  - "Does not bring in Camel, ProducerTemplate or REST DSL; points Camel content to developing-camel-quarkus-rest-v3-40"
 must_not:
-  - "States @ApplicationScoped is mandatory on a RouteBuilder"
-  - "Returns Uni from the endpoint while calling requestBody inside it"
+  - "Returns Uni from the endpoint while calling blocking code inside it"
   - "Adds quarkus-resteasy* artifacts"
+  - "Hardcodes artifact versions that the Quarkus BOM manages"
 ```
 
 ---
@@ -39,8 +47,8 @@ must_pass:
   - "States that whether quarkus.rest.path affects platform-http routes is unverified"
   - "States the global defaults are 15000 ms connect and 30000 ms read, but that per-client inheritance is unverified, and recommends explicit per-client timeouts"
 must_not:
-  - "Assert which of the two handlers wins on a shared path"
-  - "Assert that per-client timeouts inherit the global values"
+  - "Asserts which of the two handlers wins on a shared path"
+  - "Asserts that per-client timeouts inherit the global values"
 ```
 
 ---
@@ -58,9 +66,9 @@ must_pass:
   - "Points to ObjectMapperCustomizer for 3.40"
   - "Refers the Camel REST DSL part to the sibling skill developing-camel-quarkus-rest-v3-40"
 must_not:
-  - "Present tools.jackson.* packages as valid on 3.40"
-  - "Fabricate a Camel Quarkus build on Quarkus 4"
-  - "Write Camel REST DSL routes from this skill"
+  - "Presents tools.jackson.* packages as valid on 3.40"
+  - "Fabricates a Camel Quarkus build on Quarkus 4"
+  - "Writes Camel REST DSL routes from this skill"
 ```
 
 ---
@@ -97,6 +105,6 @@ must_pass:
   - "Explains HTTP permissions run before annotations, so @PermitAll cannot override them, and suggests a permit policy on the public prefix"
   - "Notes that whether annotation checks run before body deserialization is unverified"
 must_not:
-  - "Recommend origins=* in production"
-  - "Claim @PermitAll overrides quarkus.http.auth.permission policies"
+  - "Recommends origins=* in production"
+  - "Claims @PermitAll overrides quarkus.http.auth.permission policies"
 ```

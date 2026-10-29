@@ -18,7 +18,7 @@ Research date 2026-10-14. Back to [SKILL.md](../SKILL.md). Source for every line
 
 Build items that replace extension hooks: `AdditionalBeanBuildItem`, `UnremovableBeanBuildItem`, `SyntheticBeanBuildItem`, `BeanDefiningAnnotationBuildItem`, `AnnotationsTransformerBuildItem` (https://quarkus.io/version/3.40/guides/cdi-integration).
 
-CDI Full features beyond a subset are only partly supported. The research changelog lists decorators, a subset of `BeanManager` and `@SessionScoped` (with Undertow) as the supported remainder; confirm details on the page before relying on them.
+CDI Full features beyond a subset are only partly supported. Decorators, a subset of `BeanManager` and `@SessionScoped` (with Undertow) are the supported remainder (medium confidence, M9); confirm details on the page before relying on them.
 
 ## Name of the build-item factory (medium confidence)
 

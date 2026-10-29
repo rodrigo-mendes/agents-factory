@@ -56,7 +56,7 @@ The config reference lists no default for the per-client `connect-timeout` and `
 
 ## TLS
 
-`tls-configuration-name` selects a `quarkus.tls.<name>` bucket and errors if the name is missing. Client extensions ignore the default `quarkus.tls.*` bucket except `trust-all` (https://quarkus.io/version/3.40/guides/tls-registry-reference). TLS defaults to TLSv1.3. `trust-all` and disabled `verify-host` must not be used in production ([never-do](./never-do-patterns.md#3-trust-all-or-disabled-hostname-verification-in-production)).
+`tls-configuration-name` selects a `quarkus.tls.<name>` bucket and errors if the name is missing. Client extensions ignore the default `quarkus.tls.*` bucket except `trust-all` (https://quarkus.io/version/3.40/guides/tls-registry-reference). TLS defaults to TLSv1.3 (medium confidence, L1). `trust-all` must not be used in production ([never-do](./never-do-patterns.md#3-trust-all-in-production)); disabling `verify-host` is an Ask First item in SKILL.md (medium confidence, L3).
 
 ## Logging
 
