@@ -1,0 +1,221 @@
+[
+ {
+  "message": "feat(quarkus-core): add quarkus-core base package; move Quarkus skills out of camel-quarkus-skills\n\nMoves developing-quarkus-{arc,rest,junit}-v3-40 into the new quarkus-core package (names unchanged),\nmoves the two camel-integration blueprints into the Camel bean/rest skills, and adds\nrefactoring-quarkus-java plus the quarkus-clean-code rule.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>",
+  "paths": [
+   "packages/quarkus-core/",
+   ".claude/skills/developing-quarkus-arc-v3-40/",
+   ".claude/skills/developing-quarkus-junit-v3-40/",
+   ".claude/skills/developing-quarkus-rest-v3-40/",
+   ".claude/skills/refactoring-quarkus-java/",
+   ".claude/rules/quarkus-clean-code.md",
+   "packages/camel-quarkus-skills/",
+   ".claude/skills/developing-camel-quarkus-bean-v3-40/",
+   ".claude/skills/developing-camel-quarkus-core-v3-40/",
+   ".claude/skills/developing-camel-quarkus-file-v3-40/",
+   ".claude/skills/developing-camel-quarkus-http-v3-40/",
+   ".claude/skills/developing-camel-quarkus-jaxb-v3-40/",
+   ".claude/skills/developing-camel-quarkus-junit-v3-40/",
+   ".claude/skills/developing-camel-quarkus-log-v3-40/",
+   ".claude/skills/developing-camel-quarkus-platform-http-v3-40/",
+   ".claude/skills/developing-camel-quarkus-rest-v3-40/",
+   ".claude/skills/developing-camel-quarkus-xslt-v3-40/"
+  ]
+ },
+ {
+  "message": "feat(handoff-core): add generic handoff protocol v1, OpenSpec skill and spec-synchronizer\n\ncoordinating-agent-handoffs with check_records.py, board.py, detect_drift.py and tests;\nspecifying-changes-with-openspec-v1-15; spec-synchronizer agent; /syncing-spec-from-code.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>",
+  "paths": [
+   "packages/handoff-core/",
+   ".claude/skills/coordinating-agent-handoffs/",
+   ".claude/skills/specifying-changes-with-openspec-v1-15/",
+   ".claude/skills/syncing-spec-from-code/",
+   ".claude/agents/spec-synchronizer.md"
+  ]
+ },
+ {
+  "message": "feat(quarkus-aws): add Quarkus 3.40 on AWS Lambda skills, integrator and reviewer\n\n11 knowledge skills (Lambda, HTTP, Cognito, data, messaging, testing, logging, tracing, metrics,\nobservability umbrella, project structure), quarkus-lambda-integrator, quarkus-code-reviewer, 2 rules.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>",
+  "paths": [
+   "packages/quarkus-aws/",
+   ".claude/skills/developing-quarkus-amazon-lambda-http-v3-40/",
+   ".claude/skills/developing-quarkus-amazon-lambda-v3-40/",
+   ".claude/skills/integrating-quarkus-amazon-data-v3-40/",
+   ".claude/skills/integrating-quarkus-amazon-messaging-v3-40/",
+   ".claude/skills/logging-quarkus-lambda-v3-40/",
+   ".claude/skills/monitoring-quarkus-lambda-v3-40/",
+   ".claude/skills/observing-quarkus-lambda/",
+   ".claude/skills/securing-quarkus-lambda-cognito-v3-40/",
+   ".claude/skills/structuring-quarkus-lambda-projects/",
+   ".claude/skills/testing-quarkus-amazon-lambda-v3-40/",
+   ".claude/skills/tracing-quarkus-lambda-v3-40/",
+   ".claude/agents/quarkus-code-reviewer.md",
+   ".claude/agents/quarkus-lambda-integrator.md",
+   ".claude/rules/quarkus-lambda-code-standards.md",
+   ".claude/rules/quarkus-lambda-project-config.md"
+  ]
+ },
+ {
+  "message": "feat(aws-lambda): add runtime-agnostic Lambda deployer and debugger\n\naws-lambda-deployer applies only a user-approved saved plan; aws-lambda-debugger is read-only.\nSkills deploying-aws-lambda and debugging-aws-lambda; preflight rule.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>",
+  "paths": [
+   "packages/aws-lambda/",
+   ".claude/skills/debugging-aws-lambda/",
+   ".claude/skills/deploying-aws-lambda/",
+   ".claude/agents/aws-lambda-debugger.md",
+   ".claude/agents/aws-lambda-deployer.md",
+   ".claude/rules/aws-lambda-deployment-preflight.md"
+  ]
+ },
+ {
+  "message": "feat(aws-observability): add aws-observability agent, /observe-aws-workload and live validation\n\nvalidating-aws-observability: read-only Python checks for logs, metrics, traces, alarms and\ndashboards, with approval flags and offline tests against a fake aws CLI.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>",
+  "paths": [
+   "packages/aws-observability/",
+   ".claude/skills/observe-aws-workload/",
+   ".claude/skills/validating-aws-observability/",
+   ".claude/agents/aws-observability.md",
+   ".claude/rules/aws-observability-skills.md"
+  ]
+ },
+ {
+  "message": "feat(quarkus-aws-saas): add the SDD orchestrator, handoff profile, Stripe and LangChain4j on Quarkus\n\nbuilding-quarkus-aws-saas, coordinating-quarkus-aws-handoffs, integrating-stripe-quarkus-v3-40 and\nintegrating-quarkus-langchain4j-v1-15 (1.15.0.CR1, flagged as a candidate release).\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>",
+  "paths": [
+   "packages/quarkus-aws-saas/",
+   ".claude/skills/building-quarkus-aws-saas/",
+   ".claude/skills/coordinating-quarkus-aws-handoffs/",
+   ".claude/skills/integrating-quarkus-langchain4j-v1-15/",
+   ".claude/skills/integrating-stripe-quarkus-v3-40/"
+  ]
+ },
+ {
+  "message": "refactor(oci): adopt the generic handoff protocol; convert OCI shell scripts to Python\n\ncoordinating-oci-handoffs becomes the OCI profile of handoff-core (result-* records, relayed apply\napproval, user-mediated hand-offs); all OCI .sh scripts ported to Python with approval/TTY gates.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>",
+  "paths": [
+   "packages/oci-core/",
+   ".claude/skills/coordinating-oci-handoffs/",
+   "packages/oci-functions-java/",
+   ".claude/skills/debug-oci-function/",
+   ".claude/skills/debugging-deployed-functions/",
+   ".claude/skills/deploy-oci-function/",
+   ".claude/skills/deploying-oci-functions/",
+   ".claude/skills/develop-java-function/",
+   ".claude/skills/developing-oci-functions-java/",
+   ".claude/skills/implementing-oci-functions-events/",
+   ".claude/skills/integrating-oci-functions-objectstorage/",
+   ".claude/skills/integrating-oracle-rms-webhooks/",
+   ".claude/skills/invoking-rest-apis-from-oci-functions/",
+   ".claude/skills/publishing-events-from-oci-functions/",
+   ".claude/skills/refactoring-oci-java/",
+   ".claude/skills/scaffolding-oci-function/",
+   ".claude/skills/testing-oci-functions-java/",
+   ".claude/agents/oci-debugger.md",
+   ".claude/agents/oci-deployer.md",
+   ".claude/agents/oci-functions-java.md",
+   ".claude/rules/deployment-preflight-checks.md",
+   ".claude/rules/java-environment-validation.md",
+   ".claude/rules/java-functions-api-gateway.md",
+   ".claude/rules/java-functions-clean-code.md",
+   ".claude/rules/java-functions-error-handling.md",
+   ".claude/rules/java-functions-event-driven.md",
+   ".claude/rules/java-functions-external-apis.md",
+   ".claude/rules/java-functions-fdk.md",
+   ".claude/rules/java-functions-object-storage.md",
+   ".claude/rules/java-functions-observability.md",
+   ".claude/rules/java-functions-project-config.md",
+   ".claude/rules/java-functions-project-structure.md",
+   ".claude/rules/java-functions-runtime-debugging.md",
+   ".claude/rules/java-functions-sdk-integration.md",
+   ".claude/rules/java-functions-skills.md",
+   ".claude/rules/java-functions-standards.md",
+   ".claude/rules/java-functions-testing.md",
+   "packages/oci-terraform/",
+   ".claude/skills/cleaning-up-oci-resources/",
+   ".claude/skills/engineering-terraform-oci/",
+   ".claude/skills/managing-terraform-cicd/",
+   ".claude/skills/managing-terraform-state/",
+   ".claude/skills/provision-oci-infra/",
+   ".claude/skills/provisioning-custom-dashboard-oci-observability/",
+   ".claude/skills/provisioning-oci-api-gateway/",
+   ".claude/skills/provisioning-oci-apm/",
+   ".claude/skills/provisioning-oci-connector-hub/",
+   ".claude/skills/provisioning-oci-event-driven-pubsub/",
+   ".claude/skills/provisioning-oci-events/",
+   ".claude/skills/provisioning-oci-functions/",
+   ".claude/skills/provisioning-oci-iam/",
+   ".claude/skills/provisioning-oci-logging/",
+   ".claude/skills/provisioning-oci-networking/",
+   ".claude/skills/provisioning-oci-object-storage/",
+   ".claude/skills/provisioning-oci-serverless-stack/",
+   ".claude/skills/provisioning-oci-streaming/",
+   ".claude/skills/provisioning-oci-vault/",
+   ".claude/skills/testing-terraform-modules/",
+   ".claude/agents/oci-terraform.md",
+   ".claude/rules/terraform-cicd.md",
+   ".claude/rules/terraform-modules.md",
+   ".claude/rules/terraform-multi-function.md",
+   ".claude/rules/terraform-project-config.md",
+   ".claude/rules/terraform-skills.md",
+   ".claude/rules/terraform-standards.md",
+   ".claude/rules/terraform-state-backend.md",
+   ".claude/rules/terraform-testing.md",
+   "packages/oci-observability/",
+   ".claude/skills/configuring-oci-monitoring-alarms/",
+   ".claude/skills/designing-oci-connector-hub/",
+   ".claude/skills/designing-oci-logging/",
+   ".claude/skills/logging-oci-java-functions/",
+   ".claude/skills/monitoring-oci-apm/",
+   ".claude/skills/monitoring-oci-apm-dashboards/",
+   ".claude/skills/monitoring-oci-java-functions/",
+   ".claude/skills/observe-oci-workload/",
+   ".claude/skills/observing-oci-java-functions/",
+   ".claude/skills/validating-oci-observability/",
+   ".claude/agents/oci-observability.md",
+   ".claude/rules/observability-skills.md",
+   "packages/oci-architecture/",
+   ".claude/skills/architecting-oci-serverless/",
+   ".claude/skills/design-oci-architecture/",
+   ".claude/skills/designing-oci-api-gateway/",
+   ".claude/skills/designing-oci-event-driven-pubsub/",
+   ".claude/skills/designing-oci-networking/",
+   ".claude/skills/designing-oci-object-storage/",
+   ".claude/skills/designing-oci-vault-security/",
+   ".claude/skills/provision-oci-serverless-stack/",
+   ".claude/agents/oci-serverless-architect.md",
+   ".claude/agents/oci-serverless-stack.md",
+   ".claude/rules/oci-architecture-data-events-guardrails.md",
+   ".claude/rules/oci-architecture-guardrails.md",
+   "workspace/oci-observability-provenance/"
+  ]
+ },
+ {
+  "message": "fix(stripe-java, aws-architect): align agents with the Quarkus/AWS handoff flow\n\nstripe-integrator loads the skills a work-order lists; stripe-advisor and aws-architect paths and\nreview wording; Stripe code-standards rule R01/R03 wording.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>",
+  "paths": [
+   "packages/stripe-java/",
+   ".claude/skills/developing-stripe-java-core-v34/",
+   ".claude/skills/handling-stripe-webhooks-v34/",
+   ".claude/skills/integrate-stripe-java/",
+   ".claude/skills/managing-stripe-subscriptions-v34/",
+   ".claude/skills/processing-stripe-payments-v34/",
+   ".claude/skills/review-stripe-integration/",
+   ".claude/agents/stripe-advisor.md",
+   ".claude/agents/stripe-integrator.md",
+   ".claude/rules/stripe-java-code-standards.md",
+   "packages/aws-architect/",
+   ".claude/skills/aws-architecture-advisor/",
+   ".claude/agents/aws-architect.md",
+   ".claude/rules/aws-iac-reliability-cost.md",
+   ".claude/rules/aws-security-baseline.md"
+  ]
+ },
+ {
+  "message": "chore(apm): add quarkus-aws-saas to the root manifest; regenerate lock; sync docs and counts\n\nCounts from check_counts.py: 222 skills (66 commands, 156 knowledge), 40 agents, 49 rules, 29 packages.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>",
+  "paths": [
+   "apm.yml",
+   "apm.lock.yaml",
+   "CLAUDE.md",
+   "README.md",
+   "docs/"
+  ]
+ },
+ {
+  "message": "docs(workspace): add quarkus-aws-saas research, family facts/rules, state and validation rounds\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>",
+  "paths": [
+   "workspace/quarkus-aws-saas/"
+  ]
+ }
+]
