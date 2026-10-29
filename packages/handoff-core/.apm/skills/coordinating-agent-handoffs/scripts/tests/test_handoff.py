@@ -304,6 +304,53 @@ class TestProfileAndLimits(TempCase):
         self.assertTrue(any("nobody" in e for e in errs), errs)
 
 
+class TestTracker(TempCase):
+    GOOD = ("tracker:\n  kind: github-projects\n  owner: acme\n  owner_type: organization\n"
+            "  project_number: 7\n  repo: acme/shop\n  approval_source: github\n"
+            "  approvers: [alice]\n  bot_login: \"openspec-acme[bot]\"\n")
+
+    def load_with(self, block):
+        path = os.path.join(self.tmp(), "p.yaml")
+        self.write(path, self.read(Q_PROFILE) + block)
+        return lib.load_profile(path)
+
+    def test_absent_and_none_are_valid(self):
+        self.assertEqual(lib.validate_tracker(None), [])
+        _, errs = self.load_with("tracker:\n  kind: none\n")
+        self.assertEqual(errs, [])
+
+    def test_full_github_block_is_valid(self):
+        profile, errs = self.load_with(self.GOOD)
+        self.assertEqual(errs, [])
+        self.assertEqual(profile["tracker"]["project_number"], 7)
+
+    def test_missing_and_bad_fields(self):
+        errs = lib.validate_tracker({"kind": "github-projects", "owner_type": "team",
+                                     "project_number": 0, "repo": "shop"})
+        text = "\n".join(errs)
+        for needle in ("tracker.owner is required", "owner_type must be", "project_number must be",
+                       "repo must be 'owner/name'"):
+            self.assertIn(needle, text)
+
+    def test_github_approvals_need_approvers_and_distinct_bot(self):
+        base = {"kind": "github-projects", "owner": "me", "owner_type": "user",
+                "project_number": 1, "repo": "me/app", "approval_source": "both"}
+        text = "\n".join(lib.validate_tracker(dict(base)))
+        self.assertIn("approvers must be a non-empty list", text)
+        self.assertIn("bot_login is required", text)
+        errs = lib.validate_tracker(dict(base, approvers=["me"], bot_login="me"))
+        self.assertTrue(any("must not be one of tracker.approvers" in e for e in errs), errs)
+        chat = dict(base, approval_source="chat")
+        self.assertTrue(any("bot_login is required" in e for e in lib.validate_tracker(chat)))
+        self.assertEqual(lib.validate_tracker(dict(chat, bot_login="ci-bot")), [])
+        clash = lib.validate_tracker(dict(chat, bot_login="me", approvers=["me"]))
+        self.assertTrue(any("must not be one of tracker.approvers" in e for e in clash), clash)
+
+    def test_unknown_kind_fails_board(self):
+        _, errs = self.load_with("tracker:\n  kind: jira\n")
+        self.assertTrue(any("tracker.kind" in e for e in errs), errs)
+
+
 class TestBoard(TempCase):
     def test_quarkus_fixture_next_is_deploy_and_approvals_kept(self):
         d = self.copy_fixture(Q_REL)

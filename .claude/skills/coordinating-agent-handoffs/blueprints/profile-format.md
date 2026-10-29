@@ -10,6 +10,7 @@ Two complete examples are the test fixtures: `scripts/tests/fixtures/profiles/qu
 - [Schema](#schema)
 - [Overriding defaults](#overriding-defaults)
 - [Limits and parameters](#limits-and-parameters)
+- [Tracker](#tracker)
 - [The `next` rules](#the-next-rules)
 - [YAML subset](#yaml-subset-only-this-is-supported)
 
@@ -35,6 +36,7 @@ Two complete examples are the test fixtures: `scripts/tests/fixtures/profiles/qu
 | `counters` | map name -> counter spec | no | built-in 5 | how each limit is counted |
 | `fallback` | role \| `none` | no | `none` | next action when no rule matches |
 | `next` | list of rules | yes | - | ordered next-action rules |
+| `tracker` | map | no | absent (= `kind: none`) | optional external mirror of the records, see [Tracker](#tracker); ignored by the scripts except for a shape check |
 
 ## Overriding defaults
 
@@ -64,6 +66,29 @@ task/limit are counted.
 first failure: a limit is reached when count >= max(limit, 1)) behaves exactly like `1` (kept for explicitness) and is accepted only with `limits_zero_confirmed: true` in the same source
 (`limits_zero_confirmed=true` in `--args`) - set it only after the user confirms explicitly.
 Unknown limit names are errors.
+
+## Tracker
+
+Optional block for a family or project that mirrors its records into an external tracker. The
+protocol scripts (`check_records.py`, `board.py`, `detect_drift.py`) never call a tracker: they
+only validate the shape below and reject a malformed block. Records on disk stay canonical; a
+bridge package (for example `openspec-github`, skill `syncing-openspec-with-github-projects`)
+reads this block and does the mirroring.
+
+| Key | Type | Req. | Default | Meaning |
+|---|---|---|---|---|
+| `kind` | `none` \| `github-projects` | yes | - | `none` disables the tracker |
+| `owner` | string | when `github-projects` | - | user or organization login that owns the project |
+| `owner_type` | `organization` \| `user` | when `github-projects` | - | selects the credential path of the bridge |
+| `project_number` | int >= 1 | when `github-projects` | - | project number under `owner` |
+| `repo` | `owner/name` | when `github-projects` | - | repository that holds the issues |
+| `approval_source` | `chat` \| `github` \| `both` | no | `chat` | where gate answers may come from; anything but `chat` is an Ask First of the orchestrator |
+| `approvers` | list of logins | when `approval_source` is not `chat` | - | only these logins can answer a gate on the tracker |
+| `bot_login` | string | when `github-projects` | - | the automation identity whose recorded decisions and mirrored objects the bridge trusts (needed even with `approval_source: chat`); must not be an approver |
+
+A project override (`--override`) cannot set `tracker`: the scripts read only `limits:` and
+`quality:` from it, so a `tracker:` there is silently ignored. Keep project tracker values in the
+bridge's own state file (the bridge documents where).
 
 ## The `next` rules
 

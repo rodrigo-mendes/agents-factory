@@ -215,6 +215,57 @@ def _check_matcher(key, value, limit_names):
     return "unknown matcher"
 
 
+TRACKER_KINDS = ("none", "github-projects")
+TRACKER_OWNER_TYPES = ("organization", "user")
+TRACKER_APPROVAL_SOURCES = ("chat", "github", "both")
+_REPO_RE = re.compile(r"^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$")
+
+
+def validate_tracker(t):
+    """Shape check of the optional `tracker:` block (profile-format.md#tracker).
+
+    The protocol scripts never talk to a tracker; this only rejects malformed
+    blocks early so a bridge (for example openspec-github) can rely on them.
+    """
+    if t is None:
+        return []
+    if not isinstance(t, dict):
+        return ["'tracker' must be a mapping"]
+    errs = []
+    kind = t.get("kind")
+    if kind not in TRACKER_KINDS:
+        return ["tracker.kind must be one of: %s" % ", ".join(TRACKER_KINDS)]
+    if kind == "none":
+        return []
+    for key in ("owner", "owner_type", "project_number", "repo"):
+        if key not in t:
+            errs.append("tracker.%s is required when tracker.kind is github-projects" % key)
+    if "owner_type" in t and t["owner_type"] not in TRACKER_OWNER_TYPES:
+        errs.append("tracker.owner_type must be 'organization' or 'user'")
+    pn = t.get("project_number")
+    if pn is not None and (isinstance(pn, bool) or not isinstance(pn, int) or pn < 1):
+        errs.append("tracker.project_number must be an integer >= 1")
+    repo = t.get("repo")
+    if repo is not None and not (isinstance(repo, str) and _REPO_RE.match(repo)):
+        errs.append("tracker.repo must be 'owner/name'")
+    source = t.get("approval_source", "chat")
+    if source not in TRACKER_APPROVAL_SOURCES:
+        errs.append("tracker.approval_source must be one of: %s" % ", ".join(TRACKER_APPROVAL_SOURCES))
+    elif source != "chat":
+        approvers = t.get("approvers")
+        if not (isinstance(approvers, list) and approvers
+                and all(isinstance(a, str) and a for a in approvers)):
+            errs.append("tracker.approvers must be a non-empty list of logins when approval_source is not 'chat'")
+    approvers = t.get("approvers")
+    if isinstance(approvers, list) and t.get("bot_login") in approvers:
+        errs.append("tracker.bot_login must not be one of tracker.approvers")
+    # The bridge adopts mirrored objects only from bot_login (or an approver),
+    # so the automation identity is needed even when approvals stay in chat.
+    if not (isinstance(t.get("bot_login"), str) and t.get("bot_login")):
+        errs.append("tracker.bot_login is required when tracker.kind is github-projects")
+    return errs
+
+
 def validate_profile(p):
     """Return a list of error strings (empty when the profile is valid)."""
     errs = []
@@ -232,6 +283,7 @@ def validate_profile(p):
         errs.append("'spec' must be a mapping")
     elif isinstance(spec, dict) and spec.get("kind") not in ("openspec", "none"):
         errs.append("spec.kind must be 'openspec' or 'none'")
+    errs.extend(validate_tracker(p.get("tracker")))
 
     roles = p.get("roles")
     role_names = set()

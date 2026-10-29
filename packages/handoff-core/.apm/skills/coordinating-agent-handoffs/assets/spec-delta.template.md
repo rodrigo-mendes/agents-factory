@@ -10,7 +10,7 @@ status: proposed             # proposed | accepted | rejected | revise
 createdAt: <ISO 8601 UTC>
 ---
 
-<!-- Delta sections follow the OpenSpec format; see ../../specifying-changes-with-openspec-v1-15/SKILL.md.
+<!-- Delta sections follow the OpenSpec format; see the skill specifying-changes-with-openspec-v1-15 (package openspec-core).
      Keep only the sections that apply. A MODIFIED requirement repeats the COMPLETE requirement
      (sentence + every scenario), not a diff. Target file once accepted:
      <change dir>/specs/<capability>/spec.md -->
