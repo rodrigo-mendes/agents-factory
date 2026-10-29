@@ -23,4 +23,4 @@ Being a single source does NOT lower a versioned claim to medium.
 
 ## Orchestrator-verified facts
 
-A fact used by more than one skill is verified by the orchestrator against an official page, written in `_family_facts_<ver>.md` with source and read date, and only then handed to authors. Authors never edit that file; a disputed fact goes back to the orchestrator.
+A fact used by more than one skill is verified by the orchestrator against an official page, written in `_family_facts.md` with source and read date, and only then handed to authors. Authors never edit that file; a disputed fact goes back to the orchestrator.
