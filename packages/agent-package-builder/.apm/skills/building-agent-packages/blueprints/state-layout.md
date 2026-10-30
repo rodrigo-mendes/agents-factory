@@ -48,6 +48,7 @@ The version of a family file lives inside it (column or header), not in its name
 | cost | `metric <scope> estimate\|actual --tokens N [--minutes M]` (prints BUDGET EXCEEDED over `token_budget`) |
 | lesson | `retro add --kind brief\|known-failure\|lesson --target <t> --text "..."` |
 | shared file changed | `shared-lock` first, then `touch <path> --note "..."`; `shared-unlock` at the end ([policy](policy/shared-files.md)) |
+| reviewer launched (P6) | `round-start round-<k> <validate\|test\|audit> <target>` (writes the `.running` marker; dashboard shows `running`) |
 | anything else | `event <phase> <CODE> "<text>"` with CODE in ROUND_DONE, FIX, SWEEP, INCIDENT, DEFER, DISCREPANCY, NOTE |
 | P9 done | `unlock` (a lock older than 12 h can be freed with `unlock --stale`; it is logged) |
 
