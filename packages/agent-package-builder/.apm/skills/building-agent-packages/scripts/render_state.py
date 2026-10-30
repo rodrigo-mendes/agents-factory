@@ -30,12 +30,20 @@ def num(v):
 
 
 def latest_by_target(scores, kind):
-    """{target: score row} = the newest round that scored this target with this kind."""
+    """{target: score row} = the newest round that scored this target with this kind.
+    Audit rows are keyed `audit` whatever target they were recorded with (one audit per round)."""
     out = {}
     for r in scores:
         if r['kind'] == kind and num(r['score']) is not None:
-            out[r['target']] = r
+            out['audit' if kind == 'audit' else r['target']] = r
     return out
+
+
+def scenarios(row):
+    """'P/T' when counted, else the test score with a note that counts are missing."""
+    if row and row['total']:
+        return f'{row["pass"]}/{row["total"]}'
+    return f'score {row["score"]} (no counts)' if row else '-'
 
 
 def scoreboard_panel(scores):
@@ -48,10 +56,12 @@ def scoreboard_panel(scores):
             rounds.append(r['round'])
     cell, tests = {}, latest_by_target(scores, 'test')
     for r in scores:
-        if r['kind'] in ('validate', 'audit') and (r['kind'] == 'audit') == (r['target'] == 'audit'):
+        if r['kind'] in ('validate', 'audit'):
+            tgt = 'audit' if r['kind'] == 'audit' else r['target']
             sev = ' '.join(f'{r[k]}{k[0].upper()}' for k in ('high', 'medium') if r[k])
-            cell[(r['target'], r['round'])] = (num(r['score']), f'{r["score"]}' + (f' ({sev})' if sev else ''))
+            cell[(tgt, r['round'])] = (num(r['score']), f'{r["score"]}' + (f' ({sev})' if sev else ''))
     targets = sorted({t for t, _ in cell} | set(tests), key=lambda t: (t in ('package', 'audit'), t == 'audit', t))
+    rounds = [k for k in rounds if any(rk == k for _, rk in cell)] or rounds
     body = []
     for t in targets:
         seen = [cell[(t, k)][0] for k in rounds if (t, k) in cell and cell[(t, k)][0] is not None]
@@ -59,10 +69,9 @@ def scoreboard_panel(scores):
         if len(seen) >= 2:
             d = seen[-1] - seen[-2]
             delta = f'**REGRESSION {d:+g}**' if d < 0 else f'{d:+g}'
-        tr = tests.get(t)
-        scen = f'{tr["pass"]}/{tr["total"]}' if tr and tr['total'] else '-'
-        high = next((cell_row['high'] for cell_row in reversed(scores)
-                     if cell_row['target'] == t and cell_row['high'] != ''), '')
+        scen = scenarios(tests.get(t))
+        high = next((r['high'] for r in reversed(scores) if r['high'] != '' and r['kind'] != 'test'
+                     and ('audit' if r['kind'] == 'audit' else r['target']) == t), '')
         body.append([t, *(cell.get((t, k), (None, '-'))[1] for k in rounds), delta or '-', scen, high or '-'])
     return table(['Target', *rounds, 'Δ', 'Scenarios', 'HIGH'], body) + \
         '\n\nAudit is 0-10; every other score is 0-100 (`100 - 6/HIGH - 2.5/MEDIUM - 0.5/LOW`). ' \
@@ -81,11 +90,13 @@ def exit_panel(ex, scores):
     pkg = num(val['package']['score']) / 10 if 'package' in val else None
     aud = latest_by_target(scores, 'audit').get('audit')
     aud = num(aud['score']) if aud else None
-    tests = latest_by_target(scores, 'test').values()
+    tests = list(latest_by_target(scores, 'test').values())
     p = sum(int(r['pass']) for r in tests if r['pass'].isdigit())
     t = sum(int(r['total']) for r in tests if r['total'].isdigit())
     failing = sorted(f'{r["target"]} {r["pass"]}/{r["total"]}' for r in tests
                      if r['total'].isdigit() and r['pass'] != r['total'])
+    uncounted = sorted(r['target'] for r in tests if not r['total'])
+    failing += [f'{n} uncounted (record --pass/--total)' for n in uncounted]
     rows_ = [
         (not high, '0 HIGH open', f'{len(high)} open' + (f' ({", ".join(high)})' if high else '')),
         (bool(skills) and not low, f'every skill >= {sl.EXIT["skill_min"]:g}',
@@ -94,11 +105,14 @@ def exit_panel(ex, scores):
          f'{pkg:g}/10' if pkg is not None else 'not scored'),
         (aud is not None and aud >= sl.EXIT['audit_min'], f'audit >= {sl.EXIT["audit_min"]:g}/10',
          f'{aud:g}/10' if aud is not None else 'not scored'),
-        (t > 0 and p == t, '100% scenarios pass', f'{p}/{t}' + (f' (failing: {", ".join(failing)})' if failing else '')),
+        (t > 0 and p == t and not uncounted, '100% scenarios pass', f'{p}/{t}' + (f' (failing: {", ".join(failing)})' if failing else '')),
     ]
     met = sum(1 for ok, _, _ in rows_ if ok)
+    closed = sl.load(ex)['phases'].get('P6', {}).get('status') == 'done'
+    verdict = ('P6 closed' + ('' if met == 5 else ': unmet criteria must be on the G3 decision list')) if closed \
+        else ('exit P6' if met == 5 else 'loop continues (or leftovers go to G3)')
     return '\n'.join(f'- [{"x" if ok else " "}] {name}: {why}' for ok, name, why in rows_) + \
-        f'\n\n**{met}/5 met** · ' + ('exit P6' if met == 5 else 'loop continues (or leftovers go to G3)')
+        f'\n\n**{met}/5 met** · {verdict}'
 
 
 def findings_panel(ex):

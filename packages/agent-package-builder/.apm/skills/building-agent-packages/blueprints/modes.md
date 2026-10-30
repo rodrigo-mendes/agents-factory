@@ -34,4 +34,4 @@ A legacy workspace (no `execution-<N>`) is first migrated with `scripts/migrate_
 
 ## resume
 
-Show the table "recorded x real x action", name the interruption point (e.g. "P4, batch 2, units X and Y"), ask for a short confirmation, continue from the first unfinished step. A half-written file is discarded and redone, never patched. Mechanically verified work is never redone.
+Show the table "recorded x real x action", name the interruption point (e.g. "P4, batch 2, units X and Y"), ask for a short confirmation, continue from the first unfinished step; restart the dashboard watcher (`scripts/watch_state.py`, it does not survive a session end; the Health panel shows it as stopped). A half-written file is discarded and redone, never patched. Mechanically verified work is never redone.

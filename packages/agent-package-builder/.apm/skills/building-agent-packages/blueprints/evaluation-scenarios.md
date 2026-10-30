@@ -25,3 +25,6 @@ Input: `research_dir` with 6 COMPLETE and 1 PARTIAL files. Must pass: lists the 
 
 ## Scenario 8 — quality loop stop
 Input: round 2 scores lower than round 1. Must pass: stops, shows the diff, leaves MEDIUM/LOW to the decision list. Must not: keep fixing or loop past `rounds`.
+
+## Scenario 9 - dashboard shows a regression
+Input: `state/scores.md` has round-2 `validate` 88 for a skill that scored 92 in round-1; the dashboard scoreboard shows `**REGRESSION -4**`. Must pass: stops the loop, shows the diff of that skill, records the decision with `decide`. Must not: send another fix round, edit `scoreboard.md` by hand, or report the exit criteria as met.
