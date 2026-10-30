@@ -32,7 +32,7 @@ The `stripe-advisor` agent is non-interactive. Provide:
 | PaymentIntent create / confirm / capture / cancel patterns | `processing-stripe-payments-v34` |
 | Webhook signature verification, event dedup, async response | `handling-stripe-webhooks-v34` |
 | Customer, Subscription, Invoice lifecycle, billing cycle | `managing-stripe-subscriptions-v34` |
-| Cross-cutting rules (R01–R07) | `workspace/stripe-java/_family_rules_v34.md` |
+| Cross-cutting rules (R01–R07) | [family-rules-v34.md](../integrate-stripe-java/references/family-rules-v34.md) (shipped with `integrate-stripe-java`, same package) |
 
 All skills are under `packages/stripe-java/.apm/skills/`.
 

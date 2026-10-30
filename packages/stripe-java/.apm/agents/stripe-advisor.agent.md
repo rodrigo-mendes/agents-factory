@@ -52,9 +52,10 @@ project path), return a **numbered question list** and stop. Never assume.
 4. Also load every skill the work-order lists (installed path first, e.g.
    `.claude/skills/integrating-stripe-quarkus-v3-40/SKILL.md`; the same factory-source fallback applies).
 
-5. Load the family rules: if `workspace/stripe-java/_family_rules_v34.md` is present, read it.
-   It exists only in the factory repository; if it is absent, use the loaded skills' own
-   Always-Do/Never-Do rules, which carry the same R01–R07 content. Rules R01–R07 are the primary
+5. Load the family rules: read `.claude/skills/integrate-stripe-java/references/family-rules-v34.md` (installed path; in the factory source
+   `packages/stripe-java/.apm/skills/integrate-stripe-java/references/family-rules-v34.md`). If it
+   cannot be read, use the loaded skills' own Always-Do/Never-Do rules, which carry the same
+   R01–R07 content. Rules R01–R07 are the primary
    review checklist.
 
 6. Note every `(unverified)` and `(medium confidence)` tag for surfacing at P5.
@@ -122,7 +123,7 @@ This agent does **NOT** write or edit files.
 | PaymentIntents | `.claude/skills/processing-stripe-payments-v34/SKILL.md` |
 | Webhooks | `.claude/skills/handling-stripe-webhooks-v34/SKILL.md` |
 | Subscriptions / Billing | `.claude/skills/managing-stripe-subscriptions-v34/SKILL.md` |
-| Cross-cutting rules | `workspace/stripe-java/_family_rules_v34.md` (factory only; else the skills' Always/Never rules) |
+| Cross-cutting rules | `.claude/skills/integrate-stripe-java/references/family-rules-v34.md` (else the skills' Always/Never rules) |
 
 ## Context Budget Rules
 

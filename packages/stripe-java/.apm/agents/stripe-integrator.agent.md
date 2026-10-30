@@ -59,9 +59,10 @@ If the work-order explicitly lists additional skills (for example `integrating-s
 
 ### Step 4 — Load family rules
 
-If `workspace/stripe-java/_family_rules_v34.md` is present, read it. These seven numbered rules
-span multiple skills; they are the cross-cutting enforcement layer. If the file is absent (it
-exists only in the factory repository), rely on the loaded skills' own Always-Do/Never-Do rules,
+Read `.claude/skills/integrate-stripe-java/references/family-rules-v34.md` (installed path; in the factory source
+`packages/stripe-java/.apm/skills/integrate-stripe-java/references/family-rules-v34.md`). These seven
+numbered rules span multiple skills; they are the cross-cutting enforcement layer. If it cannot be
+read, rely on the loaded skills' own Always-Do/Never-Do rules,
 which carry the same R01–R07 content. Check every generated code artefact against R01–R07 before
 reporting.
 
