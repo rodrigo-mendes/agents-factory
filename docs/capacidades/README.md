@@ -116,5 +116,5 @@ Beyond the 40 factory commands, the root manifest installs domain packages. Real
 | `oci-core`, `oci-functions-java`, `oci-terraform`, `oci-observability`, `oci-architecture` | 8 | 45 | 7 | 28 |
 | `stripe-java` | 2 | 4 | 2 | 1 |
 | `langchain4j` | 0 | 3 | 1 | 2 |
-| `handoff-core`, `quarkus-aws`, `aws-lambda`, `aws-observability`, `quarkus-aws-saas` | 2 | 20 | 6 | 4 |
+| `handoff-core`, `quarkus-aws`, `aws-lambda`, `aws-observability`, `aws-saas-serverless-quarkus-react-nextjs` | 2 | 20 | 6 | 4 |
 

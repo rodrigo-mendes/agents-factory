@@ -77,24 +77,29 @@ The **Terraform executors** live in `packages/terraform`: `terraform-rules-autho
 
 The **LangChain4j** package (`packages/langchain4j`) covers chat + streaming in plain Java on LangChain4j 1.22.0 with OpenAI and Anthropic: 3 version-locked knowledge skills (`developing-langchain4j-core-v1-22`, `integrating-langchain4j-openai-v1-22`, `integrating-langchain4j-provider-a-v1-22` — the Anthropic one, named without the reserved word), the non-interactive `langchain4j-integrator` subagent (no `/command`; spawned via the Agent tool) and 2 scoped rules. AiServices, `@Tool`, RAG, structured output and Spring/Quarkus are out of scope. Details: [packages/langchain4j/README.md](packages/langchain4j/README.md).
 
-The **Quarkus on AWS Lambda SaaS** set is 6 layered packages (plus the reusable OpenSpec and GitHub layers below) driven by the inline orchestrator
-`/building-quarkus-aws-saas` (spec-driven: interview, architecture spec + ADRs, OpenSpec functional spec,
-then an agent team via handoff records; it is the only one that talks to the user):
+The **Quarkus on AWS Lambda SaaS + Next.js** set is a set of layered packages (plus the reusable OpenSpec and GitHub layers below) driven by the inline project-manager orchestrator
+`/building-aws-saas-serverless-quarkus-react-nextjs` (spec-driven: interview, solution architecture + design + infrastructure specs with ADRs in three folders, OpenSpec functional spec, wireframes,
+technical designs, then an agent team via handoff records; deploy runs in GitHub Actions after the user's PR merge; it is the only one that talks to the user). Planning runs in the session model (Opus); every worker is launched with `model: "sonnet"` except `solution-architect` and `aws-infrastructure-architect` (`opus`). Every deliverable has a different reviewer agent.
 - `handoff-core`: the generic handoff protocol v1 (`coordinating-agent-handoffs`, with the Python
   scripts `check_records.py`, `board.py`, `detect_drift.py`; profiles may carry an optional `tracker:` block),
   the read-only `spec-synchronizer` subagent and the command `/syncing-spec-from-code`. The OCI profile
   `coordinating-oci-handoffs` (in `oci-core`) uses the same protocol. Depends on `openspec-core`.
+- `openspec-core`: the OpenSpec 1.15 skill plus the rule `openspec-project-layout` (factory folder convention: `architecture/`, `design/`, `infrastructure/` with their own `adr/`).
 - `quarkus-aws`: 11 knowledge skills (Lambda, HTTP, Cognito, data, messaging, testing, logging, tracing,
   metrics, observability umbrella, project structure), the executor `quarkus-lambda-integrator`, the
   read-only `quarkus-code-reviewer` and 2 rules.
-- `aws-lambda`: runtime-agnostic `aws-lambda-deployer` (applies only a user-approved saved plan) and
+- `quarkus-langchain4j`: `integrating-quarkus-langchain4j-v1-15` (pinned to 1.15.0.CR1, flagged as a candidate release) and the read-only `langchain4j-reviewer`.
+- `solution-architecture`: `solution-architect` (opus) and `solution-architecture-reviewer`.
+- `ui-design`: `ui-ux-designer` and `ui-design-reviewer` (use the Vercel design skills).
+- `nextjs-frontend`: `nextjs-frontend-integrator`, `nextjs-code-reviewer` and the rule `nextjs-static-export` (Next.js static export to S3 + CloudFront).
+- `aws-architect`: gains `aws-infrastructure-architect` (opus) and `aws-architect-reviewer`; `terraform` gains `terraform-code-reviewer`; `aws-observability` gains `static-site-verifier`.
+- `aws-lambda`: runtime-agnostic `aws-lambda-deployer` (not used by this flow any more; the pipeline deploys) and
   read-only `aws-lambda-debugger`, with `deploying-aws-lambda` and `debugging-aws-lambda`.
 - `aws-observability`: the `aws-observability` subagent, the command `/observe-aws-workload` and
   `validating-aws-observability` (read-only live checks in Python, approval flags for anything else).
-- `quarkus-aws-saas`: the orchestrator, the profile `coordinating-quarkus-aws-handoffs`,
-  `integrating-stripe-quarkus-v3-40` and `integrating-quarkus-langchain4j-v1-15` (pinned to 1.15.0.CR1,
-  flagged as a candidate release).
-Details: [packages/quarkus-aws-saas/README.md](packages/quarkus-aws-saas/README.md).
+- `aws-saas-serverless-quarkus-react-nextjs`: the orchestrator, the profile `coordinating-quarkus-aws-handoffs`
+  and `integrating-stripe-quarkus-v3-40`; depends on all of the above plus `vercel-frontend` and `github-actions-cicd`.
+Details: [packages/aws-saas-serverless-quarkus-react-nextjs/README.md](packages/aws-saas-serverless-quarkus-react-nextjs/README.md).
 
 The **OpenSpec + GitHub** layer is 3 reusable packages: `openspec-core` (the OpenSpec 1.15 skill alone,
 split out of `handoff-core`), `github-core` (generic `managing-github-projects-gh-v2-103` and
@@ -133,13 +138,13 @@ Not compiled code — artifacts run **in Claude Code** via `/<command>`:
 - Or call the sibling directly: `/researching-streaming-broker Kafka 3.7 deployment=kubernetes-operator`
 - Datastore with modeling: `/researching-document-store MongoDB 7.0 deployment=kubernetes-operator`
 - API gateway: `/researching-api-gateway Kong 3.7 deployment=kubernetes-operator`
-- Build or evolve a Quarkus SaaS on AWS Lambda (inline orchestrator): `/building-quarkus-aws-saas`
+- Build or evolve a Quarkus SaaS on AWS Lambda (inline orchestrator): `/building-aws-saas-serverless-quarkus-react-nextjs`
 - Propose a spec-delta after code drift: `/syncing-spec-from-code <change-dir>`
 - Review, provision or live-validate AWS observability: `/observe-aws-workload <work-order>`
 - Refresh or check the GitHub Project mirror of an OpenSpec change: `/syncing-openspec-to-github <change-id>`
 
-The 67 commands use `disable-model-invocation: true` (deliberate actions) — accessible via `/name`,
-with no auto-listing cost. The other 179 skills are knowledge skills and auto-invoke instead of
+The 68 commands use `disable-model-invocation: true` (deliberate actions) — accessible via `/name`,
+with no auto-listing cost. The other 188 skills are knowledge skills and auto-invoke instead of
 routing via `/name`: `rules-compiler`, the 12 Camel Quarkus skills, the 4 `quarkus-core` skills, the 26 `provisioning-aws-<service>-v6` skills, the Quarkus on AWS Lambda SaaS skills, and the AWS architecture (`aws-skills`), OCI, Stripe, LangChain4j, OpenSpec and GitHub (`github-core`, `syncing-openspec-with-github-projects`) knowledge skills (their descriptions are
 listed in every session of a project that installs them, so keep them short and specific).
 
@@ -147,7 +152,7 @@ listed in every session of a project that installs them, so keep them short and 
 
 ```
 .claude/            ← GENERATED by `apm install --target claude`. Edit packages/, not this.
-├── agents/     ← 41 subagents: 5 routing-level (framework-researcher, artifact-author,
+├── agents/     ← 54 subagents: 5 routing-level (framework-researcher, artifact-author,
 │                 architecture-auditor, quality-validator, skill-evaluator) +
 │                 2 internal helpers (research-synthesizer, section-investigator) +
 │                 13 book-writing agents + camel-quarkus-integrator +
@@ -155,17 +160,22 @@ listed in every session of a project that installs them, so keep them short and 
 │                 7 OCI agents + 2 Stripe agents (stripe-advisor, stripe-integrator) +
 │                 langchain4j-integrator + 6 Quarkus/AWS SaaS agents (quarkus-lambda-integrator,
 │                 quarkus-code-reviewer, aws-lambda-deployer, aws-lambda-debugger,
-│                 aws-observability, spec-synchronizer) + openspec-github-syncer
-├── skills/     ← 246 skills: 67 fork → subagent commands + 179 knowledge/auto-invoke; includes the
+│                 aws-observability, spec-synchronizer) + openspec-github-syncer +
+│                 2 CI/CD agents (cicd-pipeline-engineer, cicd-pipeline-reviewer) +
+│                 11 SaaS design/front/review agents (solution-architect, solution-architecture-reviewer,
+│                 aws-infrastructure-architect, aws-architect-reviewer, ui-ux-designer, ui-design-reviewer,
+│                 nextjs-frontend-integrator, nextjs-code-reviewer, langchain4j-reviewer,
+│                 terraform-code-reviewer, static-site-verifier)
+├── skills/     ← 256 skills: 68 fork → subagent commands + 188 knowledge/auto-invoke (incl. 20 Vercel and 9 GitHub Actions CI/CD knowledge skills); includes the
 │                 platform-software family (1 orchestrator + 14 siblings),
 │                 12 Camel Quarkus, 4 quarkus-core, 22 Quarkus/AWS SaaS, 26 AWS Terraform (provisioning-aws-*-v6), the AWS/OCI/Stripe/LangChain4j knowledge skills, and each skill's own assets/ (former .claude/templates/
 │                 content) + blueprints/
-├── rules/      ← 50 rules (most scoped by `paths:`): 5 factory rules + 3 Camel Quarkus + 3 AWS Terraform + OCI (incl. 2 oci-architecture guardrails), AWS-architect, Stripe, 2 LangChain4j and 5 Quarkus/AWS rules (quarkus-clean-code, 2 quarkus-lambda, aws-lambda-deployment-preflight, aws-observability-skills) + openspec-github-state
+├── rules/      ← 56 rules (most scoped by `paths:`; incl. nextjs-static-export, openspec-project-layout and 4 github-workflows-*): 5 factory rules + 3 Camel Quarkus + 3 AWS Terraform + OCI (incl. 2 oci-architecture guardrails), AWS-architect, Stripe, 2 LangChain4j and 5 Quarkus/AWS rules (quarkus-clean-code, 2 quarkus-lambda, aws-lambda-deployment-preflight, aws-observability-skills) + openspec-github-state
 ├── MIGRATION.md ← migration history Copilot → Claude Code (hand-authored, not generated)
 ├── settings.json         ← hand-authored, not generated (APM only merges `hooks:`, unused here)
 └── settings.local.json   ← hand-authored, gitignored
 
-packages/           ← the actual source of truth — 33 APM packages, all installed by the root manifest (directly or transitively), each with its own apm.yml
+packages/           ← the actual source of truth — 38 APM packages, all installed by the root manifest (directly or transitively), each with its own apm.yml
 ├── factory-core/                 ← 5 rules (frontmatter + naming schemas), no skills/agents
 ├── research-core/                ← framework-researcher + its 2 internal helpers, no skills
 ├── researching-frameworks/       ← 5 generic research skills
@@ -195,11 +205,15 @@ packages/           ← the actual source of truth — 33 APM packages, all inst
 ├── quarkus-aws/                  ← 11 Quarkus on Lambda skills, integrator + reviewer agents, 2 rules
 ├── aws-lambda/                   ← deployer + debugger agents, 2 skills, 1 rule (any Lambda runtime)
 ├── aws-observability/            ← aws-observability agent, /observe-aws-workload, live validation, 1 rule
-└── quarkus-aws-saas/             ← orchestrator, handoff profile, Stripe + LangChain4j on Quarkus (4 skills)
+├── quarkus-langchain4j/          ← LangChain4j 1.15.0.CR1 on Quarkus Lambda skill + langchain4j-reviewer
+├── solution-architecture/        ← solution-architect (opus) + solution-architecture-reviewer
+├── ui-design/                    ← ui-ux-designer + ui-design-reviewer
+├── nextjs-frontend/              ← nextjs-frontend-integrator + nextjs-code-reviewer + 1 rule (static export)
+└── aws-saas-serverless-quarkus-react-nextjs/ ← project-manager orchestrator, handoff profile, Stripe skill
 
 apm.yml             ← root manifest: aggregates the packages (factory-core, research-core,
                        camel-quarkus-skills, quarkus-core, openspec-core, github-core, openspec-github and the
-                       Quarkus/AWS SaaS layers below quarkus-aws-saas are NOT listed directly — they resolve transitively;
+                       Quarkus/AWS SaaS layers below aws-saas-serverless-quarkus-react-nextjs (incl. vercel-frontend, github-actions-cicd) are NOT listed directly — they resolve transitively;
                        listing them twice triggers a real `apm audit --ci` failure,
                        "ambiguous resolved_by")
 apm.lock.yaml       ← committed; `apm install --frozen` in CI must reproduce it exactly
@@ -213,7 +227,7 @@ docs/
 └── referencia/   ← glossary and conventions
 workspace/      ← research outputs and validation working files (versioned; was StoryBeat/); Camel Quarkus
                   research_*_v3.40.md + _family_facts/_family_rules are the provenance of its skills;
-                  workspace/quarkus-aws-saas/ holds the research, state and validation of the SaaS set
+                  workspace/quarkus-aws-saas/ (historical folder name) holds the research, state and validation of the SaaS set
 ```
 
 There is **no `.claude/templates/`** — every template lives in the `assets/` of the skill that
