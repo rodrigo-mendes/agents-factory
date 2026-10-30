@@ -201,7 +201,7 @@ OPS 11  (continuous improvement)
 ## Blueprints Directory Structure
 
 ```
-workspace/.claude/skills/applying-waf-operational-excellence-pillar/
+.claude/skills/applying-waf-operational-excellence-pillar/
 ├── SKILL.md                         <- This file (summary + guardrails)
 └── blueprints/
     ├── evaluation-scenarios.md      <- 6 test scenarios for skill-evaluator

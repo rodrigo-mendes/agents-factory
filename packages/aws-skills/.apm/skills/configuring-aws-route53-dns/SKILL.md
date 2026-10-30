@@ -229,7 +229,7 @@ aws route53-recovery-cluster get-routing-control-state --routing-control-arn ARN
 ## Blueprints Directory Structure
 
 ```
-workspace/.claude/skills/configuring-aws-route53-dns/
+.claude/skills/configuring-aws-route53-dns/
 ├── SKILL.md                          <- This file (summary + guardrails)
 └── blueprints/
     ├── always-do-patterns.md         <- 6 mandatory patterns with full code examples

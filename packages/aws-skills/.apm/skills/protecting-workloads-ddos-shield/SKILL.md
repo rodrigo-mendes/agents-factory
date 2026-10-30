@@ -222,7 +222,7 @@ CloudFront distributions, Route 53 hosted zones, Global Accelerator standard acc
 ## Blueprints Directory Structure
 
 ```
-workspace/.claude/skills/protecting-workloads-ddos-shield/
+.claude/skills/protecting-workloads-ddos-shield/
 ├── SKILL.md                              ← This file
 └── blueprints/
     └── evaluation-scenarios.md           ← Test cases for skill-evaluator

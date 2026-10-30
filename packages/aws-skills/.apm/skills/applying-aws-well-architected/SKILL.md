@@ -187,7 +187,7 @@ aws ec2 describe-route-tables \
 ## Blueprints Directory Structure
 
 ```
-workspace/.claude/skills/applying-aws-well-architected/
+.claude/skills/applying-aws-well-architected/
 ├── SKILL.md                              <- This file (summary + guardrails)
 └── blueprints/
     ├── always-do-patterns.md             <- 10 mandatory patterns with verification commands

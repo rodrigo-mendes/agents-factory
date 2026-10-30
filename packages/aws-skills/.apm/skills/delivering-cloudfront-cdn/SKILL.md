@@ -215,7 +215,7 @@ aws cloudfront get-distribution --id <DIST_ID> --query 'Distribution.Status'
 ## Blueprints Directory Structure
 
 ```
-workspace/.claude/skills/delivering-cloudfront-cdn/
+.claude/skills/delivering-cloudfront-cdn/
 ├── SKILL.md                              <- This file (summary + guardrails)
 └── blueprints/
     ├── always-do-patterns.md             <- M1-M7 full patterns with CLI verification
