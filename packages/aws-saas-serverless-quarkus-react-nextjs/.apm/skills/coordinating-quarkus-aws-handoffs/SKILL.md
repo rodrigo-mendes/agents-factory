@@ -100,9 +100,9 @@ only its `## Approvals` section is hand-written (by the orchestrator, from the u
 | cicd | `cicd-pipeline-engineer` | `wo-NN-cicd` | `.github/**` + `result-NN-cicd.md` (with the `user-must-add` list) |
 | reviewer | `quarkus-code-reviewer`, `stripe-advisor`, `langchain4j-reviewer`, `nextjs-code-reviewer`, `terraform-code-reviewer`, `cicd-pipeline-reviewer` | `wo-NN-review`, code, ADRs | `review-NN.md` (inline; orchestrator saves; `role:` per the [wo-review variants](./assets/wo-review.template.md)) |
 | infra | `aws-terraform-engineer` | `wo-NN-infra` | HCL + `result-NN-infra.md` |
-| observability | `aws-observability` | `wo-NN-observability`, specs, pipeline record | Terraform (mode B) or live validation (mode C) + `result-NN-observability.md` (kind `report`; mode C adds `role: observability-live`, mode A `role: observability-review`) |
+| observability | `aws-observability` | `wo-NN-observability`, specs, pipeline record | Terraform (mode B) or live validation (mode C) + `result-NN-observability.md` (kind `report`; mode C adds `role: observability-live`; modes A and D are not used in this flow) |
 | pipeline-ci, pipeline-cd | none: the GitHub Actions run (the roles point to the orchestrator, which records the run) | `gh pr checks`, `gh run view` (read-only) | `result-NN-pipeline.md` with `role: pipeline-ci` or `pipeline-cd`, `run_url` |
-| site-verify | `static-site-verifier` | `wo-NN-site-verify`, pipeline record, `out/` sha256 | `verify-E7-site.md` (inline) |
+| site-verify | `static-site-verifier` | `wo-NN-site-verify`, pipeline record, `out/` dirhash | `verify-E7-site.md` (inline) |
 | debug | `aws-lambda-debugger` | `wo-NN-debug`, pipeline and observability results | `diagnosis-NN.md` (mode A), `verify-E7.md` (mode B; gap-acceptance relaunch: `verify-E7-<nn>`) (inline) |
 | sync | `spec-synchronizer` | `wo-NN-sync`, drift, specs, ADRs, results | `verify-E1.md`, `verify-E3.md`, `verify-E5.md`, `spec-delta-NN.md` (inline) |
 
@@ -119,7 +119,7 @@ architect reviewers) return the record inline; the orchestrator saves it unchang
 | E1 interview | `status.md` approvals, `verify-E1.md` | `spec-synchronizer` (review mode) + user |
 | E2a solution architecture | ADRs `area: architecture`, `result-NN-solution-architect`, `verify-E2a.md` | `solution-architecture-reviewer` + `check_records.py` |
 | E2b design system | ADRs `area: design`, `result-NN-designer`, `verify-E2b.md` | `ui-design-reviewer` |
-| E2c infrastructure | ADRs `area: infrastructure`, `result-NN-infrastructure-architect`, `result-NN-observability` (mode A, `role: observability-review`), `verify-E2c.md` | `aws-architect-reviewer`; one E2 approval of the user over the three fronts |
+| E2c infrastructure | ADRs `area: infrastructure`, `result-NN-infrastructure-architect`, `verify-E2c.md` (includes the observability check) | `aws-architect-reviewer`; one E2 approval of the user over the three fronts |
 | E3 functional spec | `verify-E3.md` | `spec-synchronizer` + user |
 | E3b wireframes | `result-NN-designer`, `verify-E3b.md` | `ui-design-reviewer` + user approval |
 | E4 change designs | `verify-E4-<flow>.md` (one per design), `verify-E4-index.md` (every R* owned by exactly one design), `verify-E4-infra.md` | `solution-architecture-reviewer`, `aws-architect-reviewer` |

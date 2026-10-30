@@ -11,9 +11,9 @@ Back to [SKILL.md](../SKILL.md).
 | 5 | Ask only what is missing | read `openspec/specs/**`, `proposal.md`, prior approvals before the round |
 | 6 | Independent reviewer per deliverable (the author never reviews its own work) | E1/E3/E5 `spec-synchronizer`; E2a/E4 `solution-architecture-reviewer`; E2b/E3b `ui-design-reviewer`; E2c/E4 `aws-architect-reviewer`; I7 the chain of the task type; E7 `aws-lambda-debugger` mode B + `static-site-verifier`; gates by scripts |
 | 7 | Re-run the build myself | `mvn -q verify` (back/AI/Stripe), `pnpm install --frozen-lockfile && pnpm lint && pnpm test && pnpm build` (front), `terraform validate` (infra), `actionlint` (workflows); compare to the agent's claim |
-| 8 | Real timestamps | `date -u +%Y-%m-%dT%H:%M:%SZ` for `createdAt`; placeholders are rejected by the checker |
+| 8 | Real timestamps | `python .claude/skills/coordinating-agent-handoffs/scripts/portable.py now` for `createdAt` (`python3` where only that exists; works on Windows, macOS and Linux); placeholders are rejected by the checker |
 | 9 | Save inline records for read-only agents | file name from the profile patterns, `saved-by: building-aws-saas-serverless-quarkus-react-nextjs`, content verbatim |
-| 10 | Hash what is published | `sha256sum` of `function.zip` and of the `out/` tree reported by the author; compare with the pipeline artifact and with the live site (`static-site-verifier`) |
+| 10 | Hash what is published | `python .claude/skills/coordinating-agent-handoffs/scripts/portable.py sha256 function.zip` and `python .claude/skills/coordinating-agent-handoffs/scripts/portable.py dirhash out` (THE single method for the `out/` tree) reported by the author; compare with the pipeline artifact and with the live site (`static-site-verifier`) |
 | 11 | Pass run arguments through the board | `board.py ... --args limits.review_rounds=4` (last on the line); `status.md` is the record of effective values |
 | 12 | Escalate by record | `escalation-NN.md`: attempts, evidence (command output, `file:line`), hypothesis, 2-4 options with impact; reply verbatim under `## Answer` |
 | 13 | Relay confidence tags | keep `(unverified)` / `(medium confidence)` exactly when telling the user or briefing an agent |

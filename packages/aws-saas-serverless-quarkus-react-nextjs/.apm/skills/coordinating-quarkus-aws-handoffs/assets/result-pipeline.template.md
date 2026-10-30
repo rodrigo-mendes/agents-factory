@@ -26,7 +26,7 @@ Which jobs ran and their result (build Java, build front, tests, scans, terrafor
 
 - Commands (read-only): `gh pr checks <pr>`, `gh run view <run_id>`, `gh run view <run_id> --log-failed` -> the lines that matter (redacted).
 - `smoke_start_epoch`: <epoch seconds when the smoke step began> (cd-app; the observability window starts there).
-- Artifact digest / version / alias / `out/` sha256 promoted: <values>.
+- Artifact digest / version / alias / `out/` dirhash (`portable.py dirhash out`) promoted: <values>.
 - Failed job: <name, step, error lines> (or "none").
 
 ## Spec impact

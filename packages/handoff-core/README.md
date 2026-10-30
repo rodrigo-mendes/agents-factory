@@ -8,6 +8,8 @@ Generic **agent handoff protocol v1**, shared by agent families (Quarkus/AWS, OC
 | command | `/syncing-spec-from-code` | on-demand code → spec sync (forks to `spec-synchronizer`) |
 | agent | `spec-synchronizer` | spec review (E1/E3) and spec-delta proposals from drift (E8); never edits the spec |
 
+`scripts/portable.py` of `coordinating-agent-handoffs` (stdlib) replaces `date -u` and `sha256sum` on any OS: `now`, `sha256 <file>`, `dirhash <dir>`.
+
 Profiles plug in per family: `coordinating-quarkus-aws-handoffs` (package quarkus-aws-saas) and
 `coordinating-oci-handoffs` (package oci-core). Record files never start with `report` (a Claude Code
 subagent write guard on such names was observed in this build, (unverified), see the skill's register U2):

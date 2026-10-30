@@ -18,7 +18,7 @@ parts of E2a; never changes parts or contracts, never writes Terraform.
 Output: files + `result-<nn>-infrastructure-architect.md` (kind `report`, outcome `success|partial|failed|needs-input`).
 - E2c: `openspec/specs/infrastructure/spec.md` (12 sections: environments and accounts, part -> service map, network, edge, identity, secrets, data, observability, Terraform layout, CI/CD, cost, risks) and ADRs in `openspec/specs/infrastructure/adr/`.
 - E4: `openspec/changes/<id>/infra-design.md` (new or changed resources per environment, IAM per Lambda, secrets, alarms, Terraform modules touched, pipeline effect, extra cost).
-- The observability section is reviewed by `aws-observability` mode A (it writes `role: observability-review`), then by `aws-architect-reviewer`.
+- The observability section is verified by `aws-architect-reviewer` (8-item check); `aws-observability` Mode A is not used in this flow.
 
 ## Skills
 

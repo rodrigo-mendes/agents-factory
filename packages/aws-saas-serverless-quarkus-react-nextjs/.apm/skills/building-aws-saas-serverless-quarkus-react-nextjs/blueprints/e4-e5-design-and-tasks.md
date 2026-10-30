@@ -92,7 +92,7 @@ Write `wo-NN-<role>.md` from the profile template (`coordinating-quarkus-aws-han
 `detect_drift.py` exits 1 until a `lastSyncedSha` exists, and only `board.py --sync-sha` sets it. Right after the task-list approval and **before the first work-order** run:
 
 ```
-python <scripts>/board.py <handoff-dir> --profile <profile> --sync-sha $(git rev-parse HEAD)
+python <scripts>/board.py <handoff-dir> --profile <profile> --sync-sha $(git rev-parse HEAD)   # valid in Git Bash and in PowerShell
 ```
 
 Record it under `## Approvals` as `gate=E5-baseline` (`subject=<sha>`; the baseline hides no drift because no code of this change exists yet). Later `--sync-sha` calls happen only after an accepted delta ([E8](e8-reverse-sync.md)).

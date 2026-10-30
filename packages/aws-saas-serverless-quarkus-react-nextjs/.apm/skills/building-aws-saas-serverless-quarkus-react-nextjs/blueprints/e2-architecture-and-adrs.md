@@ -10,16 +10,20 @@ The tree and the rules of who writes what live in the rule `openspec-project-lay
 | Solution (E2a) | `openspec/specs/architecture/spec.md`, `architecture/contracts/*.md`, `architecture/adr/NNN-*.md` | `solution-architect` (opus) | `solution-architecture-reviewer` |
 | Design (E2b) | `openspec/specs/design/design-system.md`, `design/adr/NNN-*.md` (wireframes and navigation come in [E3b](e3b-ui-design.md)) | `ui-ux-designer` | `ui-design-reviewer` |
 | Infrastructure (E2c) | `openspec/specs/infrastructure/spec.md`, `infrastructure/adr/NNN-*.md` | `aws-infrastructure-architect` (opus) | `aws-architect-reviewer` |
+| Change designs (E4) | `openspec/changes/<id>/design.md` (index) and `design/<flow>.md` | `solution-architect` | `solution-architecture-reviewer` |
+| Change infrastructure (E4) | `openspec/changes/<id>/infra-design.md` | `aws-infrastructure-architect` | `aws-architect-reviewer` |
+| Functional spec (E3) | `openspec/specs/<capability>/spec.md` via deltas in `changes/<id>/specs/<capability>/spec.md` | project manager (me) | `spec-synchronizer` |
+| Change tasks (E5) | `openspec/changes/<id>/tasks.md` | project manager (me) | `spec-synchronizer` |
 | Later-change deltas | `openspec/changes/<id>/specs/<area>/spec.md` | same as the area | same as the area |
 
 ADR numbering is **per folder** (each starts at 001). Cite an ADR by path: `architecture/adr/003`, `design/adr/002`, `infrastructure/adr/001`. Template: `coordinating-quarkus-aws-handoffs/assets/adr.template.md` (field `area`: architecture | design | infrastructure). An accepted ADR is never edited, only `superseded by NNN`. Violation of an ADR of any folder is HIGH for every code reviewer.
-Path names are the profile's (`spec.architecture`, `spec.adr_dir` = `architecture/adr`, informational); work-orders list all three ADR folders.
+The folder layout, the official-vs-convention split and the ADR numbering/status rules are in the rule `openspec-project-layout` (package `openspec-core`); the author/reviewer table above is this flow's own. Path names are the profile's (`spec.architecture`, `spec.adr_dir` = `architecture/adr`, informational); work-orders list all three ADR folders.
 
 ```
 E1 verified
    |-- E2a solution-architect  -> solution-architecture-reviewer -> verify-E2a --+
    |-- E2b ui-ux-designer      -> ui-design-reviewer             -> verify-E2b --+   (E2a and E2b may run in parallel)
-   +--  after E2a: E2c aws-infrastructure-architect (+ aws-observability Mode A)
+   +--  after E2a: E2c aws-infrastructure-architect
                    -> aws-architect-reviewer -> verify-E2c
 all three pass -> I show the 3 fronts -> the user approves E2 -> every ADR (3 folders) becomes accepted
 ```
@@ -40,7 +44,7 @@ Each ADR: status `proposed`, context linking `R*` or B-blocks, decision in one s
 
 ## E2c - Infrastructure design (`infrastructure/spec.md`, 12 sections)
 
-Starts after `verify-E2a` is `pass` (uses the components and contracts). `aws-observability` Mode A reviews section 8 (brief in [worker briefs](worker-briefs.md#aws-observability)).
+Starts after `verify-E2a` is `pass` (uses the components and contracts). Section 8 (observability) is verified by `aws-architect-reviewer` (8-item check); `aws-observability` does not review the spec in this flow.
 
 | # | Section | Content |
 |---|---|---|

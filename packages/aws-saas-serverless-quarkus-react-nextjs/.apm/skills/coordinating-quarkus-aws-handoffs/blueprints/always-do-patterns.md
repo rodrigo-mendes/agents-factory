@@ -69,6 +69,6 @@ verbatim, one line each (same tail `by=<user> at=<UTC> relayed-by=building-aws-s
 
 ## 9. Put `role:` where the board needs it
 
-`role: pipeline-ci | pipeline-cd` on pipeline records; `role: observability-live` (mode C) and `observability-review` (mode A) on observability records;
+`role: pipeline-ci | pipeline-cd` on pipeline records; `role: observability-live` (mode C) on observability records (mode A / `observability-review` is not used in this flow);
 `role: ai` on AI results; on every review the `role` of the author to return to (`stripe`, `ai`, `frontend`, `infra`, `observability`, `cicd`; none for plain `code`).
 After saving an inline record, re-run `check_records.py` and read the `NEXT:` line: a missing `role` shows up as a wrong or generic `NEXT`.

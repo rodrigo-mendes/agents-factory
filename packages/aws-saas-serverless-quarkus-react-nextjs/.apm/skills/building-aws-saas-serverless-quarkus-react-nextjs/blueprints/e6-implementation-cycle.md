@@ -38,7 +38,7 @@ After each stage I run `check_records.py -> detect_drift.py --include-worktree -
 | AI (`ai`) | `quarkus-lambda-integrator` | `langchain4j-reviewer` -> `quarkus-code-reviewer` | `mvn -q verify` |
 | front (`frontend`) | `nextjs-frontend-integrator` | `nextjs-code-reviewer` -> `ui-design-reviewer` (visual fidelity) | `pnpm install --frozen-lockfile && pnpm lint && pnpm test && pnpm build`, hash of `out/` |
 | infra / bootstrap (`infra`) | `aws-terraform-engineer` | `terraform-code-reviewer` | `terraform fmt -check`, `init -backend=false`, `validate`, mocked `test` |
-| observability (Mode B) | `aws-observability` | `terraform-code-reviewer` | `terraform validate` |
+| observability (Mode B) | `aws-observability` | `terraform-code-reviewer` | `terraform validate`; infra tasks never contain observability resources (CloudWatch alarms, dashboards, X-Ray): those go in separate `observability` tasks |
 | CI/CD (`cicd`) | `cicd-pipeline-engineer` | `cicd-pipeline-reviewer` | `actionlint`, `yamllint` |
 
 Rule: the **last reviewer of back-end code is always `quarkus-code-reviewer`**. A design change inside a task goes back to the design owner through E4, not to the code author. The front-end build uses pnpm and Node 26 like the CI skill so the local build equals the pipeline's.

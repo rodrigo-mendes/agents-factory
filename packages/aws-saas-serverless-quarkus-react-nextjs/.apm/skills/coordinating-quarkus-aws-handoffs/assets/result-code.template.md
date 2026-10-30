@@ -5,7 +5,7 @@ from: quarkus-lambda-integrator   # or stripe-integrator / nextjs-frontend-integ
 to: building-aws-saas-serverless-quarkus-react-nextjs
 change: <change-id>
 task: <task-id>
-# role: ai (optional, shares the agent of code) | observability-live | observability-review (REQUIRED, see wo-observability); every other role is derived from `from`
+# role: ai (optional, shares the agent of code) | observability-live (REQUIRED, see wo-observability); every other role is derived from `from`
 refs: [wo-<nn>-code]              # I8: [wo-<nn>-code, review-<nn>]
 requirements: [R1]
 outcome: success                  # success | partial | failed | needs-input
@@ -26,8 +26,8 @@ createdAt: <ISO 8601 UTC>
 
 ## Evidence
 
-- Back-end / AI: `mvn -q verify` -> <result, test count>; JaCoCo new classes <n>% (limit <coverage_min>%); `function.zip` built: `<path>`, sha256 `<hash>`.
-- Front: `pnpm install --frozen-lockfile && pnpm lint && pnpm test && pnpm build` -> <result>; sha256 of `out/`: `<hash>`.
+- Back-end / AI: `mvn -q verify` -> <result, test count>; JaCoCo new classes <n>% (limit <coverage_min>%); `function.zip` built: `<path>`, sha256 `<hash>` (from `portable.py sha256 <file>`).
+- Front: `pnpm install --frozen-lockfile && pnpm lint && pnpm test && pnpm build` -> <result>; hash of `out/`: `<hash>` (from `portable.py dirhash out`).
 - Terraform: `fmt -check`, `init -backend=false`, `validate` (and mocked `test`) -> <results>. CI/CD: `actionlint`, `yamllint` -> <results> + the `user-must-add` list.
 - Design records (solution-architect, infrastructure-architect, designer): list of files written and the sections each covers instead of the build lines.
 - Build attempts: <n> of <limit from the work-order>.

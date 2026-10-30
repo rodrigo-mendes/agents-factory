@@ -68,4 +68,4 @@ One line = one action; a line covers only what it names. The debugger never invo
   (CI green: the user merges; any failure: the orchestrator routes the owner of the failing job).
 - `report` with `role: observability-live` (mode C record, `success` or `partial`) routes to `debug`: the live result goes to the independent verifier.
 - `report` with role `observability` (mode B Terraform, no `role` field) and `success` routes to `reviewer`
-  (`terraform-code-reviewer`). Mode A writes `role: observability-review`, which no rule matches: fallback to the orchestrator.
+  (`terraform-code-reviewer`). `role: observability-review` (mode A) is not used in this flow.
