@@ -11,7 +11,7 @@ pré-migração foi retirado (ver `.claude/MIGRATION.md`); `audit-architecture-*
 
 O Agents Factory é uma fábrica de artefatos de IA que oferece:
 
-- **246 Skills** (Claude Code) — 67 comandos (`/nome`) e 179 skills de conhecimento (auto-invocáveis), vindas de 33 pacotes APM (ver [Catálogo de pacotes](#catálogo-de-pacotes)). Pesquisa, autoria de skills/agentes/rules, compilação, validação e auditoria — inclui a **família platform-software** (15: orquestradora + 14 irmãs para Kafka, Redis, MongoDB, Postgres…), o **pipeline de livros técnicos** (`book-writing`), os pacotes **Camel Quarkus**, **AWS** (arquitetura + Terraform), **OCI** serverless, **Stripe Java**, **LangChain4j**, o conjunto **Quarkus na AWS Lambda para SaaS** (orquestrador `building-quarkus-aws-saas`, handoff genérico, deploy, observabilidade) e o **orquestrador de pacotes** `building-agent-packages`
+- **256 Skills** (Claude Code) — 68 comandos (`/nome`) e 188 skills de conhecimento (auto-invocáveis), vindas de 38 pacotes APM (ver [Catálogo de pacotes](#catálogo-de-pacotes)). Pesquisa, autoria de skills/agentes/rules, compilação, validação e auditoria — inclui a **família platform-software** (15: orquestradora + 14 irmãs para Kafka, Redis, MongoDB, Postgres…), o **pipeline de livros técnicos** (`book-writing`), os pacotes **Camel Quarkus**, **AWS** (arquitetura + Terraform), **OCI** serverless, **Stripe Java**, **LangChain4j**, o conjunto **Quarkus na AWS Lambda para SaaS** (orquestrador `building-aws-saas-serverless-quarkus-react-nextjs`, handoff genérico, deploy, observabilidade) e o **orquestrador de pacotes** `building-agent-packages`
 - **41 subagentes** e **50 rules** escopadas por caminho (`paths:`)
 - **Ficheiros de `assets/`** nas skills que os possuem (`skill-creator`, `agent-creator`, `rules-compiler`, `terraform-instructions-compiler`, `structuring-camel-quarkus-projects`) — não existe mais `.claude/templates/`
 - **4 Fluxos Combinados** — Pipelines de ponta-a-ponta
@@ -81,7 +81,11 @@ Contagens reais (`verify_package.py`); a soma bate com `.claude/` (246 skills, 4
 | [`quarkus-aws`](packages/quarkus-aws/README.md) | 11 | 2 | 2 | Quarkus 3.40 na AWS Lambda (HTTP, Cognito, dados, mensageria, testes, logs, traces, métricas) + integrador e revisor |
 | [`aws-lambda`](packages/aws-lambda/README.md) | 2 | 2 | 1 | Deploy (só com plan aprovado) e diagnóstico de Lambda, qualquer runtime |
 | [`aws-observability`](packages/aws-observability/README.md) | 2 | 1 | 1 | Agente `aws-observability`, `/observe-aws-workload`, validação ao vivo (só leitura) |
-| [`quarkus-aws-saas`](packages/quarkus-aws-saas/README.md) | 4 | 0 | 0 | Orquestrador SDD `building-quarkus-aws-saas`, perfil de handoff, Stripe e LangChain4j no Quarkus |
+| [`aws-saas-serverless-quarkus-react-nextjs`](packages/aws-saas-serverless-quarkus-react-nextjs/README.md) | 3 | 0 | 0 | Orquestrador (gestor do projeto) `building-aws-saas-serverless-quarkus-react-nextjs`, perfil de handoff e Stripe; reúne back Quarkus, front Next.js, design, IA e CI/CD |
+| [`solution-architecture`](packages/solution-architecture/README.md) | 0 | 2 | 0 | `solution-architect` (opus) e `solution-architecture-reviewer` |
+| [`ui-design`](packages/ui-design/README.md) | 0 | 2 | 0 | `ui-ux-designer` e `ui-design-reviewer` |
+| [`nextjs-frontend`](packages/nextjs-frontend/README.md) | 0 | 2 | 1 | Integrador e revisor de front Next.js (static export) e a regra `nextjs-static-export` |
+| [`quarkus-langchain4j`](packages/quarkus-langchain4j/README.md) | 1 | 1 | 0 | `integrating-quarkus-langchain4j-v1-15` e `langchain4j-reviewer` |
 
 ## Documentação
 
