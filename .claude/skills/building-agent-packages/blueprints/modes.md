@@ -24,7 +24,7 @@ Then add git: `git log --oneline -15` and `git status --short` to see what is co
 | skill dir without SKILL.md | CORRUPT | delete the folder content and redo |
 | state says ready, disk says no | the state lied | disk wins; log the discrepancy |
 
-A legacy or broken workspace is never patched in place: `state_event.py ... init` opens a new execution, the reconstruction is recorded as `event P0 DISCREPANCY "reconstructed from disk: ..."` plus one `unit` call per unit found, and approvals not in `state/gates/` are asked again. Resume order: the first phase without a `done` row (`render_state.py` names it).
+A legacy workspace (no `execution-<N>`) is first migrated with `scripts/migrate_state.py workspace/<slug>` (dry run) then `--apply`: it adds `execution-0/` reconstructed from the old `PIPELINE_STATE.md` (gates, decisions, units, phases, DISCREPANCY events) and leaves every legacy file where it is. A broken workspace is never patched in place: `state_event.py ... init` opens a new execution, the reconstruction is recorded as `event P0 DISCREPANCY "reconstructed from disk: ..."` plus one `unit` call per unit found, and approvals not in `state/gates/` are asked again. Resume order: the first phase without a `done` row (`render_state.py` names it).
 
 ## from-research
 

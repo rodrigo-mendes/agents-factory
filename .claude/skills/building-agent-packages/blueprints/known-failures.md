@@ -33,8 +33,12 @@ Back to [SKILL.md](../SKILL.md).
 | Preflight message / install error | Recovery (ask the user before anything destructive) |
 |---|---|
 | another run holds `.run.lock` | wait for it to finish, or ask the user; never install over a live run |
-| untracked or modified files in `.claude/` | find the owner (`git log`, the other run's slug); save yours with `git stash push -- .claude apm.lock.yaml` |
-| CRLF-only deployed copies / "modified since deployment" | `git restore --source=HEAD -- <files>`, then install; long term add a `.gitattributes` with `eol=lf` (user decision) |
+| untracked or modified files in `.claude/` | the preflight groups them by owning package (`--package <yours>`): yours are a warning, others block; for others find the run (`git log`, its slug); save yours with `git stash push -- .claude apm.lock.yaml` |
+| CRLF-only deployed copies / "modified since deployment" | the repo now has `.gitattributes` with `* text=auto eol=lf`; if it reappears, convert the working copy to LF (the index is already LF) |
+| rules without `name:`/`description:`, links into `apm_modules/` after install | the post-install hooks did not run: `scripts/after_install.py` (always, right after every install) |
 | package listed in the root apm.yml and reached transitively | remove the direct entry ("ambiguous resolved_by" in `apm audit --ci`) |
 | content hash mismatch on a remote dependency | rerun once; if it repeats, log an INCIDENT and ask before `--force` or a lock regeneration |
+| install "cleaned" hundreds of files of remote dependencies ("recovery incomplete", lock lost their entries) | `after_install.py` reports it; restore the files with `git ls-files --deleted -- .claude` + `git restore --source=HEAD`, then `merge_lock.py --package <yours> --apply` (HEAD lock + only your entries) and `after_install.py` again |
+| "Installation refused ... conflicts with unmanaged file" | the file was in `.claude/` before apm deployed it (another run's partial copy, a hand copy), so the lock never recorded it; the preflight flags it. Delete `.claude/skills/<your skill>/` (generated) and reinstall |
+| a skill or agent reads `workspace/<slug>/...` at runtime | `workspace/` exists only in the factory; ship the file in the skill (`references/`) and point readers at `.claude/skills/<skill>/references/...` |
 | install hangs on a remote dependency | network or another package's remote deps; stop it, log an INCIDENT, do not retry in a loop |

@@ -304,7 +304,7 @@ aws dynamodb update-contributor-insights --table-name <NAME> \
 ## Blueprints Directory Structure
 
 ```
-workspace/.claude/skills/designing-dynamodb-nosql/
+.claude/skills/designing-dynamodb-nosql/
 ├── SKILL.md                              ← This file (summary + guardrails)
 └── blueprints/
     └── evaluation-scenarios.md           ← 6 test scenarios for skill-evaluator

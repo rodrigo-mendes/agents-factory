@@ -214,7 +214,7 @@ aws oam list-attached-links --sink-identifier <sink-arn>
 ## Blueprints Directory Structure
 
 ```
-workspace/.claude/skills/monitoring-cloudwatch-observability/
+.claude/skills/monitoring-cloudwatch-observability/
 ├── SKILL.md                              ← This file (summary + guardrails)
 └── blueprints/
     ├── always-do-patterns.md             ← 8 mandatory patterns with full CLI verification

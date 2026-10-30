@@ -191,7 +191,7 @@ PERF05 Process and culture
 ## Blueprints Directory Structure
 
 ```
-workspace/.claude/skills/applying-aws-performance-efficiency/
+.claude/skills/applying-aws-performance-efficiency/
 ├── SKILL.md                              ← This file (guardrails + summary)
 └── blueprints/
     ├── architecture-decisions.md         ← Full option/tradeoff matrices (Decisions A/B/C) + reference architecture

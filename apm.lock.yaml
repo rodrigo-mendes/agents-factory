@@ -8,10 +8,20 @@ dependencies:
   deployed_files:
   - .claude/skills/building-agent-packages
   - .claude/skills/building-agent-packages/SKILL.md
+  - .claude/skills/building-agent-packages/assets/DECISIONS.template.md
+  - .claude/skills/building-agent-packages/assets/DEFERRED.template.md
   - .claude/skills/building-agent-packages/assets/FAMILY_FACTS.template.md
   - .claude/skills/building-agent-packages/assets/FAMILY_RULES.template.md
+  - .claude/skills/building-agent-packages/assets/FINDINGS.template.md
+  - .claude/skills/building-agent-packages/assets/GATE.template.md
+  - .claude/skills/building-agent-packages/assets/METRICS.template.md
   - .claude/skills/building-agent-packages/assets/PACKAGE_BRIEF.template.md
+  - .claude/skills/building-agent-packages/assets/PHASE.template.md
   - .claude/skills/building-agent-packages/assets/PIPELINE_STATE.template.md
+  - .claude/skills/building-agent-packages/assets/RETRO.template.md
+  - .claude/skills/building-agent-packages/assets/SHARED_TOUCH.template.md
+  - .claude/skills/building-agent-packages/assets/SOURCES.template.md
+  - .claude/skills/building-agent-packages/assets/UNIT.template.md
   - .claude/skills/building-agent-packages/blueprints/evaluation-scenarios.md
   - .claude/skills/building-agent-packages/blueprints/known-failures.md
   - .claude/skills/building-agent-packages/blueprints/modes.md
@@ -27,58 +37,634 @@ dependencies:
   - .claude/skills/building-agent-packages/blueprints/phases/p9-commit.md
   - .claude/skills/building-agent-packages/blueprints/policy/evidence-rule.md
   - .claude/skills/building-agent-packages/blueprints/policy/hybrid-format-checklist.md
+  - .claude/skills/building-agent-packages/blueprints/policy/shared-files.md
   - .claude/skills/building-agent-packages/blueprints/policy/tag-notation-and-registers.md
   - .claude/skills/building-agent-packages/blueprints/policy/triage-and-stop-rules.md
+  - .claude/skills/building-agent-packages/blueprints/state-layout.md
   - .claude/skills/building-agent-packages/blueprints/worker-briefs/README.md
   - .claude/skills/building-agent-packages/blueprints/worker-briefs/fix-cycle.md
   - .claude/skills/building-agent-packages/blueprints/worker-briefs/package-author.md
   - .claude/skills/building-agent-packages/blueprints/worker-briefs/researcher.md
   - .claude/skills/building-agent-packages/blueprints/worker-briefs/skill-author-hybrid.md
   - .claude/skills/building-agent-packages/blueprints/worker-briefs/validator.md
+  - .claude/skills/building-agent-packages/scripts/after_install.py
   - .claude/skills/building-agent-packages/scripts/check_counts.py
+  - .claude/skills/building-agent-packages/scripts/check_state.py
   - .claude/skills/building-agent-packages/scripts/commit_groups.py
   - .claude/skills/building-agent-packages/scripts/inspect_workspace.py
+  - .claude/skills/building-agent-packages/scripts/merge_lock.py
+  - .claude/skills/building-agent-packages/scripts/migrate_state.py
   - .claude/skills/building-agent-packages/scripts/normalize_tags.py
+  - .claude/skills/building-agent-packages/scripts/preflight_apm.py
+  - .claude/skills/building-agent-packages/scripts/render_state.py
+  - .claude/skills/building-agent-packages/scripts/snapshot_env.py
+  - .claude/skills/building-agent-packages/scripts/state_event.py
+  - .claude/skills/building-agent-packages/scripts/state_lib.py
   - .claude/skills/building-agent-packages/scripts/verify_package.py
   - .claude/skills/building-agent-packages/scripts/verify_skill.py
   deployed_file_hashes:
-    .claude/skills/building-agent-packages/SKILL.md: sha256:664f71a153ab6d57cf6812d885bb29dad2ab5608d4a2cd88b4781c995233f340
+    .claude/skills/building-agent-packages/SKILL.md: sha256:1d753e1b1651687fca228e5932388fd5f70dbd01f4433898a8309dbd6eb0c730
+    .claude/skills/building-agent-packages/assets/DECISIONS.template.md: sha256:a68abf7af43087a9c4351bc8af7ef624bf51ac2d8fa3eec29efc673f24162a45
+    .claude/skills/building-agent-packages/assets/DEFERRED.template.md: sha256:b72f4c35a36d9c933175dc25055f15506b3e44df6a5063deabe1fa4eef4f5b15
     .claude/skills/building-agent-packages/assets/FAMILY_FACTS.template.md: sha256:4ef5fed4c041b1432d70b208ed284175cd9d2c5486be55833fd50f8a271e3656
     .claude/skills/building-agent-packages/assets/FAMILY_RULES.template.md: sha256:c4d2e0022a8adc906120da2c40445b8dc5adfd2173b765364de3e394b68e7ae1
+    .claude/skills/building-agent-packages/assets/FINDINGS.template.md: sha256:f0bb028fb1dd9a73af7b18edc330998d429afc8ddf882e57b4ca4bc837624df1
+    .claude/skills/building-agent-packages/assets/GATE.template.md: sha256:75636734e06448a7bfb12cbd7847a2669b1b2dd9a081a615f00cc75c8ba3b8b6
+    .claude/skills/building-agent-packages/assets/METRICS.template.md: sha256:4f4f15829c0995a36bc63fd90dcea875c4cb744aaab3759c7cc1ef7cce9fd9eb
     .claude/skills/building-agent-packages/assets/PACKAGE_BRIEF.template.md: sha256:7c28d620ffe3b8f0ae3f198abf1fd90c627f74593edb9420bb6d5927899f2f05
+    .claude/skills/building-agent-packages/assets/PHASE.template.md: sha256:406708d3c9cf8a8d0a360e755b40631d62620479530d41af023d40ef85e98626
     .claude/skills/building-agent-packages/assets/PIPELINE_STATE.template.md: sha256:97aeaa5bf77b2852afc2f8b3366929c8340fe2f9ba8399b509d87a48c57cd5b9
+    .claude/skills/building-agent-packages/assets/RETRO.template.md: sha256:7326c1f0d86d9a01c41d66989c3f21103bfbffcf55b24a7dfdb180bd9385c981
+    .claude/skills/building-agent-packages/assets/SHARED_TOUCH.template.md: sha256:ef74559ee82adc2f6b80ee63e94e0fb8c76f694e01b2adb66f64c8ce0143fa9d
+    .claude/skills/building-agent-packages/assets/SOURCES.template.md: sha256:b99ad07230a2ed2479fa4c35be844f378cb968c6ec674dde33b398cabba17292
+    .claude/skills/building-agent-packages/assets/UNIT.template.md: sha256:32ca5566c40ab294d0d9d4d5d14be54e268e9fe383e0ecc030763d3979a8f584
     .claude/skills/building-agent-packages/blueprints/evaluation-scenarios.md: sha256:0fa545c8324a76a60ff3617c56a565bcf1bc919322b44e9a88f42f92a348792d
-    .claude/skills/building-agent-packages/blueprints/known-failures.md: sha256:1a462c0f2fd432da4bb788481519d6b1342aa20638c3b02c53c05eccb08c221d
-    .claude/skills/building-agent-packages/blueprints/modes.md: sha256:a0d75546d522b78b63c3d66ed108950f88ef5b312a1f45f00714aaa865d2b7cf
+    .claude/skills/building-agent-packages/blueprints/known-failures.md: sha256:1936e74fd567805df30f805f0fbc6c5996e3ddad9887ea97c30dbff70f6ab87e
+    .claude/skills/building-agent-packages/blueprints/modes.md: sha256:ad99e16157e5bfd67cddf7227edc427a28c28879366cc5776cf4f353293ac30f
     .claude/skills/building-agent-packages/blueprints/phases/p0-intake.md: sha256:cec4d6486a2783f2298b0df197556baec404c37f0662b146dcad656a08082b16
     .claude/skills/building-agent-packages/blueprints/phases/p1-version-gate.md: sha256:ba28243a48bf4d8fdabe9c2278bdc13cd2dc00e0d74e7145b9dd0a55b6b6569e
     .claude/skills/building-agent-packages/blueprints/phases/p2-inventory-design.md: sha256:28acb3ee0965f5624be9ecaf30638a5cd18436b16b21e749d716508ee9af72c9
     .claude/skills/building-agent-packages/blueprints/phases/p3-pilot.md: sha256:cfb9661241eb73d993d0f5cd0b336306c1c9fe47b1fa0ccfe175acb40e1c0616
     .claude/skills/building-agent-packages/blueprints/phases/p4-fanout.md: sha256:fabff354227b9af037fe981788d38e32b72febe74df000321298d89785399e74
-    .claude/skills/building-agent-packages/blueprints/phases/p5-package-assembly.md: sha256:ea0e9befb13dea2e7d0fec622112010df59f46cf9df50ab90e1db38546048848
-    .claude/skills/building-agent-packages/blueprints/phases/p6-quality-loop.md: sha256:915f2958b77a72a2e3459696b7b5cb10ec349a7d383e9ad1f43bdfca895b2d71
+    .claude/skills/building-agent-packages/blueprints/phases/p5-package-assembly.md: sha256:22b9cd9cf6aff9a7ba01577bf1460261281be942ab0a9e32f845e1da0420c0e4
+    .claude/skills/building-agent-packages/blueprints/phases/p6-quality-loop.md: sha256:c882fffecf8718ec29604c32d5a40d408d3a0c0ae8671ed140bbb7b6d9f1c936
     .claude/skills/building-agent-packages/blueprints/phases/p7-fact-sweep.md: sha256:707d1458330adff549491093f6c99e6b15fb964c5e635b9b65c41240c68d84f4
-    .claude/skills/building-agent-packages/blueprints/phases/p8-mechanical-close.md: sha256:c6856b19b9528b534cc5bc2ba78f08ee4e55c3e8329836cb85d20dcc3017d0fa
+    .claude/skills/building-agent-packages/blueprints/phases/p8-mechanical-close.md: sha256:fcab90a11cb86bf701ae9479a1bde2b8dd6dcb11ac084f4b95892d336885ae56
     .claude/skills/building-agent-packages/blueprints/phases/p9-commit.md: sha256:7762ee9334ff632a4e110bceacdeb49dfa78ccc2737e6e88d9add0b4883c2f52
     .claude/skills/building-agent-packages/blueprints/policy/evidence-rule.md: sha256:21cdf577ccb3b9a52195a747535cf9db13accf94f702907a81f79e662f83e433
     .claude/skills/building-agent-packages/blueprints/policy/hybrid-format-checklist.md: sha256:94ad98f27eac4c6165eeab284476686a3ee5fdc5ec3c0e94f257d1a1391158ac
+    .claude/skills/building-agent-packages/blueprints/policy/shared-files.md: sha256:21544f4bb6238ebce2f7e98a6374112fba579e82a5ee62b2d7a0942b7cc13db4
     .claude/skills/building-agent-packages/blueprints/policy/tag-notation-and-registers.md: sha256:cdae0c01e4f0f227d7fc463da6154abcf6395a57146a28daf9648bba2301c53e
     .claude/skills/building-agent-packages/blueprints/policy/triage-and-stop-rules.md: sha256:8854295b29b7aecee03251156f33e363a27ff9bee3c7933be29f3afcab75af34
-    .claude/skills/building-agent-packages/blueprints/worker-briefs/README.md: sha256:ced8ca6751c75492fb9f7e3c380c7ff53a9b15c88ed6bce23b18f0ed5e2d5a17
+    .claude/skills/building-agent-packages/blueprints/state-layout.md: sha256:f9d24ab7ac0ea98da4b636e85e67c638d72d6311c7d4669e653bd6e5c6387caf
+    .claude/skills/building-agent-packages/blueprints/worker-briefs/README.md: sha256:1fabb3827ce86ed7ce24250d6d1804a695ca92abc8628791a2766258a208ff4b
     .claude/skills/building-agent-packages/blueprints/worker-briefs/fix-cycle.md: sha256:1593dda6bcb6a169431641c393c3ececc67eb11b7c0116b3e3b5eac756ea7496
     .claude/skills/building-agent-packages/blueprints/worker-briefs/package-author.md: sha256:e24d5209967eaf8934609e0cf483cd41b9d55b5426f13f011898b6676d844c47
     .claude/skills/building-agent-packages/blueprints/worker-briefs/researcher.md: sha256:2f3ee15e41fe4ddc7db539784a59ed73d75283e5c29e190eab27029d835e8266
     .claude/skills/building-agent-packages/blueprints/worker-briefs/skill-author-hybrid.md: sha256:429342b3042f9fd2db9efd105762dcf13733c29e3bd0488211b5ed7526ee2c02
     .claude/skills/building-agent-packages/blueprints/worker-briefs/validator.md: sha256:839a89952cff2254f242513cf3375712624d42ea8e4c89289b8869d42419142e
+    .claude/skills/building-agent-packages/scripts/after_install.py: sha256:d29526301c72366ec05a711882f8a2b27daa0f06a5807dad490a93ac5bada504
     .claude/skills/building-agent-packages/scripts/check_counts.py: sha256:0e5b44cdd3b700f3854b526a314c571f0164940a8480ea07aeda054af8f13497
+    .claude/skills/building-agent-packages/scripts/check_state.py: sha256:e11125e2ab87c8b0a0b02d274fa7c60ac3d16ab0d697e2368b0e847878514c69
     .claude/skills/building-agent-packages/scripts/commit_groups.py: sha256:f814b5ee62f471630773ad27d9ff94553b14d250797a9f3dd7c3e5ea2ed0e271
     .claude/skills/building-agent-packages/scripts/inspect_workspace.py: sha256:6cb2bcc5563bf57bc4cb10ee9e5d9a322e0feb1fc048678b5137ef33eaaa604e
+    .claude/skills/building-agent-packages/scripts/merge_lock.py: sha256:fc6fb1c6b99a4e65d56f37bdfc0917c78951ed905c355d698da87bf3f6c333eb
+    .claude/skills/building-agent-packages/scripts/migrate_state.py: sha256:51f43c533a92c53f89d82b9a92afb09c13845c94da8ad5b42d1f3252c3536ed1
     .claude/skills/building-agent-packages/scripts/normalize_tags.py: sha256:52afbe4e693be8f340c95726184a0ddf808dba50ce166671dab51cf3d8023a1f
+    .claude/skills/building-agent-packages/scripts/preflight_apm.py: sha256:697ceaa6bbc0383a27d81f485f41236835bda7db9723ceb5bbc08702c7fa3277
+    .claude/skills/building-agent-packages/scripts/render_state.py: sha256:6926f1ada81eec125bd5937e0e262f8664970ff0f48506854647d4ab9c64d382
+    .claude/skills/building-agent-packages/scripts/snapshot_env.py: sha256:1cdb64aadcd630237cc52a5511c1e59b5f974e372ead920324b4bafe116b2e99
+    .claude/skills/building-agent-packages/scripts/state_event.py: sha256:c2597913c4f730ffdfdf59070ef3d879ba8db5752cb6a58dcc51faa7d8a856d2
+    .claude/skills/building-agent-packages/scripts/state_lib.py: sha256:21df3bb8ec135514d038f7052ed970f26bc9b6191f65603a7075aaaf16eacab0
     .claude/skills/building-agent-packages/scripts/verify_package.py: sha256:02bae1a0dd80f7777c6c18fafdab2aad2b15bd193e88c3d1ba0af30eab99cea4
     .claude/skills/building-agent-packages/scripts/verify_skill.py: sha256:d83e843b72be0275b7e4e238c817c76659cc82408f851e8d9fd2f66970ce7c1f
   source: local
   local_path: ./packages/agent-package-builder
-  content_hash: sha256:5ff057f962ca734b8d075cd19a781ce8ae1fc169c72901a417dd100378d67b5f
+  content_hash: sha256:561676d499a73f6365f8cb032dea0a2f7d6393d22e693e21fc4cedc54380ed01
+  declared_license: MIT
+- repo_url: _local/quarkus-aws-saas
+  name: agents-factory-quarkus-aws-saas
+  version: 1.0.0
+  package_type: apm_package
+  deployed_files:
+  - .claude/skills/building-quarkus-aws-saas
+  - .claude/skills/building-quarkus-aws-saas/SKILL.md
+  - .claude/skills/building-quarkus-aws-saas/blueprints/always-do-patterns.md
+  - .claude/skills/building-quarkus-aws-saas/blueprints/e1-interview.md
+  - .claude/skills/building-quarkus-aws-saas/blueprints/e2-architecture-and-adrs.md
+  - .claude/skills/building-quarkus-aws-saas/blueprints/e3-functional-spec.md
+  - .claude/skills/building-quarkus-aws-saas/blueprints/e4-e5-design-and-tasks.md
+  - .claude/skills/building-quarkus-aws-saas/blueprints/e6-implementation-cycle.md
+  - .claude/skills/building-quarkus-aws-saas/blueprints/e7-deploy-and-observability.md
+  - .claude/skills/building-quarkus-aws-saas/blueprints/e8-reverse-sync.md
+  - .claude/skills/building-quarkus-aws-saas/blueprints/e9-archive-gate.md
+  - .claude/skills/building-quarkus-aws-saas/blueprints/evaluation-scenarios.md
+  - .claude/skills/building-quarkus-aws-saas/blueprints/knowledge-map.md
+  - .claude/skills/building-quarkus-aws-saas/blueprints/never-do-patterns.md
+  - .claude/skills/building-quarkus-aws-saas/blueprints/tracker-github-projects.md
+  - .claude/skills/building-quarkus-aws-saas/blueprints/unverified-and-risks.md
+  - .claude/skills/building-quarkus-aws-saas/blueprints/worker-briefs.md
+  - .claude/skills/coordinating-quarkus-aws-handoffs
+  - .claude/skills/coordinating-quarkus-aws-handoffs/SKILL.md
+  - .claude/skills/coordinating-quarkus-aws-handoffs/assets/adr.template.md
+  - .claude/skills/coordinating-quarkus-aws-handoffs/assets/deploy-report.template.md
+  - .claude/skills/coordinating-quarkus-aws-handoffs/assets/diagnosis-report.template.md
+  - .claude/skills/coordinating-quarkus-aws-handoffs/assets/escalation.template.md
+  - .claude/skills/coordinating-quarkus-aws-handoffs/assets/handoff-profile.yaml
+  - .claude/skills/coordinating-quarkus-aws-handoffs/assets/result-code.template.md
+  - .claude/skills/coordinating-quarkus-aws-handoffs/assets/review.template.md
+  - .claude/skills/coordinating-quarkus-aws-handoffs/assets/wo-code.template.md
+  - .claude/skills/coordinating-quarkus-aws-handoffs/assets/wo-debug.template.md
+  - .claude/skills/coordinating-quarkus-aws-handoffs/assets/wo-deploy.template.md
+  - .claude/skills/coordinating-quarkus-aws-handoffs/assets/wo-infra.template.md
+  - .claude/skills/coordinating-quarkus-aws-handoffs/assets/wo-observability.template.md
+  - .claude/skills/coordinating-quarkus-aws-handoffs/assets/wo-review.template.md
+  - .claude/skills/coordinating-quarkus-aws-handoffs/assets/wo-stripe.template.md
+  - .claude/skills/coordinating-quarkus-aws-handoffs/blueprints/agent-alignment.md
+  - .claude/skills/coordinating-quarkus-aws-handoffs/blueprints/always-do-patterns.md
+  - .claude/skills/coordinating-quarkus-aws-handoffs/blueprints/approval-lines.md
+  - .claude/skills/coordinating-quarkus-aws-handoffs/blueprints/evaluation-scenarios.md
+  - .claude/skills/coordinating-quarkus-aws-handoffs/blueprints/never-do-patterns.md
+  - .claude/skills/coordinating-quarkus-aws-handoffs/blueprints/openspec-integration.md
+  - .claude/skills/coordinating-quarkus-aws-handoffs/blueprints/roles-and-skills.md
+  - .claude/skills/coordinating-quarkus-aws-handoffs/blueprints/unverified-and-risks.md
+  - .claude/skills/integrating-quarkus-langchain4j-v1-15
+  - .claude/skills/integrating-quarkus-langchain4j-v1-15/SKILL.md
+  - .claude/skills/integrating-quarkus-langchain4j-v1-15/blueprints/always-do-patterns.md
+  - .claude/skills/integrating-quarkus-langchain4j-v1-15/blueprints/ask-first-decisions.md
+  - .claude/skills/integrating-quarkus-langchain4j-v1-15/blueprints/config-defaults-and-contradictions.md
+  - .claude/skills/integrating-quarkus-langchain4j-v1-15/blueprints/evaluation-scenarios.md
+  - .claude/skills/integrating-quarkus-langchain4j-v1-15/blueprints/never-do-patterns.md
+  - .claude/skills/integrating-quarkus-langchain4j-v1-15/blueprints/source-bibliography.md
+  - .claude/skills/integrating-quarkus-langchain4j-v1-15/blueprints/unverified-and-risks.md
+  - .claude/skills/integrating-quarkus-langchain4j-v1-15/blueprints/verification-and-production.md
+  - .claude/skills/integrating-stripe-quarkus-v3-40
+  - .claude/skills/integrating-stripe-quarkus-v3-40/SKILL.md
+  - .claude/skills/integrating-stripe-quarkus-v3-40/blueprints/always-do-patterns.md
+  - .claude/skills/integrating-stripe-quarkus-v3-40/blueprints/ask-first-decisions.md
+  - .claude/skills/integrating-stripe-quarkus-v3-40/blueprints/evaluation-scenarios.md
+  - .claude/skills/integrating-stripe-quarkus-v3-40/blueprints/migration-notes.md
+  - .claude/skills/integrating-stripe-quarkus-v3-40/blueprints/never-do-patterns.md
+  - .claude/skills/integrating-stripe-quarkus-v3-40/blueprints/source-bibliography.md
+  - .claude/skills/integrating-stripe-quarkus-v3-40/blueprints/unverified-and-risks.md
+  - .claude/skills/integrating-stripe-quarkus-v3-40/blueprints/verification-and-production.md
+  - .claude/skills/integrating-stripe-quarkus-v3-40/blueprints/webhook-pipeline.md
+  deployed_file_hashes:
+    .claude/skills/building-quarkus-aws-saas/SKILL.md: sha256:7ace1c4149d74c74838902a96ee68432c6e87f1377a7fdfb4f92520f72734210
+    .claude/skills/building-quarkus-aws-saas/blueprints/always-do-patterns.md: sha256:184361bf50de8dd941790e9150ee6a3ad85219bb0d6df53cf6bd374b254417b9
+    .claude/skills/building-quarkus-aws-saas/blueprints/e1-interview.md: sha256:b4b7ef85f1135b9e059d1517dd24b92e32003585ceddd3073f1b9df9e6bff107
+    .claude/skills/building-quarkus-aws-saas/blueprints/e2-architecture-and-adrs.md: sha256:c99cf5c29820688bf8b2cafd34003629397de3413cc7f977a6ebcec467a3db58
+    .claude/skills/building-quarkus-aws-saas/blueprints/e3-functional-spec.md: sha256:09db2785d37cc1571b7b81a0c0eab3203fbf3755dc766238a70ed6c2a605c0f3
+    .claude/skills/building-quarkus-aws-saas/blueprints/e4-e5-design-and-tasks.md: sha256:774d9842f88bc0dac382534f3494f325f74a5d1c2e43a6243e4a5efe8cedc24f
+    .claude/skills/building-quarkus-aws-saas/blueprints/e6-implementation-cycle.md: sha256:6d8bf664d83cd46479caa255c9d7e8f5db053bbe707d7d6cc56cb80415075f59
+    .claude/skills/building-quarkus-aws-saas/blueprints/e7-deploy-and-observability.md: sha256:0de034aae3da89f4134003c60d67f677b98b10c85c0a59914518473fc7d832ca
+    .claude/skills/building-quarkus-aws-saas/blueprints/e8-reverse-sync.md: sha256:9b3bfcd0d564bc5f42455e9b4e78170364e4794f485e9d14afb095b9a39b53b9
+    .claude/skills/building-quarkus-aws-saas/blueprints/e9-archive-gate.md: sha256:6678f0c62a98b44bb34a96c15a7e8f582defc52202d57b93674655290b255d67
+    .claude/skills/building-quarkus-aws-saas/blueprints/evaluation-scenarios.md: sha256:bf416a7cff52a742c7a2b5a123b68f1208b339999e53da841e5e08d786d6dc66
+    .claude/skills/building-quarkus-aws-saas/blueprints/knowledge-map.md: sha256:8601b75f64263baf6ce433f0829486da8df372c53d08f0bc1df7f66982b11a31
+    .claude/skills/building-quarkus-aws-saas/blueprints/never-do-patterns.md: sha256:3c34d0cabe6f482f3cc50bbd910abb2e76f31f2c9c02000af81e1b0f11b74688
+    .claude/skills/building-quarkus-aws-saas/blueprints/tracker-github-projects.md: sha256:17b578f617e20dcc34a3551e63c4112d50ae2e702b1e610331b04378903f9f19
+    .claude/skills/building-quarkus-aws-saas/blueprints/unverified-and-risks.md: sha256:5f1e3ada8b9aa7baf1ba958d4907afcd67dac195bbd65564a3916ab2b617f2bf
+    .claude/skills/building-quarkus-aws-saas/blueprints/worker-briefs.md: sha256:75872ad055f6150233bd1859e1dcbb9a821d6b42b54ef89abb9de56c46eecbba
+    .claude/skills/coordinating-quarkus-aws-handoffs/SKILL.md: sha256:658a40597c5e223d4e61d08af1a5aecc55d8362f9ff0f237cb55fde78b4f69a6
+    .claude/skills/coordinating-quarkus-aws-handoffs/assets/adr.template.md: sha256:de46315aececa06122cf38fcce0d889d9cff95deb65d6c2786c49d990509d910
+    .claude/skills/coordinating-quarkus-aws-handoffs/assets/deploy-report.template.md: sha256:dd4ed31229680efb314fa82d0bdc47fa982ccfda483ce42d8913933638b504d3
+    .claude/skills/coordinating-quarkus-aws-handoffs/assets/diagnosis-report.template.md: sha256:74344b6881dcf220ed37c294f11b36c08cad30ae821c92116bc612a6a071426f
+    .claude/skills/coordinating-quarkus-aws-handoffs/assets/escalation.template.md: sha256:5ad1dcff9d41eb7f253ea7712e0ecc8eecde0f1f8798c8c72d66392e75512f03
+    .claude/skills/coordinating-quarkus-aws-handoffs/assets/handoff-profile.yaml: sha256:6c9ab1dca7a28b0a34512b457e110b2671614b94e9c131f906017a11319b109e
+    .claude/skills/coordinating-quarkus-aws-handoffs/assets/result-code.template.md: sha256:3cf931ef0398369326608b1a934fe3bb5e185cce6b75e34e2012e6b223ca5b8c
+    .claude/skills/coordinating-quarkus-aws-handoffs/assets/review.template.md: sha256:06595824306f86be324b36f915cbb6df51de8d9a1d58c746ad829b438ae07c64
+    .claude/skills/coordinating-quarkus-aws-handoffs/assets/wo-code.template.md: sha256:eb6b8e916384a4b4b757e8996bb205ae9852703ea248d0f1211be19782a4209b
+    .claude/skills/coordinating-quarkus-aws-handoffs/assets/wo-debug.template.md: sha256:42e633be57ac5dc60d2cbe1fa70635b4c3bb377ee6dd4be1a10259dd8a8774ca
+    .claude/skills/coordinating-quarkus-aws-handoffs/assets/wo-deploy.template.md: sha256:07cc6e7a85ba952364f4e70080943939fac8e6f0bcce3ecf5b2f2b389b64822b
+    .claude/skills/coordinating-quarkus-aws-handoffs/assets/wo-infra.template.md: sha256:91dce452d06b324df7c4392508ecfde854e0b685a34e35985e09b0fa84f9b5a7
+    .claude/skills/coordinating-quarkus-aws-handoffs/assets/wo-observability.template.md: sha256:4878ea71f30150e378510b85cfca12c053cba730a48185dddc7166f4282d9799
+    .claude/skills/coordinating-quarkus-aws-handoffs/assets/wo-review.template.md: sha256:0255acfcf7dde76c501cfb2fa2edf5191efee657e8e2d14f551ca97f67dbfc62
+    .claude/skills/coordinating-quarkus-aws-handoffs/assets/wo-stripe.template.md: sha256:b9d2d1218c7b3cccaa376ea90982d3be8e790beabaa9e070459b958d32ee9446
+    .claude/skills/coordinating-quarkus-aws-handoffs/blueprints/agent-alignment.md: sha256:40e2ef23308fcff1317400fe1fd175478c9e006023d3eefb0c8425459453721b
+    .claude/skills/coordinating-quarkus-aws-handoffs/blueprints/always-do-patterns.md: sha256:bb45e7124efb0fbbf4cfedd36ad771d1aac50fedb851af0487639a80db7b4c8f
+    .claude/skills/coordinating-quarkus-aws-handoffs/blueprints/approval-lines.md: sha256:369b3814cc5b3d84115d2f9fb7195dbd0f8f2bd8913e3e87cfcebb2d7d988dcd
+    .claude/skills/coordinating-quarkus-aws-handoffs/blueprints/evaluation-scenarios.md: sha256:f973ae9502b44293ad7ab691a85205e994773a7b6b8d6cbfa3626a30f857ff2b
+    .claude/skills/coordinating-quarkus-aws-handoffs/blueprints/never-do-patterns.md: sha256:af0df735f7da8011b473d7e20d0ea978520967fde77d10e3935d662f7ddc6854
+    .claude/skills/coordinating-quarkus-aws-handoffs/blueprints/openspec-integration.md: sha256:d02b7587bf2d7e12db851afe13c356c575ff6b6fcc6956a0efb1b4bcb62b18e9
+    .claude/skills/coordinating-quarkus-aws-handoffs/blueprints/roles-and-skills.md: sha256:bfd991c17eb62f3caf2b6ee62a5d6ec38a59504c37131f07353e078e7089f4d1
+    .claude/skills/coordinating-quarkus-aws-handoffs/blueprints/unverified-and-risks.md: sha256:402a0b0852182b2a7687b7f40c37ab4ef71530c5ffe17288cb802bf64308ebde
+    .claude/skills/integrating-quarkus-langchain4j-v1-15/SKILL.md: sha256:3f9a6151625e00d7dda110e689bd3ece268329253316c9df8c5797910ed317e9
+    .claude/skills/integrating-quarkus-langchain4j-v1-15/blueprints/always-do-patterns.md: sha256:85ad92d35465fde7182dadd1ad5d7617abf0a78b03f73c33375df9ee40bc8226
+    .claude/skills/integrating-quarkus-langchain4j-v1-15/blueprints/ask-first-decisions.md: sha256:a6ff7342d52da46dd6a48204d2f6403d078ca72be16d867ae2423518ffdb6624
+    .claude/skills/integrating-quarkus-langchain4j-v1-15/blueprints/config-defaults-and-contradictions.md: sha256:cffbbd958d8c6cf5a33b7d83ee5a3ffd626e49240e1224d7f0caa30d2a9d93f2
+    .claude/skills/integrating-quarkus-langchain4j-v1-15/blueprints/evaluation-scenarios.md: sha256:e624ce466c9b66b4e80990022476c077548d14c1294158c8ce94c5c8cd99ef4c
+    .claude/skills/integrating-quarkus-langchain4j-v1-15/blueprints/never-do-patterns.md: sha256:241f2f30e1595cad7ed4de1323302c6a741f3ec2d2bdfc4bd09dd72e47f8e5c8
+    .claude/skills/integrating-quarkus-langchain4j-v1-15/blueprints/source-bibliography.md: sha256:c9b1e981fd960a9529ec195c530c60bf13cdf8e5b7417bab04239d9bc02dc4c6
+    .claude/skills/integrating-quarkus-langchain4j-v1-15/blueprints/unverified-and-risks.md: sha256:88bb1d7861f2c436c4f020173aa7201de6067a66418fc8bf5bdbc9f586f7d224
+    .claude/skills/integrating-quarkus-langchain4j-v1-15/blueprints/verification-and-production.md: sha256:f444ebab297eba30baf2a45099e46159b67d043b195804a7e32f00fdeda08ce6
+    .claude/skills/integrating-stripe-quarkus-v3-40/SKILL.md: sha256:f912e2c4e88cdd3c330a0f307c8357408a9b2d62ca57df5445f20d92ff14717d
+    .claude/skills/integrating-stripe-quarkus-v3-40/blueprints/always-do-patterns.md: sha256:6e6ef2db536027f420fd626ffd0c5c8ca69850e6ddcbf917607890bf0176cb27
+    .claude/skills/integrating-stripe-quarkus-v3-40/blueprints/ask-first-decisions.md: sha256:40c026de1040780a3e615b920c9f9e794f158e8bd0e7f696fc798f9b228a6f05
+    .claude/skills/integrating-stripe-quarkus-v3-40/blueprints/evaluation-scenarios.md: sha256:43ac4c3a316ea1f80117078f0e7b4ec02b890cb408267e9a27b0e1f91658b009
+    .claude/skills/integrating-stripe-quarkus-v3-40/blueprints/migration-notes.md: sha256:c5c4e278618e0e7d903e29df26e56f3d2d062ab155625e041384189f95f0f637
+    .claude/skills/integrating-stripe-quarkus-v3-40/blueprints/never-do-patterns.md: sha256:dc75ddbe7b1a5be88ac925a44ebd8cc52b8f1f3f6333a24250a56533f2f2f1b4
+    .claude/skills/integrating-stripe-quarkus-v3-40/blueprints/source-bibliography.md: sha256:6e89f3aa820817877a5f9b694e58758c21cbb546c8defb60af097e69df73839e
+    .claude/skills/integrating-stripe-quarkus-v3-40/blueprints/unverified-and-risks.md: sha256:3a476760ab790f786de6aed0ba375e2fe0a2b07b4d85d0a84f926890d2961302
+    .claude/skills/integrating-stripe-quarkus-v3-40/blueprints/verification-and-production.md: sha256:68aa4ca12e50312b264d87f2f26da989f5debd1bc91185746d4ffa1ead4ebe35
+    .claude/skills/integrating-stripe-quarkus-v3-40/blueprints/webhook-pipeline.md: sha256:f953cbc3262fdf7b2a51014af1941b9406111622785664c4f1a10e3a55455b4f
+  source: local
+  local_path: ./packages/quarkus-aws-saas
+  content_hash: sha256:5f4756737167c495cf5b178ab1966537c1372e863ba9b075ca84dd38926a522a
+  declared_license: MIT
+- repo_url: _local/aws-architect
+  name: agents-factory-aws-architect
+  version: 1.0.0
+  depth: 2
+  resolved_by: _local/quarkus-aws-saas
+  package_type: apm_package
+  deployed_files:
+  - .claude/agents/aws-architect.md
+  - .claude/rules/aws-iac-reliability-cost.md
+  - .claude/rules/aws-security-baseline.md
+  - .claude/skills/aws-architecture-advisor
+  - .claude/skills/aws-architecture-advisor/SKILL.md
+  - .claude/skills/aws-architecture-advisor/blueprints/evaluation-scenarios.md
+  - .claude/skills/aws-architecture-advisor/references/family-facts-v2026.md
+  - .claude/skills/aws-architecture-advisor/references/family-rules-v2026-r07-r13.md
+  - .claude/skills/aws-architecture-advisor/references/family-rules-v2026.md
+  deployed_file_hashes:
+    .claude/agents/aws-architect.md: sha256:3f38974b81ddb9060265225dbeaaea3077c9feb5e8cc235f3fcc81b0f3ae85ab
+    .claude/rules/aws-iac-reliability-cost.md: sha256:f85a5139a2005964d196ff68831278297312abf4ef6a52b7683681e4c5d0e175
+    .claude/rules/aws-security-baseline.md: sha256:61af486f115b8be949a472fb57b27d9716698f473121c6adbb3081065d957147
+    .claude/skills/aws-architecture-advisor/SKILL.md: sha256:a2b9405544b7adee880af697132b4cd667b19b1f62bc8e94d71ea445e5986438
+    .claude/skills/aws-architecture-advisor/blueprints/evaluation-scenarios.md: sha256:31dae533ffa46ed4ce7dfe45fd89fd305621f536b1c79bde972c295200195980
+    .claude/skills/aws-architecture-advisor/references/family-facts-v2026.md: sha256:bde9aba1f5c5af72d77cbf2f5c8a134d4bef6cb2a157470a3c1a3937e107bc9c
+    .claude/skills/aws-architecture-advisor/references/family-rules-v2026-r07-r13.md: sha256:e087d0fc042542a601a5df8d827a1aa51df67f66f61657014641779f32b4671f
+    .claude/skills/aws-architecture-advisor/references/family-rules-v2026.md: sha256:f2b7db42d4d44201425046c704846827e08787bed62caa2be061a1dfee9868cf
+  source: local
+  local_path: ../aws-architect
+  declaring_parent: ./packages/quarkus-aws-saas
+  anchored_local_path: packages/aws-architect
+  content_hash: sha256:a0937a3cbc28250884640cb40c6193d191da5730d0cdfe4de948e69cab784bdd
+  declared_license: MIT
+- repo_url: _local/stripe-java
+  name: agents-factory-stripe-java
+  version: 1.0.0
+  depth: 2
+  resolved_by: _local/quarkus-aws-saas
+  package_type: apm_package
+  deployed_files:
+  - .claude/agents/stripe-advisor.md
+  - .claude/agents/stripe-integrator.md
+  - .claude/rules/stripe-java-code-standards.md
+  - .claude/skills/developing-stripe-java-core-v34
+  - .claude/skills/developing-stripe-java-core-v34/SKILL.md
+  - .claude/skills/developing-stripe-java-core-v34/blueprints/always-do-patterns.md
+  - .claude/skills/developing-stripe-java-core-v34/blueprints/evaluation-scenarios.md
+  - .claude/skills/developing-stripe-java-core-v34/blueprints/never-do-patterns.md
+  - .claude/skills/developing-stripe-java-core-v34/blueprints/unverified-and-risks.md
+  - .claude/skills/handling-stripe-webhooks-v34
+  - .claude/skills/handling-stripe-webhooks-v34/SKILL.md
+  - .claude/skills/handling-stripe-webhooks-v34/blueprints/always-do-patterns.md
+  - .claude/skills/handling-stripe-webhooks-v34/blueprints/evaluation-scenarios.md
+  - .claude/skills/handling-stripe-webhooks-v34/blueprints/never-do-patterns.md
+  - .claude/skills/handling-stripe-webhooks-v34/blueprints/unverified-and-risks.md
+  - .claude/skills/integrate-stripe-java
+  - .claude/skills/integrate-stripe-java/SKILL.md
+  - .claude/skills/integrate-stripe-java/blueprints/evaluation-scenarios.md
+  - .claude/skills/integrate-stripe-java/references/family-rules-v34.md
+  - .claude/skills/managing-stripe-subscriptions-v34
+  - .claude/skills/managing-stripe-subscriptions-v34/SKILL.md
+  - .claude/skills/managing-stripe-subscriptions-v34/blueprints/always-do-patterns.md
+  - .claude/skills/managing-stripe-subscriptions-v34/blueprints/evaluation-scenarios.md
+  - .claude/skills/managing-stripe-subscriptions-v34/blueprints/never-do-patterns.md
+  - .claude/skills/managing-stripe-subscriptions-v34/blueprints/unverified-and-risks.md
+  - .claude/skills/processing-stripe-payments-v34
+  - .claude/skills/processing-stripe-payments-v34/SKILL.md
+  - .claude/skills/processing-stripe-payments-v34/blueprints/always-do-patterns.md
+  - .claude/skills/processing-stripe-payments-v34/blueprints/evaluation-scenarios.md
+  - .claude/skills/processing-stripe-payments-v34/blueprints/never-do-patterns.md
+  - .claude/skills/processing-stripe-payments-v34/blueprints/unverified-and-risks.md
+  - .claude/skills/review-stripe-integration
+  - .claude/skills/review-stripe-integration/SKILL.md
+  - .claude/skills/review-stripe-integration/blueprints/evaluation-scenarios.md
+  deployed_file_hashes:
+    .claude/agents/stripe-advisor.md: sha256:d39316565c8558d0ece974a0416006eb5f8bc506087e058d42fd34d7caef429b
+    .claude/agents/stripe-integrator.md: sha256:2e7148384953e25928bafe59f52f5c6fdb41ed707c751f23bcfbc26f617cfa1c
+    .claude/rules/stripe-java-code-standards.md: sha256:456e6e870484501c67b3f09a6f5cff4e5a9f4b8b70e768f2470d0afed16f128d
+    .claude/skills/developing-stripe-java-core-v34/SKILL.md: sha256:29cdc50eeca643de4165c35464ab7b7f6c0ae0c93c934cc44907c9efdd973810
+    .claude/skills/developing-stripe-java-core-v34/blueprints/always-do-patterns.md: sha256:0c5f8fdd0f9986ecca04913ead88db87e228949ce64e487f1f1a756fde90b020
+    .claude/skills/developing-stripe-java-core-v34/blueprints/evaluation-scenarios.md: sha256:462283ea530ca69be67e0f3300cb1f32d9d6d04dab4642284bb0bfcc6589e769
+    .claude/skills/developing-stripe-java-core-v34/blueprints/never-do-patterns.md: sha256:88ad906e7b0614373c47bf07a319a81abf1a71188deea4669db4e20bbea199d9
+    .claude/skills/developing-stripe-java-core-v34/blueprints/unverified-and-risks.md: sha256:fb95a359e5b6840caef23a5c8e7eae44d56266b0c2ff920c87a25d0b39456001
+    .claude/skills/handling-stripe-webhooks-v34/SKILL.md: sha256:98745d39c9e5b9897f1359ba2170639aec2aec2c04a011d9adbe14fd445eeaf5
+    .claude/skills/handling-stripe-webhooks-v34/blueprints/always-do-patterns.md: sha256:6a533b1f35dcbdfe1a28294c683f8624edaee87f85f661a019aa3758de67a262
+    .claude/skills/handling-stripe-webhooks-v34/blueprints/evaluation-scenarios.md: sha256:44b204f5c8216eb38a965be3371799e4791306ae21a273f5d915da561e61ba40
+    .claude/skills/handling-stripe-webhooks-v34/blueprints/never-do-patterns.md: sha256:540070a1479a5cdcc6548af429c347a762169a42cbb79ba3ac074183f6e31a42
+    .claude/skills/handling-stripe-webhooks-v34/blueprints/unverified-and-risks.md: sha256:41c593921507732f545ee50938db8e0bf60b74b37b7ec8cf63898fe8c6b045dc
+    .claude/skills/integrate-stripe-java/SKILL.md: sha256:061001c3fbdb94d45f8de0d442968aeaa1ecd50bf5f0cf29dd15d82a40185f95
+    .claude/skills/integrate-stripe-java/blueprints/evaluation-scenarios.md: sha256:27369d246b79d610ca3769988f581c19264a8e8b4842fd6d6dfd9ce7b6d44b59
+    .claude/skills/integrate-stripe-java/references/family-rules-v34.md: sha256:afbea095e189f993a69a692118594892cddc5ab78fa290aef32142cafed63b8f
+    .claude/skills/managing-stripe-subscriptions-v34/SKILL.md: sha256:8f8534861c6b89adc86d2ff95d4f0e4c3d99462a3e2e1ab71577f20501584bcf
+    .claude/skills/managing-stripe-subscriptions-v34/blueprints/always-do-patterns.md: sha256:d336656a02a133f411cc286912525812411fa449bffbe1dad99e99c10f6c6d23
+    .claude/skills/managing-stripe-subscriptions-v34/blueprints/evaluation-scenarios.md: sha256:518ae810e196bc311f142d1533d90520b38543255405017fd3f5b08b7dbf1dc3
+    .claude/skills/managing-stripe-subscriptions-v34/blueprints/never-do-patterns.md: sha256:1351ea1adcb86ed8316377e280551c2c6cc842de9447746d3f2cee593e713377
+    .claude/skills/managing-stripe-subscriptions-v34/blueprints/unverified-and-risks.md: sha256:497e5a0f514ea180623b7deafda023dc8a159501a815179b89e77d73e0d7f288
+    .claude/skills/processing-stripe-payments-v34/SKILL.md: sha256:102a62c6ffba432b534faa467a5a3aab30b8897c257c8c9075320e71adc9d94f
+    .claude/skills/processing-stripe-payments-v34/blueprints/always-do-patterns.md: sha256:8f7c0907e2a65c23277cc296762a30c5e7bd7ea1d55a0b3e313d732e0369c386
+    .claude/skills/processing-stripe-payments-v34/blueprints/evaluation-scenarios.md: sha256:2f0dd5af734a158bb5d3b4e9d29a0df644923c9035f1efec6d14244a8b23ca4e
+    .claude/skills/processing-stripe-payments-v34/blueprints/never-do-patterns.md: sha256:c1aa78aa6f9e75d7d3d4a589c8c74ca707abed5991fe63174be26f662476982d
+    .claude/skills/processing-stripe-payments-v34/blueprints/unverified-and-risks.md: sha256:d19298cf3e53a2047b3e9f0ed84e049962d2608d21a061c77ba38e79e95a432b
+    .claude/skills/review-stripe-integration/SKILL.md: sha256:cec428b5f119494623e8382dd87f7ab8226566f6c2a8b15989f0ad7cd7d241e8
+    .claude/skills/review-stripe-integration/blueprints/evaluation-scenarios.md: sha256:d647ca8526ee4b5f0a19fea2c2907e05f452c6f59c851b31e65049b11338af2c
+  source: local
+  local_path: ../stripe-java
+  declaring_parent: ./packages/quarkus-aws-saas
+  anchored_local_path: packages/stripe-java
+  content_hash: sha256:0786e67b3f3bc6754eacc4778a095799ad9678b4ceae366ef81cda49fabcc7df
+- repo_url: _local/aws-skills
+  name: agents-factory-aws-skills
+  version: 1.0.0
+  depth: 3
+  resolved_by: _local/quarkus-aws
+  package_type: apm_package
+  deployed_files:
+  - .claude/skills/applying-aws-operational-excellence
+  - .claude/skills/applying-aws-operational-excellence/SKILL.md
+  - .claude/skills/applying-aws-operational-excellence/blueprints/evaluation-scenarios.md
+  - .claude/skills/applying-aws-performance-efficiency
+  - .claude/skills/applying-aws-performance-efficiency/SKILL.md
+  - .claude/skills/applying-aws-performance-efficiency/blueprints/architecture-decisions.md
+  - .claude/skills/applying-aws-performance-efficiency/blueprints/evaluation-scenarios.md
+  - .claude/skills/applying-aws-reliability-pillar
+  - .claude/skills/applying-aws-reliability-pillar/SKILL.md
+  - .claude/skills/applying-aws-reliability-pillar/blueprints/evaluation-scenarios.md
+  - .claude/skills/applying-aws-serverless-well-architected-lens
+  - .claude/skills/applying-aws-serverless-well-architected-lens/SKILL.md
+  - .claude/skills/applying-aws-serverless-well-architected-lens/blueprints/always-do-patterns.md
+  - .claude/skills/applying-aws-serverless-well-architected-lens/blueprints/ask-first-decisions.md
+  - .claude/skills/applying-aws-serverless-well-architected-lens/blueprints/evaluation-scenarios.md
+  - .claude/skills/applying-aws-serverless-well-architected-lens/blueprints/never-do-patterns.md
+  - .claude/skills/applying-aws-serverless-well-architected-lens/blueprints/post-2022-gaps.md
+  - .claude/skills/applying-aws-sustainability-pillar
+  - .claude/skills/applying-aws-sustainability-pillar/SKILL.md
+  - .claude/skills/applying-aws-sustainability-pillar/blueprints/evaluation-scenarios.md
+  - .claude/skills/applying-aws-well-architected
+  - .claude/skills/applying-aws-well-architected/SKILL.md
+  - .claude/skills/applying-aws-well-architected/blueprints/always-do-patterns.md
+  - .claude/skills/applying-aws-well-architected/blueprints/ask-first-decisions.md
+  - .claude/skills/applying-aws-well-architected/blueprints/evaluation-scenarios.md
+  - .claude/skills/applying-aws-well-architected/blueprints/never-do-patterns.md
+  - .claude/skills/applying-aws-well-architected/blueprints/reference-architectures.md
+  - .claude/skills/applying-waf-cost-optimization
+  - .claude/skills/applying-waf-cost-optimization/SKILL.md
+  - .claude/skills/applying-waf-cost-optimization/blueprints/always-do-patterns.md
+  - .claude/skills/applying-waf-cost-optimization/blueprints/ask-first-decisions.md
+  - .claude/skills/applying-waf-cost-optimization/blueprints/evaluation-scenarios.md
+  - .claude/skills/applying-waf-cost-optimization/blueprints/never-do-patterns.md
+  - .claude/skills/applying-waf-operational-excellence-pillar
+  - .claude/skills/applying-waf-operational-excellence-pillar/SKILL.md
+  - .claude/skills/applying-waf-operational-excellence-pillar/blueprints/always-do-patterns.md
+  - .claude/skills/applying-waf-operational-excellence-pillar/blueprints/architecture-decisions.md
+  - .claude/skills/applying-waf-operational-excellence-pillar/blueprints/evaluation-scenarios.md
+  - .claude/skills/applying-waf-reliability-pillar
+  - .claude/skills/applying-waf-reliability-pillar/SKILL.md
+  - .claude/skills/applying-waf-reliability-pillar/blueprints/evaluation-scenarios.md
+  - .claude/skills/applying-waf-sustainability-pillar
+  - .claude/skills/applying-waf-sustainability-pillar/SKILL.md
+  - .claude/skills/applying-waf-sustainability-pillar/blueprints/evaluation-scenarios.md
+  - .claude/skills/architecting-aws-multi-account-organizations
+  - .claude/skills/architecting-aws-multi-account-organizations/SKILL.md
+  - .claude/skills/architecting-aws-multi-account-organizations/blueprints/always-do-patterns.md
+  - .claude/skills/architecting-aws-multi-account-organizations/blueprints/ask-first-decisions.md
+  - .claude/skills/architecting-aws-multi-account-organizations/blueprints/evaluation-scenarios.md
+  - .claude/skills/architecting-aws-multi-account-organizations/blueprints/never-do-patterns.md
+  - .claude/skills/architecting-aws-s3-storage
+  - .claude/skills/architecting-aws-s3-storage/SKILL.md
+  - .claude/skills/architecting-aws-s3-storage/blueprints/evaluation-scenarios.md
+  - .claude/skills/architecting-aws-saas-multitenant
+  - .claude/skills/architecting-aws-saas-multitenant/SKILL.md
+  - .claude/skills/architecting-aws-saas-multitenant/blueprints/evaluation-scenarios.md
+  - .claude/skills/architecting-aws-security-pillar
+  - .claude/skills/architecting-aws-security-pillar/SKILL.md
+  - .claude/skills/architecting-aws-security-pillar/blueprints/always-do-patterns.md
+  - .claude/skills/architecting-aws-security-pillar/blueprints/ask-first-decisions.md
+  - .claude/skills/architecting-aws-security-pillar/blueprints/evaluation-scenarios.md
+  - .claude/skills/architecting-aws-security-pillar/blueprints/never-do-patterns.md
+  - .claude/skills/architecting-aws-ses-email
+  - .claude/skills/architecting-aws-ses-email/SKILL.md
+  - .claude/skills/architecting-aws-ses-email/blueprints/evaluation-scenarios.md
+  - .claude/skills/architecting-aws-sns-pubsub
+  - .claude/skills/architecting-aws-sns-pubsub/SKILL.md
+  - .claude/skills/architecting-aws-sns-pubsub/blueprints/evaluation-scenarios.md
+  - .claude/skills/architecting-aws-sqs-messaging
+  - .claude/skills/architecting-aws-sqs-messaging/SKILL.md
+  - .claude/skills/architecting-aws-sqs-messaging/blueprints/evaluation-scenarios.md
+  - .claude/skills/architecting-cloudtrail-audit-logging
+  - .claude/skills/architecting-cloudtrail-audit-logging/SKILL.md
+  - .claude/skills/architecting-cloudtrail-audit-logging/blueprints/always-do-patterns.md
+  - .claude/skills/architecting-cloudtrail-audit-logging/blueprints/evaluation-scenarios.md
+  - .claude/skills/architecting-cloudtrail-audit-logging/blueprints/never-do-patterns.md
+  - .claude/skills/architecting-eventbridge-eda
+  - .claude/skills/architecting-eventbridge-eda/SKILL.md
+  - .claude/skills/architecting-eventbridge-eda/blueprints/always-do-patterns.md
+  - .claude/skills/architecting-eventbridge-eda/blueprints/ask-first-decisions.md
+  - .claude/skills/architecting-eventbridge-eda/blueprints/evaluation-scenarios.md
+  - .claude/skills/architecting-eventbridge-eda/blueprints/never-do-patterns.md
+  - .claude/skills/architecting-lambda-serverless-patterns
+  - .claude/skills/architecting-lambda-serverless-patterns/SKILL.md
+  - .claude/skills/architecting-lambda-serverless-patterns/blueprints/evaluation-scenarios.md
+  - .claude/skills/architecting-sam-serverless-patterns
+  - .claude/skills/architecting-sam-serverless-patterns/SKILL.md
+  - .claude/skills/architecting-sam-serverless-patterns/blueprints/evaluation-scenarios.md
+  - .claude/skills/auditing-aws-cloudtrail
+  - .claude/skills/auditing-aws-cloudtrail/SKILL.md
+  - .claude/skills/auditing-aws-cloudtrail/blueprints/evaluation-scenarios.md
+  - .claude/skills/configuring-aws-route53-dns
+  - .claude/skills/configuring-aws-route53-dns/SKILL.md
+  - .claude/skills/configuring-aws-route53-dns/blueprints/always-do-patterns.md
+  - .claude/skills/configuring-aws-route53-dns/blueprints/ask-first-decisions.md
+  - .claude/skills/configuring-aws-route53-dns/blueprints/evaluation-scenarios.md
+  - .claude/skills/configuring-aws-route53-dns/blueprints/never-do-patterns.md
+  - .claude/skills/delivering-cloudfront-cdn
+  - .claude/skills/delivering-cloudfront-cdn/SKILL.md
+  - .claude/skills/delivering-cloudfront-cdn/blueprints/always-do-patterns.md
+  - .claude/skills/delivering-cloudfront-cdn/blueprints/ask-first-decisions.md
+  - .claude/skills/delivering-cloudfront-cdn/blueprints/evaluation-scenarios.md
+  - .claude/skills/delivering-cloudfront-cdn/blueprints/never-do-patterns.md
+  - .claude/skills/designing-aws-api-gateway-serverless
+  - .claude/skills/designing-aws-api-gateway-serverless/SKILL.md
+  - .claude/skills/designing-aws-api-gateway-serverless/blueprints/evaluation-scenarios.md
+  - .claude/skills/designing-aws-vpc-networks
+  - .claude/skills/designing-aws-vpc-networks/SKILL.md
+  - .claude/skills/designing-aws-vpc-networks/blueprints/evaluation-scenarios.md
+  - .claude/skills/designing-aws-vpc-networks/blueprints/reference-architectures.md
+  - .claude/skills/designing-dynamodb-nosql
+  - .claude/skills/designing-dynamodb-nosql/SKILL.md
+  - .claude/skills/designing-dynamodb-nosql/blueprints/evaluation-scenarios.md
+  - .claude/skills/designing-multi-cloud-network-topology
+  - .claude/skills/designing-multi-cloud-network-topology/SKILL.md
+  - .claude/skills/designing-multi-cloud-network-topology/blueprints/evaluation-scenarios.md
+  - .claude/skills/designing-multi-cloud-network-topology/blueprints/service-equivalence-lock-in.md
+  - .claude/skills/implementing-lambda-powertools-java
+  - .claude/skills/implementing-lambda-powertools-java/SKILL.md
+  - .claude/skills/implementing-lambda-powertools-java/blueprints/always-do-patterns.md
+  - .claude/skills/implementing-lambda-powertools-java/blueprints/ask-first-decisions.md
+  - .claude/skills/implementing-lambda-powertools-java/blueprints/evaluation-scenarios.md
+  - .claude/skills/implementing-lambda-powertools-java/blueprints/integration-patterns.md
+  - .claude/skills/implementing-lambda-powertools-java/blueprints/never-do-patterns.md
+  - .claude/skills/managing-aws-costs
+  - .claude/skills/managing-aws-costs/SKILL.md
+  - .claude/skills/managing-aws-costs/blueprints/evaluation-scenarios.md
+  - .claude/skills/monitoring-cloudwatch-observability
+  - .claude/skills/monitoring-cloudwatch-observability/SKILL.md
+  - .claude/skills/monitoring-cloudwatch-observability/blueprints/always-do-patterns.md
+  - .claude/skills/monitoring-cloudwatch-observability/blueprints/ask-first-decisions.md
+  - .claude/skills/monitoring-cloudwatch-observability/blueprints/evaluation-scenarios.md
+  - .claude/skills/monitoring-cloudwatch-observability/blueprints/never-do-patterns.md
+  - .claude/skills/optimizing-aws-costs
+  - .claude/skills/optimizing-aws-costs/SKILL.md
+  - .claude/skills/optimizing-aws-costs/blueprints/evaluation-scenarios.md
+  - .claude/skills/orchestrating-aws-step-functions
+  - .claude/skills/orchestrating-aws-step-functions/SKILL.md
+  - .claude/skills/orchestrating-aws-step-functions/blueprints/evaluation-scenarios.md
+  - .claude/skills/protecting-workloads-ddos-shield
+  - .claude/skills/protecting-workloads-ddos-shield/SKILL.md
+  - .claude/skills/protecting-workloads-ddos-shield/blueprints/evaluation-scenarios.md
+  - .claude/skills/securing-aws-cognito
+  - .claude/skills/securing-aws-cognito/SKILL.md
+  - .claude/skills/securing-aws-cognito/blueprints/always-do-patterns.md
+  - .claude/skills/securing-aws-cognito/blueprints/ask-first-decisions.md
+  - .claude/skills/securing-aws-cognito/blueprints/evaluation-scenarios.md
+  - .claude/skills/securing-aws-cognito/blueprints/never-do-patterns.md
+  - .claude/skills/securing-aws-iam-serverless
+  - .claude/skills/securing-aws-iam-serverless/SKILL.md
+  - .claude/skills/securing-aws-iam-serverless/blueprints/evaluation-scenarios.md
+  - .claude/skills/securing-aws-iam-serverless/blueprints/policy-patterns.md
+  - .claude/skills/securing-aws-secrets-certificates
+  - .claude/skills/securing-aws-secrets-certificates/SKILL.md
+  - .claude/skills/securing-aws-secrets-certificates/blueprints/always-do-patterns.md
+  - .claude/skills/securing-aws-secrets-certificates/blueprints/ask-first-decisions.md
+  - .claude/skills/securing-aws-secrets-certificates/blueprints/evaluation-scenarios.md
+  - .claude/skills/securing-aws-secrets-certificates/blueprints/never-do-patterns.md
+  - .claude/skills/securing-aws-waf-web-acls
+  - .claude/skills/securing-aws-waf-web-acls/SKILL.md
+  - .claude/skills/securing-aws-waf-web-acls/blueprints/evaluation-scenarios.md
+  - .claude/skills/securing-vpc-network-access
+  - .claude/skills/securing-vpc-network-access/SKILL.md
+  - .claude/skills/securing-vpc-network-access/blueprints/evaluation-scenarios.md
+  - .claude/skills/tracing-aws-xray
+  - .claude/skills/tracing-aws-xray/SKILL.md
+  - .claude/skills/tracing-aws-xray/blueprints/evaluation-scenarios.md
+  deployed_file_hashes:
+    .claude/skills/applying-aws-operational-excellence/SKILL.md: sha256:a2a40c25846c0cca012c18895c9b5fb1ec19d9f64f2e15d7e81777f5b6fd3ca5
+    .claude/skills/applying-aws-operational-excellence/blueprints/evaluation-scenarios.md: sha256:10306e01db46f29985189d213385cf65dd7a95b258f72790935d5176fda04b3b
+    .claude/skills/applying-aws-performance-efficiency/SKILL.md: sha256:4acb24cdb03e5aa947b6058f3b490070775f40d8d779666740717700ba9bacdc
+    .claude/skills/applying-aws-performance-efficiency/blueprints/architecture-decisions.md: sha256:f5a5b5d9c41e3d32f0d9137478b521631fbb2a8bdfcbb1cf83c7e1206a42e761
+    .claude/skills/applying-aws-performance-efficiency/blueprints/evaluation-scenarios.md: sha256:d40c1a38f356ef1734f4f6c8caf28c75f2d4068085b467602173e2a2c6f8f4b4
+    .claude/skills/applying-aws-reliability-pillar/SKILL.md: sha256:a1dd43dbb90ac701eadd3740835ad24f7f6c69d9f929c77070a11ed0d0e817d9
+    .claude/skills/applying-aws-reliability-pillar/blueprints/evaluation-scenarios.md: sha256:02be2c3d7cb0046b8a42ced74f06ea05285758cea927739d86129feb8786acf5
+    .claude/skills/applying-aws-serverless-well-architected-lens/SKILL.md: sha256:621eb43e4f0828b4990d487c038492e842bad2551930066ee7ebd752f15ca0f1
+    .claude/skills/applying-aws-serverless-well-architected-lens/blueprints/always-do-patterns.md: sha256:46c03b4f4de15bd6a4873ce2fbd3807770033fc87e589a21bdc2cb4a88aec206
+    .claude/skills/applying-aws-serverless-well-architected-lens/blueprints/ask-first-decisions.md: sha256:46b4f83d5bcc2c1a0cdf8e16fb854622b44fb234fcd395c91cae2e15ebd429bf
+    .claude/skills/applying-aws-serverless-well-architected-lens/blueprints/evaluation-scenarios.md: sha256:f945910c1824cef5ca7d4d97e9bf57ac833e49ee56617ce469968dd4bcf59c48
+    .claude/skills/applying-aws-serverless-well-architected-lens/blueprints/never-do-patterns.md: sha256:047e7599823bdf9b261ce26df4fb69d2de0b879f0a0d1ec169a21838416ca3b7
+    .claude/skills/applying-aws-serverless-well-architected-lens/blueprints/post-2022-gaps.md: sha256:88acf949a404e0e79107b457e5ef13c9647000afaa3ba7d39faafa710b9c5a67
+    .claude/skills/applying-aws-sustainability-pillar/SKILL.md: sha256:d50b19551fcd93e4475eb2283da07f73ff9917e47b4d114efe154563bf46843c
+    .claude/skills/applying-aws-sustainability-pillar/blueprints/evaluation-scenarios.md: sha256:9b796248655c596b0221a6988e758ed7cb88d26dae4103e3f5e9e570f707824e
+    .claude/skills/applying-aws-well-architected/SKILL.md: sha256:67cf740fb440fa497e70871095c4ebde9863132a9fad4369742a1e4964c60482
+    .claude/skills/applying-aws-well-architected/blueprints/always-do-patterns.md: sha256:e2c091dedf2091f90211b607650ac9b4735d43c37f9a143f7c43e0c099295843
+    .claude/skills/applying-aws-well-architected/blueprints/ask-first-decisions.md: sha256:83914f07f1e83a3a77f9e1ed5e94e769785c00d05a3c7aff2b7481bbdfa71bf6
+    .claude/skills/applying-aws-well-architected/blueprints/evaluation-scenarios.md: sha256:7de4bf118e39f0429ade33bec1b9fc57349b97b9980e947c1e8aa1ad04d844df
+    .claude/skills/applying-aws-well-architected/blueprints/never-do-patterns.md: sha256:ca5a1d7e8d9db3ee405c905a6ca984df241bbafdcae3b2b4f66b7ed2c156fdc2
+    .claude/skills/applying-aws-well-architected/blueprints/reference-architectures.md: sha256:41c3c187edf756c3dd105904b139242c94d43c401aa54ad1e00e8a89e3adf89d
+    .claude/skills/applying-waf-cost-optimization/SKILL.md: sha256:82d22571268622df5d522c53eca6ca8784dbd6949ed172e1879307ee773fe494
+    .claude/skills/applying-waf-cost-optimization/blueprints/always-do-patterns.md: sha256:fc8704ce3b450d77e29cc7dfb8dd88226d5b057a55194a031881824bcd1c1952
+    .claude/skills/applying-waf-cost-optimization/blueprints/ask-first-decisions.md: sha256:7460beea6c48769ec11d39b192670779e449fe51a5b17bafe684e26f6e44a1e4
+    .claude/skills/applying-waf-cost-optimization/blueprints/evaluation-scenarios.md: sha256:d1a9cdbbabad5e572a737fe5d35e4cf7c804e556eb02b1df7d7c02a5218b6046
+    .claude/skills/applying-waf-cost-optimization/blueprints/never-do-patterns.md: sha256:71ad439f5bba79205de5bc437250175fcdbd95a55fdce2ce4e77ca565a10433b
+    .claude/skills/applying-waf-operational-excellence-pillar/SKILL.md: sha256:b128edaff23e360bfc7fd8f6253927ad34f935064685c6a354f3fd2c579d96f0
+    .claude/skills/applying-waf-operational-excellence-pillar/blueprints/always-do-patterns.md: sha256:05cea4bf7f319f67fbb347f00c6709d553cff2885096ba8c94e52ba1e139d9b5
+    .claude/skills/applying-waf-operational-excellence-pillar/blueprints/architecture-decisions.md: sha256:eb1470b4d40b26823f9462fada207c34a2f2fce44c8e2265601f7e62b07064a3
+    .claude/skills/applying-waf-operational-excellence-pillar/blueprints/evaluation-scenarios.md: sha256:1bc51d24e7e1d8d570bdb644983923d1787b6213066f88fcb03df2a0a8287fd3
+    .claude/skills/applying-waf-reliability-pillar/SKILL.md: sha256:403ae13d407a94f0f878a886a9fa36c601172a5411c0bc5b591825c869006431
+    .claude/skills/applying-waf-reliability-pillar/blueprints/evaluation-scenarios.md: sha256:c7da8d721add2b67988ea061485c2c119995f41017fb9eb41cae5f8e3ebe47dd
+    .claude/skills/applying-waf-sustainability-pillar/SKILL.md: sha256:c812c00238cf6621fb6475ae846b510a02fe6ce54fac07088ebd9358ea6b9a88
+    .claude/skills/applying-waf-sustainability-pillar/blueprints/evaluation-scenarios.md: sha256:8a60b7e9c73ff84df884da5e3f5ab5bb9a24e843ef5f9c2e0a70516b3d19fae0
+    .claude/skills/architecting-aws-multi-account-organizations/SKILL.md: sha256:0d9a58345db49e85bfd6b9550080210a29077e4077ad36192207191aa133c62a
+    .claude/skills/architecting-aws-multi-account-organizations/blueprints/always-do-patterns.md: sha256:ee5af6c26ef4b8c5efcf8c29a2e5cdb5f1093dd931b30fe199bec98f15dc246a
+    .claude/skills/architecting-aws-multi-account-organizations/blueprints/ask-first-decisions.md: sha256:06eead91a47aa4478ee4668b108990498672907cebd18632066c021eba3d9025
+    .claude/skills/architecting-aws-multi-account-organizations/blueprints/evaluation-scenarios.md: sha256:1df9f5f8cec359cfc9592845a4122ffacc8c5aff140b798dff94efdfc0d9cfb8
+    .claude/skills/architecting-aws-multi-account-organizations/blueprints/never-do-patterns.md: sha256:b9fcc4514c779bd551a1c89c1e35ce89e0afc8587c77fee5729ec2f2ec0da779
+    .claude/skills/architecting-aws-s3-storage/SKILL.md: sha256:b4831d66d191812da91191ca94fdb044f1193ec19d302b7dbf54fdbe975d5bfe
+    .claude/skills/architecting-aws-s3-storage/blueprints/evaluation-scenarios.md: sha256:7486947015f65081b8f2533b5e1dbbd25182e9fff7d042186e5d908f6958a7fe
+    .claude/skills/architecting-aws-saas-multitenant/SKILL.md: sha256:4e01fe3f31f3bb0f57995639a860096f71edc1bd519ced72a007a32fb0c40870
+    .claude/skills/architecting-aws-saas-multitenant/blueprints/evaluation-scenarios.md: sha256:465ede8e09d186e08c77c80e143b5a96f96e6483ddb5acd8c9f44776a630433e
+    .claude/skills/architecting-aws-security-pillar/SKILL.md: sha256:4861ea98d1707a475c296a5968d310ee9bc456859741cda7cebd6b0a85107404
+    .claude/skills/architecting-aws-security-pillar/blueprints/always-do-patterns.md: sha256:c35c57ddb4f4d3832b39dc0bef8ab77dc2a53ebafe5b35c24de087934ee584c0
+    .claude/skills/architecting-aws-security-pillar/blueprints/ask-first-decisions.md: sha256:9383d4b7850d0e191896b75d8e9b3985bb1b54ad56c30d7616adaeb7c09fe723
+    .claude/skills/architecting-aws-security-pillar/blueprints/evaluation-scenarios.md: sha256:47ad222f2fcf4beaa53fbe2a5b3deef3eb1835a13a3d874625b3645142737256
+    .claude/skills/architecting-aws-security-pillar/blueprints/never-do-patterns.md: sha256:e0a1e9ceaf28a217b22b8a903169b9ac5e8bd76b9c46c71e54c9379662f700a5
+    .claude/skills/architecting-aws-ses-email/SKILL.md: sha256:d21e5e44fc5641f7ba51e786c47cdd211cedff8266d4b67ca58c6368ef2ea760
+    .claude/skills/architecting-aws-ses-email/blueprints/evaluation-scenarios.md: sha256:e539f91d187a91edde8f35ea1254f403714a030cdf3374d42767e8963703efcd
+    .claude/skills/architecting-aws-sns-pubsub/SKILL.md: sha256:603ee193da5c41fd26555986bc34f04bb7b94ba321b04bbfeb474cc1a5378748
+    .claude/skills/architecting-aws-sns-pubsub/blueprints/evaluation-scenarios.md: sha256:739bb98f39faa5518eefb9f942553441cfcad55659167a8e7f1028acfb269ff7
+    .claude/skills/architecting-aws-sqs-messaging/SKILL.md: sha256:8e52e94522f0bbd355d6ddbe5933dd21943784923f8c52aced187d0d7b6231e0
+    .claude/skills/architecting-aws-sqs-messaging/blueprints/evaluation-scenarios.md: sha256:0c482329dc5f0b5b8cecda9d6a47828bfdfeeb29f9c80045eb1f5426540fcb57
+    .claude/skills/architecting-cloudtrail-audit-logging/SKILL.md: sha256:64694a45602c3fb07ed977520eded42d61ef6840e567bd76c7909299dea2339d
+    .claude/skills/architecting-cloudtrail-audit-logging/blueprints/always-do-patterns.md: sha256:f76fc371962d4781dd9ddfbbe3679829fb105bb9462dc13a3bda2ed020e954a1
+    .claude/skills/architecting-cloudtrail-audit-logging/blueprints/evaluation-scenarios.md: sha256:0d2e97cdc4b62a6d7df57e2c03bd68e08e47f4d30d4604ac3a02dd832b3e29e7
+    .claude/skills/architecting-cloudtrail-audit-logging/blueprints/never-do-patterns.md: sha256:94ebd8d2f753c837ab657c0902628addefeb56783eda99a609102dc351e8e815
+    .claude/skills/architecting-eventbridge-eda/SKILL.md: sha256:f36bb1c14c315062b3f448c9983b89c4a66ddf497bfafe04d50a16dcc538ee4d
+    .claude/skills/architecting-eventbridge-eda/blueprints/always-do-patterns.md: sha256:86614cf2c84b56956f6d103fca37b6636214e8c7c075c0d30949566ff8eecd89
+    .claude/skills/architecting-eventbridge-eda/blueprints/ask-first-decisions.md: sha256:9e713703c6fcd737a417d606ab173ed725cb6f0124f06d0854e786f983e4d4a3
+    .claude/skills/architecting-eventbridge-eda/blueprints/evaluation-scenarios.md: sha256:37577043b2a9ce0c80ed894ea430e483a40d624769b874e3feaf5dfbaf5b7925
+    .claude/skills/architecting-eventbridge-eda/blueprints/never-do-patterns.md: sha256:30d972daa58ef722959c675924d6bf5a70bdc2239b334dca5a3e178fd6262acc
+    .claude/skills/architecting-lambda-serverless-patterns/SKILL.md: sha256:ea8873610738410663e981836ef96aea318365d4f9da30cb673b60490b928b1c
+    .claude/skills/architecting-lambda-serverless-patterns/blueprints/evaluation-scenarios.md: sha256:b6428acbbc1c3d1252d820bd280c60f74482838cc8cfb11722d839f53517ac02
+    .claude/skills/architecting-sam-serverless-patterns/SKILL.md: sha256:e982e0ad9efbcf2175068eb45df3676eb580438a6b92f582a5d5b20383fe1254
+    .claude/skills/architecting-sam-serverless-patterns/blueprints/evaluation-scenarios.md: sha256:1843e244e980a5068d168e11a05ea716b83a97ecce6aabb478f78f7a66b2cf2d
+    .claude/skills/auditing-aws-cloudtrail/SKILL.md: sha256:6c68cb5ea7ed49299ccb3679a0623e66d28b1a010e3e1aab56c257288de843d9
+    .claude/skills/auditing-aws-cloudtrail/blueprints/evaluation-scenarios.md: sha256:1891a5dd5d84868297df6ef5ca390fac82b4561254aa286bb4d910bab8fcf60e
+    .claude/skills/configuring-aws-route53-dns/SKILL.md: sha256:cd68a3d31d13c1a4ef0fd0c01fcdcd3059b414d0e4f7998bfc59dd45bfd4cdf6
+    .claude/skills/configuring-aws-route53-dns/blueprints/always-do-patterns.md: sha256:b64eaac06b42da654802999dfe1722f767e86d69f11abb12f06adf2a30fc1010
+    .claude/skills/configuring-aws-route53-dns/blueprints/ask-first-decisions.md: sha256:1956b9eef480ec12fae4f644062f620ddff91ff536fdfc368a8f68e68e1435d0
+    .claude/skills/configuring-aws-route53-dns/blueprints/evaluation-scenarios.md: sha256:52e5609f9d585a1be630bdca0b689fa172d8cd84129012d5cd7c4eea808a30b3
+    .claude/skills/configuring-aws-route53-dns/blueprints/never-do-patterns.md: sha256:d52c3b61ec7aff30284d07d10e68544a04dd2476a485e84221ecf02c7135c9c0
+    .claude/skills/delivering-cloudfront-cdn/SKILL.md: sha256:acbae547276e5a7fbbc18210158fda810e85f4219e51e7ca08a7ec8a7f88eca1
+    .claude/skills/delivering-cloudfront-cdn/blueprints/always-do-patterns.md: sha256:d3e759b2fe16290ddf3b162d61bef3b457a79db032b3a571164fcf9323545414
+    .claude/skills/delivering-cloudfront-cdn/blueprints/ask-first-decisions.md: sha256:7c77e376aa1bfcd60f1cc20d14cf2b95c066fb4c6cdb24aecd9c09d93b7a0aff
+    .claude/skills/delivering-cloudfront-cdn/blueprints/evaluation-scenarios.md: sha256:1a2373623096b8abc00ac6476e47d32b6cc8a8bf56391f2eec2ca5642ef9c51f
+    .claude/skills/delivering-cloudfront-cdn/blueprints/never-do-patterns.md: sha256:783c766195e4fc812acbad49466a32858b12fd1a3078431b1a4336d05205f2f5
+    .claude/skills/designing-aws-api-gateway-serverless/SKILL.md: sha256:90b127059d5bb3b97b93d4ad5b2cd287eb9446078d04e4f434e3b0aea45b14a0
+    .claude/skills/designing-aws-api-gateway-serverless/blueprints/evaluation-scenarios.md: sha256:3a637c390c9eab5910b3c9eb759dba0b638f866ed9e9adecbcc15cfbbc4c6960
+    .claude/skills/designing-aws-vpc-networks/SKILL.md: sha256:862987cb4001dbcc680c30b3bd05bb526c6fe5b3d7ede3cc1d7e4980e3154329
+    .claude/skills/designing-aws-vpc-networks/blueprints/evaluation-scenarios.md: sha256:0a56df05ff62ea4d7414fff7c31d38671b02afcd20c9f5c42debd5b8c9943ae6
+    .claude/skills/designing-aws-vpc-networks/blueprints/reference-architectures.md: sha256:f8eab832e6afa678bcf51fddc459ef062b4160ac64867bfe10a653ea401903b7
+    .claude/skills/designing-dynamodb-nosql/SKILL.md: sha256:2f89b624740bc2cc017a2e8812c1ac6d9b4c139f7c853d55e89e342a583f2384
+    .claude/skills/designing-dynamodb-nosql/blueprints/evaluation-scenarios.md: sha256:7b9d73e20ebec34b0b24f972d0d9fe74d1f94c6ba58dbb92fd1f7b44a48e2802
+    .claude/skills/designing-multi-cloud-network-topology/SKILL.md: sha256:6657468f488329e27dc3c7b823c361006c9caf9273d372cec7dd16c7e5d3775b
+    .claude/skills/designing-multi-cloud-network-topology/blueprints/evaluation-scenarios.md: sha256:9ad44881424c7da731715d17d4a29782c62763c5833fc483c310f1e43bc5f744
+    .claude/skills/designing-multi-cloud-network-topology/blueprints/service-equivalence-lock-in.md: sha256:4274ae668fbc81ae3e24278d5441046c90ca2c7d62e4ca6178a358fb7435f3d9
+    .claude/skills/implementing-lambda-powertools-java/SKILL.md: sha256:fac4d12981c0eb0e8c8d51db61eb8d1535ab9c741fb747d7a95411e26416baeb
+    .claude/skills/implementing-lambda-powertools-java/blueprints/always-do-patterns.md: sha256:5899d0d58fe36c17c6ce3fc965bb1f5498c19cb007f221c5a9be9ee6e38db21e
+    .claude/skills/implementing-lambda-powertools-java/blueprints/ask-first-decisions.md: sha256:3e0f3e8b40f23cc0d62590c2b65871f3f3c25d18ea966b3fdc5f130d4a2f4d00
+    .claude/skills/implementing-lambda-powertools-java/blueprints/evaluation-scenarios.md: sha256:fb44daa6c857ee0bc734eed71a3abc081db37f3837e328cea447b61942c133c6
+    .claude/skills/implementing-lambda-powertools-java/blueprints/integration-patterns.md: sha256:854ef5197fef616c3ca329ad7ad817c8083deefe743091ff2752ac4834156328
+    .claude/skills/implementing-lambda-powertools-java/blueprints/never-do-patterns.md: sha256:2e4bb5888fbd2bd64fc8dbce1e2094c4a8eecd135da33585e83d2441cb0a0c56
+    .claude/skills/managing-aws-costs/SKILL.md: sha256:3dea7097b484747f203e1a43759753091e019fc1169f7288d0c2ae502f38d119
+    .claude/skills/managing-aws-costs/blueprints/evaluation-scenarios.md: sha256:9927ee661cf2a61174b6762fe10f902da25b4a21157f766e1b114b69a29a79a9
+    .claude/skills/monitoring-cloudwatch-observability/SKILL.md: sha256:8324a3277382de65f44a28f68097ec34ef578adc14dfa447e10ac0d353181179
+    .claude/skills/monitoring-cloudwatch-observability/blueprints/always-do-patterns.md: sha256:51e91009edce7d4808bdb56a707d1b83077598ef10a974b7b8b98dac1c97082d
+    .claude/skills/monitoring-cloudwatch-observability/blueprints/ask-first-decisions.md: sha256:034b386a1cf3f8502e707241903b3cc291d68124b72a8bd345f5ad1179c73459
+    .claude/skills/monitoring-cloudwatch-observability/blueprints/evaluation-scenarios.md: sha256:5828dd917a13450d4a06fc4f22cc4787acb1013e1baa1c7e247d327a046be517
+    .claude/skills/monitoring-cloudwatch-observability/blueprints/never-do-patterns.md: sha256:43837b4057eb49b4b6eb16637fdd0cee5d0d3a977774c5f0b11835e8331d1c18
+    .claude/skills/optimizing-aws-costs/SKILL.md: sha256:3eaa319681413c7eaefbce4f8a6bb411e28aa6dd02595830b680726437bf874b
+    .claude/skills/optimizing-aws-costs/blueprints/evaluation-scenarios.md: sha256:cce1a2c17eb4c4fdc56d93ab3df90262c8c96be11b162377abe7a10888415166
+    .claude/skills/orchestrating-aws-step-functions/SKILL.md: sha256:f512d3ea91d6c35e50317b8c5fb1dcde60ea0fe3f5568c954191fda8cc61347e
+    .claude/skills/orchestrating-aws-step-functions/blueprints/evaluation-scenarios.md: sha256:2f2d7bb8211adb823a55f9952ca0834403dbb1f7340d1d192b43f0732aa7203b
+    .claude/skills/protecting-workloads-ddos-shield/SKILL.md: sha256:d6db0957d41930f17abdb1d106762caebd52601b7039885f1d804ad1a912a8f1
+    .claude/skills/protecting-workloads-ddos-shield/blueprints/evaluation-scenarios.md: sha256:938cac0ec3bbd716da86f2c090d1952396af1ac3adc18509838eca8fd19340c1
+    .claude/skills/securing-aws-cognito/SKILL.md: sha256:f361ab326a9a9ad5319708ed2cb80c2488bcd5fb5f1fd5f230d350960b111cca
+    .claude/skills/securing-aws-cognito/blueprints/always-do-patterns.md: sha256:cf2cee122d30893d2ebf1cbfe15e67c3a522c2f859c7f1255de1af5083c20bec
+    .claude/skills/securing-aws-cognito/blueprints/ask-first-decisions.md: sha256:ed0104c38727c5749e2ba827b7158c58eeb460ccab775c848d2d9193af39bf65
+    .claude/skills/securing-aws-cognito/blueprints/evaluation-scenarios.md: sha256:6f0c2094c5f1a4f7ce086ff587271335a67c060d091d517ae8242e329a614776
+    .claude/skills/securing-aws-cognito/blueprints/never-do-patterns.md: sha256:87cc3aee22847031e3c003086464c813ea5df94dab14b3410e10681363c1dea0
+    .claude/skills/securing-aws-iam-serverless/SKILL.md: sha256:8149d1566907e05f084b6e2f7d304f260552b58d172865a974712fca30a06e37
+    .claude/skills/securing-aws-iam-serverless/blueprints/evaluation-scenarios.md: sha256:86f7a3fa232c74d3b93f6a62bdba1ee9557718c0bec8f8ec29c530e36e2f8558
+    .claude/skills/securing-aws-iam-serverless/blueprints/policy-patterns.md: sha256:d0c8d478a940bb2b5c4b51893722e09897ef2dd5cf8fd959ab8e984478d9f6de
+    .claude/skills/securing-aws-secrets-certificates/SKILL.md: sha256:c20157547ec91edc308e1e187a5b5263165eabced266f1f6f13b6d009c539da2
+    .claude/skills/securing-aws-secrets-certificates/blueprints/always-do-patterns.md: sha256:f888591729af31e4d306bfcddba7146967b3bd98170eeaee83bbcdf5c5f160f6
+    .claude/skills/securing-aws-secrets-certificates/blueprints/ask-first-decisions.md: sha256:a1ae4af159c656ca17979358ec225ac287850d40ecd239b3954a2e0c85f9cf51
+    .claude/skills/securing-aws-secrets-certificates/blueprints/evaluation-scenarios.md: sha256:05f4b7bd1474792b59ccd11a5cecec4c6b2224b16cb80d4157c3741099406a24
+    .claude/skills/securing-aws-secrets-certificates/blueprints/never-do-patterns.md: sha256:6b24ec0c29fcb33d4a9d7265acc024fee75bf40f5c3f7615e0b457209c57c669
+    .claude/skills/securing-aws-waf-web-acls/SKILL.md: sha256:08a5abc5b4f869fe4e5045bbf0a0db97b2d94e3c4f87f7899afc842c9f444853
+    .claude/skills/securing-aws-waf-web-acls/blueprints/evaluation-scenarios.md: sha256:9ee15076f1d61166c074d840d7f7f0a01981e3add488fbde9d950dae00e6a527
+    .claude/skills/securing-vpc-network-access/SKILL.md: sha256:2b4b7ec3fa18c1fd18342ea9a1622ddf9ea46d28e0dd1c357897a9876827766e
+    .claude/skills/securing-vpc-network-access/blueprints/evaluation-scenarios.md: sha256:254a4d1928ae3a15ca96b539dfae5123ce671050db91da2673bdd445d0052b20
+    .claude/skills/tracing-aws-xray/SKILL.md: sha256:7e8b95418fa410f1c581c3e898c35a47227ff9172eba8a7183be5eb893af5321
+    .claude/skills/tracing-aws-xray/blueprints/evaluation-scenarios.md: sha256:868158ce7b80e837895506db71042436ee0d8f43190fb768a6a033a4050fc91f
+  source: local
+  local_path: ../aws-skills
+  declaring_parent: local:packages/quarkus-aws
+  anchored_local_path: packages/aws-skills
+  content_hash: sha256:b49536102bb913ff59750e87de32d1160d7dea3767ad44c1226c807f251cd508
   declared_license: MIT
 - repo_url: _local/artifact-authoring
   name: agents-factory-artifact-authoring
@@ -1250,136 +1836,6 @@ dependencies:
   local_path: ./packages/oci-terraform
   content_hash: sha256:20782afa939b74aa2e38c8c0fb78c0e28c69320cd11ccd40563da0e3a8bda1c7
   declared_license: MIT
-- repo_url: _local/quarkus-aws-saas
-  name: agents-factory-quarkus-aws-saas
-  version: 1.0.0
-  package_type: apm_package
-  deployed_files:
-  - .claude/skills/building-quarkus-aws-saas
-  - .claude/skills/building-quarkus-aws-saas/SKILL.md
-  - .claude/skills/building-quarkus-aws-saas/blueprints/always-do-patterns.md
-  - .claude/skills/building-quarkus-aws-saas/blueprints/e1-interview.md
-  - .claude/skills/building-quarkus-aws-saas/blueprints/e2-architecture-and-adrs.md
-  - .claude/skills/building-quarkus-aws-saas/blueprints/e3-functional-spec.md
-  - .claude/skills/building-quarkus-aws-saas/blueprints/e4-e5-design-and-tasks.md
-  - .claude/skills/building-quarkus-aws-saas/blueprints/e6-implementation-cycle.md
-  - .claude/skills/building-quarkus-aws-saas/blueprints/e7-deploy-and-observability.md
-  - .claude/skills/building-quarkus-aws-saas/blueprints/e8-reverse-sync.md
-  - .claude/skills/building-quarkus-aws-saas/blueprints/e9-archive-gate.md
-  - .claude/skills/building-quarkus-aws-saas/blueprints/evaluation-scenarios.md
-  - .claude/skills/building-quarkus-aws-saas/blueprints/knowledge-map.md
-  - .claude/skills/building-quarkus-aws-saas/blueprints/never-do-patterns.md
-  - .claude/skills/building-quarkus-aws-saas/blueprints/tracker-github-projects.md
-  - .claude/skills/building-quarkus-aws-saas/blueprints/unverified-and-risks.md
-  - .claude/skills/building-quarkus-aws-saas/blueprints/worker-briefs.md
-  - .claude/skills/coordinating-quarkus-aws-handoffs
-  - .claude/skills/coordinating-quarkus-aws-handoffs/SKILL.md
-  - .claude/skills/coordinating-quarkus-aws-handoffs/assets/adr.template.md
-  - .claude/skills/coordinating-quarkus-aws-handoffs/assets/deploy-report.template.md
-  - .claude/skills/coordinating-quarkus-aws-handoffs/assets/diagnosis-report.template.md
-  - .claude/skills/coordinating-quarkus-aws-handoffs/assets/escalation.template.md
-  - .claude/skills/coordinating-quarkus-aws-handoffs/assets/handoff-profile.yaml
-  - .claude/skills/coordinating-quarkus-aws-handoffs/assets/result-code.template.md
-  - .claude/skills/coordinating-quarkus-aws-handoffs/assets/review.template.md
-  - .claude/skills/coordinating-quarkus-aws-handoffs/assets/wo-code.template.md
-  - .claude/skills/coordinating-quarkus-aws-handoffs/assets/wo-debug.template.md
-  - .claude/skills/coordinating-quarkus-aws-handoffs/assets/wo-deploy.template.md
-  - .claude/skills/coordinating-quarkus-aws-handoffs/assets/wo-infra.template.md
-  - .claude/skills/coordinating-quarkus-aws-handoffs/assets/wo-observability.template.md
-  - .claude/skills/coordinating-quarkus-aws-handoffs/assets/wo-review.template.md
-  - .claude/skills/coordinating-quarkus-aws-handoffs/assets/wo-stripe.template.md
-  - .claude/skills/coordinating-quarkus-aws-handoffs/blueprints/agent-alignment.md
-  - .claude/skills/coordinating-quarkus-aws-handoffs/blueprints/always-do-patterns.md
-  - .claude/skills/coordinating-quarkus-aws-handoffs/blueprints/approval-lines.md
-  - .claude/skills/coordinating-quarkus-aws-handoffs/blueprints/evaluation-scenarios.md
-  - .claude/skills/coordinating-quarkus-aws-handoffs/blueprints/never-do-patterns.md
-  - .claude/skills/coordinating-quarkus-aws-handoffs/blueprints/openspec-integration.md
-  - .claude/skills/coordinating-quarkus-aws-handoffs/blueprints/roles-and-skills.md
-  - .claude/skills/coordinating-quarkus-aws-handoffs/blueprints/unverified-and-risks.md
-  - .claude/skills/integrating-quarkus-langchain4j-v1-15
-  - .claude/skills/integrating-quarkus-langchain4j-v1-15/SKILL.md
-  - .claude/skills/integrating-quarkus-langchain4j-v1-15/blueprints/always-do-patterns.md
-  - .claude/skills/integrating-quarkus-langchain4j-v1-15/blueprints/ask-first-decisions.md
-  - .claude/skills/integrating-quarkus-langchain4j-v1-15/blueprints/config-defaults-and-contradictions.md
-  - .claude/skills/integrating-quarkus-langchain4j-v1-15/blueprints/evaluation-scenarios.md
-  - .claude/skills/integrating-quarkus-langchain4j-v1-15/blueprints/never-do-patterns.md
-  - .claude/skills/integrating-quarkus-langchain4j-v1-15/blueprints/source-bibliography.md
-  - .claude/skills/integrating-quarkus-langchain4j-v1-15/blueprints/unverified-and-risks.md
-  - .claude/skills/integrating-quarkus-langchain4j-v1-15/blueprints/verification-and-production.md
-  - .claude/skills/integrating-stripe-quarkus-v3-40
-  - .claude/skills/integrating-stripe-quarkus-v3-40/SKILL.md
-  - .claude/skills/integrating-stripe-quarkus-v3-40/blueprints/always-do-patterns.md
-  - .claude/skills/integrating-stripe-quarkus-v3-40/blueprints/ask-first-decisions.md
-  - .claude/skills/integrating-stripe-quarkus-v3-40/blueprints/evaluation-scenarios.md
-  - .claude/skills/integrating-stripe-quarkus-v3-40/blueprints/migration-notes.md
-  - .claude/skills/integrating-stripe-quarkus-v3-40/blueprints/never-do-patterns.md
-  - .claude/skills/integrating-stripe-quarkus-v3-40/blueprints/source-bibliography.md
-  - .claude/skills/integrating-stripe-quarkus-v3-40/blueprints/unverified-and-risks.md
-  - .claude/skills/integrating-stripe-quarkus-v3-40/blueprints/verification-and-production.md
-  - .claude/skills/integrating-stripe-quarkus-v3-40/blueprints/webhook-pipeline.md
-  deployed_file_hashes:
-    .claude/skills/building-quarkus-aws-saas/SKILL.md: sha256:7ace1c4149d74c74838902a96ee68432c6e87f1377a7fdfb4f92520f72734210
-    .claude/skills/building-quarkus-aws-saas/blueprints/always-do-patterns.md: sha256:184361bf50de8dd941790e9150ee6a3ad85219bb0d6df53cf6bd374b254417b9
-    .claude/skills/building-quarkus-aws-saas/blueprints/e1-interview.md: sha256:b4b7ef85f1135b9e059d1517dd24b92e32003585ceddd3073f1b9df9e6bff107
-    .claude/skills/building-quarkus-aws-saas/blueprints/e2-architecture-and-adrs.md: sha256:c99cf5c29820688bf8b2cafd34003629397de3413cc7f977a6ebcec467a3db58
-    .claude/skills/building-quarkus-aws-saas/blueprints/e3-functional-spec.md: sha256:09db2785d37cc1571b7b81a0c0eab3203fbf3755dc766238a70ed6c2a605c0f3
-    .claude/skills/building-quarkus-aws-saas/blueprints/e4-e5-design-and-tasks.md: sha256:774d9842f88bc0dac382534f3494f325f74a5d1c2e43a6243e4a5efe8cedc24f
-    .claude/skills/building-quarkus-aws-saas/blueprints/e6-implementation-cycle.md: sha256:6d8bf664d83cd46479caa255c9d7e8f5db053bbe707d7d6cc56cb80415075f59
-    .claude/skills/building-quarkus-aws-saas/blueprints/e7-deploy-and-observability.md: sha256:0de034aae3da89f4134003c60d67f677b98b10c85c0a59914518473fc7d832ca
-    .claude/skills/building-quarkus-aws-saas/blueprints/e8-reverse-sync.md: sha256:9b3bfcd0d564bc5f42455e9b4e78170364e4794f485e9d14afb095b9a39b53b9
-    .claude/skills/building-quarkus-aws-saas/blueprints/e9-archive-gate.md: sha256:6678f0c62a98b44bb34a96c15a7e8f582defc52202d57b93674655290b255d67
-    .claude/skills/building-quarkus-aws-saas/blueprints/evaluation-scenarios.md: sha256:bf416a7cff52a742c7a2b5a123b68f1208b339999e53da841e5e08d786d6dc66
-    .claude/skills/building-quarkus-aws-saas/blueprints/knowledge-map.md: sha256:8601b75f64263baf6ce433f0829486da8df372c53d08f0bc1df7f66982b11a31
-    .claude/skills/building-quarkus-aws-saas/blueprints/never-do-patterns.md: sha256:3c34d0cabe6f482f3cc50bbd910abb2e76f31f2c9c02000af81e1b0f11b74688
-    .claude/skills/building-quarkus-aws-saas/blueprints/tracker-github-projects.md: sha256:17b578f617e20dcc34a3551e63c4112d50ae2e702b1e610331b04378903f9f19
-    .claude/skills/building-quarkus-aws-saas/blueprints/unverified-and-risks.md: sha256:58300812fcae8a6d0bf317b455cbbd6424c3a50b4148ec7419da17f72eb57ea2
-    .claude/skills/building-quarkus-aws-saas/blueprints/worker-briefs.md: sha256:75872ad055f6150233bd1859e1dcbb9a821d6b42b54ef89abb9de56c46eecbba
-    .claude/skills/coordinating-quarkus-aws-handoffs/SKILL.md: sha256:658a40597c5e223d4e61d08af1a5aecc55d8362f9ff0f237cb55fde78b4f69a6
-    .claude/skills/coordinating-quarkus-aws-handoffs/assets/adr.template.md: sha256:de46315aececa06122cf38fcce0d889d9cff95deb65d6c2786c49d990509d910
-    .claude/skills/coordinating-quarkus-aws-handoffs/assets/deploy-report.template.md: sha256:dd4ed31229680efb314fa82d0bdc47fa982ccfda483ce42d8913933638b504d3
-    .claude/skills/coordinating-quarkus-aws-handoffs/assets/diagnosis-report.template.md: sha256:74344b6881dcf220ed37c294f11b36c08cad30ae821c92116bc612a6a071426f
-    .claude/skills/coordinating-quarkus-aws-handoffs/assets/escalation.template.md: sha256:5ad1dcff9d41eb7f253ea7712e0ecc8eecde0f1f8798c8c72d66392e75512f03
-    .claude/skills/coordinating-quarkus-aws-handoffs/assets/handoff-profile.yaml: sha256:6c9ab1dca7a28b0a34512b457e110b2671614b94e9c131f906017a11319b109e
-    .claude/skills/coordinating-quarkus-aws-handoffs/assets/result-code.template.md: sha256:3cf931ef0398369326608b1a934fe3bb5e185cce6b75e34e2012e6b223ca5b8c
-    .claude/skills/coordinating-quarkus-aws-handoffs/assets/review.template.md: sha256:06595824306f86be324b36f915cbb6df51de8d9a1d58c746ad829b438ae07c64
-    .claude/skills/coordinating-quarkus-aws-handoffs/assets/wo-code.template.md: sha256:eb6b8e916384a4b4b757e8996bb205ae9852703ea248d0f1211be19782a4209b
-    .claude/skills/coordinating-quarkus-aws-handoffs/assets/wo-debug.template.md: sha256:42e633be57ac5dc60d2cbe1fa70635b4c3bb377ee6dd4be1a10259dd8a8774ca
-    .claude/skills/coordinating-quarkus-aws-handoffs/assets/wo-deploy.template.md: sha256:07cc6e7a85ba952364f4e70080943939fac8e6f0bcce3ecf5b2f2b389b64822b
-    .claude/skills/coordinating-quarkus-aws-handoffs/assets/wo-infra.template.md: sha256:91dce452d06b324df7c4392508ecfde854e0b685a34e35985e09b0fa84f9b5a7
-    .claude/skills/coordinating-quarkus-aws-handoffs/assets/wo-observability.template.md: sha256:4878ea71f30150e378510b85cfca12c053cba730a48185dddc7166f4282d9799
-    .claude/skills/coordinating-quarkus-aws-handoffs/assets/wo-review.template.md: sha256:0255acfcf7dde76c501cfb2fa2edf5191efee657e8e2d14f551ca97f67dbfc62
-    .claude/skills/coordinating-quarkus-aws-handoffs/assets/wo-stripe.template.md: sha256:b9d2d1218c7b3cccaa376ea90982d3be8e790beabaa9e070459b958d32ee9446
-    .claude/skills/coordinating-quarkus-aws-handoffs/blueprints/agent-alignment.md: sha256:40e2ef23308fcff1317400fe1fd175478c9e006023d3eefb0c8425459453721b
-    .claude/skills/coordinating-quarkus-aws-handoffs/blueprints/always-do-patterns.md: sha256:bb45e7124efb0fbbf4cfedd36ad771d1aac50fedb851af0487639a80db7b4c8f
-    .claude/skills/coordinating-quarkus-aws-handoffs/blueprints/approval-lines.md: sha256:369b3814cc5b3d84115d2f9fb7195dbd0f8f2bd8913e3e87cfcebb2d7d988dcd
-    .claude/skills/coordinating-quarkus-aws-handoffs/blueprints/evaluation-scenarios.md: sha256:f973ae9502b44293ad7ab691a85205e994773a7b6b8d6cbfa3626a30f857ff2b
-    .claude/skills/coordinating-quarkus-aws-handoffs/blueprints/never-do-patterns.md: sha256:af0df735f7da8011b473d7e20d0ea978520967fde77d10e3935d662f7ddc6854
-    .claude/skills/coordinating-quarkus-aws-handoffs/blueprints/openspec-integration.md: sha256:d02b7587bf2d7e12db851afe13c356c575ff6b6fcc6956a0efb1b4bcb62b18e9
-    .claude/skills/coordinating-quarkus-aws-handoffs/blueprints/roles-and-skills.md: sha256:bfd991c17eb62f3caf2b6ee62a5d6ec38a59504c37131f07353e078e7089f4d1
-    .claude/skills/coordinating-quarkus-aws-handoffs/blueprints/unverified-and-risks.md: sha256:402a0b0852182b2a7687b7f40c37ab4ef71530c5ffe17288cb802bf64308ebde
-    .claude/skills/integrating-quarkus-langchain4j-v1-15/SKILL.md: sha256:3f9a6151625e00d7dda110e689bd3ece268329253316c9df8c5797910ed317e9
-    .claude/skills/integrating-quarkus-langchain4j-v1-15/blueprints/always-do-patterns.md: sha256:85ad92d35465fde7182dadd1ad5d7617abf0a78b03f73c33375df9ee40bc8226
-    .claude/skills/integrating-quarkus-langchain4j-v1-15/blueprints/ask-first-decisions.md: sha256:a6ff7342d52da46dd6a48204d2f6403d078ca72be16d867ae2423518ffdb6624
-    .claude/skills/integrating-quarkus-langchain4j-v1-15/blueprints/config-defaults-and-contradictions.md: sha256:cffbbd958d8c6cf5a33b7d83ee5a3ffd626e49240e1224d7f0caa30d2a9d93f2
-    .claude/skills/integrating-quarkus-langchain4j-v1-15/blueprints/evaluation-scenarios.md: sha256:e624ce466c9b66b4e80990022476c077548d14c1294158c8ce94c5c8cd99ef4c
-    .claude/skills/integrating-quarkus-langchain4j-v1-15/blueprints/never-do-patterns.md: sha256:241f2f30e1595cad7ed4de1323302c6a741f3ec2d2bdfc4bd09dd72e47f8e5c8
-    .claude/skills/integrating-quarkus-langchain4j-v1-15/blueprints/source-bibliography.md: sha256:c9b1e981fd960a9529ec195c530c60bf13cdf8e5b7417bab04239d9bc02dc4c6
-    .claude/skills/integrating-quarkus-langchain4j-v1-15/blueprints/unverified-and-risks.md: sha256:88bb1d7861f2c436c4f020173aa7201de6067a66418fc8bf5bdbc9f586f7d224
-    .claude/skills/integrating-quarkus-langchain4j-v1-15/blueprints/verification-and-production.md: sha256:f444ebab297eba30baf2a45099e46159b67d043b195804a7e32f00fdeda08ce6
-    .claude/skills/integrating-stripe-quarkus-v3-40/SKILL.md: sha256:f912e2c4e88cdd3c330a0f307c8357408a9b2d62ca57df5445f20d92ff14717d
-    .claude/skills/integrating-stripe-quarkus-v3-40/blueprints/always-do-patterns.md: sha256:6e6ef2db536027f420fd626ffd0c5c8ca69850e6ddcbf917607890bf0176cb27
-    .claude/skills/integrating-stripe-quarkus-v3-40/blueprints/ask-first-decisions.md: sha256:40c026de1040780a3e615b920c9f9e794f158e8bd0e7f696fc798f9b228a6f05
-    .claude/skills/integrating-stripe-quarkus-v3-40/blueprints/evaluation-scenarios.md: sha256:43ac4c3a316ea1f80117078f0e7b4ec02b890cb408267e9a27b0e1f91658b009
-    .claude/skills/integrating-stripe-quarkus-v3-40/blueprints/migration-notes.md: sha256:c5c4e278618e0e7d903e29df26e56f3d2d062ab155625e041384189f95f0f637
-    .claude/skills/integrating-stripe-quarkus-v3-40/blueprints/never-do-patterns.md: sha256:dc75ddbe7b1a5be88ac925a44ebd8cc52b8f1f3f6333a24250a56533f2f2f1b4
-    .claude/skills/integrating-stripe-quarkus-v3-40/blueprints/source-bibliography.md: sha256:6e89f3aa820817877a5f9b694e58758c21cbb546c8defb60af097e69df73839e
-    .claude/skills/integrating-stripe-quarkus-v3-40/blueprints/unverified-and-risks.md: sha256:3a476760ab790f786de6aed0ba375e2fe0a2b07b4d85d0a84f926890d2961302
-    .claude/skills/integrating-stripe-quarkus-v3-40/blueprints/verification-and-production.md: sha256:68aa4ca12e50312b264d87f2f26da989f5debd1bc91185746d4ffa1ead4ebe35
-    .claude/skills/integrating-stripe-quarkus-v3-40/blueprints/webhook-pipeline.md: sha256:f953cbc3262fdf7b2a51014af1941b9406111622785664c4f1a10e3a55455b4f
-  source: local
-  local_path: ./packages/quarkus-aws-saas
-  content_hash: sha256:478d190c6122770616cb26587f20ce4dfb8b79298078845f6dad6add8ffd7d3d
-  declared_license: MIT
 - repo_url: _local/researching-frameworks
   name: agents-factory-researching-frameworks
   version: 1.0.0
@@ -1672,31 +2128,6 @@ dependencies:
   source: local
   local_path: ./packages/vercel-frontend
   content_hash: sha256:bc9a92c759faeb76555500d999620fa4c1e8949cdef188ff754bc1db2829d135
-  declared_license: MIT
-- repo_url: _local/aws-architect
-  name: agents-factory-aws-architect
-  version: 1.0.0
-  depth: 2
-  resolved_by: _local/quarkus-aws-saas
-  package_type: apm_package
-  deployed_files:
-  - .claude/agents/aws-architect.md
-  - .claude/rules/aws-iac-reliability-cost.md
-  - .claude/rules/aws-security-baseline.md
-  - .claude/skills/aws-architecture-advisor
-  - .claude/skills/aws-architecture-advisor/SKILL.md
-  - .claude/skills/aws-architecture-advisor/blueprints/evaluation-scenarios.md
-  deployed_file_hashes:
-    .claude/agents/aws-architect.md: sha256:3f38974b81ddb9060265225dbeaaea3077c9feb5e8cc235f3fcc81b0f3ae85ab
-    .claude/rules/aws-iac-reliability-cost.md: sha256:f905ffcc571caf03a6904bee1b2a5cfe44a03de9487bfcb50cda9471f2f5ef9b
-    .claude/rules/aws-security-baseline.md: sha256:e299b4aa4ff3bc07ddedb85d530453786422ff1a64b6be832f8a97278bc566b9
-    .claude/skills/aws-architecture-advisor/SKILL.md: sha256:41fa55ace693417a662941d6d77f2c05125771d30e14639029f3ffc6211551c2
-    .claude/skills/aws-architecture-advisor/blueprints/evaluation-scenarios.md: sha256:31dae533ffa46ed4ce7dfe45fd89fd305621f536b1c79bde972c295200195980
-  source: local
-  local_path: ../aws-architect
-  declaring_parent: ./packages/quarkus-aws-saas
-  anchored_local_path: packages/aws-architect
-  content_hash: sha256:aa2e50aae03c3b6359dfea8a92565b3eba010f2d2ff2dd29eaca35e376a454b6
   declared_license: MIT
 - repo_url: _local/aws-lambda
   name: agents-factory-aws-lambda
@@ -2669,79 +3100,6 @@ dependencies:
   anchored_local_path: packages/research-core
   content_hash: sha256:309ccb9607f6181afcdbbfa4f1963965851759c2d5ca63c7d9a78ce61ee98d5a
   declared_license: MIT
-- repo_url: _local/stripe-java
-  name: agents-factory-stripe-java
-  version: 1.0.0
-  depth: 2
-  resolved_by: _local/quarkus-aws-saas
-  package_type: apm_package
-  deployed_files:
-  - .claude/agents/stripe-advisor.md
-  - .claude/agents/stripe-integrator.md
-  - .claude/rules/stripe-java-code-standards.md
-  - .claude/skills/developing-stripe-java-core-v34
-  - .claude/skills/developing-stripe-java-core-v34/SKILL.md
-  - .claude/skills/developing-stripe-java-core-v34/blueprints/always-do-patterns.md
-  - .claude/skills/developing-stripe-java-core-v34/blueprints/evaluation-scenarios.md
-  - .claude/skills/developing-stripe-java-core-v34/blueprints/never-do-patterns.md
-  - .claude/skills/developing-stripe-java-core-v34/blueprints/unverified-and-risks.md
-  - .claude/skills/handling-stripe-webhooks-v34
-  - .claude/skills/handling-stripe-webhooks-v34/SKILL.md
-  - .claude/skills/handling-stripe-webhooks-v34/blueprints/always-do-patterns.md
-  - .claude/skills/handling-stripe-webhooks-v34/blueprints/evaluation-scenarios.md
-  - .claude/skills/handling-stripe-webhooks-v34/blueprints/never-do-patterns.md
-  - .claude/skills/handling-stripe-webhooks-v34/blueprints/unverified-and-risks.md
-  - .claude/skills/integrate-stripe-java
-  - .claude/skills/integrate-stripe-java/SKILL.md
-  - .claude/skills/integrate-stripe-java/blueprints/evaluation-scenarios.md
-  - .claude/skills/managing-stripe-subscriptions-v34
-  - .claude/skills/managing-stripe-subscriptions-v34/SKILL.md
-  - .claude/skills/managing-stripe-subscriptions-v34/blueprints/always-do-patterns.md
-  - .claude/skills/managing-stripe-subscriptions-v34/blueprints/evaluation-scenarios.md
-  - .claude/skills/managing-stripe-subscriptions-v34/blueprints/never-do-patterns.md
-  - .claude/skills/managing-stripe-subscriptions-v34/blueprints/unverified-and-risks.md
-  - .claude/skills/processing-stripe-payments-v34
-  - .claude/skills/processing-stripe-payments-v34/SKILL.md
-  - .claude/skills/processing-stripe-payments-v34/blueprints/always-do-patterns.md
-  - .claude/skills/processing-stripe-payments-v34/blueprints/evaluation-scenarios.md
-  - .claude/skills/processing-stripe-payments-v34/blueprints/never-do-patterns.md
-  - .claude/skills/processing-stripe-payments-v34/blueprints/unverified-and-risks.md
-  - .claude/skills/review-stripe-integration
-  - .claude/skills/review-stripe-integration/SKILL.md
-  - .claude/skills/review-stripe-integration/blueprints/evaluation-scenarios.md
-  deployed_file_hashes:
-    .claude/agents/stripe-advisor.md: sha256:8fbdf657abeb86d7ee4ccaa68b684f7853ddcfeace9174c4111a8fb1fe0303fc
-    .claude/agents/stripe-integrator.md: sha256:1712c3ae7bc057526ff3fc9624b6440b8422dc3bca9682c46ebab6b74af7ec67
-    .claude/rules/stripe-java-code-standards.md: sha256:54b7fec011447f9f91ffd7a3f67f5df1832cfd02d886ca59c089ff81ce96e91e
-    .claude/skills/developing-stripe-java-core-v34/SKILL.md: sha256:29cdc50eeca643de4165c35464ab7b7f6c0ae0c93c934cc44907c9efdd973810
-    .claude/skills/developing-stripe-java-core-v34/blueprints/always-do-patterns.md: sha256:0c5f8fdd0f9986ecca04913ead88db87e228949ce64e487f1f1a756fde90b020
-    .claude/skills/developing-stripe-java-core-v34/blueprints/evaluation-scenarios.md: sha256:462283ea530ca69be67e0f3300cb1f32d9d6d04dab4642284bb0bfcc6589e769
-    .claude/skills/developing-stripe-java-core-v34/blueprints/never-do-patterns.md: sha256:88ad906e7b0614373c47bf07a319a81abf1a71188deea4669db4e20bbea199d9
-    .claude/skills/developing-stripe-java-core-v34/blueprints/unverified-and-risks.md: sha256:fb95a359e5b6840caef23a5c8e7eae44d56266b0c2ff920c87a25d0b39456001
-    .claude/skills/handling-stripe-webhooks-v34/SKILL.md: sha256:98745d39c9e5b9897f1359ba2170639aec2aec2c04a011d9adbe14fd445eeaf5
-    .claude/skills/handling-stripe-webhooks-v34/blueprints/always-do-patterns.md: sha256:6a533b1f35dcbdfe1a28294c683f8624edaee87f85f661a019aa3758de67a262
-    .claude/skills/handling-stripe-webhooks-v34/blueprints/evaluation-scenarios.md: sha256:44b204f5c8216eb38a965be3371799e4791306ae21a273f5d915da561e61ba40
-    .claude/skills/handling-stripe-webhooks-v34/blueprints/never-do-patterns.md: sha256:540070a1479a5cdcc6548af429c347a762169a42cbb79ba3ac074183f6e31a42
-    .claude/skills/handling-stripe-webhooks-v34/blueprints/unverified-and-risks.md: sha256:41c593921507732f545ee50938db8e0bf60b74b37b7ec8cf63898fe8c6b045dc
-    .claude/skills/integrate-stripe-java/SKILL.md: sha256:deea31ebf9b5669d7a3e152405bf00ab5af6bd39a50db467ad9cde54ad09abd0
-    .claude/skills/integrate-stripe-java/blueprints/evaluation-scenarios.md: sha256:27369d246b79d610ca3769988f581c19264a8e8b4842fd6d6dfd9ce7b6d44b59
-    .claude/skills/managing-stripe-subscriptions-v34/SKILL.md: sha256:8f8534861c6b89adc86d2ff95d4f0e4c3d99462a3e2e1ab71577f20501584bcf
-    .claude/skills/managing-stripe-subscriptions-v34/blueprints/always-do-patterns.md: sha256:d336656a02a133f411cc286912525812411fa449bffbe1dad99e99c10f6c6d23
-    .claude/skills/managing-stripe-subscriptions-v34/blueprints/evaluation-scenarios.md: sha256:518ae810e196bc311f142d1533d90520b38543255405017fd3f5b08b7dbf1dc3
-    .claude/skills/managing-stripe-subscriptions-v34/blueprints/never-do-patterns.md: sha256:1351ea1adcb86ed8316377e280551c2c6cc842de9447746d3f2cee593e713377
-    .claude/skills/managing-stripe-subscriptions-v34/blueprints/unverified-and-risks.md: sha256:497e5a0f514ea180623b7deafda023dc8a159501a815179b89e77d73e0d7f288
-    .claude/skills/processing-stripe-payments-v34/SKILL.md: sha256:102a62c6ffba432b534faa467a5a3aab30b8897c257c8c9075320e71adc9d94f
-    .claude/skills/processing-stripe-payments-v34/blueprints/always-do-patterns.md: sha256:8f7c0907e2a65c23277cc296762a30c5e7bd7ea1d55a0b3e313d732e0369c386
-    .claude/skills/processing-stripe-payments-v34/blueprints/evaluation-scenarios.md: sha256:2f0dd5af734a158bb5d3b4e9d29a0df644923c9035f1efec6d14244a8b23ca4e
-    .claude/skills/processing-stripe-payments-v34/blueprints/never-do-patterns.md: sha256:c1aa78aa6f9e75d7d3d4a589c8c74ca707abed5991fe63174be26f662476982d
-    .claude/skills/processing-stripe-payments-v34/blueprints/unverified-and-risks.md: sha256:d19298cf3e53a2047b3e9f0ed84e049962d2608d21a061c77ba38e79e95a432b
-    .claude/skills/review-stripe-integration/SKILL.md: sha256:eff19ad1338bc9cfba7cd294e89d9c5c1f6a7c54ae82073b78146e8aacf201f6
-    .claude/skills/review-stripe-integration/blueprints/evaluation-scenarios.md: sha256:d647ca8526ee4b5f0a19fea2c2907e05f452c6f59c851b31e65049b11338af2c
-  source: local
-  local_path: ../stripe-java
-  declaring_parent: ./packages/quarkus-aws-saas
-  anchored_local_path: packages/stripe-java
-  content_hash: sha256:4dc5776f00a8659a25407f912c6c861a459de8b5cd78cb223f8b941df09044af
 - repo_url: _local/terraform
   name: agents-factory-terraform
   version: 1.2.0
@@ -3941,314 +4299,6 @@ dependencies:
   declaring_parent: local:packages/terraform
   anchored_local_path: packages/artifact-authoring
   content_hash: sha256:f60aab721953017fcd54dfca647e52329a597ad5fbec58735260aba4e3872e00
-  declared_license: MIT
-- repo_url: _local/aws-skills
-  name: agents-factory-aws-skills
-  version: 1.0.0
-  depth: 3
-  resolved_by: _local/quarkus-aws
-  package_type: apm_package
-  deployed_files:
-  - .claude/skills/applying-aws-operational-excellence
-  - .claude/skills/applying-aws-operational-excellence/SKILL.md
-  - .claude/skills/applying-aws-operational-excellence/blueprints/evaluation-scenarios.md
-  - .claude/skills/applying-aws-performance-efficiency
-  - .claude/skills/applying-aws-performance-efficiency/SKILL.md
-  - .claude/skills/applying-aws-performance-efficiency/blueprints/architecture-decisions.md
-  - .claude/skills/applying-aws-performance-efficiency/blueprints/evaluation-scenarios.md
-  - .claude/skills/applying-aws-reliability-pillar
-  - .claude/skills/applying-aws-reliability-pillar/SKILL.md
-  - .claude/skills/applying-aws-reliability-pillar/blueprints/evaluation-scenarios.md
-  - .claude/skills/applying-aws-serverless-well-architected-lens
-  - .claude/skills/applying-aws-serverless-well-architected-lens/SKILL.md
-  - .claude/skills/applying-aws-serverless-well-architected-lens/blueprints/always-do-patterns.md
-  - .claude/skills/applying-aws-serverless-well-architected-lens/blueprints/ask-first-decisions.md
-  - .claude/skills/applying-aws-serverless-well-architected-lens/blueprints/evaluation-scenarios.md
-  - .claude/skills/applying-aws-serverless-well-architected-lens/blueprints/never-do-patterns.md
-  - .claude/skills/applying-aws-serverless-well-architected-lens/blueprints/post-2022-gaps.md
-  - .claude/skills/applying-aws-sustainability-pillar
-  - .claude/skills/applying-aws-sustainability-pillar/SKILL.md
-  - .claude/skills/applying-aws-sustainability-pillar/blueprints/evaluation-scenarios.md
-  - .claude/skills/applying-aws-well-architected
-  - .claude/skills/applying-aws-well-architected/SKILL.md
-  - .claude/skills/applying-aws-well-architected/blueprints/always-do-patterns.md
-  - .claude/skills/applying-aws-well-architected/blueprints/ask-first-decisions.md
-  - .claude/skills/applying-aws-well-architected/blueprints/evaluation-scenarios.md
-  - .claude/skills/applying-aws-well-architected/blueprints/never-do-patterns.md
-  - .claude/skills/applying-aws-well-architected/blueprints/reference-architectures.md
-  - .claude/skills/applying-waf-cost-optimization
-  - .claude/skills/applying-waf-cost-optimization/SKILL.md
-  - .claude/skills/applying-waf-cost-optimization/blueprints/always-do-patterns.md
-  - .claude/skills/applying-waf-cost-optimization/blueprints/ask-first-decisions.md
-  - .claude/skills/applying-waf-cost-optimization/blueprints/evaluation-scenarios.md
-  - .claude/skills/applying-waf-cost-optimization/blueprints/never-do-patterns.md
-  - .claude/skills/applying-waf-operational-excellence-pillar
-  - .claude/skills/applying-waf-operational-excellence-pillar/SKILL.md
-  - .claude/skills/applying-waf-operational-excellence-pillar/blueprints/always-do-patterns.md
-  - .claude/skills/applying-waf-operational-excellence-pillar/blueprints/architecture-decisions.md
-  - .claude/skills/applying-waf-operational-excellence-pillar/blueprints/evaluation-scenarios.md
-  - .claude/skills/applying-waf-reliability-pillar
-  - .claude/skills/applying-waf-reliability-pillar/SKILL.md
-  - .claude/skills/applying-waf-reliability-pillar/blueprints/evaluation-scenarios.md
-  - .claude/skills/applying-waf-sustainability-pillar
-  - .claude/skills/applying-waf-sustainability-pillar/SKILL.md
-  - .claude/skills/applying-waf-sustainability-pillar/blueprints/evaluation-scenarios.md
-  - .claude/skills/architecting-aws-multi-account-organizations
-  - .claude/skills/architecting-aws-multi-account-organizations/SKILL.md
-  - .claude/skills/architecting-aws-multi-account-organizations/blueprints/always-do-patterns.md
-  - .claude/skills/architecting-aws-multi-account-organizations/blueprints/ask-first-decisions.md
-  - .claude/skills/architecting-aws-multi-account-organizations/blueprints/evaluation-scenarios.md
-  - .claude/skills/architecting-aws-multi-account-organizations/blueprints/never-do-patterns.md
-  - .claude/skills/architecting-aws-s3-storage
-  - .claude/skills/architecting-aws-s3-storage/SKILL.md
-  - .claude/skills/architecting-aws-s3-storage/blueprints/evaluation-scenarios.md
-  - .claude/skills/architecting-aws-saas-multitenant
-  - .claude/skills/architecting-aws-saas-multitenant/SKILL.md
-  - .claude/skills/architecting-aws-saas-multitenant/blueprints/evaluation-scenarios.md
-  - .claude/skills/architecting-aws-security-pillar
-  - .claude/skills/architecting-aws-security-pillar/SKILL.md
-  - .claude/skills/architecting-aws-security-pillar/blueprints/always-do-patterns.md
-  - .claude/skills/architecting-aws-security-pillar/blueprints/ask-first-decisions.md
-  - .claude/skills/architecting-aws-security-pillar/blueprints/evaluation-scenarios.md
-  - .claude/skills/architecting-aws-security-pillar/blueprints/never-do-patterns.md
-  - .claude/skills/architecting-aws-ses-email
-  - .claude/skills/architecting-aws-ses-email/SKILL.md
-  - .claude/skills/architecting-aws-ses-email/blueprints/evaluation-scenarios.md
-  - .claude/skills/architecting-aws-sns-pubsub
-  - .claude/skills/architecting-aws-sns-pubsub/SKILL.md
-  - .claude/skills/architecting-aws-sns-pubsub/blueprints/evaluation-scenarios.md
-  - .claude/skills/architecting-aws-sqs-messaging
-  - .claude/skills/architecting-aws-sqs-messaging/SKILL.md
-  - .claude/skills/architecting-aws-sqs-messaging/blueprints/evaluation-scenarios.md
-  - .claude/skills/architecting-cloudtrail-audit-logging
-  - .claude/skills/architecting-cloudtrail-audit-logging/SKILL.md
-  - .claude/skills/architecting-cloudtrail-audit-logging/blueprints/always-do-patterns.md
-  - .claude/skills/architecting-cloudtrail-audit-logging/blueprints/evaluation-scenarios.md
-  - .claude/skills/architecting-cloudtrail-audit-logging/blueprints/never-do-patterns.md
-  - .claude/skills/architecting-eventbridge-eda
-  - .claude/skills/architecting-eventbridge-eda/SKILL.md
-  - .claude/skills/architecting-eventbridge-eda/blueprints/always-do-patterns.md
-  - .claude/skills/architecting-eventbridge-eda/blueprints/ask-first-decisions.md
-  - .claude/skills/architecting-eventbridge-eda/blueprints/evaluation-scenarios.md
-  - .claude/skills/architecting-eventbridge-eda/blueprints/never-do-patterns.md
-  - .claude/skills/architecting-lambda-serverless-patterns
-  - .claude/skills/architecting-lambda-serverless-patterns/SKILL.md
-  - .claude/skills/architecting-lambda-serverless-patterns/blueprints/evaluation-scenarios.md
-  - .claude/skills/architecting-sam-serverless-patterns
-  - .claude/skills/architecting-sam-serverless-patterns/SKILL.md
-  - .claude/skills/architecting-sam-serverless-patterns/blueprints/evaluation-scenarios.md
-  - .claude/skills/auditing-aws-cloudtrail
-  - .claude/skills/auditing-aws-cloudtrail/SKILL.md
-  - .claude/skills/auditing-aws-cloudtrail/blueprints/evaluation-scenarios.md
-  - .claude/skills/configuring-aws-route53-dns
-  - .claude/skills/configuring-aws-route53-dns/SKILL.md
-  - .claude/skills/configuring-aws-route53-dns/blueprints/always-do-patterns.md
-  - .claude/skills/configuring-aws-route53-dns/blueprints/ask-first-decisions.md
-  - .claude/skills/configuring-aws-route53-dns/blueprints/evaluation-scenarios.md
-  - .claude/skills/configuring-aws-route53-dns/blueprints/never-do-patterns.md
-  - .claude/skills/delivering-cloudfront-cdn
-  - .claude/skills/delivering-cloudfront-cdn/SKILL.md
-  - .claude/skills/delivering-cloudfront-cdn/blueprints/always-do-patterns.md
-  - .claude/skills/delivering-cloudfront-cdn/blueprints/ask-first-decisions.md
-  - .claude/skills/delivering-cloudfront-cdn/blueprints/evaluation-scenarios.md
-  - .claude/skills/delivering-cloudfront-cdn/blueprints/never-do-patterns.md
-  - .claude/skills/designing-aws-api-gateway-serverless
-  - .claude/skills/designing-aws-api-gateway-serverless/SKILL.md
-  - .claude/skills/designing-aws-api-gateway-serverless/blueprints/evaluation-scenarios.md
-  - .claude/skills/designing-aws-vpc-networks
-  - .claude/skills/designing-aws-vpc-networks/SKILL.md
-  - .claude/skills/designing-aws-vpc-networks/blueprints/evaluation-scenarios.md
-  - .claude/skills/designing-aws-vpc-networks/blueprints/reference-architectures.md
-  - .claude/skills/designing-dynamodb-nosql
-  - .claude/skills/designing-dynamodb-nosql/SKILL.md
-  - .claude/skills/designing-dynamodb-nosql/blueprints/evaluation-scenarios.md
-  - .claude/skills/designing-multi-cloud-network-topology
-  - .claude/skills/designing-multi-cloud-network-topology/SKILL.md
-  - .claude/skills/designing-multi-cloud-network-topology/blueprints/evaluation-scenarios.md
-  - .claude/skills/designing-multi-cloud-network-topology/blueprints/service-equivalence-lock-in.md
-  - .claude/skills/implementing-lambda-powertools-java
-  - .claude/skills/implementing-lambda-powertools-java/SKILL.md
-  - .claude/skills/implementing-lambda-powertools-java/blueprints/always-do-patterns.md
-  - .claude/skills/implementing-lambda-powertools-java/blueprints/ask-first-decisions.md
-  - .claude/skills/implementing-lambda-powertools-java/blueprints/evaluation-scenarios.md
-  - .claude/skills/implementing-lambda-powertools-java/blueprints/integration-patterns.md
-  - .claude/skills/implementing-lambda-powertools-java/blueprints/never-do-patterns.md
-  - .claude/skills/managing-aws-costs
-  - .claude/skills/managing-aws-costs/SKILL.md
-  - .claude/skills/managing-aws-costs/blueprints/evaluation-scenarios.md
-  - .claude/skills/monitoring-cloudwatch-observability
-  - .claude/skills/monitoring-cloudwatch-observability/SKILL.md
-  - .claude/skills/monitoring-cloudwatch-observability/blueprints/always-do-patterns.md
-  - .claude/skills/monitoring-cloudwatch-observability/blueprints/ask-first-decisions.md
-  - .claude/skills/monitoring-cloudwatch-observability/blueprints/evaluation-scenarios.md
-  - .claude/skills/monitoring-cloudwatch-observability/blueprints/never-do-patterns.md
-  - .claude/skills/optimizing-aws-costs
-  - .claude/skills/optimizing-aws-costs/SKILL.md
-  - .claude/skills/optimizing-aws-costs/blueprints/evaluation-scenarios.md
-  - .claude/skills/orchestrating-aws-step-functions
-  - .claude/skills/orchestrating-aws-step-functions/SKILL.md
-  - .claude/skills/orchestrating-aws-step-functions/blueprints/evaluation-scenarios.md
-  - .claude/skills/protecting-workloads-ddos-shield
-  - .claude/skills/protecting-workloads-ddos-shield/SKILL.md
-  - .claude/skills/protecting-workloads-ddos-shield/blueprints/evaluation-scenarios.md
-  - .claude/skills/securing-aws-cognito
-  - .claude/skills/securing-aws-cognito/SKILL.md
-  - .claude/skills/securing-aws-cognito/blueprints/always-do-patterns.md
-  - .claude/skills/securing-aws-cognito/blueprints/ask-first-decisions.md
-  - .claude/skills/securing-aws-cognito/blueprints/evaluation-scenarios.md
-  - .claude/skills/securing-aws-cognito/blueprints/never-do-patterns.md
-  - .claude/skills/securing-aws-iam-serverless
-  - .claude/skills/securing-aws-iam-serverless/SKILL.md
-  - .claude/skills/securing-aws-iam-serverless/blueprints/evaluation-scenarios.md
-  - .claude/skills/securing-aws-iam-serverless/blueprints/policy-patterns.md
-  - .claude/skills/securing-aws-secrets-certificates
-  - .claude/skills/securing-aws-secrets-certificates/SKILL.md
-  - .claude/skills/securing-aws-secrets-certificates/blueprints/always-do-patterns.md
-  - .claude/skills/securing-aws-secrets-certificates/blueprints/ask-first-decisions.md
-  - .claude/skills/securing-aws-secrets-certificates/blueprints/evaluation-scenarios.md
-  - .claude/skills/securing-aws-secrets-certificates/blueprints/never-do-patterns.md
-  - .claude/skills/securing-aws-waf-web-acls
-  - .claude/skills/securing-aws-waf-web-acls/SKILL.md
-  - .claude/skills/securing-aws-waf-web-acls/blueprints/evaluation-scenarios.md
-  - .claude/skills/securing-vpc-network-access
-  - .claude/skills/securing-vpc-network-access/SKILL.md
-  - .claude/skills/securing-vpc-network-access/blueprints/evaluation-scenarios.md
-  - .claude/skills/tracing-aws-xray
-  - .claude/skills/tracing-aws-xray/SKILL.md
-  - .claude/skills/tracing-aws-xray/blueprints/evaluation-scenarios.md
-  deployed_file_hashes:
-    .claude/skills/applying-aws-operational-excellence/SKILL.md: sha256:a7e389a7f424a05c0b2c1be52985546a87e9075edb3d8659503ed6b01250af02
-    .claude/skills/applying-aws-operational-excellence/blueprints/evaluation-scenarios.md: sha256:10306e01db46f29985189d213385cf65dd7a95b258f72790935d5176fda04b3b
-    .claude/skills/applying-aws-performance-efficiency/SKILL.md: sha256:3db7c884cf9101ded8cb808660e255d832fc05c1acaccf9abbb88c53ca188f7d
-    .claude/skills/applying-aws-performance-efficiency/blueprints/architecture-decisions.md: sha256:f5a5b5d9c41e3d32f0d9137478b521631fbb2a8bdfcbb1cf83c7e1206a42e761
-    .claude/skills/applying-aws-performance-efficiency/blueprints/evaluation-scenarios.md: sha256:d40c1a38f356ef1734f4f6c8caf28c75f2d4068085b467602173e2a2c6f8f4b4
-    .claude/skills/applying-aws-reliability-pillar/SKILL.md: sha256:fa26326841ed5f98803c98d073bf0f45dd2d2b11f19cff35915863aa5de68f7d
-    .claude/skills/applying-aws-reliability-pillar/blueprints/evaluation-scenarios.md: sha256:02be2c3d7cb0046b8a42ced74f06ea05285758cea927739d86129feb8786acf5
-    .claude/skills/applying-aws-serverless-well-architected-lens/SKILL.md: sha256:84e387951469f535878a7d9631805c08e65d1d73701be83db3df612302bec2a7
-    .claude/skills/applying-aws-serverless-well-architected-lens/blueprints/always-do-patterns.md: sha256:46c03b4f4de15bd6a4873ce2fbd3807770033fc87e589a21bdc2cb4a88aec206
-    .claude/skills/applying-aws-serverless-well-architected-lens/blueprints/ask-first-decisions.md: sha256:46b4f83d5bcc2c1a0cdf8e16fb854622b44fb234fcd395c91cae2e15ebd429bf
-    .claude/skills/applying-aws-serverless-well-architected-lens/blueprints/evaluation-scenarios.md: sha256:f945910c1824cef5ca7d4d97e9bf57ac833e49ee56617ce469968dd4bcf59c48
-    .claude/skills/applying-aws-serverless-well-architected-lens/blueprints/never-do-patterns.md: sha256:047e7599823bdf9b261ce26df4fb69d2de0b879f0a0d1ec169a21838416ca3b7
-    .claude/skills/applying-aws-serverless-well-architected-lens/blueprints/post-2022-gaps.md: sha256:88acf949a404e0e79107b457e5ef13c9647000afaa3ba7d39faafa710b9c5a67
-    .claude/skills/applying-aws-sustainability-pillar/SKILL.md: sha256:06a227c042e9d30280cdef16be90bf8c995c120bfb5b29cc23489d091b1e144f
-    .claude/skills/applying-aws-sustainability-pillar/blueprints/evaluation-scenarios.md: sha256:9b796248655c596b0221a6988e758ed7cb88d26dae4103e3f5e9e570f707824e
-    .claude/skills/applying-aws-well-architected/SKILL.md: sha256:e85ace2cd5b442e6868e4b1e60191a9bec193a18d55e1634d2333d6377c25bd1
-    .claude/skills/applying-aws-well-architected/blueprints/always-do-patterns.md: sha256:e2c091dedf2091f90211b607650ac9b4735d43c37f9a143f7c43e0c099295843
-    .claude/skills/applying-aws-well-architected/blueprints/ask-first-decisions.md: sha256:83914f07f1e83a3a77f9e1ed5e94e769785c00d05a3c7aff2b7481bbdfa71bf6
-    .claude/skills/applying-aws-well-architected/blueprints/evaluation-scenarios.md: sha256:7de4bf118e39f0429ade33bec1b9fc57349b97b9980e947c1e8aa1ad04d844df
-    .claude/skills/applying-aws-well-architected/blueprints/never-do-patterns.md: sha256:ca5a1d7e8d9db3ee405c905a6ca984df241bbafdcae3b2b4f66b7ed2c156fdc2
-    .claude/skills/applying-aws-well-architected/blueprints/reference-architectures.md: sha256:41c3c187edf756c3dd105904b139242c94d43c401aa54ad1e00e8a89e3adf89d
-    .claude/skills/applying-waf-cost-optimization/SKILL.md: sha256:81944e1fc8eb15b38a7b7c96630f1e31745c56993391e5c1ed7753fa94753cb2
-    .claude/skills/applying-waf-cost-optimization/blueprints/always-do-patterns.md: sha256:fc8704ce3b450d77e29cc7dfb8dd88226d5b057a55194a031881824bcd1c1952
-    .claude/skills/applying-waf-cost-optimization/blueprints/ask-first-decisions.md: sha256:7460beea6c48769ec11d39b192670779e449fe51a5b17bafe684e26f6e44a1e4
-    .claude/skills/applying-waf-cost-optimization/blueprints/evaluation-scenarios.md: sha256:d1a9cdbbabad5e572a737fe5d35e4cf7c804e556eb02b1df7d7c02a5218b6046
-    .claude/skills/applying-waf-cost-optimization/blueprints/never-do-patterns.md: sha256:71ad439f5bba79205de5bc437250175fcdbd95a55fdce2ce4e77ca565a10433b
-    .claude/skills/applying-waf-operational-excellence-pillar/SKILL.md: sha256:45e6867f34372ee694521e6416487adb1fefc843b32e4b67447679763274bbcb
-    .claude/skills/applying-waf-operational-excellence-pillar/blueprints/always-do-patterns.md: sha256:05cea4bf7f319f67fbb347f00c6709d553cff2885096ba8c94e52ba1e139d9b5
-    .claude/skills/applying-waf-operational-excellence-pillar/blueprints/architecture-decisions.md: sha256:eb1470b4d40b26823f9462fada207c34a2f2fce44c8e2265601f7e62b07064a3
-    .claude/skills/applying-waf-operational-excellence-pillar/blueprints/evaluation-scenarios.md: sha256:1bc51d24e7e1d8d570bdb644983923d1787b6213066f88fcb03df2a0a8287fd3
-    .claude/skills/applying-waf-reliability-pillar/SKILL.md: sha256:7cd46900b06b5a16ed2a43b9ccb9785dcd1012bc1e656ef7245059b7b48fc320
-    .claude/skills/applying-waf-reliability-pillar/blueprints/evaluation-scenarios.md: sha256:c7da8d721add2b67988ea061485c2c119995f41017fb9eb41cae5f8e3ebe47dd
-    .claude/skills/applying-waf-sustainability-pillar/SKILL.md: sha256:18e7140915ecd1e93e0ffb01c0506bdd055cf58a2c74131d477a8c1f6ec02d71
-    .claude/skills/applying-waf-sustainability-pillar/blueprints/evaluation-scenarios.md: sha256:8a60b7e9c73ff84df884da5e3f5ab5bb9a24e843ef5f9c2e0a70516b3d19fae0
-    .claude/skills/architecting-aws-multi-account-organizations/SKILL.md: sha256:3d6086317d724dbe1d1b238af75331106904b20af93a8d158b369ad031375c29
-    .claude/skills/architecting-aws-multi-account-organizations/blueprints/always-do-patterns.md: sha256:ee5af6c26ef4b8c5efcf8c29a2e5cdb5f1093dd931b30fe199bec98f15dc246a
-    .claude/skills/architecting-aws-multi-account-organizations/blueprints/ask-first-decisions.md: sha256:06eead91a47aa4478ee4668b108990498672907cebd18632066c021eba3d9025
-    .claude/skills/architecting-aws-multi-account-organizations/blueprints/evaluation-scenarios.md: sha256:1df9f5f8cec359cfc9592845a4122ffacc8c5aff140b798dff94efdfc0d9cfb8
-    .claude/skills/architecting-aws-multi-account-organizations/blueprints/never-do-patterns.md: sha256:b9fcc4514c779bd551a1c89c1e35ce89e0afc8587c77fee5729ec2f2ec0da779
-    .claude/skills/architecting-aws-s3-storage/SKILL.md: sha256:6fe62689510bc68441cc7f5f5afb82951a645ee78ceaeb6328643aba9b9c8ed0
-    .claude/skills/architecting-aws-s3-storage/blueprints/evaluation-scenarios.md: sha256:7486947015f65081b8f2533b5e1dbbd25182e9fff7d042186e5d908f6958a7fe
-    .claude/skills/architecting-aws-saas-multitenant/SKILL.md: sha256:d6e4bc95c6dc52dedef14f2207bca3bb041529de5cb8ba88d6c274b2b0306ac1
-    .claude/skills/architecting-aws-saas-multitenant/blueprints/evaluation-scenarios.md: sha256:465ede8e09d186e08c77c80e143b5a96f96e6483ddb5acd8c9f44776a630433e
-    .claude/skills/architecting-aws-security-pillar/SKILL.md: sha256:9bc9520bf8b05272886ff208c8df32b0051ea11888cbd766d6c901e42a980854
-    .claude/skills/architecting-aws-security-pillar/blueprints/always-do-patterns.md: sha256:c35c57ddb4f4d3832b39dc0bef8ab77dc2a53ebafe5b35c24de087934ee584c0
-    .claude/skills/architecting-aws-security-pillar/blueprints/ask-first-decisions.md: sha256:9383d4b7850d0e191896b75d8e9b3985bb1b54ad56c30d7616adaeb7c09fe723
-    .claude/skills/architecting-aws-security-pillar/blueprints/evaluation-scenarios.md: sha256:47ad222f2fcf4beaa53fbe2a5b3deef3eb1835a13a3d874625b3645142737256
-    .claude/skills/architecting-aws-security-pillar/blueprints/never-do-patterns.md: sha256:e0a1e9ceaf28a217b22b8a903169b9ac5e8bd76b9c46c71e54c9379662f700a5
-    .claude/skills/architecting-aws-ses-email/SKILL.md: sha256:c64e5c23059a048c8bb5fad59a755b3ef757e92fa1c37f16b879e39f01043f9e
-    .claude/skills/architecting-aws-ses-email/blueprints/evaluation-scenarios.md: sha256:e539f91d187a91edde8f35ea1254f403714a030cdf3374d42767e8963703efcd
-    .claude/skills/architecting-aws-sns-pubsub/SKILL.md: sha256:5663f41ef349b0da71f3f1059c24b27eecc8e21283cb78e4ae3710957a6d22f2
-    .claude/skills/architecting-aws-sns-pubsub/blueprints/evaluation-scenarios.md: sha256:739bb98f39faa5518eefb9f942553441cfcad55659167a8e7f1028acfb269ff7
-    .claude/skills/architecting-aws-sqs-messaging/SKILL.md: sha256:5bbc422be9af7274bc2e3ce42c30a9edff857d3e70bd61e559b06bcad318760d
-    .claude/skills/architecting-aws-sqs-messaging/blueprints/evaluation-scenarios.md: sha256:0c482329dc5f0b5b8cecda9d6a47828bfdfeeb29f9c80045eb1f5426540fcb57
-    .claude/skills/architecting-cloudtrail-audit-logging/SKILL.md: sha256:c2d6c6ac554e51c3a02e4c062626a22414cfee5e4b5d54e543cbdd26b43c2bbf
-    .claude/skills/architecting-cloudtrail-audit-logging/blueprints/always-do-patterns.md: sha256:f76fc371962d4781dd9ddfbbe3679829fb105bb9462dc13a3bda2ed020e954a1
-    .claude/skills/architecting-cloudtrail-audit-logging/blueprints/evaluation-scenarios.md: sha256:0d2e97cdc4b62a6d7df57e2c03bd68e08e47f4d30d4604ac3a02dd832b3e29e7
-    .claude/skills/architecting-cloudtrail-audit-logging/blueprints/never-do-patterns.md: sha256:94ebd8d2f753c837ab657c0902628addefeb56783eda99a609102dc351e8e815
-    .claude/skills/architecting-eventbridge-eda/SKILL.md: sha256:49178aede5f8c9a663d830d1511740c47116185b56fa541b792e4cfac875a494
-    .claude/skills/architecting-eventbridge-eda/blueprints/always-do-patterns.md: sha256:86614cf2c84b56956f6d103fca37b6636214e8c7c075c0d30949566ff8eecd89
-    .claude/skills/architecting-eventbridge-eda/blueprints/ask-first-decisions.md: sha256:9e713703c6fcd737a417d606ab173ed725cb6f0124f06d0854e786f983e4d4a3
-    .claude/skills/architecting-eventbridge-eda/blueprints/evaluation-scenarios.md: sha256:37577043b2a9ce0c80ed894ea430e483a40d624769b874e3feaf5dfbaf5b7925
-    .claude/skills/architecting-eventbridge-eda/blueprints/never-do-patterns.md: sha256:30d972daa58ef722959c675924d6bf5a70bdc2239b334dca5a3e178fd6262acc
-    .claude/skills/architecting-lambda-serverless-patterns/SKILL.md: sha256:74f689789944e76df3e809b3948febb834a32d90dec847dd7051aab9217a12c1
-    .claude/skills/architecting-lambda-serverless-patterns/blueprints/evaluation-scenarios.md: sha256:b6428acbbc1c3d1252d820bd280c60f74482838cc8cfb11722d839f53517ac02
-    .claude/skills/architecting-sam-serverless-patterns/SKILL.md: sha256:e2b24c6b9fb63712c4092e4bd787d16f5a8fa95b3788d86542bdf3e0b02971ed
-    .claude/skills/architecting-sam-serverless-patterns/blueprints/evaluation-scenarios.md: sha256:1843e244e980a5068d168e11a05ea716b83a97ecce6aabb478f78f7a66b2cf2d
-    .claude/skills/auditing-aws-cloudtrail/SKILL.md: sha256:41090836df3b7097d7d8e761462b5b563dba232fcbbd8f477c0cb0cbec3ec0cb
-    .claude/skills/auditing-aws-cloudtrail/blueprints/evaluation-scenarios.md: sha256:1891a5dd5d84868297df6ef5ca390fac82b4561254aa286bb4d910bab8fcf60e
-    .claude/skills/configuring-aws-route53-dns/SKILL.md: sha256:92292342e49406939fad9a89ec0667f7a2f70a5752cb366f0fddaad18de1b08a
-    .claude/skills/configuring-aws-route53-dns/blueprints/always-do-patterns.md: sha256:b64eaac06b42da654802999dfe1722f767e86d69f11abb12f06adf2a30fc1010
-    .claude/skills/configuring-aws-route53-dns/blueprints/ask-first-decisions.md: sha256:1956b9eef480ec12fae4f644062f620ddff91ff536fdfc368a8f68e68e1435d0
-    .claude/skills/configuring-aws-route53-dns/blueprints/evaluation-scenarios.md: sha256:52e5609f9d585a1be630bdca0b689fa172d8cd84129012d5cd7c4eea808a30b3
-    .claude/skills/configuring-aws-route53-dns/blueprints/never-do-patterns.md: sha256:d52c3b61ec7aff30284d07d10e68544a04dd2476a485e84221ecf02c7135c9c0
-    .claude/skills/delivering-cloudfront-cdn/SKILL.md: sha256:ceeaf72623ee3364b54c480dd1807f86210f5ad715bb039381d3061d5cd8b426
-    .claude/skills/delivering-cloudfront-cdn/blueprints/always-do-patterns.md: sha256:d3e759b2fe16290ddf3b162d61bef3b457a79db032b3a571164fcf9323545414
-    .claude/skills/delivering-cloudfront-cdn/blueprints/ask-first-decisions.md: sha256:7c77e376aa1bfcd60f1cc20d14cf2b95c066fb4c6cdb24aecd9c09d93b7a0aff
-    .claude/skills/delivering-cloudfront-cdn/blueprints/evaluation-scenarios.md: sha256:1a2373623096b8abc00ac6476e47d32b6cc8a8bf56391f2eec2ca5642ef9c51f
-    .claude/skills/delivering-cloudfront-cdn/blueprints/never-do-patterns.md: sha256:783c766195e4fc812acbad49466a32858b12fd1a3078431b1a4336d05205f2f5
-    .claude/skills/designing-aws-api-gateway-serverless/SKILL.md: sha256:153493c190b5dedb16342ec1fdca055af1ceb5d09f8088eff8c919f1ed55c81f
-    .claude/skills/designing-aws-api-gateway-serverless/blueprints/evaluation-scenarios.md: sha256:3a637c390c9eab5910b3c9eb759dba0b638f866ed9e9adecbcc15cfbbc4c6960
-    .claude/skills/designing-aws-vpc-networks/SKILL.md: sha256:160cddaf9b563810b65db8ef7d732ce1fa6f3cd3d70b8d550ecb10e9f21a1ce9
-    .claude/skills/designing-aws-vpc-networks/blueprints/evaluation-scenarios.md: sha256:0a56df05ff62ea4d7414fff7c31d38671b02afcd20c9f5c42debd5b8c9943ae6
-    .claude/skills/designing-aws-vpc-networks/blueprints/reference-architectures.md: sha256:f8eab832e6afa678bcf51fddc459ef062b4160ac64867bfe10a653ea401903b7
-    .claude/skills/designing-dynamodb-nosql/SKILL.md: sha256:0bed08d315baebd441389ed2245ed8bcfd743418e76961a4a22e372da21078ff
-    .claude/skills/designing-dynamodb-nosql/blueprints/evaluation-scenarios.md: sha256:7b9d73e20ebec34b0b24f972d0d9fe74d1f94c6ba58dbb92fd1f7b44a48e2802
-    .claude/skills/designing-multi-cloud-network-topology/SKILL.md: sha256:2b427f9b3484111c9fa98dd7a6742086324318718ad3d2cb4ae37b43db5b1905
-    .claude/skills/designing-multi-cloud-network-topology/blueprints/evaluation-scenarios.md: sha256:9ad44881424c7da731715d17d4a29782c62763c5833fc483c310f1e43bc5f744
-    .claude/skills/designing-multi-cloud-network-topology/blueprints/service-equivalence-lock-in.md: sha256:4274ae668fbc81ae3e24278d5441046c90ca2c7d62e4ca6178a358fb7435f3d9
-    .claude/skills/implementing-lambda-powertools-java/SKILL.md: sha256:818ee136e7b02263010553d802d46cb9cc82e1c059451e67b4f43191bce330d2
-    .claude/skills/implementing-lambda-powertools-java/blueprints/always-do-patterns.md: sha256:5899d0d58fe36c17c6ce3fc965bb1f5498c19cb007f221c5a9be9ee6e38db21e
-    .claude/skills/implementing-lambda-powertools-java/blueprints/ask-first-decisions.md: sha256:3e0f3e8b40f23cc0d62590c2b65871f3f3c25d18ea966b3fdc5f130d4a2f4d00
-    .claude/skills/implementing-lambda-powertools-java/blueprints/evaluation-scenarios.md: sha256:fb44daa6c857ee0bc734eed71a3abc081db37f3837e328cea447b61942c133c6
-    .claude/skills/implementing-lambda-powertools-java/blueprints/integration-patterns.md: sha256:854ef5197fef616c3ca329ad7ad817c8083deefe743091ff2752ac4834156328
-    .claude/skills/implementing-lambda-powertools-java/blueprints/never-do-patterns.md: sha256:2e4bb5888fbd2bd64fc8dbce1e2094c4a8eecd135da33585e83d2441cb0a0c56
-    .claude/skills/managing-aws-costs/SKILL.md: sha256:f8d20e6cda6227d36ec282666ecec86c581992b5546026bc048e54f7db671c0c
-    .claude/skills/managing-aws-costs/blueprints/evaluation-scenarios.md: sha256:9927ee661cf2a61174b6762fe10f902da25b4a21157f766e1b114b69a29a79a9
-    .claude/skills/monitoring-cloudwatch-observability/SKILL.md: sha256:ccf94f8c657a0b4b153d0207bdf3fe03d96fb87ea2ea28a5e681b02e3f4a220c
-    .claude/skills/monitoring-cloudwatch-observability/blueprints/always-do-patterns.md: sha256:51e91009edce7d4808bdb56a707d1b83077598ef10a974b7b8b98dac1c97082d
-    .claude/skills/monitoring-cloudwatch-observability/blueprints/ask-first-decisions.md: sha256:034b386a1cf3f8502e707241903b3cc291d68124b72a8bd345f5ad1179c73459
-    .claude/skills/monitoring-cloudwatch-observability/blueprints/evaluation-scenarios.md: sha256:5828dd917a13450d4a06fc4f22cc4787acb1013e1baa1c7e247d327a046be517
-    .claude/skills/monitoring-cloudwatch-observability/blueprints/never-do-patterns.md: sha256:43837b4057eb49b4b6eb16637fdd0cee5d0d3a977774c5f0b11835e8331d1c18
-    .claude/skills/optimizing-aws-costs/SKILL.md: sha256:7bc692fbe220c33127c15f81a69a09e57906b7cb55930f9410d7e2571a35ea63
-    .claude/skills/optimizing-aws-costs/blueprints/evaluation-scenarios.md: sha256:cce1a2c17eb4c4fdc56d93ab3df90262c8c96be11b162377abe7a10888415166
-    .claude/skills/orchestrating-aws-step-functions/SKILL.md: sha256:453a7a0e14da024f275029723c1c4028b86f8f841a1032aa600d1a113294a39f
-    .claude/skills/orchestrating-aws-step-functions/blueprints/evaluation-scenarios.md: sha256:2f2d7bb8211adb823a55f9952ca0834403dbb1f7340d1d192b43f0732aa7203b
-    .claude/skills/protecting-workloads-ddos-shield/SKILL.md: sha256:80c60f19c569b4974a5f7886d71df3f7c56d3e008f5b18fec02d55649ce7fe7a
-    .claude/skills/protecting-workloads-ddos-shield/blueprints/evaluation-scenarios.md: sha256:938cac0ec3bbd716da86f2c090d1952396af1ac3adc18509838eca8fd19340c1
-    .claude/skills/securing-aws-cognito/SKILL.md: sha256:fb10070d7da3ada9dfbbe52eb1c25febd7c2e0ccc515b37fe49c5e3169a0ccbe
-    .claude/skills/securing-aws-cognito/blueprints/always-do-patterns.md: sha256:cf2cee122d30893d2ebf1cbfe15e67c3a522c2f859c7f1255de1af5083c20bec
-    .claude/skills/securing-aws-cognito/blueprints/ask-first-decisions.md: sha256:ed0104c38727c5749e2ba827b7158c58eeb460ccab775c848d2d9193af39bf65
-    .claude/skills/securing-aws-cognito/blueprints/evaluation-scenarios.md: sha256:6f0c2094c5f1a4f7ce086ff587271335a67c060d091d517ae8242e329a614776
-    .claude/skills/securing-aws-cognito/blueprints/never-do-patterns.md: sha256:87cc3aee22847031e3c003086464c813ea5df94dab14b3410e10681363c1dea0
-    .claude/skills/securing-aws-iam-serverless/SKILL.md: sha256:cc1069d831247e3cc77e3b3b793875dde2c04a4af1805d3b79e00719659b92c2
-    .claude/skills/securing-aws-iam-serverless/blueprints/evaluation-scenarios.md: sha256:86f7a3fa232c74d3b93f6a62bdba1ee9557718c0bec8f8ec29c530e36e2f8558
-    .claude/skills/securing-aws-iam-serverless/blueprints/policy-patterns.md: sha256:d0c8d478a940bb2b5c4b51893722e09897ef2dd5cf8fd959ab8e984478d9f6de
-    .claude/skills/securing-aws-secrets-certificates/SKILL.md: sha256:e6d9989a7b126e60f60094b2512b9a1dabf80a43d77d4a636b58f2d84824d2e5
-    .claude/skills/securing-aws-secrets-certificates/blueprints/always-do-patterns.md: sha256:f888591729af31e4d306bfcddba7146967b3bd98170eeaee83bbcdf5c5f160f6
-    .claude/skills/securing-aws-secrets-certificates/blueprints/ask-first-decisions.md: sha256:a1ae4af159c656ca17979358ec225ac287850d40ecd239b3954a2e0c85f9cf51
-    .claude/skills/securing-aws-secrets-certificates/blueprints/evaluation-scenarios.md: sha256:05f4b7bd1474792b59ccd11a5cecec4c6b2224b16cb80d4157c3741099406a24
-    .claude/skills/securing-aws-secrets-certificates/blueprints/never-do-patterns.md: sha256:6b24ec0c29fcb33d4a9d7265acc024fee75bf40f5c3f7615e0b457209c57c669
-    .claude/skills/securing-aws-waf-web-acls/SKILL.md: sha256:7ba0b285d38bb7f5c4a53f8450799644badc9d7c23ad9da620447f8a56d01895
-    .claude/skills/securing-aws-waf-web-acls/blueprints/evaluation-scenarios.md: sha256:9ee15076f1d61166c074d840d7f7f0a01981e3add488fbde9d950dae00e6a527
-    .claude/skills/securing-vpc-network-access/SKILL.md: sha256:ac6bb50c307ed3c983839ba633465ca0080e629e9ea89883b94dbb5992f7e8d2
-    .claude/skills/securing-vpc-network-access/blueprints/evaluation-scenarios.md: sha256:254a4d1928ae3a15ca96b539dfae5123ce671050db91da2673bdd445d0052b20
-    .claude/skills/tracing-aws-xray/SKILL.md: sha256:2e07213ede214288ba34fbc5e58541747e6fa5b7d86eb3b5ec25ed9c5258121d
-    .claude/skills/tracing-aws-xray/blueprints/evaluation-scenarios.md: sha256:868158ce7b80e837895506db71042436ee0d8f43190fb768a6a033a4050fc91f
-  source: local
-  local_path: ../aws-skills
-  declaring_parent: local:packages/quarkus-aws
-  anchored_local_path: packages/aws-skills
-  content_hash: sha256:4bb2ac7979c81ae1964d1823b6a5758d36598c1798b388ce29bfda59b72db202
   declared_license: MIT
 - repo_url: _local/aws-terraform
   name: agents-factory-aws-terraform
@@ -8543,7 +8593,25 @@ deployments:
   owners:
   - ./packages/agent-package-builder
   active_owner: ./packages/agent-package-builder
-  content_hash: sha256:664f71a153ab6d57cf6812d885bb29dad2ab5608d4a2cd88b4781c995233f340
+  content_hash: sha256:1d753e1b1651687fca228e5932388fd5f70dbd01f4433898a8309dbd6eb0c730
+- kind: project-relative
+  target: claude
+  value: .claude/skills/building-agent-packages/assets/DECISIONS.template.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/agent-package-builder
+  active_owner: ./packages/agent-package-builder
+  content_hash: sha256:a68abf7af43087a9c4351bc8af7ef624bf51ac2d8fa3eec29efc673f24162a45
+- kind: project-relative
+  target: claude
+  value: .claude/skills/building-agent-packages/assets/DEFERRED.template.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/agent-package-builder
+  active_owner: ./packages/agent-package-builder
+  content_hash: sha256:b72f4c35a36d9c933175dc25055f15506b3e44df6a5063deabe1fa4eef4f5b15
 - kind: project-relative
   target: claude
   value: .claude/skills/building-agent-packages/assets/FAMILY_FACTS.template.md
@@ -8564,6 +8632,33 @@ deployments:
   content_hash: sha256:c4d2e0022a8adc906120da2c40445b8dc5adfd2173b765364de3e394b68e7ae1
 - kind: project-relative
   target: claude
+  value: .claude/skills/building-agent-packages/assets/FINDINGS.template.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/agent-package-builder
+  active_owner: ./packages/agent-package-builder
+  content_hash: sha256:f0bb028fb1dd9a73af7b18edc330998d429afc8ddf882e57b4ca4bc837624df1
+- kind: project-relative
+  target: claude
+  value: .claude/skills/building-agent-packages/assets/GATE.template.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/agent-package-builder
+  active_owner: ./packages/agent-package-builder
+  content_hash: sha256:75636734e06448a7bfb12cbd7847a2669b1b2dd9a081a615f00cc75c8ba3b8b6
+- kind: project-relative
+  target: claude
+  value: .claude/skills/building-agent-packages/assets/METRICS.template.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/agent-package-builder
+  active_owner: ./packages/agent-package-builder
+  content_hash: sha256:4f4f15829c0995a36bc63fd90dcea875c4cb744aaab3759c7cc1ef7cce9fd9eb
+- kind: project-relative
+  target: claude
   value: .claude/skills/building-agent-packages/assets/PACKAGE_BRIEF.template.md
   runtime: null
   scope: project
@@ -8573,6 +8668,15 @@ deployments:
   content_hash: sha256:7c28d620ffe3b8f0ae3f198abf1fd90c627f74593edb9420bb6d5927899f2f05
 - kind: project-relative
   target: claude
+  value: .claude/skills/building-agent-packages/assets/PHASE.template.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/agent-package-builder
+  active_owner: ./packages/agent-package-builder
+  content_hash: sha256:406708d3c9cf8a8d0a360e755b40631d62620479530d41af023d40ef85e98626
+- kind: project-relative
+  target: claude
   value: .claude/skills/building-agent-packages/assets/PIPELINE_STATE.template.md
   runtime: null
   scope: project
@@ -8580,6 +8684,42 @@ deployments:
   - ./packages/agent-package-builder
   active_owner: ./packages/agent-package-builder
   content_hash: sha256:97aeaa5bf77b2852afc2f8b3366929c8340fe2f9ba8399b509d87a48c57cd5b9
+- kind: project-relative
+  target: claude
+  value: .claude/skills/building-agent-packages/assets/RETRO.template.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/agent-package-builder
+  active_owner: ./packages/agent-package-builder
+  content_hash: sha256:7326c1f0d86d9a01c41d66989c3f21103bfbffcf55b24a7dfdb180bd9385c981
+- kind: project-relative
+  target: claude
+  value: .claude/skills/building-agent-packages/assets/SHARED_TOUCH.template.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/agent-package-builder
+  active_owner: ./packages/agent-package-builder
+  content_hash: sha256:ef74559ee82adc2f6b80ee63e94e0fb8c76f694e01b2adb66f64c8ce0143fa9d
+- kind: project-relative
+  target: claude
+  value: .claude/skills/building-agent-packages/assets/SOURCES.template.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/agent-package-builder
+  active_owner: ./packages/agent-package-builder
+  content_hash: sha256:b99ad07230a2ed2479fa4c35be844f378cb968c6ec674dde33b398cabba17292
+- kind: project-relative
+  target: claude
+  value: .claude/skills/building-agent-packages/assets/UNIT.template.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/agent-package-builder
+  active_owner: ./packages/agent-package-builder
+  content_hash: sha256:32ca5566c40ab294d0d9d4d5d14be54e268e9fe383e0ecc030763d3979a8f584
 - kind: project-relative
   target: claude
   value: .claude/skills/building-agent-packages/blueprints/evaluation-scenarios.md
@@ -8597,7 +8737,7 @@ deployments:
   owners:
   - ./packages/agent-package-builder
   active_owner: ./packages/agent-package-builder
-  content_hash: sha256:1a462c0f2fd432da4bb788481519d6b1342aa20638c3b02c53c05eccb08c221d
+  content_hash: sha256:1936e74fd567805df30f805f0fbc6c5996e3ddad9887ea97c30dbff70f6ab87e
 - kind: project-relative
   target: claude
   value: .claude/skills/building-agent-packages/blueprints/modes.md
@@ -8606,7 +8746,7 @@ deployments:
   owners:
   - ./packages/agent-package-builder
   active_owner: ./packages/agent-package-builder
-  content_hash: sha256:a0d75546d522b78b63c3d66ed108950f88ef5b312a1f45f00714aaa865d2b7cf
+  content_hash: sha256:ad99e16157e5bfd67cddf7227edc427a28c28879366cc5776cf4f353293ac30f
 - kind: project-relative
   target: claude
   value: .claude/skills/building-agent-packages/blueprints/phases/p0-intake.md
@@ -8660,7 +8800,7 @@ deployments:
   owners:
   - ./packages/agent-package-builder
   active_owner: ./packages/agent-package-builder
-  content_hash: sha256:ea0e9befb13dea2e7d0fec622112010df59f46cf9df50ab90e1db38546048848
+  content_hash: sha256:22b9cd9cf6aff9a7ba01577bf1460261281be942ab0a9e32f845e1da0420c0e4
 - kind: project-relative
   target: claude
   value: .claude/skills/building-agent-packages/blueprints/phases/p6-quality-loop.md
@@ -8669,7 +8809,7 @@ deployments:
   owners:
   - ./packages/agent-package-builder
   active_owner: ./packages/agent-package-builder
-  content_hash: sha256:915f2958b77a72a2e3459696b7b5cb10ec349a7d383e9ad1f43bdfca895b2d71
+  content_hash: sha256:c882fffecf8718ec29604c32d5a40d408d3a0c0ae8671ed140bbb7b6d9f1c936
 - kind: project-relative
   target: claude
   value: .claude/skills/building-agent-packages/blueprints/phases/p7-fact-sweep.md
@@ -8687,7 +8827,7 @@ deployments:
   owners:
   - ./packages/agent-package-builder
   active_owner: ./packages/agent-package-builder
-  content_hash: sha256:c6856b19b9528b534cc5bc2ba78f08ee4e55c3e8329836cb85d20dcc3017d0fa
+  content_hash: sha256:fcab90a11cb86bf701ae9479a1bde2b8dd6dcb11ac084f4b95892d336885ae56
 - kind: project-relative
   target: claude
   value: .claude/skills/building-agent-packages/blueprints/phases/p9-commit.md
@@ -8717,6 +8857,15 @@ deployments:
   content_hash: sha256:94ad98f27eac4c6165eeab284476686a3ee5fdc5ec3c0e94f257d1a1391158ac
 - kind: project-relative
   target: claude
+  value: .claude/skills/building-agent-packages/blueprints/policy/shared-files.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/agent-package-builder
+  active_owner: ./packages/agent-package-builder
+  content_hash: sha256:21544f4bb6238ebce2f7e98a6374112fba579e82a5ee62b2d7a0942b7cc13db4
+- kind: project-relative
+  target: claude
   value: .claude/skills/building-agent-packages/blueprints/policy/tag-notation-and-registers.md
   runtime: null
   scope: project
@@ -8735,13 +8884,22 @@ deployments:
   content_hash: sha256:8854295b29b7aecee03251156f33e363a27ff9bee3c7933be29f3afcab75af34
 - kind: project-relative
   target: claude
+  value: .claude/skills/building-agent-packages/blueprints/state-layout.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/agent-package-builder
+  active_owner: ./packages/agent-package-builder
+  content_hash: sha256:f9d24ab7ac0ea98da4b636e85e67c638d72d6311c7d4669e653bd6e5c6387caf
+- kind: project-relative
+  target: claude
   value: .claude/skills/building-agent-packages/blueprints/worker-briefs/README.md
   runtime: null
   scope: project
   owners:
   - ./packages/agent-package-builder
   active_owner: ./packages/agent-package-builder
-  content_hash: sha256:ced8ca6751c75492fb9f7e3c380c7ff53a9b15c88ed6bce23b18f0ed5e2d5a17
+  content_hash: sha256:1fabb3827ce86ed7ce24250d6d1804a695ca92abc8628791a2766258a208ff4b
 - kind: project-relative
   target: claude
   value: .claude/skills/building-agent-packages/blueprints/worker-briefs/fix-cycle.md
@@ -8789,6 +8947,15 @@ deployments:
   content_hash: sha256:839a89952cff2254f242513cf3375712624d42ea8e4c89289b8869d42419142e
 - kind: project-relative
   target: claude
+  value: .claude/skills/building-agent-packages/scripts/after_install.py
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/agent-package-builder
+  active_owner: ./packages/agent-package-builder
+  content_hash: sha256:d29526301c72366ec05a711882f8a2b27daa0f06a5807dad490a93ac5bada504
+- kind: project-relative
+  target: claude
   value: .claude/skills/building-agent-packages/scripts/check_counts.py
   runtime: null
   scope: project
@@ -8796,6 +8963,15 @@ deployments:
   - ./packages/agent-package-builder
   active_owner: ./packages/agent-package-builder
   content_hash: sha256:0e5b44cdd3b700f3854b526a314c571f0164940a8480ea07aeda054af8f13497
+- kind: project-relative
+  target: claude
+  value: .claude/skills/building-agent-packages/scripts/check_state.py
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/agent-package-builder
+  active_owner: ./packages/agent-package-builder
+  content_hash: sha256:e11125e2ab87c8b0a0b02d274fa7c60ac3d16ab0d697e2368b0e847878514c69
 - kind: project-relative
   target: claude
   value: .claude/skills/building-agent-packages/scripts/commit_groups.py
@@ -8816,6 +8992,24 @@ deployments:
   content_hash: sha256:6cb2bcc5563bf57bc4cb10ee9e5d9a322e0feb1fc048678b5137ef33eaaa604e
 - kind: project-relative
   target: claude
+  value: .claude/skills/building-agent-packages/scripts/merge_lock.py
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/agent-package-builder
+  active_owner: ./packages/agent-package-builder
+  content_hash: sha256:fc6fb1c6b99a4e65d56f37bdfc0917c78951ed905c355d698da87bf3f6c333eb
+- kind: project-relative
+  target: claude
+  value: .claude/skills/building-agent-packages/scripts/migrate_state.py
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/agent-package-builder
+  active_owner: ./packages/agent-package-builder
+  content_hash: sha256:51f43c533a92c53f89d82b9a92afb09c13845c94da8ad5b42d1f3252c3536ed1
+- kind: project-relative
+  target: claude
   value: .claude/skills/building-agent-packages/scripts/normalize_tags.py
   runtime: null
   scope: project
@@ -8823,6 +9017,51 @@ deployments:
   - ./packages/agent-package-builder
   active_owner: ./packages/agent-package-builder
   content_hash: sha256:52afbe4e693be8f340c95726184a0ddf808dba50ce166671dab51cf3d8023a1f
+- kind: project-relative
+  target: claude
+  value: .claude/skills/building-agent-packages/scripts/preflight_apm.py
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/agent-package-builder
+  active_owner: ./packages/agent-package-builder
+  content_hash: sha256:697ceaa6bbc0383a27d81f485f41236835bda7db9723ceb5bbc08702c7fa3277
+- kind: project-relative
+  target: claude
+  value: .claude/skills/building-agent-packages/scripts/render_state.py
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/agent-package-builder
+  active_owner: ./packages/agent-package-builder
+  content_hash: sha256:6926f1ada81eec125bd5937e0e262f8664970ff0f48506854647d4ab9c64d382
+- kind: project-relative
+  target: claude
+  value: .claude/skills/building-agent-packages/scripts/snapshot_env.py
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/agent-package-builder
+  active_owner: ./packages/agent-package-builder
+  content_hash: sha256:1cdb64aadcd630237cc52a5511c1e59b5f974e372ead920324b4bafe116b2e99
+- kind: project-relative
+  target: claude
+  value: .claude/skills/building-agent-packages/scripts/state_event.py
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/agent-package-builder
+  active_owner: ./packages/agent-package-builder
+  content_hash: sha256:c2597913c4f730ffdfdf59070ef3d879ba8db5752cb6a58dcc51faa7d8a856d2
+- kind: project-relative
+  target: claude
+  value: .claude/skills/building-agent-packages/scripts/state_lib.py
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/agent-package-builder
+  active_owner: ./packages/agent-package-builder
+  content_hash: sha256:21df3bb8ec135514d038f7052ed970f26bc9b6191f65603a7075aaaf16eacab0
 - kind: project-relative
   target: claude
   value: .claude/skills/building-agent-packages/scripts/verify_package.py
@@ -9137,7 +9376,7 @@ deployments:
   owners:
   - ./packages/quarkus-aws-saas
   active_owner: ./packages/quarkus-aws-saas
-  content_hash: sha256:58300812fcae8a6d0bf317b455cbbd6424c3a50b4148ec7419da17f72eb57ea2
+  content_hash: sha256:5f1e3ada8b9aa7baf1ba958d4907afcd67dac195bbd65564a3916ab2b617f2bf
 - kind: project-relative
   target: claude
   value: .claude/skills/building-quarkus-aws-saas/blueprints/worker-briefs.md
