@@ -124,8 +124,31 @@ def main():
         warnings.append('units moved past PLANNED but briefs/ is empty: save every worker brief')
     if os.path.isfile(os.path.join(ex, '.run.lock')) and sl.current_phase(s) == 'DONE':
         problems.append('.run.lock still present after P9 done')
+    scores = sl.scores(ex)
+    scored = {r['round'] for r in scores}
+    for k, v in s['rounds'].items():
+        if any(x is True for x in v['kinds'].values()) and k not in scored:
+            problems.append(f'{k} has review reports but no rows in state/scores.md '
+                            f'(record one `state_event.py ... score` per report)')
+    fr = sl.register(ex, 'findings')
+    for r in scores:
+        if r['kind'] == 'audit' or not r['high'].isdigit():
+            continue
+        opened = sum(1 for rs in fr.values() if rs[0][3] == 'HIGH' and rs[0][4] == r['round']
+                     and rs[0][5] == r['target'])
+        if opened != int(r['high']):
+            warnings.append(f'{r["round"]} {r["target"]}: score says {r["high"]} HIGH, findings.md opened '
+                            f'{opened} HIGH for it (scoreboard and findings disagree)')
+    if os.path.basename(ex) != 'execution-0':
+        loose = [f for rel, f in sl.research_files(os.path.dirname(ex)) if rel == f]
+        if loose:
+            warnings.append(f'{len(loose)} research_*.md in the slug root; new runs keep them in research/')
+    drift = sl.builder_drift()
+    if drift:
+        warnings.append(f'.claude/ copies of builder scripts differ from packages/ ({", ".join(drift)}): '
+                        'run the scripts from packages/ until the P8 install')
     if os.path.basename(ex) == 'execution-0':  # migrated legacy run: rules newer than the run are notes
-        newer = ('PREFLIGHT', 'shared lock', 'no rounds/ folder', 'environment.md')
+        newer = ('PREFLIGHT', 'shared lock', 'no rounds/ folder', 'environment.md', 'scores.md')
         warnings += [f'(legacy) {p}' for p in problems if any(k in p for k in newer)]
         problems = [p for p in problems if not any(k in p for k in newer)]
     print(f'{ex}: current phase {sl.current_phase(s)}, {len(s["units"])} units, '
