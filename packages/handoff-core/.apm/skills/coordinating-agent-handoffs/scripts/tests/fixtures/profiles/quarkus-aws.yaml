@@ -12,7 +12,7 @@ spec:
   architecture: openspec/specs/architecture/spec.md
   adr_dir: openspec/specs/architecture/adr
 roles:
-  orchestrator: building-quarkus-aws-saas
+  orchestrator: building-aws-saas-serverless-quarkus-react-nextjs
   architect: aws-architect
   code: quarkus-lambda-integrator
   stripe: stripe-integrator

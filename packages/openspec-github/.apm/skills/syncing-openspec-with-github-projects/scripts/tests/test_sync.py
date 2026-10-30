@@ -179,7 +179,7 @@ class TestPushApplied(AppliedCase):
 
     def test_escalation_blocked_then_answered(self):
         write(os.path.join(self.handoff, "escalation-01.md"),
-              "---\nkind: escalation\nid: escalation-01\nfrom: building-quarkus-aws-saas\nto: user\n"
+              "---\nkind: escalation\nid: escalation-01\nfrom: building-aws-saas-serverless-quarkus-react-nextjs\nto: user\n"
               "change: list-tenant-items\nstatus: open\ncreatedAt: 2026-11-04T11:00:00Z\n---\n\n"
               "## Options\n\n1. a\n2. b\n")
         self.assertEqual(self.sync("push", "--apply")[0], 0)

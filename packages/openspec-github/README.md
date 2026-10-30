@@ -30,7 +30,7 @@ optional `OPENSPEC_PROFILE`. Details in the skill's `blueprints/bootstrap-and-cr
 
 - Agents: `push` and `status` (dry-run; `--apply` only with the orchestrator's relayed approval line, or when
   the user typed `--apply` in the command, which is itself the relayed line). The syncer agent and command are
-  for a manual refresh or other orchestrators; `building-quarkus-aws-saas` runs `push` inline.
+  for a manual refresh or other orchestrators; `building-aws-saas-serverless-quarkus-react-nextjs` runs `push` inline.
 - With `approval_source` `github` or `both` no bridge command runs under an approver's `gh` login (exit 1):
   use a machine-user token in `GH_TOKEN` locally (App tokens only inside Actions) and approve in the browser.
 - Orchestrator: `bootstrap`, `pull`, `close`, plus everything above.

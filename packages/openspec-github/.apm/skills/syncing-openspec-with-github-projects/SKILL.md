@@ -51,7 +51,7 @@ this skill tells an agent which parts it may run and which only the orchestrator
 | Actor | Allowed | Never |
 |---|---|---|
 | Agent (`openspec-github-syncer`, via `/syncing-openspec-to-github`) | `gh_projects_sync.py push` and `status`; `--apply` only with the orchestrator's relayed approval line; `gh --version`, `gh auth status` | `pull`, `close`, `bootstrap`, any other mutating `gh` call, git commit/push |
-| Orchestrator (inline, talks to the user) | everything above (`building-quarkus-aws-saas` runs `push` inline; the syncer agent and command are for a manual refresh or other orchestrators) plus `pull`, `close`, `bootstrap`; writes status.md and records | treating a GitHub comment as approval without `pull` re-checking it |
+| Orchestrator (inline, talks to the user) | everything above (`building-aws-saas-serverless-quarkus-react-nextjs` runs `push` inline; the syncer agent and command are for a manual refresh or other orchestrators) plus `pull`, `close`, `bootstrap`; writes status.md and records | treating a GitHub comment as approval without `pull` re-checking it |
 | Workflows (the target repository's Actions) | `gate_command.py evaluate` and `recheck`, `push --apply`, CI checks, the archive branch and pull request | pushing the default branch, using `pull_request_target`, reading comment text inside `run:` |
 
 Flow: git change -> `push` mirrors it -> an approver comments `/approve E<n>` on the change issue ->
@@ -119,7 +119,7 @@ and prints `TRUST approvers=... bot_login=...` so the orchestrator can show the 
 | Project tracker file | `openspec/github-tracker.yaml` overrides the profile `tracker:` block key by key | `assets/github.template.yaml` |
 | Repository variables | `OPENSPEC_OWNER_TYPE`, `OPENSPEC_BOT_LOGIN`, `OPENSPEC_APP_CLIENT_ID`, optional `OPENSPEC_PROFILE` | [workflows](./blueprints/workflows.md) |
 | Secrets | `OPENSPEC_APP_PRIVATE_KEY` (organization) or `OPENSPEC_PROJECT_PAT` (user) | [credentials](./blueprints/bootstrap-and-credentials.md) |
-| Neighbour skills | `managing-github-projects-gh-v2-103`, `automating-github-repos-with-actions` (github-core); `coordinating-agent-handoffs` (handoff-core); `specifying-changes-with-openspec-v1-15` (openspec-core); `building-quarkus-aws-saas` (consumer) | names only |
+| Neighbour skills | `managing-github-projects-gh-v2-103`, `automating-github-repos-with-actions` (github-core); `coordinating-agent-handoffs` (handoff-core); `specifying-changes-with-openspec-v1-15` (openspec-core); `building-aws-saas-serverless-quarkus-react-nextjs` (consumer) | names only |
 
 ## External Resources
 

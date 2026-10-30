@@ -2,7 +2,7 @@
 kind: spec-delta
 id: spec-delta-01
 from: spec-synchronizer
-to: building-quarkus-aws-saas
+to: building-aws-saas-serverless-quarkus-react-nextjs
 change: list-tenant-items
 refs: [result-01-code]
 status: proposed
