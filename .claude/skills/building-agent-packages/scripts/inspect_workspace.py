@@ -23,14 +23,13 @@ verify = os.path.join(here, 'verify_skill.py')
 out = {'workspace': ws, 'research': {}, 'skills': {}, 'family': [], 'rounds': {}, 'recorded': None,
        'execution': None}
 
+for rel, f in sl.research_files(ws) if os.path.isdir(ws) else []:  # research/ first, legacy root next
+    t = open(os.path.join(ws, rel), encoding='utf-8').read()
+    done = bool(re.search(r'^#+\s*.*(Source Bibliography|Bibliography|Sources)', t, re.M | re.I)) \
+        and len(t.splitlines()) > 60
+    out['research'][rel] = 'COMPLETE' if done else 'PARTIAL'
 for f in sorted(os.listdir(ws)) if os.path.isdir(ws) else []:
-    p = os.path.join(ws, f)
-    if f.startswith('research_') and f.endswith('.md'):
-        t = open(p, encoding='utf-8').read()
-        done = bool(re.search(r'^#+\s*.*(Source Bibliography|Bibliography|Sources)', t, re.M | re.I)) \
-            and len(t.splitlines()) > 60
-        out['research'][f] = 'COMPLETE' if done else 'PARTIAL'
-    elif f.startswith('_family_'):
+    if f.startswith('_family_'):
         out['family'].append(f)
 vd = os.path.join(ws, 'validation')
 if os.path.isdir(vd):

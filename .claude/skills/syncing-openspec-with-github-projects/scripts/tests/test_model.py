@@ -138,7 +138,7 @@ class TestDesiredState(ModelCase):
 
     def add_escalation(self, h, status):
         self.write(os.path.join(h, "escalation-01.md"), "\n".join([
-            "---", "kind: escalation", "id: escalation-01", "from: building-quarkus-aws-saas",
+            "---", "kind: escalation", "id: escalation-01", "from: building-aws-saas-serverless-quarkus-react-nextjs",
             "to: user", "change: list-tenant-items", "task: T2", "limit: review_rounds",
             "status: %s" % status, "createdAt: 2026-11-04T11:00:00Z", "---", "",
             "## Attempts", "", "two", "", "## Evidence", "", "x", "", "## Hypothesis", "", "y", "",
@@ -162,13 +162,13 @@ class TestDesiredState(ModelCase):
         h = self.handoff_copy()
         self.write(os.path.join(h, "result-02-code.md"), "\n".join([
             "---", "kind: report", "id: result-02-code", "from: quarkus-lambda-integrator",
-            "to: building-quarkus-aws-saas", "change: list-tenant-items", "refs: [wo-01-code]",
+            "to: building-aws-saas-serverless-quarkus-react-nextjs", "change: list-tenant-items", "refs: [wo-01-code]",
             "outcome: needs-input", "createdAt: 2026-11-04T12:00:00Z", "---", "",
             "## Questions", "", "1. Which page size?", ""]))
         ni = self.issue(model.desired_state(self.inputs(h)), "escalation:result-02-code")
         self.assertEqual((ni["state"], ni["title"]), ("open", "needs-input: result-02-code"))
         self.write(os.path.join(h, "wo-02-code.md"), "\n".join([
-            "---", "kind: work-order", "id: wo-02-code", "from: building-quarkus-aws-saas",
+            "---", "kind: work-order", "id: wo-02-code", "from: building-aws-saas-serverless-quarkus-react-nextjs",
             "to: quarkus-lambda-integrator", "change: list-tenant-items", "task: T2",
             "refs: [result-02-code]", "status: pending", "createdAt: 2026-11-04T13:00:00Z", "---", ""]))
         ni = self.issue(model.desired_state(self.inputs(h)), "escalation:result-02-code")

@@ -1,11 +1,11 @@
 ---
 kind: review
 id: review-<nn>
-from: quarkus-code-reviewer       # or stripe-advisor (orchestrator wraps its notes)
-to: building-quarkus-aws-saas
+from: quarkus-code-reviewer       # or stripe-advisor | langchain4j-reviewer | nextjs-code-reviewer | ui-design-reviewer (visual) | terraform-code-reviewer | cicd-pipeline-reviewer
+to: building-aws-saas-serverless-quarkus-react-nextjs
 change: <change-id>
 task: <task-id>                   # added by the orchestrator when it saves the record
-# role: stripe   # Stripe tasks only
+role: <author role>                # routes `changes-requested` back to the author: stripe | frontend | infra | observability | cicd | ai (omit only for plain back-end `code`)
 refs: [wo-<nn>-review]
 requirements: [R1]
 outcome: approved                 # approved | changes-requested (any HIGH or open MEDIUM => changes-requested)

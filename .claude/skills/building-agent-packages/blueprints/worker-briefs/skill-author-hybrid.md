@@ -6,7 +6,7 @@ Back to [README](README.md).
 Agent: artifact-author (batches of <= 4 in one message)
 Spec: follow packages/artifact-authoring/.apm/skills/skill-creator/SKILL.md and the hybrid template
   packages/artifact-authoring/.apm/skills/skill-creator/assets/TEMPLATE.KNOWLEDGE-SKILL.HYBRID.md
-Input: <workspace>/research_<...>.md ; facts: _family_facts.md ; rules: _family_rules.md
+Input: <workspace>/research/research_<...>.md ; facts: _family_facts.md ; rules: _family_rules.md
 Skill name: <name>-v<MAJOR>-<MINOR>
 Approval line: <exact form from README>   Hard constraints: <paste block>
 Write to: packages/<package>/.apm/skills/<name>/   (NOT .claude/skills/; .claude/ is generated)

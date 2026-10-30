@@ -7,7 +7,7 @@ PHASES = [f'P{i}' for i in range(10)]
 GATES = ('G1', 'G2', 'G3')
 STATES = ('PLANNED', 'RESEARCHED', 'AUTHORED', 'VERIFIED', 'VALIDATED')
 ROUND_KINDS = ('validate', 'test', 'audit')
-ROUND_FILE = re.compile(r'(validate|test|audit)__[a-z0-9][a-z0-9.-]*\.md|scoreboard\.md')
+ROUND_FILE = re.compile(r'(validate|test|audit)__[a-z0-9][a-z0-9.-]*\.(md|running)|scoreboard\.md')
 
 
 def rows(path):
@@ -57,7 +57,12 @@ def load(ex):
             if os.path.isdir(rd) else []:
         files = sorted(os.listdir(os.path.join(rd, k)))
         out['rounds'][k] = {'files': files,
-                            'kinds': {x: any(f.startswith(x + '__') for f in files) for x in ROUND_KINDS},
+                            # True = report written; 'running' = only a `<kind>__<target>.running`
+                            # marker (reviewer launched, report pending); False = neither.
+                            'kinds': {x: True if any(f.startswith(x + '__') and f.endswith('.md') for f in files)
+                                      else 'running' if any(f.startswith(x + '__') and f.endswith('.running')
+                                                            for f in files) else False
+                                      for x in ROUND_KINDS},
                             'bad_names': [f for f in files if not ROUND_FILE.fullmatch(f)]}
     ev = os.path.join(st, 'events.log')
     if os.path.isfile(ev):
@@ -80,7 +85,7 @@ def current_phase(s):
 CODES = ('PHASE_START', 'PHASE_DONE', 'GATE', 'UNIT_STATE', 'ROUND_DONE', 'FIX', 'SWEEP',
          'INCIDENT', 'DEFER', 'DISCREPANCY', 'LOCK', 'UNLOCK', 'INIT', 'NOTE', 'FINDING',
          'DECISION', 'SOURCE', 'ENV', 'PREFLIGHT', 'METRIC', 'RETRO',
-         'TOUCH', 'SHARED_LOCK', 'SHARED_UNLOCK', 'BUDGET')
+         'TOUCH', 'SHARED_LOCK', 'SHARED_UNLOCK', 'BUDGET', 'ROUND_START')
 # Registers: append-only tables under state/. Column 1 after the timestamp is the ID, column 2 the
 # status (or the register-specific field). The latest row of an ID is its current value.
 REGISTERS = {
@@ -91,7 +96,10 @@ REGISTERS = {
     'metrics': ('METRICS.template.md', None),
     'retro': ('RETRO.template.md', None),
     'shared-touch': ('SHARED_TOUCH.template.md', None),
+    'scores': ('SCORES.template.md', None),
 }
+# P6 exit criteria; keep in sync with blueprints/policy/triage-and-stop-rules.md (Exit criteria).
+EXIT = {'skill_min': 90.0, 'package_min': 8.0, 'audit_min': 8.0}
 SHARED_LOCK = os.path.join('workspace', '.shared.lock')
 SHARED_FILES = ('apm.yml', 'apm.lock.yaml', 'CLAUDE.md', 'README.md', 'docs/', '.claude/', 'scripts/')
 
@@ -158,3 +166,43 @@ def owner_of(path, owners=None):
         if any(os.path.exists(os.path.join('packages', pkg, '.apm', p)) for p in pats):
             return pkg
     return 'unowned (not in the lock nor in packages/)'
+
+
+def scores(ex):
+    """Latest score row per (round, target, kind) from state/scores.md, as dicts, in round order.
+    Columns: Timestamp | Round | Target | Kind | Score | HIGH | MEDIUM | LOW | Pass | Total | Actor | Note"""
+    latest = {}
+    for r in rows(os.path.join(ex, 'state', 'scores.md')):
+        if len(r) < 12:
+            continue
+        latest[(r[1], r[2], r[3])] = {'ts': r[0], 'round': r[1], 'target': r[2], 'kind': r[3],
+                                      'score': r[4], 'high': r[5], 'medium': r[6], 'low': r[7],
+                                      'pass': r[8], 'total': r[9], 'note': r[11]}
+    key = lambda k: (0 if k[0] == 'pilot' else 1, int(re.sub(r'\D', '', k[0]) or 0), k[1], k[2])
+    return [latest[k] for k in sorted(latest, key=key)]
+
+
+def research_files(slug):
+    """[(relative path, name)] of research files: workspace/<slug>/research/ first, then the legacy
+    slug root (runs before 2026-10-30 kept research_*.md loose in the slug)."""
+    out = []
+    for sub in ('research', ''):
+        d = os.path.join(slug, sub) if sub else slug
+        for f in sorted(os.listdir(d)) if os.path.isdir(d) else []:
+            if f.startswith('research_') and f.endswith('.md'):
+                out.append((os.path.join(sub, f).replace(os.sep, '/') if sub else f, f))
+    return out
+
+
+def builder_drift(repo='.'):
+    """Builder scripts whose deployed copy in .claude/ differs from the source in packages/.
+    [] when either side is missing (not a factory checkout)."""
+    import filecmp
+    rel = os.path.join('.apm', 'skills', 'building-agent-packages', 'scripts')
+    src = os.path.join(repo, 'packages', 'agent-package-builder', rel)
+    dst = os.path.join(repo, '.claude', 'skills', 'building-agent-packages', 'scripts')
+    if not (os.path.isdir(src) and os.path.isdir(dst)):
+        return []
+    return [f for f in sorted(os.listdir(src)) if f.endswith('.py')
+            and not (os.path.isfile(os.path.join(dst, f))
+                     and filecmp.cmp(os.path.join(src, f), os.path.join(dst, f), shallow=False))]

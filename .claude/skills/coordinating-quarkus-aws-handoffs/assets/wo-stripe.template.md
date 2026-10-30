@@ -1,7 +1,7 @@
 ---
 kind: work-order
 id: wo-<nn>-stripe
-from: building-quarkus-aws-saas
+from: building-aws-saas-serverless-quarkus-react-nextjs
 to: stripe-integrator
 change: <change-id>
 task: <task-id>                  # T1, T2 ...
@@ -10,6 +10,14 @@ requirements: [R1]
 status: pending                  # pending | in-progress | done | blocked | cancelled
 createdAt: <ISO 8601 UTC>
 ---
+
+## Functionality
+
+Plain sentences: what the user or the billing flow gets, including failed payments and replayed webhooks.
+
+## Diagram
+
+Sequence copied from `changes/<id>/design/<flow>.md` (section 3).
 
 ## Scope
 
@@ -29,7 +37,7 @@ Output: code + `result-<nn>-stripe.md` (kind `report`, from `assets/result-code.
 
 ## Applicable ADRs
 
-- `openspec/specs/architecture/adr/<NNN>-<title>.md` - <what it forces or forbids: webhook secret storage, idempotency store, API version>.
+- `architecture/adr/<NNN>-<title>.md`, `infrastructure/adr/<NNN>-<title>.md` - <what each forces or forbids: webhook secret storage, idempotency store, API version>.
 
 ## Constraints
 

@@ -9,22 +9,27 @@ profile puts its own files. Items marked (unverified) are not confirmed by the O
 | File | Path | Written by |
 |---|---|---|
 | Functional spec (live) | `openspec/specs/<capability>/spec.md` | applied from accepted deltas only (archive, or orchestrator) |
-| Architecture spec (live) | `openspec/specs/architecture/spec.md` | orchestrator via change deltas; reviewed by `aws-architect` |
-| ADRs | `openspec/specs/architecture/adr/<NNN>-<title>.md` ([template](../assets/adr.template.md)) | orchestrator (E2); never edited once accepted |
-| Change proposal, design, tasks | `openspec/changes/<id>/proposal.md`, `design.md`, `tasks.md` | orchestrator |
+| Architecture spec (live) and contracts | `openspec/specs/architecture/spec.md`, `architecture/contracts/*.md` | `solution-architect` (E2a); reviewed by `solution-architecture-reviewer` |
+| Design system, wireframes, navigation | `openspec/specs/design/design-system.md`, `design/wireframes/*.md`, `design/navigation.md` | `ui-ux-designer` (E2b, E3b); reviewed by `ui-design-reviewer` |
+| Infrastructure spec | `openspec/specs/infrastructure/spec.md` | `aws-infrastructure-architect` (E2c); reviewed by `aws-architect-reviewer` |
+| ADRs, three folders, numbering per folder | `openspec/specs/architecture/adr/`, `design/adr/`, `infrastructure/adr/` as `<NNN>-<title>.md` ([template](../assets/adr.template.md), field `area:`) | the author of each area (E2); never edited once accepted; cite as `design/adr/002` |
+| Change proposal, tasks | `openspec/changes/<id>/proposal.md`, `tasks.md` | orchestrator |
+| Change designs | `openspec/changes/<id>/design.md` (index + traceability) and `design/<flow>.md` (one per flow) | `solution-architect` (E4) |
+| Change infra design | `openspec/changes/<id>/infra-design.md` | `aws-infrastructure-architect` (E4) |
 | Change deltas | `openspec/changes/<id>/specs/<capability>/spec.md` | orchestrator, from accepted `spec-delta` records |
 | Handoff records | `openspec/changes/<id>/handoff/*.md` | agents and orchestrator |
 | Generated board | `openspec/changes/<id>/handoff/status.md` | `board.py` |
 | Project overrides | `openspec/handoff-profile.yaml` (`limits:` / `quality:` only) | the user, via the orchestrator |
 
-The profile's `spec.functional`, `spec.architecture` and `spec.adr_dir` mirror this table.
+The profile's `spec.functional`, `spec.architecture` and `spec.adr_dir` mirror this table; `adr_dir` points only to `architecture/adr` and is informational (the scripts do not read it),
+so every work-order lists the three ADR folders explicitly. The folder layout beyond the official OpenSpec files (`architecture/`, `design/`, `infrastructure/`, `design/<flow>.md`, `infra-design.md`, `handoff/`) is a factory convention; see U2, U3.
 
 ## Records and the spec: one direction per record
 
 - `spec-delta-NN.md` is a **proposal** (frontmatter `status: proposed`); its body uses the OpenSpec
   delta sections plus `## Questions`. Accepting it means the orchestrator copies the sections into
   `openspec/changes/<id>/specs/<capability>/spec.md` and sets the record `accepted`.
-- A delta that touches the architecture spec also carries a new ADR (the user decides through the ADR).
+- A delta that touches the architecture, design or infrastructure spec also carries a new ADR in the matching folder (the user decides through the ADR).
 - The sync agent never writes under `openspec/`; the orchestrator is the only writer of the spec.
 
 ## Archive
@@ -54,11 +59,12 @@ All must hold, re-run by the orchestrator (not trusted from earlier output):
 
 1. `check_records.py` exit 0.
 2. `detect_drift.py` exit 0 and `board.py` shows `drift: false`, `pending spec-deltas: 0`.
-3. A `verify` record with `outcome: pass` for each stage E1-E4 and E7 (`verify-E7.md` by `aws-lambda-debugger` mode B, role `debug`) whose verifier differs from the authors.
+3. A `verify` record with `outcome: pass` for each stage `E1`, `E2a`, `E2b`, `E2c`, `E3`, `E3b` (when the change has UI), `E4-<flow>` (every design), `E4-index`, `E4-infra`, `E5`, `E7` (`verify-E7.md` by `aws-lambda-debugger` mode B, role `debug`) and `E7-site` (`static-site-verifier`, when the change has a front end), each by a verifier that differs from the authors.
 4. No open `escalation`; no blocking question; every `## Approvals` entry in `status.md` is the user's own words.
 5. `board.py` prints `NEXT: final-gate`.
+6. The last `result-NN-pipeline.md` of role `pipeline-cd` for prod is `success`.
 
-Then: ask the user to approve commit and archive; commit (never push) only with that approval.
+Then: ask the user to approve the archive; the archive and the commit go in a PR of the user (the agents never push).
 
 ## Drift sync after a manual edit
 

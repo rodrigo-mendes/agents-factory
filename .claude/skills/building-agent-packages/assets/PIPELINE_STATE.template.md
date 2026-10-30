@@ -6,6 +6,26 @@
 <!-- generated:summary -->
 <summary>
 
+<!-- generated:progress -->
+## Progress and budget
+<progress>
+
+<!-- generated:exit -->
+## P6 exit criteria
+<exit>
+
+<!-- generated:scoreboard -->
+## Scoreboard by round
+<scoreboard>
+
+<!-- generated:findings -->
+## Findings by severity
+<findings>
+
+<!-- generated:health -->
+## Health
+<health>
+
 <!-- generated:phases -->
 ## Phases
 <phases>

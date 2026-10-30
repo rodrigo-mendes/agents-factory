@@ -1,7 +1,7 @@
 ---
 kind: work-order
 id: wo-01-code
-from: building-quarkus-aws-saas
+from: building-aws-saas-serverless-quarkus-react-nextjs
 to: quarkus-lambda-integrator
 change: list-tenant-items
 task: T1

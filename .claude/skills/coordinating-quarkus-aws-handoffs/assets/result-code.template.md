@@ -1,10 +1,11 @@
 ---
 kind: report
-id: result-<nn>-code              # same NN as the work-order; file name never starts with "report"
-from: quarkus-lambda-integrator   # or stripe-integrator / aws-terraform-engineer (id result-<nn>-infra) / aws-architect (result-<nn>-architect) / aws-observability (result-<nn>-observability)
-to: building-quarkus-aws-saas
+id: result-<nn>-code              # same NN and role as the work-order (result-<nn>-ai, -frontend, -cicd, -infra, -stripe, -observability, -solution-architect, -infrastructure-architect, -designer); never starts with "report"
+from: quarkus-lambda-integrator   # or stripe-integrator / nextjs-frontend-integrator / cicd-pipeline-engineer / aws-terraform-engineer / aws-observability / solution-architect / aws-infrastructure-architect / ui-ux-designer
+to: building-aws-saas-serverless-quarkus-react-nextjs
 change: <change-id>
 task: <task-id>
+# role: ai (optional, shares the agent of code) | observability-live | observability-review (REQUIRED, see wo-observability); every other role is derived from `from`
 refs: [wo-<nn>-code]              # I8: [wo-<nn>-code, review-<nn>]
 requirements: [R1]
 outcome: success                  # success | partial | failed | needs-input
@@ -25,8 +26,10 @@ createdAt: <ISO 8601 UTC>
 
 ## Evidence
 
-- `mvn -q verify` -> <result, test count>; JaCoCo new classes <n>% (limit <coverage_min>%).
-- `function.zip` built: `<path>`, sha256 `<hash>`.
+- Back-end / AI: `mvn -q verify` -> <result, test count>; JaCoCo new classes <n>% (limit <coverage_min>%); `function.zip` built: `<path>`, sha256 `<hash>`.
+- Front: `pnpm install --frozen-lockfile && pnpm lint && pnpm test && pnpm build` -> <result>; sha256 of `out/`: `<hash>`.
+- Terraform: `fmt -check`, `init -backend=false`, `validate` (and mocked `test`) -> <results>. CI/CD: `actionlint`, `yamllint` -> <results> + the `user-must-add` list.
+- Design records (solution-architect, infrastructure-architect, designer): list of files written and the sections each covers instead of the build lines.
 - Build attempts: <n> of <limit from the work-order>.
 - Unverified / medium-confidence items relied on: <tag + skill, or none>.
 

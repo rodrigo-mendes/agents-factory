@@ -6,7 +6,8 @@ Back to [SKILL.md](../SKILL.md). Why: a single shared `PIPELINE_STATE.md` drifte
 
 ```
 workspace/<slug>/
-  PACKAGE_BRIEF.md   _family_facts.md   _family_rules.md   research_*.md   (durable across executions)
+  PACKAGE_BRIEF.md   _family_facts.md   _family_rules.md                  (durable across executions)
+  research/          research_<Tech>_<Unit>_v<ver>.md, one per unit       (durable; runs before 2026-10-30 kept them in the slug root, still read)
   LATEST             one line: execution-<N>  (resume reads it)
   execution-<N>/     one per run or test run; a new run never overwrites an older one
     PIPELINE_STATE.md      GENERATED dashboard (scripts/render_state.py); never edited by hand
@@ -48,6 +49,9 @@ The version of a family file lives inside it (column or header), not in its name
 | cost | `metric <scope> estimate\|actual --tokens N [--minutes M]` (prints BUDGET EXCEEDED over `token_budget`) |
 | lesson | `retro add --kind brief\|known-failure\|lesson --target <t> --text "..."` |
 | shared file changed | `shared-lock` first, then `touch <path> --note "..."`; `shared-unlock` at the end ([policy](policy/shared-files.md)) |
+| review report scored (pilot, P6) | `score <pilot\|round-<k>> <target> --kind validate\|test\|audit --score S [--high N --medium N --low N] [--pass P --total T]` (`state/scores.md`; generates `scoreboard.md`) |
+| dashboard only | `render` (every successful write already re-renders; `--no-render` batches writes) |
+| reviewer launched (P6) | `round-start round-<k> <validate\|test\|audit> <target>` (writes the `.running` marker; dashboard shows `running`) |
 | anything else | `event <phase> <CODE> "<text>"` with CODE in ROUND_DONE, FIX, SWEEP, INCIDENT, DEFER, DISCREPANCY, NOTE |
 | P9 done | `unlock` (a lock older than 12 h can be freed with `unlock --stale`; it is logged) |
 

@@ -1,11 +1,11 @@
 ---
 kind: work-order
 id: wo-<nn>-debug                # both modes (A and B); never wo-<nn>-verify
-from: building-quarkus-aws-saas
+from: building-aws-saas-serverless-quarkus-react-nextjs
 to: aws-lambda-debugger
 change: <change-id>
-task: <task-id>                  # deploy for an E7 diagnosis (mode A) and for mode B; otherwise the diagnosed task
-refs: [result-<nn>-deploy]       # mode B: also result-<nn>-observability (the producer's result it verifies)
+task: <task-id>                  # E7 for an E7 diagnosis (mode A) and for mode B; otherwise the diagnosed task
+refs: [result-<nn>-pipeline]     # the pipeline-cd record; mode B: also result-<nn>-observability (the producer result it verifies)
 requirements: [R1]
 status: pending
 createdAt: <ISO 8601 UTC>
@@ -13,7 +13,7 @@ createdAt: <ISO 8601 UTC>
 
 ## Scope
 
-Mode: A diagnose | B post-deploy verification (stage E7). Read-only; no AWS mutation, no files written.
+Mode: A diagnose | B post-deploy verification (stage E7; the deploy was made by the pipeline, the run is in the pipeline record). Read-only; no AWS mutation, no files written.
 The orchestrator saves the returned record.
 
 ## Skills
@@ -30,15 +30,15 @@ The orchestrator saves the returned record.
 ## Constraints
 
 - mode, function, alias/version, region, entry type (REST | HTTP API | SQS | EventBridge), UTC window
-- identity: AWS profile `<name>`; symptom or deploy-report path
+- identity: AWS profile `<name>`; symptom or pipeline record path (run URL, failed job)
 - pillars to check (mode B): logs, metrics, traces, alarms (state only), dashboards
-- Ask-First items settled here: Logs Insights allowed? invoke: never by the debugger (a real invoke is the deployer's smoke step)?
+- Ask-First items settled here: Logs Insights allowed? invoke: never by the debugger (a real invoke is the smoke step of the pipeline, versioned and reviewed in the PR)?
 
 Approval lines (the orchestrator pastes the user's approval verbatim, one per line; absent = not allowed):
 
 ```
-approval: logs-insights scope=<log-group or "xray"> window=<minutes> by=<user> at=<UTC timestamp> relayed-by=building-quarkus-aws-saas
-approval: e7-gaps pillars=<comma list> by=<user> at=<UTC timestamp> relayed-by=building-quarkus-aws-saas
+approval: logs-insights scope=<log-group or "xray"> window=<minutes> by=<user> at=<UTC timestamp> relayed-by=building-aws-saas-serverless-quarkus-react-nextjs
+approval: e7-gaps pillars=<comma list> by=<user> at=<UTC timestamp> relayed-by=building-aws-saas-serverless-quarkus-react-nextjs
 ```
 
 `e7-gaps` (mode B only): the user accepted these pillars as not verified; the debugger then emits `pass` and lists them
