@@ -33,6 +33,7 @@ are those of the Quarkus/AWS flow. `detect_drift.py` resolves `--change` against
 directory, so join a relative handoff dir with `--repo` before calling it.
 
 - `git diff ...`, `git log ...`, `git show ...` (read-only forms)
+- `python .claude/skills/coordinating-agent-handoffs/scripts/portable.py now` (UTC timestamp for `createdAt`; `python3` where only that exists; never `date -u`)
 - `python <skill>/scripts/detect_drift.py <repo> --change <handoff-dir> [--include-worktree]` (read-only;
   use `--include-worktree` per run during E6-E9, when task code is still uncommitted; exit 1 with a
   missing `lastSyncedSha` is not "no drift": return it with the hint that the orchestrator runs the
@@ -53,7 +54,7 @@ Input: change id / handoff dir, the spec files (proposal, design, `specs/**/spec
 3. Run `openspec validate ... --strict --json --no-interactive` (medium confidence, L1 — confirm the form against the installed CLI first, OpenSpec Ask First) when the CLI is present; report its
    exit code and findings only, do not fix them.
 4. Return **inline** a `verify` record body (frontmatter per the verify template: `from: spec-synchronizer`,
-   `stage`, `refs`, `outcome: pass | fail`) with `## Criteria` and `## Evidence` (file:line for every
+   `stage`, `refs`, `outcome: pass | fail`, `createdAt` from `portable.py now`) with `## Criteria` and `## Evidence` (file:line for every
    finding, severity per finding). `fail` when any HIGH finding exists. Do not edit the spec.
 
 ## Mode B - sync (E8)
@@ -84,7 +85,7 @@ no spec side, add that the orchestrator does not route `spec.kind` none families
    technical choice?), or the single word `none`. If a change conflicts with an accepted ADR, say so
    in Questions and do not hide it in the delta.
 5. Return **inline** a complete `spec-delta-<nn>` record (frontmatter per the spec-delta template:
-   `from: spec-synchronizer`, `status: proposed`, `refs`, `requirements`) followed by the delta
+   `from: spec-synchronizer`, `status: proposed`, `refs`, `requirements`, `createdAt` from `portable.py now`) followed by the delta
    sections, a `## Files` section (every drifted path this delta covers, one backticked path per
    line; recommended, not enforced by `check_records.py`, and a delta without it covers no path) and
   `## Questions`. The orchestrator saves it as `spec-delta-NN.md`. Once the user accepts

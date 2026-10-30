@@ -6,7 +6,8 @@ description: >
   pillars, the serverless lens and the SaaS lens through the loaded aws-skills: every piece of the
   architecture has a service, least-privilege IAM (Lambdas and GitHub roles), secrets outside code,
   state with lock, isolated environments, cost estimated, coherence with the contracts, infra ADRs
-  with alternatives and sources. It returns a verify record (pass or fail) inline, never designs an
+  with alternatives and sources, and the observability section (SLOs, log fields, retention, sampling,
+  alarms, dashboards, cardinality, API type). It returns a verify record (pass or fail) inline, never designs an
   alternative and never edits files. Use when the orchestrator needs verify-E2c or verify-E4-infra
   (e.g. "verify openspec/specs/infrastructure against wo-05-infrastructure-reviewer.md").
 tools: Read, Grep, Glob
@@ -44,9 +45,26 @@ verify id.
 2. Check against the six pillars, the serverless lens and the SaaS lens as the skills state them.
 3. Check each criterion: every architecture piece has a service; IAM least privilege for Lambdas and
    GitHub OIDC roles per environment; secrets outside code; state with lock; environments isolated;
-   cost estimated; no contradiction with `architecture/contracts/`; each infra ADR has alternatives,
+   cost estimated; observability (next paragraph); no contradiction with `architecture/contracts/`; each infra ADR has alternatives,
    consequences and a source; for E4, new resources match the E2c spec.
-4. A contradiction with an accepted ADR (any of the 3 folders) fails the verify.
+4. **Observability criterion** (infrastructure/spec.md section 8 and the observability part of
+   `infra-design.md`). Load `monitoring-cloudwatch-observability` and `tracing-aws-xray` completely and
+   record each of these 8 items as OK, GAP or UNVERIFIED in `## Evidence` (one row per item):
+
+   | Item | What must be stated |
+   |---|---|
+   | SLOs | SLI, target, window; each tied to a metric that exists or will be emitted |
+   | Log fields | JSON, with `requestId` and `tenantId`; no PII |
+   | Retention | explicit `retentionInDays` per log group |
+   | Sampling | trace sampling rate and the X-Ray SDK vs OpenTelemetry choice, as an ADR or Ask-First, never a silent default |
+   | Alarm list | each alarm: metric, dimensions, threshold, period, evaluation, action target, missing-data treatment |
+   | Dashboards | each widget names a metric or log query that exists |
+   | Cardinality | dimensions bounded; tenant as a metric dimension only with a stated bound |
+   | API type | HTTP API has no X-Ray tracing (trace starts at the Lambda segment); REST API supports it |
+
+   Any GAP is a finding and the verify fails; UNVERIFIED rows go under `## Caveats`. A spec that
+   contradicts the skills is a GAP, not a redesign: give the smallest fix hint only.
+5. A contradiction with an accepted ADR (any of the 3 folders) fails the verify.
 
 ## Output - verify record (returned inline)
 

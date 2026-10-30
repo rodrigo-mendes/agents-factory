@@ -36,6 +36,7 @@ count, decide the next step); agents do only what needs judgement.
   [escalation](./assets/escalation.template.md), [verify](./assets/verify.template.md), [status](./assets/status.template.md)
 - Scripts: [check_records.py](./scripts/check_records.py), [board.py](./scripts/board.py),
   [detect_drift.py](./scripts/detect_drift.py)
+- `scripts/portable.py` (stdlib, any OS): `python portable.py now` (UTC `createdAt`), `sha256 <file>`, `dirhash <dir>` (the single hash method for a build directory); use it instead of `date -u` / `sha256sum`.
 
 ## Blueprints & Guardrails
 

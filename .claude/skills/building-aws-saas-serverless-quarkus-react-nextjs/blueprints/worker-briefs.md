@@ -100,10 +100,9 @@ Reviewer (`model: "sonnet"`, read-only): reviews `.github/**` against the family
 ## aws-observability
 
 `model: "sonnet"`. Re-read its file at preflight and follow its Intake section. Work-order: the `infrastructure/spec.md` observability section, log group names/retention, alarm list with thresholds, X-Ray groups/sampling, dashboards, target account/region, Terraform dir. Modes:
-- **Mode A (E2c, spec review):** review section 8 of `infrastructure/spec.md`; writes `result-NN-observability.md` with `role: observability-review` (so no rule for role `observability` fires at E2).
 - **Mode B (E6, infra task):** write the observability Terraform; `result-NN-observability.md` (offline checks only); reviewed by `terraform-code-reviewer`.
 - **Mode C (E7, after the CD run):** document the live state of the deployed release (read-only), `result-NN-observability.md` (kind `report`, `role: observability-live`).
-- **Mode D (missing instrumentation found by a check):** the report carries a work-order proposal for the code owner; it never edits application code. I turn an accepted proposal into a new code work-order.
+Modes A (spec review, owned by `aws-architect-reviewer` at E2c) and D (instrumentation proposals) are not used in this flow; instrumentation gaps found at E7 go through the debugger's diagnosis to the code owner.
 It never verifies and does **not** write the E7 acceptance.
 
 ## aws-lambda-debugger
@@ -113,7 +112,7 @@ Mode B (E7 after `result-NN-observability.md`): `mode: B`, the pillars, `refs` =
 
 ## static-site-verifier
 
-`model: "sonnet"`, read-only, `wo-NN-site-verify.md`: site URL, CloudFront distribution id, the sha256 of the run's `out/` artifact (from `result-NN-pipeline`), routes to check, region, identity name, optional `agent-browser` smoke. It checks routes (200 over HTTPS), security and cache headers, CloudFront with OAC, minimum TLS and WAF, live content equal to the artifact, and returns `verify-E7-site` inline; I save it (`from: static-site-verifier`, `kind: verify`, `stage: E7-site`, role `site-verify`, `pass|fail`, Criteria + Evidence). It runs nothing that changes anything.
+`model: "sonnet"`, read-only, `wo-NN-site-verify.md`: site URL, CloudFront distribution id, the sha256 of the run's `out/` artifact (from `result-NN-pipeline`), routes to check, region, identity name. It checks routes (200 over HTTPS), security and cache headers, CloudFront with OAC, minimum TLS and WAF, live content equal to the artifact, and returns `verify-E7-site` inline; I save it (`from: static-site-verifier`, `kind: verify`, `stage: E7-site`, role `site-verify`, `pass|fail`, Criteria + Evidence). It runs nothing that changes anything.
 
 ## spec-synchronizer review
 

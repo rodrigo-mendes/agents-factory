@@ -264,50 +264,50 @@ dependencies:
   - .claude/skills/integrating-stripe-quarkus-v3-40/blueprints/verification-and-production.md
   - .claude/skills/integrating-stripe-quarkus-v3-40/blueprints/webhook-pipeline.md
   deployed_file_hashes:
-    .claude/skills/building-aws-saas-serverless-quarkus-react-nextjs/SKILL.md: sha256:3955d93ef723e742a728e40c0a65643e55a11ef48548e683d5d6c844f0216707
-    .claude/skills/building-aws-saas-serverless-quarkus-react-nextjs/blueprints/always-do-patterns.md: sha256:5108b8e4947aabaa4ebdc355863d320eb64ab3994be6b5a1f47e2d2852d1b7f8
+    .claude/skills/building-aws-saas-serverless-quarkus-react-nextjs/SKILL.md: sha256:95bbd0f199f174669fb52ac4bc03b60957161d0a02d7a5b6aa27d2a07938e55b
+    .claude/skills/building-aws-saas-serverless-quarkus-react-nextjs/blueprints/always-do-patterns.md: sha256:56e1a9fd0eb9700144021a63124f54964181db65773bf9be587678a63aaa318d
     .claude/skills/building-aws-saas-serverless-quarkus-react-nextjs/blueprints/e1-interview.md: sha256:62c4f2bb4452dee61b46c84e16bcf0c76a0bf180d6664331881c0bf688e9d60c
-    .claude/skills/building-aws-saas-serverless-quarkus-react-nextjs/blueprints/e2-architecture-and-adrs.md: sha256:ead01053cd453dc7561d834d3eea03a6d1bf370fc7bad6f96aacb77f651d42fa
+    .claude/skills/building-aws-saas-serverless-quarkus-react-nextjs/blueprints/e2-architecture-and-adrs.md: sha256:d2061a3807609a5ce38dfcbd8686924bd24998f64e84f98c39bb8b159c02b5e3
     .claude/skills/building-aws-saas-serverless-quarkus-react-nextjs/blueprints/e3-functional-spec.md: sha256:2abbeb4819d1116f7c5e7652a55634850267b7e70cb296fd4678b71890a3396e
     .claude/skills/building-aws-saas-serverless-quarkus-react-nextjs/blueprints/e3b-ui-design.md: sha256:8ac2d8cfb7faa33b6723aae990b315b954c75601b7779172b998bffbe8d95c5e
-    .claude/skills/building-aws-saas-serverless-quarkus-react-nextjs/blueprints/e4-e5-design-and-tasks.md: sha256:4e440c5c1b41f3a38f39e970efd4d2f0aaa0997f510023a1945edc2c745cf65f
-    .claude/skills/building-aws-saas-serverless-quarkus-react-nextjs/blueprints/e6-implementation-cycle.md: sha256:3115a64dc445839b1c0e02f45466d8cf083909aa473d8d016d1116c5b7b674fe
-    .claude/skills/building-aws-saas-serverless-quarkus-react-nextjs/blueprints/e7-deploy-and-observability.md: sha256:f05fe23d65241d02dd345ac2ae2ab02e4b9e066497589755b48ce2321b9d194e
+    .claude/skills/building-aws-saas-serverless-quarkus-react-nextjs/blueprints/e4-e5-design-and-tasks.md: sha256:61dd2f3a91f20735adf30691ae3fdbefe980fd07a0ef131dc54d6fc3981985cc
+    .claude/skills/building-aws-saas-serverless-quarkus-react-nextjs/blueprints/e6-implementation-cycle.md: sha256:c334bc8621d0198a54e4c4b6a59163dfdc90d7ea28424099964e21cbe1c342f4
+    .claude/skills/building-aws-saas-serverless-quarkus-react-nextjs/blueprints/e7-deploy-and-observability.md: sha256:00c29d44eecb372aba7b99404bd2aeec2d695d22946cb08781b110ee79634991
     .claude/skills/building-aws-saas-serverless-quarkus-react-nextjs/blueprints/e8-reverse-sync.md: sha256:471ca443f81432df699a96e7967a1949e32dab23aecc8ab20e55df618517f141
     .claude/skills/building-aws-saas-serverless-quarkus-react-nextjs/blueprints/e9-archive-gate.md: sha256:39e526ab011b27b93929eb8aa97e6e0f5ce66881f2d6f91690e1ec0e8deecbc3
     .claude/skills/building-aws-saas-serverless-quarkus-react-nextjs/blueprints/evaluation-scenarios.md: sha256:034e695495cee1a2f0c141f79bce17340ccc4224b39c07a87d784fd7a715bec5
-    .claude/skills/building-aws-saas-serverless-quarkus-react-nextjs/blueprints/knowledge-map.md: sha256:16a3b6cede59a910b21e92341250c9f378e34c76986ba2d04ac5b7738551fa5d
+    .claude/skills/building-aws-saas-serverless-quarkus-react-nextjs/blueprints/knowledge-map.md: sha256:caad481ec8024c6927e7023d163692ba5679f3833ec3efb54a173b9cdc33ae1d
     .claude/skills/building-aws-saas-serverless-quarkus-react-nextjs/blueprints/never-do-patterns.md: sha256:83d8740b085932cd7a594d7f3b89a6f2a98f2b86e381f7645d3051c2b414d117
     .claude/skills/building-aws-saas-serverless-quarkus-react-nextjs/blueprints/tracker-github-projects.md: sha256:17b578f617e20dcc34a3551e63c4112d50ae2e702b1e610331b04378903f9f19
     .claude/skills/building-aws-saas-serverless-quarkus-react-nextjs/blueprints/unverified-and-risks.md: sha256:8ffa09477bc78fae9d8fa1e6c824127820752d987f2ab3f932cfce30451cdf45
-    .claude/skills/building-aws-saas-serverless-quarkus-react-nextjs/blueprints/worker-briefs.md: sha256:8c0c708e32a75d4f86ba080cffa97d3b7aa2aed29ab6999cae590b0cce32575f
-    .claude/skills/coordinating-quarkus-aws-handoffs/SKILL.md: sha256:2df09109180ea99b77ac3c241d618ae8537bd9ff185a852ff63392c749865ff4
+    .claude/skills/building-aws-saas-serverless-quarkus-react-nextjs/blueprints/worker-briefs.md: sha256:21f4e2ff775bcf969330685c1cbcafb56c3a0aa6081124bd089f1c694cae4e02
+    .claude/skills/coordinating-quarkus-aws-handoffs/SKILL.md: sha256:533231ee63b0a1d26ec382559127b97da6f5e1414853e359c9e12affb98fb85d
     .claude/skills/coordinating-quarkus-aws-handoffs/assets/adr.template.md: sha256:23835cd21dde0d6e7206658d3b37266bf90f9fffd6f1891ef890ce64d2ba4f62
     .claude/skills/coordinating-quarkus-aws-handoffs/assets/diagnosis-report.template.md: sha256:58796faf19c6a5e3d24e97c56887e2c7ef57b5cb048a699258c0544e82d28a01
     .claude/skills/coordinating-quarkus-aws-handoffs/assets/escalation.template.md: sha256:fb1da4048641ba891fb373f2fa0d9f27bf9ce31f81f6ecb59c88d0faffbd48e4
-    .claude/skills/coordinating-quarkus-aws-handoffs/assets/handoff-profile.yaml: sha256:edcff9ba6d08034100f007819a78479dcf6c005ed79b834b553a69a78a33cb88
-    .claude/skills/coordinating-quarkus-aws-handoffs/assets/result-code.template.md: sha256:1084852a42227d999db2692fc34fd5350556f7be018ccb7a0fd9dbcdbfd66bba
-    .claude/skills/coordinating-quarkus-aws-handoffs/assets/result-pipeline.template.md: sha256:af5ccb358f1651eaaf8ba3344e4ce498db0b5dee45feefec5451c93ea8d31ef4
+    .claude/skills/coordinating-quarkus-aws-handoffs/assets/handoff-profile.yaml: sha256:710097172710dede158e2c452ee57230ce175b6141ce2de3603427dfe51fb268
+    .claude/skills/coordinating-quarkus-aws-handoffs/assets/result-code.template.md: sha256:b72b8afb6cd9622c306b6d66bcf6f279130d74419bf90fb46cb1219bec148cc3
+    .claude/skills/coordinating-quarkus-aws-handoffs/assets/result-pipeline.template.md: sha256:ceb80ded1e13cb677cdc17af2a5d181e95450b45883f09ef345382b39583e7c5
     .claude/skills/coordinating-quarkus-aws-handoffs/assets/review.template.md: sha256:601ba988a83f7d878f93afd0438981ac9ec96923a0d4854fbe9b10163c277195
     .claude/skills/coordinating-quarkus-aws-handoffs/assets/wo-ai.template.md: sha256:9b15686940e8f7fde50b9f2b63c49a3ac97b61be8087c08bb34c16ce6aa54c45
     .claude/skills/coordinating-quarkus-aws-handoffs/assets/wo-cicd.template.md: sha256:60d91e468d434a097805b69cffb9de431385f7b58148cc1cdfc7193369e6c1e0
     .claude/skills/coordinating-quarkus-aws-handoffs/assets/wo-code.template.md: sha256:9be2d2553b5de71000cb2e41217ccfe8ae6c67a0b38363d20da5293e26073f26
     .claude/skills/coordinating-quarkus-aws-handoffs/assets/wo-debug.template.md: sha256:72c7101c229c2b0fc79e7aa9ce685dadc0262afc1900bfb9109d0c9f8c8102a6
     .claude/skills/coordinating-quarkus-aws-handoffs/assets/wo-designer.template.md: sha256:625e374a5c9c8f9c58ca89fa4edd984798a0097faf6389d90b6a4d3f2710688b
-    .claude/skills/coordinating-quarkus-aws-handoffs/assets/wo-frontend.template.md: sha256:1c19471247f3389b5ace7f1103540a1440c05a619d73bc1259d0cbd965571028
+    .claude/skills/coordinating-quarkus-aws-handoffs/assets/wo-frontend.template.md: sha256:fe8c510148e3684fa15649dd462c9b1dea66ca28e8d96a17742f2d9f14e304f4
     .claude/skills/coordinating-quarkus-aws-handoffs/assets/wo-infra.template.md: sha256:dacb6bea684dd8d9d91fe637461b96f7b0e751c9035afe0b23b03b4e209f9775
-    .claude/skills/coordinating-quarkus-aws-handoffs/assets/wo-infrastructure-architect.template.md: sha256:5eb6681822ba86d2429ff5e3badfd179c3aa8c61738554b4ec60db350144293b
-    .claude/skills/coordinating-quarkus-aws-handoffs/assets/wo-observability.template.md: sha256:9ddddd45b7224d48d2bb1dd3a3f509754f9ad016075aba99c312202df11d945f
+    .claude/skills/coordinating-quarkus-aws-handoffs/assets/wo-infrastructure-architect.template.md: sha256:eda55c8a2034d64c44018cb7e183a310c1baeeac542d27859a3fd3f6e35faff3
+    .claude/skills/coordinating-quarkus-aws-handoffs/assets/wo-observability.template.md: sha256:8b2497a669d82c642c16680cfea724fb78e036893015dd3df7dbaa9fc09bbc8e
     .claude/skills/coordinating-quarkus-aws-handoffs/assets/wo-review.template.md: sha256:e740f5bdc9030d8188ea86920dc58011489c9acff22750f5f8cd5975dbf14079
     .claude/skills/coordinating-quarkus-aws-handoffs/assets/wo-solution-architect.template.md: sha256:4c11c7d69014ab4c094be36fcb0b608af5da645faedbdd32353497e55a2e9e10
     .claude/skills/coordinating-quarkus-aws-handoffs/assets/wo-stripe.template.md: sha256:314d071b2fdfdb74ff45f8f093339538a1d94d2b143ec3058d194ea2c678eb98
-    .claude/skills/coordinating-quarkus-aws-handoffs/blueprints/agent-alignment.md: sha256:b1b05cd8e1188580082fc1425a6de6c61a917aa642654da36bf49be1a442283f
-    .claude/skills/coordinating-quarkus-aws-handoffs/blueprints/always-do-patterns.md: sha256:56bcbde62f0dc3364a50536882e7bddc351777c0348a409dd7effd02614f0239
-    .claude/skills/coordinating-quarkus-aws-handoffs/blueprints/approval-lines.md: sha256:e2c62bb62d171c0b5de1849d02a5ef5cd650ecb0e680607a06c31a2327fd723f
+    .claude/skills/coordinating-quarkus-aws-handoffs/blueprints/agent-alignment.md: sha256:e81331d910150aca17c720ee8ebc4d6c5f55d44ea98770beda8c3deed09af975
+    .claude/skills/coordinating-quarkus-aws-handoffs/blueprints/always-do-patterns.md: sha256:f7392c81b29b63785b620a1bbe4b15b761772940110e0b79318df189891aed0d
+    .claude/skills/coordinating-quarkus-aws-handoffs/blueprints/approval-lines.md: sha256:ac6b23d3231fa2a99198cec69df589a2791322a6e0477b7a770f65f84f12e584
     .claude/skills/coordinating-quarkus-aws-handoffs/blueprints/evaluation-scenarios.md: sha256:bbad19660203a510a9d5e9512d8d9f12ba04b088e4a07b352c3e07a782f4d1bf
     .claude/skills/coordinating-quarkus-aws-handoffs/blueprints/never-do-patterns.md: sha256:002af4ed889bd13d3c7b789c46e7c85728a1b3b782ba5ebaf9475fe3afaa71eb
     .claude/skills/coordinating-quarkus-aws-handoffs/blueprints/openspec-integration.md: sha256:5a1fbe6c268122ba2d21a66fd9958a02de9525e58a15c138017a343498a3d733
-    .claude/skills/coordinating-quarkus-aws-handoffs/blueprints/roles-and-skills.md: sha256:61f7ffec3b8ce5d01eddd0a8f4d81e24512be4b88a58e0525c3020da78da6787
+    .claude/skills/coordinating-quarkus-aws-handoffs/blueprints/roles-and-skills.md: sha256:6c9b60f63f6b4b867abe12aa3f1a75cc474c22ac61b57958420ebde1b9918630
     .claude/skills/coordinating-quarkus-aws-handoffs/blueprints/unverified-and-risks.md: sha256:807e5b07abdb521aafd02105643993f0d4af9121cc1aee046e6806c484f9eacf
     .claude/skills/integrating-stripe-quarkus-v3-40/SKILL.md: sha256:f912e2c4e88cdd3c330a0f307c8357408a9b2d62ca57df5445f20d92ff14717d
     .claude/skills/integrating-stripe-quarkus-v3-40/blueprints/always-do-patterns.md: sha256:6e6ef2db536027f420fd626ffd0c5c8ca69850e6ddcbf917607890bf0176cb27
@@ -321,7 +321,7 @@ dependencies:
     .claude/skills/integrating-stripe-quarkus-v3-40/blueprints/webhook-pipeline.md: sha256:f953cbc3262fdf7b2a51014af1941b9406111622785664c4f1a10e3a55455b4f
   source: local
   local_path: ./packages/aws-saas-serverless-quarkus-react-nextjs
-  content_hash: sha256:a593f6d1057e0bdc1ca719747b3ca637763b9a1ff144696509c42bea98de3952
+  content_hash: sha256:be8dda9b720a438da491e66bd32526679fd276660eb74f278527187d0f4cec07
   declared_license: MIT
 - repo_url: _local/book-writing
   name: agents-factory-book-writing
@@ -1725,7 +1725,7 @@ dependencies:
   - .claude/skills/aws-architecture-advisor/references/family-rules-v2026-r07-r13.md
   - .claude/skills/aws-architecture-advisor/references/family-rules-v2026.md
   deployed_file_hashes:
-    .claude/agents/aws-architect-reviewer.md: sha256:8a06d759a4ae8b5c5721b0e436f7a779deaa5e7a4a5e838efbe8aa829ccffbab
+    .claude/agents/aws-architect-reviewer.md: sha256:ba7e61e68815a9c6600279e1ca73a4c5171b17a2525244586e080abeb60d689b
     .claude/agents/aws-architect.md: sha256:3f38974b81ddb9060265225dbeaaea3077c9feb5e8cc235f3fcc81b0f3ae85ab
     .claude/agents/aws-infrastructure-architect.md: sha256:76c12203abc17b9513afdd8f864d02bdf06aa31da99fdecf9c04c2a996d6f79a
     .claude/rules/aws-iac-reliability-cost.md: sha256:f85a5139a2005964d196ff68831278297312abf4ef6a52b7683681e4c5d0e175
@@ -1739,7 +1739,7 @@ dependencies:
   local_path: ../aws-architect
   declaring_parent: ./packages/aws-saas-serverless-quarkus-react-nextjs
   anchored_local_path: packages/aws-architect
-  content_hash: sha256:6dc576b3c447f2c7eb541a1bcd9e092550dac4bbf0a0b22fd34567cf58882c54
+  content_hash: sha256:9b708b8439a8e55480f5274f54ce4a26b09fd8fbaea18dd7228910362e1d9793
   declared_license: MIT
 - repo_url: _local/aws-lambda
   name: agents-factory-aws-lambda
@@ -1779,7 +1779,7 @@ dependencies:
   - .claude/skills/deploying-aws-lambda/blueprints/smoke-test-and-verification.md
   - .claude/skills/deploying-aws-lambda/blueprints/unverified-and-risks.md
   deployed_file_hashes:
-    .claude/agents/aws-lambda-debugger.md: sha256:71426c2c278bdf9991d55fa9e75bacae68c5f873fe03572badcd8721de97049f
+    .claude/agents/aws-lambda-debugger.md: sha256:ba694a6000dc7cb5575aed3e12cf2301dbdab0c2ec1abcf70dbe704843b297e0
     .claude/agents/aws-lambda-deployer.md: sha256:a3d31fdab6ad79cf08b3624a839f87db24796c9327a9e586dbc23a335bae7027
     .claude/rules/aws-lambda-deployment-preflight.md: sha256:acf909f7151bf52813e273cab94a0a289c8251cf0329dda714d52d164ccd5fc6
     .claude/skills/debugging-aws-lambda/SKILL.md: sha256:4a9e258848e99a22e5a03dff5aed9460421072d7080f6f9010b2272d7496d6da
@@ -1811,7 +1811,7 @@ dependencies:
   local_path: ../aws-lambda
   declaring_parent: ./packages/aws-saas-serverless-quarkus-react-nextjs
   anchored_local_path: packages/aws-lambda
-  content_hash: sha256:66759137bd4f2902603732bd1d8452d608752a11ffda583ae35506c0f0f0deed
+  content_hash: sha256:fde783729a05d9a09abdf895403e946fdbc191d8ac67aff5cd512211247621a5
   declared_license: MIT
 - repo_url: _local/aws-observability
   name: agents-factory-aws-observability
@@ -1847,6 +1847,7 @@ dependencies:
   - .claude/skills/validating-aws-observability/scripts/check-metrics.py
   - .claude/skills/validating-aws-observability/scripts/check-traces.py
   - .claude/skills/validating-aws-observability/scripts/obs_common.py
+  - .claude/skills/validating-aws-observability/scripts/readonly_bash_guard.py
   - .claude/skills/validating-aws-observability/scripts/tests/fakes/fake_aws.py
   - .claude/skills/validating-aws-observability/scripts/tests/fixtures/alarm-in-alarm/cloudwatch_describe-alarms.json
   - .claude/skills/validating-aws-observability/scripts/tests/fixtures/alarm-insufficient/cloudwatch_describe-alarms.json
@@ -1879,15 +1880,16 @@ dependencies:
   - .claude/skills/validating-aws-observability/scripts/tests/fixtures/transaction-search/xray_list-retrieved-traces.json
   - .claude/skills/validating-aws-observability/scripts/tests/fixtures/transaction-search/xray_start-trace-retrieval.json
   - .claude/skills/validating-aws-observability/scripts/tests/run_tests.py
+  - .claude/skills/validating-aws-observability/scripts/tests/test_readonly_bash_guard.py
   - .claude/skills/validating-aws-observability/scripts/trigger-alarm-test.py
   - .claude/skills/validating-aws-observability/scripts/validate-observability.py
   deployed_file_hashes:
-    .claude/agents/aws-observability.md: sha256:f0d33df4be35b2a87a4f95c60e2acd0aeba058fa27f60d5e4dd764d60039c07c
-    .claude/agents/static-site-verifier.md: sha256:14afe009a08bc412f1309e322660eaff815a529dc4b78045ce6af8d89a641f8f
+    .claude/agents/aws-observability.md: sha256:c5f7210b60f4e6a91294b6593608d455a3be8210a0e12d799c7c04df7403c482
+    .claude/agents/static-site-verifier.md: sha256:cd7cce847c60e96608e89a4ee53dac7af88f21a2bc5ce2f3e3185a8868438c42
     .claude/rules/aws-observability-skills.md: sha256:0d5943fe4bd62e3520e8110ad41a75ec5e0bb324ca1abc4ae98895d9dc990332
     .claude/skills/observe-aws-workload/SKILL.md: sha256:d957731131bf64e7804e98239c893b5e51d9bb110df9db6200f5fa1fa4f736d1
     .claude/skills/observe-aws-workload/blueprints/evaluation-scenarios.md: sha256:024788528324001a6582ca04dfc171f2e97aa3ed81ea0b015c36c3342d91aaf5
-    .claude/skills/validating-aws-observability/SKILL.md: sha256:1e0742641a858c479baef00d54e46b31060d0be09d12ecb68ee7568f8ab672e1
+    .claude/skills/validating-aws-observability/SKILL.md: sha256:a851082f53b693691d3d60c9190e1f84e4a6b580a8d6b9d2f00d4414f601253a
     .claude/skills/validating-aws-observability/blueprints/always-do-patterns.md: sha256:07ac8022977920f5a7cc5551086e7e67b3e33c0fcde65aa35cf074973b4901fb
     .claude/skills/validating-aws-observability/blueprints/ask-first-decisions.md: sha256:af6a37f06b6c20014c7a0d8fd93569e2497f0248fa77f104e2f60f3f27b2d7a1
     .claude/skills/validating-aws-observability/blueprints/cli-environment-and-exit-codes.md: sha256:d7702dad710fa9aad82eb0bac2b025016e8088b0337abdea28ef30ebb638f82d
@@ -1907,6 +1909,7 @@ dependencies:
     .claude/skills/validating-aws-observability/scripts/check-metrics.py: sha256:b56e92e72db403feae2b28bbf371334c8d733c7b4812da49232909357ceb25cf
     .claude/skills/validating-aws-observability/scripts/check-traces.py: sha256:124632413f3baf07a3902de60db2e9850a363325310b7b56c07e0beaf43ff641
     .claude/skills/validating-aws-observability/scripts/obs_common.py: sha256:07d8f3c8133c7a9388e84b689dcca90f2e89882d6e2060ccd2de02ac53a7068d
+    .claude/skills/validating-aws-observability/scripts/readonly_bash_guard.py: sha256:c3f4b19856632637b67bea6673ff94c318fe9861712e61c65f3d65d487ce3f24
     .claude/skills/validating-aws-observability/scripts/tests/fakes/fake_aws.py: sha256:1b31c3b46c02f83173ecc16239e2d70089f246aaeb5e5700adccebe132e6568e
     .claude/skills/validating-aws-observability/scripts/tests/fixtures/alarm-in-alarm/cloudwatch_describe-alarms.json: sha256:a0b8505ec879f6cb2b5a8d44e5836f3e3196f4c022bfaef555146879b9aeb8a5
     .claude/skills/validating-aws-observability/scripts/tests/fixtures/alarm-insufficient/cloudwatch_describe-alarms.json: sha256:b4c393efe20027b523d1badecb12e4e2a60edef57ac7377ca829a92d86a4e5f6
@@ -1941,13 +1944,14 @@ dependencies:
     .claude/skills/validating-aws-observability/scripts/tests/fixtures/transaction-search/xray_list-retrieved-traces.json: sha256:91cf3502cd097caf0e699feaa9c856f3157d04feb2ab303d15961d0e42a66c65
     .claude/skills/validating-aws-observability/scripts/tests/fixtures/transaction-search/xray_start-trace-retrieval.json: sha256:3ad3a04fff5e2a6b0b48c1cf8629bf05c8610fee63c9732f35a6d3340096f5c6
     .claude/skills/validating-aws-observability/scripts/tests/run_tests.py: sha256:0604e77ea36938c68be713cc982140beb99d2d4de4255c200ea882797536115c
+    .claude/skills/validating-aws-observability/scripts/tests/test_readonly_bash_guard.py: sha256:8a53c7763b5efc83b56444b05bb0db3b29fb013cda658107371ce569a893d27c
     .claude/skills/validating-aws-observability/scripts/trigger-alarm-test.py: sha256:7a136cd6c4d5524c0f6fd6cc64615e5f48bf93e3ffbca5d0d34149553de8756c
     .claude/skills/validating-aws-observability/scripts/validate-observability.py: sha256:22b7217c9e04058330696a0310f474db240708e88626523dd6b71d61ee5323fd
   source: local
   local_path: ../aws-observability
   declaring_parent: ./packages/aws-saas-serverless-quarkus-react-nextjs
   anchored_local_path: packages/aws-observability
-  content_hash: sha256:0892ab75a2c103cdc7f0abfce607982beda3299cb089b04eafa1c3e03ec44fcd
+  content_hash: sha256:e800cfc583336232fb53a5de1f5ae1c3c27dd468b84605474da36f7cf2750e6b
   declared_license: MIT
 - repo_url: _local/camel-quarkus-skills
   name: agents-factory-camel-quarkus-skills
@@ -2446,6 +2450,7 @@ dependencies:
   - .claude/skills/coordinating-agent-handoffs/scripts/board.py
   - .claude/skills/coordinating-agent-handoffs/scripts/check_records.py
   - .claude/skills/coordinating-agent-handoffs/scripts/detect_drift.py
+  - .claude/skills/coordinating-agent-handoffs/scripts/portable.py
   - .claude/skills/coordinating-agent-handoffs/scripts/tests/fixtures/oci/docs/handoff/func-api-facade/deploy-report.md
   - .claude/skills/coordinating-agent-handoffs/scripts/tests/fixtures/oci/docs/handoff/func-api-facade/result-java.md
   - .claude/skills/coordinating-agent-handoffs/scripts/tests/fixtures/oci/docs/handoff/func-api-facade/stream-a-java.md
@@ -2456,12 +2461,13 @@ dependencies:
   - .claude/skills/coordinating-agent-handoffs/scripts/tests/fixtures/quarkus/openspec/changes/list-tenant-items/handoff/status.md
   - .claude/skills/coordinating-agent-handoffs/scripts/tests/fixtures/quarkus/openspec/changes/list-tenant-items/handoff/wo-01-code.md
   - .claude/skills/coordinating-agent-handoffs/scripts/tests/test_handoff.py
+  - .claude/skills/coordinating-agent-handoffs/scripts/tests/test_portable.py
   - .claude/skills/syncing-spec-from-code
   - .claude/skills/syncing-spec-from-code/SKILL.md
   - .claude/skills/syncing-spec-from-code/blueprints/evaluation-scenarios.md
   deployed_file_hashes:
-    .claude/agents/spec-synchronizer.md: sha256:0b5163aebce10c9fe40a9f791b95973ab8d74fe2e9358bf7b642d44c1920d522
-    .claude/skills/coordinating-agent-handoffs/SKILL.md: sha256:cbe39214a7d36d5b7996f7ada4b2515011e034693378f2e74a83a089042e29a9
+    .claude/agents/spec-synchronizer.md: sha256:2b3b08d2a1e1a9d2309a43a36015c3b6f41d3bddd83bd1f2f8e054d104ce7be0
+    .claude/skills/coordinating-agent-handoffs/SKILL.md: sha256:31c23c089a5ca31c49c89c983a7fd4b2912937b75427866d96b74290194fe094
     .claude/skills/coordinating-agent-handoffs/assets/deploy-report.template.md: sha256:fb25c5c3dce988577ed0acfd69fe17966d819924a25a4eba44c75c617c7b0d0c
     .claude/skills/coordinating-agent-handoffs/assets/diagnosis-report.template.md: sha256:3a86db710b5221586ba0d4cf0824bcb9613dea87507c40a5504bcb92059e257f
     .claude/skills/coordinating-agent-handoffs/assets/escalation.template.md: sha256:d6eaffe5e8c1655b0c6881ff728b541c0450fecc7b65b399a7208746092c5e18
@@ -2485,6 +2491,7 @@ dependencies:
     .claude/skills/coordinating-agent-handoffs/scripts/board.py: sha256:d5a7a9c7d6e06d6f177cb0f92a51793cee8ccc7c1566388ee5c28ac8adbfcb40
     .claude/skills/coordinating-agent-handoffs/scripts/check_records.py: sha256:e41d7d88d03f28c8eb0571bb8096f1d960646a0600e04c99326fe7abbfa647d5
     .claude/skills/coordinating-agent-handoffs/scripts/detect_drift.py: sha256:d317972416f79097ac418612c96faeb2c3a5437777bca793bb10477d77076b57
+    .claude/skills/coordinating-agent-handoffs/scripts/portable.py: sha256:a8a11d426fd0037859d13e3afd06634ef4cc2da92d85664c80b0dbd7e0dee197
     .claude/skills/coordinating-agent-handoffs/scripts/tests/fixtures/oci/docs/handoff/func-api-facade/deploy-report.md: sha256:10532278228707a0769f2d07f40d565f2820f32fb9d70b41e917d9bc747c37aa
     .claude/skills/coordinating-agent-handoffs/scripts/tests/fixtures/oci/docs/handoff/func-api-facade/result-java.md: sha256:dd9479fc5159e465f03aa35f6d9515d0937c5446633ebbef706af64f52be2c28
     .claude/skills/coordinating-agent-handoffs/scripts/tests/fixtures/oci/docs/handoff/func-api-facade/stream-a-java.md: sha256:d82cc2846135fa218b8a1f88d26caec50d684b4a4642859f30ae7a71c1521b87
@@ -2499,13 +2506,14 @@ dependencies:
     ? .claude/skills/coordinating-agent-handoffs/scripts/tests/fixtures/quarkus/openspec/changes/list-tenant-items/handoff/wo-01-code.md
     : sha256:992caacfe2d6fecfcae2de869eea38bb37798010bc27121b404b9841d526dbc1
     .claude/skills/coordinating-agent-handoffs/scripts/tests/test_handoff.py: sha256:d2941b1d8e6ce57adc7f79274f7cf85bcb5a54cd26e25bbdb6fed8d64497cb6a
+    .claude/skills/coordinating-agent-handoffs/scripts/tests/test_portable.py: sha256:deee81496f28e0e2ee6198f9c209d36fa277f4d66325cdae592550053d794e54
     .claude/skills/syncing-spec-from-code/SKILL.md: sha256:59aca8429bc8da189423ffa1be17a3dd5d7b0cb44768f0f9f351bc4e415a0e0c
     .claude/skills/syncing-spec-from-code/blueprints/evaluation-scenarios.md: sha256:8ef44abe10c8ad821e632239b1f52da8cb749247d25bd22e8ec65ff88f2d4a96
   source: local
   local_path: ../handoff-core
   declaring_parent: ./packages/aws-saas-serverless-quarkus-react-nextjs
   anchored_local_path: packages/handoff-core
-  content_hash: sha256:a9e786cfb20ca905748e5ffbfc521b355c7e7390d2fc6fb031e48aefdfb98582
+  content_hash: sha256:4f63eccd06997fa37313ca2b0e58f53ea1dda6a26d27e9b811955fa13c068bd2
   declared_license: MIT
 - repo_url: _local/nextjs-frontend
   name: agents-factory-nextjs-frontend
@@ -2519,13 +2527,13 @@ dependencies:
   - .claude/rules/nextjs-static-export.md
   deployed_file_hashes:
     .claude/agents/nextjs-code-reviewer.md: sha256:af5504bc7579b7bdbdf23517f0e2628f58469996e5604e0787ee7a820d24ffba
-    .claude/agents/nextjs-frontend-integrator.md: sha256:54708f34bb126a26d830b8abb4eecb318739d4335fb4cf2b52ab62704bed4596
+    .claude/agents/nextjs-frontend-integrator.md: sha256:977e2b5ac8a6ebe7b5493bd1c018f2744cb7b920432ce53aad54167737fb15bc
     .claude/rules/nextjs-static-export.md: sha256:fb3e0059aeff1823def54939ff5772a1d2acdf4f7f01e862522c786a0dc18d73
   source: local
   local_path: ../nextjs-frontend
   declaring_parent: ./packages/aws-saas-serverless-quarkus-react-nextjs
   anchored_local_path: packages/nextjs-frontend
-  content_hash: sha256:1b839b36414dd202c711889f906aa90b40d7d7e163e2b5f0440a71d5348213b3
+  content_hash: sha256:ddec82ca2456c96e8ae4de67d4e457ef3a654579f60a29918ce9ab59e369a72c
   declared_license: MIT
 - repo_url: _local/oci-core
   name: agents-factory-oci-core
@@ -3120,7 +3128,7 @@ dependencies:
   - .claude/skills/terraform-rules-author/SKILL.md
   - .claude/skills/terraform-rules-author/blueprints/evaluation-scenarios.md
   deployed_file_hashes:
-    .claude/agents/aws-terraform-engineer.md: sha256:ea082f0fa8d011eb7541058d1e6dd1bb5bf34664d77c3eab151bb65da8d88122
+    .claude/agents/aws-terraform-engineer.md: sha256:2542322b3bc3ea7a77062076020ea3b74b6097d09823dacdfb8319a6ae4abea7
     .claude/agents/terraform-code-reviewer.md: sha256:aa035eff79cc0912f289631cdb44778eb6f94af1e63c497b57c7d0254550036f
     .claude/agents/terraform-rules-author.md: sha256:de82dcaa43ef33df7ca4307b73a55217bf9bdbd732396cb76c12b87925745dca
     .claude/skills/provision-aws-terraform/SKILL.md: sha256:84c71ccf20395b3f6425fb5e9535548f217931322d8e9cad54ef543a236fe494
@@ -3153,7 +3161,7 @@ dependencies:
   local_path: ../terraform
   declaring_parent: ./packages/aws-saas-serverless-quarkus-react-nextjs
   anchored_local_path: packages/terraform
-  content_hash: sha256:69f30350263a7ab3e9f9e994bbc8db1ec4590eef77c0cc0d9b0e0069c1d3b2dd
+  content_hash: sha256:63018ebbd493b589f281140f82da69cd05ea7c89832d70b8c5f66a6575c8f7b3
   declared_license: MIT
 - repo_url: _local/ui-design
   name: agents-factory-ui-design
@@ -4134,7 +4142,7 @@ dependencies:
   local_path: ../aws-terraform
   declaring_parent: local:packages/aws-lambda
   anchored_local_path: packages/aws-terraform
-  content_hash: sha256:b60ebf10c0b5b9b580c833a30abdbe7f3a37cf4663082600321a29e681631021
+  content_hash: sha256:cc2972d057c4f4986fc5910dae14ecc282a97d442f64372a0311a131c0e75e42
   declared_license: MIT
 - repo_url: _local/github-core
   name: agents-factory-github-core
@@ -4215,7 +4223,7 @@ dependencies:
   - .claude/skills/specifying-changes-with-openspec-v1-15/blueprints/non-interactive-and-windows.md
   - .claude/skills/specifying-changes-with-openspec-v1-15/blueprints/unverified-and-risks.md
   deployed_file_hashes:
-    .claude/rules/openspec-project-layout.md: sha256:17cee05907b4a7643172fad2d589daac702c9db77c4bf26aa3162769d71affa0
+    .claude/rules/openspec-project-layout.md: sha256:f1378a0a226fe008c83d9b4f0cafd6735e9b698c2ca09b74039883e868cd00c2
     .claude/skills/specifying-changes-with-openspec-v1-15/SKILL.md: sha256:13fff6837080f90c163f0117e29628870f905d6620191f63e653b6b65f1752d4
     .claude/skills/specifying-changes-with-openspec-v1-15/blueprints/always-do-patterns.md: sha256:c563b21826d87284313a7b257a1fa65185f28c68124af51a1746869abfce30ff
     .claude/skills/specifying-changes-with-openspec-v1-15/blueprints/ask-first-decisions.md: sha256:e01ff6d487dcc5b4ae889f82f86f98bd2ee7e3136da5f2f21ec378c1da6ef94e
@@ -4231,7 +4239,7 @@ dependencies:
   local_path: ../openspec-core
   declaring_parent: local:packages/handoff-core
   anchored_local_path: packages/openspec-core
-  content_hash: sha256:1c4d4bd64ac8be8da48397d5a2dbaa9b6e355a2d3b44a3afae8dde6534614106
+  content_hash: sha256:f5f73c4141a52198196c97c0a23f0d9af4bd19b0d98f2331d5353708d7043149
   declared_license: MIT
 - repo_url: _local/quarkus-core
   name: agents-factory-quarkus-core
@@ -5412,7 +5420,7 @@ deployments:
   owners:
   - local:packages/aws-architect
   active_owner: local:packages/aws-architect
-  content_hash: sha256:8a06d759a4ae8b5c5721b0e436f7a779deaa5e7a4a5e838efbe8aa829ccffbab
+  content_hash: sha256:ba7e61e68815a9c6600279e1ca73a4c5171b17a2525244586e080abeb60d689b
 - kind: project-relative
   target: claude
   value: .claude/agents/aws-architect.md
@@ -5439,7 +5447,7 @@ deployments:
   owners:
   - local:packages/aws-lambda
   active_owner: local:packages/aws-lambda
-  content_hash: sha256:71426c2c278bdf9991d55fa9e75bacae68c5f873fe03572badcd8721de97049f
+  content_hash: sha256:ba694a6000dc7cb5575aed3e12cf2301dbdab0c2ec1abcf70dbe704843b297e0
 - kind: project-relative
   target: claude
   value: .claude/agents/aws-lambda-deployer.md
@@ -5457,7 +5465,7 @@ deployments:
   owners:
   - local:packages/aws-observability
   active_owner: local:packages/aws-observability
-  content_hash: sha256:f0d33df4be35b2a87a4f95c60e2acd0aeba058fa27f60d5e4dd764d60039c07c
+  content_hash: sha256:c5f7210b60f4e6a91294b6593608d455a3be8210a0e12d799c7c04df7403c482
 - kind: project-relative
   target: claude
   value: .claude/agents/aws-terraform-engineer.md
@@ -5466,7 +5474,7 @@ deployments:
   owners:
   - local:packages/terraform
   active_owner: local:packages/terraform
-  content_hash: sha256:ea082f0fa8d011eb7541058d1e6dd1bb5bf34664d77c3eab151bb65da8d88122
+  content_hash: sha256:2542322b3bc3ea7a77062076020ea3b74b6097d09823dacdfb8319a6ae4abea7
 - kind: project-relative
   target: claude
   value: .claude/agents/book-formatter.md
@@ -5646,7 +5654,7 @@ deployments:
   owners:
   - local:packages/nextjs-frontend
   active_owner: local:packages/nextjs-frontend
-  content_hash: sha256:54708f34bb126a26d830b8abb4eecb318739d4335fb4cf2b52ab62704bed4596
+  content_hash: sha256:977e2b5ac8a6ebe7b5493bd1c018f2744cb7b920432ce53aad54167737fb15bc
 - kind: project-relative
   target: claude
   value: .claude/agents/oci-debugger.md
@@ -5808,7 +5816,7 @@ deployments:
   owners:
   - local:packages/handoff-core
   active_owner: local:packages/handoff-core
-  content_hash: sha256:0b5163aebce10c9fe40a9f791b95973ab8d74fe2e9358bf7b642d44c1920d522
+  content_hash: sha256:2b3b08d2a1e1a9d2309a43a36015c3b6f41d3bddd83bd1f2f8e054d104ce7be0
 - kind: project-relative
   target: claude
   value: .claude/agents/static-site-verifier.md
@@ -5817,7 +5825,7 @@ deployments:
   owners:
   - local:packages/aws-observability
   active_owner: local:packages/aws-observability
-  content_hash: sha256:14afe009a08bc412f1309e322660eaff815a529dc4b78045ce6af8d89a641f8f
+  content_hash: sha256:cd7cce847c60e96608e89a4ee53dac7af88f21a2bc5ce2f3e3185a8868438c42
 - kind: project-relative
   target: claude
   value: .claude/agents/stripe-advisor.md
@@ -6240,7 +6248,7 @@ deployments:
   owners:
   - local:packages/openspec-core
   active_owner: local:packages/openspec-core
-  content_hash: sha256:17cee05907b4a7643172fad2d589daac702c9db77c4bf26aa3162769d71affa0
+  content_hash: sha256:f1378a0a226fe008c83d9b4f0cafd6735e9b698c2ca09b74039883e868cd00c2
 - kind: project-relative
   target: claude
   value: .claude/rules/quarkus-clean-code.md
@@ -9750,7 +9758,7 @@ deployments:
   owners:
   - ./packages/aws-saas-serverless-quarkus-react-nextjs
   active_owner: ./packages/aws-saas-serverless-quarkus-react-nextjs
-  content_hash: sha256:3955d93ef723e742a728e40c0a65643e55a11ef48548e683d5d6c844f0216707
+  content_hash: sha256:95bbd0f199f174669fb52ac4bc03b60957161d0a02d7a5b6aa27d2a07938e55b
 - kind: project-relative
   target: claude
   value: .claude/skills/building-aws-saas-serverless-quarkus-react-nextjs/blueprints/always-do-patterns.md
@@ -9759,7 +9767,7 @@ deployments:
   owners:
   - ./packages/aws-saas-serverless-quarkus-react-nextjs
   active_owner: ./packages/aws-saas-serverless-quarkus-react-nextjs
-  content_hash: sha256:5108b8e4947aabaa4ebdc355863d320eb64ab3994be6b5a1f47e2d2852d1b7f8
+  content_hash: sha256:56e1a9fd0eb9700144021a63124f54964181db65773bf9be587678a63aaa318d
 - kind: project-relative
   target: claude
   value: .claude/skills/building-aws-saas-serverless-quarkus-react-nextjs/blueprints/e1-interview.md
@@ -9777,7 +9785,7 @@ deployments:
   owners:
   - ./packages/aws-saas-serverless-quarkus-react-nextjs
   active_owner: ./packages/aws-saas-serverless-quarkus-react-nextjs
-  content_hash: sha256:ead01053cd453dc7561d834d3eea03a6d1bf370fc7bad6f96aacb77f651d42fa
+  content_hash: sha256:d2061a3807609a5ce38dfcbd8686924bd24998f64e84f98c39bb8b159c02b5e3
 - kind: project-relative
   target: claude
   value: .claude/skills/building-aws-saas-serverless-quarkus-react-nextjs/blueprints/e3-functional-spec.md
@@ -9804,7 +9812,7 @@ deployments:
   owners:
   - ./packages/aws-saas-serverless-quarkus-react-nextjs
   active_owner: ./packages/aws-saas-serverless-quarkus-react-nextjs
-  content_hash: sha256:4e440c5c1b41f3a38f39e970efd4d2f0aaa0997f510023a1945edc2c745cf65f
+  content_hash: sha256:61dd2f3a91f20735adf30691ae3fdbefe980fd07a0ef131dc54d6fc3981985cc
 - kind: project-relative
   target: claude
   value: .claude/skills/building-aws-saas-serverless-quarkus-react-nextjs/blueprints/e6-implementation-cycle.md
@@ -9813,7 +9821,7 @@ deployments:
   owners:
   - ./packages/aws-saas-serverless-quarkus-react-nextjs
   active_owner: ./packages/aws-saas-serverless-quarkus-react-nextjs
-  content_hash: sha256:3115a64dc445839b1c0e02f45466d8cf083909aa473d8d016d1116c5b7b674fe
+  content_hash: sha256:c334bc8621d0198a54e4c4b6a59163dfdc90d7ea28424099964e21cbe1c342f4
 - kind: project-relative
   target: claude
   value: .claude/skills/building-aws-saas-serverless-quarkus-react-nextjs/blueprints/e7-deploy-and-observability.md
@@ -9822,7 +9830,7 @@ deployments:
   owners:
   - ./packages/aws-saas-serverless-quarkus-react-nextjs
   active_owner: ./packages/aws-saas-serverless-quarkus-react-nextjs
-  content_hash: sha256:f05fe23d65241d02dd345ac2ae2ab02e4b9e066497589755b48ce2321b9d194e
+  content_hash: sha256:00c29d44eecb372aba7b99404bd2aeec2d695d22946cb08781b110ee79634991
 - kind: project-relative
   target: claude
   value: .claude/skills/building-aws-saas-serverless-quarkus-react-nextjs/blueprints/e8-reverse-sync.md
@@ -9858,7 +9866,7 @@ deployments:
   owners:
   - ./packages/aws-saas-serverless-quarkus-react-nextjs
   active_owner: ./packages/aws-saas-serverless-quarkus-react-nextjs
-  content_hash: sha256:16a3b6cede59a910b21e92341250c9f378e34c76986ba2d04ac5b7738551fa5d
+  content_hash: sha256:caad481ec8024c6927e7023d163692ba5679f3833ec3efb54a173b9cdc33ae1d
 - kind: project-relative
   target: claude
   value: .claude/skills/building-aws-saas-serverless-quarkus-react-nextjs/blueprints/never-do-patterns.md
@@ -9894,7 +9902,7 @@ deployments:
   owners:
   - ./packages/aws-saas-serverless-quarkus-react-nextjs
   active_owner: ./packages/aws-saas-serverless-quarkus-react-nextjs
-  content_hash: sha256:8c0c708e32a75d4f86ba080cffa97d3b7aa2aed29ab6999cae590b0cce32575f
+  content_hash: sha256:21f4e2ff775bcf969330685c1cbcafb56c3a0aa6081124bd089f1c694cae4e02
 - kind: project-relative
   target: claude
   value: .claude/skills/building-cicd-pipelines
@@ -10794,7 +10802,7 @@ deployments:
   owners:
   - local:packages/handoff-core
   active_owner: local:packages/handoff-core
-  content_hash: sha256:cbe39214a7d36d5b7996f7ada4b2515011e034693378f2e74a83a089042e29a9
+  content_hash: sha256:31c23c089a5ca31c49c89c983a7fd4b2912937b75427866d96b74290194fe094
 - kind: project-relative
   target: claude
   value: .claude/skills/coordinating-agent-handoffs/assets/deploy-report.template.md
@@ -11004,6 +11012,15 @@ deployments:
   content_hash: sha256:d317972416f79097ac418612c96faeb2c3a5437777bca793bb10477d77076b57
 - kind: project-relative
   target: claude
+  value: .claude/skills/coordinating-agent-handoffs/scripts/portable.py
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/handoff-core
+  active_owner: local:packages/handoff-core
+  content_hash: sha256:a8a11d426fd0037859d13e3afd06634ef4cc2da92d85664c80b0dbd7e0dee197
+- kind: project-relative
+  target: claude
   value: .claude/skills/coordinating-agent-handoffs/scripts/tests/fixtures/oci/docs/handoff/func-api-facade/deploy-report.md
   runtime: null
   scope: project
@@ -11092,6 +11109,15 @@ deployments:
   - local:packages/handoff-core
   active_owner: local:packages/handoff-core
   content_hash: sha256:d2941b1d8e6ce57adc7f79274f7cf85bcb5a54cd26e25bbdb6fed8d64497cb6a
+- kind: project-relative
+  target: claude
+  value: .claude/skills/coordinating-agent-handoffs/scripts/tests/test_portable.py
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/handoff-core
+  active_owner: local:packages/handoff-core
+  content_hash: sha256:deee81496f28e0e2ee6198f9c209d36fa277f4d66325cdae592550053d794e54
 - kind: project-relative
   target: claude
   value: .claude/skills/coordinating-oci-handoffs
@@ -11217,7 +11243,7 @@ deployments:
   owners:
   - ./packages/aws-saas-serverless-quarkus-react-nextjs
   active_owner: ./packages/aws-saas-serverless-quarkus-react-nextjs
-  content_hash: sha256:2df09109180ea99b77ac3c241d618ae8537bd9ff185a852ff63392c749865ff4
+  content_hash: sha256:533231ee63b0a1d26ec382559127b97da6f5e1414853e359c9e12affb98fb85d
 - kind: project-relative
   target: claude
   value: .claude/skills/coordinating-quarkus-aws-handoffs/assets/adr.template.md
@@ -11253,7 +11279,7 @@ deployments:
   owners:
   - ./packages/aws-saas-serverless-quarkus-react-nextjs
   active_owner: ./packages/aws-saas-serverless-quarkus-react-nextjs
-  content_hash: sha256:edcff9ba6d08034100f007819a78479dcf6c005ed79b834b553a69a78a33cb88
+  content_hash: sha256:710097172710dede158e2c452ee57230ce175b6141ce2de3603427dfe51fb268
 - kind: project-relative
   target: claude
   value: .claude/skills/coordinating-quarkus-aws-handoffs/assets/result-code.template.md
@@ -11262,7 +11288,7 @@ deployments:
   owners:
   - ./packages/aws-saas-serverless-quarkus-react-nextjs
   active_owner: ./packages/aws-saas-serverless-quarkus-react-nextjs
-  content_hash: sha256:1084852a42227d999db2692fc34fd5350556f7be018ccb7a0fd9dbcdbfd66bba
+  content_hash: sha256:b72b8afb6cd9622c306b6d66bcf6f279130d74419bf90fb46cb1219bec148cc3
 - kind: project-relative
   target: claude
   value: .claude/skills/coordinating-quarkus-aws-handoffs/assets/result-pipeline.template.md
@@ -11271,7 +11297,7 @@ deployments:
   owners:
   - ./packages/aws-saas-serverless-quarkus-react-nextjs
   active_owner: ./packages/aws-saas-serverless-quarkus-react-nextjs
-  content_hash: sha256:af5ccb358f1651eaaf8ba3344e4ce498db0b5dee45feefec5451c93ea8d31ef4
+  content_hash: sha256:ceb80ded1e13cb677cdc17af2a5d181e95450b45883f09ef345382b39583e7c5
 - kind: project-relative
   target: claude
   value: .claude/skills/coordinating-quarkus-aws-handoffs/assets/review.template.md
@@ -11334,7 +11360,7 @@ deployments:
   owners:
   - ./packages/aws-saas-serverless-quarkus-react-nextjs
   active_owner: ./packages/aws-saas-serverless-quarkus-react-nextjs
-  content_hash: sha256:1c19471247f3389b5ace7f1103540a1440c05a619d73bc1259d0cbd965571028
+  content_hash: sha256:fe8c510148e3684fa15649dd462c9b1dea66ca28e8d96a17742f2d9f14e304f4
 - kind: project-relative
   target: claude
   value: .claude/skills/coordinating-quarkus-aws-handoffs/assets/wo-infra.template.md
@@ -11352,7 +11378,7 @@ deployments:
   owners:
   - ./packages/aws-saas-serverless-quarkus-react-nextjs
   active_owner: ./packages/aws-saas-serverless-quarkus-react-nextjs
-  content_hash: sha256:5eb6681822ba86d2429ff5e3badfd179c3aa8c61738554b4ec60db350144293b
+  content_hash: sha256:eda55c8a2034d64c44018cb7e183a310c1baeeac542d27859a3fd3f6e35faff3
 - kind: project-relative
   target: claude
   value: .claude/skills/coordinating-quarkus-aws-handoffs/assets/wo-observability.template.md
@@ -11361,7 +11387,7 @@ deployments:
   owners:
   - ./packages/aws-saas-serverless-quarkus-react-nextjs
   active_owner: ./packages/aws-saas-serverless-quarkus-react-nextjs
-  content_hash: sha256:9ddddd45b7224d48d2bb1dd3a3f509754f9ad016075aba99c312202df11d945f
+  content_hash: sha256:8b2497a669d82c642c16680cfea724fb78e036893015dd3df7dbaa9fc09bbc8e
 - kind: project-relative
   target: claude
   value: .claude/skills/coordinating-quarkus-aws-handoffs/assets/wo-review.template.md
@@ -11397,7 +11423,7 @@ deployments:
   owners:
   - ./packages/aws-saas-serverless-quarkus-react-nextjs
   active_owner: ./packages/aws-saas-serverless-quarkus-react-nextjs
-  content_hash: sha256:b1b05cd8e1188580082fc1425a6de6c61a917aa642654da36bf49be1a442283f
+  content_hash: sha256:e81331d910150aca17c720ee8ebc4d6c5f55d44ea98770beda8c3deed09af975
 - kind: project-relative
   target: claude
   value: .claude/skills/coordinating-quarkus-aws-handoffs/blueprints/always-do-patterns.md
@@ -11406,7 +11432,7 @@ deployments:
   owners:
   - ./packages/aws-saas-serverless-quarkus-react-nextjs
   active_owner: ./packages/aws-saas-serverless-quarkus-react-nextjs
-  content_hash: sha256:56bcbde62f0dc3364a50536882e7bddc351777c0348a409dd7effd02614f0239
+  content_hash: sha256:f7392c81b29b63785b620a1bbe4b15b761772940110e0b79318df189891aed0d
 - kind: project-relative
   target: claude
   value: .claude/skills/coordinating-quarkus-aws-handoffs/blueprints/approval-lines.md
@@ -11415,7 +11441,7 @@ deployments:
   owners:
   - ./packages/aws-saas-serverless-quarkus-react-nextjs
   active_owner: ./packages/aws-saas-serverless-quarkus-react-nextjs
-  content_hash: sha256:e2c62bb62d171c0b5de1849d02a5ef5cd650ecb0e680607a06c31a2327fd723f
+  content_hash: sha256:ac6b23d3231fa2a99198cec69df589a2791322a6e0477b7a770f65f84f12e584
 - kind: project-relative
   target: claude
   value: .claude/skills/coordinating-quarkus-aws-handoffs/blueprints/evaluation-scenarios.md
@@ -11451,7 +11477,7 @@ deployments:
   owners:
   - ./packages/aws-saas-serverless-quarkus-react-nextjs
   active_owner: ./packages/aws-saas-serverless-quarkus-react-nextjs
-  content_hash: sha256:61f7ffec3b8ce5d01eddd0a8f4d81e24512be4b88a58e0525c3020da78da6787
+  content_hash: sha256:6c9b60f63f6b4b867abe12aa3f1a75cc474c22ac61b57958420ebde1b9918630
 - kind: project-relative
   target: claude
   value: .claude/skills/coordinating-quarkus-aws-handoffs/blueprints/unverified-and-risks.md
@@ -25815,7 +25841,7 @@ deployments:
   owners:
   - local:packages/aws-observability
   active_owner: local:packages/aws-observability
-  content_hash: sha256:1e0742641a858c479baef00d54e46b31060d0be09d12ecb68ee7568f8ab672e1
+  content_hash: sha256:a851082f53b693691d3d60c9190e1f84e4a6b580a8d6b9d2f00d4414f601253a
 - kind: project-relative
   target: claude
   value: .claude/skills/validating-aws-observability/blueprints/always-do-patterns.md
@@ -25987,6 +26013,15 @@ deployments:
   - local:packages/aws-observability
   active_owner: local:packages/aws-observability
   content_hash: sha256:07d8f3c8133c7a9388e84b689dcca90f2e89882d6e2060ccd2de02ac53a7068d
+- kind: project-relative
+  target: claude
+  value: .claude/skills/validating-aws-observability/scripts/readonly_bash_guard.py
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-observability
+  active_owner: local:packages/aws-observability
+  content_hash: sha256:c3f4b19856632637b67bea6673ff94c318fe9861712e61c65f3d65d487ce3f24
 - kind: project-relative
   target: claude
   value: .claude/skills/validating-aws-observability/scripts/tests/fakes/fake_aws.py
@@ -26275,6 +26310,15 @@ deployments:
   - local:packages/aws-observability
   active_owner: local:packages/aws-observability
   content_hash: sha256:0604e77ea36938c68be713cc982140beb99d2d4de4255c200ea882797536115c
+- kind: project-relative
+  target: claude
+  value: .claude/skills/validating-aws-observability/scripts/tests/test_readonly_bash_guard.py
+  runtime: null
+  scope: project
+  owners:
+  - local:packages/aws-observability
+  active_owner: local:packages/aws-observability
+  content_hash: sha256:8a53c7763b5efc83b56444b05bb0db3b29fb013cda658107371ce569a893d27c
 - kind: project-relative
   target: claude
   value: .claude/skills/validating-aws-observability/scripts/trigger-alarm-test.py

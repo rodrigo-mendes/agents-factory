@@ -49,7 +49,7 @@ The app is Next.js with `output: 'export'` (no server) built with pnpm + Node 26
 
 | | Skills |
 |---|---|
-| **IN** (work without a server) | `react-best-practices`, `composition-patterns`, `web-design-guidelines`, `building-components`, `next-dev-loop`, `next-bundle-optimizer`, `react-view-transitions`, `turborepo` (only in a monorepo), `agent-browser` (E2E / smoke) |
+| **IN** (work without a server) | `react-best-practices`, `composition-patterns`, `web-design-guidelines`, `building-components`, `next-dev-loop`, `next-bundle-optimizer`, `react-view-transitions`, `turborepo` (only in a monorepo), `agent-browser` (E2E / smoke, by the front-end work, not by `static-site-verifier`) |
 | **OUT** (need a server or Vercel) | `deploy-to-vercel`, `vercel-cli-with-tokens`, `vercel-optimize`, `next-cache-components-*`, `next-partial-prefetching-*`, `react-native-skills` |
 | **Out of this flow** (no chat in the front end) | `ai-elements`, `streamdown` |
 

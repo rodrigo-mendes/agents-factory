@@ -23,7 +23,7 @@ verify `pass|fail`) and the profile carries no `values:` override. Agents are no
 | `spec-synchronizer` | `verify-E1/E3/E5.md`, `spec-delta-NN.md` (inline) | `verify` / `spec-delta` | per the generic templates | Criteria, Evidence / delta sections + Questions | A7 |
 | `aws-terraform-engineer`, `stripe-integrator` | `result-NN-infra.md`, `result-NN-stripe.md` | `report` | none defined; native status DONE / PARTIAL / NEEDS-INPUT (outcome mapping in A9) | none defined (the engineer reports Requirement, Skills loaded, Files changed, Verification results, Open questions, Unverified items) | A9 |
 | `stripe-advisor` | `review-NN.md` (orchestrator wraps; adds `role: stripe`) | `review` | none defined (read-only) | none defined | A9 |
-| `aws-observability` | `result-NN-observability.md` (writes it; mode C returns it) | `report` | kind, id, from, to, (mode C: `role: observability-live`; mode A: `role: observability-review`; mode B: none), change, refs, requirements, outcome (protocol values), spec_impact, createdAt | per its Records table (mode C adds the live-results table) | A10 |
+| `aws-observability` | `result-NN-observability.md` (writes it; mode C returns it) | `report` | kind, id, from, to, (mode C: `role: observability-live`; mode B: none; mode A is not used in this flow), change, refs, requirements, outcome (protocol values), spec_impact, createdAt | per its Records table (mode C adds the live-results table) | A10 |
 | orchestrator (no agent) | `result-NN-pipeline.md` from `gh` output | `report` | `role: pipeline-ci \| pipeline-cd`, `run_url`, outcome, spec_impact | Done, Evidence, Spec impact, Suggested next step | A5 |
 
 ## Mismatches and how they are absorbed

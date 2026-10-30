@@ -109,7 +109,7 @@ arguments to `board.py --args ...` (last on the command line). Values are intege
 | **E1** Interview | 12 blocks B1-B12 (manager), <= 10 questions per round, playback | confirms each block summary; GitHub plan (B8) | `spec-synchronizer` (review mode) | `verify-E1.md` | [e1](blueprints/e1-interview.md) |
 | **E2a** Solution | `solution-architect`: `architecture/spec.md`, `contracts/`, `architecture/adr/` | part of the E2 approval | `solution-architecture-reviewer` | `verify-E2a.md` | [e2](blueprints/e2-architecture-and-adrs.md) |
 | **E2b** Design | `ui-ux-designer`: `design/design-system.md`, `design/adr/` | part of the E2 approval | `ui-design-reviewer` | `verify-E2b.md` | [e2](blueprints/e2-architecture-and-adrs.md) |
-| **E2c** Infrastructure | `aws-infrastructure-architect` (after E2a): `infrastructure/spec.md`, `infrastructure/adr/`; `aws-observability` Mode A reviews its observability section | **approves E2** (all 3 fronts; ADRs become `accepted`) | `aws-architect-reviewer` | `verify-E2c.md` | [e2](blueprints/e2-architecture-and-adrs.md) |
+| **E2c** Infrastructure | `aws-infrastructure-architect` (after E2a): `infrastructure/spec.md`, `infrastructure/adr/`; its observability section is verified by `aws-architect-reviewer` | **approves E2** (all 3 fronts; ADRs become `accepted`) | `aws-architect-reviewer` | `verify-E2c.md` | [e2](blueprints/e2-architecture-and-adrs.md) |
 | **E3** Functional spec | manager: requirements `R*` with SHALL + scenarios (change deltas) | **approves E3** | `spec-synchronizer` + `openspec validate` | `verify-E3.md` | [e3](blueprints/e3-functional-spec.md) |
 | **E3b** Wireframes | `ui-ux-designer`: `design/wireframes/`, `design/navigation.md` (skipped without UI change) | **approves E3b** | `ui-design-reviewer` | `verify-E3b.md` | [e3b](blueprints/e3b-ui-design.md) |
 | **E4** Designs | `solution-architect`: `design.md` index + `design/<flow>.md`; `aws-infrastructure-architect`: `infra-design.md` | shown, not blocking | `solution-architecture-reviewer` (one per design + index), `aws-architect-reviewer` | `verify-E4-<flow>.md`, `verify-E4-index.md`, `verify-E4-infra.md` | [e4-e5](blueprints/e4-e5-design-and-tasks.md) |
@@ -178,7 +178,7 @@ Models: `opus` = launched with `model: "opus"`; all others `model: "sonnet"`. Ro
 | stripe | `stripe-integrator` | E6 Stripe tasks | sonnet | `result-NN-stripe.md` |
 | frontend | `nextjs-frontend-integrator` | E6 front tasks | sonnet | `result-NN-frontend.md` |
 | infra | `aws-terraform-engineer` | E6 infra and bootstrap tasks | sonnet | `result-NN-infra.md` |
-| observability | `aws-observability` | E2c Mode A, E6 Mode B, E7 Mode C; never verifies | sonnet | `result-NN-observability.md` (kind `report`) |
+| observability | `aws-observability` | E6 Mode B, E7 Mode C (Modes A and D unused here); never verifies | sonnet | `result-NN-observability.md` (kind `report`) |
 | cicd | `cicd-pipeline-engineer` | E6 CI/CD tasks | sonnet | `result-NN-cicd.md` |
 | reviewer | `quarkus-code-reviewer`, `stripe-advisor`, `langchain4j-reviewer`, `nextjs-code-reviewer`, `terraform-code-reviewer`, `cicd-pipeline-reviewer` (all read-only) | E6 I7 | sonnet | inline; I save `review-NN.md` |
 | pipeline-ci / pipeline-cd | GitHub Actions (not an agent) | E7 | - | I write `result-NN-pipeline.md` from `gh` output |

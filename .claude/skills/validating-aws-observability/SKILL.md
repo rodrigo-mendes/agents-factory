@@ -162,3 +162,7 @@ All fetched 2026-10-28.
 - CloudWatch Transaction Search: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Transaction-Search.html
 - Lambda and X-Ray: https://docs.aws.amazon.com/lambda/latest/dg/services-xray.html
 - Full bibliography: [unverified and risks](./blueprints/unverified-and-risks.md#source-bibliography)
+
+## Read-only Bash guard for subagents
+
+`scripts/readonly_bash_guard.py` is a `PreToolUse` hook for the Bash tool: it allows only a closed list of read-only commands (profile `static-site`: `curl` GET/HEAD to one https URL, a fixed list of `aws` read operations, and the helper `portable.py now|sha256|dirhash`) and denies shell chaining, pipes, redirects, substitution and anything else, failing closed on error. The agent `static-site-verifier` wires it in its frontmatter (`hooks:`). Offline test: `python scripts/tests/test_readonly_bash_guard.py` (or `python -m unittest tests.test_readonly_bash_guard` from `scripts/`). The hook is not part of the five-pillar validation scripts and does not change them.
