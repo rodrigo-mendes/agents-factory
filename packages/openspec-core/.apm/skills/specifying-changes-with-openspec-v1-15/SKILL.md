@@ -7,7 +7,7 @@ description: "Guides OpenSpec v1.15.0 spec-driven changes: openspec/ layout, spe
 
 > Version lock: every claim applies to **OpenSpec 1.15.0** (npm `@fission-ai/openspec`, repo `Fission-AI/OpenSpec` at tag `v1.15.0`) only. Research date **2026-10-28**.
 > Claims tagged (unverified) or (medium confidence) were not fully confirmed against an official page; each maps to a line of the [register](./blueprints/unverified-and-risks.md#tag-to-register-mapping).
-> Scope: the OpenSpec **format** (layout, spec, delta, proposal, tasks) and the **`openspec` CLI**, as used by this factory's own agents. No Quarkus or AWS content. Neighbours, by name only: `coordinating-agent-handoffs` (handoff protocol), `syncing-spec-from-code` (code to spec), the `spec-synchronizer` agent, and `building-quarkus-aws-saas` (the family orchestrator).
+> Scope: the OpenSpec **format** (layout, spec, delta, proposal, tasks) and the **`openspec` CLI**, as used by this factory's own agents. No Quarkus or AWS content. Neighbours, by name only: `coordinating-agent-handoffs` (handoff protocol), `syncing-spec-from-code` (code to spec), the `spec-synchronizer` agent, and `building-aws-saas-serverless-quarkus-react-nextjs` (the family orchestrator).
 
 ## Version Context
 
