@@ -13,3 +13,9 @@ Scripts need Python 3 (standard library) and AWS CLI v2. Offline tests: `python3
 calls). Code instrumentation belongs to `observing-quarkus-lambda` (package quarkus-aws).
 
 Depends on: factory-core, handoff-core, aws-skills, aws-terraform.
+
+## Static site verification
+
+| Kind | Name | Purpose |
+|---|---|---|
+| agent | `static-site-verifier` | Read-only live check of a static front end on S3 + CloudFront after a pipeline deploy (routes, headers, OAC, TLS, WAF, content = artifact sha256). Explicit read-only allowlist, no Write tool; returns `verify-E7-site` inline |

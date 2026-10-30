@@ -1,0 +1,14 @@
+name: agents-factory-nextjs-frontend
+version: 1.0.0
+description: >-
+  Next.js 16 / React front end (static export for S3 + CloudFront): nextjs-frontend-integrator (non-interactive executor, tests first, pnpm build) and the read-only nextjs-code-reviewer, plus the scoped rule nextjs-static-export. Uses the official Vercel skills from vercel-frontend.
+author: rodrigo-mendes
+license: MIT
+dependencies:
+  apm:
+    - path: ../factory-core
+    - path: ../vercel-frontend
+    - path: ../handoff-core
+  mcp: []
+includes: auto
+scripts: {}
