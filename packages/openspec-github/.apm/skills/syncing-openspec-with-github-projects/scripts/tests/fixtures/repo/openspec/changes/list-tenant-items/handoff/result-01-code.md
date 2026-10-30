@@ -2,7 +2,7 @@
 kind: report
 id: result-01-code
 from: quarkus-lambda-integrator
-to: building-quarkus-aws-saas
+to: building-aws-saas-serverless-quarkus-react-nextjs
 change: list-tenant-items
 refs: [wo-01-code]
 requirements: [R1]

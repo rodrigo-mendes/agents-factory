@@ -1,0 +1,139 @@
+# Quarkus/AWS + React/Next.js SaaS family profile (package aws-saas-serverless-quarkus-react-nextjs) for coordinating-agent-handoffs (protocol v1).
+# Format: coordinating-agent-handoffs/blueprints/profile-format.md (YAML subset only).
+# Orchestrated: the orchestrator follows board.py's `NEXT:` line; only it launches agents.
+# Record file names never start with "report" (factory convention; a subagent write guard on such names was observed, unverified): result-<nn>-<role>.md, kind stays `report`.
+# Defaults below are overridable per project (openspec/handoff-profile.yaml) and per run (--args limits.<name>=<int>).
+# Vocabulary: protocol only (family rule 14): report-family outcomes success|partial|failed|needs-input,
+# verify outcomes pass|fail. No `values:` override is needed; agents do not invent outcome words.
+profile: quarkus-aws
+protocol: coordinating-agent-handoffs
+protocol_version: 1
+mode: orchestrated
+root: "openspec/changes/{change}/handoff"
+scope_key: change
+fallback: orchestrator
+spec:
+  kind: openspec
+  functional: "openspec/specs/{capability}/spec.md"
+  architecture: openspec/specs/architecture/spec.md
+  adr_dir: openspec/specs/architecture/adr
+roles:
+  orchestrator: building-aws-saas-serverless-quarkus-react-nextjs
+  solution-architect: solution-architect
+  solution-reviewer: solution-architecture-reviewer
+  infrastructure-architect: aws-infrastructure-architect
+  infrastructure-reviewer: aws-architect-reviewer
+  designer: ui-ux-designer
+  design-reviewer: ui-design-reviewer
+  code: quarkus-lambda-integrator
+  # `ai` shares the agent of `code`: the board derives `code` from `from` (first role listed wins), so an AI
+  # record MUST carry `role: ai` in its frontmatter; only that routes the review to langchain4j-reviewer.
+  ai: quarkus-lambda-integrator
+  stripe: stripe-integrator
+  frontend: nextjs-frontend-integrator
+  cicd: cicd-pipeline-engineer
+  reviewer: [quarkus-code-reviewer, stripe-advisor, langchain4j-reviewer, nextjs-code-reviewer, terraform-code-reviewer, cicd-pipeline-reviewer]
+  infra: aws-terraform-engineer
+  observability: aws-observability
+  # pipeline-ci / pipeline-cd: the GitHub Actions run is not an agent. The orchestrator writes the record from
+  # a read-only `gh run view` and MUST put `role: pipeline-ci` or `role: pipeline-cd` in the frontmatter
+  # (its own `from` would derive `orchestrator`). The agent value only has to be a valid agent name.
+  pipeline-ci: building-aws-saas-serverless-quarkus-react-nextjs
+  pipeline-cd: building-aws-saas-serverless-quarkus-react-nextjs
+  site-verify: static-site-verifier
+  debug: aws-lambda-debugger
+  sync: spec-synchronizer
+records:
+  work-order: "wo-{nn}-{role}.md"
+  report: "result-{nn}-{role}.md"
+  pipeline-report: "result-{nn}-pipeline.md"   # kind stays `report`; role pipeline-ci | pipeline-cd in the frontmatter
+  review: "review-{nn}.md"
+  diagnosis-report: "diagnosis-{nn}.md"
+  verify: "verify-{stage}.md"            # E2a/E2b/E2c, E3b, E4-<flow>, E4-index, E4-infra, E5, E7, E7-site; re-verification: verify-{stage}-{nn}.md
+  spec-delta: "spec-delta-{nn}.md"
+  escalation: "escalation-{nn}.md"
+# Only where the agents legitimately differ from the generic sections (blueprints/agent-alignment.md).
+required_sections:
+  review: [Findings]
+  diagnosis-report: [Symptom, Verdict, Evidence, Confidence, Fix work-order proposal, Suggested next step]
+limits:
+  build_attempts: 3
+  review_rounds: 2
+  deploy_cycles: 2
+  delta_revisions: 2
+  record_rejections: 2
+quality:
+  coverage_min: 80
+# Optional tracker mirror, off by default. Keys: coordinating-agent-handoffs/blueprints/profile-format.md#tracker.
+# Project values (owner, owner_type, project_number, repo, approval_source, approvers, bot_login) live in
+# openspec/github-tracker.yaml, written by the orchestrator at E1 only after the user confirms.
+tracker:
+  kind: none
+# build_attempts counts only build-producing roles (observability mode A/C partials are not build attempts;
+# the design authors solution-architect, infrastructure-architect and designer are not counted: their loop is
+# verify fail -> orchestrator, escalated by the orchestrator after two failed verifies of the same stage).
+# deploy_cycles counts failed CD runs (role pipeline-cd) per change; a failed CI run is a fix in E6, not a cycle.
+counters:
+  build_attempts: {kind: report, outcome: [failed, partial], role: [code, ai, stripe, frontend, infra, observability, cicd], scope: task}
+  deploy_cycles: {kind: report, outcome: failed, role: pipeline-cd, scope: change}
+# First match wins (board.py). Order: limit; drift and pending deltas (state, never shadowed);
+# design events; build events; pipeline events; verifications; "all tasks done" rule last.
+next:
+  - when: {limit_reached: any}
+    then: escalate
+  - when: {drift: true}
+    then: sync
+  - when: {pending_deltas: ">0"}
+    then: orchestrator
+  # 1) Design (E2a/E2b/E2c, E3b, E4): a success goes to the paired independent reviewer; needs-input to the user via the orchestrator.
+  - when: {kind: report, role: [solution-architect, infrastructure-architect, designer], outcome: needs-input}
+    then: orchestrator
+  - when: {kind: report, role: solution-architect, outcome: success}
+    then: solution-reviewer
+  - when: {kind: report, role: infrastructure-architect, outcome: success}
+    then: infrastructure-reviewer
+  - when: {kind: report, role: designer, outcome: success}
+    then: design-reviewer
+  # 2) Build and review (E6). A task with two reviewers (stripe, ai, frontend) uses a `hold`: the orchestrator
+  #    creates the 2nd wo-NN-review with status pending BEFORE running board.py, so all_tasks stays open.
+  - when: {kind: report, role: [code, ai, stripe, frontend, infra, observability, cicd], outcome: success}
+    then: reviewer
+  - when: {kind: review, role: stripe, outcome: changes-requested}
+    then: stripe
+  - when: {kind: review, role: frontend, outcome: changes-requested}
+    then: frontend                               # both frontend reviews (code and visual) carry role: frontend
+  - when: {kind: review, role: infra, outcome: changes-requested}
+    then: infra
+  - when: {kind: review, role: observability, outcome: changes-requested}
+    then: observability
+  - when: {kind: review, role: cicd, outcome: changes-requested}
+    then: cicd
+  - when: {kind: review, outcome: changes-requested}
+    then: code                                   # also review role: ai (same agent as code)
+  # 3) On air (E7). The pipeline does the work; the orchestrator only records the run.
+  - when: {kind: report, role: pipeline-cd, outcome: success}
+    then: observability                          # mode C, live validation (record carries role: observability-live)
+  - when: {kind: report, role: [pipeline-ci, pipeline-cd]}
+    then: orchestrator                           # CI result (user merges or an owner fixes) or any failed/partial CD
+  # Observability has three rule shapes because one agent writes three kinds of record (the board reads a
+  # `role` frontmatter field before deriving the role from `from`):
+  # - mode C (live validation after the CD run) writes `role: observability-live`; success or partial
+  #   goes to the independent verifier (`debug`, mode B), a `failed` one falls to the fallback.
+  # - mode A (E2c spec review) writes `role: observability-review`: no rule matches, fallback orchestrator.
+  # - mode B (Terraform, E6) carries no `role` field (role `observability`): success goes to `reviewer`
+  #   (terraform-code-reviewer) in the build rule above.
+  - when: {kind: report, role: observability-live, outcome: [success, partial]}
+    then: debug
+  - when: {kind: diagnosis-report}
+    then: orchestrator
+  # 4) Verifications.
+  - when: {kind: verify, role: [solution-reviewer, infrastructure-reviewer, sync, debug, design-reviewer, site-verify], outcome: fail}
+    then: orchestrator
+  - when: {kind: verify, role: debug, outcome: pass, all_tasks: done, drift: false, pending_deltas: 0}
+    then: final-gate
+  # With a front end the orchestrator runs static-site-verifier AFTER the debugger (E7 order), so its pass is the last
+  # record; E9 re-checks that verify-E7 and verify-E7-site (when there is a front) are both pass before the archive.
+  - when: {kind: verify, role: site-verify, outcome: pass, all_tasks: done, drift: false, pending_deltas: 0}
+    then: final-gate
+  - when: {kind: review, outcome: approved, all_tasks: done}
+    then: orchestrator                           # commit plan + PR text for the user (the user pushes and opens the PR)

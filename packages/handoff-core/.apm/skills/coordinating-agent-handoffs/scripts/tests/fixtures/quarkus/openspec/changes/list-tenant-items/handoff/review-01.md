@@ -2,7 +2,7 @@
 kind: review
 id: review-01
 from: quarkus-code-reviewer
-to: building-quarkus-aws-saas
+to: building-aws-saas-serverless-quarkus-react-nextjs
 change: list-tenant-items
 refs: [result-01-code]
 outcome: approved
