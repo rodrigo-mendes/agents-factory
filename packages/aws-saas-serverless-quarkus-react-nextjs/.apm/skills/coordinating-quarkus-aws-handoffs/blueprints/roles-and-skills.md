@@ -16,7 +16,7 @@ E2a and E4. The aws-skills the question needs (e.g. `architecting-aws-saas-multi
 E2c and E4. Only the skills the change needs: `applying-aws-serverless-well-architected-lens`, `architecting-aws-saas-multitenant`,
 `designing-aws-api-gateway-serverless`, `delivering-cloudfront-cdn`, `securing-aws-waf-web-acls`, `securing-aws-iam-serverless`,
 `securing-aws-secrets-certificates`, `designing-dynamodb-nosql`, `federating-github-actions-aws-oidc`,
-`limiting-blast-radius-github-actions-deploys`, `managing-aws-costs`. Its observability section is reviewed by `aws-observability` mode A.
+`limiting-blast-radius-github-actions-deploys`, `managing-aws-costs`. Its observability section is verified by `aws-architect-reviewer`.
 
 ## Designer work-order (`ui-ux-designer`; review by `ui-design-reviewer`)
 
@@ -103,7 +103,7 @@ of `infrastructure/spec.md` is the input. Mode B (Terraform) is reviewed by `ter
 - `aws-lambda-debugger`: `debugging-aws-lambda` (the debugger never invokes the function); mode B adds `validating-aws-observability`
   (read-only scripts only). When the runtime is Quarkus list `logging-quarkus-lambda-v3-40`, `tracing-quarkus-lambda-v3-40`,
   `developing-quarkus-amazon-lambda-v3-40` so it can read logs, traces and handler settings.
-- `static-site-verifier`: the work-order names the site URL, the sha256 of `out/` from the pipeline record and the checks of its agent definition (read-only).
+- `static-site-verifier`: the work-order names the site URL, the `portable.py dirhash out` of `out/` from the pipeline record and the checks of its agent definition (read-only).
 - `spec-synchronizer`: `coordinating-agent-handoffs`, `specifying-changes-with-openspec-v1-15`.
 
 ## Rule of thumb

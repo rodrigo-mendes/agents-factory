@@ -4,7 +4,7 @@ id: wo-<nn>-observability
 from: building-aws-saas-serverless-quarkus-react-nextjs
 to: aws-observability
 change: <change-id>
-task: <task-id>                  # mode A: `spec`; mode B: its own task; mode C: `E7` (same task as the E7 debug work-order)
+task: <task-id>                  # mode B: its own task; mode C: `E7` (same task as the E7 debug work-order)
 refs: [result-<nn>-pipeline]     # mode C: the pipeline-cd record; mode B: the infra-design/infra work it extends
 requirements: [R1]
 status: pending
@@ -16,8 +16,7 @@ createdAt: <ISO 8601 UTC>
 Mode: A review the observability section of `infrastructure/spec.md` (section 8) | B write observability Terraform (offline) |
 C live validation after the CD run (stage E7) | D instrumentation missing. Output: `result-<nn>-observability.md`
 (kind `report`, outcome `success|partial|failed|needs-input`) at `<path>`; never a name starting with `report`.
-Mode C: the record carries `role: observability-live` in its frontmatter (routes it to the debugger); mode A
-carries `role: observability-review` (back to the orchestrator); mode B carries no `role` field and goes to `terraform-code-reviewer` (review record `role: observability`). The record is not the E7 verify: `aws-lambda-debugger` mode B verifies it afterwards (`verify-E7.md`).
+Mode C: the record carries `role: observability-live` in its frontmatter (routes it to the debugger); mode B carries no `role` field and goes to `terraform-code-reviewer` (review record `role: observability`). The record is not the E7 verify: `aws-lambda-debugger` mode B verifies it afterwards (`verify-E7.md`).
 
 ## Skills
 
@@ -32,7 +31,6 @@ carries `role: observability-review` (back to the orchestrator); mode B carries 
 
 ## Constraints
 
-- spec (mode A): `<path to the architecture spec / observability section>`
 - mode: `<A|B|C|D>`; region: `<region>`; identity: AWS profile `<name>` (never credentials in text)
 - function: `<name>`; alias/version: `<alias>` / `<version>`; log group: `<name>`
 - API type: `REST | HTTP | NONE` (decides which access-log and metric dimensions apply)
@@ -51,7 +49,7 @@ approval: logs-insights scope=<log-group or "xray"> window=<minutes> by=<user> a
 
 ## Limits
 
-- build_attempts: <effective value>   (source: profile | override | args)   # the board counts failed/partial mode B reports of this task (mode A/C roles are excluded)
+- build_attempts: <effective value>   (source: profile | override | args)   # the board counts failed/partial mode B reports of this task (mode C role is excluded)
 
 ## Acceptance criteria
 

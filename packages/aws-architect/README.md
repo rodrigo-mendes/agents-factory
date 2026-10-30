@@ -58,6 +58,6 @@ packages/aws-architect/
 | Agent | Does |
 |---|---|
 | `aws-infrastructure-architect` | Designs the AWS infrastructure for an already reviewed solution architecture (non-interactive; tools: Read, Grep, Glob, Write; model: opus). Writes `openspec/specs/infrastructure/**` (12-section `spec.md`, `adr/` with `area: infrastructure`) and `openspec/changes/<id>/infra-design.md`; record `result-NN-infrastructure-architect.md`. Writes no Terraform |
-| `aws-architect-reviewer` | Read-only verifier of that design against the WAF pillars, serverless lens and SaaS lens (tools: Read, Grep, Glob; model: sonnet). Returns `verify-E2c` / `verify-E4-infra` inline; designs no alternative |
+| `aws-architect-reviewer` | Read-only verifier of that design against the WAF pillars, serverless lens and SaaS lens (tools: Read, Grep, Glob; model: sonnet). Also checks the observability section (8 items: SLOs, log fields, retention, sampling, alarm list, dashboards, cardinality, API type; a GAP fails the verify). Returns `verify-E2c` / `verify-E4-infra` inline; designs no alternative |
 
 The original `aws-architect` (designs and reviews) is unchanged and stays available for other uses.
