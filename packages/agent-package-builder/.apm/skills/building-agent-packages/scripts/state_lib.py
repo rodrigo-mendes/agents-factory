@@ -117,3 +117,44 @@ def register(ex, name):
 def live_ids(ex, name):
     """IDs whose latest status is still open (findings, deferred)."""
     return [i for i, rs in register(ex, name).items() if rs[-1][2] in LIVE.get(name, ())]
+
+
+def lock_owners(lock='apm.lock.yaml'):
+    """{deployed path: package} from the deployed_files lists of apm.lock.yaml (repo root)."""
+    owners, cur, in_list = {}, None, False
+    if not os.path.isfile(lock):
+        return owners
+    for line in open(lock, encoding='utf-8'):
+        m = re.match(r'^- repo_url:\s*(\S+)', line)
+        if m:
+            cur, in_list = m.group(1).replace('_local/', ''), False
+            continue
+        if re.match(r'^  deployed_files:\s*$', line):
+            in_list = True
+            continue
+        if in_list:
+            m = re.match(r'^  - (\S+)\s*$', line)
+            if m:
+                owners[m.group(1)] = cur
+            else:
+                in_list = False
+    return owners
+
+
+def owner_of(path, owners=None):
+    """Package that deploys a .claude/ path: the lock first, then the source tree in packages/."""
+    path = path.replace(os.sep, '/')
+    owners = lock_owners() if owners is None else owners
+    if path in owners:
+        return owners[path]
+    parts = path.split('/')
+    if len(parts) < 3 or parts[0] != '.claude':
+        return '?'
+    kind, name = parts[1], parts[2]
+    pats = {'skills': [f'skills/{name}'],
+            'agents': [f'agents/{name[:-3]}.agent.md', f'agents/{name}'],
+            'rules': [f'instructions/{name[:-3]}.instructions.md', f'rules/{name}']}.get(kind, [])
+    for pkg in sorted(os.listdir('packages')) if os.path.isdir('packages') else []:
+        if any(os.path.exists(os.path.join('packages', pkg, '.apm', p)) for p in pats):
+            return pkg
+    return 'unowned (not in the lock nor in packages/)'

@@ -11,6 +11,9 @@ Back to [SKILL.md](../../SKILL.md). Prompt templates the orchestrator sends to t
 - Write only the files named under "Output". Report the paths and anything you could not verify.
 - Apply `<workspace>/_family_facts.md` and `_family_rules.md` as given; do not edit them.
 - Lessons from earlier batches (retro `brief` rows): <paste them verbatim, or "none yet">.
+- Never make a shipped skill, agent or rule READ a file under `workspace/` (it exists only in the factory): copy what
+  it needs into the skill's `references/` and cite `.claude/skills/<skill>/references/<file>`. Citing a workspace
+  research file as provenance is fine.
 - Do not edit shared files (root `apm.yml`, lock, `CLAUDE.md`, `docs/`, other packages); return a request instead.
 
 ## Approval line (exact form)
