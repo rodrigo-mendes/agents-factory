@@ -17,6 +17,12 @@ Usage: state_event.py <slug_dir> <command> [args] [--execution N] [--actor NAME]
   retro add --kind brief|known-failure|lesson --target T --text X     -> prints R-<nnn>
   touch <repo-path> [--note X]          record a change to a file other runs also own
   shared-lock | shared-unlock [--stale] repo-wide lock (workspace/.shared.lock) for P8/P9
+  round-start <round-k> <validate|test|audit> <target>  mark a reviewer as launched (writes
+                                      rounds/<round-k>/<kind>__<target>.running; the report replaces it)
+  score <pilot|round-k> <target> --kind validate|test|audit --score S [--high N --medium N --low N]
+        [--pass P --total T] [--note X]   one row per review report (state/scores.md)
+  render                              regenerate PIPELINE_STATE.md (and each round's scoreboard.md)
+Every successful write re-renders the dashboard; add --no-render to batch many writes, then `render`.
 Layout and formats: blueprints/state-layout.md. Exit 1 on any refused write."""
 import datetime
 import os
@@ -216,6 +222,63 @@ def cmd_unit(ex, args, actor):
            template('UNIT.template.md', unit=name))
     log(ex, '-', actor, 'UNIT_STATE', f'{name} -> {state}' + (f' score={score}' if score else ''))
     print(f'OK {name} {state}')
+
+
+def cmd_round_start(ex, args, actor):
+    if len(args) != 3 or not re.fullmatch(r'round-\d+', args[0]) or args[1] not in sl.ROUND_KINDS \
+            or not re.fullmatch(r'[a-z0-9][a-z0-9.-]*', args[2]):
+        die('usage: round-start <round-k> <validate|test|audit> <target>')
+    d = os.path.join(ex, 'rounds', args[0])
+    os.makedirs(d, exist_ok=True)
+    with open(os.path.join(d, f'{args[1]}__{args[2]}.running'), 'w', encoding='utf-8', newline='\n') as fh:
+        fh.write(f'{now()} | {actor}\n')
+    log(ex, 'P6', actor, 'ROUND_START', f'{args[0]} {args[1]}__{args[2]} running')
+    print(f'OK {args[0]} {args[1]}__{args[2]} running')
+
+
+def cmd_score(ex, args, actor):
+    kind, score = opt(args, '--kind'), opt(args, '--score')
+    nums = {k: opt(args, f'--{k}', '') for k in ('high', 'medium', 'low', 'pass', 'total')}
+    note = opt(args, '--note', '')
+    usage = ('usage: score <pilot|round-k> <target> --kind validate|test|audit --score S '
+             '[--high N --medium N --low N] [--pass P --total T] [--note X]')
+    if len(args) != 2 or not re.fullmatch(r'pilot|round-\d+', args[0]) or kind not in sl.ROUND_KINDS \
+            or not re.fullmatch(r'[a-z0-9][a-z0-9.-]*', args[1]):
+        die(usage)
+    try:
+        s = float(score)
+    except (TypeError, ValueError):
+        die('--score must be a number')
+    if not 0 <= s <= (10 if kind == 'audit' else 100):
+        die('--score out of range (0-100; audit 0-10)')
+    if any(v and not v.isdigit() for v in nums.values()):
+        die('--high/--medium/--low/--pass/--total must be whole numbers')
+    if nums['pass'] and nums['total'] and int(nums['pass']) > int(nums['total']):
+        die('--pass cannot exceed --total')
+    path = os.path.join(ex, 'state', 'scores.md')
+    append(path, f'| {now()} | ' + ' | '.join(clean(c) for c in [
+        args[0], args[1], kind, f'{s:g}', nums['high'], nums['medium'], nums['low'],
+        nums['pass'], nums['total'], actor, note]) + ' |', template('SCORES.template.md'))
+    log(ex, 'P6' if args[0] != 'pilot' else 'P3', actor, 'NOTE', f'score {args[0]} {kind} {args[1]} {s:g}')
+    print(f'OK score {args[0]} {kind} {args[1]} {s:g}')
+
+
+def cmd_render(ex, args, actor):
+    print(render(ex, 'render') or 'OK rendered')
+
+
+def render(ex, by):
+    """Regenerate the dashboard; never fails the write that triggered it."""
+    try:
+        p = subprocess.run([sys.executable, os.path.join(HERE, 'render_state.py'), os.path.dirname(ex),
+                            '--execution', os.path.basename(ex).removeprefix('execution-'), '--by', by],
+                           capture_output=True, text=True, encoding='utf-8', errors='replace')
+        if p.returncode:
+            print('WARN dashboard not rendered:', (p.stdout + p.stderr).strip()[-200:], file=sys.stderr)
+        return p.stdout.strip()
+    except OSError as e:
+        print('WARN dashboard not rendered:', e, file=sys.stderr)
+        return ''
 
 
 def cmd_event(ex, args, actor):
@@ -427,6 +490,9 @@ def main():
     args = sys.argv[1:]
     actor = opt(args, '--actor', 'orchestrator')
     n = opt(args, '--execution')
+    no_render = '--no-render' in args
+    if no_render:
+        args.remove('--no-render')
     if len(args) < 2:
         print(__doc__)
         sys.exit(2)
@@ -434,17 +500,22 @@ def main():
     if cmd == 'init':
         return cmd_init(slug, rest, actor)
     ex = resolve(slug, n)
+    if cmd == 'render':
+        return cmd_render(ex, rest, actor)
     handlers = {'phase': cmd_phase, 'gate': cmd_gate, 'unit': cmd_unit, 'event': cmd_event,
                 'finding': cmd_finding, 'defer': cmd_defer, 'decide': cmd_decide,
                 'source': cmd_source, 'metric': cmd_metric, 'retro': cmd_retro,
-                'touch': cmd_touch}
+                'touch': cmd_touch, 'round-start': cmd_round_start, 'score': cmd_score}
     if cmd in handlers:
-        return handlers[cmd](ex, rest, actor)
-    if cmd in ('lock', 'unlock'):
-        return cmd_lock(ex, rest, actor, cmd == 'unlock')
-    if cmd in ('shared-lock', 'shared-unlock'):
-        return cmd_shared_lock(ex, rest, actor, cmd == 'shared-unlock')
-    die(f'unknown command {cmd}')
+        handlers[cmd](ex, rest, actor)
+    elif cmd in ('lock', 'unlock'):
+        cmd_lock(ex, rest, actor, cmd == 'unlock')
+    elif cmd in ('shared-lock', 'shared-unlock'):
+        cmd_shared_lock(ex, rest, actor, cmd == 'shared-unlock')
+    else:
+        die(f'unknown command {cmd}')
+    if not no_render:  # refused writes exit in die() before this line, so only real writes render
+        render(ex, 'state_event')
 
 
 if __name__ == '__main__':

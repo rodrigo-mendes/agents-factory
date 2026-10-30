@@ -12,6 +12,9 @@ COMMAND_KEYS = {'context', 'agent', 'disable-model-invocation', 'argument-hint',
                 'allowed-tools'}
 
 d = sys.argv[1]
+# GitHub Actions CI/CD skills must show real `.github/workflows/...` paths in `uses:` examples
+# (user decision at G2 of the github-actions-cicd run, DEC-010); every other package keeps the ban.
+GITHUB_PATHS_ALLOWED = 'packages/github-actions-cicd/' in os.path.abspath(d).replace(os.sep, '/') + '/'
 name = os.path.basename(d.rstrip('/'))
 problems = []
 is_command = False
@@ -108,6 +111,8 @@ for root, _, fs in os.walk(d):
         for pat, label in ((r'/Users/|/home/|\b[A-Za-z]:\\[A-Za-z]', 'absolute path'), (r'\.github/', '.github'),
                            (r'days? (old|ago)|weeks? old', 'relative date'),
                            (r'write_to_file', 'write_to_file')):
+            if label == '.github' and GITHUB_PATHS_ALLOWED:
+                continue
             if re.search(pat, t):
                 problems.append(f'{label} in {os.path.relpath(p, d)}')
 

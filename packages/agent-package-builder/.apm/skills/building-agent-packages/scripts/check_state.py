@@ -51,6 +51,10 @@ def main():
         if not re.fullmatch(r'round-\d+', k):
             problems.append(f'round folder {k} not named round-<k>')
         for kind, ok in v['kinds'].items():
+            if ok == 'running':
+                if s['phases'].get('P6', {}).get('status') == 'done':
+                    problems.append(f'{k}: {kind} still marked running after P6 done (report never arrived)')
+                continue
             if not ok:
                 problems.append(f'{k}: no {kind}__<target>.md report')
         for b in v['bad_names']:
