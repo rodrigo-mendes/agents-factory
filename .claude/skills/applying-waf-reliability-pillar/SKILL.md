@@ -228,7 +228,7 @@ Expected: each app shows a recent compliance evaluation; resiliency score meets 
 ## Blueprints Directory Structure
 
 ```
-workspace/.claude/skills/applying-waf-reliability-pillar/
+.claude/skills/applying-waf-reliability-pillar/
 ├── SKILL.md                              <- This file (summary + guardrails)
 └── blueprints/
     └── evaluation-scenarios.md           <- 6 test scenarios (canonical, edge, anti-pattern)

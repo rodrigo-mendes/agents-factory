@@ -102,6 +102,7 @@ State always comes from disk (`scripts/inspect_workspace.py`); the generated das
 - Never write "the user approved" for something the user did not say -> ask with the question tool.
 - Never launch agents from inside a worker or allow nested investigators -> flat fan-out only.
 - Never use `git add -A` or `git add .` -> `scripts/commit_groups.py` with explicit paths.
+- Never make a shipped artifact read `workspace/` at runtime -> ship the file in the skill's `references/`.
 - Never author into `.claude/` -> write to `packages/<pkg>/.apm/` and run `apm install`.
 - Never edit a shared file (root `apm.yml`, lock, `CLAUDE.md`, `docs/`) without `shared-lock` and `touch` -> see [shared files](blueprints/policy/shared-files.md).
 - Never run `apm install` while `scripts/preflight_apm.py` reports a BLOCK (e.g. another run's files) -> show the BLOCK to the user.
@@ -117,11 +118,13 @@ Run from the repo root. Skill scripts live in `.claude/skills/building-agent-pac
 |---|---|
 | Rebuild state from disk | `python3 scripts/inspect_workspace.py workspace/<slug>` |
 | Write state (only way) | `python3 scripts/state_event.py workspace/<slug> init\|lock\|phase\|gate\|unit\|event\|unlock` |
-| Environment / apm preflight | `python3 scripts/snapshot_env.py --write workspace/<slug> --phase P0` · `python3 scripts/preflight_apm.py --slug <slug>` |
+| Environment / apm preflight | `python3 scripts/snapshot_env.py --write workspace/<slug> --phase P0` · `python3 scripts/preflight_apm.py --slug <slug> --package <pkg>` |
 | Dashboard / consistency | `python3 scripts/render_state.py workspace/<slug>` · `python3 scripts/check_state.py workspace/<slug>` |
 | Check one skill | `python3 scripts/verify_skill.py <skill_dir>` |
 | Check a package | `python3 scripts/verify_package.py packages/<pkg>` |
 | Normalize tags | `python3 scripts/normalize_tags.py <dir> [--write]` |
 | Real counts | `python3 scripts/check_counts.py` |
 | Commit groups | `python3 scripts/commit_groups.py plan.json [--apply]` |
-| Regenerate `.claude/` | `apm install --target claude`, then the repo-root `scripts/restore-rule-metadata.py` and `scripts/fix-cross-package-links.py` |
+| Regenerate `.claude/` | `apm install --target claude`, then always `python3 scripts/after_install.py --package <pkg>` (runs both repo-root fixups and checks the residue) |
+| Repair the lock after a bad install | `python3 scripts/merge_lock.py --package <pkg> [--apply]` |
+| Migrate a legacy workspace | `python3 scripts/migrate_state.py workspace/<slug> [--apply]` |

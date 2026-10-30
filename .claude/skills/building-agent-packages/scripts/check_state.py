@@ -120,6 +120,10 @@ def main():
         warnings.append('units moved past PLANNED but briefs/ is empty: save every worker brief')
     if os.path.isfile(os.path.join(ex, '.run.lock')) and sl.current_phase(s) == 'DONE':
         problems.append('.run.lock still present after P9 done')
+    if os.path.basename(ex) == 'execution-0':  # migrated legacy run: rules newer than the run are notes
+        newer = ('PREFLIGHT', 'shared lock', 'no rounds/ folder', 'environment.md')
+        warnings += [f'(legacy) {p}' for p in problems if any(k in p for k in newer)]
+        problems = [p for p in problems if not any(k in p for k in newer)]
     print(f'{ex}: current phase {sl.current_phase(s)}, {len(s["units"])} units, '
           f'{len(s["rounds"])} rounds')
     for w in warnings:

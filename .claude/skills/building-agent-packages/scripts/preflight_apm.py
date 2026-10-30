@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 """Read-only checks before `apm install` (stdlib only). Run from the repo root in P5 (rehearsal)
 and P8. It never runs apm and never fixes anything: it names the problem and the recovery step.
-Usage: preflight_apm.py [--slug <slug>] [--log <slug_dir>] [--execution N]
-  --slug  your own run, so its .run.lock is not reported as a concurrent run
+Usage: preflight_apm.py [--slug <slug>] [--package <pkg>[,<pkg>]] [--log <slug_dir>] [--execution N]
+  --slug     your own run, so its .run.lock is not reported as a concurrent run
+  --package  the packages your run edits (default: the slug); changed .claude files are grouped by
+             owning package (apm.lock.yaml, then packages/) and only files owned by others block
   --log   append a PREFLIGHT event with the summary to that execution
 Exit 1 when a BLOCK is found (concurrent run, uncommitted .claude/lock changes, broken root apm.yml)."""
 import glob
@@ -13,6 +15,8 @@ import sys
 
 sys.stdout.reconfigure(encoding='utf-8', errors='replace')
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import state_lib as sl  # noqa: E402
+
 DEP = re.compile(r'^\s*-\s*(path|git):\s*(\S+)', re.M)
 
 
@@ -30,6 +34,7 @@ def deps(apm_file):
 def main():
     args = sys.argv[1:]
     own = args[args.index('--slug') + 1] if '--slug' in args else None
+    own_pkgs = (args[args.index('--package') + 1] if '--package' in args else (own or '')).split(',')
     block, warn, info = [], [], []
 
     for lock in glob.glob('workspace/*/execution-*/.run.lock') + glob.glob('workspace/.shared.lock'):
@@ -40,12 +45,32 @@ def main():
             block.append(f'another run holds {lock} ({open(lock, encoding="utf-8").read().strip()}): '
                          'wait for it, or ask the user; never install over a live run')
 
-    dirty = git('diff', '--name-only', '--', '.claude', 'apm.lock.yaml')
+    # --ignore-cr-at-eol: a CRLF-only difference is reported below, not as a change of content
+    dirty = git('diff', '--ignore-cr-at-eol', '--name-only', '--', '.claude')
     untracked = git('ls-files', '--others', '--exclude-standard', '--', '.claude')
-    if dirty or untracked:
-        block.append(f'{len(dirty)} modified + {len(untracked)} untracked files in .claude/ or '
-                     f'apm.lock.yaml (e.g. {(dirty + untracked)[0]}): identify the owner; save yours '
-                     'with `git stash push -- .claude apm.lock.yaml` before installing')
+    mine = set(own_pkgs)
+    by_owner = {}
+    owners = sl.lock_owners()
+    for f in dirty + untracked:
+        by_owner.setdefault(sl.owner_of(f, owners), []).append(f)
+    unmanaged = [f for f in glob.glob('.claude/skills/**/*', recursive=True)
+                 if os.path.isfile(f) and '__pycache__' not in f
+                 and f.replace(os.sep, '/') not in owners and sl.owner_of(f, owners) in mine]
+    if unmanaged:
+        skills = sorted({f.replace(os.sep, '/').split('/')[2] for f in unmanaged})
+        block.append(f'{len(unmanaged)} files of your package exist in .claude/ but are not in apm.lock.yaml '
+                     f'(e.g. {unmanaged[0]}): apm refuses to update such "unmanaged" files once they change. '
+                     f'Delete .claude/skills/{{{",".join(skills)}}} (generated; packages/ and git have them) and reinstall')
+    for owner, files in sorted(by_owner.items()):
+        line = (f'{len(files)} changed/new .claude files owned by {owner} (e.g. {files[0]})')
+        if owner in mine:
+            warn.append(line + ': yours; the install will overwrite them with packages/ (expected)')
+        else:
+            block.append(line + ': not yours; find who changed them (another run, a hand edit) '
+                         'before installing; save them with `git stash push -- <files>` if needed')
+    if git('diff', '--ignore-cr-at-eol', '--name-only', '--', 'apm.lock.yaml'):
+        (warn if mine else block).append('apm.lock.yaml has uncommitted changes: expected only after '
+                                         "your own install; otherwise another run's install is pending")
 
     if not os.path.isfile('apm.yml'):
         block.append('no apm.yml in the current folder: run from the repo root')

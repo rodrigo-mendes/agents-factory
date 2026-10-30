@@ -281,7 +281,7 @@ sam pipeline init                                       # generate CI/CD (GitHub
 ## Blueprints Directory Structure
 
 ```
-workspace/.claude/skills/architecting-sam-serverless-patterns/
+.claude/skills/architecting-sam-serverless-patterns/
 ├── SKILL.md                              <- This file (summary + guardrails)
 └── blueprints/
     └── evaluation-scenarios.md           <- 6 test cases (canonical, edge, misuse)
