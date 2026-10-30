@@ -77,7 +77,7 @@ def main() -> int:
         if desc_m:
             prefix_lines.append(f"description: {desc_m.group(1).strip()}")
         new_front = "\n".join(prefix_lines) + "\n" + dep_front
-        deployed.write_text(f"---\n{new_front}\n---\n{dep_body}", encoding="utf-8")
+        deployed.write_text(f"---\n{new_front}\n---\n{dep_body}", encoding="utf-8", newline="\n")
         patched += 1
         print(f"[restore-rule-metadata] patched {deployed.relative_to(REPO_ROOT)}")
 
