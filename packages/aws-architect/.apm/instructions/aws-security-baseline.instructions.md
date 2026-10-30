@@ -10,7 +10,7 @@ Technical facts live in the aws-skills (`packages/aws-skills/.apm/skills/`). Thi
 what to check and where to look; it does not duplicate skill bodies. Tags `(unverified)` and
 `(medium confidence)` from a skill apply here too.
 
-Source family rules: R01–R06 from `workspace/aws/_family_rules_v2026.md`.
+Source family rules: R01–R06 from `.claude/skills/aws-architecture-advisor/references/family-rules-v2026.md`.
 
 ## Always
 
