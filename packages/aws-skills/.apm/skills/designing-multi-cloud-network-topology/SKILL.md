@@ -218,7 +218,7 @@ aws ec2 get-transit-gateway-route-table-associations \
 ## Blueprints Directory Structure
 
 ```
-workspace/.claude/skills/designing-multi-cloud-network-topology/
+.claude/skills/designing-multi-cloud-network-topology/
 ├── SKILL.md                              <- This file
 └── blueprints/
     ├── service-equivalence-lock-in.md    <- Full networking primitives map + lock-in tables

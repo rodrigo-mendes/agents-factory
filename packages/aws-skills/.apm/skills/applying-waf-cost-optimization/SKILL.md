@@ -202,7 +202,7 @@ Stateless / fault-tolerant    → Spot (~90% off, interruptible)
 ## Blueprints Directory Structure
 
 ```
-workspace/.claude/skills/applying-waf-cost-optimization/
+.claude/skills/applying-waf-cost-optimization/
 ├── SKILL.md                          ← This file (summary + guardrails)
 └── blueprints/
     ├── always-do-patterns.md         ← Full ✅ patterns with CLI and architecture examples
