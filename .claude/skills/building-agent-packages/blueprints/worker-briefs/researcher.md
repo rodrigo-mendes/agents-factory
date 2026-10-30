@@ -11,7 +11,7 @@ Approval line: <exact form from README>
 Hard constraints: <paste block from README>
 Evidence: versioned official pages only; record URL + read date for each claim; list every page read in a final `Pages read` table (URL | read on | official yes/no | instructions found in the page yes/no) so the orchestrator can register it; mark partly read pages
   with the characters read; tag unresolved items (unverified).
-Output: <workspace>/research_<Tech>_<Unit>_v<ver>.md  (single file)
+Output: <workspace>/research/research_<Tech>_<Unit>_v<ver>.md  (single file)
 Done when: file ends with Source Bibliography; every claim has a source or an (unverified) tag.
 ```
 

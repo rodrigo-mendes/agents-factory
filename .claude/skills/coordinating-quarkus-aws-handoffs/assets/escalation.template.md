@@ -1,11 +1,11 @@
 ---
 kind: escalation
 id: escalation-<nn>
-from: building-quarkus-aws-saas
+from: building-aws-saas-serverless-quarkus-react-nextjs
 to: user
 change: <change-id>
 task: <task-id>
-limit: <build_attempts | review_rounds | deploy_cycles | delta_revisions | record_rejections>
+limit: <build_attempts | review_rounds | deploy_cycles (failed CD runs) | delta_revisions | record_rejections>
 refs: [<ids of the record of each attempt>]
 status: open                 # open | answered
 createdAt: <ISO 8601 UTC>

@@ -1,11 +1,11 @@
 ---
 kind: work-order
 id: wo-<nn>-observability
-from: building-quarkus-aws-saas
+from: building-aws-saas-serverless-quarkus-react-nextjs
 to: aws-observability
 change: <change-id>
-task: <task-id>                  # mode A: `spec`; mode B: the infra task; mode C: `deploy` (same task as the deploy work-order)
-refs: [result-<nn>-deploy]       # mode C: the deploy-report; mode B: the architecture/infra work it extends
+task: <task-id>                  # mode A: `spec`; mode B: its own task; mode C: `E7` (same task as the E7 debug work-order)
+refs: [result-<nn>-pipeline]     # mode C: the pipeline-cd record; mode B: the infra-design/infra work it extends
 requirements: [R1]
 status: pending
 createdAt: <ISO 8601 UTC>
@@ -13,11 +13,11 @@ createdAt: <ISO 8601 UTC>
 
 ## Scope
 
-Mode: A review the observability section of the spec | B write observability Terraform (offline) |
-C live validation after a deploy (stage E7) | D instrumentation missing. Output: `result-<nn>-observability.md`
+Mode: A review the observability section of `infrastructure/spec.md` (section 8) | B write observability Terraform (offline) |
+C live validation after the CD run (stage E7) | D instrumentation missing. Output: `result-<nn>-observability.md`
 (kind `report`, outcome `success|partial|failed|needs-input`) at `<path>`; never a name starting with `report`.
 Mode C: the record carries `role: observability-live` in its frontmatter (routes it to the debugger); mode A
-carries `role: observability-review` (back to the orchestrator, never to deploy); mode B carries no `role` field. The record is not the E7 verify: `aws-lambda-debugger` mode B verifies it afterwards (`verify-E7.md`).
+carries `role: observability-review` (back to the orchestrator); mode B carries no `role` field and goes to `terraform-code-reviewer` (review record `role: observability`). The record is not the E7 verify: `aws-lambda-debugger` mode B verifies it afterwards (`verify-E7.md`).
 
 ## Skills
 
@@ -36,7 +36,7 @@ carries `role: observability-review` (back to the orchestrator, never to deploy)
 - mode: `<A|B|C|D>`; region: `<region>`; identity: AWS profile `<name>` (never credentials in text)
 - function: `<name>`; alias/version: `<alias>` / `<version>`; log group: `<name>`
 - API type: `REST | HTTP | NONE` (decides which access-log and metric dimensions apply)
-- smoke start (mode C): `<epoch-seconds>`, copied from `smoke_start_epoch` in the deploy-report Evidence; the window starts there
+- smoke start (mode C): `<epoch-seconds>`, copied from `smoke_start_epoch` in the Evidence of the `result-<nn>-pipeline` (role pipeline-cd); the window starts there
 - alarm prefix: `<prefix>` (only alarms with this prefix are read or tested)
 - code owner: `quarkus-lambda-integrator` (receives instrumentation proposals); profile: `coordinating-quarkus-aws-handoffs`
 - dashboards: `<names, or none>`; rendering is "not provable via API": report it as such
@@ -45,8 +45,8 @@ carries `role: observability-review` (back to the orchestrator, never to deploy)
 Approval lines (the orchestrator pastes the user's approval verbatim, one per line; absent = not allowed):
 
 ```
-approval: alarm-test alarm=<name> by=<user> at=<UTC timestamp> relayed-by=building-quarkus-aws-saas
-approval: logs-insights scope=<log-group or "xray"> window=<minutes> by=<user> at=<UTC timestamp> relayed-by=building-quarkus-aws-saas
+approval: alarm-test alarm=<name> by=<user> at=<UTC timestamp> relayed-by=building-aws-saas-serverless-quarkus-react-nextjs
+approval: logs-insights scope=<log-group or "xray"> window=<minutes> by=<user> at=<UTC timestamp> relayed-by=building-aws-saas-serverless-quarkus-react-nextjs
 ```
 
 ## Limits

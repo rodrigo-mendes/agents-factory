@@ -66,7 +66,7 @@ class TempCase(unittest.TestCase):
     def add_review(self, directory, nn, outcome, created):
         self.add_record(directory, "review-%s.md" % nn, [
             "kind: review", "id: review-%s" % nn, "from: quarkus-code-reviewer",
-            "to: building-quarkus-aws-saas", "change: list-tenant-items",
+            "to: building-aws-saas-serverless-quarkus-react-nextjs", "change: list-tenant-items",
             "refs: [result-01-code]", "outcome: %s" % outcome, "createdAt: %s" % created,
         ], ["Findings", "ADR check"])
 
@@ -174,7 +174,7 @@ class TestCheckRecords(TempCase):
         d = self.copy_fixture(Q_REL)
         self.add_record(d, "verify-E6.md", [
             "kind: verify", "id: verify-E6", "from: quarkus-lambda-integrator",
-            "to: building-quarkus-aws-saas", "change: list-tenant-items", "stage: E6",
+            "to: building-aws-saas-serverless-quarkus-react-nextjs", "change: list-tenant-items", "stage: E6",
             "refs: [result-01-code]", "outcome: pass", "createdAt: 2026-11-04T11:00:00Z",
         ], ["Criteria", "Evidence"])
         code, out, _ = run(check_records, [d, "--profile", Q_PROFILE])
@@ -192,14 +192,14 @@ class TestCheckRecords(TempCase):
                 name = "%s-%s.md" % (kind, outcome)
                 self.add_record(d, name, [
                     "kind: " + kind, "id: %s-%s" % (kind, outcome), "from: " + agents[kind],
-                    "to: building-quarkus-aws-saas", "change: list-tenant-items",
+                    "to: building-aws-saas-serverless-quarkus-react-nextjs", "change: list-tenant-items",
                     "refs: [result-01-code]", "outcome: " + outcome,
                     "createdAt: 2026-11-04T13:00:00Z"], sections[kind])
         code, out, _ = run(check_records, [d, "--profile", Q_PROFILE])
         self.assertEqual(code, 0, out)
         self.add_record(d, "deploy-report-bad.md", [
             "kind: deploy-report", "id: deploy-report-bad", "from: aws-lambda-deployer",
-            "to: building-quarkus-aws-saas", "change: list-tenant-items", "outcome: pass",
+            "to: building-aws-saas-serverless-quarkus-react-nextjs", "change: list-tenant-items", "outcome: pass",
             "createdAt: 2026-11-04T13:00:00Z"], sections["deploy-report"])
         code, out, _ = run(check_records, [d, "--profile", Q_PROFILE])
         self.assertEqual(code, 1)
@@ -208,7 +208,7 @@ class TestCheckRecords(TempCase):
     def test_verify_outcome_vocabulary_is_pass_fail_only(self):
         d = self.copy_fixture(Q_REL)
         fm = ["kind: verify", "id: verify-E6", "from: aws-lambda-debugger",
-              "to: building-quarkus-aws-saas", "change: list-tenant-items", "stage: E6",
+              "to: building-aws-saas-serverless-quarkus-react-nextjs", "change: list-tenant-items", "stage: E6",
               "refs: [result-01-code]", "createdAt: 2026-11-04T11:00:00Z"]
         self.add_record(d, "verify-E6.md", fm + ["outcome: success"], ["Criteria", "Evidence"])
         code, out, _ = run(check_records, [d, "--profile", Q_PROFILE])
@@ -221,7 +221,7 @@ class TestCheckRecords(TempCase):
 
     def test_escalation_needs_two_to_four_options(self):
         d = self.copy_fixture(Q_REL)
-        fm = ["kind: escalation", "id: escalation-01", "from: building-quarkus-aws-saas",
+        fm = ["kind: escalation", "id: escalation-01", "from: building-aws-saas-serverless-quarkus-react-nextjs",
               "to: user", "change: list-tenant-items", "task: T1", "status: open",
               "createdAt: 2026-11-04T12:00:00Z"]
         body = "\n## Attempts\n\n- 1\n\n## Evidence\n\n- e\n\n## Hypothesis\n\n- h\n\n## Options\n\n"
@@ -237,7 +237,7 @@ class TestCheckRecords(TempCase):
     def test_spec_delta_requires_openspec_section(self):
         d = self.copy_fixture(Q_REL)
         fm = ["kind: spec-delta", "id: spec-delta-01", "from: spec-synchronizer",
-              "to: building-quarkus-aws-saas", "change: list-tenant-items", "status: proposed",
+              "to: building-aws-saas-serverless-quarkus-react-nextjs", "change: list-tenant-items", "status: proposed",
               "createdAt: 2026-11-04T12:00:00Z"]
         self.write(os.path.join(d, "spec-delta-01.md"),
                    "---\n" + "\n".join(fm) + "\n---\n\n## Questions\n\n- none\n")
@@ -373,7 +373,7 @@ class TestBoard(TempCase):
         self.assertNotIn("NEXT: escalate", out)
         self.add_record(d, "result-02-deploy.md", [
             "kind: deploy-report", "id: result-02-deploy", "from: aws-lambda-deployer",
-            "to: building-quarkus-aws-saas", "change: list-tenant-items", "task: deploy",
+            "to: building-aws-saas-serverless-quarkus-react-nextjs", "change: list-tenant-items", "task: deploy",
             "outcome: failed", "createdAt: 2026-11-04T12:00:00Z",
         ], ["Release", "Approval", "Evidence", "Suggested next step"])
         code, out, _ = run(board, [d, "--profile", Q_PROFILE] + args)
@@ -399,7 +399,7 @@ class TestBoard(TempCase):
         self.add_review(d, "02", "changes-requested", "2026-11-04T11:00:00Z")
         self.add_record(d, "result-02-code.md", [
             "kind: report", "id: result-02-code", "from: quarkus-lambda-integrator",
-            "to: building-quarkus-aws-saas", "change: list-tenant-items", "refs: [review-02]",
+            "to: building-aws-saas-serverless-quarkus-react-nextjs", "change: list-tenant-items", "refs: [review-02]",
             "outcome: success", "spec_impact: none", "createdAt: 2026-11-04T11:30:00Z",
         ], ["Done", "Evidence", "Spec impact", "Suggested next step"])
         code, out, _ = run(board, [d, "--profile", Q_PROFILE])
@@ -420,7 +420,7 @@ class TestBoard(TempCase):
         code, out, _ = run(board, [d, "--profile", Q_PROFILE])
         self.assertIn("NEXT: escalate limit=review_rounds", out)
         self.write(os.path.join(d, "escalation-01.md"),
-                   "---\nkind: escalation\nid: escalation-01\nfrom: building-quarkus-aws-saas\n"
+                   "---\nkind: escalation\nid: escalation-01\nfrom: building-aws-saas-serverless-quarkus-react-nextjs\n"
                    "to: user\nchange: list-tenant-items\ntask: T1\nlimit: review_rounds\n"
                    "status: answered\ncreatedAt: 2026-11-04T11:10:00Z\n"
                    "answeredAt: 2026-11-04T11:20:00Z\n---\n\n## Attempts\n\n- a\n\n## Evidence\n\n- e\n\n"
@@ -439,7 +439,7 @@ class TestBoard(TempCase):
         self.assertIn("NEXT: role=reviewer", out)  # rule 2 (report success) precedes drift (rule 4)
         self.add_record(d, "spec-delta-01.md", [
             "kind: spec-delta", "id: spec-delta-01", "from: spec-synchronizer",
-            "to: building-quarkus-aws-saas", "change: list-tenant-items",
+            "to: building-aws-saas-serverless-quarkus-react-nextjs", "change: list-tenant-items",
             "refs: [result-01-code]", "status: proposed", "createdAt: 2026-11-04T12:00:00Z",
         ], ["MODIFIED Requirements", "Questions"])
         code, out, _ = run(board, [d, "--profile", Q_PROFILE])
@@ -531,7 +531,7 @@ class TestTimestamps(TempCase):
                              ("result-03-code", "2026-12-01T11:00:00Z")):
             self.add_record(d, rid + ".md", [
                 "kind: report", "id: " + rid, "from: quarkus-lambda-integrator",
-                "to: building-quarkus-aws-saas", "change: list-tenant-items",
+                "to: building-aws-saas-serverless-quarkus-react-nextjs", "change: list-tenant-items",
                 "refs: [wo-01-code]", "outcome: success", "spec_impact: none",
                 "createdAt: " + created,
             ], ["Done", "Evidence", "Spec impact", "Suggested next step"])

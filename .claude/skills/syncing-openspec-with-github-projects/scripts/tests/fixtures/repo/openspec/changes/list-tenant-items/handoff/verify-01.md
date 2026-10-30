@@ -2,7 +2,7 @@
 kind: verify
 id: verify-01
 from: spec-synchronizer
-to: building-quarkus-aws-saas
+to: building-aws-saas-serverless-quarkus-react-nextjs
 change: list-tenant-items
 stage: E1
 outcome: pass

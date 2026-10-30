@@ -1,7 +1,7 @@
 ---
 kind: work-order
 id: wo-<nn>-infra
-from: building-quarkus-aws-saas
+from: building-aws-saas-serverless-quarkus-react-nextjs
 to: aws-terraform-engineer
 change: <change-id>
 task: <task-id>
@@ -11,12 +11,20 @@ status: pending
 createdAt: <ISO 8601 UTC>
 ---
 
+## Functionality
+
+Plain sentences: what exists in AWS after this task and why the requirements need it.
+
+## Diagram
+
+The resource diagram of `changes/<id>/infra-design.md` for these resources.
+
 ## Scope
 
 Infrastructure for task <task-id>: <resources, e.g. Lambda + alias, HTTP API route, DynamoDB table,
 IAM role>. Terraform directory: `<path>`. Offline only: `terraform fmt -check`, `init -backend=false`,
 `validate` and, if wanted below, a fully mocked `terraform test`. The engineer never runs `terraform plan`,
-`apply`, `destroy` or `import`; the plan is the deployer's (E7).
+`apply`, `destroy` or `import`; the plan and apply run in the GitHub Actions pipeline (E7), except the one-time bootstrap below.
 
 ## Closed requirement (the engineer cannot ask; every line must be filled or the answer is `needs-input`)
 
@@ -38,7 +46,7 @@ IAM role>. Terraform directory: `<path>`. Offline only: `terraform fmt -check`, 
 
 ## Applicable ADRs
 
-- `openspec/specs/architecture/adr/<NNN>-<title>.md` - <service, tenancy model, secret pattern, runtime mode decided>.
+- `architecture/adr/<NNN>-<title>.md`, `infrastructure/adr/<NNN>-<title>.md` - <service, tenancy model, secret pattern, runtime mode, state backend decided>.
 
 ## Constraints
 
@@ -52,6 +60,8 @@ IAM role>. Terraform directory: `<path>`. Offline only: `terraform fmt -check`, 
 
 ## Acceptance criteria
 
+- [ ] Review by `terraform-code-reviewer` (review record with `role: infra`).
 - [ ] `terraform fmt -check`, `init -backend=false` and `terraform validate` pass (exact outputs in the result); `terraform test` passes only if wanted and fully mocked.
-- [ ] Output names the Terraform directory and the variables the deployer needs (the deployer plans in E7).
-- [ ] Result record valid (`result-<nn>-infra.md`, kind `report`, from `assets/result-code.template.md`, outcome `success|partial|failed|needs-input`; engineer status DONE -> success, PARTIAL -> partial, NEEDS-INPUT -> needs-input, failed validate -> failed) with `## Spec impact`.
+- [ ] Output names the Terraform directory and the variables the pipeline needs (the pipeline plans and applies in E7).
+- [ ] Bootstrap task only (GitHub OIDC provider, `<env>-deploy` and `<env>-pr` roles, state bucket with lock): the result lists the exact commands the USER runs once, locally (`gate=bootstrap-apply`); the agents never apply.
+- [ ] Result record valid (`result-<nn>-infra.md`, kind `report`, `role` optional (derived `infra`), from `assets/result-code.template.md`, outcome `success|partial|failed|needs-input`; engineer status DONE -> success, PARTIAL -> partial, NEEDS-INPUT -> needs-input, failed validate -> failed) with `## Spec impact`.

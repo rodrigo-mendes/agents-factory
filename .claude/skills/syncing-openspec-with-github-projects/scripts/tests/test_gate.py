@@ -131,7 +131,7 @@ class TestGateAccept(GateCase):
     def test_answer_escalation_on_its_issue(self):
         handoff = self.handoff
         with open(os.path.join(handoff, "escalation-01.md"), "w", encoding="utf-8") as fh:
-            fh.write("---\nkind: escalation\nid: escalation-01\nfrom: building-quarkus-aws-saas\nto: user\n"
+            fh.write("---\nkind: escalation\nid: escalation-01\nfrom: building-aws-saas-serverless-quarkus-react-nextjs\nto: user\n"
                      "change: list-tenant-items\nstatus: open\ncreatedAt: 2026-11-04T11:00:00Z\n---\n\n"
                      "## Options\n\n1. a\n2. b\n")
         fake_gh.run_main(sync, ["push", self.repo, "--change", fake_gh.CHANGE, "--profile",

@@ -99,7 +99,7 @@ other outcome words. Fields and required sections per kind: [record-kinds](./blu
 kind: report
 id: result-03-code              # optional; defaults to the file name
 from: quarkus-lambda-integrator
-to: building-quarkus-aws-saas   # or `user`
+to: building-aws-saas-serverless-quarkus-react-nextjs   # or `user`
 change: list-tenant-items       # `capability:` when the profile says scope_key: capability
 task: T1                        # optional; inherited through refs
 refs: [wo-03-code]              # ids that must exist

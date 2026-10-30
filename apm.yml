@@ -24,7 +24,7 @@ dependencies:
     # "ambiguous resolved_by" reason as factory-core above).
     - path: ./packages/camel-quarkus-integrator
     - path: ./packages/agent-package-builder
-    # aws-skills and oci-core are NOT listed directly: quarkus-aws-saas (via
+    # aws-skills and oci-core are NOT listed directly: aws-saas-serverless-quarkus-react-nextjs (via
     # aws-architect) and the oci-* packages depend on them, so they resolve transitively (same "ambiguous
     # resolved_by" reason as factory-core above).
     - path: ./packages/oci-functions-java
@@ -32,13 +32,15 @@ dependencies:
     - path: ./packages/oci-observability
     - path: ./packages/oci-architecture
     - path: ./packages/langchain4j
-    # quarkus-aws-saas pulls in quarkus-aws, aws-lambda, aws-observability,
+    # aws-saas-serverless-quarkus-react-nextjs pulls in quarkus-aws, aws-lambda, aws-observability,
     # handoff-core (and through them quarkus-core, aws-skills, aws-terraform),
     # plus aws-architect, terraform and stripe-java. Those three are therefore
     # NOT listed directly any more (same "ambiguous resolved_by" reason as
     # factory-core above); they still install, transitively.
-    - path: ./packages/quarkus-aws-saas
-    - path: ./packages/vercel-frontend
+    - path: ./packages/aws-saas-serverless-quarkus-react-nextjs
+    # vercel-frontend, github-actions-cicd, solution-architecture, ui-design, nextjs-frontend and
+    # quarkus-langchain4j are NOT listed directly: aws-saas-serverless-quarkus-react-nextjs depends
+    # on them, so they resolve transitively (same "ambiguous resolved_by" reason as factory-core).
 #    - git: microsoft/apm
   mcp: []
 includes: auto

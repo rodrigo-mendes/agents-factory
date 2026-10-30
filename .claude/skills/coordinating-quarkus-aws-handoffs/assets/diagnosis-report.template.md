@@ -2,10 +2,10 @@
 kind: diagnosis-report
 id: diagnosis-<nn>
 from: aws-lambda-debugger         # returned inline; the orchestrator saves it and adds `task`
-to: building-quarkus-aws-saas
+to: building-aws-saas-serverless-quarkus-react-nextjs
 change: <change-id>
-task: deploy                      # added by the orchestrator, copied from the debug work-order (deploy for an E7 diagnosis)
-refs: [result-<nn>-deploy]
+task: E7                          # added by the orchestrator, copied from the debug work-order (E7 for an E7 diagnosis)
+refs: [result-<nn>-pipeline]
 requirements: [R1]
 outcome: success                  # success = root cause found | partial | failed = not determined | needs-input
 spec_impact: none                 # none | divergence | ambiguity (set by the orchestrator when the proposed fix changes behaviour)
@@ -32,7 +32,7 @@ high | medium | low, with the reason; every `(unverified)` / `(medium confidence
 ## Fix work-order proposal
 
 - Fix required: <exact setting, line or file>
-- Owner: code | infra | deploy
+- Owner: code | ai | frontend | infra | cicd | observability
 - Reason: <branch, evidence>
 - Risk: <...>
 - Verify after: <read-only checks>

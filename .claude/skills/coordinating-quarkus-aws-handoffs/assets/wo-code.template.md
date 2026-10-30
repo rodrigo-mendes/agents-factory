@@ -1,8 +1,8 @@
 ---
 kind: work-order
 id: wo-<nn>-code
-from: building-quarkus-aws-saas
-to: quarkus-lambda-integrator    # or stripe-integrator (Stripe tasks, with the Stripe skill listed below)
+from: building-aws-saas-serverless-quarkus-react-nextjs
+to: quarkus-lambda-integrator    # back-end only; Stripe: wo-stripe; AI: wo-ai; front: wo-frontend
 change: <change-id>
 task: <task-id>                  # T1, T2 ...
 refs: []                         # for I8: [<previous wo id>, review-<nn>]
@@ -10,6 +10,14 @@ requirements: [R1]
 status: pending                  # pending | in-progress | done | blocked | cancelled
 createdAt: <ISO 8601 UTC>
 ---
+
+## Functionality
+
+Plain sentences: what the user gets from this endpoint or consumer, including the error cases.
+
+## Diagram
+
+Sequence copied from `changes/<id>/design/<flow>.md` (section 3).
 
 ## Scope
 
@@ -30,7 +38,7 @@ Load only these (see roles-and-skills.md of the profile for the choice per task 
 
 ## Applicable ADRs
 
-- `openspec/specs/architecture/adr/<NNN>-<title>.md` - <one line: what it forces or forbids>.
+- `architecture/adr/<NNN>-<title>.md`, `infrastructure/adr/<NNN>-<title>.md` (and `design/adr/...` when it applies) - <one line: what each forces or forbids>.
   Only `accepted` ADRs; a conflict with a loaded skill's Never-Do is returned as a question.
 
 ## Constraints

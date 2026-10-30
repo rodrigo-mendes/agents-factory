@@ -54,7 +54,7 @@ knowledge lives in `syncing-openspec-with-github-projects`.
   A user's own `--apply` typed in this command is itself the relayed line (the user typed it); without
   either, the agent runs the dry-run and stops.
 - With `approval_source` `github` or `both`, the token in `GH_TOKEN` must not be an approver (the script exits 1).
-- This command suits a manual refresh or another orchestrator; `building-quarkus-aws-saas` runs `push` inline.
+- This command suits a manual refresh or another orchestrator; `building-aws-saas-serverless-quarkus-react-nextjs` runs `push` inline.
 
 Examples:
 
