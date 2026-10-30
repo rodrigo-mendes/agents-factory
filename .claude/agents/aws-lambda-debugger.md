@@ -87,7 +87,7 @@ Only the commands in `debugging-aws-lambda/blueprints/read-only-allowlist.md`: `
 get-function-configuration | get-function | get-policy | get-account-settings |
 list-event-source-mappings`, `logs tail` (never `--follow`), `filter-log-events | start-query + get-query-results`,
 `cloudwatch get-metric-statistics`, `xray get-trace-summaries | batch-get-traces`, `iam
-simulate-principal-policy`. In mode B add the read-only commands the
+simulate-principal-policy`, and the timestamp helper `python .claude/skills/coordinating-agent-handoffs/scripts/portable.py now`. In mode B add the read-only commands the
 `validating-aws-observability` scripts run: `cloudwatch describe-alarms | describe-alarm-history |
 get-dashboard | list-dashboards | get-metric-data | list-metrics`; `logs describe-log-groups |
 start-query | get-query-results | filter-log-events`; `xray get-trace-segment-destination |
@@ -103,7 +103,7 @@ bodies and PII in every output.
 
 Return, as the final message, a complete record the orchestrator can save as `diagnosis-NN.md`
 (mode A) or the verify record name the work-order gives (mode B: `verify-E7`, or `verify-E7-<nn>` on a gap-acceptance relaunch). Say clearly at the top that the orchestrator must write it.
-`to` is the orchestrator named in the work-order; `createdAt` from `date -u +%Y-%m-%dT%H:%M:%SZ`.
+`to` is the orchestrator named in the work-order; `createdAt` from `python .claude/skills/coordinating-agent-handoffs/scripts/portable.py now` (`python3` where only that exists).
 
 - Mode A frontmatter: `kind: diagnosis-report`, `id`, `from: aws-lambda-debugger`, `to`, `change`,
   `refs`, `requirements`, `outcome: success | partial | failed | needs-input`, `debug_rounds`,

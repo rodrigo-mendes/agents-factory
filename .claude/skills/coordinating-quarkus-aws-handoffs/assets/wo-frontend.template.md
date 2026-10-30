@@ -54,7 +54,7 @@ Steps I0-I6 and I9 (I8 + I9 with a review). Output: code + `result-<nn>-frontend
 ## Acceptance criteria
 
 - [ ] One test per scenario, named `R<n>_<scenario>`.
-- [ ] lint, test and build green; `out/` generated; sha256 reported.
+- [ ] lint, test and build green; `out/` generated; `portable.py dirhash out` reported.
 - [ ] Only contract endpoints are called.
 - [ ] Review order: `nextjs-code-reviewer` first, `ui-design-reviewer` (visual fidelity) after the first is `approved`; both review records carry `role: frontend` (REQUIRED: it sends `changes-requested` back to `nextjs-frontend-integrator`).
 - [ ] Result record valid, with `spec_impact` and `## Spec impact`.

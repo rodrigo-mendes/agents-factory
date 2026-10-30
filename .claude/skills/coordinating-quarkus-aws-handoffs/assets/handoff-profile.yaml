@@ -69,7 +69,7 @@ quality:
 # openspec/github-tracker.yaml, written by the orchestrator at E1 only after the user confirms.
 tracker:
   kind: none
-# build_attempts counts only build-producing roles (observability mode A/C partials are not build attempts;
+# build_attempts counts only build-producing roles (observability mode C partials are not build attempts;
 # the design authors solution-architect, infrastructure-architect and designer are not counted: their loop is
 # verify fail -> orchestrator, escalated by the orchestrator after two failed verifies of the same stage).
 # deploy_cycles counts failed CD runs (role pipeline-cd) per change; a failed CI run is a fix in E6, not a cycle.
@@ -119,7 +119,7 @@ next:
   # `role` frontmatter field before deriving the role from `from`):
   # - mode C (live validation after the CD run) writes `role: observability-live`; success or partial
   #   goes to the independent verifier (`debug`, mode B), a `failed` one falls to the fallback.
-  # - mode A (E2c spec review) writes `role: observability-review`: no rule matches, fallback orchestrator.
+  # - `observability-review` (mode A) is not used in this flow: E2c review belongs to aws-architect-reviewer.
   # - mode B (Terraform, E6) carries no `role` field (role `observability`): success goes to `reviewer`
   #   (terraform-code-reviewer) in the build rule above.
   - when: {kind: report, role: observability-live, outcome: [success, partial]}

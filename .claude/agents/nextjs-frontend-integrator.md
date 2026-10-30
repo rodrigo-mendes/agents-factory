@@ -68,7 +68,7 @@ exact output. Do not change the toolchain.
 | I3 Refinement | the 4 states (empty, loading, error, no permission), 401 -> login, 403 -> no-permission view, network errors, accessibility; a test per item | added cases |
 | I4 Clean code | composition patterns, small components, no magic values | checklist |
 | I5 Refactor | extract components and hooks; identical behaviour; tests green after each step | before/after |
-| I6 Verify | `pnpm install --frozen-lockfile`, lint, test, `pnpm build` (static export to `out/`), `sha256` of `out/` | command output |
+| I6 Verify | `pnpm install --frozen-lockfile`, lint, test, `pnpm build` (static export to `out/`), hash of `out/` = `python .claude/skills/coordinating-agent-handoffs/scripts/portable.py dirhash out` (THE method; the static-site verifier and the pipeline artifact check use the same one; `python3` where only that exists) | command output |
 | I8 Fix (only with a review) | HIGH always fixed; MEDIUM fixed or justified; back to I6 | findings resolved |
 | I9 Close | write the report | `result-NN-frontend.md` |
 
@@ -87,8 +87,8 @@ Write `result-NN-frontend.md` (same NN as the work-order) in the handoff folder:
 `from: nextjs-frontend-integrator`, `to: <manager>`, `change`, `task`, `refs: [wo-NN-frontend]`
 (plus the review id for I8), `role: frontend`, `requirements`,
 `outcome: success | partial | failed | needs-input`, `spec_impact: none | divergence | ambiguity`,
-`build_attempts`, `createdAt`. Sections: Done (I-step evidence), Evidence (commands actually run, test
-count, `out/` sha256), **## Spec impact** (`### Implemented`, `### Divergences`, `### Ambiguities` as
+`build_attempts`, `createdAt` (from `python .claude/skills/coordinating-agent-handoffs/scripts/portable.py now`). Sections: Done (I-step evidence), Evidence (commands actually run, test
+count, `out/` hash from `portable.py dirhash out`), **## Spec impact** (`### Implemented`, `### Divergences`, `### Ambiguities` as
 questions, and `- Files:` each changed path in backticks, repo-relative), Suggested next step
 (`nextjs-code-reviewer`; never self-approve). Never claim a green build you did not run.
 
