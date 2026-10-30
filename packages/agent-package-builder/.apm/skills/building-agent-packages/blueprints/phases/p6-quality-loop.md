@@ -2,7 +2,7 @@
 
 Back to [SKILL.md](../../SKILL.md). Rules: [triage and stop](../policy/triage-and-stop-rules.md).
 
-Before round 1: `apm install --target claude` + the two post-install scripts so the audit sees the generated `.claude/`.
+Before round 1: `apm install --target claude` + `scripts/after_install.py --package <pkg>` so the audit sees the generated `.claude/`.
 
 Round k:
 1. VALIDATE skills (groups <= 5) and the package.
