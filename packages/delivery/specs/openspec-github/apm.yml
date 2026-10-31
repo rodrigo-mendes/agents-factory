@@ -1,0 +1,15 @@
+name: agents-factory-openspec-github
+version: 1.0.0
+description: >-
+  Bridge that mirrors OpenSpec changes, tasks, ADRs, escalations and spec-deltas into a GitHub Project (v2) while git stays canonical; gate approvals by issue comment validated by a GitHub Actions workflow (App for organization projects, classic PAT for user projects). Skill syncing-openspec-with-github-projects (scripts + 4 workflow templates), the openspec-github-syncer agent, the /syncing-openspec-to-github command and one scoped rule.
+author: rodrigo-mendes
+license: MIT
+dependencies:
+  apm:
+    - path: ../../../factory/factory-core
+    - path: ../openspec-core
+    - path: ../../protocol/handoff-core
+    - path: ../../github/github-core
+  mcp: []
+includes: auto
+scripts: {}

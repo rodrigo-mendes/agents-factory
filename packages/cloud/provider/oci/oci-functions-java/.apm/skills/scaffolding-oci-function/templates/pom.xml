@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>{{groupId}}</groupId>
+    <artifactId>{{function-name}}</artifactId>
+    <version>1.0.0</version>
+    <packaging>jar</packaging>
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <fdk.version>1.1.11</fdk.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- OCI SDK BOM — manages ALL SDK module versions -->
+            <dependency>
+                <groupId>com.oracle.oci.sdk</groupId>
+                <artifactId>oci-java-sdk-bom</artifactId>
+                <version>3.86.1</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <!-- FDK Core -->
+        <dependency>
+            <groupId>com.fnproject.fn</groupId>
+            <artifactId>api</artifactId>
+            <version>${fdk.version}</version>
+        </dependency>
+
+        <!-- FDK Events (APIGatewayFunction typed abstractions) -->
+        <dependency>
+            <groupId>com.fnproject.fn</groupId>
+            <artifactId>fn-events</artifactId>
+            <version>${fdk.version}</version>
+        </dependency>
+
+        <!-- JSON Processing -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.17.2</version>
+        </dependency>
+
+        <!-- ================================================================
+             OCI SDK Dependencies (uncomment as needed)
+             ================================================================ -->
+
+        <!-- OCI SDK HTTP Client Provider (MANDATORY if using ANY OCI SDK module) -->
+        <!-- Without this: "NoSuchElementException: No http provider available" -->
+        <!--
+        <dependency>
+            <groupId>com.oracle.oci.sdk</groupId>
+            <artifactId>oci-java-sdk-common-httpclient-jersey</artifactId>
+        </dependency>
+        -->
+
+        <!-- OCI SDK Common (Resource Principal auth, base client) -->
+        <!--
+        <dependency>
+            <groupId>com.oracle.oci.sdk</groupId>
+            <artifactId>oci-java-sdk-common</artifactId>
+        </dependency>
+        -->
+
+        <!-- OCI Vault/Secrets (for credential retrieval) -->
+        <!--
+        <dependency>
+            <groupId>com.oracle.oci.sdk</groupId>
+            <artifactId>oci-java-sdk-vault</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.oracle.oci.sdk</groupId>
+            <artifactId>oci-java-sdk-secrets</artifactId>
+        </dependency>
+        -->
+
+        <!-- OCI Object Storage -->
+        <!--
+        <dependency>
+            <groupId>com.oracle.oci.sdk</groupId>
+            <artifactId>oci-java-sdk-objectstorage</artifactId>
+        </dependency>
+        -->
+
+        <!-- ================================================================
+             Test Dependencies
+             ================================================================ -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.2</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>5.12.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.fnproject.fn</groupId>
+            <artifactId>testing-core</artifactId>
+            <version>${fdk.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.fnproject.fn</groupId>
+            <artifactId>fn-events-testing</artifactId>
+            <version>${fdk.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
+                <configuration>
+                    <source>17</source>
+                    <target>17</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.2.5</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>3.6.1</version>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>package</phase>
+                        <goals><goal>copy-dependencies</goal></goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/dependency</outputDirectory>
+                            <includeScope>runtime</includeScope>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <repositories>
+        <repository>
+            <id>fn-release</id>
+            <url>https://dl.bintray.com/fnproject/fnproject</url>
+            <releases><enabled>true</enabled></releases>
+            <snapshots><enabled>false</enabled></snapshots>
+        </repository>
+    </repositories>
+</project>

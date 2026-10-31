@@ -1,0 +1,13 @@
+name: agents-factory-quarkus-langchain4j
+version: 1.0.0
+description: >-
+  LangChain4j on Quarkus 3.40 Lambda: the version-locked skill integrating-quarkus-langchain4j-v1-15 (quarkus-langchain4j 1.15.0.CR1, a pre-release) and the read-only langchain4j-reviewer agent for AI service code (OpenAI, Anthropic, Bedrock).
+author: rodrigo-mendes
+license: MIT
+dependencies:
+  apm:
+    - path: ../../../factory/factory-core
+    - path: ../quarkus-aws
+  mcp: []
+includes: auto
+scripts: {}

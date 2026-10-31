@@ -1,0 +1,16 @@
+name: agents-factory-quarkus-core
+version: 1.0.0
+description: >-
+  Base Quarkus 3.40 LTS knowledge skills shared by every Quarkus package (ArC/CDI, Quarkus REST
+  and REST client, Quarkus JUnit testing). Depended on by camel-quarkus-skills (Quarkus + Camel)
+  and quarkus-aws (Quarkus + AWS). refactoring-quarkus-java and the quarkus-clean-code rule come
+  from java/clean-code/clean-code-quarkus.
+author: rodrigo-mendes
+license: MIT
+dependencies:
+  apm:
+    - path: ../../../factory/factory-core
+    - path: ../../clean-code/clean-code-quarkus
+  mcp: []
+includes: auto
+scripts: {}

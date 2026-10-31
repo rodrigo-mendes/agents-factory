@@ -1,0 +1,15 @@
+name: agents-factory-quarkus-aws
+version: 1.0.0
+description: >-
+  Quarkus 3.40 LTS on AWS Lambda (reusable): 9 version-locked knowledge skills (runtime, HTTP, Cognito security, DynamoDB/S3, messaging/config, testing, logging, tracing, metrics), an observability umbrella, a project-structure skill, the quarkus-lambda-integrator executor and the read-only quarkus-code-reviewer, plus 2 scoped rules.
+author: rodrigo-mendes
+license: MIT
+dependencies:
+  apm:
+    - path: ../../../factory/factory-core
+    - path: ../quarkus-core
+    - path: ../../../delivery/protocol/handoff-core
+    - path: ../../../cloud/provider/aws/aws-skills
+  mcp: []
+includes: auto
+scripts: {}

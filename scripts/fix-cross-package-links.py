@@ -4,10 +4,10 @@ Defensive fixup for markdown links that APM's install-time link resolution
 can rewrite into apm_modules/ paths.
 
 Root cause found and fixed (2026-09-25): this repo's root apm.yml originally
-declared a DIRECT dependency on packages/factory-core and packages/research-
+declared a DIRECT dependency on packages/factory/factory-core and packages/research-
 core *as well as* every package that already depended on them transitively
 (e.g. researching-frameworks -> ../factory-core). APM resolved the same
-physical package via two different textual paths (./packages/factory-core
+physical package via two different textual paths (./packages/factory/factory-core
 from root vs ../factory-core from a sibling), and `apm audit --ci` correctly
 rejected this as "ambiguous resolved_by". As a side effect, the ambiguity
 also confused APM's markdown-link rewriting: within-package links (e.g. an
@@ -26,12 +26,12 @@ reintroduces an ambiguous dependency graph (a new package added twice, a
 path typo, etc.), this catches the resulting link corruption without anyone
 needing to re-diagnose it. It should print "0 link(s) fixed" in the normal
 case; if it ever prints more than that, treat it as a signal to re-check the
-dependency graph in apm.yml and every packages/*/apm.yml for a duplicate
+dependency graph in apm.yml and every packages/**/apm.yml for a duplicate
 path to the same package.
 
 Wired up as a `lifecycle: post-install:` command in the root apm.yml
-(after restore-rule-metadata.py) and explicitly in CI (see
-.github/workflows/apm.yml) since lifecycle did not auto-fire in testing.
+(after restore-rule-metadata.py); run it by hand after every `apm install` since lifecycle did not
+auto-fire in testing (there is no CI that runs it).
 """
 import os
 import re
@@ -39,7 +39,9 @@ import sys
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
-CLAUDE_DIR = REPO_ROOT / ".claude"
+# `--root <dir>` fixes <dir>/.claude (e.g. an export sandbox); default: this repo
+ROOT = Path(sys.argv[sys.argv.index("--root") + 1]).resolve() if "--root" in sys.argv else REPO_ROOT
+CLAUDE_DIR = ROOT / ".claude"
 
 # Matches: apm_modules/_local/<pkg-or-hash>[/<pkg>]/.apm/(agents|skills|instructions)/<rest>
 # (CLI >= 0.35 nests a hash directory before the package directory)
@@ -98,7 +100,7 @@ def main() -> int:
         if n:
             total_files += 1
             total_fixes += n
-            print(f"[fix-cross-package-links] fixed {n} link(s) in {f.relative_to(REPO_ROOT)}")
+            print(f"[fix-cross-package-links] fixed {n} link(s) in {f.relative_to(ROOT)}")
 
     print(f"[fix-cross-package-links] done -- {total_fixes} link(s) fixed across {total_files} file(s)")
     return 0

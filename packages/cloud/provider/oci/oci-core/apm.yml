@@ -1,0 +1,15 @@
+name: agents-factory-oci-core
+version: 1.0.0
+description: >-
+  Shared core for the OCI agent family: the cross-agent handoff protocol (coordinating-oci-handoffs)
+  and its report templates, migrated from the poc-oci-serverless project. Depended on by the OCI
+  domain packages (oci-functions-java, oci-terraform, oci-observability, oci-architecture).
+author: rodrigo-mendes
+license: MIT
+dependencies:
+  apm:
+    - path: ../../../../factory/factory-core
+    - path: ../../../../delivery/protocol/handoff-core
+  mcp: []
+includes: auto
+scripts: {}

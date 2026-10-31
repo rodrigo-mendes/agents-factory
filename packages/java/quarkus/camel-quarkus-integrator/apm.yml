@@ -1,0 +1,13 @@
+name: agents-factory-camel-quarkus-integrator
+version: 1.0.0
+description: >-
+  camel-quarkus-integrator non-interactive subagent, 3 scoped rules and the inline orchestrator skills for implementing closed integration requirements in Camel Quarkus 3.40 LTS projects.
+author: rodrigo-mendes
+license: MIT
+dependencies:
+  apm:
+    - path: ../../../factory/factory-core
+    - path: ../camel-quarkus-skills
+  mcp: []
+includes: auto
+scripts: {}
