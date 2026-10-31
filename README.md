@@ -11,7 +11,7 @@ pré-migração foi retirado (ver `.claude/MIGRATION.md`); `audit-architecture-*
 
 O Agents Factory é uma fábrica de artefatos de IA que oferece:
 
-- **256 Skills** (Claude Code) — 68 comandos (`/nome`) e 188 skills de conhecimento (auto-invocáveis), vindas de 38 pacotes APM (ver [Catálogo de pacotes](#catálogo-de-pacotes)). Pesquisa, autoria de skills/agentes/rules, compilação, validação e auditoria — inclui a **família platform-software** (15: orquestradora + 14 irmãs para Kafka, Redis, MongoDB, Postgres…), o **pipeline de livros técnicos** (`book-writing`), os pacotes **Camel Quarkus**, **AWS** (arquitetura + Terraform), **OCI** serverless, **Stripe Java**, **LangChain4j**, o conjunto **Quarkus na AWS Lambda para SaaS** (orquestrador `building-aws-saas-serverless-quarkus-react-nextjs`, handoff genérico, deploy, observabilidade) e o **orquestrador de pacotes** `building-agent-packages`
+- **256 Skills** (Claude Code) — 68 comandos (`/nome`) e 188 skills de conhecimento (auto-invocáveis), vindas de 40 pacotes APM (ver [Catálogo de pacotes](#catálogo-de-pacotes)). Pesquisa, autoria de skills/agentes/rules, compilação, validação e auditoria — inclui a **família platform-software** (15: orquestradora + 14 irmãs para Kafka, Redis, MongoDB, Postgres…), o **pipeline de livros técnicos** (`book-writing`), os pacotes **Camel Quarkus**, **AWS** (arquitetura + Terraform), **OCI** serverless, **Stripe Java**, **LangChain4j**, o conjunto **Quarkus na AWS Lambda para SaaS** (orquestrador `building-aws-saas-serverless-quarkus-react-nextjs`, handoff genérico, deploy, observabilidade) e o **orquestrador de pacotes** `building-agent-packages`
 - **41 subagentes** e **50 rules** escopadas por caminho (`paths:`)
 - **Ficheiros de `assets/`** nas skills que os possuem (`skill-creator`, `agent-creator`, `rules-compiler`, `terraform-instructions-compiler`, `structuring-camel-quarkus-projects`) — não existe mais `.claude/templates/`
 - **4 Fluxos Combinados** — Pipelines de ponta-a-ponta
@@ -56,36 +56,38 @@ Contagens reais (`verify_package.py`); a soma bate com `.claude/` (246 skills, 4
 | `factory-core` | 0 | 0 | 5 | Rules de frontmatter e naming da fábrica |
 | `research-core` | 0 | 3 | 0 | framework-researcher + 2 helpers internos |
 | `researching-frameworks` | 5 | 0 | 0 | Comandos de pesquisa anti-alucinação (frameworks, cloud, metodologia, domínio) |
-| [`researching-platform`](packages/researching-platform/README.md) | 15 | 0 | 0 | Família platform-software (datastores, brokers, gateways) |
+| [`researching-platform`](packages/factory/researching-platform/README.md) | 15 | 0 | 0 | Família platform-software (datastores, brokers, gateways) |
 | `artifact-authoring` | 5 | 1 | 0 | artifact-author + skill/agent/rule authoring |
 | `auditing` | 8 | 1 | 0 | architecture-auditor + auditorias Copilot e Claude Code |
 | `validating` | 5 | 1 | 0 | quality-validator + validações |
 | `evaluating` | 1 | 1 | 0 | skill-evaluator (LLM-as-judge) |
-| [`agent-package-builder`](packages/agent-package-builder/README.md) | 1 | 0 | 0 | `building-agent-packages`: pesquisa → skills → agente/rules → loop de qualidade → commits |
-| [`book-writing`](packages/book-writing/README.md) | 10 | 13 | 0 | Pipeline de livros técnicos (EPUB 3.0) |
-| `quarkus-core` | 4 | 0 | 1 | Base Quarkus 3.40 LTS (ArC, REST, JUnit) + `refactoring-quarkus-java` + regra de clean code |
-| [`camel-quarkus-skills`](packages/camel-quarkus-integrator/README.md) | 10 | 0 | 0 | Camel Quarkus 3.40 LTS, uma skill por extensão (depende de `quarkus-core`) |
-| [`camel-quarkus-integrator`](packages/camel-quarkus-integrator/README.md) | 2 | 1 | 3 | Orquestradora + executor camel-quarkus-integrator |
+| [`agent-package-builder`](packages/factory/agent-package-builder/README.md) | 1 | 0 | 0 | `building-agent-packages`: pesquisa → skills → agente/rules → loop de qualidade → commits |
+| [`book-writing`](packages/content-generation/book-writing/README.md) | 10 | 13 | 0 | Pipeline de livros técnicos (EPUB 3.0) |
+| `quarkus-core` | 3 | 0 | 0 | Base Quarkus 3.40 LTS (ArC, REST, JUnit); depende de `clean-code-quarkus` |
+| [`clean-code-quarkus`](packages/java/clean-code/README.md) | 1 | 0 | 1 | `refactoring-quarkus-java` + regra `quarkus-clean-code` |
+| [`clean-code-oci`](packages/java/clean-code/README.md) | 1 | 0 | 1 | `refactoring-oci-java` + regra `java-functions-clean-code` |
+| [`camel-quarkus-skills`](packages/java/quarkus/camel-quarkus-integrator/README.md) | 10 | 0 | 0 | Camel Quarkus 3.40 LTS, uma skill por extensão (depende de `quarkus-core`) |
+| [`camel-quarkus-integrator`](packages/java/quarkus/camel-quarkus-integrator/README.md) | 2 | 1 | 3 | Orquestradora + executor camel-quarkus-integrator |
 | `terraform` | 5 | 2 | 0 | Pesquisa Terraform, terraform-rules-author, aws-terraform-engineer |
-| [`aws-terraform`](packages/aws-terraform/README.md) | 26 | 0 | 3 | `provisioning-aws-<serviço>-v6` (hashicorp/aws 6.x) |
-| [`aws-skills`](packages/aws-skills/README.md) | 40 | 0 | 0 | Arquitetura AWS (Well-Architected, serviços) |
-| [`aws-architect`](packages/aws-architect/README.md) | 1 | 1 | 2 | Agente consultivo aws-architect + guardrails |
-| [`oci-core`](packages/oci-core/README.md) | 1 | 0 | 0 | Perfil OCI do protocolo de handoff genérico (`handoff-core`) |
-| [`oci-functions-java`](packages/oci-functions-java/README.md) | 14 | 3 | 17 | OCI Functions Java (FDK 1.1.x, Java 17) |
-| [`oci-terraform`](packages/oci-terraform/README.md) | 20 | 1 | 8 | Terraform OCI (oracle/oci) |
-| [`oci-observability`](packages/oci-observability/README.md) | 10 | 1 | 1 | APM, Logging, alarmes, Connector Hub, dashboards |
-| [`oci-architecture`](packages/oci-architecture/README.md) | 8 | 2 | 2 | Arquitetura serverless OCI |
-| [`stripe-java`](packages/stripe-java/README.md) | 6 | 2 | 1 | Stripe Java 34.x (advisor + integrator) |
-| [`langchain4j`](packages/langchain4j/README.md) | 3 | 1 | 2 | LangChain4j 1.22.0 chat + streaming com OpenAI e Anthropic |
-| [`handoff-core`](packages/handoff-core/README.md) | 3 | 1 | 0 | Protocolo de handoff genérico v1 + scripts, OpenSpec, `spec-synchronizer`, `/syncing-spec-from-code` |
-| [`quarkus-aws`](packages/quarkus-aws/README.md) | 11 | 2 | 2 | Quarkus 3.40 na AWS Lambda (HTTP, Cognito, dados, mensageria, testes, logs, traces, métricas) + integrador e revisor |
-| [`aws-lambda`](packages/aws-lambda/README.md) | 2 | 2 | 1 | Deploy (só com plan aprovado) e diagnóstico de Lambda, qualquer runtime |
-| [`aws-observability`](packages/aws-observability/README.md) | 2 | 1 | 1 | Agente `aws-observability`, `/observe-aws-workload`, validação ao vivo (só leitura) |
-| [`aws-saas-serverless-quarkus-react-nextjs`](packages/aws-saas-serverless-quarkus-react-nextjs/README.md) | 3 | 0 | 0 | Orquestrador (gestor do projeto) `building-aws-saas-serverless-quarkus-react-nextjs`, perfil de handoff e Stripe; reúne back Quarkus, front Next.js, design, IA e CI/CD |
-| [`solution-architecture`](packages/solution-architecture/README.md) | 0 | 2 | 0 | `solution-architect` (opus) e `solution-architecture-reviewer` |
-| [`ui-design`](packages/ui-design/README.md) | 0 | 2 | 0 | `ui-ux-designer` e `ui-design-reviewer` |
-| [`nextjs-frontend`](packages/nextjs-frontend/README.md) | 0 | 2 | 1 | Integrador e revisor de front Next.js (static export) e a regra `nextjs-static-export` |
-| [`quarkus-langchain4j`](packages/quarkus-langchain4j/README.md) | 1 | 1 | 0 | `integrating-quarkus-langchain4j-v1-15` e `langchain4j-reviewer` |
+| [`aws-terraform`](packages/cloud/terraform/aws-terraform/README.md) | 26 | 0 | 3 | `provisioning-aws-<serviço>-v6` (hashicorp/aws 6.x) |
+| [`aws-skills`](packages/cloud/provider/aws/aws-skills/README.md) | 40 | 0 | 0 | Arquitetura AWS (Well-Architected, serviços) |
+| [`aws-architect`](packages/cloud/provider/aws/aws-architect/README.md) | 1 | 1 | 2 | Agente consultivo aws-architect + guardrails |
+| [`oci-core`](packages/cloud/provider/oci/oci-core/README.md) | 1 | 0 | 0 | Perfil OCI do protocolo de handoff genérico (`handoff-core`) |
+| [`oci-functions-java`](packages/cloud/provider/oci/oci-functions-java/README.md) | 13 | 3 | 16 | OCI Functions Java (FDK 1.1.x, Java 17) |
+| [`oci-terraform`](packages/cloud/terraform/oci-terraform/README.md) | 20 | 1 | 8 | Terraform OCI (oracle/oci) |
+| [`oci-observability`](packages/cloud/provider/oci/oci-observability/README.md) | 10 | 1 | 1 | APM, Logging, alarmes, Connector Hub, dashboards |
+| [`oci-architecture`](packages/cloud/provider/oci/oci-architecture/README.md) | 8 | 2 | 2 | Arquitetura serverless OCI |
+| [`stripe-java`](packages/java/libs/stripe-java/README.md) | 6 | 2 | 1 | Stripe Java 34.x (advisor + integrator) |
+| [`langchain4j`](packages/java/libs/langchain4j/README.md) | 3 | 1 | 2 | LangChain4j 1.22.0 chat + streaming com OpenAI e Anthropic |
+| [`handoff-core`](packages/delivery/protocol/handoff-core/README.md) | 3 | 1 | 0 | Protocolo de handoff genérico v1 + scripts, OpenSpec, `spec-synchronizer`, `/syncing-spec-from-code` |
+| [`quarkus-aws`](packages/java/quarkus/quarkus-aws/README.md) | 11 | 2 | 2 | Quarkus 3.40 na AWS Lambda (HTTP, Cognito, dados, mensageria, testes, logs, traces, métricas) + integrador e revisor |
+| [`aws-lambda`](packages/cloud/provider/aws/aws-lambda/README.md) | 2 | 2 | 1 | Deploy (só com plan aprovado) e diagnóstico de Lambda, qualquer runtime |
+| [`aws-observability`](packages/cloud/provider/aws/aws-observability/README.md) | 2 | 1 | 1 | Agente `aws-observability`, `/observe-aws-workload`, validação ao vivo (só leitura) |
+| [`aws-saas-serverless-quarkus-react-nextjs`](packages/saas/aws-saas-serverless-quarkus-react-nextjs/README.md) | 3 | 0 | 0 | Orquestrador (gestor do projeto) `building-aws-saas-serverless-quarkus-react-nextjs`, perfil de handoff e Stripe; reúne back Quarkus, front Next.js, design, IA e CI/CD |
+| [`solution-architecture`](packages/architecture/solution-architecture/README.md) | 0 | 2 | 0 | `solution-architect` (opus) e `solution-architecture-reviewer` |
+| [`ui-design`](packages/frontend/react/ui-design/README.md) | 0 | 2 | 0 | `ui-ux-designer` e `ui-design-reviewer` |
+| [`nextjs-frontend`](packages/frontend/react/nextjs-frontend/README.md) | 0 | 2 | 1 | Integrador e revisor de front Next.js (static export) e a regra `nextjs-static-export` |
+| [`quarkus-langchain4j`](packages/java/quarkus/quarkus-langchain4j/README.md) | 1 | 1 | 0 | `integrating-quarkus-langchain4j-v1-15` e `langchain4j-reviewer` |
 
 ## Documentação
 

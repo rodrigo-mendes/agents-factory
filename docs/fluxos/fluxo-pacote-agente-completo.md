@@ -1,7 +1,7 @@
 # Flow: Complete Agent Package
 
 End-to-end orchestration from a brief to a committed APM package (skills + agent + rules), driven by
-the inline skill [`building-agent-packages`](../../packages/agent-package-builder/README.md).
+the inline skill [`building-agent-packages`](../../packages/factory/agent-package-builder/README.md).
 
 ---
 

@@ -1,0 +1,14 @@
+name: agents-factory-bundle-cloud-observability
+version: 1.0.0
+description: >-
+  Cloud Observability: logs, metrics, traces, alarms and dashboards for AWS Lambda and OCI
+  Functions, with read-only live validation scripts.
+author: rodrigo-mendes
+license: MIT
+dependencies:
+  apm:
+    - path: ../../cloud/provider/aws/aws-observability
+    - path: ../../cloud/provider/oci/oci-observability
+  mcp: []
+includes: auto
+scripts: {}

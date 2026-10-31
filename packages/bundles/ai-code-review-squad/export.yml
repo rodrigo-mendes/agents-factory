@@ -1,0 +1,23 @@
+# Read only by scripts/export-bundle.py (APM ignores this file).
+# apm.yml says what to INSTALL (whole packages); this file says what of that install goes into the
+# package that is sold. Fields: agents / skills / rules = list of names, `cited` or `all`
+# (default `all`); include / exclude = paths relative to the target dir (skills/x, agents/y.md, rules/z.md),
+# `*` wildcards allowed.
+agents:
+  - quarkus-code-reviewer
+  - langchain4j-reviewer
+  - terraform-code-reviewer
+  - cicd-pipeline-reviewer
+  - stripe-advisor
+skills: cited   # only skills named in backticks in the agents above
+rules: cited    # only rules named in backticks in the agents above
+include:
+  # cited by family, not by name: terraform-code-reviewer checks "every provisioning-aws-<service>-v6
+  # skill" of the work-order; stripe-advisor reviews "against the four stripe-java v34 skills"
+  - skills/provisioning-aws-*-v6
+  - skills/*stripe*-v34
+exclude:
+  # the SaaS orchestrator and its handoff profile are cited for context only; the reviewers work
+  # without them when given files to review directly
+  - skills/building-aws-saas-serverless-quarkus-react-nextjs
+  - skills/coordinating-quarkus-aws-handoffs

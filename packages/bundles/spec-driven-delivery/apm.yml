@@ -1,0 +1,13 @@
+name: agents-factory-bundle-spec-driven-delivery
+version: 1.0.0
+description: >-
+  Spec-Driven Delivery: OpenSpec 1.15, the file-based agent handoff protocol and the OpenSpec to
+  GitHub Projects bridge.
+author: rodrigo-mendes
+license: MIT
+dependencies:
+  apm:
+    - path: ../../delivery/specs/openspec-github
+  mcp: []
+includes: auto
+scripts: {}

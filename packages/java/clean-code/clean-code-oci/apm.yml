@@ -1,0 +1,14 @@
+name: agents-factory-clean-code-oci
+version: 1.0.0
+description: >-
+  Clean code for OCI Functions Java (FDK): the behaviour-preserving refactoring skill refactoring-oci-java
+  and the java-functions-clean-code rule. Depended on by oci-functions-java, so installing it still
+  brings both.
+author: rodrigo-mendes
+license: MIT
+dependencies:
+  apm:
+    - path: ../../../factory/factory-core
+  mcp: []
+includes: auto
+scripts: {}
