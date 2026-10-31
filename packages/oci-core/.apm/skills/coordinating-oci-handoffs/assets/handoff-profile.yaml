@@ -1,0 +1,54 @@
+# OCI family profile for coordinating-agent-handoffs (protocol v1).
+# Format: coordinating-agent-handoffs/blueprints/profile-format.md
+# User-mediated: the agent ends with one "Hand off: run /cmd" line; board.py's NEXT line is advisory.
+# Record file names never start with "report" (subagent write guard): result-*.md; kind stays `report`.
+profile: oci
+protocol: coordinating-agent-handoffs
+protocol_version: 1
+mode: user-mediated
+root: "docs/handoff/{capability}"
+scope_key: capability
+fallback: none
+spec:
+  kind: none
+roles:
+  architect: oci-serverless-architect
+  stack: oci-serverless-stack
+  java: oci-functions-java
+  terraform: oci-terraform
+  deployer: oci-deployer
+  debugger: oci-debugger
+  observability: oci-observability
+records:
+  work-order: "stream-{stream}.md"
+  # Patterns are guidance, not enforced. Role terraform has two files (result-terraform-infra.md,
+  # result-terraform-integration.md), so "result-{role}.md" does not match them literally; role
+  # observability writes result-observability.md (its own file; O16).
+  report: "result-{role}.md"
+  deploy-report: "deploy-report.md"
+  diagnosis-report: "diagnosis-report.md"
+kind_overrides:
+  deploy-report.md: deploy-report
+  diagnosis-report.md: diagnosis-report
+values:
+  work-order:
+    status: [pending, in-progress, completed]
+required_sections:
+  work-order: [Scope, Components, Constraints, Dependencies, Acceptance Criteria]
+  report: [What changed, Validation, Acceptance status, Next action]
+  deploy-report: [What changed, Validation, Next action]
+  diagnosis-report: [Root cause, Evidence, Exact fix, Next action]
+limits:
+  build_attempts: 3
+  deploy_cycles: 2
+next:
+  - when: {limit_reached: any}
+    then: escalate
+  - when: {kind: report, role: [java, terraform], outcome: success}
+    then: deployer
+  - when: {kind: deploy-report, outcome: failed}
+    then: debugger
+  - when: {kind: deploy-report, outcome: success}
+    then: final-gate
+  - when: {kind: diagnosis-report}
+    then: deployer

@@ -1,0 +1,17 @@
+# Line endings: LF everywhere, in the index and in the working tree, whatever core.autocrlf says.
+# Why: with autocrlf=true, Windows checkouts got CRLF while apm deployed LF copies, so APM saw
+# CRLF-only differences as "modified since deployment" and refused to update them.
+* text=auto eol=lf
+
+# Binary files are never converted.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+*.zip binary
+*.epub binary
+*.jar binary
+*.woff binary
+*.woff2 binary

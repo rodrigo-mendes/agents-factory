@@ -61,21 +61,21 @@ Java worked examples from `libs/obs-commons/` (path-cited) are embedded in:
 
 ## Validation scripts
 
-`validating-oci-observability/scripts/` contains 10 scripts:
+`validating-oci-observability/scripts/` contains 10 Python 3 scripts (standard library only, no `jq`; offline tests: `python scripts/tests/run_tests.py`):
 
 | Script | Purpose |
 |---|---|
-| `validate-observability.sh` | Orchestrator — 4-pillar post-deploy gate |
-| `generate-dashboard-traffic.sh` | Dashboard precondition — generates load before `check-dashboards.sh` |
-| `check-logs.sh` | Logs pillar |
-| `check-metrics.sh` | Metrics pillar |
-| `check-traces.sh` | APM traces pillar |
-| `check-alarms.sh` | Alarms + notification pillar |
-| `check-dashboards.sh` | Dashboard render-readiness (5th pillar) |
-| `trigger-alarm-test.sh` | End-to-end alarm→FIRING→email proof |
-| `smoke-invoke.sh` | Traffic generator |
-| `deploy-and-validate.sh` | Full runbook (build + push + apply + validate) |
-| `lib-common.sh` | Shared config library (source only — do not execute directly) |
+| `validate-observability.py` | Orchestrator — 4-pillar post-deploy gate |
+| `generate-dashboard-traffic.py` | Dashboard precondition — generates load before `check-dashboards.py` |
+| `check-logs.py` | Logs pillar |
+| `check-metrics.py` | Metrics pillar |
+| `check-traces.py` | APM traces pillar |
+| `check-alarms.py` | Alarms + notification pillar |
+| `check-dashboards.py` | Dashboard render-readiness (5th pillar) |
+| `trigger-alarm-test.py` | End-to-end alarm→FIRING→email proof |
+| `smoke-invoke.py` | Traffic generator |
+| `deploy-and-validate.py` | Full runbook (build + push + apply + validate) |
+| `lib_common.py` | Shared config module (imported by the others — do not execute directly) |
 
 All scripts are parametrized via environment variables. No hardcoded OCIDs, tenancy IDs, or profile names.
 

@@ -163,7 +163,7 @@ aws ec2 describe-security-groups \
 ## Blueprints Directory Structure
 
 ```
-workspace/.claude/skills/architecting-aws-security-pillar/
+.claude/skills/architecting-aws-security-pillar/
 ├── SKILL.md                              ← This file (summary + guardrails)
 └── blueprints/
     ├── always-do-patterns.md             ← SEC-AD-1 through SEC-AD-8 with full detail

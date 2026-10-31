@@ -248,7 +248,7 @@ CloudWatchLogsRoleArn=<delivery-role-arn>
 ## Blueprints Directory Structure
 
 ```
-workspace/.claude/skills/architecting-cloudtrail-audit-logging/
+.claude/skills/architecting-cloudtrail-audit-logging/
 ├── SKILL.md                              <- This file (guardrails + summary)
 └── blueprints/
     ├── always-do-patterns.md             <- M1-M7 with full config/CLI details

@@ -38,7 +38,8 @@ A default may be offered only if a skill names it; never invent one.
 
 ### Step 2 — Load the core skill first
 
-Read `packages/stripe-java/.apm/skills/developing-stripe-java-core-v34/SKILL.md`.
+Read `.claude/skills/developing-stripe-java-core-v34/SKILL.md` (installed path; only in the
+factory repository, if it is absent there, the source is `packages/stripe-java/.apm/skills/developing-stripe-java-core-v34/SKILL.md`).
 This skill owns: `StripeClient` construction, idempotency key rules, error handling, API-version
 pinning, and the ≤33.x-vs-34.x distinction. Do not re-derive these facts.
 
@@ -54,11 +55,16 @@ Load only the skills the requirement touches:
 
 Read the skill's `SKILL.md`; follow blueprint links on demand. Do not maintain a second mapping.
 
+If the work-order explicitly lists additional skills (for example `integrating-stripe-quarkus-v3-40` for a Quarkus on AWS Lambda project), load those too and treat their rules with the same priority as the skills above.
+
 ### Step 4 — Load family rules
 
-Read `workspace/stripe-java/_family_rules_v34.md`. These seven numbered rules span multiple
-skills; they are the cross-cutting enforcement layer. Check every generated code artefact
-against R01–R07 before reporting.
+Read `.claude/skills/integrate-stripe-java/references/family-rules-v34.md` (installed path; in the factory source
+`packages/stripe-java/.apm/skills/integrate-stripe-java/references/family-rules-v34.md`). These seven
+numbered rules span multiple skills; they are the cross-cutting enforcement layer. If it cannot be
+read, rely on the loaded skills' own Always-Do/Never-Do rules,
+which carry the same R01–R07 content. Check every generated code artefact against R01–R07 before
+reporting.
 
 ### Step 5 — Inspect the project
 
@@ -74,9 +80,9 @@ For an ⚠️ Ask-First decision the requirement does not settle: return it as a
 (Step 1) unless the skill names a default (the only allowed default; never invent one).
 
 Enforce all family rules:
-- **R01:** Every POST call carries a `RequestOptions` with a UUID v4 idempotency key.
+- **R01:** Every POST call carries a `RequestOptions` with an idempotency key: a business-derived key, persisted and reused on every attempt; a UUID v4 only when no business key exists.
 - **R02:** Signature verification is the first statement in every webhook handler.
-- **R03:** Webhook handlers dedupe on `event.getId()` and return 2xx before async processing.
+- **R03:** Dedupe on `event.getId()` in the handler or in the consumer the handler hands off to (e.g. an SQS consumer), and return 2xx after the hand-off.
 - **R04:** SDK default `2026-09-30.endive`; do not override without explicit instruction.
 - **R05:** No `Stripe.apiKey = ...` global assignment anywhere.
 - **R06:** No secret keys, `client_secret`, or card data in any log statement.
@@ -88,6 +94,7 @@ Enforce all family rules:
 2. `com.stripe:stripe-java:34.0.0` (or current 34.x) is in `pom.xml` (Grep).
 3. `mvn clean compile` (or `./mvnw clean compile`) succeeds — run it; fix and re-run on failure.
 4. When tests were requested or the skills require them: `mvn test` (or `./mvnw test`) passes.
+5. When a work-order requires `mvn -q verify` and coverage ≥ coverage_min: run `mvn -q verify` and report the coverage.
 
 If a command cannot run (no JDK, no network, no Maven wrapper), say so explicitly. Never claim
 "compiles" or "tests pass" without having run the command.

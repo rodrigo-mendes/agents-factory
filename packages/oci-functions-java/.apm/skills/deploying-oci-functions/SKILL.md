@@ -41,11 +41,11 @@ description: "Builds, pushes, deploys, and validates OCI Function images to exis
 **Never reuse a version tag, even in development.**
 ```bash
 # 🚫 WRONG: rebuilding with the same tag after a failed build
-./build-push.sh 0.0.15   # first attempt failed
-./build-push.sh 0.0.15   # reusing same tag — overwrites OCIR, loses audit trail
+python3 build-push.py 0.0.15   # first attempt failed
+python3 build-push.py 0.0.15   # reusing same tag — overwrites OCIR, loses audit trail
 
 # ✅ CORRECT: always increment
-./build-push.sh 0.0.16   # next patch version
+python3 build-push.py 0.0.16   # next patch version
 ```
 
 **Never build without running pre-flight first.**
@@ -54,7 +54,7 @@ description: "Builds, pushes, deploys, and validates OCI Function images to exis
 docker build --platform linux/amd64 -t <image> .
 
 # ✅ CORRECT: pre-flight → build
-bash scripts/preflight.sh && ./build-push.sh <version>
+bash scripts/preflight.sh && python3 build-push.py <version>
 ```
 
 **Never commit `.env` or any file containing OCIR credentials.**
@@ -146,11 +146,11 @@ fi
 cd services/<function-name>/
 
 # Build with explicit version tag
-./build-push.sh <version>
-# Example: ./build-push.sh 0.0.12
+python3 build-push.py <version>
+# Example: python3 build-push.py 0.0.12
 ```
 
-**build-push.sh behavior:**
+**build-push.py behavior:**
 1. Loads `services/.env` for OCIR credentials
 2. Logs into OCIR (`docker login`)
 3. Reads function name from `func.yaml` `name:` field
@@ -159,10 +159,8 @@ cd services/<function-name>/
 
 ### Corporate Proxy Note
 
-The build script strips proxy environment variables during `docker build`:
-```bash
-env -u HTTP_PROXY -u HTTPS_PROXY -u http_proxy -u https_proxy docker build ...
-```
+The build script removes the proxy environment variables from the `docker build` call only (same effect as
+`env -u HTTP_PROXY -u HTTPS_PROXY -u http_proxy -u https_proxy docker build ...`); login and push keep them.
 
 Required when a corporate proxy (e.g., Zscaler) interferes with Docker layer downloads.
 

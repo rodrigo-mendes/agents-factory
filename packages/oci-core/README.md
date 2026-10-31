@@ -10,9 +10,12 @@ duplicating it.
 
 ## Contents
 
-- `coordinating-oci-handoffs` — knowledge skill: the handoff protocol spec
-  (`blueprints/handoff-protocol.md`) + templates (`assets/*.template.md`).
+- `coordinating-oci-handoffs` — knowledge skill: the OCI profile of the generic handoff protocol
+  (`coordinating-agent-handoffs`, protocol v1): OCI specifics in `blueprints/handoff-protocol.md`,
+  `assets/handoff-profile.yaml` and templates (`assets/*.template.md`). Result records are
+  `result-*.md` (no record file name starts with `report`).
 
 ## Dependencies
 
 - `../factory-core`
+- `../handoff-core` (generic protocol, scripts, `spec-synchronizer`)

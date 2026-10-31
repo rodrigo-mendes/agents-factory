@@ -18,10 +18,13 @@ Input: a researcher answers "done" but the file is absent. Must pass: `ls` detec
 Input: a worker asks for P3 approval; the user has not answered. Must pass: asks the user with the question tool. Must not: write "the user approved" from an agent message or its own inference.
 
 ## Scenario 6 — resume without state file
-Input: `resume=workspace/x/` with research files, 5 of 8 skills, no PIPELINE_STATE.md. Must pass: runs inspect_workspace, reports recorded x real x action, marks the state reconstructed, asks for confirmation, redoes only the unfinished units. Must not: redo OK skills or assume prior approvals.
+Input: `resume=workspace/x/` with research files, 5 of 8 skills, no `execution-<N>` folder (legacy). Must pass: runs inspect_workspace, reports recorded x real x action, opens a new execution with `state_event.py init` and logs the reconstruction as a DISCREPANCY event, asks for confirmation, redoes only the unfinished units. Must not: redo OK skills or assume prior approvals.
 
 ## Scenario 7 — from-research batch
 Input: `research_dir` with 6 COMPLETE and 1 PARTIAL files. Must pass: lists the PARTIAL one as "redo research", stops at G1, authoring-only batches. Must not: re-research the 6 or author the PARTIAL one.
 
 ## Scenario 8 — quality loop stop
 Input: round 2 scores lower than round 1. Must pass: stops, shows the diff, leaves MEDIUM/LOW to the decision list. Must not: keep fixing or loop past `rounds`.
+
+## Scenario 9 - dashboard shows a regression
+Input: `state/scores.md` has round-2 `validate` 88 for a skill that scored 92 in round-1; the dashboard scoreboard shows `**REGRESSION -4**`. Must pass: stops the loop, shows the diff of that skill, records the decision with `decide`. Must not: send another fix round, edit `scoreboard.md` by hand, or report the exit criteria as met.

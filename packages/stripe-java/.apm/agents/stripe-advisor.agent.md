@@ -37,20 +37,28 @@ project path), return a **numbered question list** and stop. Never assume.
    - **Subscriptions / Billing** — Customers, Subscriptions, Invoices, billing cycle
 
 2. Load the **core skill** first (always): read
-   `packages/stripe-java/.apm/skills/developing-stripe-java-core-v34/SKILL.md`.
+   `.claude/skills/developing-stripe-java-core-v34/SKILL.md` (installed path). Only in the factory
+   repository, if it is absent, read the source under `packages/stripe-java/.apm/skills/<name>/SKILL.md`;
+   the same fallback applies to every skill below.
 
 3. Load domain skills for the identified scope:
 
    | Domain | Skill |
    |---|---|
-   | Payments | `packages/stripe-java/.apm/skills/processing-stripe-payments-v34/SKILL.md` |
-   | Webhooks | `packages/stripe-java/.apm/skills/handling-stripe-webhooks-v34/SKILL.md` |
-   | Subscriptions | `packages/stripe-java/.apm/skills/managing-stripe-subscriptions-v34/SKILL.md` |
+   | Payments | `.claude/skills/processing-stripe-payments-v34/SKILL.md` |
+   | Webhooks | `.claude/skills/handling-stripe-webhooks-v34/SKILL.md` |
+   | Subscriptions | `.claude/skills/managing-stripe-subscriptions-v34/SKILL.md` |
 
-4. Load the family rules: read `workspace/stripe-java/_family_rules_v34.md`.
-   Rules R01–R07 are the primary review checklist.
+4. Also load every skill the work-order lists (installed path first, e.g.
+   `.claude/skills/integrating-stripe-quarkus-v3-40/SKILL.md`; the same factory-source fallback applies).
 
-5. Note every `(unverified)` and `(medium confidence)` tag for surfacing at P5.
+5. Load the family rules: read `.claude/skills/integrate-stripe-java/references/family-rules-v34.md` (installed path; in the factory source
+   `packages/stripe-java/.apm/skills/integrate-stripe-java/references/family-rules-v34.md`). If it
+   cannot be read, use the loaded skills' own Always-Do/Never-Do rules, which carry the same
+   R01–R07 content. Rules R01–R07 are the primary
+   review checklist.
+
+6. Note every `(unverified)` and `(medium confidence)` tag for surfacing at P5.
 
 ### P1 — Analyze
 
@@ -70,7 +78,7 @@ If the caller provides no project path and no code snippets, **stop and return n
 3. Cross-reference all seven family rules:
    - **R01** — Is there an idempotency key on every POST call?
    - **R02** — Is signature verification the FIRST statement in every webhook handler?
-   - **R03** — Does the webhook handler dedupe on `event.getId()` and return 2xx before processing?
+   - **R03** — Does the handler, or the consumer it hands off to (e.g. an SQS consumer), dedupe on `event.getId()`, with 2xx returned after the hand-off?
    - **R04** — Is the SDK default version (`2026-09-30.endive`) preserved, or is there an unexplained override?
    - **R05** — Is `Stripe.apiKey = ...` absent from all files?
    - **R06** — Are secret keys, `client_secret`, and card data absent from all log statements?
@@ -87,7 +95,7 @@ Present:
 
 If context is missing (no code provided, no project path), **stop here and return numbered questions.**
 
-**Wait for feedback before refining** — do not implement changes; state only what to fix and why.
+Return the findings and stop (non-interactive) — do not implement changes; state only what to fix and why.
 
 ### P4 — Deliver
 
@@ -111,11 +119,11 @@ This agent does **NOT** write or edit files.
 
 | Domain | Skill path |
 |---|---|
-| Core / Client / Idempotency | `packages/stripe-java/.apm/skills/developing-stripe-java-core-v34/SKILL.md` |
-| PaymentIntents | `packages/stripe-java/.apm/skills/processing-stripe-payments-v34/SKILL.md` |
-| Webhooks | `packages/stripe-java/.apm/skills/handling-stripe-webhooks-v34/SKILL.md` |
-| Subscriptions / Billing | `packages/stripe-java/.apm/skills/managing-stripe-subscriptions-v34/SKILL.md` |
-| Cross-cutting rules | `workspace/stripe-java/_family_rules_v34.md` |
+| Core / Client / Idempotency | `.claude/skills/developing-stripe-java-core-v34/SKILL.md` |
+| PaymentIntents | `.claude/skills/processing-stripe-payments-v34/SKILL.md` |
+| Webhooks | `.claude/skills/handling-stripe-webhooks-v34/SKILL.md` |
+| Subscriptions / Billing | `.claude/skills/managing-stripe-subscriptions-v34/SKILL.md` |
+| Cross-cutting rules | `.claude/skills/integrate-stripe-java/references/family-rules-v34.md` (else the skills' Always/Never rules) |
 
 ## Context Budget Rules
 

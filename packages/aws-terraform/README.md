@@ -49,6 +49,8 @@ https://releases.hashicorp.com/terraform-provider-aws/
 | `provisioning-aws-waf-v6` | WAFv2: web ACLs, rule groups, IP sets, associations, logging |
 | `provisioning-aws-xray-v6` | X-Ray sampling rules, groups, encryption config |
 
+Note: `aws-terraform-engineer` does not write CloudWatch alarms, dashboards or retention policy, nor X-Ray groups or sampling; those belong to `aws-observability` Mode B (the engineer may only create the log group a Lambda needs, with the retention given in the work-order).
+
 ## Instructions (3)
 
 Under `.apm/instructions/`, with `applyTo` on Terraform files:

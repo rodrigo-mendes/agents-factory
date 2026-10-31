@@ -1,0 +1,4 @@
+{"data": {"items": [
+  {"display-name": "REST Proxy - Operations Overview", "lifecycle-state": "ACTIVE", "is-oob-dashboard": false},
+  {"display-name": "Oracle OOB dashboard", "lifecycle-state": "ACTIVE", "is-oob-dashboard": true}
+]}}

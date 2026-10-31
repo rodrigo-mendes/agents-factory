@@ -1,0 +1,13 @@
+name: agents-factory-handoff-core
+version: 1.0.0
+description: >-
+  Generic agent-handoff protocol v1 (records, profiles, limits/escalation, spec sync): skill coordinating-agent-handoffs with stdlib Python scripts (check_records, board, detect_drift), the spec-synchronizer agent, the /syncing-spec-from-code command. The OpenSpec 1.15 skill lives in openspec-core (dependency). Used by the OCI and Quarkus/AWS families.
+author: rodrigo-mendes
+license: MIT
+dependencies:
+  apm:
+    - path: ../factory-core
+    - path: ../openspec-core
+  mcp: []
+includes: auto
+scripts: {}

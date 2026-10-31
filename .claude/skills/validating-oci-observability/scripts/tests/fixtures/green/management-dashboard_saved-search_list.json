@@ -1,0 +1,6 @@
+{"data": {"items": [
+  {"display-name": "Invocations", "widget-template": "visualizations/chartWidgetTemplate.html", "widget-vm": "visualizations/chartWidget",
+   "data-config": [{"type": "monitoringDataSource"}], "parameters-config": [{"name": "regionName"}, {"name": "compartmentId"}]},
+  {"display-name": "Upstream spans", "widget-template": "visualizations/chartWidgetTemplate.html", "widget-vm": "visualizations/chartWidget",
+   "data-config": [{"type": "tracesDataSource"}], "parameters-config": [{"name": "apmDomain"}]}
+]}}

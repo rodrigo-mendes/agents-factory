@@ -1,0 +1,54 @@
+{
+ "data": [
+  {
+   "display-name": "alarm-fn-errors-api-handler",
+   "severity": "CRITICAL",
+   "is-enabled": true
+  },
+  {
+   "display-name": "alarm-fn-errors-facade",
+   "severity": "CRITICAL",
+   "is-enabled": true
+  },
+  {
+   "display-name": "alarm-fn-errors-rest-proxy",
+   "severity": "CRITICAL",
+   "is-enabled": true
+  },
+  {
+   "display-name": "alarm-fn-latency-api-handler",
+   "severity": "CRITICAL",
+   "is-enabled": true
+  },
+  {
+   "display-name": "alarm-fn-latency-facade",
+   "severity": "CRITICAL",
+   "is-enabled": true
+  },
+  {
+   "display-name": "alarm-fn-latency-rest-proxy",
+   "severity": "CRITICAL",
+   "is-enabled": true
+  },
+  {
+   "display-name": "alarm-fn-throttle-api-handler",
+   "severity": "CRITICAL",
+   "is-enabled": true
+  },
+  {
+   "display-name": "alarm-fn-throttle-facade",
+   "severity": "CRITICAL",
+   "is-enabled": true
+  },
+  {
+   "display-name": "alarm-fn-throttle-rest-proxy",
+   "severity": "CRITICAL",
+   "is-enabled": true
+  },
+  {
+   "display-name": "alarm-apigw-5xx",
+   "severity": "CRITICAL",
+   "is-enabled": true
+  }
+ ]
+}

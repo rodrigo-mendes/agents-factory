@@ -1,0 +1,1 @@
+{"RetrievalStatus":"COMPLETE","TraceFormat":"XRAY","Traces":[{"Id":"1-5f84c7a1-31b9da6d6e0a2b54c1f8e0aa","Duration":0.2,"Spans":[{"Id":"7c1a9d0e2b3f4a56","Document":"{\"id\":\"7c1a9d0e2b3f4a56\",\"name\":\"orders-fn\",\"origin\":\"AWS::Lambda\"}"},{"Id":"2e5b8f9c1d4a7036","Document":"{\"id\":\"2e5b8f9c1d4a7036\",\"name\":\"orders-fn\",\"origin\":\"AWS::Lambda::Function\"}"}]}]}

@@ -22,6 +22,6 @@ Human gates: **G1** scope/version/units · **G2** pilot review · **G3** commit 
   orchestrator launches their subagents directly with the worker `SKILL.md` as spec; subagents cannot nest.
 - No new subagent. Runtime dependency on the worker packages is documented, not declared (as in `evaluating`).
 - Scripts (stdlib Python, read-only except `commit_groups.py --apply`): `verify_skill.py`,
-  `verify_package.py`, `normalize_tags.py`, `inspect_workspace.py`, `check_counts.sh`, `commit_groups.py`.
+  `verify_package.py`, `normalize_tags.py`, `inspect_workspace.py`, `check_counts.py`, `commit_groups.py`.
 - Origin: distilled from building the Camel Quarkus package (see `blueprints/known-failures.md`).
 - Step 2 (not built): a "pipeline mode" in the workers (no P3 gate, fixed output path, write straight to `packages/`).

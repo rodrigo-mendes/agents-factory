@@ -64,7 +64,7 @@ Present to the user:
 5. **Error handling strategy** — timeout budget, retry approach, fallback
 6. **⚠️ Ask First items** — any decisions from P2 that need user input
 
-**Wait for user approval before proceeding to P4.**
+**End at P3** with the plan and numbered Ask-First questions in the result record (outcome `needs-input`); the relaunch carries the user's answers (and, where an apply happens, an `approve=tfplan sha256=<hash>` line as in `oci-deployer`).
 
 ### P4 — Implement
 
@@ -95,11 +95,11 @@ Present to the user:
    - No credentials in func.yaml (security check)
    - Run `../../scripts/preflight.sh .` if available
 5. **Write a report record** and hand off (standard closing — the `coordinating-oci-handoffs` skill (standard handshake)):
-   - Write `docs/handoff/<capability>/report-java.md` from the `report.template.md` of the `coordinating-oci-handoffs` skill: files changed, resources/OCIDs (none if no infra), validation (`mvn compile`/`mvn test` results), acceptance status vs the work-order criteria, `outcome`. You have Bash — stamp a real `createdAt` (`date -u +%Y-%m-%dT%H:%M:%SZ`) and fill any `<pending>` timestamp on the work-order.
+   - Write `docs/handoff/<capability>/result-java.md` from the `result.template.md` of the `coordinating-oci-handoffs` skill: files changed, resources/OCIDs (none if no infra), validation (`mvn compile`/`mvn test` results), acceptance status vs the work-order criteria, `outcome`. You have Bash — stamp a real `createdAt` (`date -u +%Y-%m-%dT%H:%M:%SZ`) and fill any `<pending>` timestamp on the work-order.
    - Then state the single next action:
-     - If corresponding OCI infrastructure is missing → **Hand off:** run `/add-functions-infra` (`@oci-terraform`) — provision the resources this function needs. Context: `docs/handoff/<capability>/report-java.md`.
-     - If infrastructure is ready → **Hand off:** run `/deploy-function` (`@oci-deployer`) — build, push, deploy, smoke-test. Context: `docs/handoff/<capability>/report-java.md`.
-   - If invoked programmatically by `@oci-serverless-stack`, the report **is** your return contract — write it before returning.
+     - If corresponding OCI infrastructure is missing → **Hand off:** run `/provision-oci-infra` (`@oci-terraform`) — provision the resources this function needs. Context: `docs/handoff/<capability>/result-java.md`.
+     - If infrastructure is ready → **Hand off:** run `/deploy-oci-function` (`@oci-deployer`) — build, push, deploy, smoke-test. Context: `docs/handoff/<capability>/result-java.md`.
+   - The report is your return contract (it is read by `/provision-oci-serverless-stack <slug> --integrate`) — write it before finishing.
 
 ## What You Do
 
@@ -111,7 +111,7 @@ Present to the user:
 
 ## What You Do NOT Do
 
-- Write Terraform infrastructure code (delegate to `@oci-terraform`)
+- Write Terraform infrastructure code (hand off: run `/provision-oci-infra` (`@oci-terraform`))
 - Make architecture decisions without consulting design skills
 - Generate code without user approval (always execute P3 before P4)
 - Skip any step in the P0–P5 workflow

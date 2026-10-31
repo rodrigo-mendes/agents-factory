@@ -1,0 +1,6 @@
+{"data": {"items": [
+  {"display-name": "Invocations", "widget-template": "visualizations/chartWidgetTemplate.html",
+   "data-config": [{"type": "monitoringDataSource"}], "parameters-config": [{"name": "compartmentId"}]},
+  {"display-name": "NoTemplate", "widget-template": "",
+   "data-config": [{"type": "monitoringDataSource"}], "parameters-config": [{"name": "regionName"}]}
+]}}

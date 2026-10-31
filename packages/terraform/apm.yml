@@ -8,6 +8,7 @@ dependencies:
     - path: ../factory-core
     - path: ../research-core
     - path: ../artifact-authoring
+    - path: ../handoff-core
     - path: ../aws-terraform
   mcp: []
 includes: auto

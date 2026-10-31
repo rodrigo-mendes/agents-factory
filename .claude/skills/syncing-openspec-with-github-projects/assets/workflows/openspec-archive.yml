@@ -1,0 +1,218 @@
+# openspec-archive.yml - after gate E9 is approved, re-checks that approval, re-runs the final gate
+# and proposes the `openspec archive` result as a pull request.
+# Template from syncing-openspec-with-github-projects.
+#
+# Trust boundary: starts only when the label gate:E9:approved is added by vars.OPENSPEC_BOT_LOGIN
+# (the identity of openspec-gate.yml) and runs the DEFAULT-BRANCH copy of the files. The label is
+# not trusted on its own: `gate_command.py recheck --gate E9` must find the bot's confirmation on
+# the change issue and re-verify the user comment it points to (approver, no bot marker, same
+# issue, newer than the Stage value) before anything else runs. The change id comes from the
+# issue's key marker / title and must exist as a folder; the label text is never used.
+#
+# Three jobs (family rule 15: no token where third-party code runs). `authorize` runs the
+# re-check with a read-only token that dies with that job. `prepare` (needs authorize) has NO token
+# at all and is the only job that runs third-party code (the npm package @fission-ai/openspec,
+# installed with --ignore-scripts); it hands over a binary patch as a job output - data only, never
+# code. `publish` starts on a fresh runner (nothing npm wrote to $GITHUB_ENV, $GITHUB_PATH or
+# .git/hooks reaches it), runs no third-party code, applies the patch only after
+# `gate_command.py check-patch` accepts it (both sides of every rename/copy under openspec/, no
+# mode change, symlink or submodule), and is the only place with a write token: it pushes
+# ONLY the new branch openspec/archive-<id> - never the default branch - and opens a pull request
+# that a human reviews. GITHUB_TOKEN is read-only in both jobs. Credentials: GitHub App
+# (organization) or the classic PAT secret OPENSPEC_PROJECT_PAT (user), by vars.OPENSPEC_OWNER_TYPE.
+name: openspec-archive
+
+on:
+  issues:
+    types: [labeled]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: openspec-archive-${{ github.event.issue.number }}
+  cancel-in-progress: false
+
+jobs:
+  authorize:
+    if: ${{ github.event.label.name == 'gate:E9:approved' && vars.OPENSPEC_BOT_LOGIN != '' && github.event.sender.login == vars.OPENSPEC_BOT_LOGIN }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    steps:
+      - name: Check out the default branch
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: ${{ github.sha }}  # same commit in authorize, prepare and publish (L3)
+
+      - name: Set up Python
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0  # v7.1.0
+        with:
+          python-version: "3.12"
+
+      - name: Verify the vendored scripts (before any token or script runs)
+        run: python .github/openspec-github/_vendor.py verify .github/openspec-github
+
+      - name: Check the credential path
+        env:
+          OWNER_TYPE: ${{ vars.OPENSPEC_OWNER_TYPE }}
+        run: |
+          case "$OWNER_TYPE" in
+            organization) echo "credential: GitHub App installation token" ;;
+            user) echo "::warning::user-owned project: classic PAT with repo scope (broad access); prefer an organization project with a GitHub App" ;;
+            *) echo "::error::set the repository variable OPENSPEC_OWNER_TYPE to organization or user"; exit 1 ;;
+          esac
+
+      - name: Mint a read-only GitHub App token for the re-check (organization-owned project)
+        id: read-token
+        if: ${{ vars.OPENSPEC_OWNER_TYPE == 'organization' }}
+        uses: actions/create-github-app-token@64ab729a6294000f5aa4a4bc0b73d1f32bc45510  # v3.3.0
+        with:
+          client-id: ${{ vars.OPENSPEC_APP_CLIENT_ID }}
+          private-key: ${{ secrets.OPENSPEC_APP_PRIVATE_KEY }}
+          repositories: ${{ github.event.repository.name }}
+          permission-issues: read
+          permission-organization-projects: read
+
+      - name: Re-check the E9 approval (read-only token, no third-party code in this job)
+        env:
+          GH_TOKEN: ${{ vars.OPENSPEC_OWNER_TYPE == 'organization' && steps.read-token.outputs.token || secrets.OPENSPEC_PROJECT_PAT }}
+          GH_PROMPT_DISABLED: "1"
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          PROFILE: ${{ vars.OPENSPEC_PROFILE || '.github/openspec-github/handoff-profile.yaml' }}
+        run: python .github/openspec-github/gate_command.py recheck . --profile "$PROFILE" --gate E9
+
+  prepare:
+    needs: authorize
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    outputs:
+      change: ${{ steps.change.outputs.change }}
+      patch: ${{ steps.archive.outputs.patch }}
+    steps:
+      - name: Check out the default branch
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: ${{ github.sha }}  # same commit in authorize, prepare and publish (L3)
+
+      - name: Set up Python
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0  # v7.1.0
+        with:
+          python-version: "3.12"
+
+      - name: Verify the vendored scripts (before any script runs)
+        run: python .github/openspec-github/_vendor.py verify .github/openspec-github
+
+      - name: Resolve the change id
+        id: change
+        env:
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+          ISSUE_BODY: ${{ github.event.issue.body }}
+        run: python .github/openspec-github/gate_command.py resolve-change . >> "$GITHUB_OUTPUT"
+
+      - name: Install OpenSpec 1.15.0 (pinned, no install scripts, no token)
+        run: |
+          npm install --global --ignore-scripts @fission-ai/openspec@1.15.0
+          openspec --version
+
+      - name: Re-run the final gate (no token)
+        env:
+          CHANGE_ID: ${{ steps.change.outputs.change }}
+          PROFILE: ${{ vars.OPENSPEC_PROFILE || '.github/openspec-github/handoff-profile.yaml' }}
+        run: |
+          set -euo pipefail
+          dir="openspec/changes/$CHANGE_ID"
+          openspec validate "$CHANGE_ID" --type change --strict --json --no-interactive
+          python .github/openspec-github/check_records.py "$dir/handoff" --profile "$PROFILE"
+          python .github/openspec-github/detect_drift.py . --change "$dir/handoff"
+
+      - name: Archive and export the result as a patch (no token)
+        id: archive
+        env:
+          CHANGE_ID: ${{ steps.change.outputs.change }}
+        run: |
+          set -euo pipefail
+          openspec archive "$CHANGE_ID" --yes
+          git add -A openspec
+          patch="$RUNNER_TEMP/archive.patch"
+          git diff --cached --binary -M > "$patch"
+          if [ ! -s "$patch" ]; then echo "::error::openspec archive changed nothing"; exit 1; fi
+          size=$(wc -c < "$patch")
+          if [ "$size" -gt 700000 ]; then echo "::error::archive patch too large for a job output ($size bytes)"; exit 1; fi
+          echo "patch=$(base64 -w0 "$patch")" >> "$GITHUB_OUTPUT"
+
+  publish:
+    needs: prepare
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - name: Check out the default branch (fresh runner)
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          persist-credentials: false
+          ref: ${{ github.sha }}  # same commit in authorize, prepare and publish (L3)
+
+      - name: Set up Python
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0  # v7.1.0
+        with:
+          python-version: "3.12"
+
+      - name: Verify the vendored scripts (before any token is minted)
+        run: python .github/openspec-github/_vendor.py verify .github/openspec-github
+
+      - name: Apply the patch and commit (data only, openspec/ paths only, no token)
+        env:
+          PATCH_B64: ${{ needs.prepare.outputs.patch }}
+          CHANGE_ID: ${{ needs.prepare.outputs.change }}
+          BOT_LOGIN: ${{ vars.OPENSPEC_BOT_LOGIN }}
+        run: |
+          set -euo pipefail
+          if ! [[ "$CHANGE_ID" =~ ^[a-z0-9][a-z0-9._-]*$ ]]; then echo "::error::invalid change id"; exit 1; fi
+          patch="$RUNNER_TEMP/archive.patch"
+          printf '%s' "$PATCH_B64" | base64 -d > "$patch"
+          python .github/openspec-github/gate_command.py check-patch "$patch"
+          git apply --index --check "$patch"
+          git apply --index "$patch"
+          bad=$(git diff --cached --no-renames --name-only | grep -v '^openspec/' || true)
+          if [ -n "$bad" ]; then echo "::error::the archive patch touches paths outside openspec/"; exit 1; fi
+          git config user.name "$BOT_LOGIN"
+          git config user.email "${BOT_LOGIN}@users.noreply.github.com"
+          git switch -c "openspec/archive-$CHANGE_ID"
+          git commit -q -m "chore(openspec): archive $CHANGE_ID"
+
+      - name: Mint a GitHub App token for the push (organization-owned project)
+        id: app-token
+        if: ${{ vars.OPENSPEC_OWNER_TYPE == 'organization' }}
+        uses: actions/create-github-app-token@64ab729a6294000f5aa4a4bc0b73d1f32bc45510  # v3.3.0
+        with:
+          client-id: ${{ vars.OPENSPEC_APP_CLIENT_ID }}
+          private-key: ${{ secrets.OPENSPEC_APP_PRIVATE_KEY }}
+          repositories: ${{ github.event.repository.name }}
+          permission-contents: write
+          permission-pull-requests: write
+
+      - name: Push the branch and open a pull request (the only step with a write token)
+        env:
+          GH_TOKEN: ${{ vars.OPENSPEC_OWNER_TYPE == 'organization' && steps.app-token.outputs.token || secrets.OPENSPEC_PROJECT_PAT }}
+          GH_PROMPT_DISABLED: "1"
+          CHANGE_ID: ${{ needs.prepare.outputs.change }}
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+        run: |
+          set -euo pipefail
+          branch="openspec/archive-$CHANGE_ID"
+          if [ "$branch" = "$DEFAULT_BRANCH" ]; then echo "::error::refusing to push the default branch"; exit 1; fi
+          gh auth setup-git
+          git push origin "HEAD:refs/heads/$branch"
+          body="$RUNNER_TEMP/pr-body.md"
+          printf '%s\n\nAutomated `openspec archive %s --yes` after gate E9 was approved and re-checked. Review before merging.\n' \
+            '<!-- openspec-github:bot v1 -->' "$CHANGE_ID" > "$body"
+          gh pr create --base "$DEFAULT_BRANCH" --head "$branch" --title "openspec: archive $CHANGE_ID" --body-file "$body"

@@ -1,0 +1,3 @@
+# Round 1 TEST — batch 4 (skill-evaluator, 2026-10-28; saved by orchestrator)
+structuring-quarkus-lambda-projects 6/6 · refactoring-quarkus-java 6/6 · integrating-stripe-quarkus-v3-40 6/6 · specifying-changes-with-openspec-v1-15 6/6 — 24/24 PASS, no scenario defects.
+Observations: refactoring reviewer-checklist.md:60 leaves P2-P4, B5, Q10, Q11 without severity (LOW); refactoring cites Quarkus 4 Beta1 date via blog vs family fact "Upcoming" (compatible); Stripe API GW timeouts "page not recorded" (L7, also a validator MEDIUM — cite S14/S15); "family rule 6" cited without path (factory-only reference).

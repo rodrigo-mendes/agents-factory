@@ -142,7 +142,7 @@ If no (single VPC, simple internal routing): ALB with internal scheme is suffici
 
 ## Integration Patterns
 
-For complete architecture code and Terraform examples, see [Reference Architectures](./blueprints/reference-architectures.md).
+For reference architectures (no IaC examples — see the `provisioning-aws-vpc-v6` skill for Terraform), see [Reference Architectures](./blueprints/reference-architectures.md).
 
 **CloudFront + ALB + WAF Edge Architecture** (north-south, web apps)
 Internet → CloudFront (CDN, Shield Standard, 600+ PoPs) → ALB in public subnets (WAF attached; SQLi, XSS, rate limiting, geo-block) → Auto Scaling EC2/ECS/EKS in private subnets. CloudFront-to-AWS-origin transfer is free. As of May 2026, CloudFront supports WebSocket connections to private VPC origins.
@@ -243,7 +243,7 @@ aws ec2 describe-flow-logs --filter Name=resource-id,Values=<vpc-id> \
 ## Blueprints Directory Structure
 
 ```
-workspace/.claude/skills/designing-aws-vpc-networks/
+.claude/skills/designing-aws-vpc-networks/
 ├── SKILL.md                              ← This file (guardrails + quick reference)
 └── blueprints/
     ├── evaluation-scenarios.md           ← 6 test scenarios for skill-evaluator

@@ -1,0 +1,21 @@
+# openspec/github-tracker.yaml - project values for syncing-openspec-with-github-projects.
+#
+# Same keys as the `tracker:` block of a handoff profile (handoff-core profile-format.md#tracker).
+# gh_projects_sync.py and gate_command.py merge the profile block with this file key by key; the
+# values here win. Validated by _handoff_lib.validate_tracker. YAML subset of _mini_yaml only:
+# plain block mappings, one-line flow lists, quoted strings; no anchors, no multi-line values.
+# Quote anything containing [ ] { } : # (for example an App bot login "name[bot]").
+
+kind: github-projects           # none disables the bridge (scripts exit 3)
+owner: acme                     # login of the user or organization that owns the project
+owner_type: organization        # organization -> GitHub App token; user -> classic PAT (project + repo)
+project_number: 7               # https://github.com/orgs/acme/projects/7
+repo: acme/shop                 # repository that holds the mirrored issues
+
+# Where gate answers may come from: chat (default) | github | both.
+# Anything but chat is an Ask First decision of the orchestrator.
+approval_source: chat
+
+# Needed when approval_source is github or both:
+approvers: [alice, bob]         # only these logins can answer a gate on GitHub
+bot_login: "openspec-bot[bot]"  # identity of the openspec-gate workflow; must not be an approver

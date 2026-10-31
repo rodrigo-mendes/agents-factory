@@ -4,7 +4,7 @@ Research date 2026-10-14. Back to [SKILL.md](../SKILL.md). Source unless stated:
 
 ## Artifacts
 
-- Quarkus: `quarkus-junit` and `quarkus-junit-mockito`, test scope. The 3.40 testing guide does not mention `quarkus-junit5*`.
+- Quarkus: `quarkus-junit` and `quarkus-junit-mockito`, test scope. The part of the 3.40 testing guide that was read does not mention `quarkus-junit5*` (medium confidence, absence of evidence, M8).
 - Camel: `camel-quarkus-junit` (renamed from `camel-quarkus-junit5` since 3.31, High; https://camel.apache.org/camel-quarkus/3.40.x/migration-guide/3.31.0.html). Camel test details: skill `developing-camel-quarkus-junit-v3-40`; Quarkus-side rename: skill `developing-quarkus-junit-v3-40`.
 
 ## InjectMock
@@ -22,7 +22,7 @@ class OrderServiceTest {
 }
 ```
 
-- `@InjectMock` and `@InjectSpy` require `quarkus-junit-mockito`.
+- `@InjectMock` and `@InjectSpy` require `quarkus-junit-mockito` (medium confidence, L1).
 - Only normal-scoped beans can be mocked ("basically every scope except @Singleton and @Dependent").
 - The mock applies only to test methods of the annotated test class. Use `QuarkusMock.installMockForType` in `@BeforeAll`. `@InjectSpy` keeps the real behavior and its observers still run.
 
@@ -31,7 +31,7 @@ class OrderServiceTest {
 | Option | Use when | Limit |
 |---|---|---|
 | `@InjectMock` | normal-scoped bean | not for `@Singleton`/`@Dependent` |
-| `@MockitoConfig(convertScopes = true)` | bean must stay `@Singleton` | documented as an advanced option |
+| `@MockitoConfig(convertScopes = true)` (medium confidence, L1) | bean must stay `@Singleton` | documented as an advanced option |
 | test `@Alternative` in `src/test/java` | bean used during startup (not mocked automatically) | does not work for native tests |
 
 ## Lifecycle observers in tests

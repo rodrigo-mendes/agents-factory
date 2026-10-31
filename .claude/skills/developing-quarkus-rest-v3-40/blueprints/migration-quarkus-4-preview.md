@@ -14,9 +14,9 @@ Research date 2026-10-14. Back to [SKILL.md](../SKILL.md). "3.15" appears only a
 
 | Area | 3.40 name | Source |
 |---|---|---|
-| Server | `quarkus-rest` (successor of RESTEasy Reactive). Whether legacy `quarkus-resteasy-reactive*` names still exist as aliases is (unverified) (register U5) | https://quarkus.io/version/3.40/guides/rest |
+| Server | `quarkus-rest` (successor of RESTEasy Reactive; medium confidence, L5). Whether legacy `quarkus-resteasy-reactive*` names still exist as aliases is (unverified) (register U5) | https://quarkus.io/version/3.40/guides/rest |
 | Client | `quarkus-rest-client`, `quarkus-rest-client-jackson`; never `quarkus-resteasy-client` with Quarkus REST | https://quarkus.io/version/3.40/guides/rest |
-| Testing | `quarkus-junit` (no `quarkus-junit5` in the 3.40 guide); Camel tests use `camel-quarkus-junit` | https://quarkus.io/version/3.40/guides/getting-started-testing ; https://camel.apache.org/camel-quarkus/3.40.x/migration-guide/3.31.0.html |
+| Testing | `quarkus-junit` (no `quarkus-junit5` in the part of the 3.40 guide that was read; medium confidence, absence of evidence, M12); Camel tests use `camel-quarkus-junit` | https://quarkus.io/version/3.40/guides/getting-started-testing ; https://camel.apache.org/camel-quarkus/3.40.x/migration-guide/3.31.0.html |
 | Config prefixes | `quarkus.rest.*` and `quarkus.rest-client.*` | https://quarkus.io/version/3.40/guides/rest |
 
 ## Deprecated in 3.40

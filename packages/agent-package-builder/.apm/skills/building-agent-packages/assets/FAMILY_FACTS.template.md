@@ -8,4 +8,4 @@ orchestrator against an official page before authors see it. Authors never edit 
 | F1 | | High / medium / unverified | | |
 
 When a row changes: set the new value here, grep every skill listed in "Used by", fix them (P7),
-and note the change in the Log of PIPELINE_STATE.md.
+and log it with `scripts/state_event.py <slug> event <phase> SWEEP "<fact id> changed"`.

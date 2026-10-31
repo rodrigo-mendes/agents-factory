@@ -15,8 +15,8 @@ Research date 2026-10-14. Back to [SKILL.md](../SKILL.md). Sources are versioned
 | Scope | Optimizes | Sacrifices | Best when |
 |---|---|---|---|
 | `@ApplicationScoped` | lazy init, mockable, circular dependencies | proxy indirection; never access fields directly | default |
-| `@Singleton` | slightly better performance; fields can be accessed safely | no proxy; not `@InjectMock`-able without `@MockitoConfig(convertScopes = true)` | hot path, never mocked |
-| `@Dependent` | one instance per injection point | bound to the owner's lifecycle; not mockable with `@InjectMock` without `@MockitoConfig(convertScopes = true)` | stateful helpers |
+| `@Singleton` | slightly better performance; fields can be accessed safely | no proxy; not `@InjectMock`-able without `@MockitoConfig(convertScopes = true)` (medium confidence, L1) | hot path, never mocked |
+| `@Dependent` | one instance per injection point | bound to the owner's lifecycle; not mockable with `@InjectMock` without `@MockitoConfig(convertScopes = true)` (medium confidence, L1) | stateful helpers |
 | `@RequestScoped` | per-request state | needs an active request context; in Camel `bean`/`process` calls use `@ActivateRequestContext` | request data |
 
 Normal-scoped beans are created lazily, on the first method call on their client proxy; being injected does not create them. `@Singleton` and `@Dependent` beans are created at injection (cdi-reference).
@@ -61,7 +61,7 @@ class LoggedInterceptor {
 - Interceptors: lower `@Priority` values run first. A decorator needs exactly one `@Delegate`, and decorating built-in beans such as `Event` is unsupported ([cdi](https://quarkus.io/version/3.40/guides/cdi), [cdi-reference](https://quarkus.io/version/3.40/guides/cdi-reference)).
 - Events: `Event<T>.fire()` with `@Observes`.
 - `@Lock` (READ/WRITE, with timeouts that raise `LockException`) gives container-managed concurrency ([cdi-reference](https://quarkus.io/version/3.40/guides/cdi-reference)).
-- A `@Disposes` method for the producer above is (unverified): the 3.40 CDI guide does not describe disposer semantics (register U4); rely on the Jakarta CDI spec.
+- A `@Disposes` method for the producer above is (unverified): the 3.40 CDI guide (https://quarkus.io/version/3.40/guides/cdi) does not describe disposer semantics (register U4); rely on the Jakarta CDI spec.
 
 ## Build-time bean enablement
 

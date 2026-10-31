@@ -37,7 +37,7 @@ questions:
 | PaymentIntent flows (create / confirm / capture / cancel) | `processing-stripe-payments-v34` |
 | Webhook endpoints (signature verification, event dedup, async response) | `handling-stripe-webhooks-v34` |
 | Customer, Subscription, Invoice lifecycle | `managing-stripe-subscriptions-v34` |
-| Cross-cutting policies (idempotency on all POSTs, secret logging, version pinning) | `workspace/stripe-java/_family_rules_v34.md` (R01–R07) |
+| Cross-cutting policies (idempotency on all POSTs, secret logging, version pinning) | [references/family-rules-v34.md](references/family-rules-v34.md) (R01–R07) |
 
 All skills are under `packages/stripe-java/.apm/skills/`.
 
