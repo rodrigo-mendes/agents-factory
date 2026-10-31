@@ -1,0 +1,14 @@
+name: agents-factory-openspec-poc
+version: 1.0.0
+description: >-
+  Technology-independent drafting of OpenSpec specs from the code of a proof of concept (back end and/or front end, any stack): the inline skill /bootstrapping-spec-from-poc (stdlib inventory script poc_inventory.py, draft area openspec/poc/<id>/, optional promotion to a change), the read-only poc-spec-extractor agent, and the review by spec-synchronizer (Mode A, POC variant, from handoff-core). The POC is evidence, not requirements: shortcuts become questions.
+author: rodrigo-mendes
+license: MIT
+dependencies:
+  apm:
+    - path: ../../../factory/factory-core
+    - path: ../openspec-core
+    - path: ../../protocol/handoff-core
+  mcp: []
+includes: auto
+scripts: {}
