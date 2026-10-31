@@ -9,7 +9,7 @@ format without the handoff protocol.
 
 The skill name did not change when it moved, so references by name in other packages still work.
 
-Depends on: factory-core. Used by: handoff-core (and, transitively, the packages that depend on it) and openspec-github.
+Depends on: factory-core. Used by: handoff-core (and, transitively, the packages that depend on it), openspec-github and openspec-poc (drafts specs from a POC into `openspec/poc/<id>/`).
 
 ## Project layout rule
 

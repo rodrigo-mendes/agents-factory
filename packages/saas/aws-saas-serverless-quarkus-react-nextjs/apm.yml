@@ -15,6 +15,7 @@ dependencies:
     - path: ../../cloud/terraform/terraform
     - path: ../../java/libs/stripe-java
     - path: ../../delivery/specs/openspec-github
+    - path: ../../delivery/specs/openspec-poc
     - path: ../../architecture/solution-architecture
     - path: ../../frontend/react/ui-design
     - path: ../../frontend/react/nextjs-frontend
