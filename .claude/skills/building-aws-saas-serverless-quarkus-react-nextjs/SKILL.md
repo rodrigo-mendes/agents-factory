@@ -80,6 +80,7 @@ Not suffixed `-v3-40`: workflow skill, updated in place. Tags `(unverified)` / `
 | Push, or commit in the user's project without asking | Offer the commit plan; the user pushes |
 | Add server features to Next.js or deploy to Vercel | Static export on S3 + CloudFront only |
 | Invent a Quarkus, AWS, React or GitHub Actions fact | Read the skill; if absent, mark `(unverified)` and offer research |
+| Treat a POC draft (`openspec/poc/<id>/`) as an approved requirement, a decided architecture or an accepted ADR | Use it only as E1 input: confirmation questions with evidence; the user's answers decide |
 
 ## Preflight
 
@@ -91,11 +92,14 @@ Before E1 (and at every resume) check with `ls`/Glob/`head`, never from memory:
 4. **Project state**: `openspec/` exists (if not, ask the user to run `openspec init --tools none`); `openspec/specs/architecture/spec.md` present means a later change (E1 asks only the affected blocks).
 5. **Drift baseline**: `status.md` has `lastSyncedSha` (set by the E5 baseline, `gate=E5-baseline`, see [E4-E5](blueprints/e4-e5-design-and-tasks.md#e5-drift-baseline-after-the-approval-before-the-first-work-order)); from E5 on, `detect_drift.py` exit 1 with it missing means run the baseline first.
 6. **Handoff folder and status.md**: once the change id is known (E1), create `openspec/changes/<id>/handoff/` and run `board.py` once so `status.md` exists before the first `## Approvals` line.
-7. **Tracker (optional, only when enabled)**: `gh --version` >= 2.94.0, skill `syncing-openspec-with-github-projects` present. See [tracker](blueprints/tracker-github-projects.md).
+7. **POC input (only with `poc*` arguments)**: `.claude/agents/poc-spec-extractor.md` with `model: sonnet` and skill `bootstrapping-spec-from-poc` (with `scripts/poc_inventory.py`); with `poc=<id>`, `openspec/poc/<id>/` exists.
+8. **Tracker (optional, only when enabled)**: `gh --version` >= 2.94.0, skill `syncing-openspec-with-github-projects` present. See [tracker](blueprints/tracker-github-projects.md).
 
 ## Arguments and limits
 
 Arguments after the command: `change=<kebab-id>` (resume or name the change), `limits.<name>=<int>`, `quality.coverage_min=<int>`.
+Optional POC input (package `openspec-poc`): `poc=<poc-id>` reads an existing draft in `openspec/poc/<poc-id>/`; `poc.back=<path>` and/or `poc.front=<path>` (optional `poc.id=<id>`) draft it first by following
+[run steps](../bootstrapping-spec-from-poc/blueprints/run-steps.md) S1-S6 before E1 (no handoff record, no new phase). The draft is **only input to the E1 interview** ([E1](blueprints/e1-interview.md#poc-draft-as-input)); this flow never promotes it.
 Limits: `build_attempts`, `review_rounds`, `deploy_cycles`, `delta_revisions`, `record_rejections`.
 Precedence (most specific wins): installed profile < project `openspec/handoff-profile.yaml` < run arguments. Pass run
 arguments to `board.py --args ...` (last on the command line). Values are integers >= 1; `0` only after the user confirms.

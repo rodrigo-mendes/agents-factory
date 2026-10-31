@@ -6,7 +6,7 @@ Back to [SKILL.md](../SKILL.md). Only the manager (this skill) talks to the user
 
 - **At most 10 questions per round.** If the question tool limits questions per call, split the round without exceeding 10 in total.
 - Concrete options whenever possible, plus "other / not blocking" so the user is never forced into a guess.
-- **Ask only what is missing.** First read: `openspec/specs/**`, `proposal.md` of the change, previous answers in `## Approvals`. Do not re-ask.
+- **Ask only what is missing.** First read: `openspec/specs/**`, `proposal.md` of the change, previous answers in `## Approvals` and, when a POC was given, the POC draft (see [POC draft as input](#poc-draft-as-input)). Do not re-ask.
 - **Playback after each block:** "I understood: ... Confirm?" The user's confirmation (verbatim) goes to `## Approvals` as `gate=E1-B<n>`.
 - **Open questions are recorded, never assumed.** An open question may stay open only if the user marks it "does not block"; mark it in `proposal.md` under an open-questions heading (heading names per the openspec skill's doc-vs-validator conflicts blueprint).
 - First change of the project: all 12 blocks. Later changes: only blocks the change affects (state which ones and why, let the user add). B9-B11 are skipped for a change with no UI; B12 for a change with no AI.
@@ -44,6 +44,17 @@ Back to [SKILL.md](../SKILL.md). Only the manager (this skill) talks to the user
 - **B10**: brand assets, tone, target devices, dark mode, languages (and whether the language changes in the UI).
 - **B11**: accessibility level, keyboard-only support, screen reader support, minimum contrast.
 - **B12**: what the AI does and what it never decides; provider and model preference (LangChain4j on Quarkus exists only as a pre-release-locked skill, `integrating-quarkus-langchain4j-v1-15`: tell the user and ask, D1); latency tolerance (sync vs queue); what the user sees when the AI fails; cost ceiling; data allowed to leave to the provider. Chat/streaming in the browser is out of scope: say so.
+
+## POC draft as input
+
+Only with the `poc*` arguments (draft in `openspec/poc/<id>/`, written by package `openspec-poc`). The draft is **input to this interview, nothing more**.
+
+- Read `questions.md`, `functional/**`, `architecture-draft.md`, `design-draft.md` and `verify-poc.md` before the first round.
+- What the POC shows becomes a **confirmation question with evidence**, in the block it belongs to: "The POC lets any user list items (`ItemResource.java:12`). Is that a rule of the product?" (B3/B4). Behaviour seen only in the front end (`confidence: low`) is asked openly, not offered as the default.
+- Every question of `questions.md` goes to its block: security shortcuts (hard-coded secret, open CORS, no auth) to B2/B6/B7, data and mock data to B5, front-only and back-only calls to B3, screens and states to B9. A shortcut is never offered as an option to confirm.
+- Observed technical choices (`architecture-draft.md`) are recorded for E2 as open questions for the architects, never as B7 constraints unless the user states them as decided.
+- Open HIGH findings of `verify-poc.md`: mention them in the playback of the affected block.
+- The playback and the user's confirmation of each block stay mandatory; the POC never answers for the user. In `proposal.md` note the POC as a source (`openspec/poc/<id>/`) under the open-questions heading. Fill the `Decision` column of `traceability.md` only from the user's answers.
 
 ## Optional: GitHub Projects tracker (ask once, off by default)
 
