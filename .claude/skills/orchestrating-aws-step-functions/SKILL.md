@@ -197,7 +197,7 @@ aws stepfunctions test-state \
 ## Blueprints Directory Structure
 
 ```
-workspace/.claude/skills/orchestrating-aws-step-functions/
+.claude/skills/orchestrating-aws-step-functions/
 ├── SKILL.md                              <- This file (summary + guardrails)
 └── blueprints/
     └── evaluation-scenarios.md           <- 3 test scenarios (canonical, edge, misuse)

@@ -1,0 +1,3 @@
+2026-10-29T21:05:59 | P0 | migrate_state | INIT | execution-0 migrated from the legacy layout (legacy files untouched)
+2026-10-29T21:06:00 | - | migrate_state | DISCREPANCY | G3 row empty in Approvals but approved in the log
+2026-10-29T21:06:00 | - | migrate_state | NOTE | legacy round reports kept in place: round-1, round-2, round-4, round-5, round-6, round-7

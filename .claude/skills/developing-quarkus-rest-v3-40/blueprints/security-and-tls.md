@@ -61,7 +61,7 @@ Source: https://quarkus.io/version/3.40/guides/security-authorize-web-endpoints-
 
 Source: https://quarkus.io/version/3.40/guides/tls-registry-reference (first 100k chars read, register L1).
 
-- TLS defaults to TLSv1.3.
+- TLS defaults to TLSv1.3 (medium confidence, L1: the page was read only to 100k characters and no verbatim quote is recorded).
 - REST client: `quarkus.rest-client."key".tls-configuration-name` points to a named bucket ([REST client](./rest-client.md#tls)).
 - HTTP server: `quarkus.http.tls-configuration-name=<name>`.
 - Camel Quarkus 3.40.0 applies `quarkus.tls` protocols, ciphers and key-exchange groups to Camel SSL contexts built from registered beans; default TLSv1.3 only; unknown names fail; five settings are not bridged (High; https://camel.apache.org/camel-quarkus/3.40.x/migration-guide/3.40.0.html).

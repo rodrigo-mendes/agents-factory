@@ -78,7 +78,7 @@ def fix_file(path: Path) -> int:
 
     new_text, n = BROKEN_LINK_RE.subn(repl, text)
     if n:
-        path.write_text(new_text, encoding="utf-8")
+        path.write_text(new_text, encoding="utf-8", newline="\n")
     return n
 
 

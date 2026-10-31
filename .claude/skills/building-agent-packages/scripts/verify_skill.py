@@ -1,13 +1,23 @@
 #!/usr/bin/env python3
 """Mechanical checks for a hybrid knowledge skill (stdlib only, read-only).
-Usage: verify_skill.py <skill_dir>   Exit 1 when any problem is found."""
+Usage: verify_skill.py <skill_dir>   Exit 1 when any problem is found.
+Skills with `context: fork` are action commands: they get a lighter profile (extra routing keys
+allowed, no hybrid headings/blueprints/Version Context required)."""
 import os
 import re
 import sys
 
+sys.stdout.reconfigure(encoding='utf-8', errors='replace')
+COMMAND_KEYS = {'context', 'agent', 'disable-model-invocation', 'argument-hint', 'model',
+                'allowed-tools'}
+
 d = sys.argv[1]
+# GitHub Actions CI/CD skills must show real `.github/workflows/...` paths in `uses:` examples
+# (user decision at G2 of the github-actions-cicd run, DEC-010); every other package keeps the ban.
+GITHUB_PATHS_ALLOWED = 'packages/github-actions-cicd/' in os.path.abspath(d).replace(os.sep, '/') + '/'
 name = os.path.basename(d.rstrip('/'))
 problems = []
+is_command = False
 
 
 def slug(h):
@@ -29,7 +39,10 @@ if not m:
 else:
     fm = m.group(1)
     keys = re.findall(r'^([a-zA-Z_-]+):', fm, re.M)
-    if sorted(keys) != ['description', 'name']:
+    is_command = re.search(r'^context:\s*fork\s*$', fm, re.M) is not None
+    print(f'  profile: {"command (context: fork)" if is_command else "knowledge"}')
+    allowed = {'description', 'name'} | (COMMAND_KEYS if is_command else set())
+    if not {'description', 'name'} <= set(keys) or not set(keys) <= allowed:
         problems.append(f'frontmatter keys: {keys}')
     nm = re.search(r'^name:\s*(.+)$', fm, re.M)
     if nm and nm.group(1).strip() != name:
@@ -45,14 +58,14 @@ else:
         if 'Use when' not in dd:
             problems.append('description lacks "Use when"')
 
-for h in ('## Version Context', '## Quick Navigation', '## Blueprints & Guardrails',
+for h in () if is_command else ('## Version Context', '## Quick Navigation', '## Blueprints & Guardrails',
           '### ✅ Always Do', '### ⚠️ Ask First', '### 🚫 Never Do', '## Quick Reference'):
     if h not in text:
         problems.append(f'missing heading {h}')
 
 bp = os.path.join(d, 'blueprints')
-for f in ('evaluation-scenarios.md', 'unverified-and-risks.md', 'always-do-patterns.md',
-          'never-do-patterns.md'):
+for f in () if is_command else ('evaluation-scenarios.md', 'unverified-and-risks.md',
+                                 'always-do-patterns.md', 'never-do-patterns.md'):
     if not os.path.isfile(os.path.join(bp, f)):
         problems.append(f'missing blueprint {f}')
 ur = os.path.join(bp, 'unverified-and-risks.md')
@@ -63,8 +76,13 @@ if os.path.isfile(ur):
             problems.append(f'unverified-and-risks lacks heading {h}')
 ev = os.path.join(bp, 'evaluation-scenarios.md')
 if os.path.isfile(ev):
-    n = len(re.findall(r'^#+\s*(Scenario|Escenario)', open(ev, encoding='utf-8').read(), re.M | re.I))
+    et = open(ev, encoding='utf-8').read()
+    # two accepted formats: "## Scenario N" headings, or numbered headings with a `query:` block each
+    n = max(len(re.findall(r'^#+\s*(Scenario|Escenario)', et, re.M | re.I)),
+            len(re.findall(r'^\s*query:', et, re.M)))
     print(f'  eval scenarios headings: {n}')
+    if not is_command and n < 3:
+        problems.append(f'evaluation-scenarios.md has {n} scenario headings (< 3)')
 
 for root, _, fs in os.walk(d):
     for f in fs:
@@ -90,9 +108,11 @@ for root, _, fs in os.walk(d):
                          open(fp, encoding='utf-8').read().splitlines() if l.startswith('#')]
                 if anc[1:] not in heads:
                     problems.append(f'MISSING ANCHOR {os.path.relpath(p, d)} -> {tgt}{anc}')
-        for pat, label in ((r'/Users/|/home/|C:\\\\', 'absolute path'), (r'\.github/', '.github'),
+        for pat, label in ((r'/Users/|/home/|\b[A-Za-z]:\\[A-Za-z]', 'absolute path'), (r'\.github/', '.github'),
                            (r'days? (old|ago)|weeks? old', 'relative date'),
                            (r'write_to_file', 'write_to_file')):
+            if label == '.github' and GITHUB_PATHS_ALLOWED:
+                continue
             if re.search(pat, t):
                 problems.append(f'{label} in {os.path.relpath(p, d)}')
 

@@ -9,7 +9,8 @@ description: >
   when a fully specified AWS Terraform change must be written or reviewed and verified without
   further dialogue (e.g. "private S3 bucket with KMS encryption and access logging, with a mocked
   terraform test"). Not for apply/destroy/import, other clouds, or Terraform 0.x/provider 5.x or
-  7.x work.
+  7.x work. CloudWatch alarms/dashboards/retention policy and X-Ray groups/sampling belong to
+  aws-observability Mode B, not to this agent.
 tools: Read, Grep, Glob, Edit, Write, Bash
 model: sonnet
 ---
@@ -71,7 +72,7 @@ only under that target path (the project root named in the requirement), never o
    - `terraform fmt -check -recursive`
    - `terraform init -backend=false -input=false`
    - `terraform validate`
-   - `terraform test` ONLY after both checks below pass (Bash shell assumed; `env -u` is POSIX):
+   - `terraform test` ONLY after both checks below pass (a POSIX shell is assumed; `env -u` is POSIX. On Windows the Bash tool is Git Bash, which provides `env` and `/dev/null`):
      - (a) Grep every `*.tftest.hcl` for `command\s*=\s*apply`, for `providers\s*=` overrides, and
        for real `provider` blocks. Require a file-level `mock_provider` for every provider and
        alias the test uses. If any check fails, DO NOT run `terraform test`; report the file and
@@ -94,7 +95,7 @@ All skills are named `provisioning-aws-<service>-v6`.
 | API Gateway (REST, HTTP, WebSocket) | `provisioning-aws-api-gateway-v6` |
 | CloudFront | `provisioning-aws-cloudfront-v6` |
 | CloudTrail | `provisioning-aws-cloudtrail-v6` |
-| CloudWatch logs/alarms/dashboards | `provisioning-aws-cloudwatch-v6` |
+| CloudWatch: only the log group a Lambda needs to exist, with the retention given in the work-order. Alarms, dashboards and retention policy: NOT yours (owned by `aws-observability` Mode B) | `provisioning-aws-cloudwatch-v6` (log group only) |
 | Cognito | `provisioning-aws-cognito-v6` |
 | Cost Management (budgets, anomaly, CUR) | `provisioning-aws-cost-management-v6` |
 | DynamoDB | `provisioning-aws-dynamodb-v6` |
@@ -115,7 +116,7 @@ All skills are named `provisioning-aws-<service>-v6`.
 | Step Functions | `provisioning-aws-step-functions-v6` |
 | VPC networking | `provisioning-aws-vpc-v6` |
 | WAFv2 | `provisioning-aws-waf-v6` |
-| X-Ray | `provisioning-aws-xray-v6` |
+| X-Ray (groups, sampling): NOT yours (owned by `aws-observability` Mode B) | none: return needs-input naming `aws-observability` |
 
 **No skill exists for** any other AWS service (e.g. EKS, RDS, ECS, ALB, Transit Gateway), other
 clouds, or provider 5.x / 7.x. Return that as a limitation plus a question (descope, or confirm
@@ -146,9 +147,11 @@ targets 1.17+, say the skills are unverified for it (Ask First).
 - Any decision listed in a skill's Ask First table for a requested feature that the requirement
   leaves open.
 - Adding services or resources beyond what the requirement implies.
+- A requirement that contains CloudWatch alarms, dashboards, a log retention policy, X-Ray groups or sampling: return NEEDS-INPUT naming `aws-observability` (Mode B owns them); do not write them.
 - A target using provider 5.x or 7.x, or Terraform 1.17+ (unverified by the skills).
 
 ### 🚫 Never Do
+- Write CloudWatch alarms, dashboards or retention policy, or X-Ray groups or sampling rules. -> Return needs-input naming `aws-observability` Mode B. (Exception: the log group a Lambda needs, with the retention given in the work-order.)
 - Run `terraform apply`, `destroy`, `import`, `console`, `refresh`, `taint`, `untaint`,
   `force-unlock`, `workspace new|select|delete`, or any `terraform state` subcommand. -> Verify
   offline only; hand apply/import to the user.

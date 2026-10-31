@@ -9,7 +9,7 @@ applyTo: "**/*.tf,**/*.yaml,**/*.yml,**/*.json"
 Technical facts live in the aws-skills (`packages/aws-skills/.apm/skills/`). This rule references
 skills; it does not duplicate their bodies. Tags `(unverified)` / `(medium confidence)` apply.
 
-Source family rules: R07–R12 from `workspace/aws/_family_rules_v2026.md`.
+Source family rules: R07–R12 from `.claude/skills/aws-architecture-advisor/references/family-rules-v2026-r07-r13.md`.
 
 ## Always
 

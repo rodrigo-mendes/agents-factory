@@ -6,27 +6,24 @@ paths:
   - "**/func.yaml"
   - "**/pom.xml"
 ---
-## ⚠️ Check Prompts First!
+## ⚠️ Check Commands First!
 
-Before loading skills directly, check if a specialized prompt exists for the user's request:
+Before loading skills directly, check if a command exists for the user's request:
 
-| User Intent | Recommended Prompt |
+| User Intent | Command (agent) |
 |---|---|
-| Create a new function | `/add-oci-function` |
-| Add API Gateway integration | `/add-api-gateway` |
-| Add event handler (SCH, Notifications) | `/add-event-handler` |
-| Add event/message publishing | `/add-event-publishing` |
-| Add REST API client call | `/add-rest-client` |
-| Add Object Storage integration | `/add-object-storage` |
-| Add distributed APM tracing | `/add-function-tracing` |
-| Add JUnit 5 unit and integration tests | `/add-function-tests` |
-| Add full observability block (3 pillars) | `/add-function-observability` |
-| Full stack (function + infra) | `/add-serverless-stack` |
-| Architecture design/review | `/design-serverless-architecture` |
+| Create or change a function (handler, API Gateway backend, event handler, event publishing, REST client, Object Storage, tests, instrumentation) | `/develop-java-function` (`@oci-functions-java`) |
+| Provision or change OCI infrastructure for a function | `/provision-oci-infra` (`@oci-terraform`) |
+| Full stack (function + infra + API Gateway route) | `/provision-oci-serverless-stack` (`@oci-serverless-stack`) |
+| Deploy a function version | `/deploy-oci-function` (`@oci-deployer`) |
+| Diagnose a deployed function | `/debug-oci-function` (`@oci-debugger`) |
+| Design, provision or validate observability infrastructure | `/observe-oci-workload` (`@oci-observability`) |
+| Architecture design/review | `/design-oci-architecture` (`@oci-serverless-architect`) |
+| Tear down a test compartment | `/cleaning-up-oci-resources` (dry-run only by the agent) |
 
-**If a prompt matches** → Recommend it to the user. Prompts provide guided workflows with context collection.
+**If a command matches** → Recommend it to the user. Commands provide guided workflows with context collection.
 
-**If no prompt matches** → Proceed with skill loading below.
+**If no command matches** → Proceed with skill loading below.
 
 ---
 
@@ -115,11 +112,11 @@ P4: Generate code applying all patterns in composition order
 
 ---
 
-## Agent Delegation
+## Agent Hand-offs
 
-For requests outside Java function scope:
-- **Terraform provisioning** → Delegate to `@oci-terraform`
-- **Observability infra/design** (APM, logging, alarms, connector-hub, dashboards) → Delegate to `@oci-observability`
-- **Architecture review** → Delegate to `@oci-serverless-architect`
-- **Full stack (Java + Terraform)** → Delegate to `@oci-serverless-stack`
-- **Function testing** → Auto-applied via `java-functions-testing` instructions for `**/src/test/java/**/*.java`
+For requests outside Java function scope (user-mediated: tell the user the command to run):
+- **Terraform provisioning** → Hand off: run `/provision-oci-infra` (`@oci-terraform`)
+- **Observability infra/design** (APM, logging, alarms, connector-hub, dashboards) → Hand off: run `/observe-oci-workload` (`@oci-observability`)
+- **Architecture review** → Hand off: run `/design-oci-architecture` (`@oci-serverless-architect`)
+- **Full stack (Java + Terraform)** → Hand off: run `/provision-oci-serverless-stack` (`@oci-serverless-stack`)
+- **Function testing** → follow the `java-functions-testing` rule for `**/src/test/java/**/*.java`

@@ -1,0 +1,1 @@
+{"Subscriptions":[{"SubscriptionArn":"PendingConfirmation","Owner":"111122223333","Protocol":"email","Endpoint":"oncall@example.com","TopicArn":"arn:aws:sns:eu-west-1:111122223333:orders-alerts"}]}

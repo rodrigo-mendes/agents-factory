@@ -2,9 +2,9 @@
 kind: report
 from: "@oci-deployer"
 to: "@oci-debugger"
-refs: <report-java.md | report-terraform-integration.md | diagnosis-report.md>
+refs: <result-java.md | result-terraform-integration.md | diagnosis-report.md>
 capability: <capability-slug>
-outcome: <success | partial | failed>
+outcome: <success | partial | failed | needs-input>
 createdAt: <ISO 8601>
 ---
 
@@ -33,7 +33,7 @@ createdAt: <ISO 8601>
 ## Next action
 
 <On success> Deploy complete — no handoff needed.
-<On failure> Hand off: run `/debug-function` (`@oci-debugger`) — <symptom> needs diagnosis. Context: this file.
+<On failure> Hand off: run `/debug-oci-function` (`@oci-debugger`) — <symptom> needs diagnosis. Context: this file.
 
 ## Open issues / blockers
 

@@ -1,0 +1,173 @@
+[>] Installing dependencies from apm.yml...
+[!] [!] Skipped 2 untrusted project script(s). Run 'apm lifecycle trust' to 
+enable them.
+[>] Resolving microsoft/apm...
+[>] Resolving ./packages/langchain4j...
+WARNING apm_cli.policy.discovery Policy repo rodrigo-mendes/.github-private not found (or [REDACTED] private-repo read scope). If your org publishes policy in .github-private, ensure the token has Contents:read permission on that repo.
+[i] Targets: claude  (source: --target flag)
+  [+] ./packages/agent-package-builder (local)
+  [+] ./packages/artifact-authoring (local)
+  [+] ./packages/auditing (local)
+  [+] ./packages/aws-architect (local)
+  [+] ./packages/book-writing (local)
+  [+] ./packages/camel-quarkus-integrator (local)
+  [+] ./packages/evaluating (local)
+  [+] ./packages/langchain4j (local)
+  [+] ./packages/oci-architecture (local)
+  [+] ./packages/oci-functions-java (local)
+  [+] ./packages/oci-observability (local)
+  [+] ./packages/oci-terraform (local)
+  [+] ./packages/researching-frameworks (local)
+  [+] ./packages/researching-platform (local)
+  [+] ./packages/stripe-java (local)
+  [+] ./packages/terraform (local)
+  [+] ./packages/validating (local)
+  [+] ../artifact-authoring (local)
+  [+] ../aws-skills (local)
+  [+] ../aws-terraform (local)
+  [+] ../camel-quarkus-skills (local)
+  [+] ../factory-core (local)
+  [+] ../oci-core (local)
+  [+] ../research-core (local)
+  |-- 1 skill(s) integrated -> .claude/skills/
+Warning: Failed to parse C:\agents\agents-factory\apm_modules\_local\artifact-authoring\.apm\skills\agent-creator\assets\TEMPLATE.AGENT.md: Failed to parse primitive file C:\agents\agents-factory\apm_modules\_local\artifact-authoring\.apm\skills\agent-creator\assets\TEMPLATE.AGENT.md: Unknown primitive file type: C:\agents\agents-factory\apm_modules\_local\artifact-authoring\.apm\skills\agent-creator\assets\TEMPLATE.AGENT.md
+  |-- 1 agents integrated -> .claude/agents/
+  |-- 5 skill(s) integrated -> .claude/skills/
+  |-- 1 agents adopted -> .claude/agents/
+  |-- 8 skill(s) integrated -> .claude/skills/
+  |-- 1 agents adopted -> .claude/agents/
+  |-- 2 rule(s) integrated -> .claude/rules/
+  |-- 1 skill(s) integrated -> .claude/skills/
+  |-- 13 agents adopted -> .claude/agents/
+  |-- 10 skill(s) integrated -> .claude/skills/
+  |-- 1 agents adopted -> .claude/agents/
+  |-- 3 rule(s) integrated -> .claude/rules/
+  |-- 2 skill(s) integrated -> .claude/skills/
+  |-- 1 agents adopted -> .claude/agents/
+  |-- 1 skill(s) integrated -> .claude/skills/
+  |-- 1 agents integrated -> .claude/agents/
+  |-- 2 rule(s) integrated -> .claude/rules/
+  |-- 3 skill(s) integrated -> .claude/skills/
+  |-- 2 agents adopted -> .claude/agents/
+  |-- 2 rule(s) integrated -> .claude/rules/
+  |-- 8 skill(s) integrated -> .claude/skills/
+  |-- 3 agents adopted -> .claude/agents/
+  |-- 17 rule(s) integrated -> .claude/rules/
+  |-- 14 skill(s) integrated -> .claude/skills/
+  |-- 1 agents adopted -> .claude/agents/
+  |-- 1 rule(s) integrated -> .claude/rules/
+  |-- 10 skill(s) integrated -> .claude/skills/
+  |-- 1 agents adopted -> .claude/agents/
+  |-- 8 rule(s) integrated -> .claude/rules/
+  |-- 20 skill(s) integrated -> .claude/skills/
+  |-- 5 skill(s) integrated -> .claude/skills/
+  |-- 15 skill(s) integrated -> .claude/skills/
+  |-- 2 agents adopted -> .claude/agents/
+  |-- 1 rule(s) integrated -> .claude/rules/
+  |-- 6 skill(s) integrated -> .claude/skills/
+  |-- 2 agents adopted -> .claude/agents/
+  |-- 5 skill(s) integrated -> .claude/skills/
+  |-- 1 agents adopted -> .claude/agents/
+  |-- 5 skill(s) integrated -> .claude/skills/
+Warning: Failed to parse C:\agents\agents-factory\apm_modules\_local\cb22016cafe9\artifact-authoring\.apm\skills\agent-creator\assets\TEMPLATE.AGENT.md: Failed to parse primitive file C:\agents\agents-factory\apm_modules\_local\cb22016cafe9\artifact-authoring\.apm\skills\agent-creator\assets\TEMPLATE.AGENT.md: Unknown primitive file type: C:\agents\agents-factory\apm_modules\_local\cb22016cafe9\artifact-authoring\.apm\skills\agent-creator\assets\TEMPLATE.AGENT.md
+  |-- 1 agents integrated -> .claude/agents/
+  |-- 5 skill(s) integrated -> .claude/skills/
+  |-- 40 skill(s) integrated -> .claude/skills/
+  |-- 3 rule(s) integrated -> .claude/rules/
+  |-- 26 skill(s) integrated -> .claude/skills/
+  |-- 13 skill(s) integrated -> .claude/skills/
+  |-- 5 rule(s) integrated -> .claude/rules/
+  |-- 1 skill(s) integrated -> .claude/skills/
+  |-- 3 agents adopted -> .claude/agents/
+  |-- (files unchanged)
+  [!] Skipped .claude/skills/refactoring-oci-java/SKILL.md: modified since 
+deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped .claude/skills/terraform-rules-author/SKILL.md: modified since 
+deployment. Preserve your changes before reinstalling with --force.
+  [x] 1 package failed:
+    +- microsoft/apm -- Failed to download dependency microsoft/apm: Failed to 
+clone repository microsoft/apm: error: Your local changes to the following 
+files would be overwritten by checkout:
+        tests/unit/policy/test_ci_checks.py
+        tests/unit/policy/test_discovery.py
+        tests/unit/primitives/test_primitives.py
+        tests/unit/primitives/test_resolve_user_invocable.py
+        tests/unit/regressions/test_issue_2551_mcp_uninstall_cleanup.py
+        tests/unit/scripts/test_architecture_runner.py
+        tests/unit/scripts/test_architecture_skills_root_guard.py
+        tests/unit/scripts/test_lifecycle_smoke_sharding.py
+        tests/unit/test_audit_policy_command.py
+        tests/unit/test_auth.py
+        tests/unit/test_build_sha.py
+        tests/unit/test_claude_mcp.py
+        tests/unit/test_cli_consistency.py
+        tests/unit/test_codex_adapter_compatibility.py
+        tests/unit/test_codex_adapter_phase3.py
+        tests/unit/test_codex_mcp_native_schema.py
+        tests/unit/test_codex_native_admission.py
+        tests/unit/test_codex_native_client.py
+        tests/unit/test_codex_native_intent.py
+        tests/unit/test_codex_native_registrar.py
+        tests/unit/test_codex_native_snapshot.py
+        tests/unit/test_command_logger.py
+        tests/unit/test_conflict_detection.py
+        tests/unit/test_copilot_adapter.py
+        tests/unit/test_deployment_materialization_receipts.py
+        tests/unit/test_deps_list_tree_info.py
+        tests/unit/test_dev_dependencies.py
+        tests/unit/test_drift_detection.py
+        tests/unit/test_drift_registry.py
+        tests/unit/test_external_options.py
+        tests/unit/test_global_mcp_scope.py
+        tests/unit/test_helpers.py
+        tests/unit/test_install_command.py
+        tests/unit/test_install_pipeline_orchestration.py
+        tests/unit/test_install_pipeline_phase3w4.py
+        tests/unit/test_install_update_refs.py
+        tests/unit/test_lifecycle_executor_paths.py
+        tests/unit/test_lockfile_enrichment.py
+        tests/unit/test_lockfile_v2_bump.py
+        tests/unit/test_manifest_extension_keys.py
+        tests/unit/test_mcp_client_factory.py
+        tests/unit/test_mcp_integrator_overlay.py
+        tests/unit/test_mcp_integrator_phase3w4.py
+        tests/unit/test_mcp_integrator_remove_stale.py
+        tests/unit/test_models_validation_phase3.py
+        tests/unit/test_models_validation_rules.py
+        tests/unit/test_native_bundle_hash.py
+        tests/unit/test_opencode_mcp.py
+        tests/unit/test_opencode_runtime_references.py
+        tests/unit/test_outdated_marketplace_detection.py
+        tests/unit/test_outdated_phase3w5.py
+        tests/unit/test_performance_scan_regressions.py
+        tests/unit/test_platform_contract_workflow.py
+        tests/unit/test_prune_casing.py
+        tests/unit/test_runtime_manager.py
+        tests/unit/test_safe_installer.py
+        tests/unit/test_scoped_mcp_server_names.py
+        tests/unit/test_skill_subset_persistence.py
+        tests/unit/test_skillspector_llm.py
+        tests/unit/test_symlink_containment.py
+        tests/unit/test_tls_docs_scope.py
+        tests/unit/test_transitive_mcp.py
+        tests/unit/test_triage_advisory.py
+        tests/unit/test_triage_fetch_queue.py
+        tests/unit/test_triage_panel_lock.py
+        tests/unit/test_uninstall_engine_helpers.py
+        tests/unit/test_uninstall_engine_phase3w5.py
+        tests/unit/test_uninstall_engine_validation.py
+        tests/unit/test_version.py
+        tests/unit/test_version_entrypoint.py
+        tests/unit/test_yaml_io.py
+        tests/unit/utils/test_atomic_io.py
+        tests/unit/utils/test_github_host_predicate.py
+        tests/utils/git_credential_shim.py
+        tests/utils/kiro_prompt_loader.mjs
+        tests/utils/managed_mcp.py
+        tests/utils/materialized_downloader.py
+        tests/utils/resolution_failure_probe.py
+        uv.lock
+Please commit your changes or stash them before you switch branches.
+Aborting
+[x] Installation failed with 1 error(s) in 84.1s. No install transaction 
+changes were committed.

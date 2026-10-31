@@ -1,68 +1,51 @@
-# Blueprint: build-push.sh Script
+# Blueprint: build-push.py Script
 
-> **Runnable template**: [`assets/build-push.sh`](../assets/build-push.sh) — copy that file to
-> `services/<function-name>/build-push.sh` and `chmod +x` it. It contains the identical script
-> below, kept in a single place to avoid the 6-copy duplication seen in the PoC services.
+> **Runnable template**: [`assets/build-push.py`](../assets/build-push.py) — copy that file to
+> `services/<function-name>/build-push.py` and run it with `python3 build-push.py [TAG]`
+> (Python 3.8+, standard library only; Linux, macOS and Windows). It is kept in a single place to
+> avoid the 6-copy duplication seen in the PoC services. Offline tests with a fake `docker`:
+> `python3 tests/run_tests.py` (from the skill folder).
 
-Reference listing (for documentation purposes — the authoritative copy is `assets/build-push.sh`):
+## What it does (in order)
 
-```bash
-#!/usr/bin/env bash
-set -euo pipefail
+1. **Pre-flight** — if `services/../scripts/preflight.sh` (i.e. `<repo>/scripts/preflight.sh`) exists
+   and is executable, prints `==> Running pre-flight checks...` and runs it with the function directory
+   as argument (through `bash` on Windows). A non-zero exit stops the script with that exit code.
+2. **Load `services/.env`** — missing file → `ERROR: <path> not found.` and exit 1. The file is read as
+   `KEY=VALUE` lines (`export`, quotes, `$VAR`/`${VAR}` expansion and `#` comments supported); it is
+   not executed as shell code. Values already in the environment count too.
+3. **Validate** `OCIR_REGION`, `OCIR_NAMESPACE`, `OCIR_REPO`, `OCIR_USERNAME`, `OCIR_PASSWORD` →
+   `ERROR: <VAR> is not set in <path>` and exit 1.
+4. **Login** — `docker login <OCIR_REGION>.ocir.io -u <OCIR_USERNAME> --password-stdin`; the password
+   goes on stdin only (never on the command line, never printed).
+5. **Resolve** the function name (`name:` in `func.yaml`) and the tag (first argument, else `version:`
+   in `func.yaml`). A missing `func.yaml` exits 2, a missing field exits 1.
+6. **Build** — `docker build --platform <PLATFORM> -t <image> <function dir>` with `HTTP_PROXY`,
+   `HTTPS_PROXY`, `http_proxy`, `https_proxy` removed from that call's environment only.
+7. **Push** — `docker push <image>`, then prints `Done! Image URI:` and the image.
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-ENV_FILE="${SCRIPT_DIR}/../.env"
-
-if [[ -f "${SCRIPT_DIR}/../../scripts/preflight.sh" ]]; then
-  echo "==> Running pre-flight checks..."
-  "${SCRIPT_DIR}/../../scripts/preflight.sh" "${SCRIPT_DIR}"
-fi
-
-if [[ ! -f "${ENV_FILE}" ]]; then
-  echo "ERROR: ${ENV_FILE} not found."
-  exit 1
-fi
-source "${ENV_FILE}"
-
-for var in OCIR_REGION OCIR_NAMESPACE OCIR_REPO OCIR_USERNAME OCIR_PASSWORD; do
-  if [[ -z "${!var:-}" ]]; then
-    echo "ERROR: ${var} not set in ${ENV_FILE}"
-    exit 1
-  fi
-done
-
-echo "==> Logging in to ${OCIR_REGION}.ocir.io"
-echo "${OCIR_PASSWORD}" | docker login "${OCIR_REGION}.ocir.io" -u "${OCIR_USERNAME}" --password-stdin
-
-FUNC_NAME=$(grep '^name:' "${SCRIPT_DIR}/func.yaml" | awk '{print $2}')
-TAG="${1:-$(grep '^version:' "${SCRIPT_DIR}/func.yaml" | awk '{print $2}')}"
-PLATFORM="${PLATFORM:-linux/amd64}"
-IMAGE="${OCIR_REGION}.ocir.io/${OCIR_NAMESPACE}/${OCIR_REPO}/${FUNC_NAME}:${TAG}"
-
-echo "==> Building ${IMAGE} (platform: ${PLATFORM})"
-env -u HTTP_PROXY -u HTTPS_PROXY -u http_proxy -u https_proxy \
-  docker build --platform "${PLATFORM}" -t "${IMAGE}" "${SCRIPT_DIR}"
-
-echo "==> Pushing ${IMAGE}"
-docker push "${IMAGE}"
-
-echo ""
-echo "Done! Image URI: ${IMAGE}"
-```
+Image: `<OCIR_REGION>.ocir.io/<OCIR_NAMESPACE>/<OCIR_REPO>/<name>:<tag>`. Any docker failure stops
+the script with docker's exit code.
 
 ## Required `.env` variables
 
 | Variable | Description |
 |---|---|
-| `OCIR_REGION` | OCI region identifier (e.g. `sa-saopaulo-1`) |
+| `OCIR_REGION` | OCI region key used in the registry host (e.g. `gru` for `sa-saopaulo-1`) |
 | `OCIR_NAMESPACE` | OCIR namespace (tenancy object storage namespace) |
 | `OCIR_REPO` | Repository path inside OCIR |
 | `OCIR_USERNAME` | `<tenancy>/<username>` or IDCS user |
 | `OCIR_PASSWORD` | Auth token (not account password) |
 
+## Optional environment variables
+
+| Variable | Default | Use |
+|---|---|---|
+| `PLATFORM` | `linux/amd64` | `linux/arm64` for local Apple Silicon builds; always push `linux/amd64` to OCI |
+| `DOCKER_CMD` | `docker` | Alternative docker CLI (the tests point it at a fake) |
+
 ## Notes
 
-- `set -euo pipefail` ensures the script fails fast on any error or unset variable.
-- Proxy variables are explicitly unset for the `docker build` call to avoid proxy interference with layer pulls inside the build.
-- The `PLATFORM` variable defaults to `linux/amd64`; override it for Apple Silicon (`linux/arm64`) local builds if needed, but always push `linux/amd64` for OCI.
+- Same contract as the former `build-push.sh` (inputs, steps, output lines, exit codes); the one
+  difference is that `services/.env` is parsed, not `source`d — keep it to plain `KEY=VALUE` lines.
 - The script reads `name:` and `version:` from `func.yaml`; keep those fields accurate.

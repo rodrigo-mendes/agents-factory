@@ -1,6 +1,6 @@
 # Unverified Register, Risks and Bibliography
 
-Research date 2026-10-14. Back to [SKILL.md](../SKILL.md). Header counts: 16 unverified (U1-U16: the research's 11 plus 5 skill-added), 4 irresolvable (I1-I4), 14 medium-confidence (M1-M14), 1 coverage limit (L1). The research file reports 11 unverified and 5 irresolvable items and a quality score of 84%; its fifth irresolvable item (unread migration guides) is filed here as coverage limit L1.
+Research date 2026-10-14. Back to [SKILL.md](../SKILL.md). Header counts: 16 unverified (U1-U16: the research's 11 and 5 skill-added; the 2 unverified and 1 irresolvable item moved from `developing-quarkus-rest-v3-40` were duplicates of U5 and U13 and are merged into them), 4 irresolvable (I1-I4), 15 medium-confidence (M1-M15; M15 moved), 2 coverage limits (L1; L2 moved). The research file reports 11 unverified and 5 irresolvable items and a quality score of 84%; its fifth irresolvable item (unread migration guides) is filed here as coverage limit L1.
 
 ## Contents
 
@@ -21,13 +21,13 @@ Research date 2026-10-14. Back to [SKILL.md](../SKILL.md). Header counts: 16 unv
 
 ## Unverified items
 
-16 unverified items. U1-U11 come from the research; U12-U16 are skill-added.
+16 unverified items. U1-U11 come from the research; U12-U16 are skill-added. Items moved from `developing-quarkus-rest-v3-40` (blueprint `camel-integration`) were merged into U5 and U13.
 
 - U1. The `.required(boolean)` param builder method.
 - U2. `camel-openapi-validator` native support in Camel Quarkus.
 - U3. Placeholder resolution in a REST path for openapi-java at build time.
 - U4. OIDC configuration with platform-http (guide not fetched).
-- U5. Path collision between Quarkus REST and Camel REST.
+- U5. Path collision between Quarkus REST and Camel REST: what happens when a Quarkus REST resource and a Camel platform-http route share a path on the same HTTP server (ambiguous routing or shadowed endpoints), and whether `quarkus.rest.path` affects Camel platform-http routes (merged from the `developing-quarkus-rest-v3-40` items I1 and U2). Not resolvable from documentation. Do not rely on `quarkus.rest.path` to separate the stacks; use disjoint path prefixes (research workaround). Follow-up: camel-quarkus issues, platform-http extension source.
 - U6. REST-specific metrics.
 - U7. Performance numbers (no official benchmarks found).
 - U8. Release date and Camel version on the `q-3.40.0` page. Superseded for the skill's claims: the release date and the Camel version come from the family facts (https://camel.apache.org/releases/ and https://camel.apache.org/camel-quarkus/latest/); the `q-3.40.0` page shows neither and is cited for Java only.
@@ -35,7 +35,7 @@ Research date 2026-10-14. Back to [SKILL.md](../SKILL.md). Header counts: 16 unv
 - U10. Whether `contextPath` overrides the contract base path.
 - U11. The property name `camel.dataformat.jackson.auto-discover-object-mapper`.
 - U12. The runtime result of setting `SSLContextParameters` on the platform-http server (the sibling platform-http register also lists it).
-- U13. Whether the Camel Quarkus 3.40.0 TLS bridging (`quarkus.tls` applied to Camel SSL contexts built from registered beans) affects the inbound REST/platform-http server (not resolvable from documentation; no page states it). Related: the effect of the Quarkus TLS registry on the inbound server.
+- U13. Whether the Camel Quarkus 3.40.0 TLS bridging (`quarkus.tls` applied to Camel SSL contexts built from registered beans) affects the inbound REST/platform-http server (not resolvable from documentation; no page states it; merged from the `developing-quarkus-rest-v3-40` item U7). Related: the effect of the Quarkus TLS registry on the inbound server. Configure server TLS explicitly with `quarkus.http.tls-configuration-name`. Follow-up: https://camel.apache.org/camel-quarkus/3.40.x/migration-guide/3.40.0.html.
 - U14. When the `camel-quarkus-junit5` stub will be removed. The stub facts live in `developing-camel-quarkus-junit-v3-40`; prefer `camel-quarkus-junit`.
 - U15. Java 25 support for Camel Quarkus 3.40.
 - U16. That Jackson 3 (Quarkus 4) affects `camel-quarkus-jackson` and REST JSON binding (not in the family facts; research only).
@@ -55,7 +55,7 @@ The exact wording of quotes taken from tool-summarised pages is a general caveat
 
 ## Medium-confidence items
 
-14 medium-confidence items.
+15 medium-confidence items (M15 moved from `developing-quarkus-rest-v3-40`).
 
 - M1. REST DSL manual pages (`/manual/rest-dsl*.html`) are unversioned and treated as 4.22.x docs: `bindingMode` values, JSON using Jackson, `skipBindingOnErrorCode`, `inlineRoutes`, response codes, custom error codes 300+, `clientRequestValidation` defaults, contract-first startup failure, `enableCORS` defaults.
 - M2. Official example poms and code on the `main` branch (not the 3.40.x tag): `camel-quarkus-jackson` and `camel-quarkus-direct` dependencies, `quarkus-junit` + `rest-assured` test dependencies, Quarkus platform 3.40.1 (supporting evidence only; the fact itself comes from the Camel Quarkus docs index).
@@ -71,14 +71,16 @@ The exact wording of quotes taken from tool-summarised pages is a general caveat
 - M12. Testing details: `camel-quarkus-junit` needed only for `CamelQuarkusTestSupport`, test port 8081, RestAssured timeout 30 s, Quarkus authorization reference.
 - M13. Camel 4.22 upgrade-guide items (Content-Type from `produces`, `fileNameExtWhitelist`, `vertx-http` header stripping).
 - M14. Authenticated-user header (investigator notes).
+- M15. Moved from `developing-quarkus-rest-v3-40` (ID M6 there): `ProducerTemplate` in a Jakarta REST resource; resource versus REST DSL. Examples main branch, not 3.40.x-tagged docs.
 
 Resolved as High (rule: versioned page, single source does not lower confidence): alternate transport `camel-quarkus-servlet` (rest extension page), `missingOperation` and platform-http endpoint defaults (components/4.22.x pages), ObjectMapper reuse via `autoDiscoverObjectMapper` (versioned jackson extension page; only the property-name form is U11), `expose.enabled` default (openapi-java page). Moved out of the medium list: Jackson 3 impact is now U16 (not in the family facts).
 
 ## Coverage limits
 
-1 coverage limit.
+2 coverage limits (L2 moved from `developing-quarkus-rest-v3-40`).
 
 - L1. Nine Camel Quarkus migration guides were not read for REST impact: 3.17, 3.18, 3.23, 3.26, 3.27, 3.33, 3.35, 3.36, 3.38. Possible missed breaking change; read each before upgrading from 3.15: https://camel.apache.org/camel-quarkus/3.40.x/migration-guide/index.html
+- L2. Moved from `developing-quarkus-rest-v3-40` (ID L4 there): the `rest-json` example of the Camel REST DSL in https://github.com/apache/camel-quarkus-examples was not read (name only seen).
 
 ## Tag to register mapping
 
@@ -98,6 +100,7 @@ Resolved as High (rule: versioned page, single source does not lower confidence)
 | (unverified): placeholder resolution in a REST path at build time | never-do-patterns | U3 |
 | (unverified): OIDC configuration details | validation-and-cors | U4 |
 | (unverified): Quarkus REST and Camel REST path collision | validation-and-cors; integration-examples | U5 |
+| (unverified, U5) shared path; `quarkus.rest.path` and platform-http | quarkus-rest-integration | U5 |
 | (unverified): REST metrics and performance numbers | rest-dsl-configuration | U6, U7 |
 | (unverified): `camel.dataformat.jackson.auto-discover-object-mapper` name | rest-dsl-configuration | U11 |
 | (unverified): runtime result of `SSLContextParameters` on the server | never-do-patterns | U12 |
@@ -119,43 +122,12 @@ Resolved as High (rule: versioned page, single source does not lower confidence)
 | (medium confidence): Camel 4.22 upgrade-guide items | migration-guide; validation-and-cors | M13 |
 | (medium confidence): authenticated-user header | rest-dsl-configuration | M14 |
 | (medium confidence): CDI injection in `configure()` and REST in `LambdaRouteBuilder` | never-do-patterns | M9 |
+| (unverified, U13) TLS bridging on the inbound server | quarkus-rest-integration | U13 |
+| coverage limit, `rest-json` example not read (register L2; no tag in text) | quarkus-rest-integration | L2 |
+| (medium confidence, M15) resource + ProducerTemplate; (medium confidence, M15: the example is on the `main` branch, not the 3.40.x tag) | SKILL.md Ask First; quarkus-rest-integration | M15 |
 
 Untagged claims are High: versioned official page fetched 2026-10-14, or an orchestrator-verified family fact (release date and LTS, versions, Quarkus 3.40 LTS end date, Quarkus 4.0.0.Beta1, junit rename). Always Do and Never Do in SKILL.md accept only High; any tag there is a defect.
 
 ## Source Bibliography
 
-All fetched 2026-10-14. camel.apache.org manual and component pages carry no page date and are accepted as current docs; `/manual/` pages are unversioned. No community sources were used. The Quarkus blog post cited by the earlier research (AtlasMap-based, pre-Camel-4) was rejected.
-
-- https://camel.apache.org/camel-quarkus/3.40.x/reference/extensions/rest.html
-- https://camel.apache.org/camel-quarkus/3.40.x/reference/extensions/platform-http.html
-- https://camel.apache.org/camel-quarkus/3.40.x/reference/extensions/openapi-java.html
-- https://camel.apache.org/camel-quarkus/3.40.x/reference/extensions/rest-openapi.html
-- https://camel.apache.org/camel-quarkus/3.40.x/reference/extensions/jackson.html
-- https://camel.apache.org/camel-quarkus/3.40.x/user-guide/testing.html
-- https://camel.apache.org/camel-quarkus/3.40.x/user-guide/cdi.html
-- https://camel.apache.org/camel-quarkus/3.40.x/migration-guide/index.html
-- https://camel.apache.org/camel-quarkus/3.40.x/migration-guide/3.40.0.html
-- https://camel.apache.org/camel-quarkus/3.40.x/migration-guide/3.31.0.html
-- https://camel.apache.org/camel-quarkus/next/migration-guide/3.39.0.html
-- https://camel.apache.org/releases/
-- https://camel.apache.org/releases/q-3.40.0/ (Java 17 and 21; neither release date nor Camel version)
-- https://camel.apache.org/releases/release-4.0.0/
-- https://camel.apache.org/manual/rest-dsl.html
-- https://camel.apache.org/manual/rest-dsl-binding.html
-- https://camel.apache.org/manual/rest-dsl-validation.html
-- https://camel.apache.org/manual/rest-dsl-openapi.html
-- https://camel.apache.org/manual/latest/rest-dsl.html (search snippet only, `.param()` syntax)
-- https://camel.apache.org/manual/camel-4x-upgrade-guide-4_22.html
-- https://camel.apache.org/manual/camel-4-migration-guide.html (search summary)
-- https://camel.apache.org/components/4.22.x/platform-http-component.html
-- https://camel.apache.org/components/4.22.x/rest-openapi-component.html
-- https://camel.apache.org/components/4.22.x/others/main.html
-- https://quarkus.io/version/3.40/guides/http-reference (research fetched the unpinned `/guides/` URL; pinned URL not re-fetched, so claims stay medium)
-- https://quarkus.io/version/3.40/guides/security-cors (same note)
-- https://quarkus.io/version/3.40/guides/security-authorize-web-endpoints-reference (same note)
-- https://quarkus.io/version/3.40/guides/getting-started-testing (same note)
-- https://repo1.maven.org/maven2/org/apache/camel/quarkus/camel-quarkus-junit5/3.40.0/camel-quarkus-junit5-3.40.0.pom (orchestrator-fetched 2026-10-14)
-- https://camel.apache.org/camel-quarkus/latest/
-- https://quarkus.io/releases
-- https://quarkus.io/blog/quarkus-4-0-0-beta1-released/
-- https://github.com/apache/camel-quarkus-examples (`rest-json` pom and Routes.java, `openapi-contract-first` pom and application.properties)
+The full table is in [source-bibliography.md](./source-bibliography.md).

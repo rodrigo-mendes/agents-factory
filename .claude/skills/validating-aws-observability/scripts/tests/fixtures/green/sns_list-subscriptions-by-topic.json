@@ -1,0 +1,1 @@
+{"Subscriptions":[{"SubscriptionArn":"arn:aws:sns:eu-west-1:111122223333:orders-alerts:0b1c2d3e-aaaa-bbbb-cccc-0123456789ab","Owner":"111122223333","Protocol":"email","Endpoint":"oncall@example.com","TopicArn":"arn:aws:sns:eu-west-1:111122223333:orders-alerts"}]}

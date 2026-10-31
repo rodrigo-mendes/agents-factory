@@ -1,6 +1,6 @@
 # Always-Do Patterns: Quarkus ArC 3.40.x
 
-Research date 2026-10-14. Back to [SKILL.md](../SKILL.md). Every pattern here is tagged High in the research and rests on versioned 3.40 pages. Medium-confidence items (private members, `@Startup`) are in [scopes and injection](./scopes-and-injection.md).
+Research date 2026-10-14. Back to [SKILL.md](../SKILL.md). Patterns 1-5 are tagged High in the research and rest on versioned 3.40 pages; pattern 6 is (medium confidence, L1). Other medium-confidence items (private members, `@Startup`) are in [scopes and injection](./scopes-and-injection.md).
 
 ## Contents
 
@@ -13,7 +13,7 @@ Research date 2026-10-14. Back to [SKILL.md](../SKILL.md). Every pattern here is
 
 ## 1. Bean-defining annotation
 
-Discovery uses a single bean archive in annotated mode. A class without a bean-defining annotation is not discovered. Exception: a class that declares producers or observers is treated as `@Dependent`. The CDI guide recommends `@ApplicationScoped` by default; `@Singleton` is slightly faster but has no client proxy and cannot be mocked with `QuarkusMock`.
+Discovery uses a single bean archive in annotated mode. A class without a bean-defining annotation is not discovered. Exception: a class that declares producers or observers is treated as `@Dependent`. The [CDI guide](https://quarkus.io/version/3.40/guides/cdi) recommends `@ApplicationScoped` by default; `@Singleton` is slightly faster but has no client proxy and cannot be mocked with `QuarkusMock`.
 
 ```java
 @ApplicationScoped            // normal scope: lazy client proxy, mockable
@@ -40,7 +40,7 @@ Sources: https://quarkus.io/version/3.40/guides/cdi-reference ; https://quarkus.
 
 ## 3. Identifier instead of Named
 
-The Quarkus CDI reference says to use `@io.smallrye.common.annotation.Identifier` instead of `@Named`, except where an external language such as Qute needs the bean name. This is a recommendation, not a documented failure: the stated reason is that a `@Named`-only bean also gets `@Default` and can become ambiguous (see Ask First in SKILL.md).
+The Quarkus [CDI reference](https://quarkus.io/version/3.40/guides/cdi-reference) says to use `@io.smallrye.common.annotation.Identifier` instead of `@Named`, except where an external language such as Qute needs the bean name. This is a recommendation, not a documented failure: the stated reason is that a `@Named`-only bean also gets `@Default` and can become ambiguous (see Ask First in SKILL.md).
 
 ```java
 @ApplicationScoped @Identifier("primary") class PrimaryClient implements Client {}
@@ -83,7 +83,7 @@ Source: https://camel.apache.org/camel-quarkus/3.40.x/user-guide/cdi.html
 
 ## 6. Mockito artifact for InjectMock
 
-`@InjectMock` and `@InjectSpy` require `quarkus-junit-mockito`. The 3.40 testing guide names `quarkus-junit` and `quarkus-junit-mockito`.
+`@InjectMock` and `@InjectSpy` require `quarkus-junit-mockito`. The 3.40 testing guide names `quarkus-junit` and `quarkus-junit-mockito` (medium confidence, L1).
 
 ```xml
 <dependency>

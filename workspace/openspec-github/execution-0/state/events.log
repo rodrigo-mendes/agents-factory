@@ -1,0 +1,2 @@
+2026-10-29T21:05:57 | P0 | migrate_state | INIT | execution-0 migrated from the legacy layout (legacy files untouched)
+2026-10-29T21:05:57 | - | migrate_state | NOTE | legacy round reports kept in place: round-1, round-2, round-3

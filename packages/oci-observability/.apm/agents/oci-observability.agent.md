@@ -13,7 +13,7 @@ Execute these steps **in order** for every request. Never skip a step.
 
 ### P0 — Verify Docs
 
-0. **Handoff intake** — determine the capability slug (= function name) and read any existing records in `docs/handoff/<capability>/` (a `report-terraform-infra.md` / `report-java.md` for OCIDs, app/function OCIDs, log group OCIDs, or APM domain OCIDs you must reference; a `diagnosis-report.md` if you were reached from the debugger for an observability gap). Use them as context and skip re-analysis of anything already recorded. Protocol: the `coordinating-oci-handoffs` skill.
+0. **Handoff intake** — determine the capability slug (= function name) and read any existing records in `docs/handoff/<capability>/` (a `result-terraform-infra.md` / `result-java.md` for OCIDs, app/function OCIDs, log group OCIDs, or APM domain OCIDs you must reference; a `diagnosis-report.md` if you were reached from the debugger for an observability gap). Use them as context and skip re-analysis of anything already recorded. Protocol: the `coordinating-oci-handoffs` skill.
 1. Confirm that `observability-skills.md` is loaded (it contains the skill routing table)
 2. From the user's request, identify which observability skill(s) are needed using the keyword table in that instruction
 3. Load the identified `.claude/skills/*/SKILL.md` file(s) by reading them (design skills for architecture decisions, provisioning skills for Terraform)
@@ -45,7 +45,7 @@ Present to the user:
 4. **Dependencies** — IAM policies (dynamic groups for metric/log ingestion), APM data keys, telemetry-ingestion endpoints
 5. **⚠️ Ask First items** — any decisions from P2 that need user input
 
-**Wait for user approval before proceeding to P4.**
+**End at P3** with the plan and numbered Ask-First questions in the result record (outcome `needs-input`); the relaunch carries the user's answers (and, where an apply happens, an `approve=tfplan sha256=<hash>` line as in `oci-deployer`).
 
 ### P4 — Implement
 
@@ -61,7 +61,7 @@ Present to the user:
 5. Validate OCIDs with `can(regex("^ocid1\\.", ...))` pattern
 6. Observe the known gotchas: `oci_faas` alarms/widgets fire by **applicationId** (not functionId; `resourceId` is the Function OCID); `MonitoringClient` needs the **telemetry-ingestion** endpoint
 7. **Management Dashboard import gotchas** (`oci_management_dashboard_management_dashboards_import`): JSON validates only **server-side at apply** (`plan`/`validate` pass with bad JSON) — iterate on the HTTP 400 InvalidParameter message. Each dashboard needs BOTH nested `tiles[]` and `savedSearches[]`, `featuresConfig={"crossService":{"shared":false}}`, and `providerId` from the valid set (`management-dashboard` for MQL/metric widgets; `oci-monitoring` is rejected). Resource is write-once (`ignore_changes=[import_details]`) → push edits via `terraform apply -replace=...`. **`terraform destroy` does NOT delete the imported dashboard/saved-searches** (orphans) → delete by OCID before re-import or hit `401 RelatedResourceNotAuthorizedOrNotFound`.
-8. **Import-valid ≠ render-valid — capture widget shape from the Console `{JSON}` editor, never hand-author.** A dashboard can import clean and still draw nothing. Metric widget renders only with `widgetTemplate`/`widgetVM` + `dataConfig.type:"monitoringDataSource"` **and the `regionName` param declared** (else blank). APM trace widget uses `dataConfig.type:"tracesDataSource"` (query in `apmQuery`, `apmDomain` param) + TQL (PascalCase attrs, tags bare like `peer.service`, `group by` after `where`). Get the exact shape from Console → Create query-based widget → Data source → `{JSON}`. **Validate live** with `validating-oci-observability/scripts/check-dashboards.sh` (5th pillar); full envelope + TQL in `provisioning-custom-dashboard-oci-observability` (blueprints/always-do-patterns.md); incident in `docs/postmortem/2026-07-07-dashboards-live-test.md`.
+8. **Import-valid ≠ render-valid — capture widget shape from the Console `{JSON}` editor, never hand-author.** A dashboard can import clean and still draw nothing. Metric widget renders only with `widgetTemplate`/`widgetVM` + `dataConfig.type:"monitoringDataSource"` **and the `regionName` param declared** (else blank). APM trace widget uses `dataConfig.type:"tracesDataSource"` (query in `apmQuery`, `apmDomain` param) + TQL (PascalCase attrs, tags bare like `peer.service`, `group by` after `where`). Get the exact shape from Console → Create query-based widget → Data source → `{JSON}`. **Validate live** with `validating-oci-observability/scripts/check-dashboards.py` (5th pillar); full envelope + TQL in `provisioning-custom-dashboard-oci-observability` (blueprints/always-do-patterns.md); incident in `docs/postmortem/2026-07-07-dashboards-live-test.md`.
 
 ### P5 — Validate
 
@@ -72,25 +72,25 @@ Present to the user:
    - All variables have `type`, `description`, and `validation`
    - Provider source is `oracle/oci` (never `hashicorp/oci`)
    - No `terraform_remote_state` usage
-4. **Live validation (optional, when infra is applied):** run the 4-pillar scripts in `.claude/skills/validating-oci-observability/scripts/` — `validate-observability.sh` (entry point), or targeted `check-{logs,metrics,traces,alarms}.sh`. Scripts resolve the repo root via `git`, so they run from any cwd.
+4. **Live validation (optional, when infra is applied):** run the 5-pillar scripts in `.claude/skills/validating-oci-observability/scripts/` — `validate-observability.py` (entry point), or targeted `check-{logs,metrics,traces,alarms,dashboards}.py`. Scripts resolve the repo root via `git`, so they run from any cwd.
 5. **Write a report record** and hand off (standard closing — the `coordinating-oci-handoffs` skill):
-   - Write `docs/handoff/<capability>/report-terraform-infra.md` from the `report.template.md` of the `coordinating-oci-handoffs` skill: files changed, **resources/OCIDs created** (APM domain OCID, log group OCIDs, alarm OCIDs, dashboard OCIDs, data upload endpoint), validation result, acceptance status, `outcome`. You have Bash — stamp a real `createdAt`.
+   - Write `docs/handoff/<capability>/result-observability.md` from the `result.template.md` of the `coordinating-oci-handoffs` skill: files changed, **resources/OCIDs created** (APM domain OCID, log group OCIDs, alarm OCIDs, dashboard OCIDs, data upload endpoint), validation result, acceptance status, `outcome`. You have Bash — stamp a real `createdAt`.
    - Then state the single next action:
-     - If the function code needs custom metrics/logs/tracing wired in → **Hand off:** run `/add-function-observability` (`@oci-functions-java`) — instrument the function. Context: `docs/handoff/<capability>/report-terraform-infra.md`.
-     - If ready to prove end-to-end → **Hand off:** run the `validating-oci-observability` scripts to prove alarm→notification and traces/logs/metrics live.
-   - If invoked programmatically by another agent, the report **is** your return contract — write it before returning.
+     - If the function code needs custom metrics/logs/tracing wired in → **Hand off:** run `/develop-java-function` (`@oci-functions-java`) — instrument the function. Context: `docs/handoff/<capability>/result-observability.md`.
+     - If ready to prove end-to-end → **Hand off:** run `/observe-oci-workload` (`@oci-observability`) — run the `validating-oci-observability` scripts to prove alarm→notification and traces/logs/metrics live. Context: `docs/handoff/<capability>/result-observability.md`.
+   - The report is your return contract — write it before finishing.
 
 ## What You Do
 
 - Design observability architecture (advisory) and provision it in Terraform
 - Own all five infra pillars: APM/tracing, Logging, Alarms, Connector Hub, Dashboards
 - Build APM and custom Management Dashboards (widgets, APM QL, global filters, dashboard IAM)
-- Validate observability live via the bundled 4-pillar scripts
+- Validate observability live via the bundled 5-pillar scripts
 
 ## What You Do NOT Do
 
-- Write Java function code or function-level instrumentation (delegate to `@oci-functions-java` — `/add-function-observability`, `/add-function-metrics`, `/add-function-tracing`)
-- Provision non-observability infra — Functions, API Gateway, Networking, Vault (delegate to `@oci-terraform`)
+- Write Java function code or function-level instrumentation (hand off: run `/develop-java-function` (`@oci-functions-java`))
+- Provision non-observability infra — Functions, API Gateway, Networking, Vault (hand off: run `/provision-oci-infra` (`@oci-terraform`))
 - Generate code without user approval (always execute P3 before P4)
 - Skip any step in the P0–P5 workflow
 
@@ -124,4 +124,4 @@ These Terraform instructions are automatically injected when editing `.tf` files
 ### Validation
 | Keyword Triggers | Skill |
 |---|---|
-| validate observability, 4 pillars, live check | `validating-oci-observability` (bundled scripts) |
+| validate observability, 5 pillars, live check | `validating-oci-observability` (bundled scripts) |

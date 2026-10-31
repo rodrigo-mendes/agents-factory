@@ -9,6 +9,7 @@ license: MIT
 dependencies:
   apm:
     - path: ../factory-core
+    - path: ../handoff-core
   mcp: []
 includes: auto
 scripts: {}

@@ -46,7 +46,7 @@ resource "oci_apigateway_deployment" "this" {
 ```
 
 **Common Issues**:
-- **502 Bad Gateway**: Missing IAM policy `use fn-invocation` — see [provisioning-oci-iam](../provisioning-oci-iam/SKILL.md)
+- **502 Bad Gateway**: Missing IAM policy `use fn-invocation` — see [provisioning-oci-iam](../../provisioning-oci-iam/SKILL.md)
 - **Cold starts**: 2-5s for Java Functions — mitigate with `provisioned_concurrency`
 - **Timeout**: Function max 300s; API Gateway must match or exceed Function timeout
 
@@ -101,7 +101,7 @@ resource "oci_core_network_security_group_security_rule" "functions_ingress" {
 - **NAT Gateway**: Required for Functions private subnet egress (image pull, external API calls)
 - **Service Gateway**: Required for Functions to access OCI services (Object Storage, Vault) without internet
 
-**Source**: https://docs.oracle.com/en-us/iaas/Content/Network/Concepts/networksecuritygroups.htm — see also [designing-oci-networking](../designing-oci-networking/SKILL.md)
+**Source**: https://docs.oracle.com/en-us/iaas/Content/Network/Concepts/networksecuritygroups.htm — see also [designing-oci-networking](../../designing-oci-networking/SKILL.md)
 
 ---
 

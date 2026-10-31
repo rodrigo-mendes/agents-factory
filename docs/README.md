@@ -33,7 +33,7 @@
 docs/
 ├── visao-geral.md                 ← Architecture + diagrams
 ├── manual/
-│   ├── README.md                  ← Index + cheat sheet of 40 commands
+│   ├── README.md                  ← Index + cheat sheet of the 40 factory commands
 │   ├── framework-researcher.md    ← 7 research commands + platform-software family
 │   ├── platform-software-family.md ← 15 platform-software commands (1 orchestrator + 14 siblings)
 │   ├── artifact-author.md         ← 6 generation commands
@@ -41,7 +41,7 @@ docs/
 │   ├── quality-validator.md       ← 5 validation commands
 │   └── skill-evaluator.md         ← 1 evaluation command
 ├── capacidades/
-│   ├── README.md                  ← Complete catalog (40 commands)
+│   ├── README.md                  ← Catalog of the 40 factory commands + domain packages
 │   ├── skills.md                  ← foundation skills
 │   ├── templates.md               ← 24 template files + traceability
 │   ├── prompts-pesquisa.md        ← 7 research prompts (+ platform-software family)

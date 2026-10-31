@@ -1,18 +1,22 @@
 # Scripts de Validação de Observabilidade (dev)
 
-Valida os 4 pilares de observabilidade dos serviços serverless OCI ao vivo:
+Valida os pilares de observabilidade dos serviços serverless OCI ao vivo:
 **logs** (OCI Logging), **métricas** (OCI Monitoring — plataforma + custom),
-**traces** (OCI APM) e **alarmes/notificações** (Monitoring + ONS).
+**traces** (OCI APM), **alarmes/notificações** (Monitoring + ONS) e
+**dashboards** (render-readiness).
+
+Scripts em Python 3 (só biblioteca padrão; Windows e Linux). Chamam a OCI CLI
+real via subprocess; o parsing JSON é feito em Python (não precisa de `jq`).
 
 ## Pré-requisitos
 
+- Python 3.8+.
 - OCI CLI autenticado no perfil `poc` (security token):
   ```bash
   oci session authenticate --profile poc --region sa-saopaulo-1
   ```
-- `jq` instalado.
-- Rodar de um diretório com acesso aos outputs do Terraform (`infra/environments/dev`).
-  Os scripts leem `terraform output -json`; se indisponível, caem em OCIDs de fallback do state atual.
+- `git` (localiza o repo) e `terraform` (lê `terraform output -json` em `infra/environments/dev`);
+  se os outputs estiverem indisponíveis, caem em OCIDs de fallback do state atual.
 
 ## Variáveis de ambiente (opcionais)
 
@@ -23,33 +27,47 @@ Valida os 4 pilares de observabilidade dos serviços serverless OCI ao vivo:
 | `OCI_REGION` | `sa-saopaulo-1` | Região |
 | `TF_DIR` | `infra/environments/dev` | Diretório do ambiente Terraform |
 | `LOOKBACK_MIN` | `15` | Janela (min) das queries |
+| `VOO_OCI_CMD` | `oci` | Comando da OCI CLI (string ou lista JSON, ex. `["python","fake_oci.py"]`) |
+| `VOO_TERRAFORM_CMD` / `VOO_GIT_CMD` | `terraform` / `git` | Idem para terraform / git |
+| `VOO_BASH_CMD` | `bash` | Executa os `.sh` do projeto alvo (`scripts/preflight.sh`; `build-push`/`simulate-webhook` só quando o projeto ainda tem a versão `.sh` — a `.py` roda com o próprio Python; `simulate-webhook.sh`) no Windows |
+| `VOO_SLEEP_SCALE` | `1` | Multiplica todos os sleeps (os testes usam `0`) |
 
 ## Scripts
 
 | Script | Função |
 |--------|--------|
-| `lib-common.sh` | Config + helpers compartilhados (não executar direto) |
-| `smoke-invoke.sh [N]` | Invoca rotas públicas p/ gerar tráfego (N repetições, default 3) |
-| `check-logs.sh` | Verifica entradas nos service logs + campos estruturados |
-| `check-metrics.sh` | Métricas `oci_faas` + custom; diagnostica filtro `resourceId` dos alarmes |
-| `check-traces.sh` | Traces no APM (best-effort) + valida pré-req APM_* no config |
-| `check-alarms.sh` | Alarmes habilitados + status + subscription ONS confirmada |
-| `check-dashboards.sh [--name-filter X]` | 5º pilar — dashboards ACTIVE + render-readiness (widget-template, dataSource-type, `regionName` nos metric) + ingestão |
-| `trigger-alarm-test.sh [N] [MIN]` | Injeta erros e faz polling até alarme FIRING |
-| `validate-observability.sh` | Orquestra tudo e imprime tabela PASS/FAIL |
+| `lib_common.py` | Config + helpers compartilhados (módulo importado; não executar direto) |
+| `smoke-invoke.py [N]` | Invoca rotas públicas p/ gerar tráfego (N repetições, default 3) |
+| `check-logs.py` | Verifica entradas nos service logs + campos estruturados |
+| `check-metrics.py` | Métricas `oci_faas` + custom; diagnostica dimensão (`applicationId` vs `resourceId`) dos alarmes |
+| `check-traces.py` | Ingestão no APM (`IngestedBytes`/`PayloadRejections`) + pré-req APM_* no config |
+| `check-alarms.py` | Alarmes habilitados + status + subscription ONS confirmada |
+| `check-dashboards.py [--name-filter X]` | 5º pilar — dashboards ACTIVE + render-readiness (widget-template, dataSource-type, `regionName` nos metric) + ingestão |
+| `trigger-alarm-test.py --i-have-user-approval [N] [MIN]` | Injeta erros e faz polling até alarme FIRING (sem a flag: exit 2, nada enviado) |
+| `generate-dashboard-traffic.py [--rounds N] [--sleep S] [--url U]` | Gera carga para popular os dashboards |
+| `deploy-and-validate.py [--skip-build] [--plan-only]` | Build + push + plan + apply (só após `yes` no prompt) + validação |
+| `validate-observability.py [--no-smoke] [--wait S]` | Orquestra tudo e imprime tabela PASS/FAIL |
+
+Exit codes: `0` OK · `1` algum FAIL (ou ferramenta ausente) · `2` sessão OCI inválida / argumento
+desconhecido · `127` opção sem valor. `validate-observability.py` sai com o nº de pilares em FAIL.
 
 ## Uso típico
 
 ```bash
-# validação completa (gera tráfego, espera ingestão, valida 4 pilares)
-./validate-observability.sh
+# validação completa (gera tráfego, espera ingestão, valida os pilares)
+python validate-observability.py
 
 # só validar (sem gerar tráfego novo)
-./validate-observability.sh --no-smoke
+python validate-observability.py --no-smoke
 
 # testar caminho alarme -> notificação (injeta erros em dev)
-./trigger-alarm-test.sh
+python trigger-alarm-test.py --i-have-user-approval   # só com aprovação explícita do usuário
 ```
+
+## Testes
+
+`python tests/run_tests.py` — OCI CLI falsa (`tests/fakes/fake_oci.py` + `tests/fixtures/`),
+git/terraform/bash falsos e um servidor HTTP em `127.0.0.1`. Não chama a OCI nem a rede.
 
 ## Interpretando falhas
 

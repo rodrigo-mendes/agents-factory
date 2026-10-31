@@ -19,7 +19,7 @@ disable-model-invocation: true
 
 - **[Blueprints & Guardrails](#blueprints--guardrails)** — Three-tier rules for this skill
 - **[Evaluation Scenarios](./blueprints/evaluation-scenarios.md)** — 3 scenarios: canonical, edge case, misuse rejection
-- **[Agent](../../../.apm/agents/terraform-rules-author.agent.md)** — `terraform-rules-author` executor
+- **[Agent](../../agents/terraform-rules-author.md)** — `terraform-rules-author` executor
 - **[Standards Catalog](../terraform-instructions-compiler/assets/terraform-standards-reference.md)** — Terraform pattern catalog
 - **[Interactive alternative](../terraform-instructions-compiler/SKILL.md)** — `terraform-instructions-compiler` (with interview)
 

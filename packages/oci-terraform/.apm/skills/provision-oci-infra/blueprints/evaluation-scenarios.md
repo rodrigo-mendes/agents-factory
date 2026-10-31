@@ -18,7 +18,7 @@ routes to the right provisioning sub-skill for each service scope.
 - P1 scans existing `.tf` files for provider version and existing `oci_functions_application` resources.
 - P3 presents a plan listing the `oci_functions_application` + `oci_functions_function` resources to create, naming convention, and any `⚠️ Ask First` items (e.g., provisioned concurrency, shape selection).
 - P4 generates module code under `infra/modules/function-app/` only after explicit user approval.
-- P5 runs `terraform fmt -check` and `terraform validate`; writes `docs/handoff/api-handler/report-terraform-infra.md`.
+- P5 runs `terraform fmt -check` and `terraform validate`; writes `docs/handoff/api-handler/result-terraform-infra.md`.
 
 **Pass criteria:**
 - Output `.tf` files contain `provider "oci"` with source `oracle/oci` (never `hashicorp/oci`).

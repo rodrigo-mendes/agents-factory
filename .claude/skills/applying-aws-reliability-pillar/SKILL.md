@@ -232,7 +232,7 @@ aws cloudformation detect-stack-drift --stack-name <dr-stack-name>
 ## Blueprints Directory Structure
 
 ```
-workspace/.claude/skills/applying-aws-reliability-pillar/
+.claude/skills/applying-aws-reliability-pillar/
 ├── SKILL.md                              <- This file (guardrails + summaries)
 └── blueprints/
     └── evaluation-scenarios.md           <- 6 test scenarios for skill-evaluator

@@ -22,7 +22,7 @@ disable-model-invocation: true
 - **[Data Modeling](./blueprints/data-modeling.md)** — Distance metric, index type, chunking, hybrid search
 - **[Reference Card Template](../researching-platform-software/blueprints/shared/reference-card-template.md)** — Skeleton every per-vendor card follows (worked example: [reference-card-example-kafka-3.7.md](../researching-platform-software/blueprints/shared/reference-card-example-kafka-3.7.md))
 - **[Deployment Guides](../researching-platform-software/blueprints/shared/deployment-guides/)** — bare-metal, VM, container-compose, and Kubernetes-operator playbooks; pick the one matching `DEPLOYMENT_MODEL`
-- **[Reference Cards](./blueprints/references/)**
+- **[Reference Cards](./blueprints/references/README.md)**
 - **[Evaluation Scenarios](./blueprints/evaluation-scenarios.md)**
 - **[Shared Output Template](../researching-platform-software/blueprints/shared/output-format-base.md)**
 - **[Shared Research Scope](../researching-platform-software/blueprints/shared/research-scope-operations.md)**

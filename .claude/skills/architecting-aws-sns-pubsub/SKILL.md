@@ -312,7 +312,7 @@ aws sns list-subscriptions-by-topic --topic-arn <topic-arn> \
 ## Blueprints Directory Structure
 
 ```
-workspace/.claude/skills/architecting-aws-sns-pubsub/
+.claude/skills/architecting-aws-sns-pubsub/
 ├── SKILL.md                              ← This file (summary + guardrails)
 └── blueprints/
     └── evaluation-scenarios.md           ← 6 test scenarios for skill-evaluator

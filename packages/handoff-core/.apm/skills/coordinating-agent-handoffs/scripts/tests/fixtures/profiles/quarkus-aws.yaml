@@ -1,0 +1,61 @@
+# Simplified fixture profile in the Quarkus/AWS style (NOT a copy of the installed coordinating-quarkus-aws-handoffs profile; tests only). Format: blueprints/profile-format.md
+profile: quarkus-aws
+protocol: coordinating-agent-handoffs
+protocol_version: 1
+mode: orchestrated
+root: "openspec/changes/{change}/handoff"
+scope_key: change
+fallback: orchestrator
+spec:
+  kind: openspec
+  functional: "openspec/specs/{capability}/spec.md"
+  architecture: openspec/specs/architecture/spec.md
+  adr_dir: openspec/specs/architecture/adr
+roles:
+  orchestrator: building-aws-saas-serverless-quarkus-react-nextjs
+  architect: aws-architect
+  code: quarkus-lambda-integrator
+  stripe: stripe-integrator
+  reviewer: [quarkus-code-reviewer, stripe-advisor]
+  infra: aws-terraform-engineer
+  deploy: aws-lambda-deployer
+  observability: aws-observability
+  debug: aws-lambda-debugger
+  sync: spec-synchronizer
+records:
+  work-order: "wo-{nn}-{role}.md"
+  report: "result-{nn}-{role}.md"
+  review: "review-{nn}.md"
+  spec-delta: "spec-delta-{nn}.md"
+  escalation: "escalation-{nn}.md"
+limits:
+  build_attempts: 3
+  review_rounds: 2
+  deploy_cycles: 2
+  delta_revisions: 2
+  record_rejections: 2
+quality:
+  coverage_min: 80
+next:
+  - when: {limit_reached: any}
+    then: escalate
+  - when: {kind: report, role: [code, stripe], outcome: success}
+    then: reviewer
+  - when: {kind: review, outcome: changes-requested}
+    then: code
+  - when: {drift: true}
+    then: sync
+  - when: {pending_deltas: ">0"}
+    then: orchestrator
+  - when: {kind: deploy-report, outcome: failed}
+    then: debug
+  - when: {kind: deploy-report, outcome: success}
+    then: observability
+  - when: {kind: diagnosis-report}
+    then: orchestrator
+  - when: {kind: verify, outcome: pass, all_tasks: done, drift: false, pending_deltas: 0}
+    then: final-gate
+  - when: {kind: verify, outcome: fail}
+    then: debug
+  - when: {all_tasks: done}
+    then: deploy

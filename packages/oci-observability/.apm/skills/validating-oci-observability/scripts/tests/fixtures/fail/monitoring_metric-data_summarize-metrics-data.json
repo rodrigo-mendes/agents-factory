@@ -1,0 +1,4 @@
+{"__rules__": [
+  {"contains": ["PayloadRejections"], "stdout": {"data": [{"aggregated-datapoints": [{"value": 5}]}]}}
+ ],
+ "__default__": {"stdout": {"data": []}, "rc": 0}}

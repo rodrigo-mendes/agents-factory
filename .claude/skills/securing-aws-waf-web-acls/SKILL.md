@@ -254,7 +254,7 @@ aws wafv2 list-available-managed-rule-group-versions \
 ## Blueprints Directory Structure
 
 ```
-workspace/.claude/skills/securing-aws-waf-web-acls/
+.claude/skills/securing-aws-waf-web-acls/
 ├── SKILL.md                         <- This file (guardrails + quick reference)
 └── blueprints/
     └── evaluation-scenarios.md      <- 6 test cases for skill-evaluator

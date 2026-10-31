@@ -6,7 +6,7 @@ capability: <capability-slug>
 stream: <a-java | b-terraform-infra | c-terraform-integration>
 dependsOn: <none | [stream-a, stream-b]>
 status: pending
-createdAt: <ISO 8601 — placeholder OK if writer has no Bash>
+createdAt: <real ISO 8601 UTC timestamp — never a placeholder: check_records.py rejects it>
 ---
 
 ## Scope

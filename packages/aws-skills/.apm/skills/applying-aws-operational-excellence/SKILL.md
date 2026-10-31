@@ -224,7 +224,7 @@ aws deploy get-deployment-group --application-name <app> --deployment-group-name
 ## Blueprints Directory Structure
 
 ```
-workspace/.claude/skills/applying-aws-operational-excellence/
+.claude/skills/applying-aws-operational-excellence/
 ├── SKILL.md                              <- This file (guardrails + summaries)
 └── blueprints/
     └── evaluation-scenarios.md           <- 6 test scenarios for skill-evaluator

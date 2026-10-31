@@ -87,9 +87,9 @@ fi
 grep -iE "(client_secret|password|token):\s*['\"]?[a-zA-Z0-9]" func.yaml && echo "❌ SECURITY: Credentials in func.yaml"
 ```
 
-### 5. services/.env Must Exist (for build-push.sh)
+### 5. services/.env Must Exist (for build-push.py)
 
-The `build-push.sh` script requires `services/.env` with OCIR credentials:
+The `build-push.py` script requires `services/.env` with OCIR credentials:
 
 ```bash
 test -f "../.env" || echo "❌ Missing services/.env — copy from .env.example"
@@ -163,7 +163,7 @@ fi
 ```
 
 ## ✅ Always Do
-- Run pre-flight checks before every `build-push.sh` execution
+- Run pre-flight checks before every `build-push.py` execution
 - Verify CMD matches between func.yaml and Dockerfile after any handler rename
 - Keep credentials in OCI Vault, reference by OCID in Terraform config
 
@@ -171,4 +171,4 @@ fi
 - Build a Docker image without CMD — guaranteed 502 at runtime
 - Deploy without oci-java-sdk-common-httpclient-jersey if using OCI SDK
 - Commit credentials to func.yaml or any Git-tracked file
-- Build without Docker running (build-push.sh will fail at push step)
+- Build without Docker running (build-push.py will fail at push step)

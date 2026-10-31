@@ -34,7 +34,7 @@ The `oci-observability` agent follows a mandatory P0–P5 workflow:
 3. **P2 — Consult**: Read identified SKILL.md files; extract ✅/⚠️/🚫 patterns and composition order.
 4. **P3 — Propose**: Present resources to create, naming convention, file structure, dependencies, and ⚠️ Ask-First items. Wait for approval.
 5. **P4 — Implement**: Generate `.tf` files and dashboard JSON following skill patterns.
-6. **P5 — Validate**: Run `terraform fmt -check` + `terraform validate`; optionally run `validating-oci-observability` scripts; write `docs/handoff/<capability>/report-terraform-infra.md`.
+6. **P5 — Validate**: Run `terraform fmt -check` + `terraform validate`; optionally run `validating-oci-observability` scripts; write `docs/handoff/<capability>/result-observability.md`.
 
 ## Evaluation Scenarios
 

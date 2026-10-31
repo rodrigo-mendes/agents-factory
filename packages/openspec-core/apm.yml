@@ -1,0 +1,12 @@
+name: agents-factory-openspec-core
+version: 1.0.0
+description: >-
+  Reusable OpenSpec 1.15.0 knowledge: skill specifying-changes-with-openspec-v1-15 (openspec/ layout, spec and delta format, tasks.md, non-interactive openspec CLI incl. Windows). No handoff or tracker content; used by handoff-core and openspec-github.
+author: rodrigo-mendes
+license: MIT
+dependencies:
+  apm:
+    - path: ../factory-core
+  mcp: []
+includes: auto
+scripts: {}

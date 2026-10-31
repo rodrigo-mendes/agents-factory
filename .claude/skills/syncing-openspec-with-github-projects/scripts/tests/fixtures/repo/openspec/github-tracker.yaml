@@ -1,0 +1,9 @@
+# Test tracker (same keys as the profile tracker: block; this file wins)
+kind: github-projects
+owner: acme
+owner_type: organization
+project_number: 7
+repo: acme/shop
+approval_source: github
+approvers: [alice, bob]
+bot_login: "openspec-bot[bot]"

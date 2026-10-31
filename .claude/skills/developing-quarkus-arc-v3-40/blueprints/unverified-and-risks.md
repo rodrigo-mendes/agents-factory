@@ -2,7 +2,7 @@
 
 Research date 2026-10-14. Back to [SKILL.md](../SKILL.md). The research reports a quality score of 93% (about 60 claims) from a deep run that used all 3 iterations. Family facts verified by the orchestrator on 2026-10-14 keep the tags of the family facts file.
 
-Header counts: 7 unverified (U1-U7), 0 irresolvable, 7 medium-confidence (M1-M7), 1 coverage limit (L1).
+Header counts: 9 unverified (U1-U9), 0 irresolvable, 9 medium-confidence (M1-M9), 1 coverage limit (L1).
 
 ## Contents
 
@@ -22,7 +22,7 @@ Header counts: 7 unverified (U1-U7), 0 irresolvable, 7 medium-confidence (M1-M7)
 
 ## Unverified items
 
-7 unverified items. U1, U2 and U5 are not resolvable from documentation: do not assert them.
+9 unverified items. U1, U2 and U5 are not resolvable from documentation: do not assert them.
 
 | ID | Item | Impact and workaround |
 |---|---|---|
@@ -33,6 +33,8 @@ Header counts: 7 unverified (U1-U7), 0 irresolvable, 7 medium-confidence (M1-M7)
 | U5 | Camel Quarkus-specific support end date for 3.40 (the "LTS Until" column is blank); not resolvable from documentation | Support planning; do not infer from the Quarkus date |
 | U6 | ArC-related items in the Quarkus migration guides 3.16 to 3.39 were not reviewed | Read those guides when upgrading from an older release |
 | U7 | `@QuarkusComponentTest` was not verified for 3.40 | No guidance given; check the testing guide |
+| U8 | The artifact name `io.quarkus:quarkus-arc`: no page was recorded for it | Confirm in the Quarkus CDI guide or the BOM before relying on it |
+| U9 | The dev-mode endpoint list (`/q/arc`, `/q/arc/beans`, `/q/arc/removed-beans`, `/q/arc/observers`): no page was recorded | Representative only; confirm in dev mode |
 
 ## Irresolvable items
 
@@ -40,7 +42,7 @@ Header counts: 7 unverified (U1-U7), 0 irresolvable, 7 medium-confidence (M1-M7)
 
 ## Medium-confidence items
 
-7 medium-confidence items.
+9 medium-confidence items.
 
 | ID | Item | Why medium |
 |---|---|---|
@@ -51,6 +53,8 @@ Header counts: 7 unverified (U1-U7), 0 irresolvable, 7 medium-confidence (M1-M7)
 | M5 | Quarkus REST: resources as unremovable roots; default resource scope not covered | REST guide not read by this skill's research; skill `developing-quarkus-rest-v3-40` read it |
 | M6 | No Camel Quarkus build on Quarkus 4 | Absence of evidence (family fact) |
 | M7 | Definition of "unused" differs between the cdi-reference list and the config-property description | Documentation inconsistency |
+| M8 | Absence of `quarkus-junit5*` in the 3.40 testing guide: only the first 100,000 of 108,136 characters were read (L1) | Absence of evidence; the guide names `quarkus-junit` and `quarkus-junit-mockito` |
+| M9 | The supported remainder of CDI Full features: decorators, a subset of `BeanManager`, `@SessionScoped` with Undertow | Taken from a research summary; the page passage was not recorded |
 
 ## Coverage limits
 
@@ -58,13 +62,13 @@ Header counts: 7 unverified (U1-U7), 0 irresolvable, 7 medium-confidence (M1-M7)
 
 | ID | Page | Limit |
 |---|---|---|
-| L1 | https://quarkus.io/version/3.40/guides/getting-started-testing | Read the first 100,000 of 108,136 characters; the `@InjectMock`, `convertScopes` and `quarkus-junit-mockito` claims come from the part read |
+| L1 | https://quarkus.io/version/3.40/guides/getting-started-testing | Read the first 100,000 of 108,136 characters; the claim that only normal-scoped beans can be mocked has a recorded verbatim quote ("basically every scope except @Singleton and @Dependent") and is High; the `convertScopes` and `quarkus-junit-mockito` claims come from the part read and no verbatim quote is recorded, so they carry (medium confidence, L1) wherever they appear (family rule 13; same tag as the refactoring skill, and as M15/L2 in the Camel bean register) |
 
 ## Tag to register mapping
 
 | Tag text used in the skill | Where | Register id |
 |---|---|---|
-| (unverified) removal of an `@Identifier`-only bean; (unverified, U1) | SKILL.md Ask First; bean-removal; camel-integration; migration-guide; evaluation-scenarios | U1 |
+| (unverified) removal of an `@Identifier`-only bean; (unverified, U1) | SKILL.md Ask First; bean-removal; migration-guide; evaluation-scenarios | U1 |
 | (unverified) Camel Quarkus marking name-looked-up beans unremovable; (unverified, U2) | SKILL.md Ask First; bean-removal | U2 |
 | (unverified, U3) minimum Java; (unverified) minimum Java | SKILL.md Version Context and Ask First; migration-guide; evaluation-scenarios | U3 |
 | (unverified, U4) `@Disposes`; (unverified) with "register U4" | SKILL.md Ask First; scopes-and-injection | U4 |
@@ -75,9 +79,14 @@ Header counts: 7 unverified (U1-U7), 0 irresolvable, 7 medium-confidence (M1-M7)
 | (medium confidence) eager startup; (medium confidence, M2) | SKILL.md Ask First; scopes-and-injection | M2 |
 | (medium confidence) Name of the build-item factory | cdi-lite-limitations | M3 |
 | (medium confidence, M4) async observers | scopes-and-injection | M4 |
-| (medium confidence) Quarkus REST, JAX-RS roots; (medium confidence, M5) | SKILL.md Ask First and Quick Reference; camel-integration; scopes-and-injection | M5 |
+| (medium confidence, L1) `convertScopes`, `quarkus-junit-mockito` | SKILL.md Ask First (mocking strategy) and Quick Reference; always-do 6; testing; scopes-and-injection | L1 |
+| (unverified, U8) artifact name `io.quarkus:quarkus-arc` | SKILL.md Version Context | U8 |
+| (unverified, U9) dev-mode endpoint list | SKILL.md Quick Reference and Verification Loop; bean-removal; migration-guide | U9 |
+| (medium confidence, M9) supported remainder of CDI Full | cdi-lite-limitations | M9 |
+| (medium confidence) Quarkus REST, JAX-RS roots; (medium confidence, M5) | SKILL.md Ask First and Quick Reference; scopes-and-injection | M5 |
 | (medium confidence, absence of evidence) Quarkus 4 and Camel Quarkus | SKILL.md Version-lifetime; evaluation-scenarios; this file | M6 |
 | (medium confidence, M7) definition of "unused" | bean-removal | M7 |
+| (medium confidence, absence of evidence, M8) `quarkus-junit5*` absent from the partly read testing guide | testing; migration-guide | M8 |
 
 ## Source Bibliography
 

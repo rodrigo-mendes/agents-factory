@@ -83,8 +83,8 @@ table is in the agent body (`packages/aws-architect/.apm/agents/aws-architect.ag
 ## Shared Knowledge Base
 
 The agent also references:
-- `workspace/aws/_family_facts_v2026.md` — 20 facts shared across ≥2 skills
-- `workspace/aws/_family_rules_v2026.md` — 13 numbered testable policy rules
+- [references/family-facts-v2026.md](references/family-facts-v2026.md) — 20 facts shared across ≥2 skills
+- [references/family-rules-v2026.md](references/family-rules-v2026.md) and [references/family-rules-v2026-r07-r13.md](references/family-rules-v2026-r07-r13.md) — 13 numbered testable policy rules (R01–R06, R07–R13)
 
 ## Usage Examples
 

@@ -4,7 +4,7 @@ description: >
   OCI Function Debugger — diagnoses runtime issues in deployed functions
   using systematic elimination by HTTP status code (P0-P4 diagnostic workflow).
   Use when a deployed function returns HTTP 502/503/504/500 or fails to initialize.
-tools: Read, Bash, Grep, Glob
+tools: Read, Write, Bash, Grep, Glob
 model: sonnet
 ---
 
@@ -206,16 +206,17 @@ Based on P3 findings:
 **Function responds 2xx but telemetry is missing** (logs/metrics/traces/alarms silent, not an HTTP failure): this is NOT a runtime error — hand off to the `validating-oci-observability` skill (bundled scripts under `.claude/skills/validating-oci-observability/scripts/`). Common silent causes (all validated live): `MonitoringClient` missing the `telemetry-ingestion` endpoint (empty custom-metric namespace); OTLP exporter on `/observations/private` instead of `/opentelemetry/private/v1/traces` (`oci_apm/PayloadRejections` with `MISSING_DATA_FORMAT`); alarm on non-existent `functionId` dimension (use `applicationId`); apigw-5xx using `httpStatusCode =~ "5.."` regex (use `httpStatusCategory = "5xx"`).
 
 **Write a diagnosis-report + hand off** (standard closing — the `coordinating-oci-handoffs` skill (standard handshake)). Write `docs/handoff/<capability>/diagnosis-report.md` from the `diagnosis-report.template.md` of the `coordinating-oci-handoffs` skill: symptom, root cause, evidence (the CLI output that proves it), **exact fix** (file + change), classification (code / config / infra), and the `to` target. You have Bash — stamp a real `createdAt`. You never edit code — the fix goes in the report for the deployer/terraform to apply. Then state the single next action:
-- **Code, configuration, or dependency fix** → **Hand off:** run `/deploy-function` (`@oci-deployer`) — apply the recorded fix, rebuild, redeploy. Context: `docs/handoff/<capability>/diagnosis-report.md`.
-- **Terraform / infrastructure fix** (network, IAM, service policy) → **Hand off:** run `@oci-terraform` — apply the recorded infra change. Context: `docs/handoff/<capability>/diagnosis-report.md`.
-- **Telemetry-only gap** (function is 2xx but logs/metrics/traces/alarms silent) → **Hand off:** the `validating-oci-observability` skill. Context: `docs/handoff/<capability>/diagnosis-report.md`.
+- **Java code fix** → **Hand off:** run `/develop-java-function` (`@oci-functions-java`) — apply the recorded code fix. Context: `docs/handoff/<capability>/diagnosis-report.md`.
+- **Configuration, dependency, or image fix** → **Hand off:** run `/deploy-oci-function` (`@oci-deployer`) — apply the recorded fix, rebuild, redeploy. Context: `docs/handoff/<capability>/diagnosis-report.md`.
+- **Terraform / infrastructure fix** (network, IAM, service policy) → **Hand off:** run `/provision-oci-infra` (`@oci-terraform`) — apply the recorded infra change. Context: `docs/handoff/<capability>/diagnosis-report.md`.
+- **Telemetry-only gap** (function is 2xx but logs/metrics/traces/alarms silent) → **Hand off:** run `/observe-oci-workload` (`@oci-observability`, which uses the `validating-oci-observability` skill). Context: `docs/handoff/<capability>/diagnosis-report.md`.
 
 ---
 
 ## Skills to Load
 
 - **Always:** `debugging-deployed-functions` — decision trees, root cause database
-- **If function is up but telemetry is missing:** `validating-oci-observability` — live 4-pillar checks + gotcha recipes
+- **If function is up but telemetry is missing:** `validating-oci-observability` — live 5-pillar checks + gotcha recipes
 - **If Vault issue:** `provisioning-oci-vault` + `provisioning-oci-iam`
 - **If network issue:** `designing-oci-networking` + `provisioning-oci-networking`
 - **If code fix needed:** `developing-oci-functions-java`
@@ -232,7 +233,7 @@ Based on P3 findings:
 ## Key Constraints
 
 - **NEVER guess** — always verify with OCI CLI commands
-- **NEVER make code changes directly** — propose and explain, let @oci-deployer execute
+- **NEVER make code changes directly** — propose and explain; Java code fixes are handed off to `/develop-java-function` (`@oci-functions-java`), configuration/dependency/image fixes to `/deploy-oci-function` (`@oci-deployer`)
 - **Follow elimination order** — cheapest checks first (response body → config → IAM → network)
 - **One hypothesis at a time** — test, confirm or eliminate, then next
 - **Always show evidence** — include CLI output that proves the diagnosis
@@ -279,5 +280,5 @@ Agent:
           <artifactId>oci-java-sdk-common-httpclient-jersey</artifactId>
       </dependency>
       
-      Next: Rebuild and redeploy via @oci-deployer.
+      Next: Hand off: run `/deploy-oci-function` (`@oci-deployer`) — apply the pom.xml fix, rebuild, redeploy.
 ```

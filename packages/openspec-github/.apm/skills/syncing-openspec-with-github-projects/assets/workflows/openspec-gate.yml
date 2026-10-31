@@ -1,0 +1,90 @@
+# openspec-gate.yml - records OpenSpec gate, spec-delta and escalation commands written as
+# issue comments (/approve E<n>, /reject E<n> <reason>, /accept|/reject|/revise delta-<nn>,
+# /answer escalation-<nn> <text>). Template from syncing-openspec-with-github-projects.
+#
+# Trust boundary: issue_comment always runs the DEFAULT-BRANCH copy of this file and of
+# .github/openspec-github/ (never pull-request code). The comment is untrusted text: it reaches
+# the script only through env: (never inside run:), and gate_command.py reads only its first line
+# against a fixed grammar, accepting authors in tracker.approvers and never tracker.bot_login.
+# The job runs only on issues labelled openspec / openspec:*, and comments by anyone outside
+# tracker.approvers are ignored silently (no reply). No npm or other third-party code runs here.
+# GITHUB_TOKEN stays read-only (contents: read); writes (one label, one comment, the Gate field)
+# use a GitHub App installation token for organization-owned projects or the classic PAT secret
+# OPENSPEC_PROJECT_PAT for user-owned projects, selected by vars.OPENSPEC_OWNER_TYPE. What it
+# posts is evidence only: the orchestrator re-checks it (gh_projects_sync.py pull) before git.
+#
+# Repository settings: vars OPENSPEC_OWNER_TYPE (organization | user), OPENSPEC_BOT_LOGIN,
+# OPENSPEC_APP_CLIENT_ID + secret OPENSPEC_APP_PRIVATE_KEY (organization), or secret
+# OPENSPEC_PROJECT_PAT (user, classic: project + repo); optional var OPENSPEC_PROFILE.
+name: openspec-gate
+
+on:
+  issue_comment:
+    types: [created]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: openspec-gate-${{ github.event.issue.number }}
+  cancel-in-progress: false
+
+jobs:
+  gate:
+    if: ${{ !github.event.issue.pull_request && contains(join(github.event.issue.labels.*.name, ','), 'openspec') && startsWith(github.event.comment.body, '/') && github.event.comment.user.login != vars.OPENSPEC_BOT_LOGIN }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    steps:
+      - name: Check out the default branch
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0  # v7.1.0
+        with:
+          python-version: "3.12"
+
+      - name: Verify the vendored scripts (before any token or script runs)
+        run: python .github/openspec-github/_vendor.py verify .github/openspec-github
+
+      - name: Check the credential path
+        env:
+          OWNER_TYPE: ${{ vars.OPENSPEC_OWNER_TYPE }}
+        run: |
+          case "$OWNER_TYPE" in
+            organization) echo "credential: GitHub App installation token" ;;
+            user) echo "::warning::user-owned project: classic PAT with repo scope (broad access); prefer an organization project with a GitHub App" ;;
+            *) echo "::error::set the repository variable OPENSPEC_OWNER_TYPE to organization or user"; exit 1 ;;
+          esac
+
+      - name: Mint a GitHub App token (organization-owned project)
+        id: app-token
+        if: ${{ vars.OPENSPEC_OWNER_TYPE == 'organization' }}
+        uses: actions/create-github-app-token@64ab729a6294000f5aa4a4bc0b73d1f32bc45510  # v3.3.0
+        with:
+          client-id: ${{ vars.OPENSPEC_APP_CLIENT_ID }}
+          private-key: ${{ secrets.OPENSPEC_APP_PRIVATE_KEY }}
+          repositories: ${{ github.event.repository.name }}
+          permission-issues: write
+          permission-organization-projects: write
+
+      - name: Evaluate the command
+        env:
+          GH_TOKEN: ${{ vars.OPENSPEC_OWNER_TYPE == 'organization' && steps.app-token.outputs.token || secrets.OPENSPEC_PROJECT_PAT }}
+          GH_PROMPT_DISABLED: "1"
+          COMMENT_BODY: ${{ github.event.comment.body }}
+          COMMENT_AUTHOR: ${{ github.event.comment.user.login }}
+          COMMENT_URL: ${{ github.event.comment.html_url }}
+          COMMENT_ID: ${{ github.event.comment.id }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          CREATED_AT: ${{ github.event.comment.created_at }}
+          PROFILE: ${{ vars.OPENSPEC_PROFILE || '.github/openspec-github/handoff-profile.yaml' }}
+        run: |
+          gh --version
+          rc=0
+          python .github/openspec-github/gate_command.py evaluate . --profile "$PROFILE" --apply || rc=$?
+          if [ "$rc" -eq 3 ]; then echo "tracker disabled"; exit 0; fi
+          exit "$rc"
