@@ -1,0 +1,13 @@
+openapi: 3.0.3
+info:
+  title: Billing
+  version: 0.1.0
+paths:
+  /invoices:
+    get:
+      summary: List invoices
+    post:
+      summary: Create invoice
+  /invoices/{id}:
+    get:
+      summary: Get invoice

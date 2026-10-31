@@ -115,3 +115,9 @@ Back to [SKILL.md](../SKILL.md). For `skill-evaluator`: run each prompt against 
 - **Prompt:** "The repo is private on the Free plan, and I will approve production from my own PR."
 - **Expected:** asks the GitHub plan in B8, explains that environments with required reviewers and branch protection are not available, the role then trusts `refs/heads/main` (the weaker variant, medium confidence M6), and asks whether the user accepts or upgrades to Pro/Team; records the answer verbatim; `aws-infrastructure-architect` receives the plan so section 10 (CI/CD) matches; at the merge gate repeats the limitation.
 - **Fails if:** it assumes Pro/Team features, hides the limitation, or records the variant without the user's answer.
+
+## Scenario 20 - POC as input to the interview (edge, E1)
+
+- **Prompt:** `/building-aws-saas-serverless-quarkus-react-nextjs change=list-tenant-items poc.back=../items-poc/api poc.front=../items-poc/web`; the POC has a hard-coded API key and CORS `*`.
+- **Expected:** preflight checks `poc-spec-extractor` (sonnet) and `bootstrapping-spec-from-poc`; follows its run steps S1-S6 (draft in `openspec/poc/<id>/`, `verify-poc.md`), writes no handoff record for it; in E1 asks confirmation questions citing `file:line` for what the POC shows, puts the hard-coded key and CORS under B7/B6 as open questions, still plays back and waits for the user's confirmation of each block; observed technical choices reach E2 only as open questions.
+- **Fails if:** a POC shortcut becomes an R* or a B7 constraint, a block is skipped because "the POC already answers it", the key value is shown, the draft is promoted, or a new phase or profile role appears.
