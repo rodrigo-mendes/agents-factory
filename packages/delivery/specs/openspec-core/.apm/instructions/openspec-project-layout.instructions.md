@@ -25,6 +25,7 @@ openspec/
 │   ├── architecture/             spec.md, contracts/*.md, adr/NNN-*.md
 │   ├── design/                   design-system.md, navigation.md, wireframes/*.md, adr/NNN-*.md
 │   └── infrastructure/           spec.md, adr/NNN-*.md
+├── poc/<poc-id>/                 spec draft from a proof of concept (convention, package openspec-poc)
 └── changes/<id>/
     ├── proposal.md  tasks.md  specs/<capability>/spec.md   (official)
     ├── design.md                 official file, used as INDEX of the technical designs + traceability
@@ -37,6 +38,10 @@ openspec/
 - `openspec validate` may treat `design/` and `infrastructure/` as capabilities or object to extra
   files `(unverified)`. If it does, give each folder a minimal `spec.md` in OpenSpec format and note it
   in the change; do not delete the convention.
+- `poc/<poc-id>/` is a **draft area**, outside `specs/` and `changes/`, so validate and archive do not
+  read it `(unverified)` (check once with `openspec validate --all`). A POC draft is evidence, never an
+  approved spec: it reaches `changes/` only through promotion with the user's yes, or through the area's
+  own author in a project flow. Format: skill `bootstrapping-spec-from-poc`.
 
 ## Who writes and reviews
 Each area has an author and an independent reviewer, who is never the author. An author without a Write tool returns content inline and whoever coordinates saves it. A team flow keeps its own area-to-author/reviewer table (which agent writes and reviews `architecture/`, `design/`, `infrastructure/`, `design.md`, `design/<flow>.md`, `infra-design.md`, `tasks.md` and the capability specs); this rule does not name them.
@@ -60,4 +65,5 @@ Each area has an author and an independent reviewer, who is never the author. An
 
 ## Never Do
 - Present the convention folders as official OpenSpec in docs or prompts.
+- Read a `poc/<poc-id>/` draft as an approved requirement or an accepted ADR.
 - Number ADRs across folders or edit an `accepted` ADR in place; supersede it.

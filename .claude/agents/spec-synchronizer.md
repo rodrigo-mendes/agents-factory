@@ -4,8 +4,9 @@ description: >
   Spec Synchronizer - reviews a spec (gaps, contradictions, testability, conflicts with accepted ADRs)
   and proposes OpenSpec spec-deltas when code has drifted from the spec. Read-only: returns its
   result inline, never edits the spec or the code, never decides acceptance. Use when a spec needs an
-  independent review before approval (E1/E3 verify in the Quarkus/AWS flow) or when detect_drift.py
-  reports that code and spec diverge and a spec-delta must be proposed (E8 sync in that flow).
+  independent review before approval (E1/E3 verify in the Quarkus/AWS flow, or a spec draft written
+  from a POC under openspec/poc/<id>/) or when detect_drift.py reports that code and spec diverge and a
+  spec-delta must be proposed (E8 sync in that flow).
 tools: Read, Grep, Glob, Bash
 model: sonnet
 ---
@@ -57,6 +58,30 @@ Input: change id / handoff dir, the spec files (proposal, design, `specs/**/spec
    `stage`, `refs`, `outcome: pass | fail`, `createdAt` from `portable.py now`) with `## Criteria` and `## Evidence` (file:line for every
    finding, severity per finding). `fail` when any HIGH finding exists. Do not edit the spec.
 
+### Mode A, POC variant (draft from a proof of concept)
+
+Input: a draft dir `openspec/poc/<id>/` written from `poc-spec-extractor` (`inventory.json`, `functional/**`,
+`architecture-draft.md`, `design-draft.md` (only when a front end exists), `questions.md`, `traceability.md`) and the shortcut list
+`bootstrapping-spec-from-poc/blueprints/poc-shortcuts.md`. There is no handoff dir, no ADR and no
+`openspec validate` here (the draft is outside `changes/`). Read the draft format in
+`bootstrapping-spec-from-poc/blueprints/draft-format.md` first; if skill `bootstrapping-spec-from-poc`
+is not installed, say the POC variant is unavailable and stop. Resolve `back:`/`front:` evidence paths against
+`back.root`/`front.root` of `inventory.json` (POC dirs are read-only). `cross` is null when only one side
+was given: then no front-only/back-only questions apply. Checks, on top of testability:
+
+- **HIGH**: a requirement without `Evidence:` or whose `file:line` does not exist (open the file to check);
+  a POC shortcut (any `shortcuts[]` kind except plain `todo`) written as a requirement; a `cross.front_only`
+  or `cross.back_only` item of `inventory.json` with no question; a contract in `architecture-draft.md`
+  that contradicts `inventory.json` (method, path or caller); a secret value copied anywhere; an observed
+  technical choice presented as a decision.
+- **MEDIUM**: a requirement without a negative scenario and no question asking for one; a framework,
+  cloud or library name in requirement text; a `P<n>` missing from `traceability.md`.
+- **LOW**: Purpose under 50 characters, requirement text over 500 characters, duplicate questions.
+
+Return the `verify` record with `id: verify-poc`, `stage: poc`, `change: <poc id>`,
+`refs: [poc-spec-extractor]`; `fail` when any HIGH finding exists. The coordinator saves it as
+`openspec/poc/<id>/verify-poc.md`.
+
 ## Mode B - sync (E8)
 
 Input: `detect_drift.py` output, the spec, ADRs, existing reports, existing `spec-delta-*` records;
@@ -98,7 +123,7 @@ no spec side, add that the orchestrator does not route `spec.kind` none families
 
 ## Hand-off (end of every run)
 
-One line: `Hand off: orchestrator - save spec-delta-<nn>.md and show it to the user. Context: <handoff-dir>` (Mode A: `save verify-<stage>.md`).
+One line: `Hand off: orchestrator - save spec-delta-<nn>.md and show it to the user. Context: <handoff-dir>` (Mode A: `save verify-<stage>.md`; POC variant: `save openspec/poc/<id>/verify-poc.md`).
 
 ## Guardrails
 
