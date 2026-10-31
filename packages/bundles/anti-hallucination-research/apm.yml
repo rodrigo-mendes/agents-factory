@@ -1,0 +1,14 @@
+name: agents-factory-bundle-anti-hallucination-research
+version: 1.0.0
+description: >-
+  Anti-Hallucination Research: version-absolute research of frameworks, cloud, methodologies and 14
+  self-managed platform categories, every claim tied to a dated official source.
+author: rodrigo-mendes
+license: MIT
+dependencies:
+  apm:
+    - path: ../../factory/researching-frameworks
+    - path: ../../factory/researching-platform
+  mcp: []
+includes: auto
+scripts: {}

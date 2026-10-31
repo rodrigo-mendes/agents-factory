@@ -1,0 +1,13 @@
+name: agents-factory-bundle-camel-quarkus-integration
+version: 1.0.0
+description: >-
+  Camel Quarkus Integration: 10 Camel Quarkus 3.40 LTS skills, the project-structure skill and the
+  camel-quarkus-integrator agent.
+author: rodrigo-mendes
+license: MIT
+dependencies:
+  apm:
+    - path: ../../java/quarkus/camel-quarkus-integrator
+  mcp: []
+includes: auto
+scripts: {}

@@ -1,0 +1,13 @@
+name: agents-factory-bundle-aws-well-architected-reviewer
+version: 1.0.0
+description: >-
+  AWS Well-Architected Reviewer: 40 AWS architecture skills (six pillars, serverless and SaaS
+  lenses) and the read-only aws-architect advisor and reviewers.
+author: rodrigo-mendes
+license: MIT
+dependencies:
+  apm:
+    - path: ../../cloud/provider/aws/aws-architect
+  mcp: []
+includes: auto
+scripts: {}

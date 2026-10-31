@@ -1,0 +1,13 @@
+name: agents-factory-bundle-github-actions-secure-cicd
+version: 1.0.0
+description: >-
+  GitHub Actions Secure CI/CD: 9 pipeline skills (OIDC to AWS and OCI, supply chain, blast radius,
+  Java, Next.js, Terraform, containers) and the pipeline engineer and reviewer agents.
+author: rodrigo-mendes
+license: MIT
+dependencies:
+  apm:
+    - path: ../../delivery/github/github-actions-cicd
+  mcp: []
+includes: auto
+scripts: {}

@@ -1,0 +1,14 @@
+name: agents-factory-bundle-architecture-board
+version: 1.0.0
+description: >-
+  Architecture Board: solution architect and reviewer plus the AWS and OCI architecture advisors.
+author: rodrigo-mendes
+license: MIT
+dependencies:
+  apm:
+    - path: ../../architecture/solution-architecture
+    - path: ../../cloud/provider/aws/aws-architect
+    - path: ../../cloud/provider/oci/oci-architecture
+  mcp: []
+includes: auto
+scripts: {}
