@@ -1,0 +1,16 @@
+name: agents-factory-bundle-oci-serverless-complete
+version: 1.0.0
+description: >-
+  OCI Serverless Complete: Java functions (FDK), Terraform provisioning, observability and
+  architecture for OCI Functions, API Gateway, Vault, Streaming and Object Storage.
+author: rodrigo-mendes
+license: MIT
+dependencies:
+  apm:
+    - path: ../../cloud/provider/oci/oci-functions-java
+    - path: ../../cloud/provider/oci/oci-observability
+    - path: ../../cloud/provider/oci/oci-architecture
+    - path: ../../cloud/terraform/oci-terraform
+  mcp: []
+includes: auto
+scripts: {}

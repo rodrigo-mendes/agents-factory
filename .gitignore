@@ -1,3 +1,10 @@
 
 # APM dependencies
 apm_modules/
+**/target/
+# Python bytecode (handoff-core scripts and tests)
+__pycache__/
+*.pyc
+
+# sales exports (scripts/export-bundle.py)
+dist/

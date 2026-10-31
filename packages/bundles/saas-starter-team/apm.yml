@@ -1,0 +1,14 @@
+name: agents-factory-bundle-saas-starter-team
+version: 1.0.0
+description: >-
+  SaaS Starter Team: the spec-driven project-manager orchestrator for a Quarkus Lambda + Next.js
+  SaaS on AWS and its whole agent team. Pulls third-party/vercel-frontend transitively: exclude the
+  Vercel skills from any paid export.
+author: rodrigo-mendes
+license: MIT
+dependencies:
+  apm:
+    - path: ../../saas/aws-saas-serverless-quarkus-react-nextjs
+  mcp: []
+includes: auto
+scripts: {}

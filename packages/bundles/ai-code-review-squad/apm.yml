@@ -1,0 +1,17 @@
+name: agents-factory-bundle-ai-code-review-squad
+version: 1.0.0
+description: >-
+  AI Code Review Squad: five read-only reviewer agents (Quarkus on Lambda, LangChain4j on Quarkus,
+  Terraform, GitHub Actions CI/CD, Stripe Java) with the skills and rules they cite. The install pulls
+  the whole source packages; export.yml cuts the sold package down to the reviewers.
+author: rodrigo-mendes
+license: MIT
+dependencies:
+  apm:
+    - path: ../../java/quarkus/quarkus-langchain4j
+    - path: ../../cloud/terraform/terraform
+    - path: ../../delivery/github/github-actions-cicd
+    - path: ../../java/libs/stripe-java
+  mcp: []
+includes: auto
+scripts: {}

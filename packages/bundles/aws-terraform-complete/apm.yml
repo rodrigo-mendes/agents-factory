@@ -1,0 +1,13 @@
+name: agents-factory-bundle-aws-terraform-complete
+version: 1.0.0
+description: >-
+  AWS Terraform Complete: 26 version-locked provisioning-aws-<service>-v6 skills (hashicorp/aws
+  6.x) plus the aws-terraform-engineer and terraform-rules-author agents.
+author: rodrigo-mendes
+license: MIT
+dependencies:
+  apm:
+    - path: ../../cloud/terraform/terraform
+  mcp: []
+includes: auto
+scripts: {}

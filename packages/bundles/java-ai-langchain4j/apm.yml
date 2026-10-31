@@ -1,0 +1,14 @@
+name: agents-factory-bundle-java-ai-langchain4j
+version: 1.0.0
+description: >-
+  Java AI with LangChain4j: plain-Java chat and streaming on LangChain4j 1.22 (OpenAI, Anthropic)
+  and quarkus-langchain4j on Lambda.
+author: rodrigo-mendes
+license: MIT
+dependencies:
+  apm:
+    - path: ../../java/libs/langchain4j
+    - path: ../../java/quarkus/quarkus-langchain4j
+  mcp: []
+includes: auto
+scripts: {}
