@@ -1,0 +1,17 @@
+name: agents-factory-oci-functions-java
+version: 1.0.0
+description: >-
+  Knowledge skills + agents for the OCI Functions Java lifecycle (FDK Java 1.1.x, Java 17):
+  develop, scaffold, implement events, integrate Object Storage, call REST, publish events,
+  test, refactor, deploy and debug. Migrated from the poc-oci-serverless authored package;
+  blueprints cite the PoC's services/ and libs/obs-commons as worked examples.
+author: rodrigo-mendes
+license: MIT
+dependencies:
+  apm:
+    - path: ../../../../factory/factory-core
+    - path: ../oci-core
+    - path: ../../../../java/clean-code/clean-code-oci
+  mcp: []
+includes: auto
+scripts: {}

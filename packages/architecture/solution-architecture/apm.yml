@@ -1,0 +1,13 @@
+name: agents-factory-solution-architecture
+version: 1.0.0
+description: >-
+  Solution architecture authoring and review agents: solution-architect (peças, contratos, dados, segurança lógica, ADRs de arquitetura, designs técnicos de uma mudança; model opus) and the read-only solution-architecture-reviewer. Non-interactive; return handoff records.
+author: rodrigo-mendes
+license: MIT
+dependencies:
+  apm:
+    - path: ../../factory/factory-core
+    - path: ../../delivery/protocol/handoff-core
+  mcp: []
+includes: auto
+scripts: {}

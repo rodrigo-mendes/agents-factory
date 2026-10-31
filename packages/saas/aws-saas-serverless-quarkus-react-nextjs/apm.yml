@@ -1,0 +1,26 @@
+name: agents-factory-aws-saas-serverless-quarkus-react-nextjs
+version: 1.0.0
+description: >-
+  Composition for building a SaaS on Quarkus 3.40 + AWS Lambda with a Next.js/React static front end (S3 + CloudFront), continuous spec-driven development and GitHub Actions CD: the inline project-manager orchestrator /building-aws-saas-serverless-quarkus-react-nextjs (OpenSpec-based E1-E9 process), the coordinating-quarkus-aws-handoffs profile, Stripe on Quarkus (integrating-stripe-quarkus-v3-40). Pulls in the solution-architecture, ui-design, nextjs-frontend and quarkus-langchain4j packages, the official Vercel skills (vercel-frontend) and the GitHub Actions CI/CD package. Optional GitHub Projects mirror via openspec-github (off by default).
+author: rodrigo-mendes
+license: MIT
+dependencies:
+  apm:
+    - path: ../../factory/factory-core
+    - path: ../../java/quarkus/quarkus-aws
+    - path: ../../cloud/provider/aws/aws-lambda
+    - path: ../../cloud/provider/aws/aws-observability
+    - path: ../../delivery/protocol/handoff-core
+    - path: ../../cloud/provider/aws/aws-architect
+    - path: ../../cloud/terraform/terraform
+    - path: ../../java/libs/stripe-java
+    - path: ../../delivery/specs/openspec-github
+    - path: ../../architecture/solution-architecture
+    - path: ../../frontend/react/ui-design
+    - path: ../../frontend/react/nextjs-frontend
+    - path: ../../java/quarkus/quarkus-langchain4j
+    - path: ../../third-party/vercel-frontend
+    - path: ../../delivery/github/github-actions-cicd
+  mcp: []
+includes: auto
+scripts: {}

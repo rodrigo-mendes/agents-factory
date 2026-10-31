@@ -1,0 +1,4 @@
+{"data": {"results": [
+  {"data": {"logContent": {"data": {"opcRequestId": "req-1", "service": "api-handler", "source": "ocid1.fnapp.oc1.sa-saopaulo-1.example-api-handler-app"}}}},
+  {"data": {"logContent": {"data": {"message": "hello"}}}}
+]}}

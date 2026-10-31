@@ -1,0 +1,15 @@
+name: agents-factory-evaluating
+version: 1.0.0
+description: >-
+  skill-evaluator subagent + evaluating-skill-scenarios command — LLM-as-judge behavioral testing.
+  Runtime dependency only (not declared below, to avoid a cycle): it reads
+  blueprints/evaluation-scenarios.md from whichever skill is under test, across every other
+  package. Install alongside whatever you want to evaluate.
+author: rodrigo-mendes
+license: MIT
+dependencies:
+  apm:
+    - path: ../../factory/factory-core
+  mcp: []
+includes: auto
+scripts: {}

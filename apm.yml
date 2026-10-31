@@ -11,33 +11,33 @@ dependencies:
     # them again here would give APM two different textual paths
     # (./packages/X here vs ../X from the siblings) for the SAME physical
     # package, which `apm audit --ci` rejects as "ambiguous resolved_by"
-    # (confirmed, CLI v0.31.0) — this is not cosmetic, it fails CI.
-    - path: ./packages/researching-frameworks
-    - path: ./packages/researching-platform
-    - path: ./packages/artifact-authoring
-    - path: ./packages/auditing
-    - path: ./packages/validating
-    - path: ./packages/evaluating
-    - path: ./packages/book-writing
+    # (confirmed, CLI v0.31.0) — this is not cosmetic, the audit fails.
+    - path: ./packages/factory/researching-frameworks
+    - path: ./packages/factory/researching-platform
+    - path: ./packages/factory/artifact-authoring
+    - path: ./packages/harness-quality/auditing
+    - path: ./packages/harness-quality/validating
+    - path: ./packages/harness-quality/evaluating
+    - path: ./packages/content-generation/book-writing
     # camel-quarkus-skills is NOT listed directly: camel-quarkus-integrator
     # depends on ../camel-quarkus-skills, so it resolves transitively (same
     # "ambiguous resolved_by" reason as factory-core above).
-    - path: ./packages/camel-quarkus-integrator
-    - path: ./packages/agent-package-builder
+    - path: ./packages/java/quarkus/camel-quarkus-integrator
+    - path: ./packages/factory/agent-package-builder
     # aws-skills and oci-core are NOT listed directly: aws-saas-serverless-quarkus-react-nextjs (via
     # aws-architect) and the oci-* packages depend on them, so they resolve transitively (same "ambiguous
     # resolved_by" reason as factory-core above).
-    - path: ./packages/oci-functions-java
-    - path: ./packages/oci-terraform
-    - path: ./packages/oci-observability
-    - path: ./packages/oci-architecture
-    - path: ./packages/langchain4j
+    - path: ./packages/cloud/provider/oci/oci-functions-java
+    - path: ./packages/cloud/terraform/oci-terraform
+    - path: ./packages/cloud/provider/oci/oci-observability
+    - path: ./packages/cloud/provider/oci/oci-architecture
+    - path: ./packages/java/libs/langchain4j
     # aws-saas-serverless-quarkus-react-nextjs pulls in quarkus-aws, aws-lambda, aws-observability,
     # handoff-core (and through them quarkus-core, aws-skills, aws-terraform),
     # plus aws-architect, terraform and stripe-java. Those three are therefore
     # NOT listed directly any more (same "ambiguous resolved_by" reason as
     # factory-core above); they still install, transitively.
-    - path: ./packages/aws-saas-serverless-quarkus-react-nextjs
+    - path: ./packages/saas/aws-saas-serverless-quarkus-react-nextjs
     # vercel-frontend, github-actions-cicd, solution-architecture, ui-design, nextjs-frontend and
     # quarkus-langchain4j are NOT listed directly: aws-saas-serverless-quarkus-react-nextjs depends
     # on them, so they resolve transitively (same "ambiguous resolved_by" reason as factory-core).
@@ -50,7 +50,7 @@ scripts: {}
 # confirmed via `apm lifecycle test post-install` (shows as armed) vs. a real
 # `apm install` run (no lifecycle phase logged, scripts never executed). Kept
 # here in case a future CLI version honors it, but DO NOT rely on it: run both
-# scripts explicitly after every `apm install` (see CI workflow and README).
+# scripts explicitly after every `apm install` (see CLAUDE.md).
 lifecycle:
   post-install:
     - type: command

@@ -57,11 +57,14 @@ The **book-writing** package adds its own self-contained pipeline: `book-orchest
 `switching-book-language`, `enriching-book-chapter`), plus `book-translator`, `book-formatter`,
 `epub-repairer` and `mermaid-renderer` (each fronted by one command) and 7 worker subagents spawned
 by the orchestrator. Output goes to `Books/{slug}/` (gitignored); details in
-[packages/book-writing/README.md](packages/book-writing/README.md).
+[packages/content-generation/book-writing/README.md](packages/content-generation/book-writing/README.md).
 
 The **Quarkus base** package `quarkus-core` holds the Quarkus 3.40 LTS skills shared by Camel and
 AWS work: `developing-quarkus-{arc,rest,junit}-v3-40` (moved here from `camel-quarkus-skills`, names
-unchanged), `refactoring-quarkus-java` and the `quarkus-clean-code` rule.
+unchanged). `refactoring-quarkus-java`, `refactoring-oci-java` and the two clean code rules
+(`quarkus-clean-code`, `java-functions-clean-code`) live in `java/clean-code/` as two packages, one
+per stack: `clean-code-quarkus` (a dependency of `quarkus-core`) and `clean-code-oci` (a dependency of
+`oci-functions-java`) (split out 2026-10-31 so it can be sold as its own bundle).
 
 The **Camel Quarkus** packages are a second self-contained set, not routed by a `/command`:
 `camel-quarkus-skills` (10 version-locked knowledge skills `developing-camel-quarkus-*-v3-40` for Camel Quarkus
@@ -69,13 +72,13 @@ The **Camel Quarkus** packages are a second self-contained set, not routed by a 
 `camel-quarkus-integrator` (the inline orchestrator skill `integrating-camel-quarkus`, the
 `structuring-camel-quarkus-projects` skill, the non-interactive `camel-quarkus-integrator` subagent
 and 3 scoped rules). Details and scope limits in
-[packages/camel-quarkus-integrator/README.md](packages/camel-quarkus-integrator/README.md). These
+[packages/java/quarkus/camel-quarkus-integrator/README.md](packages/java/quarkus/camel-quarkus-integrator/README.md). These
 skills follow the **hybrid knowledge-skill** format (lean `SKILL.md` + `blueprints/`, see
 `.claude/rules/skill-structure.md`).
 
-The **Terraform executors** live in `packages/terraform`: `terraform-rules-author` (non-interactive, compiles scoped Terraform rules from a research file) and `aws-terraform-engineer` (non-interactive, writes/reviews HCL for a CLOSED AWS requirement using the 26 `provisioning-aws-<service>-v6` skills from `packages/aws-terraform`; offline checks only — never apply/destroy/import). Command: `/provision-aws-terraform`. Details: [packages/aws-terraform/README.md](packages/aws-terraform/README.md).
+The **Terraform executors** live in `packages/cloud/terraform/terraform`: `terraform-rules-author` (non-interactive, compiles scoped Terraform rules from a research file) and `aws-terraform-engineer` (non-interactive, writes/reviews HCL for a CLOSED AWS requirement using the 26 `provisioning-aws-<service>-v6` skills from `packages/cloud/terraform/aws-terraform`; offline checks only — never apply/destroy/import). Command: `/provision-aws-terraform`. Details: [packages/cloud/terraform/aws-terraform/README.md](packages/cloud/terraform/aws-terraform/README.md).
 
-The **LangChain4j** package (`packages/langchain4j`) covers chat + streaming in plain Java on LangChain4j 1.22.0 with OpenAI and Anthropic: 3 version-locked knowledge skills (`developing-langchain4j-core-v1-22`, `integrating-langchain4j-openai-v1-22`, `integrating-langchain4j-provider-a-v1-22` — the Anthropic one, named without the reserved word), the non-interactive `langchain4j-integrator` subagent (no `/command`; spawned via the Agent tool) and 2 scoped rules. AiServices, `@Tool`, RAG, structured output and Spring/Quarkus are out of scope. Details: [packages/langchain4j/README.md](packages/langchain4j/README.md).
+The **LangChain4j** package (`packages/java/libs/langchain4j`) covers chat + streaming in plain Java on LangChain4j 1.22.0 with OpenAI and Anthropic: 3 version-locked knowledge skills (`developing-langchain4j-core-v1-22`, `integrating-langchain4j-openai-v1-22`, `integrating-langchain4j-provider-a-v1-22` — the Anthropic one, named without the reserved word), the non-interactive `langchain4j-integrator` subagent (no `/command`; spawned via the Agent tool) and 2 scoped rules. AiServices, `@Tool`, RAG, structured output and Spring/Quarkus are out of scope. Details: [packages/java/libs/langchain4j/README.md](packages/java/libs/langchain4j/README.md).
 
 The **Quarkus on AWS Lambda SaaS + Next.js** set is a set of layered packages (plus the reusable OpenSpec and GitHub layers below) driven by the inline project-manager orchestrator
 `/building-aws-saas-serverless-quarkus-react-nextjs` (spec-driven: interview, solution architecture + design + infrastructure specs with ADRs in three folders, OpenSpec functional spec, wireframes,
@@ -99,7 +102,7 @@ technical designs, then an agent team via handoff records; deploy runs in GitHub
   `validating-aws-observability` (read-only live checks in Python, approval flags for anything else).
 - `aws-saas-serverless-quarkus-react-nextjs`: the orchestrator, the profile `coordinating-quarkus-aws-handoffs`
   and `integrating-stripe-quarkus-v3-40`; depends on all of the above plus `vercel-frontend` and `github-actions-cicd`.
-Details: [packages/aws-saas-serverless-quarkus-react-nextjs/README.md](packages/aws-saas-serverless-quarkus-react-nextjs/README.md).
+Details: [packages/saas/aws-saas-serverless-quarkus-react-nextjs/README.md](packages/saas/aws-saas-serverless-quarkus-react-nextjs/README.md).
 
 The **OpenSpec + GitHub** layer is 3 reusable packages: `openspec-core` (the OpenSpec 1.15 skill alone,
 split out of `handoff-core`), `github-core` (generic `managing-github-projects-gh-v2-103` and
@@ -109,9 +112,9 @@ gates, spec CI, board sync and archive-by-PR; the non-interactive `openspec-gith
 the command `/syncing-openspec-to-github`; one scoped rule). Git stays canonical; GitHub is a mirror plus an
 optional approval channel that only the orchestrator reads (`pull`). Organization projects use a GitHub App,
 user projects a classic PAT. Off by default (`tracker.kind: none`). Details:
-[packages/openspec-github/README.md](packages/openspec-github/README.md).
+[packages/delivery/specs/openspec-github/README.md](packages/delivery/specs/openspec-github/README.md).
 
-The **Vercel front-end** package (`packages/vercel-frontend`) copies no skill content. Its `apm.yml` points to 7 official Vercel skill repositories (agent-skills, next.js, ai-elements, streamdown, components.build, turborepo, agent-browser), each pinned to a commit SHA, and `apm install` brings in the 20 knowledge skills they publish (React/Next.js performance, composition, Cache Components, web design guidelines, AI chat UI, Turborepo, browser automation). Their names come from the upstream folders and do not follow the factory naming rules. On Windows the install needs `git config --global core.longpaths true` and takes about 25-40 minutes. `vercel/ai` and 3 skills that can only be installed from a subfolder (`path:`) are commented out because the install fails for them on Windows. Details: [packages/vercel-frontend/README.md](packages/vercel-frontend/README.md).
+The **Vercel front-end** package (`packages/third-party/vercel-frontend`) copies no skill content. Its `apm.yml` points to 7 official Vercel skill repositories (agent-skills, next.js, ai-elements, streamdown, components.build, turborepo, agent-browser), each pinned to a commit SHA, and `apm install` brings in the 20 knowledge skills they publish (React/Next.js performance, composition, Cache Components, web design guidelines, AI chat UI, Turborepo, browser automation). Their names come from the upstream folders and do not follow the factory naming rules. On Windows the install needs `git config --global core.longpaths true` and takes about 25-40 minutes. `vercel/ai` and 3 skills that can only be installed from a subfolder (`path:`) are commented out because the install fails for them on Windows. Details: [packages/third-party/vercel-frontend/README.md](packages/third-party/vercel-frontend/README.md).
 
 Note `rules-compiler` in the table above: it is itself a **knowledge skill** (no `context: fork`)
 — a reference engine that `terraform-instructions-compiler` (an action command) links into for
@@ -175,49 +178,71 @@ listed in every session of a project that installs them, so keep them short and 
 ├── settings.json         ← hand-authored, not generated (APM only merges `hooks:`, unused here)
 └── settings.local.json   ← hand-authored, gitignored
 
-packages/           ← the actual source of truth — 38 APM packages, all installed by the root manifest (directly or transitively), each with its own apm.yml
-├── factory-core/                 ← 5 rules (frontmatter + naming schemas), no skills/agents
-├── research-core/                ← framework-researcher + its 2 internal helpers, no skills
-├── researching-frameworks/       ← 5 generic research skills
-├── researching-platform/         ← 15 platform-software skills (indivisible — see its apm.yml)
-├── terraform/                    ← Terraform skills + 2 agents (terraform-rules-author,
-│                                   aws-terraform-engineer) + `/provision-aws-terraform`; depends on aws-terraform
-├── aws-terraform/                ← 26 version-locked skills (hashicorp/aws 6.x, Terraform ~> 1.16) + 3 rules
-├── artifact-authoring/           ← artifact-author + 5 skill/agent/rule-authoring skills
-├── auditing/                     ← architecture-auditor + 8 audit skills
-├── validating/                   ← quality-validator + 5 validation skills
-├── book-writing/                 ← 13 agents + 10 commands for the technical-book pipeline
-├── quarkus-core/                 ← 3 Quarkus 3.40 LTS skills (arc, rest, junit) + refactoring-quarkus-java + 1 rule
-├── camel-quarkus-skills/         ← 10 version-locked Camel Quarkus 3.40 LTS skills; depends on quarkus-core
-├── camel-quarkus-integrator/     ← orchestrator + structure skills, 1 subagent, 3 rules
-├── agent-package-builder/        ← building-agent-packages: inline orchestrator of the whole
+packages/           ← the actual source of truth — 40 APM packages grouped in family folders
+│                     (packages/<family>[/<sub>]/<pkg>), all installed by the root manifest (directly or
+│                     transitively), each with its own apm.yml; plus 19 sales bundles (see bundles/ below)
+├── factory/
+│   ├── factory-core/             ← 5 rules (frontmatter + naming schemas), no skills/agents
+│   ├── research-core/            ← framework-researcher + its 2 internal helpers, no skills
+│   ├── researching-frameworks/   ← 5 generic research skills
+│   ├── researching-platform/     ← 15 platform-software skills (indivisible — see its apm.yml)
+│   ├── artifact-authoring/       ← artifact-author + 5 skill/agent/rule-authoring skills
+│   └── agent-package-builder/    ← building-agent-packages: inline orchestrator of the whole
 │                                   research → skills → agent/rules → quality loop → commit chain
-├── evaluating/                   ← skill-evaluator + 1 skill (runtime dep on every package)
-├── aws-skills, aws-architect/    ← AWS architecture knowledge skills + advisory agent
-├── oci-core, oci-functions-java, oci-terraform, oci-observability, oci-architecture
-│                                 ← OCI serverless family (shared handoff protocol in oci-core)
-├── stripe-java/                  ← Stripe Java 34.x skills + advisor/integrator agents
-├── langchain4j/                  ← LangChain4j 1.22.0 chat + streaming (3 skills, langchain4j-integrator, 2 rules)
-├── openspec-core/                ← OpenSpec 1.15 skill (specifying-changes-with-openspec-v1-15), reusable without handoff
-├── handoff-core/                 ← generic handoff protocol + scripts (optional tracker: block), spec-synchronizer, 1 command
-├── github-core/                  ← gh 2.103 + Projects v2 skill, GitHub Actions automation skill (generic)
-├── openspec-github/              ← OpenSpec ↔ GitHub Projects bridge: skill + scripts + 4 workflow templates, syncer agent, 1 command, 1 rule
-├── quarkus-aws/                  ← 11 Quarkus on Lambda skills, integrator + reviewer agents, 2 rules
-├── aws-lambda/                   ← deployer + debugger agents, 2 skills, 1 rule (any Lambda runtime)
-├── aws-observability/            ← aws-observability agent, /observe-aws-workload, live validation, 1 rule
-├── quarkus-langchain4j/          ← LangChain4j 1.15.0.CR1 on Quarkus Lambda skill + langchain4j-reviewer
-├── solution-architecture/        ← solution-architect (opus) + solution-architecture-reviewer
-├── ui-design/                    ← ui-ux-designer + ui-design-reviewer
-├── nextjs-frontend/              ← nextjs-frontend-integrator + nextjs-code-reviewer + 1 rule (static export)
-└── aws-saas-serverless-quarkus-react-nextjs/ ← project-manager orchestrator, handoff profile, Stripe skill
+├── harness-quality/
+│   ├── auditing/                 ← architecture-auditor + 8 audit skills
+│   ├── validating/               ← quality-validator + 5 validation skills
+│   └── evaluating/               ← skill-evaluator + 1 skill (runtime dep on every package)
+├── content-generation/
+│   └── book-writing/             ← 13 agents + 10 commands for the technical-book pipeline
+├── architecture/
+│   └── solution-architecture/    ← solution-architect (opus) + solution-architecture-reviewer
+├── cloud/
+│   ├── terraform/
+│   │   ├── terraform/            ← Terraform skills + 2 agents (terraform-rules-author,
+│   │   │                           aws-terraform-engineer) + `/provision-aws-terraform`; depends on aws-terraform
+│   │   ├── aws-terraform/        ← 26 version-locked skills (hashicorp/aws 6.x, Terraform ~> 1.16) + 3 rules
+│   │   └── oci-terraform/        ← OCI Terraform provisioning skills + oci-terraform agent
+│   └── provider/
+│       ├── aws/                  ← aws-skills (AWS architecture knowledge), aws-architect (advisory agent),
+│       │                           aws-lambda (deployer + debugger, any runtime),
+│       │                           aws-observability (agent, /observe-aws-workload, live validation)
+│       └── oci/                  ← oci-core (shared handoff profile), oci-functions-java, oci-observability,
+│                                   oci-architecture — the OCI serverless family
+├── delivery/
+│   ├── protocol/handoff-core/    ← generic handoff protocol + scripts (optional tracker: block), spec-synchronizer, 1 command
+│   ├── specs/                    ← openspec-core (OpenSpec 1.15 skill, reusable without handoff),
+│   │                               openspec-github (OpenSpec ↔ GitHub Projects bridge: skill + scripts +
+│   │                               4 workflow templates, syncer agent, 1 command, 1 rule)
+│   └── github/                   ← github-core (gh 2.103 + Projects v2, Actions automation),
+│                                   github-actions-cicd (9 CI/CD skills + engineer/reviewer agents)
+├── java/
+│   ├── quarkus/                  ← quarkus-core (Quarkus 3.40 LTS arc/rest/junit),
+│   │                               quarkus-aws (11 Quarkus on Lambda skills, integrator + reviewer, 2 rules),
+│   │                               quarkus-langchain4j (1.15.0.CR1 skill + langchain4j-reviewer),
+│   │                               camel-quarkus-skills (10 Camel Quarkus 3.40 LTS skills),
+│   │                               camel-quarkus-integrator (orchestrator + structure skills, 1 subagent, 3 rules)
+│   ├── clean-code/               ← clean-code-quarkus (refactoring-quarkus-java + quarkus-clean-code),
+│   │                               clean-code-oci (refactoring-oci-java + java-functions-clean-code)
+│   └── libs/                     ← langchain4j (1.22.0 chat + streaming, langchain4j-integrator, 2 rules),
+│                                   stripe-java (Stripe Java 34.x skills + advisor/integrator agents)
+├── frontend/react/               ← ui-design (ui-ux-designer + ui-design-reviewer),
+│                                   nextjs-frontend (integrator + code reviewer + 1 rule, static export)
+├── third-party/vercel-frontend/  ← points to 7 official Vercel skill repos (never sold, see bundles)
+├── saas/aws-saas-serverless-quarkus-react-nextjs/ ← project-manager orchestrator, handoff profile, Stripe skill
+└── bundles/                      ← 19 sales meta-packages: apm.yml only (dependencies, no .apm/; an
+                                    optional export.yml cuts what is sold); exported by scripts/export-bundle.py;
+                                    NOT listed in the root apm.yml. See docs/comercial/estrategia-bundles.md
 
 apm.yml             ← root manifest: aggregates the packages (factory-core, research-core,
                        camel-quarkus-skills, quarkus-core, openspec-core, github-core, openspec-github and the
                        Quarkus/AWS SaaS layers below aws-saas-serverless-quarkus-react-nextjs (incl. vercel-frontend, github-actions-cicd) are NOT listed directly — they resolve transitively;
                        listing them twice triggers a real `apm audit --ci` failure,
                        "ambiguous resolved_by")
-apm.lock.yaml       ← committed; `apm install --frozen` in CI must reproduce it exactly
-scripts/            ← 2 defensive post-install fixups (see NOTE in apm.yml above `lifecycle:`)
+apm.lock.yaml       ← committed; regenerated by `apm install --target claude` (no CI check)
+scripts/            ← 2 defensive post-install fixups (see NOTE in apm.yml above `lifecycle:`; both take
+                       `--root <dir>`), reorganize-packages.py (the family move), export-bundle.py +
+                       export_detectors.py (sales export and sensitive-data detectors; tests in scripts/tests/)
 docs/
 ├── capacidades/  ← skills/commands catalog
 ├── como-usar/    ← operational guides
@@ -238,10 +263,11 @@ with the skill.
 
 **`.claude/{agents,skills,rules}/` are generated, and committed anyway** — a clone with no
 network access and no `apm` CLI still has every `/command` working, exactly as before this
-migration. CI (`.github/workflows/apm.yml`) proves there's no drift between `packages/` and the
-committed `.claude/` on every push: `apm install --frozen` (pinned CLI) then `git diff --exit-code`.
-To change a skill/agent/rule: edit it under `packages/*/.apm/`, then
-`apm install --target claude` to regenerate `.claude/` locally before committing both.
+migration. There is no CI: nothing checks automatically that `.claude/` matches `packages/`, so
+always regenerate it before committing (below).
+To change a skill/agent/rule: edit it under `packages/**/.apm/` (family folders), then
+`apm install --target claude` followed by `python scripts/restore-rule-metadata.py` and
+`python scripts/fix-cross-package-links.py` to regenerate `.claude/` locally before committing both.
 
 ## Gotchas
 

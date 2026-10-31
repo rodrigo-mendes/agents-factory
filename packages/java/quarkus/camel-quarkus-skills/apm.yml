@@ -1,0 +1,15 @@
+name: agents-factory-camel-quarkus-skills
+version: 1.0.0
+description: >-
+  Knowledge skills for Camel Quarkus 3.40 LTS (Camel 4.22, Quarkus 3.40): one skill per Camel
+  Quarkus extension (10), each generated from a dated, official-source research file. The base
+  Quarkus skills (ArC, REST, JUnit) live in quarkus-core.
+author: rodrigo-mendes
+license: MIT
+dependencies:
+  apm:
+    - path: ../../../factory/factory-core
+    - path: ../quarkus-core
+  mcp: []
+includes: auto
+scripts: {}

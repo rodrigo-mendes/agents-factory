@@ -169,7 +169,7 @@
 |-------|-------|
 | **When to use** | Create a version-locked, research-derived knowledge skill that is too large for the plain knowledge template: frontmatter stays `name` + `description`, `SKILL.md` stays lean (100–200 lines) and the bulk lives in `blueprints/` (always-do, never-do, unverified-and-risks register, evaluation scenarios). Rules: `.claude/rules/skill-structure.md` ("Hybrid knowledge skills") and the `-vMAJOR-MINOR` name suffix in `naming-conventions.md` |
 | **Referenced by** | `TEMPLATE.KNOWLEDGE-SKILL.md` header note, the `skill-structure` and `naming-conventions` rules |
-| **Implementations that follow** | The 13 `developing-*-v3-40` skills of `packages/camel-quarkus-skills/` (reference implementation: `developing-camel-quarkus-core-v3-40`) |
+| **Implementations that follow** | The 13 `developing-*-v3-40` skills of `packages/java/quarkus/camel-quarkus-skills/` (reference implementation: `developing-camel-quarkus-core-v3-40`) |
 
 ### TEMPLATE.EVALUATION-SCENARIOS.md
 > **File**: **Claude Code equivalent**: [`skill-creator/assets/TEMPLATE.EVALUATION-SCENARIOS.md`](../../.claude/skills/skill-creator/assets/TEMPLATE.EVALUATION-SCENARIOS.md) (no `.github/` mirror)
