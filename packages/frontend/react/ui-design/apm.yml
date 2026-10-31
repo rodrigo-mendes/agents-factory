@@ -1,0 +1,14 @@
+name: agents-factory-ui-design
+version: 1.0.0
+description: >-
+  UI/UX design agents: ui-ux-designer (design system, design ADRs, wireframes; read-only, returns content inline) and the read-only ui-design-reviewer (design system, wireframes, fidelity of the built front end). Use the official Vercel design skills from vercel-frontend.
+author: rodrigo-mendes
+license: MIT
+dependencies:
+  apm:
+    - path: ../../../factory/factory-core
+    - path: ../../../delivery/protocol/handoff-core
+    - path: ../../../third-party/vercel-frontend
+  mcp: []
+includes: auto
+scripts: {}

@@ -1,0 +1,11 @@
+name: agents-factory-auditing
+version: 1.0.0
+description: architecture-auditor subagent + 8 architecture audit commands (scope/flow/engine/consensus, for Copilot-target and Claude-Code-target projects)
+author: rodrigo-mendes
+license: MIT
+dependencies:
+  apm:
+    - path: ../../factory/factory-core
+  mcp: []
+includes: auto
+scripts: {}

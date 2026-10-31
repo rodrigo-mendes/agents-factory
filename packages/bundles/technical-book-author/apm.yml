@@ -1,0 +1,13 @@
+name: agents-factory-bundle-technical-book-author
+version: 1.0.0
+description: >-
+  Technical Book Author: the multi-agent technical book pipeline (TOC, chapters, code, diagrams,
+  review, translation, EPUB 3.0).
+author: rodrigo-mendes
+license: MIT
+dependencies:
+  apm:
+    - path: ../../content-generation/book-writing
+  mcp: []
+includes: auto
+scripts: {}

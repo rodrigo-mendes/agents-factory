@@ -1,0 +1,15 @@
+name: agents-factory-aws-observability
+version: 1.0.0
+description: >-
+  AWS observability (model: oci-observability): live 5-pillar validation skill validating-aws-observability with read-only bash scripts (logs, metrics, traces, alarms, dashboards), the aws-observability agent and the /observe-aws-workload command.
+author: rodrigo-mendes
+license: MIT
+dependencies:
+  apm:
+    - path: ../../../../factory/factory-core
+    - path: ../../../../delivery/protocol/handoff-core
+    - path: ../aws-skills
+    - path: ../../../terraform/aws-terraform
+  mcp: []
+includes: auto
+scripts: {}

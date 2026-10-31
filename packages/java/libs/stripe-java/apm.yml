@@ -1,0 +1,8 @@
+name: agents-factory-stripe-java
+version: 1.0.0
+dependencies:
+  apm:
+    - path: ../../../factory/factory-core
+  mcp: []
+includes: auto
+scripts: {}

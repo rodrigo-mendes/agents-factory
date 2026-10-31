@@ -1,0 +1,14 @@
+name: agents-factory-bundle-serverless-java-aws
+version: 1.0.0
+description: >-
+  Serverless Java on AWS: Quarkus 3.40 on Lambda (HTTP, Cognito, data, messaging, testing,
+  observability), Lambda deploy and debug agents.
+author: rodrigo-mendes
+license: MIT
+dependencies:
+  apm:
+    - path: ../../java/quarkus/quarkus-aws
+    - path: ../../cloud/provider/aws/aws-lambda
+  mcp: []
+includes: auto
+scripts: {}

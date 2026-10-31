@@ -1,0 +1,15 @@
+name: agents-factory-bundle-harness-quality-kit
+version: 1.0.0
+description: >-
+  Harness Quality Kit: audit agent architectures, validate skills/rules/router compliance and
+  evaluate skill behaviour with LLM-as-judge scenarios.
+author: rodrigo-mendes
+license: MIT
+dependencies:
+  apm:
+    - path: ../../harness-quality/auditing
+    - path: ../../harness-quality/validating
+    - path: ../../harness-quality/evaluating
+  mcp: []
+includes: auto
+scripts: {}

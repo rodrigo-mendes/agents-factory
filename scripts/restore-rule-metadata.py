@@ -15,7 +15,7 @@ Code's paths: mechanism doesn't need name/description to fire -- but every
 rule loses its identity and its human-readable purpose.
 
 Fix: after install, re-read name/description from the package source
-(packages/*/.apm/instructions/*.instructions.md) and patch them back into
+(packages/**/.apm/instructions/*.instructions.md) and patch them back into
 the matching deployed file, keyed by filename stem.
 
 Wired up as a `lifecycle: post-install:` command in the root apm.yml. Needs
@@ -29,8 +29,18 @@ import sys
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
-DEPLOYED_RULES = REPO_ROOT / ".claude" / "rules"
-PACKAGES = REPO_ROOT / "packages"
+PACKAGES = REPO_ROOT / "packages"  # sources always come from this repo
+
+
+def deploy_root() -> Path:
+    """`--root <dir>` patches <dir>/.claude/rules (e.g. an export sandbox); default: this repo."""
+    if "--root" in sys.argv:
+        return Path(sys.argv[sys.argv.index("--root") + 1]).resolve()
+    return REPO_ROOT
+
+
+ROOT = deploy_root()
+DEPLOYED_RULES = ROOT / ".claude" / "rules"
 
 FRONTMATTER_RE = re.compile(r"^---\n(.*?)\n---\n", re.DOTALL)
 
@@ -45,7 +55,8 @@ def read_frontmatter(path: Path) -> tuple[str, str, str]:
 
 
 def find_source(stem: str) -> Path | None:
-    matches = list(PACKAGES.glob(f"*/.apm/instructions/{stem}.instructions.md"))
+    # packages/<family>[/<sub>]/<pkg>/.apm/... since the family reorganization (2026-10-31)
+    matches = list(PACKAGES.glob(f"**/.apm/instructions/{stem}.instructions.md"))
     return matches[0] if matches else None
 
 
@@ -79,7 +90,7 @@ def main() -> int:
         new_front = "\n".join(prefix_lines) + "\n" + dep_front
         deployed.write_text(f"---\n{new_front}\n---\n{dep_body}", encoding="utf-8", newline="\n")
         patched += 1
-        print(f"[restore-rule-metadata] patched {deployed.relative_to(REPO_ROOT)}")
+        print(f"[restore-rule-metadata] patched {deployed.relative_to(ROOT)}")
 
     print(f"[restore-rule-metadata] done -- {patched} file(s) patched")
     return 0

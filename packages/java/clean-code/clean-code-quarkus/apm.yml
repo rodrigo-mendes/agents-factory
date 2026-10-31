@@ -1,0 +1,13 @@
+name: agents-factory-clean-code-quarkus
+version: 1.0.0
+description: >-
+  Clean code for Quarkus 3.40 Java: the behaviour-preserving refactoring skill refactoring-quarkus-java
+  and the quarkus-clean-code rule. Depended on by quarkus-core, so installing it still brings both.
+author: rodrigo-mendes
+license: MIT
+dependencies:
+  apm:
+    - path: ../../../factory/factory-core
+  mcp: []
+includes: auto
+scripts: {}

@@ -1,0 +1,14 @@
+name: agents-factory-bundle-multi-cloud-terraform
+version: 1.0.0
+description: >-
+  Multi-Cloud Terraform: AWS (hashicorp/aws 6.x) and OCI (oracle/oci) provisioning skills and
+  agents in one install.
+author: rodrigo-mendes
+license: MIT
+dependencies:
+  apm:
+    - path: ../../cloud/terraform/terraform
+    - path: ../../cloud/terraform/oci-terraform
+  mcp: []
+includes: auto
+scripts: {}

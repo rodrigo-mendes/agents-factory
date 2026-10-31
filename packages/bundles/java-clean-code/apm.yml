@@ -1,0 +1,15 @@
+name: agents-factory-bundle-java-clean-code
+version: 1.0.0
+description: >-
+  Java Clean Code: behaviour-preserving refactoring skills for Quarkus and OCI Functions Java and the
+  two clean code rules (small methods, SRP by package, DRY, records, facades). Each rule targets one
+  stack: keep only the rule of your stack in a project.
+author: rodrigo-mendes
+license: MIT
+dependencies:
+  apm:
+    - path: ../../java/clean-code/clean-code-quarkus
+    - path: ../../java/clean-code/clean-code-oci
+  mcp: []
+includes: auto
+scripts: {}

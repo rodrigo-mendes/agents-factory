@@ -1,0 +1,13 @@
+name: agents-factory-bundle-stripe-for-java
+version: 1.0.0
+description: >-
+  Stripe for Java: stripe-java 34.x payments, subscriptions and webhooks, with the stripe-advisor
+  and stripe-integrator agents.
+author: rodrigo-mendes
+license: MIT
+dependencies:
+  apm:
+    - path: ../../java/libs/stripe-java
+  mcp: []
+includes: auto
+scripts: {}
