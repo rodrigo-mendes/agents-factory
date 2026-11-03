@@ -159,3 +159,8 @@
 2026-11-01T01:49:13 | P8 | preflight_apm | PREFLIGHT | 14 block, 2 warn, 1 info; 18 files of your package exist in .claude/ but are not in apm.lock.yaml (e.g. .claude/skills\building-acceptance-tests\SKILL.md): apm refuses to update such "unmanaged" files
 2026-11-03T12:33:41 | P8 | orchestrator | GATE | G3 approved: 4 commits on feat/openspec-poc (feat quality, docs, chore .claude regen 73 files, chore workspace); lock and docs counts deferred (D-002, D-003); dashboard skills>=90 item is a recording 
 2026-11-03T12:33:41 | P9 | orchestrator | PHASE_START | start
+2026-11-03T12:34:35 | - | orchestrator | RETRO | R-002 known-failure: Windows LongPathsEnabled=0: apm cannot replace apm_modules/vercel (WinError 145); delete apm_modules with rd /s /q \?\path; agent-browser checkout fails with 'local changes' -> lo
+2026-11-03T12:34:35 | - | orchestrator | RETRO | R-003 lesson: Record package scores with target 'package' (0-100), never per package name, or the dashboard counts them as skills
+2026-11-03T12:34:36 | P9 | orchestrator | PHASE_DONE | done
+2026-11-03T12:34:36 | - | orchestrator | SHARED_UNLOCK | software-quality 26956 c11-2ylsyt3zib9 2026-11-01T00:28:42
+2026-11-03T12:34:37 | - | orchestrator | UNLOCK | 39784 c11-2ylsyt3zib9 2026-10-31T22:58:44

@@ -4,12 +4,12 @@
 > on the next render. Write state only with `scripts/state_event.py`.
 
 <!-- generated:summary -->
-- **Current phase:** P9
+- **Current phase:** DONE
 - **Units:** 3 (3 VALIDATED)
 - **Gates recorded:** G1, G2, G3
 - **Rounds:** 2
 - **Findings open:** 0 · **Deferred open:** 3 · **Decisions:** 10 · **Sources:** 38
-- **Events:** 161
+- **Events:** 166
 
 <!-- generated:progress -->
 ## Progress and budget
@@ -56,14 +56,14 @@ _none yet_
 | Check | Status |
 |---|---|
 | Reviewers running | none |
-| Run lock | pid 39784 on c11-2ylsyt3zib9 since 2026-10-31T22:58:44 |
-| Shared lock | held by software-quality since 2026-11-01T00:28:42 · **60 h old: stale, ask the user** |
+| Run lock | none (run finished or not started) |
+| Shared lock | free |
 | Watcher (5-min refresh) | alive, every 300s |
 | Builder scripts in .claude/ | **stale vs source**: verify_skill.py (run scripts from packages/; fixed by the P8 install) |
 | Next gate | G4 (push) - always the user |
 | check_state.py | OK |
 
-_Updated 2026-11-03T12:33:43 by render._
+_Updated 2026-11-03T12:34:38 by state_event._
 
 <!-- generated:phases -->
 ## Phases
@@ -77,7 +77,7 @@ _Updated 2026-11-03T12:33:43 by render._
 | P5 | done | 2026-11-01T00:24:38 | 2026-11-01T00:30:10 |  | [P5](state/phases/P5.md) |
 | P6 | done | 2026-11-01T00:30:11 | 2026-11-01T00:39:28 |  | [P6](state/phases/P6.md) |
 | P8 | done | 2026-11-01T00:45:24 | 2026-11-01T01:48:28 | partial: lock deferred D-002 | [P8](state/phases/P8.md) |
-| P9 | start | 2026-11-03T12:33:41 |  |  | [P9](state/phases/P9.md) |
+| P9 | done | 2026-11-03T12:33:41 | 2026-11-03T12:34:36 |  | [P9](state/phases/P9.md) |
 
 <!-- generated:gates -->
 ## Approvals
@@ -167,6 +167,8 @@ Paste every `brief` row into each later worker brief of this run.
 | ID | Kind | Target | Text |
 |---|---|---|---|
 | R-001 | brief | author | Every Version Context row cites the page that states it (not a neighbour fact); Never Do alternatives must be High confidence (put spike-only patterns second); plugin versions need a URL or (medium co |
+| R-002 | known-failure | P8 | Windows LongPathsEnabled=0: apm cannot replace apm_modules/vercel (WinError 145); delete apm_modules with rd /s /q \?\path; agent-browser checkout fails with 'local changes' -> lock not written |
+| R-003 | lesson | P6 | Record package scores with target 'package' (0-100), never per package name, or the dashboard counts them as skills |
 
 <!-- generated:open -->
 ## Open items
@@ -178,11 +180,6 @@ Paste every `brief` row into each later worker brief of this run.
 
 <!-- generated:log -->
 ## Last events
-- `2026-11-01T00:41:32 | - | orchestrator | METRIC | round-2-audit actual 118006 tokens`
-- `2026-11-01T00:41:51 | P7 | orchestrator | SWEEP | F10 change checked: U1 uses F10 only for tags; no change needed`
-- `2026-11-01T00:45:23 | - | orchestrator | DECISION | DEC-010 Run full apm install despite preflight BLOCK; the 27 pre-existing .claude files go in a separate commit 'chore(.claude): regenerate from packages'`
-- `2026-11-01T00:45:24 | P8 | orchestrator | PHASE_START | start`
-- `2026-11-01T00:45:42 | P8 | snapshot_env | ENV | snapshot written; missing tools: jq, terraform, node; git init in sandbox: no`
 - `2026-11-01T00:46:32 | P8 | after_install | INCIDENT | 8 problem(s) after install`
 - `2026-11-01T00:52:04 | - | orchestrator | TOUCH | CLAUDE.md aeed07a4ba9c -> 723de2faed4e`
 - `2026-11-01T00:52:43 | - | orchestrator | TOUCH | packages/README.md d5059c961fad -> 74ed590af701`
@@ -198,3 +195,8 @@ Paste every `brief` row into each later worker brief of this run.
 - `2026-11-01T01:49:13 | P8 | preflight_apm | PREFLIGHT | 14 block, 2 warn, 1 info; 18 files of your package exist in .claude/ but are not in apm.lock.yaml (e.g. .claude/skills\building-acceptance-tests\SKILL.md): apm refuses to update such "unmanaged" files`
 - `2026-11-03T12:33:41 | P8 | orchestrator | GATE | G3 approved: 4 commits on feat/openspec-poc (feat quality, docs, chore .claude regen 73 files, chore workspace); lock and docs counts deferred (D-002, D-003); dashboard skills>=90 item is a recording `
 - `2026-11-03T12:33:41 | P9 | orchestrator | PHASE_START | start`
+- `2026-11-03T12:34:35 | - | orchestrator | RETRO | R-002 known-failure: Windows LongPathsEnabled=0: apm cannot replace apm_modules/vercel (WinError 145); delete apm_modules with rd /s /q \?\path; agent-browser checkout fails with 'local changes' -> lo`
+- `2026-11-03T12:34:35 | - | orchestrator | RETRO | R-003 lesson: Record package scores with target 'package' (0-100), never per package name, or the dashboard counts them as skills`
+- `2026-11-03T12:34:36 | P9 | orchestrator | PHASE_DONE | done`
+- `2026-11-03T12:34:36 | - | orchestrator | SHARED_UNLOCK | software-quality 26956 c11-2ylsyt3zib9 2026-11-01T00:28:42`
+- `2026-11-03T12:34:37 | - | orchestrator | UNLOCK | 39784 c11-2ylsyt3zib9 2026-10-31T22:58:44`
