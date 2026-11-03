@@ -1,0 +1,26 @@
+Agent: artifact-author (batch of <= 4)
+Spec: follow packages/artifact-authoring/.apm/skills/skill-creator/SKILL.md and the hybrid template
+  packages/artifact-authoring/.apm/skills/skill-creator/assets/TEMPLATE.KNOWLEDGE-SKILL.HYBRID.md
+  Schema: .claude/rules/skill-structure.md and .claude/rules/skill-frontmatter.md.
+Input: workspace/github-actions-cicd/research_GitHubActions_OCI_Auth_2026-10.md
+Skill name: federating-github-actions-oci
+Write to: packages/github-actions-cicd/.apm/skills/federating-github-actions-oci/   (NOT .claude/skills/)
+Content requirements:
+- Composite ./.github/actions/cloud/login-oci (input auth-mode api-key|token-exchange, region).
+- Path B default (G1 DEC-005): CI service user API key; key written to $RUNNER_TEMP with umask 077; OCI CLI env vars; `oci` backend only documents private_key_path (closes Terraform U5) and partial -backend-config with identifiers only; least-privilege policies; rotation within documented limits (3 API keys, 2 auth tokens) (medium confidence).
+- OCIR: login-ocir F34 (node20 risk F38, fallback plain docker login documented by Oracle); auth token required.
+- Path A optional (medium confidence): token exchange F20/F21 still needs an identity-domain app client secret; CLI/provider consumption of an external UPST is (unverified); ephemeral RPST left out.
+- run-oci-cli-command F35 (node20 risk).
+- Plan variants per family rule 16: Free private has only repository secrets -> explicit warning.
+- evaluation-scenarios: canonical (API key in environment secrets on Team), edge (token exchange requested), rejection (personal user API key), trap (key content passed in -backend-config).
+Approval line: The user approved 9 skills, names (v1-17 terraform, v16-4 nextjs), 2 agents, 4 rules, command /building-cicd-pipelines on 2026-10-30 (verbatim: "G1 escopo: Aprovo como está | OCI login: API key padrão + federação opcional (Recommended) | Peças: No próprio repo (Recommended) | Scanner: Checkov + Trivy"); recorded in workspace/github-actions-cicd/execution-1/state/gates/G1.md. Fan-out approved at G2 (verbatim: "G2 orçamento: Aprovo, budget 7M (Recommended) | .github/: Liberar só para este pacote (Recommended) | Plano GitHub: Team / Pro / Free (repos privados)"); recorded in state/gates/G2.md. This is a relay, not a new approval.
+Hard constraints:
+- Do NOT spawn any agent, section-investigator or background task.
+- Do NOT enter plan mode and do not wait for a gate: the user approved this scope in this session (see Approval line); it is not a new approval and you must not treat it as one from yourself.
+- Write only files under the "Write to" folder. Report the paths and anything you could not verify.
+- Apply workspace/github-actions-cicd/_family_facts.md (F1-F39) and _family_rules.md (1-16) as given; do not edit them. Every action SHA comes from the facts file; if the research uses a placeholder like <FRn-sha> or <SHA-pending-new-F-row>, replace it with the matching F-row (F28-F37 now exist). If an action is still missing from the facts file, do not invent a SHA: drop that example or keep the step generic and list it in your reply.
+- Lessons from earlier batches: (1) GitHub doc examples show stale action majors - use only facts-file pins. (2) Family rule 16 is the plan model: DEFAULT Pro/Team private repos (environments with secrets + branch policy main, protected main with required PR reviewers -> approval = PR review before merge, roles trust environment:<env>); a separate, explicitly weaker FREE private variant (no environments - F25, no protected branches - F39; OIDC roles trusting ref:refs/heads/main; unavoidable static secrets as least-privilege repository secrets with a warning). Required reviewers, wait timers, artifact attestations (F33) = upgrade path only. (3) Family rule 13: PR jobs use a PR-only read role/environment. (4) Family rule 14: SKILL.md has a Verification Loop (offline commands + expected output). (5) Family rule 15: use real paths ./.github/workflows/_<name>.yml and ./.github/actions/<domain>/<name> (the verifier allows .github/ in this package). (6) Pilot validator flagged: tags must be plain `(medium confidence)` / `(unverified)`, never combined or nested; one claim per Always Do bullet; cite the page that actually states the claim; label design choices "(family decision)"; add a short contents list at the top of blueprints over 100 lines. (7) Immutable OIDC sub format for repos created after 2026-07-15 (F26).
+- Never make the shipped skill READ a file under workspace/; cite the research file only as provenance.
+- Do not edit shared files (root apm.yml, lock, CLAUDE.md, docs/, other packages); return a request instead.
+Format: hybrid knowledge skill; checklist .claude/skills/building-agent-packages/blueprints/policy/hybrid-format-checklist.md; evidence rule .claude/skills/building-agent-packages/blueprints/policy/evidence-rule.md; tags .claude/skills/building-agent-packages/blueprints/policy/tag-notation-and-registers.md. Style/structure reference: the finished sibling packages/github-actions-cicd/.apm/skills/automating-terraform-github-actions-v1-17/ (copy its layout, not its content).
+Done when: .claude/skills/building-agent-packages/scripts/verify_skill.py <dir> exits 0 (the orchestrator runs it; you have no Bash) and register header counts equal the listed items.

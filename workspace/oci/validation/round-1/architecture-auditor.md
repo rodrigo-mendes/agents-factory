@@ -1,0 +1,36 @@
+# Architecture audit - oci-serverless-architect (P6 round 1, single lens)
+
+Scope: packages/oci-architecture/.apm/agents/oci-serverless-architect.agent.md (A), router skills/design-oci-architecture/SKILL.md (R), README.md, instructions/*. Compared with aws-architect and aws-terraform-engineer.
+
+## Verified OK
+- Flow: R has context: fork + agent: oci-serverless-architect + disable-model-invocation (R:5-7). A name matches.
+- 6 skills in A:154-161 all exist in packages/oci-architecture/.apm/skills/ (ls verified).
+- Handoff targets exist: .claude/skills/provision-oci-infra (agent oci-terraform), .claude/skills/develop-java-function (agent oci-functions-java).
+- Non-interactive contract is clean: A:26-29, A:70, A:210; no "wait for feedback" remnant (unlike aws-architect.agent.md:80, which still says "Wait for user feedback").
+- Report format ends with Status COMPLETE|NEEDS-INPUT (A:193-203); aws-architect has no equivalent, engineer uses DONE|NEEDS-INPUT|PARTIAL.
+- Context budget rules present (A:167-175), same shape as aws-architect.
+
+## HIGH
+1. Stale template path. A:119-120 tells the agent to follow `docs/handoff/_templates/work-order.md "if present"`. That directory does not exist in the repo (ls docs/handoff fails). The real template is .claude/skills/coordinating-oci-handoffs/assets/work-order.template.md (frontmatter also has `status: pending`, no `to` as command). Fix: reference the `coordinating-oci-handoffs` skill's `assets/work-order.template.md` and `blueprints/handoff-protocol.md`; delete the `_templates` clause. Also the architect never loads `coordinating-oci-handoffs` (not in Skills Reference A:154-165), so the schema is only implicit; add it to P6 as a required read.
+2. `status: draft` is outside the protocol enum. A:140 and A:144 use `draft`; handoff-protocol.md:56 and :337 define `pending | in-progress | completed`. oci-serverless-stack.agent.md (lines 130-169) and the executors have no `draft` handling. Fix: either use `pending` and keep the "caller must obtain user approval" sentence, or add `draft` to the protocol enum and the intake step of oci-terraform / oci-functions-java / oci-serverless-stack. Pick one; today a downstream agent sees an undefined value.
+3. Handoff conflict with `/provision-oci-serverless-stack` (still shipped). A (P6) and R (SKILL.md:19) route work-orders to `/provision-oci-infra` + `/develop-java-function`; README.md:15,22,78-82 (table + "Typical workflow") and R:3 (description: "handoff plan for @oci-serverless-stack") still route step 2 to `/provision-oci-serverless-stack`. The stack skill (provision-oci-serverless-stack/SKILL.md:17,44-49) requires exactly the stream-a/b/c files the architect writes, so it is actually compatible, but README:69 ("Handoff targets - /provision-oci-infra and /develop-java-function") contradicts README:78. The architect's closing line (A:146-148) never offers the stack command, so the orchestrator path is orphaned from the designer. Fix: decide one primary path. Recommended: keep the stack command as the one-shot executor, and make A:146-148 and R say "run `/provision-oci-serverless-stack <slug>` (all streams) or the individual commands (`/provision-oci-infra`, `/develop-java-function`)"; update README:69 and R:3 accordingly. Note the stack agent calls `@oci-terraform`/`@oci-functions-java` directly, so stream B/C run twice if the user runs both paths; add a "do not run both" sentence.
+
+## MEDIUM
+4. Write scope is prompt-only. A:13 `tools: Read, Grep, Glob, Write` cannot limit Write to docs/handoff/<capability>/; only A:22-24, 121 and 209 state it. aws-terraform-engineer has the same pattern (Write/Edit "only under that target path"), so this is consistent but unenforced. Fix: add a path-guard sentence in P6 ("refuse any path not starting with docs/handoff/<slug>/ ; slug must match ^[a-z0-9-]+$ with no `..`") or move to a PreToolUse hook. Slug sanitisation is currently missing (A:117).
+5. Generated .claude is out of sync. `diff` between packages/.../oci-serverless-architect.agent.md and .claude/agents/oci-serverless-architect.md shows the old 6-step workflow (P0 "Verify Docs") and short description still in .claude/. CI `apm install --frozen` + `git diff --exit-code` will fail until `apm install --target claude` is run and both committed (CLAUDE.md "Structure"). Same for the design-oci-architecture skill and the new instructions/ (untracked).
+6. Router scope table incomplete. R:29-34 lists 4 scopes (full-stack, api-surface, security-model, network-topology) but A:37-43 has 6 domains; object-storage and event-driven-pubsub have no argument value although README:33 and the agent support them. Fix: add `object-storage` and `event-driven-pubsub` rows and update `argument-hint` (R:4).
+7. Router description wording. R:3 says "ADRs, diagrams, and handoff work-orders" (fine) but ends "for @oci-serverless-stack"; R:18 says "ASCII component diagrams" while A:86 prefers Mermaid. Align (see aws-architect.agent.md:88: Mermaid preferred).
+8. Capability slug has no ask path in the router. R argument-hint is `<scope>`, but P6 needs `<capability-slug>` (A:117). When absent the agent must return NEEDS-INPUT (A:48-49 covers it implicitly). Fix: make `argument-hint: "<scope> <capability-slug>"` or state in R that the slug is requested through NEEDS-INPUT.
+9. Missing createdAt policy conflict. A:121 leaves `createdAt: <pending>`; executors stamp it (oci-terraform.md:74), which is fine, but README/R do not mention it. Low risk; note only.
+
+## LOW
+10. P1 hard-codes `infra/modules/*`, `modules/function-app/`, `var.route_backends` layout (A:53-62) as if universal; terraform-project-config rule uses `modules/` at project root. Fix: say "locate the Terraform root with Glob `**/modules/*`".
+11. A:99 lists OCI-R69 etc. while README:50-51 split rules across two instruction files; IDs R93-R115 are not echoed in A. Acceptable (delegated by name, A:93-94) but A:93 could cite both instruction file names.
+12. Instructions `applyTo` includes `docs/handoff/**` (both files, line 4): good for write-time injection, but the architect's Write targets are markdown, and the Never/Always text is Terraform-oriented; confirm APM maps applyTo to `paths:` in .claude/rules (not verified here, run after `apm install`).
+13. README:93-95 says cross-package links are "expected unresolved"; the stack agent depends on oci-terraform/oci-functions-java agents that are not declared in apm.yml dependencies (apm.yml:8-12 only factory-core, oci-core). Not a defect for the architect but affects the stack path in item 3.
+14. Context budget: A is ~213 lines, R 38 lines; no problem. Six eager skills could overflow only on multi-domain `full-stack`; A:174-175 already gives the fallback.
+
+## Comparison summary
+- Tool scope: aws-architect read-only (no Write) vs architect Write-limited-by-prompt vs engineer Write/Edit/Bash. Architect is correct for its P6 need, but is the only one with no enforcement besides prose.
+- Non-interactive: architect and engineer both return numbered questions; aws-architect (line 80) still contradicts its own contract ("Wait for user feedback") and is out of scope here but worth a fix.
+- Report format: architect and engineer have explicit status trailers; aws-architect lacks one.

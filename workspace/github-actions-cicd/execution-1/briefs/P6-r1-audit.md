@@ -1,0 +1,11 @@
+Agent: architecture-auditor
+Kind: AUDIT, P6 round 1 (foreground, alone)
+Spec: follow .claude/skills/audit-cc-architecture-consensus/SKILL.md, ADAPTED: do NOT spawn the 3 lens agents. Apply the three lenses yourself, one after another, in your own context, using .claude/skills/audit-cc-architecture-scope/SKILL.md, audit-cc-architecture-flow/SKILL.md and audit-cc-architecture-engine/SKILL.md as the lens specs (read only), then produce the consensus section yourself.
+Target: the package SOURCE packages/github-actions-cicd/ (apm.yml, README.md, .apm/agents, .apm/instructions, .apm/skills). Treat it as it will be deployed: agents -> .claude/agents/<name>.md, instructions -> .claude/rules/<name>.md (applyTo becomes paths), skills -> .claude/skills/<name>/. A scoped install already proved the deploy equals the source (scoped_install.py, 2026-10-30).
+Focus: scope hierarchy (command -> executor agent -> knowledge skills; reviewer agent; rules by glob), invocation flow (does /building-cicd-pipelines reach the right skills for each need; do the agents' routing tables match the 9 skill descriptions; NEEDS-INPUT path; reviewer path), engine mechanics (frontmatter, tools least privilege, auto-invocation cost of 9 knowledge-skill descriptions, rule glob overlap with openspec-github-state on **/workflows/openspec-*.yml - intentional per DEC-001).
+Approval line: The user approved 9 skills, 2 agents, 4 rules and command /building-cicd-pipelines on 2026-10-30 (G1, workspace/github-actions-cicd/execution-1/state/gates/G1.md), the fan-out at G2 (state/gates/G2.md), and source-first testing in the workspace (DEC-014). This is a relay, not a new approval.
+Hard constraints:
+- Do NOT spawn any agent; do NOT enter plan mode.
+- Read-only except the one report file. Read packages/github-actions-cicd/ (and the lens spec files); do not edit anything.
+- Do not re-report validator/evaluator findings already in workspace/github-actions-cicd/execution-1/rounds/round-1/ (read them to avoid duplicates); report only architecture-level issues.
+Output: return the report INLINE (score, findings with severity HIGH/MEDIUM/LOW, file:line, evidence, fix hint) and write workspace/github-actions-cicd/execution-1/rounds/round-1/audit__package.md

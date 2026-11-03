@@ -1,0 +1,10 @@
+[
+  {
+    "message": "feat(github-actions-cicd): add GitHub Actions CI/CD package for Terraform, Java and Next.js\n\nNew APM package: 9 knowledge skills (composing building blocks, Terraform 1.17,\nAWS OIDC, OCI auth, Java Maven 3.10/Gradle 9.8, container images, Next.js 16.4,\nblast radius, supply chain), the cicd-pipeline-engineer executor and the\ncicd-pipeline-reviewer advisor, 4 scoped workflow rules and the\n/building-cicd-pipelines command. Plan model: GitHub Pro/Team private repos by\ndefault with an explicit weaker Free variant. Facts verified 2026-10-30;\nP6 quality loop: 2 rounds, 0 HIGH, skills 97-99.5, audit 9.7/10.\n\nNot yet listed in the root apm.yml/lock (.claude/ not regenerated in this commit).\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>",
+    "paths": ["packages/github-actions-cicd/"]
+  },
+  {
+    "message": "feat(agent-package-builder): test package source in parallel and add scoped install\n\n- P5 install rehearsal is scripts/scoped_install.py: one package in a throwaway\n  workspace/.sbx sandbox, deploy compared with the source; full root install only in P8\n- P6 reviewers (validate, test, audit) read packages/<pkg>/ and run in parallel;\n  state_event round-start writes a .running marker shown as running on the dashboard\n- pilot report goes to execution-N/pilot/; dashboard rendered at every boundary\n- verify_skill.py allows literal .github/ only for packages/github-actions-cicd\n- includes the score/render commands and auto-render added to the state scripts\n  outside this run (accepted by the user)\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>",
+    "paths": ["packages/agent-package-builder/"]
+  }
+]

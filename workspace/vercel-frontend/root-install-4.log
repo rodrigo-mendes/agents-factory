@@ -1,0 +1,524 @@
+[>] Installing dependencies from apm.yml...
+[>] Resolving vercel-labs/agent-skills...
+[>] Resolving vercel/next.js...
+[>] Resolving vercel/components.build...
+[>] Resolving vercel/ai...
+[>] Resolving vercel/ai-elements...
+[>] Resolving vercel/streamdown...
+[>] Resolving vercel/turborepo...
+[>] Resolving vercel-labs/agent-browser...
+WARNING apm_cli.policy.discovery Policy repo rodrigo-mendes/.github-private not found (or [REDACTED] private-repo read scope). If your org publishes policy in .github-private, ensure the token has Contents:read permission on that repo.
+[i] Targets: claude  (source: --target flag)
+  [+] ./packages/agent-package-builder (local)
+  [+] ./packages/artifact-authoring (local)
+  [+] ./packages/auditing (local)
+  [+] ./packages/book-writing (local)
+  [+] ./packages/camel-quarkus-integrator (local)
+  [+] ./packages/evaluating (local)
+  [+] ./packages/langchain4j (local)
+  [+] ./packages/oci-architecture (local)
+  [+] ./packages/oci-functions-java (local)
+  [+] ./packages/oci-observability (local)
+  [+] ./packages/oci-terraform (local)
+  [+] ./packages/quarkus-aws-saas (local)
+  [+] ./packages/researching-frameworks (local)
+  [+] ./packages/researching-platform (local)
+  [+] ./packages/validating (local)
+  [+] ./packages/vercel-frontend (local)
+  [+] ../aws-architect (local)
+  [+] ../aws-lambda (local)
+  [+] ../aws-observability (local)
+  [+] ../camel-quarkus-skills (local)
+  [+] ../factory-core (local)
+  [+] ../handoff-core (local)
+  [+] ../oci-core (local)
+  [+] ../openspec-github (local)
+  [+] ../quarkus-aws (local)
+  [+] ../research-core (local)
+  [+] ../stripe-java (local)
+  [+] ../terraform (local)
+  [+] vercel-labs/agent-browser #1453dd37a40c730fe00f592bc32198a896ff8747 
+@1453dd37
+  [+] vercel-labs/agent-skills #1a2c79d4e6c4a2283dc2c614b6538cbe1ed5ca62 
+@1a2c79d4
+  [+] vercel/ai-elements #ca8be600bfd01b3131f9bf6134b51602a71f4374 @ca8be600
+  [+] vercel/components.build #ba727450437385af662810329fa19896215f76d5 
+@ba727450
+  [+] vercel/next.js #4c6a3fa48041c70e5ebb77f11e49c2e5e4a14bd1 @4c6a3fa4
+  [+] vercel/streamdown #7dcabc64df944edce6f3993732667652e6214af0 @7dcabc64
+  [+] vercel/turborepo #e158e859f804019fa48dd1af15bc247e4759d81e @e158e859
+  [+] ../artifact-authoring (local)
+  [+] ../aws-skills (local)
+  [+] ../aws-terraform (local)
+  [+] ../github-core (local)
+  [+] ../openspec-core (local)
+  [+] ../quarkus-core (local)
+  |-- 1 skill(s) integrated -> .claude/skills/
+Warning: Failed to parse C:\agents\agents-factory\apm_modules\_local\artifact-authoring\.apm\skills\agent-creator\assets\TEMPLATE.AGENT.md: Failed to parse primitive file C:\agents\agents-factory\apm_modules\_local\artifact-authoring\.apm\skills\agent-creator\assets\TEMPLATE.AGENT.md: Unknown primitive file type: C:\agents\agents-factory\apm_modules\_local\artifact-authoring\.apm\skills\agent-creator\assets\TEMPLATE.AGENT.md
+  |-- 1 agents integrated -> .claude/agents/
+  |-- 5 skill(s) integrated -> .claude/skills/
+  |-- 1 agents adopted -> .claude/agents/
+  |-- 8 skill(s) integrated -> .claude/skills/
+  |-- 13 agents adopted -> .claude/agents/
+  |-- 10 skill(s) integrated -> .claude/skills/
+  |-- 1 agents adopted -> .claude/agents/
+  |-- 3 rule(s) integrated -> .claude/rules/
+  |-- 2 skill(s) integrated -> .claude/skills/
+  |-- 1 agents adopted -> .claude/agents/
+  |-- 1 skill(s) integrated -> .claude/skills/
+  |-- 1 agents adopted -> .claude/agents/
+  |-- 2 rule(s) integrated -> .claude/rules/
+  |-- 3 skill(s) integrated -> .claude/skills/
+  |-- 2 agents adopted -> .claude/agents/
+  |-- 2 rule(s) integrated -> .claude/rules/
+  |-- 8 skill(s) integrated -> .claude/skills/
+  |-- 3 agents adopted -> .claude/agents/
+  |-- 17 rule(s) integrated -> .claude/rules/
+  |-- 14 skill(s) integrated -> .claude/skills/
+  |-- 1 agents adopted -> .claude/agents/
+  |-- 1 rule(s) integrated -> .claude/rules/
+  |-- 10 skill(s) integrated -> .claude/skills/
+  |-- 1 agents adopted -> .claude/agents/
+  |-- 8 rule(s) integrated -> .claude/rules/
+  |-- 20 skill(s) integrated -> .claude/skills/
+  |-- 4 skill(s) integrated -> .claude/skills/
+  |-- 5 skill(s) integrated -> .claude/skills/
+  |-- 15 skill(s) integrated -> skills/
+  |-- 1 agents adopted -> .claude/agents/
+  |-- 5 skill(s) integrated -> .claude/skills/
+  |-- (files unchanged)
+  |-- 1 agents adopted -> .claude/agents/
+  |-- 2 rule(s) integrated -> .claude/rules/
+  |-- 1 skill(s) integrated -> .claude/skills/
+  |-- 2 agents adopted -> .claude/agents/
+  |-- 1 rule(s) integrated -> .claude/rules/
+  |-- 2 skill(s) integrated -> .claude/skills/
+  |-- 1 agents adopted -> .claude/agents/
+  |-- 1 rule(s) integrated -> .claude/rules/
+  |-- 2 skill(s) integrated -> .claude/skills/
+  |-- 10 skill(s) integrated -> .claude/skills/
+  |-- 5 rule(s) integrated -> .claude/rules/
+  |-- 1 agents adopted -> .claude/agents/
+  |-- 2 skill(s) integrated -> .claude/skills/
+  |-- 1 skill(s) integrated -> .claude/skills/
+  |-- 1 agents adopted -> .claude/agents/
+  |-- 1 rule(s) integrated -> .claude/rules/
+  |-- 2 skill(s) integrated -> .claude/skills/
+  |-- 2 agents adopted -> .claude/agents/
+  |-- 2 rule(s) integrated -> .claude/rules/
+  |-- 11 skill(s) integrated -> .claude/skills/
+  |-- 3 agents adopted -> .claude/agents/
+  |-- (files unchanged)
+  |-- 2 agents adopted -> .claude/agents/
+  |-- 1 rule(s) integrated -> .claude/rules/
+  |-- 6 skill(s) integrated -> .claude/skills/
+  |-- 2 agents adopted -> .claude/agents/
+  |-- 5 skill(s) integrated -> .claude/skills/
+  |-- Skill integrated -> .claude/skills/
+  |-- 1 skill(s) integrated -> .claude/skills/
+  |-- Skill integrated -> .claude/skills/
+  |-- 9 skill(s) integrated -> .claude/skills/
+  |-- Skill integrated -> .claude/skills/
+  |-- 1 skill(s) integrated -> .claude/skills/
+  |-- Skill integrated -> .claude/skills/
+  |-- 1 skill(s) integrated -> .claude/skills/
+  |-- Skill integrated -> .claude/skills/
+  |-- 6 skill(s) integrated -> .claude/skills/
+  |-- Skill integrated -> .claude/skills/
+  |-- 1 skill(s) integrated -> .claude/skills/
+  |-- Skill integrated -> .claude/skills/
+  |-- 1 skill(s) integrated -> .claude/skills/
+Warning: Failed to parse C:\agents\agents-factory\apm_modules\_local\cb22016cafe9\artifact-authoring\.apm\skills\agent-creator\assets\TEMPLATE.AGENT.md: Failed to parse primitive file C:\agents\agents-factory\apm_modules\_local\cb22016cafe9\artifact-authoring\.apm\skills\agent-creator\assets\TEMPLATE.AGENT.md: Unknown primitive file type: C:\agents\agents-factory\apm_modules\_local\cb22016cafe9\artifact-authoring\.apm\skills\agent-creator\assets\TEMPLATE.AGENT.md
+  |-- 1 agents integrated -> .claude/agents/
+  |-- 5 skill(s) integrated -> .claude/skills/
+  |-- 40 skill(s) integrated -> .claude/skills/
+  |-- 3 rule(s) integrated -> .claude/rules/
+  |-- 26 skill(s) integrated -> .claude/skills/
+  |-- 2 skill(s) integrated -> .claude/skills/
+  |-- 1 skill(s) integrated -> .claude/skills/
+  |-- 1 rule(s) integrated -> .claude/rules/
+  |-- 4 skill(s) integrated -> .claude/skills/
+[!] Install recovery or staging cleanup is incomplete. Close programs using the
+affected paths, then inspect the retained data before retrying. Do not delete 
+backups needed to recover the prior installation.
+[!] Resolution recovery path 
+C:\agents\agents-factory\apm_modules\.apm-resolution-staging\da2bbc9e7de4\backu
+ps\079c03199beebe9b: could not restore 
+C:\agents\agents-factory\apm_modules\vercel\next.js: [WinError 145] The 
+directory is not empty: 
+'C:\\agents\\agents-factory\\apm_modules\\vercel\\next.js\\turbopack\\crates\\t
+urbopack-tests\\tests\\snapshot\\cjs-remove-unused-exports\\define-property-get
+ter-reads-export\\output'
+  [!] 1 file(s) contain hidden characters
+    Run with --verbose to see details
+  [!] Skipped 
+.claude/skills/building-agent-packages/assets/PIPELINE_STATE.template.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped 
+.claude/skills/building-agent-packages/scripts/inspect_workspace.py: modified 
+since deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped .claude/skills/building-agent-packages/scripts/verify_skill.py: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped .claude/skills/provisioning-oci-api-gateway/SKILL.md: modified 
+since deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped 
+.claude/skills/provisioning-oci-api-gateway/blueprints/integration-patterns.md:
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped .claude/skills/provisioning-oci-events/SKILL.md: modified since 
+deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped 
+.claude/skills/provisioning-oci-events/blueprints/integration-patterns.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped 
+.claude/skills/provisioning-oci-functions/blueprints/integration-patterns.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped .claude/skills/researching-api-gateway/SKILL.md: modified since 
+deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped 
+.claude/skills/researching-api-gateway/blueprints/references/README.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped .claude/skills/researching-cache-store/SKILL.md: modified since 
+deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped 
+.claude/skills/researching-cache-store/blueprints/references/README.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped .claude/skills/researching-columnar-analytics/SKILL.md: modified 
+since deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped 
+.claude/skills/researching-columnar-analytics/blueprints/category-specifics.md:
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped 
+.claude/skills/researching-columnar-analytics/blueprints/data-modeling.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped 
+.claude/skills/researching-columnar-analytics/blueprints/references/README.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped .claude/skills/researching-coordination-service/SKILL.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped 
+.claude/skills/researching-coordination-service/blueprints/references/README.md
+: modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped .claude/skills/researching-document-store/SKILL.md: modified 
+since deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped 
+.claude/skills/researching-document-store/blueprints/category-specifics.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped 
+.claude/skills/researching-document-store/blueprints/references/README.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped .claude/skills/researching-graph-database/SKILL.md: modified 
+since deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped 
+.claude/skills/researching-graph-database/blueprints/category-specifics.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped 
+.claude/skills/researching-graph-database/blueprints/references/README.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped .claude/skills/researching-kv-store/SKILL.md: modified since 
+deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped 
+.claude/skills/researching-kv-store/blueprints/category-specifics.md: modified 
+since deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped .claude/skills/researching-kv-store/blueprints/data-modeling.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped 
+.claude/skills/researching-kv-store/blueprints/references/README.md: modified 
+since deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped .claude/skills/researching-object-storage/SKILL.md: modified 
+since deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped 
+.claude/skills/researching-object-storage/blueprints/category-specifics.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped 
+.claude/skills/researching-object-storage/blueprints/data-modeling.md: modified
+since deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped 
+.claude/skills/researching-object-storage/blueprints/references/README.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped .claude/skills/researching-platform-software/SKILL.md: modified 
+since deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped 
+.claude/skills/researching-platform-software/blueprints/shared/category-templat
+es/api-management-template.md: modified since deployment. Preserve your changes
+before reinstalling with --force.
+  [!] Skipped 
+.claude/skills/researching-platform-software/blueprints/shared/data-modeling/RE
+ADME.md: modified since deployment. Preserve your changes before reinstalling 
+with --force.
+  [!] Skipped .claude/skills/researching-rdbms/SKILL.md: modified since 
+deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped .claude/skills/researching-rdbms/blueprints/data-modeling.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped .claude/skills/researching-rdbms/blueprints/references/README.md:
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped .claude/skills/researching-search-engine/SKILL.md: modified since
+deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped 
+.claude/skills/researching-search-engine/blueprints/category-specifics.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped 
+.claude/skills/researching-search-engine/blueprints/references/README.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped .claude/skills/researching-streaming-broker/SKILL.md: modified 
+since deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped 
+.claude/skills/researching-streaming-broker/blueprints/references/README.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped .claude/skills/researching-timeseries-db/SKILL.md: modified since
+deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped 
+.claude/skills/researching-timeseries-db/blueprints/category-specifics.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped 
+.claude/skills/researching-timeseries-db/blueprints/references/README.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped .claude/skills/researching-vector-store/SKILL.md: modified since 
+deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped 
+.claude/skills/researching-vector-store/blueprints/category-specifics.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped 
+.claude/skills/researching-vector-store/blueprints/references/README.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped .claude/skills/researching-wide-column-store/SKILL.md: modified 
+since deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped 
+.claude/skills/researching-wide-column-store/blueprints/category-specifics.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped 
+.claude/skills/researching-wide-column-store/blueprints/references/README.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped .claude/skills/debugging-aws-lambda/SKILL.md: modified since 
+deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped 
+.claude/skills/developing-quarkus-amazon-lambda-http-v3-40/SKILL.md: modified 
+since deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped 
+.claude/skills/developing-quarkus-amazon-lambda-http-v3-40/blueprints/always-do
+-patterns.md: modified since deployment. Preserve your changes before 
+reinstalling with --force.
+  [!] Skipped 
+.claude/skills/developing-quarkus-amazon-lambda-http-v3-40/blueprints/ask-first
+-decisions.md: modified since deployment. Preserve your changes before 
+reinstalling with --force.
+  [!] Skipped 
+.claude/skills/developing-quarkus-amazon-lambda-http-v3-40/blueprints/build-out
+put-and-artifact-contract.md: modified since deployment. Preserve your changes 
+before reinstalling with --force.
+  [!] Skipped 
+.claude/skills/developing-quarkus-amazon-lambda-http-v3-40/blueprints/migration
+-notes.md: modified since deployment. Preserve your changes before reinstalling
+with --force.
+  [!] Skipped 
+.claude/skills/developing-quarkus-amazon-lambda-http-v3-40/blueprints/never-do-
+patterns.md: modified since deployment. Preserve your changes before 
+reinstalling with --force.
+  [!] Skipped .claude/skills/integrating-quarkus-amazon-data-v3-40/SKILL.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped 
+.claude/skills/integrating-quarkus-amazon-data-v3-40/blueprints/ask-first-decis
+ions.md: modified since deployment. Preserve your changes before reinstalling 
+with --force.
+  [!] Skipped 
+.claude/skills/integrating-quarkus-amazon-data-v3-40/blueprints/dev-services.md
+: modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped 
+.claude/skills/integrating-quarkus-amazon-messaging-v3-40/SKILL.md: modified 
+since deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped 
+.claude/skills/integrating-quarkus-amazon-messaging-v3-40/blueprints/always-do-
+patterns.md: modified since deployment. Preserve your changes before 
+reinstalling with --force.
+  [!] Skipped 
+.claude/skills/integrating-quarkus-amazon-messaging-v3-40/blueprints/ask-first-
+decisions.md: modified since deployment. Preserve your changes before 
+reinstalling with --force.
+  [!] Skipped 
+.claude/skills/integrating-quarkus-amazon-messaging-v3-40/blueprints/config-sou
+rces.md: modified since deployment. Preserve your changes before reinstalling 
+with --force.
+  [!] Skipped 
+.claude/skills/integrating-quarkus-amazon-messaging-v3-40/blueprints/migration-
+notes.md: modified since deployment. Preserve your changes before reinstalling 
+with --force.
+  [!] Skipped 
+.claude/skills/integrating-quarkus-amazon-messaging-v3-40/blueprints/publishing
+-and-limits.md: modified since deployment. Preserve your changes before 
+reinstalling with --force.
+  [!] Skipped 
+.claude/skills/integrating-quarkus-amazon-messaging-v3-40/blueprints/sqs-handle
+r.md: modified since deployment. Preserve your changes before reinstalling with
+--force.
+  [!] Skipped 
+.claude/skills/integrating-quarkus-amazon-messaging-v3-40/blueprints/verificati
+on-loop.md: modified since deployment. Preserve your changes before 
+reinstalling with --force.
+  [!] Skipped .claude/skills/monitoring-quarkus-lambda-v3-40/SKILL.md: modified
+since deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped 
+.claude/skills/monitoring-quarkus-lambda-v3-40/blueprints/ask-first-decisions.m
+d: modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped 
+.claude/skills/monitoring-quarkus-lambda-v3-40/blueprints/emf-implementation.md
+: modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped 
+.claude/skills/monitoring-quarkus-lambda-v3-40/blueprints/migration-notes.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped .claude/skills/observing-quarkus-lambda/SKILL.md: modified since 
+deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped 
+.claude/skills/observing-quarkus-lambda/blueprints/always-do-patterns.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped 
+.claude/skills/observing-quarkus-lambda/blueprints/ask-first-decisions.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped 
+.claude/skills/observing-quarkus-lambda/blueprints/correlation-recipe.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped 
+.claude/skills/observing-quarkus-lambda/blueprints/never-do-patterns.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped 
+.claude/skills/observing-quarkus-lambda/blueprints/unverified-and-risks.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped 
+.claude/skills/observing-quarkus-lambda/blueprints/verification-loop.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped .claude/skills/securing-quarkus-lambda-cognito-v3-40/SKILL.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped 
+.claude/skills/securing-quarkus-lambda-cognito-v3-40/blueprints/testing-and-ver
+ification.md: modified since deployment. Preserve your changes before 
+reinstalling with --force.
+  [!] Skipped .claude/skills/structuring-quarkus-lambda-projects/SKILL.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped 
+.claude/skills/structuring-quarkus-lambda-projects/blueprints/always-do-pattern
+s.md: modified since deployment. Preserve your changes before reinstalling with
+--force.
+  [!] Skipped 
+.claude/skills/structuring-quarkus-lambda-projects/blueprints/ask-first-decisio
+ns.md: modified since deployment. Preserve your changes before reinstalling 
+with --force.
+  [!] Skipped 
+.claude/skills/structuring-quarkus-lambda-projects/blueprints/never-do-patterns
+.md: modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped .claude/skills/testing-quarkus-amazon-lambda-v3-40/SKILL.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped .claude/skills/tracing-quarkus-lambda-v3-40/SKILL.md: modified 
+since deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped 
+.claude/skills/tracing-quarkus-lambda-v3-40/blueprints/ask-first-decisions.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped 
+.claude/skills/tracing-quarkus-lambda-v3-40/blueprints/lambda-and-api-gateway-t
+racing.md: modified since deployment. Preserve your changes before reinstalling
+with --force.
+  [!] Skipped 
+.claude/skills/tracing-quarkus-lambda-v3-40/blueprints/verification-loop.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped .claude/skills/terraform-rules-author/SKILL.md: modified since 
+deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped .claude/skills/refactoring-quarkus-java/SKILL.md: modified since 
+deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped 
+.claude/skills/refactoring-quarkus-java/blueprints/always-do-patterns.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped 
+.claude/skills/refactoring-quarkus-java/blueprints/package-taxonomy.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [x] 1 package failed:
+    +- vercel/ai -- Failed to resolve transitive dep vercel/ai (via 
+./packages/vercel-frontend > vercel/ai): Failed to clone repository vercel/ai: 
+error: Your local changes to the following files would be overwritten by 
+checkout:
+        packages/svelte/CHANGELOG.md
+        packages/svelte/package.json
+        packages/svelte/tsconfig.json
+        packages/togetherai/CHANGELOG.md
+        packages/togetherai/package.json
+        packages/tool-bash/CHANGELOG.md
+        packages/tool-bash/package.json
+        packages/tool-bash/src/bash-tool.test.ts
+        packages/tool-web-fetch/CHANGELOG.md
+        packages/tool-web-fetch/package.json
+        packages/topaz/CHANGELOG.md
+        packages/topaz/package.json
+        packages/tui/CHANGELOG.md
+        packages/tui/package.json
+        packages/tui/src/agent-tui.test.ts
+        packages/typesafe-ai/CHANGELOG.md
+        packages/typesafe-ai/package.json
+        packages/valibot/CHANGELOG.md
+        packages/valibot/package.json
+        packages/voyage/CHANGELOG.md
+        packages/voyage/package.json
+        packages/vue/CHANGELOG.md
+        packages/vue/package.json
+        packages/workflow-harness/CHANGELOG.md
+        packages/workflow-harness/package.json
+        packages/workflow/CHANGELOG.md
+        packages/workflow/package.json
+        packages/workflow/src/model-call-iterator.ts
+        packages/workflow/src/model-call.ts
+        packages/workflow/src/test/test-sandbox.ts
+        packages/workflow/src/workflow-agent.ts
+        packages/xai/CHANGELOG.md
+        packages/xai/package.json
+        packages/zai/CHANGELOG.md
+        packages/zai/package.json
+        tools/tsconfig/base.json
+        tools/tsdown-config/index.mts
+Please commit your changes or stash them before you switch branches.
+Aborting
+[x] Installation failed with 1 error(s) in 2397.3s. No install transaction 
+changes were committed.

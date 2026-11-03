@@ -1,0 +1,3 @@
+2026-10-29T21:06:05 | P0 | migrate_state | INIT | execution-0 migrated from the legacy layout (legacy files untouched)
+2026-10-29T21:06:05 | - | migrate_state | DISCREPANCY | G3 row empty in Approvals but approved in the log
+2026-10-29T21:06:05 | - | migrate_state | DISCREPANCY | header said current_phase P2 # P0 preflight done, inventory done, awaiting G1 but the log reaches P6

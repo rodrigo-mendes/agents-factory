@@ -1,0 +1,57 @@
+[>] Installing dependencies from apm.yml...
+WARNING apm_cli.policy.discovery Policy repo rodrigo-mendes/.github-private not found (or [REDACTED] private-repo read scope). If your org publishes policy in .github-private, ensure the token has Contents:read permission on that repo.
+[i] Dry run mode - showing what would change:
+[i] APM dependencies (41):
+[i]   - ./packages/agent-package-builder -> install
+[i]   - ./packages/artifact-authoring -> install
+[i]   - ./packages/auditing -> install
+[i]   - ./packages/book-writing -> install
+[i]   - ./packages/camel-quarkus-integrator -> install
+[i]   - ./packages/evaluating -> install
+[i]   - ./packages/langchain4j -> install
+[i]   - ./packages/oci-architecture -> install
+[i]   - ./packages/oci-functions-java -> install
+[i]   - ./packages/oci-observability -> install
+[i]   - ./packages/oci-terraform -> install
+[i]   - ./packages/quarkus-aws-saas -> install
+[i]   - ./packages/researching-frameworks -> install
+[i]   - ./packages/researching-platform -> install
+[i]   - ./packages/validating -> install
+[i]   - ./packages/vercel-frontend -> install
+[i]   - ../aws-architect -> install
+[i]   - ../aws-lambda -> install
+[i]   - ../aws-observability -> install
+[i]   - ../camel-quarkus-skills -> install
+[i]   - ../factory-core -> install
+[i]   - ../handoff-core -> install
+[i]   - ../oci-core -> install
+[i]   - ../openspec-github -> install
+[i]   - ../quarkus-aws -> install
+[i]   - ../research-core -> install
+[i]   - ../stripe-java -> install
+[i]   - ../terraform -> install
+[i]   - vercel-labs/agent-browser#1453dd37a40c730fe00f592bc32198a896ff8747 -> 
+install
+[i]   - vercel-labs/agent-skills#1a2c79d4e6c4a2283dc2c614b6538cbe1ed5ca62 -> 
+install
+[i]   - vercel/ai-elements#ca8be600bfd01b3131f9bf6134b51602a71f4374 -> install
+[i]   - vercel/components.build#ba727450437385af662810329fa19896215f76d5 -> 
+install
+[i]   - vercel/next.js#4c6a3fa48041c70e5ebb77f11e49c2e5e4a14bd1 -> install
+[i]   - vercel/streamdown#7dcabc64df944edce6f3993732667652e6214af0 -> install
+[i]   - vercel/turborepo#e158e859f804019fa48dd1af15bc247e4759d81e -> install
+[i]   - ../artifact-authoring -> install
+[i]   - ../aws-skills -> install
+[i]   - ../aws-terraform -> install
+[i]   - ../github-core -> install
+[i]   - ../openspec-core -> install
+[i]   - ../quarkus-core -> install
+[i] [dry-run] Dependency preview incomplete; showing only locally known 
+dependencies. Orphan removals are not previewed. Run 'apm install' without 
+--dry-run to resolve dependencies.
+[i] [dry-run] Stale-file cleanup (renames within a package or in the project's 
+.apm/ content) is not previewed -- it requires running integration. Run without
+--dry-run to apply.
+
+[!] Dry run incomplete: 41 locally known APM dependencies. Run 'apm install' 
+without --dry-run to resolve the full plan.

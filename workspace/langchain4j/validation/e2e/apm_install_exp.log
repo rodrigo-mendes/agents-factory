@@ -1,0 +1,236 @@
+[>] Installing dependencies from apm.yml...
+Parsed apm.yml: 17 APM deps, 0 MCP deps
+[!] [!] Skipped 2 untrusted project script(s). Run 'apm lifecycle trust' to 
+enable them.
+Using apm.lock.yaml (24 locked dependencies)
+Resolved dependency tree: 17 direct + 7 transitive deps (max depth 2)
+    ./packages/researching-frameworks > ../factory-core
+    ./packages/researching-frameworks > ../research-core
+    ./packages/terraform > ../artifact-authoring
+    ./packages/terraform > ../aws-terraform
+    ./packages/camel-quarkus-integrator > ../camel-quarkus-skills
+    ./packages/aws-architect > ../aws-skills
+    ./packages/oci-functions-java > ../oci-core
+Phase: resolve -> 0.158s
+WARNING apm_cli.policy.discovery Policy repo rodrigo-mendes/.github-private not found (or [REDACTED] private-repo read scope). If your org publishes policy in .github-private, ensure the token has Contents:read permission on that repo.
+[i] No org policy found for this project
+Phase: policy_gate -> 7.086s
+[i] Targets: claude  (source: --target flag)
+Phase: targets -> 0.006s
+Copilot native registration: unavailable (copilot target not selected)
+Phase: copilot_activate -> 0.000s
+Phase: policy_target_check -> 0.000s
+Phase: download -> 0.013s
+  [+] ./packages/agent-package-builder (local)
+  [+] ./packages/artifact-authoring (local)
+  [+] ./packages/auditing (local)
+  [+] ./packages/aws-architect (local)
+  [+] ./packages/book-writing (local)
+  [+] ./packages/camel-quarkus-integrator (local)
+  [+] ./packages/evaluating (local)
+  [+] ./packages/langchain4j (local)
+  [+] ./packages/oci-architecture (local)
+  [+] ./packages/oci-functions-java (local)
+  [+] ./packages/oci-observability (local)
+  [+] ./packages/oci-terraform (local)
+  [+] ./packages/researching-frameworks (local)
+  [+] ./packages/researching-platform (local)
+  [+] ./packages/stripe-java (local)
+  [+] ./packages/terraform (local)
+  [+] ./packages/validating (local)
+  [+] ../artifact-authoring (local)
+  [+] ../aws-skills (local)
+  [+] ../aws-terraform (local)
+  [+] ../camel-quarkus-skills (local)
+  [+] ../factory-core (local)
+  [+] ../oci-core (local)
+  [+] ../research-core (local)
+  |-- 1 skill(s) integrated -> .claude/skills/
+Warning: Failed to parse C:\agents\agents-factory\apm_modules\_local\artifact-authoring\.apm\skills\agent-creator\assets\TEMPLATE.AGENT.md: Failed to parse primitive file C:\agents\agents-factory\apm_modules\_local\artifact-authoring\.apm\skills\agent-creator\assets\TEMPLATE.AGENT.md: Unknown primitive file type: C:\agents\agents-factory\apm_modules\_local\artifact-authoring\.apm\skills\agent-creator\assets\TEMPLATE.AGENT.md
+  |-- 1 agents integrated -> .claude/agents/
+  |-- 5 skill(s) integrated -> .claude/skills/
+  |-- 1 agents adopted -> .claude/agents/
+  |-- 8 skill(s) integrated -> .claude/skills/
+  [*] rewritten: .claude/rules/aws-iac-reliability-cost.md
+  [*] rewritten: .claude/rules/aws-security-baseline.md
+  |-- 1 agents adopted -> .claude/agents/
+  |-- 2 rule(s) integrated -> .claude/rules/
+  |-- 1 skill(s) integrated -> .claude/skills/
+  |-- 13 agents adopted -> .claude/agents/
+  |-- 10 skill(s) integrated -> .claude/skills/
+  [*] rewritten: .claude/rules/camel-quarkus-integrator-code-standards.md
+  [*] rewritten: .claude/rules/camel-quarkus-integrator-project-config.md
+  [*] rewritten: .claude/rules/camel-quarkus-integrator-skills-management.md
+  |-- 1 agents adopted -> .claude/agents/
+  |-- 3 rule(s) integrated -> .claude/rules/
+  |-- 2 skill(s) integrated -> .claude/skills/
+  |-- 1 agents adopted -> .claude/agents/
+  |-- 1 skill(s) integrated -> .claude/skills/
+  [*] rewritten: .claude/rules/langchain4j-code-standards.md
+  [*] rewritten: .claude/rules/langchain4j-project-config.md
+  |-- 1 agents adopted -> .claude/agents/
+  |-- 2 rule(s) integrated -> .claude/rules/
+  |-- 3 skill(s) integrated -> .claude/skills/
+  [*] rewritten: .claude/rules/oci-architecture-data-events-guardrails.md
+  [*] rewritten: .claude/rules/oci-architecture-guardrails.md
+  |-- 2 agents adopted -> .claude/agents/
+  |-- 2 rule(s) integrated -> .claude/rules/
+  |-- 8 skill(s) integrated -> .claude/skills/
+  [*] rewritten: .claude/rules/deployment-preflight-checks.md
+  [*] rewritten: .claude/rules/java-environment-validation.md
+  [*] rewritten: .claude/rules/java-functions-api-gateway.md
+  [*] rewritten: .claude/rules/java-functions-clean-code.md
+  [*] rewritten: .claude/rules/java-functions-error-handling.md
+  [*] rewritten: .claude/rules/java-functions-event-driven.md
+  [*] rewritten: .claude/rules/java-functions-external-apis.md
+  [*] rewritten: .claude/rules/java-functions-fdk.md
+  [*] rewritten: .claude/rules/java-functions-object-storage.md
+  [*] rewritten: .claude/rules/java-functions-observability.md
+  [*] rewritten: .claude/rules/java-functions-project-config.md
+  [*] rewritten: .claude/rules/java-functions-project-structure.md
+  [*] rewritten: .claude/rules/java-functions-runtime-debugging.md
+  [*] rewritten: .claude/rules/java-functions-sdk-integration.md
+  [*] rewritten: .claude/rules/java-functions-skills.md
+  [*] rewritten: .claude/rules/java-functions-standards.md
+  [*] rewritten: .claude/rules/java-functions-testing.md
+  |-- 3 agents adopted -> .claude/agents/
+  |-- 17 rule(s) integrated -> .claude/rules/
+  |-- 14 skill(s) integrated -> .claude/skills/
+  [*] rewritten: .claude/rules/observability-skills.md
+  |-- 1 agents adopted -> .claude/agents/
+  |-- 1 rule(s) integrated -> .claude/rules/
+  |-- 10 skill(s) integrated -> .claude/skills/
+  [*] rewritten: .claude/rules/terraform-cicd.md
+  [*] rewritten: .claude/rules/terraform-modules.md
+  [*] rewritten: .claude/rules/terraform-multi-function.md
+  [*] rewritten: .claude/rules/terraform-project-config.md
+  [*] rewritten: .claude/rules/terraform-skills.md
+  [*] rewritten: .claude/rules/terraform-standards.md
+  [*] rewritten: .claude/rules/terraform-state-backend.md
+  [*] rewritten: .claude/rules/terraform-testing.md
+  |-- 1 agents adopted -> .claude/agents/
+  |-- 8 rule(s) integrated -> .claude/rules/
+  |-- 20 skill(s) integrated -> .claude/skills/
+  |-- 5 skill(s) integrated -> .claude/skills/
+  |-- 15 skill(s) integrated -> .claude/skills/
+  [*] rewritten: .claude/rules/stripe-java-code-standards.md
+  |-- 2 agents adopted -> .claude/agents/
+  |-- 1 rule(s) integrated -> .claude/rules/
+  |-- 6 skill(s) integrated -> .claude/skills/
+  |-- 2 agents adopted -> .claude/agents/
+  |-- 5 skill(s) integrated -> .claude/skills/
+  |-- 1 agents adopted -> .claude/agents/
+  |-- 5 skill(s) integrated -> .claude/skills/
+Warning: Failed to parse C:\agents\agents-factory\apm_modules\_local\cb22016cafe9\artifact-authoring\.apm\skills\agent-creator\assets\TEMPLATE.AGENT.md: Failed to parse primitive file C:\agents\agents-factory\apm_modules\_local\cb22016cafe9\artifact-authoring\.apm\skills\agent-creator\assets\TEMPLATE.AGENT.md: Unknown primitive file type: C:\agents\agents-factory\apm_modules\_local\cb22016cafe9\artifact-authoring\.apm\skills\agent-creator\assets\TEMPLATE.AGENT.md
+  |-- 1 agents integrated -> .claude/agents/
+  |-- 5 skill(s) integrated -> .claude/skills/
+  |-- 40 skill(s) integrated -> .claude/skills/
+  [*] rewritten: .claude/rules/aws-terraform-code-standards.md
+  [*] rewritten: .claude/rules/aws-terraform-project-config.md
+  [*] rewritten: .claude/rules/aws-terraform-skills-management.md
+  |-- 3 rule(s) integrated -> .claude/rules/
+  |-- 26 skill(s) integrated -> .claude/skills/
+  |-- 13 skill(s) integrated -> .claude/skills/
+  [*] rewritten: .claude/rules/agent-frontmatter.md
+  [*] rewritten: .claude/rules/naming-conventions.md
+  [*] rewritten: .claude/rules/rules-frontmatter.md
+  [*] rewritten: .claude/rules/skill-frontmatter.md
+  [*] rewritten: .claude/rules/skill-structure.md
+  |-- 5 rule(s) integrated -> .claude/rules/
+  |-- 1 skill(s) integrated -> .claude/skills/
+  |-- 3 agents adopted -> .claude/agents/
+  |-- (files unchanged)
+Phase: integrate -> 52.649s
+Kept stale file .claude/skills/refactoring-oci-java for 
+./packages/oci-functions-java; still in use by another package or target
+[!]   Kept user-edited file .claude/skills/refactoring-oci-java/SKILL.md (from 
+./packages/oci-functions-java); delete manually if no longer needed
+Kept stale file .claude/skills/terraform-rules-author for ./packages/terraform;
+still in use by another package or target
+[!]   Kept user-edited file .claude/skills/terraform-rules-author/SKILL.md 
+(from ./packages/terraform); delete manually if no longer needed
+Phase: cleanup -> 0.054s
+Carrying forward local .apm state pending hash reconciliation: 0 file(s)
+MCP state unchanged -- carrying forward 0 servers, 0 configs
+LSP state unchanged -- carrying forward 0 server(s), 0 config(s)
+Generated apm.lock.yaml with 24 dependencies
+Phase: post_deps_local -> 0.000s
+Phase: audit -> 0.000s
+Phase: copilot_plugins -> 0.035s
+Phase: codex_plugins -> 0.792s
+[#] Perf: 72 walks, 81 file matches, 3777 files visited, 0.732s total walk time
+[#] Perf:   apm_modules\_local\agent-package-builder: 3 walk(s) (19ms, 108 
+files visited, 0 matched)
+[#] Perf:   apm_modules\_local\artifact-authoring: 3 walk(s) (19ms, 78 files 
+visited, 2 matched)
+[#] Perf:   apm_modules\_local\auditing: 3 walk(s) (20ms, 72 files visited, 1 
+matched)
+[#] Perf:   apm_modules\_local\aws-architect: 3 walk(s) (7ms, 21 files visited,
+3 matched)
+[#] Perf:   apm_modules\_local\book-writing: 3 walk(s) (21ms, 99 files visited,
+13 matched)
+[#] Perf:   apm_modules\_local\camel-quarkus-integrator: 3 walk(s) (13ms, 54 
+files visited, 4 matched)
+[#] Perf:   apm_modules\_local\evaluating: 3 walk(s) (7ms, 12 files visited, 1 
+matched)
+[#] Perf:   apm_modules\_local\langchain4j: 3 walk(s) (15ms, 84 files visited, 
+3 matched)
+[#] Perf:   apm_modules\_local\oci-architecture: 3 walk(s) (38ms, 171 files 
+visited, 4 matched)
+[#] Perf:   apm_modules\_local\oci-functions-java: 3 walk(s) (46ms, 306 files 
+visited, 20 matched)
+[#] Perf:   apm_modules\_local\oci-observability: 3 walk(s) (37ms, 234 files 
+visited, 2 matched)
+[#] Perf:   apm_modules\_local\oci-terraform: 3 walk(s) (61ms, 435 files 
+visited, 9 matched)
+[#] Perf:   apm_modules\_local\researching-frameworks: 3 walk(s) (16ms, 72 
+files visited, 0 matched)
+[#] Perf:   apm_modules\_local\researching-platform: 3 walk(s) (38ms, 192 files
+visited, 0 matched)
+[#] Perf:   apm_modules\_local\stripe-java: 3 walk(s) (24ms, 87 files visited, 
+3 matched)
+[#] Perf:   apm_modules\_local\terraform: 3 walk(s) (23ms, 87 files visited, 2 
+matched)
+[#] Perf:   apm_modules\_local\validating: 3 walk(s) (14ms, 45 files visited, 1
+matched)
+[#] Perf:   apm_modules\_local\cb22016cafe9\artifact-authoring: 3 walk(s) 
+(27ms, 78 files visited, 2 matched)
+[#] Perf:   apm_modules\_local\1138850bd4d2\aws-skills: 3 walk(s) (76ms, 294 
+files visited, 0 matched)
+[#] Perf:   apm_modules\_local\aa92f8983b52\aws-terraform: 3 walk(s) (142ms, 
+807 files visited, 3 matched)
+[#] Perf:   apm_modules\_local\c16a2c33800f\camel-quarkus-skills: 3 walk(s) 
+(51ms, 387 files visited, 0 matched)
+[#] Perf:   apm_modules\_local\9a9c18916519\factory-core: 3 walk(s) (5ms, 18 
+files visited, 5 matched)
+[#] Perf:   apm_modules\_local\86a6123f1065\oci-core: 3 walk(s) (8ms, 24 files 
+visited, 0 matched)
+[#] Perf:   apm_modules\_local\895b0db7d385\research-core: 3 walk(s) (5ms, 12 
+files visited, 3 matched)
+[#] Perf: discovery: 82 call(s) (24 unique base(s), 58 cache hit(s), 70%)
+Resolved 2 context file links
+Integrated 44 instruction(s)
+Phase: finalize -> 0.000s
+No MCP dependencies found in apm.yml
+No LSP dependencies found in apm.yml
+  [!] Skipped .claude/skills/refactoring-oci-java/SKILL.md: modified since 
+deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped .claude/skills/terraform-rules-author/SKILL.md: modified since 
+deployment. Preserve your changes before reinstalling with --force.
+  [!] [./packages/oci-functions-java] Skipped removing 
+.claude/skills/refactoring-oci-java/SKILL.md: file has been edited since APM 
+deployed it. Delete it manually if you no longer need it, or ignore this 
+warning to keep your changes.
+  [!] [./packages/terraform] Skipped removing 
+.claude/skills/terraform-rules-author/SKILL.md: file has been edited since APM 
+deployed it. Delete it manually if you no longer need it, or ignore this 
+warning to keep your changes.
+  [!] [./packages/oci-functions-java] Skipped removing skill directory 
+.claude/skills/refactoring-oci-java: 1 file(s) not owned by APM or modified 
+since deployment: .claude/skills/refactoring-oci-java/SKILL.md. Remove manually
+if no longer needed.
+  [!] [./packages/terraform] Skipped removing skill directory 
+.claude/skills/terraform-rules-author: 1 file(s) not owned by APM or modified 
+since deployment: .claude/skills/terraform-rules-author/SKILL.md. Remove 
+manually if no longer needed.
+[*] Installed 24 APM dependencies in 68.9s.

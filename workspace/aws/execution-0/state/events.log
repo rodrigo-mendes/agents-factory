@@ -1,0 +1,2 @@
+2026-10-29T21:05:50 | P0 | migrate_state | INIT | execution-0 migrated from the legacy layout (legacy files untouched)
+2026-10-29T21:05:50 | - | migrate_state | DISCREPANCY | no PIPELINE_STATE.md: state reconstructed from disk only; phases and gates unknown, ask the user before resuming
