@@ -3,13 +3,13 @@
 Full handler class template. Replace `{{package}}` and `{{Class}}` with the values collected during scaffolding.
 
 ```java
-package com.brx.functions.{{package}};
+package {{groupId}}.{{package}};
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.brx.functions.{{package}}.model.{{Class}}Request;
-import com.brx.functions.{{package}}.model.{{Class}}Response;
+import {{groupId}}.{{package}}.model.{{Class}}Request;
+import {{groupId}}.{{package}}.model.{{Class}}Response;
 import com.fnproject.events.APIGatewayFunction;
 import com.fnproject.events.input.APIGatewayRequestEvent;
 import com.fnproject.events.output.APIGatewayResponseEvent;

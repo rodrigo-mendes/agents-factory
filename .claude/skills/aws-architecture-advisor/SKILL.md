@@ -12,15 +12,15 @@ disable-model-invocation: true
 ## Function
 
 Routes AWS architecture questions and design requests to the `aws-architect` advisory agent.
-The agent reasons over the 40 knowledge skills in `packages/aws-skills/.apm/skills/` and
+The agent reasons over the 40 knowledge skills in `packages/cloud/provider/aws/aws-skills/.apm/skills/` and
 returns sourced, version-dated guidance. It does not invent facts — every claim traces to an
 official source recorded in a skill's `## Version Context` block.
 
 ## How the Agent Routes to the 40 AWS Skills
 
 The `aws-architect` agent loads skills on demand based on the request domain. Skills are
-referenced by name from `packages/aws-skills/.apm/skills/<name>/SKILL.md`. The full routing
-table is in the agent body (`packages/aws-architect/.apm/agents/aws-architect.agent.md`).
+referenced by name from `packages/cloud/provider/aws/aws-skills/.apm/skills/<name>/SKILL.md`. The full routing
+table is in the agent body (`packages/cloud/provider/aws/aws-architect/.apm/agents/aws-architect.agent.md`).
 
 ### Available Knowledge Skills (40 total)
 

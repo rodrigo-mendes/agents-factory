@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Mechanical checks for an APM package (stdlib only, read-only).
 Usage: verify_package.py <package_dir> [--installed <claude_dir>]
-  e.g. verify_package.py packages/aws-skills --installed .claude
+  e.g. verify_package.py packages/cloud/provider/aws/aws-skills --installed .claude
 With --installed, a link that is broken in the source tree is re-checked at its deployed location
 (<claude_dir>/skills|agents/...) and reported as a note, not a problem, when it resolves there.
 Checks apm.yml, skill/agent/rule frontmatter, dependency paths, skill names referenced in prose,

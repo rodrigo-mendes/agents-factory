@@ -40,7 +40,7 @@
 **Expected agent behavior**:
 - P0: Identifies as refactor request; loads `refactoring-oci-java/SKILL.md`
 - P1: Scans existing class structure, identifies responsibilities (routing, auth, HTTP, transform)
-- P3: Proposes extracted classes: `BrxServicesClient`, `OAuth2TokenProvider`, `StoreMapper`, etc.
+- P3: Proposes extracted classes: `TargetServicesClient`, `OAuth2TokenProvider`, `StoreMapper`, etc.
 - P4: Extracts to sub-packages; handler delegates only; no logic duplication
 - P5: Runs `mvn compile` and `mvn test`; verifies all existing tests still pass
 

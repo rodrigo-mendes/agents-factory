@@ -18,6 +18,7 @@ Exit 0 when the install succeeds and every skill, agent and rule matches the sou
 """
 import argparse
 import filecmp
+import glob
 import os
 import re
 import shutil
@@ -131,17 +132,21 @@ def main():
     ap.add_argument('--keep', action='store_true')
     a = ap.parse_args()
     repo = os.getcwd()
-    pkg_apm = os.path.join('packages', a.package, '.apm')
-    if not os.path.isfile(os.path.join('packages', a.package, 'apm.yml')):
-        sys.exit(f'packages/{a.package}/apm.yml not found (run from the repo root)')
+    # packages/<family>[/<sub>]/<name>/ since the family reorganization; --package takes the folder name
+    found = [os.path.dirname(p) for p in glob.glob(os.path.join('packages', '**', a.package, 'apm.yml'),
+                                                     recursive=True)]
+    if len(found) != 1:
+        sys.exit(f'packages/**/{a.package}/apm.yml: {len(found)} match(es) (run from the repo root)')
+    pkg_dir = found[0].replace(os.sep, '/')
+    pkg_apm = os.path.join(pkg_dir, '.apm')
     if os.path.isdir(SANDBOX):
         shutil.rmtree(SANDBOX)
     os.makedirs(SANDBOX)
     with open(os.path.join(SANDBOX, 'apm.yml'), 'w', encoding='utf-8', newline='\n') as fh:
         fh.write(f'name: scoped-install-sandbox\nversion: 0.0.0\n'
-                 f'description: Throwaway scoped install of packages/{a.package}; never committed.\n'
+                 f'description: Throwaway scoped install of {pkg_dir}; never committed.\n'
                  f'author: agents-factory\nlicense: MIT\ndependencies:\n  apm:\n'
-                 f'    - path: ../../packages/{a.package}\n  mcp: []\nincludes: auto\nscripts: {{}}\n')
+                 f'    - path: ../../{pkg_dir}\n  mcp: []\nincludes: auto\nscripts: {{}}\n')
     rc, out = run_install(SANDBOX)
     if rc:
         print('PROBLEMS:\n  - scoped apm install failed:', out.strip().splitlines()[-3:])

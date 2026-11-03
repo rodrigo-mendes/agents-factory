@@ -21,7 +21,9 @@ commands = sum(1 for d in skills if (d / 'SKILL.md').is_file()
 print(f'skills   (.claude/skills):   {len(skills)}  ({commands} commands, {len(skills) - commands} knowledge)')
 print(f'agents   (.claude/agents):   {len(list((root / ".claude/agents").glob("*.md")))}')
 print(f'rules    (.claude/rules):    {len(list((root / ".claude/rules").glob("*.md")))}')
-print(f'packages (packages/*/apm.yml): {len(list((root / "packages").glob("*/apm.yml")))}')
+ymls = [p for p in (root / 'packages').rglob('apm.yml') if '.apm' not in p.parts]
+bundles = sum(1 for p in ymls if 'bundles' in p.relative_to(root / 'packages').parts)
+print(f'packages (packages/**/apm.yml): {len(ymls) - bundles}  (+ {bundles} bundles)')
 print('--- documented counts to compare ---')
 shown = 0
 for rel in DOCS:

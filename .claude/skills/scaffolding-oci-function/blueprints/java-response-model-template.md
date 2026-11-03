@@ -3,7 +3,7 @@
 Full `{{Class}}Response` model. Replace `{{package}}` and `{{Class}}` with the values collected during scaffolding.
 
 ```java
-package com.brx.functions.{{package}}.model;
+package {{groupId}}.{{package}}.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;

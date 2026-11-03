@@ -266,7 +266,7 @@ The following snippets are extracted from `libs/obs-commons/` in the PoC. They s
 ### LoggingBridge — Pattern 4: JUL-to-SLF4J bridge (one-time static install)
 
 ```java
-// from libs/obs-commons/src/main/java/com/brx/functions/common/obs/LoggingBridge.java
+// from libs/obs-commons/src/main/java/com/example/functions/common/obs/LoggingBridge.java
 
 public final class LoggingBridge {
 
@@ -291,7 +291,7 @@ public final class LoggingBridge {
 ### ObservabilityHelper — shared facade wiring logging + metrics + tracing
 
 ```java
-// from libs/obs-commons/src/main/java/com/brx/functions/common/obs/ObservabilityHelper.java
+// from libs/obs-commons/src/main/java/com/example/functions/common/obs/ObservabilityHelper.java
 
 public class ObservabilityHelper {
 
@@ -299,7 +299,7 @@ public class ObservabilityHelper {
     private static final TracingSupport   tracing = new TracingSupport();
 
     // Bridge installed once at class-load — covers all three pub/sub services that
-    // depend on this shared library (brx-fn-obs-commons).
+    // depend on this shared library (fn-obs-commons).
     static { LoggingBridge.install(); }
 
     // Single configure() entry point for @FnConfiguration — metrics short-circuits

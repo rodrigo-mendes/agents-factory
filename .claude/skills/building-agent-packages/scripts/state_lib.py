@@ -162,10 +162,21 @@ def owner_of(path, owners=None):
     pats = {'skills': [f'skills/{name}'],
             'agents': [f'agents/{name[:-3]}.agent.md', f'agents/{name}'],
             'rules': [f'instructions/{name[:-3]}.instructions.md', f'rules/{name}']}.get(kind, [])
-    for pkg in sorted(os.listdir('packages')) if os.path.isdir('packages') else []:
-        if any(os.path.exists(os.path.join('packages', pkg, '.apm', p)) for p in pats):
+    for pkg, d in sorted(package_dirs().items()):
+        if any(os.path.exists(os.path.join(d, '.apm', p)) for p in pats):
             return pkg
     return 'unowned (not in the lock nor in packages/)'
+
+
+def package_dirs(repo='.'):
+    """{package folder name: path} for every packages/**/apm.yml (family folders since 2026-10-31)."""
+    root = os.path.join(repo, 'packages')
+    out = {}
+    for r, ds, fs in os.walk(root) if os.path.isdir(root) else []:
+        ds[:] = [d for d in ds if not d.startswith('.')]  # skip each package's .apm/
+        if 'apm.yml' in fs:
+            out[os.path.basename(r)] = r
+    return out
 
 
 def scores(ex):
@@ -199,7 +210,7 @@ def builder_drift(repo='.'):
     [] when either side is missing (not a factory checkout)."""
     import filecmp
     rel = os.path.join('.apm', 'skills', 'building-agent-packages', 'scripts')
-    src = os.path.join(repo, 'packages', 'agent-package-builder', rel)
+    src = os.path.join(package_dirs(repo).get('agent-package-builder', ''), rel)
     dst = os.path.join(repo, '.claude', 'skills', 'building-agent-packages', 'scripts')
     if not (os.path.isdir(src) and os.path.isdir(dst)):
         return []

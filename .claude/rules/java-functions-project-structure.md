@@ -14,9 +14,9 @@ The skill's `blueprints/always-do-patterns.md` contains func.yaml, Dockerfile, a
 ## Artifact & Directory Naming
 
 - Project directory: `func-<domain>` (e.g., `func-orders`, `func-payments`)
-- Maven `groupId`: `com.brx.functions`
+- Maven `groupId`: the project's base group, `<org>.functions` (e.g., `com.example.functions`). Ask the user for `<org>` once (Ask First) and reuse it; never invent one.
 - Maven `artifactId`: matches project directory name (e.g., `func-orders`)
-- Base package: `com.brx.functions.<domain>` (e.g., `com.brx.functions.orders`)
+- Base package: `<org>.functions.<domain>` (e.g., `com.example.functions.orders`)
 - Handler class: `<Domain>Function` (e.g., `OrderFunction`, `PaymentFunction`)
 - func.yaml `name`: matches project directory name (e.g., `func-orders`)
 
@@ -30,12 +30,12 @@ func-orders/
 ├── Dockerfile
 └── src/
     ├── main/java/
-    │   └── com/brx/functions/orders/
+    │   └── com/example/functions/orders/
     │       ├── OrderFunction.java
     │       ├── OrderRequest.java
     │       └── OrderResponse.java
     └── test/java/
-        └── com/brx/functions/orders/
+        └── com/example/functions/orders/
             └── OrderFunctionTest.java
 ```
 
@@ -47,7 +47,7 @@ func-orders/
 ├── Dockerfile
 └── src/
     ├── main/java/
-    │   └── com/brx/functions/orders/
+    │   └── com/example/functions/orders/
     │       ├── OrderFunction.java
     │       ├── model/
     │       │   ├── OrderRequest.java
@@ -58,7 +58,7 @@ func-orders/
     │       └── client/
     │           └── InventoryClient.java
     └── test/java/
-        └── com/brx/functions/orders/
+        └── com/example/functions/orders/
             ├── OrderFunctionTest.java
             └── service/
                 └── OrderServiceTest.java
@@ -80,7 +80,7 @@ func-orders/
 
 ## ✅ Always Do
 - Use `func-<domain>` naming for project directories
-- Use `com.brx.functions.<domain>` as base package
+- Use `<org>.functions.<domain>` as base package (e.g., `com.example.functions.orders`)
 - Place handler class at the package root
 - Extract to `model/`, `service/`, `client/` sub-packages when > 4 classes
 - Mirror main source structure in test directory

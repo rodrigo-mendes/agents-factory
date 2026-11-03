@@ -39,7 +39,7 @@ A default may be offered only if a skill names it; never invent one.
 ### Step 2 — Load the core skill first
 
 Read `.claude/skills/developing-stripe-java-core-v34/SKILL.md` (installed path; only in the
-factory repository, if it is absent there, the source is `packages/stripe-java/.apm/skills/developing-stripe-java-core-v34/SKILL.md`).
+factory repository, if it is absent there, the source is `packages/java/libs/stripe-java/.apm/skills/developing-stripe-java-core-v34/SKILL.md`).
 This skill owns: `StripeClient` construction, idempotency key rules, error handling, API-version
 pinning, and the ≤33.x-vs-34.x distinction. Do not re-derive these facts.
 
@@ -60,7 +60,7 @@ If the work-order explicitly lists additional skills (for example `integrating-s
 ### Step 4 — Load family rules
 
 Read `.claude/skills/integrate-stripe-java/references/family-rules-v34.md` (installed path; in the factory source
-`packages/stripe-java/.apm/skills/integrate-stripe-java/references/family-rules-v34.md`). These seven
+`packages/java/libs/stripe-java/.apm/skills/integrate-stripe-java/references/family-rules-v34.md`). These seven
 numbered rules span multiple skills; they are the cross-cutting enforcement layer. If it cannot be
 read, rely on the loaded skills' own Always-Do/Never-Do rules,
 which carry the same R01–R07 content. Check every generated code artefact against R01–R07 before

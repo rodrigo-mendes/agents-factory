@@ -4,7 +4,7 @@
 > points here). This copy is the one aws-architect and the aws-architect rules read; edit it here, not in `workspace/`.
 
 Shared facts derived from the `## Version Context` blocks of the 40 skills in
-`packages/aws-skills/.apm/skills/`. Facts included here appear in **two or more** skills.
+`packages/cloud/provider/aws/aws-skills/.apm/skills/`. Facts included here appear in **two or more** skills.
 
 | ID | Fact | Confidence | Source URL (from skill Version Context) | Read-date | Used-by Skills |
 |----|------|-----------|----------------------------------------|-----------|----------------|

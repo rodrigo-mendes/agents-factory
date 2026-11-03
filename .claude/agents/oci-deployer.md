@@ -108,7 +108,7 @@ If ANY check fails:
 
 1. Update `infra/environments/dev/terraform.tfvars`:
    - Change the image variable to new version
-   - Example: `rest_proxy_image = "gru.ocir.io/gr2o2hdgzoxw/serverless-app/func-rr-rest-proxy:0.0.12"`
+   - Example: `rest_proxy_image = "<region-key>.ocir.io/<namespace>/serverless-app/func-rr-rest-proxy:0.0.12"`
 
 2. Plan (safety check):
    ```bash

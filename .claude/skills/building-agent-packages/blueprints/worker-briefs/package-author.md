@@ -4,7 +4,7 @@ Back to [README](README.md). Used in P5 for the agent, rules, structure skill, o
 
 ```
 Agent: artifact-author (one artifact per message, parallel allowed)
-Spec: agent -> packages/artifact-authoring/.apm/skills/agent-creator/SKILL.md (+ assets);
+Spec: agent -> packages/factory/artifact-authoring/.apm/skills/agent-creator/SKILL.md (+ assets);
   rules -> .claude/rules/instructions-frontmatter conventions; skill -> skill-creator.
 Inputs: the list of VERIFIED skills (names + one-line scope), family facts/rules, brief deliverables.
 Approval line + Hard constraints: <paste from README>

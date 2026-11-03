@@ -10,7 +10,7 @@ paths:
 
 # AWS Security Baseline Guardrails
 
-Technical facts live in the aws-skills (`packages/aws-skills/.apm/skills/`). This rule states
+Technical facts live in the aws-skills (`packages/cloud/provider/aws/aws-skills/.apm/skills/`). This rule states
 what to check and where to look; it does not duplicate skill bodies. Tags `(unverified)` and
 `(medium confidence)` from a skill apply here too.
 

@@ -12,7 +12,7 @@ API Gateway (POST /proxy/item/webhook, ANONYMOUS)
          RMS.ItemFetch  : rmsClient.getItemById(id)       [client/RmsClient.java]
          log ENRICH item=<id> full=<json>
          buildItemModel → marshal XML ; log TRANSFORM
-         BrxServices.PostItem : forward (PUT/POST/DELETE by action)
+         TargetServices.PostItem : forward (PUT/POST/DELETE by action)
      → aggregate: 200 (all ok) / 207 (partial) / 500
 ```
 Reusable pieces:
@@ -32,7 +32,7 @@ Avoids exceeding 60s when `pageLimit` is high. Idempotency enforced in the worke
 EVENT webhook (uuid/since only) → function calls delta `GET foundation/<ent>?since=&before=` (before = event `timestamp`) → processes rows. Good for low traffic.
 
 ## Observability (3 pillars)
-- **Logs** (JSON, source `app-<fn>-dev`): `WEBHOOK`, `ENRICH item=.. full=..`, `TRANSFORM item=.. xml=..`, `BRX_SEND item=.. elapsed=..ms`. MDC: `webhookId`,`traceId`,`spanId`.
+- **Logs** (JSON, source `app-<fn>-dev`): `WEBHOOK`, `ENRICH item=.. full=..`, `TRANSFORM item=.. xml=..`, `TARGET_SEND item=.. elapsed=..ms`. MDC: `webhookId`,`traceId`,`spanId`.
 - **Traces** (APM/OTel): spans `RMS.OAuthToken`, `RMS.ItemFetch`, `<Downstream>.Post` with duration → time spent per external API.
 - **Metrics** (OCI Monitoring, endpoint `telemetry-ingestion`): e.g. `RestProxyWebhookItems` dims route/mode/result.
 Validate with skill `validating-oci-observability`.

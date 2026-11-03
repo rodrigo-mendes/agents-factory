@@ -9,7 +9,7 @@ paths:
 # Stripe Java Code Standards (stripe-java 34.x)
 
 Technical facts live in the four knowledge skills under
-`packages/stripe-java/.apm/skills/`. This rule states what to check and where to look; it does
+`packages/java/libs/stripe-java/.apm/skills/`. This rule states what to check and where to look; it does
 not duplicate skill bodies. Tags `(unverified)` and `(medium confidence)` from a skill apply here
 too. Family rules source: `.claude/skills/integrate-stripe-java/references/family-rules-v34.md` (R01–R07).
 

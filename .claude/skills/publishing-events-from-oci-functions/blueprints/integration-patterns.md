@@ -99,7 +99,7 @@ allow dynamic-group <dg-name> to use log-content in compartment <compartment>
 ## Worked Example (from the reference PoC)
 
 ### DomainEvent envelope contract
-// from libs/obs-commons/src/main/java/com/brx/functions/common/obs/DomainEvent.java
+// from libs/obs-commons/src/main/java/com/example/functions/common/obs/DomainEvent.java
 
 ```java
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -128,7 +128,7 @@ Key rules encoded in this class:
 - Never Base64-encode manually — SDK handles wire encoding
 
 ### StreamPublisher — verified delivery check
-// from services/func-event-producer/src/main/java/com/brx/functions/event/producer/client/StreamPublisher.java
+// from services/func-event-producer/src/main/java/com/example/functions/event/producer/client/StreamPublisher.java
 
 ```java
 public void publish(String key, String json) {
@@ -158,7 +158,7 @@ public void publish(String key, String json) {
 ```
 
 ### EventProducerFunction — trace context injection before publish
-// from services/func-event-producer/src/main/java/com/brx/functions/event/producer/EventProducerFunction.java
+// from services/func-event-producer/src/main/java/com/example/functions/event/producer/EventProducerFunction.java
 
 ```java
 Span span = ObservabilityHelper.startSpan("POST", "/events", null);

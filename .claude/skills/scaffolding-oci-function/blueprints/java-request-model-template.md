@@ -3,7 +3,7 @@
 Minimal `{{Class}}Request` skeleton. Replace `{{package}}` and `{{Class}}`, then add the actual request fields.
 
 ```java
-package com.brx.functions.{{package}}.model;
+package {{groupId}}.{{package}}.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;

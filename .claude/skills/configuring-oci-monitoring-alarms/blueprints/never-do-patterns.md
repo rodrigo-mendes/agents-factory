@@ -10,7 +10,7 @@
 # ❌ WRONG — never hardcode credentials
 config = {
     "user": "ocid1.user.oc1..aaaa...",
-    "key_content": "-----BEGIN RSA PRIVATE KEY-----\nMIIEow...",  # SECRET IN CODE
+    "key_content": "<PEM private key pasted here>",  # SECRET IN CODE
     "fingerprint": "aa:bb:cc:...",
     "tenancy": "ocid1.tenancy.oc1..aaaa...",
     "region": "us-ashburn-1"

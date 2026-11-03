@@ -7,7 +7,7 @@ These examples are extracted from `workspace/poc-oci-serverless/` — a validate
 
 ## Pattern 03 — API Facade (`services/func-api-facade/`)
 
-**Source**: `workspace/poc-oci-serverless/services/func-api-facade/src/main/java/com/brx/functions/apifacade/ApiFacadeFunction.java`
+**Source**: `workspace/poc-oci-serverless/services/func-api-facade/src/main/java/com/example/functions/apifacade/ApiFacadeFunction.java`
 
 The API Facade pattern uses a single OCI Function as a unified backend for multiple routes, each
 handled by a `switch` on the extracted route path. The API Gateway routes all requests through one
@@ -55,7 +55,7 @@ route_backends = [
 
 The REST Proxy pattern uses the Function as a protocol bridge: receives JSON from the API Gateway,
 fetches data from an upstream REST API (Oracle RMS) with OAuth2, transforms the response to XML,
-and forwards it to a downstream REST API (BrxServices).
+and forwards it to a downstream REST API (TargetServices).
 
 ```java
 // RestProxyFunction.java (extract) — thin dispatcher delegates to domain handlers

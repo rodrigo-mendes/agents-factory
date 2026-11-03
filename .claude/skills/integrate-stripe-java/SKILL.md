@@ -39,7 +39,7 @@ questions:
 | Customer, Subscription, Invoice lifecycle | `managing-stripe-subscriptions-v34` |
 | Cross-cutting policies (idempotency on all POSTs, secret logging, version pinning) | [references/family-rules-v34.md](references/family-rules-v34.md) (R01–R07) |
 
-All skills are under `packages/stripe-java/.apm/skills/`.
+All skills are under `packages/java/libs/stripe-java/.apm/skills/`.
 
 ## Coverage and Gaps
 

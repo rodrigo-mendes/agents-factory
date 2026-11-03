@@ -46,7 +46,7 @@ class FakeHandler(http.server.BaseHTTPRequestHandler):
         path = urllib.parse.urlsplit(self.path).path
         auth = self.headers.get("Authorization", "")
         if path == "/token":
-            if auth == BASIC and body == "grant_type=client_credentials&scope=rgbu:merch:MFCS-PAR1":
+            if auth == BASIC and body == "grant_type=client_credentials&scope=rgbu:merch:EXAMPLE-ENV":
                 return self._reply(200, json.dumps({"access_token": TOKEN, "expires_in": 3600}))
             return self._reply(401, json.dumps({"error": "invalid_client"}))
         if path.startswith("/mi/") and auth != "Bearer " + TOKEN:
@@ -89,6 +89,8 @@ class RmsScriptsTest(unittest.TestCase):
                if k.lower() not in ("http_proxy", "https_proxy", "all_proxy", "no_proxy")
                and k not in ("CLIENT_ID", "CLIENT_SECRET", "LISTENER", "SERVICE", "ITEMS", "UUID")}
         env.update({"RMS_TOKEN_URL": self.base + "/token", "RMS_MERCH_BASE": self.base + "/mi",
+                    "RMS_SCOPE": "rgbu:merch:EXAMPLE-ENV",
+                    "MFCS_TENANT": "example-mfcs-tenant",
                     "TF_DIR": self.tmp, "FAKE_LOG": self.log, "PYTHONIOENCODING": "utf-8",
                     "OCI_CMD": '"%s" "%s"' % (sys.executable, FAKE_CLI),
                     "TERRAFORM_CMD": '"%s" "%s"' % (sys.executable, FAKE_CLI)})
@@ -256,7 +258,7 @@ class RmsScriptsTest(unittest.TestCase):
         self.assertIn("-- resposta (HTTP 200) --\naccepted\n", out)
         body = FakeHandler.requests[0]["body"]
         self.assertEqual(body, '{"type":"PAYLOAD","timestamp":"2026-05-29T13:35:59.223Z","service":"foundation/item",'
-                               '"uuid":"u-1","environment":"rgbu-rex-brxs-par1-mfcs","since":"2026-05-29T02:27:59.838Z",'
+                               '"uuid":"u-1","environment":"example-mfcs-tenant","since":"2026-05-29T02:27:59.838Z",'
                                '"payload":{"items":[{"action":"UPDATE","item":"1","status":"A","itemDescription":"sim 1"},'
                                '{"action":"UPDATE","item":"2","status":"A","itemDescription":"sim 2"},'
                                '{"action":"UPDATE","item":"3","status":"A","itemDescription":"sim 3"}],'

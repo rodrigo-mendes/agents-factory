@@ -11,8 +11,8 @@ Consume and configure the **Publish APIs** of Oracle Retail Merchandising Founda
 
 ## Version Context
 
-- **API**: Merch Integration REST Services (MFCS) `26.1.x` — tenant `<mfcs-tenant>`, host `<mfcs-host>` (this project's npe example: tenant `rgbu-rex-brxs-par1-mfcs`, host `rex-npe.retail.sa-vinhedo-1.ocs.oraclecloud.com` — replace per environment).
-- **Auth**: OAuth2 **client-credentials** via IDCS (`https://idcs-<id>.identity.oraclecloud.com/oauth2/v1/token`), scope `rgbu:merch:<APP-ENV>` (this project: `rgbu:merch:MFCS-PAR1`). Header `Authorization: Basic base64(client_id:client_secret)`, body `grant_type=client_credentials&scope=<scope>`. Secrets in OCI Vault. ✅
+- **API**: Merch Integration REST Services (MFCS) `26.1.x` — tenant `<mfcs-tenant>`, host `<mfcs-host>`.
+- **Auth**: OAuth2 **client-credentials** via IDCS (`https://idcs-<id>.identity.oraclecloud.com/oauth2/v1/token`), scope `rgbu:merch:<APP-ENV>` (set per environment). Header `Authorization: Basic base64(client_id:client_secret)`, body `grant_type=client_credentials&scope=<scope>`. Secrets in OCI Vault. ✅
 - **Consumer**: OCI Functions (Java 17, FDK v1.1.x, fn-events `APIGatewayFunction`) behind API Gateway. Reference impl: `services/func-rr-rest-proxy/`.
 - **Swagger**: `.../MerchIntegrations/swagger-ui/` — **auth-gated (IDCS SSO)**, does not open headless.
 - **Network**: The MerchIntegrations host sits behind the **IDCS Cloud Gate** with a **network allowlist**. The function reaches it (OCI VCN egress is permitted); calls from local machine receive **302 → IDCS authorize**. Run `rms-get`/`register-webhook` from inside OCI or from an allowlisted VPN. ✅ (observed)
@@ -43,7 +43,7 @@ Example item: `ITEM_MASTER → ICL_RMS_ITEM_MASTER → MERCHAPI_DELTA_EXT_ITEM_A
 EVENT (no `payload`): ✅
 ```json
 {"type":"EVENT","timestamp":"2026-05-29T02:06:57Z","service":"foundation/item",
- "uuid":"5784...","environment":"rgbu-rex-brxs-par1-mfcs","since":"2026-05-29T02:01:56Z"}
+ "uuid":"5784...","environment":"<mfcs-tenant>","since":"2026-05-29T02:01:56Z"}
 ```
 PAYLOAD (items under **`payload.items`**, NOT at root): ✅
 ```json

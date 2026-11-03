@@ -26,11 +26,11 @@ OCI_REGION = os.environ.get("OCI_REGION") or "sa-saopaulo-1"
 
 # Base MerchIntegrations (IRMÃ de RmsReSTServices — NÃO filha).
 RMS_MERCH_BASE = os.environ.get("RMS_MERCH_BASE") or (
-    "https://rex-npe.retail.sa-vinhedo-1.ocs.oraclecloud.com/rgbu-rex-brxs-par1-mfcs/MerchIntegrations")
+    "https://<mfcs-host>/<mfcs-tenant>/MerchIntegrations")  # placeholder: set RMS_MERCH_BASE
 # OAuth2 IDCS.
 RMS_TOKEN_URL = os.environ.get("RMS_TOKEN_URL") or (
-    "https://idcs-a23fd2fe5f18408c865bfc16a04cddb8.identity.oraclecloud.com/oauth2/v1/token")
-RMS_SCOPE = os.environ.get("RMS_SCOPE") or "rgbu:merch:MFCS-PAR1"
+    "https://idcs-<id>.identity.oraclecloud.com/oauth2/v1/token")  # placeholder: set RMS_TOKEN_URL
+RMS_SCOPE = os.environ.get("RMS_SCOPE") or "rgbu:merch:<APP-ENV>"  # placeholder: set RMS_SCOPE
 
 # Nomes dos recursos Vault no terraform state (creds OAuth). Sobrescrevível.
 RMS_TF_SECRET_ID_RESOURCE = os.environ.get("RMS_TF_SECRET_ID_RESOURCE") or "oci_vault_secret.rest_proxy_oauth_client_id[0]"

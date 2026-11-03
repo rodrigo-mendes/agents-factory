@@ -7,6 +7,7 @@ Usage: merge_lock.py --package <pkg>[,<pkg>] [--apply]     dry run by default
 For each package: its `- repo_url: _local/<pkg>` block under dependencies:, and every
 `deployments:` entry whose owners list contains `./packages/<pkg>`, come from the current file;
 everything else comes from `git show HEAD:apm.lock.yaml`. Then run after_install.py again."""
+import re
 import subprocess
 import sys
 
@@ -57,7 +58,8 @@ def main():
         blocks.append(b)
     if not placed:
         blocks += new
-    owned = lambda e: any(f'  - ./packages/{p}\n' in e for p in pkgs)
+    # owners are ./packages/<family>[/<sub>]/<pkg> since the family reorganization
+    owned = lambda e: any(re.search(rf'  - \./packages/(?:[\w.-]+/)*{re.escape(p)}\n', e) for p in pkgs)
     keep = [e for e in deployments(head) if not owned(e)]
     mine = [e for e in deployments(cur) if owned(e)]
     ents = sorted(keep + mine, key=value)

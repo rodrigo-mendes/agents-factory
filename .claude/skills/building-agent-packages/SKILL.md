@@ -21,7 +21,7 @@ launching the existing subagents directly and relaying genuine user approvals. F
 |---|---|---|---|
 | APM CLI used by the repo | local and CI 0.35.0 | High | `apm.lock.yaml`, `.github/workflows/apm.yml` |
 | Workers driven | framework-researcher, artifact-author, quality-validator, skill-evaluator, architecture-auditor | High | `.claude/agents/` |
-| Hybrid skill format | `TEMPLATE.KNOWLEDGE-SKILL.HYBRID.md` | High | `packages/artifact-authoring/.apm/skills/skill-creator/assets/` |
+| Hybrid skill format | `TEMPLATE.KNOWLEDGE-SKILL.HYBRID.md` | High | `packages/factory/artifact-authoring/.apm/skills/skill-creator/assets/` |
 
 Not version-locked (workflow skill, no `-vMAJOR-MINOR` suffix); update in place when a worker interface changes.
 

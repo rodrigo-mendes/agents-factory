@@ -7,7 +7,7 @@ Numbered, testable policy decisions applied across the 40 aws-skills. Each rule 
 more `always-do`/`never-do` patterns and the shared Version Context facts in `_family_facts_v2026.md`.
 
 These rules are compiled into instruction files under
-`packages/aws-architect/.apm/instructions/`.
+`packages/cloud/provider/aws/aws-architect/.apm/instructions/`.
 
 ---
 

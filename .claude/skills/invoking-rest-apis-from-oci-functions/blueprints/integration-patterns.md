@@ -154,7 +154,7 @@ public String handleRequest(String input) throws Exception {
 ## Worked Example (from the reference PoC)
 
 ### HttpRetryExecutor — reusable send-with-retry engine
-// from services/func-evt-consumer-notify/src/main/java/com/brx/functions/event/consumer/notify/client/http/HttpRetryExecutor.java
+// from services/func-evt-consumer-notify/src/main/java/com/example/functions/event/consumer/notify/client/http/HttpRetryExecutor.java
 
 ```java
 public class HttpRetryExecutor {
@@ -203,7 +203,7 @@ Key design decisions:
 - `serviceName` field for contextual log messages
 
 ### TracedCall — collapses start/end span boilerplate into one place
-// from services/func-evt-consumer-notify/src/main/java/com/brx/functions/event/consumer/notify/obs/TracedCall.java
+// from services/func-evt-consumer-notify/src/main/java/com/example/functions/event/consumer/notify/obs/TracedCall.java
 
 ```java
 public final class TracedCall {
@@ -227,7 +227,7 @@ public final class TracedCall {
 Usage pattern: `TracedCall.run("POST /notify", "notification-service", Map.of("eventId", id), () -> notifyClient.send(payload));`
 
 ### OciServiceClient — Vault + Object Storage initialization in configure()
-// from services/func-api-facade/src/main/java/com/brx/functions/apifacade/service/OciServiceClient.java
+// from services/func-api-facade/src/main/java/com/example/functions/apifacade/service/OciServiceClient.java
 
 ```java
 // Both clients initialized once with ResourcePrincipal + retry config

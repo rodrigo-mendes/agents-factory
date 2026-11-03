@@ -64,7 +64,7 @@
   "expected_behavior": [
     "Explains that OCI Functions (Fn Project) requires CMD to pass the handler class reference",
     "States that ENTRYPOINT without CMD or with wrong format causes 502 on every invocation",
-    "Shows the correct CMD format: CMD [\"com.brx.functions.<package>.<Class>Function::handler\"]",
+    "Shows the correct CMD format: CMD [\"<groupId>.<package>.<Class>Function::handler\"] (groupId asked from the user, e.g. com.example.functions)",
     "Notes that cmd: in func.yaml must match the CMD value exactly",
     "Does NOT suggest ENTRYPOINT as a valid alternative"
   ]

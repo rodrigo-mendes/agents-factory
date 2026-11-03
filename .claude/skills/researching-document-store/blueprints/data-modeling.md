@@ -99,7 +99,7 @@ Ask these questions for each relationship:
 {
   "_id": "order_123",
   "customer_id": "cust_456",
-  "customer_name": "Rodrigo Mendes",   // cached — acceptable if name doesn't change often
+  "customer_name": "Kal El",           // cached — acceptable if name doesn't change often
   "items": [...]
 }
 // Trade-off: stale data if customer name changes; must update in both places

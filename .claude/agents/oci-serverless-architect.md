@@ -184,7 +184,7 @@ Load the skill by name; do not copy its content into this agent or into the answ
 | Vault, keys, secrets, rotation, CMEK, encryption, least-privilege IAM for secrets | `designing-oci-vault-security` |
 | pub/sub, Streaming, Service Connector Hub, fan-out, consumer variants, idempotency, trace across stream | `designing-oci-event-driven-pubsub` |
 
-Skill presence verified in `packages/oci-architecture/.apm/skills/` (all 6 exist).
+Skill presence verified in `packages/cloud/provider/oci/oci-architecture/.apm/skills/` (all 6 exist).
 Implementation skills (provisioning, Java development) are not loaded here; they are reached
 through the P6 commands.
 
