@@ -1,0 +1,568 @@
+[>] Installing dependencies from apm.yml...
+[>] Resolving ./packages/factory/researching-frameworks...
+[>] Resolving ./packages/factory/researching-platform...
+[>] Resolving ./packages/harness-quality/auditing...
+[>] Resolving ./packages/factory/artifact-authoring...
+[>] Resolving ./packages/harness-quality/validating...
+[>] Resolving ./packages/harness-quality/evaluating...
+[>] Resolving ./packages/content-generation/book-writing...
+[>] Resolving ./packages/java/quarkus/camel-quarkus-integrator...
+[>] Resolving ./packages/factory/agent-package-builder...
+[>] Resolving ./packages/cloud/provider/oci/oci-functions-java...
+[>] Resolving ./packages/cloud/terraform/oci-terraform...
+[>] Resolving ./packages/cloud/provider/oci/oci-observability...
+[>] Resolving ./packages/cloud/provider/oci/oci-architecture...
+[>] Resolving ./packages/java/libs/langchain4j...
+[>] Resolving ./packages/saas/aws-saas-serverless-quarkus-react-nextjs...
+[>] Resolving ./packages/quality/quarkus-acceptance-testing...
+[>] Resolving ../factory-core...
+[>] Resolving ../camel-quarkus-skills...
+[>] Resolving ../research-core...
+[>] Resolving ../oci-core...
+[>] Resolving ../../../../java/clean-code/clean-code-oci...
+[>] Resolving ../../java/quarkus/quarkus-aws...
+[>] Resolving ../../cloud/provider/aws/aws-lambda...
+[>] Resolving ../../cloud/provider/aws/aws-observability...
+[>] Resolving ../../delivery/protocol/handoff-core...
+[>] Resolving ../../cloud/provider/aws/aws-architect...
+[>] Resolving ../../cloud/terraform/terraform...
+[>] Resolving ../../java/libs/stripe-java...
+[>] Resolving ../../delivery/specs/openspec-github...
+[>] Resolving ../../delivery/specs/openspec-poc...
+[>] Resolving ../../architecture/solution-architecture...
+[>] Resolving ../../frontend/react/ui-design...
+[>] Resolving ../../frontend/react/nextjs-frontend...
+[>] Resolving ../../java/quarkus/quarkus-langchain4j...
+[>] Resolving ../../third-party/vercel-frontend...
+[>] Resolving ../../delivery/github/github-actions-cicd...
+[>] Resolving ../acceptance-testing...
+[>] Resolving ../../java/quarkus/quarkus-core...
+[>] Resolving ../../../cloud/provider/aws/aws-skills...
+[>] Resolving ../../../factory/artifact-authoring...
+[>] Resolving ../../specs/openspec-core...
+[>] Resolving ../../../terraform/aws-terraform...
+[>] Resolving ../../github/github-core...
+[>] Resolving vercel-labs/agent-skills...
+[>] Resolving vercel/next.js...
+[>] Resolving vercel/components.build...
+[>] Resolving vercel/ai-elements...
+[>] Resolving vercel/streamdown...
+[>] Resolving vercel/turborepo...
+[>] Resolving vercel-labs/agent-browser...
+[>] Resolving ../../clean-code/clean-code-quarkus...
+WARNING apm_cli.policy.discovery Policy repo rodrigo-mendes/.github-private not found (or [REDACTED] private-repo read scope). If your org publishes policy in .github-private, ensure the token has Contents:read permission on that repo.
+[i] Targets: claude  (source: --target flag)
+  [+] ./packages/cloud/provider/oci/oci-architecture (local)
+  [+] ./packages/cloud/provider/oci/oci-functions-java (local)
+  [+] ./packages/cloud/provider/oci/oci-observability (local)
+  [+] ./packages/cloud/terraform/oci-terraform (local)
+  [+] ./packages/content-generation/book-writing (local)
+  [+] ./packages/factory/agent-package-builder (local)
+  [+] ./packages/factory/artifact-authoring (local)
+  [+] ./packages/factory/researching-frameworks (local)
+  [+] ./packages/factory/researching-platform (local)
+  [+] ./packages/harness-quality/auditing (local)
+  [+] ./packages/harness-quality/evaluating (local)
+  [+] ./packages/harness-quality/validating (local)
+  [+] ./packages/java/libs/langchain4j (local)
+  [+] ./packages/java/quarkus/camel-quarkus-integrator (local)
+  [+] ./packages/quality/quarkus-acceptance-testing (local)
+  [+] ./packages/saas/aws-saas-serverless-quarkus-react-nextjs (local)
+  [+] ../../architecture/solution-architecture (local)
+  [+] ../../cloud/provider/aws/aws-architect (local)
+  [+] ../../cloud/provider/aws/aws-lambda (local)
+  [+] ../../cloud/provider/aws/aws-observability (local)
+  [+] ../oci-core (local)
+  [+] ../../cloud/terraform/terraform (local)
+  [+] ../../delivery/github/github-actions-cicd (local)
+  [+] ../../delivery/protocol/handoff-core (local)
+  [+] ../../delivery/specs/openspec-github (local)
+  [+] ../../delivery/specs/openspec-poc (local)
+  [+] ../factory-core (local)
+  [+] ../research-core (local)
+  [+] ../../frontend/react/nextjs-frontend (local)
+  [+] ../../frontend/react/ui-design (local)
+  [+] ../../../../java/clean-code/clean-code-oci (local)
+  [+] ../../java/libs/stripe-java (local)
+  [+] ../camel-quarkus-skills (local)
+  [+] ../../java/quarkus/quarkus-aws (local)
+  [+] ../../java/quarkus/quarkus-core (local)
+  [+] ../../java/quarkus/quarkus-langchain4j (local)
+  [+] ../acceptance-testing (local)
+  [+] ../../third-party/vercel-frontend (local)
+  [+] ../../../cloud/provider/aws/aws-skills (local)
+  [+] ../../../terraform/aws-terraform (local)
+  [+] ../../github/github-core (local)
+  [+] ../../specs/openspec-core (local)
+  [+] ../../../factory/artifact-authoring (local)
+  [+] ../../clean-code/clean-code-quarkus (local)
+  [+] vercel-labs/agent-skills #1a2c79d4e6c4a2283dc2c614b6538cbe1ed5ca62 
+@1a2c79d4
+  [+] vercel/ai-elements #ca8be600bfd01b3131f9bf6134b51602a71f4374 @ca8be600
+  [+] vercel/components.build #ba727450437385af662810329fa19896215f76d5 
+@ba727450
+  [+] vercel/next.js #4c6a3fa48041c70e5ebb77f11e49c2e5e4a14bd1 @4c6a3fa4
+  [+] vercel/streamdown #7dcabc64df944edce6f3993732667652e6214af0 @7dcabc64
+  |-- 2 agents adopted -> .claude/agents/
+  |-- 2 rule(s) integrated -> .claude/rules/
+  |-- 8 skill(s) integrated -> .claude/skills/
+  |-- 1 agents integrated (2 adopted) -> .claude/agents/
+  |-- 16 rule(s) integrated -> .claude/rules/
+  |-- 13 skill(s) integrated -> .claude/skills/
+  |-- 1 agents adopted -> .claude/agents/
+  |-- 1 rule(s) integrated -> .claude/rules/
+  |-- 10 skill(s) integrated -> .claude/skills/
+  |-- 1 agents adopted -> .claude/agents/
+  |-- 8 rule(s) integrated -> .claude/rules/
+  |-- 20 skill(s) integrated -> .claude/skills/
+  |-- 13 agents adopted -> .claude/agents/
+  |-- 10 skill(s) integrated -> .claude/skills/
+  |-- (files unchanged)
+Warning: Failed to parse C:\agents\agents-factory\apm_modules\_local\artifact-authoring\.apm\skills\agent-creator\assets\TEMPLATE.AGENT.md: Failed to parse primitive file C:\agents\agents-factory\apm_modules\_local\artifact-authoring\.apm\skills\agent-creator\assets\TEMPLATE.AGENT.md: Unknown primitive file type: C:\agents\agents-factory\apm_modules\_local\artifact-authoring\.apm\skills\agent-creator\assets\TEMPLATE.AGENT.md
+  |-- 1 agents adopted -> .claude/agents/
+  |-- 5 skill(s) integrated -> .claude/skills/
+  |-- 5 skill(s) integrated -> .claude/skills/
+  |-- 15 skill(s) integrated -> .claude/skills/
+  |-- 1 agents adopted -> .claude/agents/
+  |-- 8 skill(s) integrated -> .claude/skills/
+  |-- 1 agents adopted -> .claude/agents/
+  |-- 1 skill(s) integrated -> .claude/skills/
+  |-- 1 agents adopted -> .claude/agents/
+  |-- 4 skill(s) integrated -> .claude/skills/
+  |-- 1 agents adopted -> .claude/agents/
+  |-- 2 rule(s) integrated -> .claude/rules/
+  |-- 3 skill(s) integrated -> .claude/skills/
+  |-- 1 agents adopted -> .claude/agents/
+  |-- 3 rule(s) integrated -> .claude/rules/
+  |-- 2 skill(s) integrated -> .claude/skills/
+  |-- 1 agents integrated -> .claude/agents/
+  |-- 1 rule(s) integrated -> .claude/rules/
+  |-- 3 skill(s) integrated -> .claude/skills/
+  |-- 3 skill(s) integrated -> .claude/skills/
+  |-- 2 agents adopted -> .claude/agents/
+  |-- (files unchanged)
+  |-- 3 agents adopted -> .claude/agents/
+  |-- 2 rule(s) integrated -> .claude/rules/
+  |-- 1 skill(s) integrated -> .claude/skills/
+  |-- 2 agents adopted -> .claude/agents/
+  |-- 1 rule(s) integrated -> .claude/rules/
+  |-- 2 skill(s) integrated -> .claude/skills/
+  |-- 2 agents adopted -> .claude/agents/
+  |-- 1 rule(s) integrated -> .claude/rules/
+  |-- 2 skill(s) integrated -> .claude/skills/
+  |-- 1 skill(s) integrated -> .claude/skills/
+  |-- 3 agents adopted -> .claude/agents/
+  |-- 4 skill(s) integrated -> .claude/skills/
+  |-- 2 agents adopted -> .claude/agents/
+  |-- 4 rule(s) integrated -> .claude/rules/
+  |-- 10 skill(s) integrated -> .claude/skills/
+  |-- 1 agents adopted -> .claude/agents/
+  |-- 2 skill(s) integrated -> .claude/skills/
+  |-- 1 agents adopted -> .claude/agents/
+  |-- 1 rule(s) integrated -> .claude/rules/
+  |-- 2 skill(s) integrated -> .claude/skills/
+  |-- 1 agents adopted -> .claude/agents/
+  |-- 1 skill(s) integrated -> .claude/skills/
+  |-- 5 rule(s) integrated -> .claude/rules/
+  |-- 3 agents adopted -> .claude/agents/
+  |-- (files unchanged)
+  |-- 2 agents adopted -> .claude/agents/
+  |-- 1 rule(s) integrated -> .claude/rules/
+  |-- 2 agents adopted -> .claude/agents/
+  |-- (files unchanged)
+  |-- 1 rule(s) integrated -> .claude/rules/
+  |-- 1 skill(s) integrated -> .claude/skills/
+  |-- 2 agents adopted -> .claude/agents/
+  |-- 1 rule(s) integrated -> .claude/rules/
+  |-- 5 skill(s) integrated -> .claude/skills/
+  |-- 10 skill(s) integrated -> .claude/skills/
+  |-- 2 agents adopted -> .claude/agents/
+  |-- 2 rule(s) integrated -> .claude/rules/
+  |-- 11 skill(s) integrated -> .claude/skills/
+  |-- 3 skill(s) integrated -> .claude/skills/
+  |-- 1 agents adopted -> .claude/agents/
+  |-- 1 skill(s) integrated -> .claude/skills/
+  |-- 1 agents integrated -> .claude/agents/
+  |-- 1 rule(s) integrated -> .claude/rules/
+  |-- 1 skill(s) integrated -> .claude/skills/
+  |-- (files unchanged)
+  |-- 40 skill(s) integrated -> .claude/skills/
+  |-- 3 rule(s) integrated -> .claude/rules/
+  |-- 26 skill(s) integrated -> .claude/skills/
+  |-- 2 skill(s) integrated -> .claude/skills/
+  |-- 1 rule(s) integrated -> .claude/rules/
+  |-- 1 skill(s) integrated -> .claude/skills/
+Warning: Failed to parse C:\agents\agents-factory\apm_modules\_local\b752acfd2b2f\artifact-authoring\.apm\skills\agent-creator\assets\TEMPLATE.AGENT.md: Failed to parse primitive file C:\agents\agents-factory\apm_modules\_local\b752acfd2b2f\artifact-authoring\.apm\skills\agent-creator\assets\TEMPLATE.AGENT.md: Unknown primitive file type: C:\agents\agents-factory\apm_modules\_local\b752acfd2b2f\artifact-authoring\.apm\skills\agent-creator\assets\TEMPLATE.AGENT.md
+  |-- 1 agents adopted -> .claude/agents/
+  |-- 5 skill(s) integrated -> .claude/skills/
+  |-- 1 rule(s) integrated -> .claude/rules/
+  |-- 1 skill(s) integrated -> .claude/skills/
+  |-- Skill integrated -> .claude/skills/
+  |-- 9 skill(s) integrated -> .claude/skills/
+  |-- Skill integrated -> .claude/skills/
+  |-- 1 skill(s) integrated -> .claude/skills/
+  |-- Skill integrated -> .claude/skills/
+  |-- 1 skill(s) integrated -> .claude/skills/
+  |-- Skill integrated -> .claude/skills/
+  |-- 6 skill(s) integrated -> .claude/skills/
+  |-- Skill integrated -> .claude/skills/
+  |-- 1 skill(s) integrated -> .claude/skills/
+[!] Install recovery or staging cleanup is incomplete. Close programs using the
+affected paths, then inspect the retained data before retrying. Do not delete 
+backups needed to recover the prior installation.
+[!] Resolution recovery path 
+C:\agents\agents-factory\apm_modules\vercel\next.js: could not restore 
+C:\agents\agents-factory\apm_modules\vercel\next.js: [WinError 145] The 
+directory is not empty: 
+'C:\\agents\\agents-factory\\apm_modules\\vercel\\next.js\\turbopack\\crates\\t
+urbopack-tests\\tests\\snapshot\\cjs-remove-unused-exports\\define-property-get
+ter-reads-export\\output'
+  [!] 1 file(s) contain hidden characters
+    Run with --verbose to see details
+  [!] 23 skills replaced by a different package (last installed wins)
+    Run with --verbose to see details
+  [!] Skipped .claude/skills/provisioning-oci-api-gateway/SKILL.md: modified 
+since deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped 
+.claude/skills/provisioning-oci-api-gateway/blueprints/integration-patterns.md:
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped 
+.claude/skills/provisioning-oci-functions/blueprints/integration-patterns.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped .claude/skills/building-agent-packages/SKILL.md: no trustworthy 
+local deployment baseline. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped 
+.claude/skills/building-agent-packages/assets/DECISIONS.template.md: no 
+trustworthy local deployment baseline. Preserve your changes before 
+reinstalling with --force.
+  [!] Skipped 
+.claude/skills/building-agent-packages/assets/DEFERRED.template.md: no 
+trustworthy local deployment baseline. Preserve your changes before 
+reinstalling with --force.
+  [!] Skipped 
+.claude/skills/building-agent-packages/assets/FAMILY_FACTS.template.md: no 
+trustworthy local deployment baseline. Preserve your changes before 
+reinstalling with --force.
+  [!] Skipped 
+.claude/skills/building-agent-packages/assets/FAMILY_RULES.template.md: no 
+trustworthy local deployment baseline. Preserve your changes before 
+reinstalling with --force.
+  [!] Skipped 
+.claude/skills/building-agent-packages/assets/FINDINGS.template.md: no 
+trustworthy local deployment baseline. Preserve your changes before 
+reinstalling with --force.
+  [!] Skipped .claude/skills/building-agent-packages/assets/GATE.template.md: 
+no trustworthy local deployment baseline. Preserve your changes before 
+reinstalling with --force.
+  [!] Skipped 
+.claude/skills/building-agent-packages/assets/METRICS.template.md: no 
+trustworthy local deployment baseline. Preserve your changes before 
+reinstalling with --force.
+  [!] Skipped 
+.claude/skills/building-agent-packages/assets/PACKAGE_BRIEF.template.md: no 
+trustworthy local deployment baseline. Preserve your changes before 
+reinstalling with --force.
+  [!] Skipped .claude/skills/building-agent-packages/assets/PHASE.template.md: 
+no trustworthy local deployment baseline. Preserve your changes before 
+reinstalling with --force.
+  [!] Skipped 
+.claude/skills/building-agent-packages/assets/PIPELINE_STATE.template.md: no 
+trustworthy local deployment baseline. Preserve your changes before 
+reinstalling with --force.
+  [!] Skipped .claude/skills/building-agent-packages/assets/RETRO.template.md: 
+no trustworthy local deployment baseline. Preserve your changes before 
+reinstalling with --force.
+  [!] Skipped .claude/skills/building-agent-packages/assets/SCORES.template.md:
+no trustworthy local deployment baseline. Preserve your changes before 
+reinstalling with --force.
+  [!] Skipped 
+.claude/skills/building-agent-packages/assets/SHARED_TOUCH.template.md: no 
+trustworthy local deployment baseline. Preserve your changes before 
+reinstalling with --force.
+  [!] Skipped 
+.claude/skills/building-agent-packages/assets/SOURCES.template.md: no 
+trustworthy local deployment baseline. Preserve your changes before 
+reinstalling with --force.
+  [!] Skipped .claude/skills/building-agent-packages/assets/UNIT.template.md: 
+no trustworthy local deployment baseline. Preserve your changes before 
+reinstalling with --force.
+  [!] Skipped 
+.claude/skills/building-agent-packages/blueprints/evaluation-scenarios.md: no 
+trustworthy local deployment baseline. Preserve your changes before 
+reinstalling with --force.
+  [!] Skipped 
+.claude/skills/building-agent-packages/blueprints/known-failures.md: no 
+trustworthy local deployment baseline. Preserve your changes before 
+reinstalling with --force.
+  [!] Skipped .claude/skills/building-agent-packages/blueprints/modes.md: no 
+trustworthy local deployment baseline. Preserve your changes before 
+reinstalling with --force.
+  [!] Skipped 
+.claude/skills/building-agent-packages/blueprints/state-layout.md: no 
+trustworthy local deployment baseline. Preserve your changes before 
+reinstalling with --force.
+  [!] Skipped 
+.claude/skills/building-agent-packages/blueprints/phases/p0-intake.md: no 
+trustworthy local deployment baseline. Preserve your changes before 
+reinstalling with --force.
+  [!] Skipped 
+.claude/skills/building-agent-packages/blueprints/phases/p1-version-gate.md: no
+trustworthy local deployment baseline. Preserve your changes before 
+reinstalling with --force.
+  [!] Skipped 
+.claude/skills/building-agent-packages/blueprints/phases/p2-inventory-design.md
+: no trustworthy local deployment baseline. Preserve your changes before 
+reinstalling with --force.
+  [!] Skipped 
+.claude/skills/building-agent-packages/blueprints/phases/p3-pilot.md: no 
+trustworthy local deployment baseline. Preserve your changes before 
+reinstalling with --force.
+  [!] Skipped 
+.claude/skills/building-agent-packages/blueprints/phases/p4-fanout.md: no 
+trustworthy local deployment baseline. Preserve your changes before 
+reinstalling with --force.
+  [!] Skipped 
+.claude/skills/building-agent-packages/blueprints/phases/p5-package-assembly.md
+: no trustworthy local deployment baseline. Preserve your changes before 
+reinstalling with --force.
+  [!] Skipped 
+.claude/skills/building-agent-packages/blueprints/phases/p6-quality-loop.md: no
+trustworthy local deployment baseline. Preserve your changes before 
+reinstalling with --force.
+  [!] Skipped 
+.claude/skills/building-agent-packages/blueprints/phases/p7-fact-sweep.md: no 
+trustworthy local deployment baseline. Preserve your changes before 
+reinstalling with --force.
+  [!] Skipped 
+.claude/skills/building-agent-packages/blueprints/phases/p8-mechanical-close.md
+: no trustworthy local deployment baseline. Preserve your changes before 
+reinstalling with --force.
+  [!] Skipped 
+.claude/skills/building-agent-packages/blueprints/phases/p9-commit.md: no 
+trustworthy local deployment baseline. Preserve your changes before 
+reinstalling with --force.
+  [!] Skipped 
+.claude/skills/building-agent-packages/blueprints/policy/evidence-rule.md: no 
+trustworthy local deployment baseline. Preserve your changes before 
+reinstalling with --force.
+  [!] Skipped 
+.claude/skills/building-agent-packages/blueprints/policy/hybrid-format-checklis
+t.md: no trustworthy local deployment baseline. Preserve your changes before 
+reinstalling with --force.
+  [!] Skipped 
+.claude/skills/building-agent-packages/blueprints/policy/shared-files.md: no 
+trustworthy local deployment baseline. Preserve your changes before 
+reinstalling with --force.
+  [!] Skipped 
+.claude/skills/building-agent-packages/blueprints/policy/tag-notation-and-regis
+ters.md: no trustworthy local deployment baseline. Preserve your changes before
+reinstalling with --force.
+  [!] Skipped 
+.claude/skills/building-agent-packages/blueprints/policy/triage-and-stop-rules.
+md: no trustworthy local deployment baseline. Preserve your changes before 
+reinstalling with --force.
+  [!] Skipped 
+.claude/skills/building-agent-packages/blueprints/worker-briefs/README.md: no 
+trustworthy local deployment baseline. Preserve your changes before 
+reinstalling with --force.
+  [!] Skipped 
+.claude/skills/building-agent-packages/blueprints/worker-briefs/fix-cycle.md: 
+no trustworthy local deployment baseline. Preserve your changes before 
+reinstalling with --force.
+  [!] Skipped 
+.claude/skills/building-agent-packages/blueprints/worker-briefs/package-author.
+md: no trustworthy local deployment baseline. Preserve your changes before 
+reinstalling with --force.
+  [!] Skipped 
+.claude/skills/building-agent-packages/blueprints/worker-briefs/researcher.md: 
+no trustworthy local deployment baseline. Preserve your changes before 
+reinstalling with --force.
+  [!] Skipped 
+.claude/skills/building-agent-packages/blueprints/worker-briefs/skill-author-hy
+brid.md: no trustworthy local deployment baseline. Preserve your changes before
+reinstalling with --force.
+  [!] Skipped 
+.claude/skills/building-agent-packages/blueprints/worker-briefs/validator.md: 
+no trustworthy local deployment baseline. Preserve your changes before 
+reinstalling with --force.
+  [!] Skipped .claude/skills/building-agent-packages/scripts/after_install.py: 
+no trustworthy local deployment baseline. Preserve your changes before 
+reinstalling with --force.
+  [!] Skipped .claude/skills/building-agent-packages/scripts/check_counts.py: 
+no trustworthy local deployment baseline. Preserve your changes before 
+reinstalling with --force.
+  [!] Skipped .claude/skills/building-agent-packages/scripts/check_state.py: no
+trustworthy local deployment baseline. Preserve your changes before 
+reinstalling with --force.
+  [!] Skipped .claude/skills/building-agent-packages/scripts/commit_groups.py: 
+no trustworthy local deployment baseline. Preserve your changes before 
+reinstalling with --force.
+  [!] Skipped 
+.claude/skills/building-agent-packages/scripts/inspect_workspace.py: no 
+trustworthy local deployment baseline. Preserve your changes before 
+reinstalling with --force.
+  [!] Skipped .claude/skills/building-agent-packages/scripts/merge_lock.py: no 
+trustworthy local deployment baseline. Preserve your changes before 
+reinstalling with --force.
+  [!] Skipped .claude/skills/building-agent-packages/scripts/migrate_state.py: 
+no trustworthy local deployment baseline. Preserve your changes before 
+reinstalling with --force.
+  [!] Skipped .claude/skills/building-agent-packages/scripts/normalize_tags.py:
+no trustworthy local deployment baseline. Preserve your changes before 
+reinstalling with --force.
+  [!] Skipped .claude/skills/building-agent-packages/scripts/preflight_apm.py: 
+no trustworthy local deployment baseline. Preserve your changes before 
+reinstalling with --force.
+  [!] Skipped .claude/skills/building-agent-packages/scripts/render_state.py: 
+no trustworthy local deployment baseline. Preserve your changes before 
+reinstalling with --force.
+  [!] Skipped .claude/skills/building-agent-packages/scripts/scoped_install.py:
+no trustworthy local deployment baseline. Preserve your changes before 
+reinstalling with --force.
+  [!] Skipped .claude/skills/building-agent-packages/scripts/snapshot_env.py: 
+no trustworthy local deployment baseline. Preserve your changes before 
+reinstalling with --force.
+  [!] Skipped .claude/skills/building-agent-packages/scripts/state_event.py: no
+trustworthy local deployment baseline. Preserve your changes before 
+reinstalling with --force.
+  [!] Skipped .claude/skills/building-agent-packages/scripts/state_lib.py: no 
+trustworthy local deployment baseline. Preserve your changes before 
+reinstalling with --force.
+  [!] Skipped .claude/skills/building-agent-packages/scripts/verify_package.py:
+no trustworthy local deployment baseline. Preserve your changes before 
+reinstalling with --force.
+  [!] Skipped .claude/skills/building-agent-packages/scripts/verify_skill.py: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped .claude/skills/building-agent-packages/scripts/watch_state.py: no
+trustworthy local deployment baseline. Preserve your changes before 
+reinstalling with --force.
+  [!] Skipped .claude/skills/researching-document-store/SKILL.md: modified 
+since deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped 
+.claude/skills/researching-document-store/blueprints/category-specifics.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped 
+.claude/skills/researching-document-store/blueprints/references/README.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped .claude/skills/skill-best-practices-validator/SKILL.md: no 
+trustworthy local deployment baseline. Preserve your changes before 
+reinstalling with --force.
+  [!] Skipped 
+.claude/skills/skill-best-practices-validator/blueprints/evaluation-scenarios.m
+d: no trustworthy local deployment baseline. Preserve your changes before 
+reinstalling with --force.
+  [!] Skipped 
+.claude/skills/skill-best-practices-validator/blueprints/output-templates.md: 
+no trustworthy local deployment baseline. Preserve your changes before 
+reinstalling with --force.
+  [!] Skipped .claude/skills/technical-framework-researcher-terraform/SKILL.md:
+no trustworthy local deployment baseline. Preserve your changes before 
+reinstalling with --force.
+  [!] Skipped 
+.claude/skills/technical-framework-researcher-terraform/blueprints/evaluation-s
+cenarios.md: no trustworthy local deployment baseline. Preserve your changes 
+before reinstalling with --force.
+  [!] Skipped 
+.claude/skills/technical-framework-researcher-terraform/blueprints/research-sco
+pe-formats.md: no trustworthy local deployment baseline. Preserve your changes 
+before reinstalling with --force.
+  [!] Skipped 
+.claude/skills/technical-framework-researcher-terraform/blueprints/terraform-cl
+i-commands.md: no trustworthy local deployment baseline. Preserve your changes 
+before reinstalling with --force.
+  [!] Skipped 
+.claude/skills/technical-framework-researcher-terraform/blueprints/terraform-in
+tegration-example.md: no trustworthy local deployment baseline. Preserve your 
+changes before reinstalling with --force.
+  [!] Skipped 
+.claude/skills/technical-framework-researcher-terraform/blueprints/terraform-mo
+dule-patterns.md: no trustworthy local deployment baseline. Preserve your 
+changes before reinstalling with --force.
+  [!] Skipped 
+.claude/skills/technical-framework-researcher-terraform/blueprints/terraform-ou
+tput-template.md: no trustworthy local deployment baseline. Preserve your 
+changes before reinstalling with --force.
+  [!] Skipped 
+.claude/skills/technical-framework-researcher-terraform/blueprints/terraform-pr
+oduction-readiness.md: no trustworthy local deployment baseline. Preserve your 
+changes before reinstalling with --force.
+  [!] Skipped 
+.claude/skills/technical-framework-researcher-terraform/blueprints/terraform-st
+ate-patterns.md: no trustworthy local deployment baseline. Preserve your 
+changes before reinstalling with --force.
+  [!] Skipped 
+.claude/skills/technical-framework-researcher-terraform/blueprints/terraform-te
+sting-patterns.md: no trustworthy local deployment baseline. Preserve your 
+changes before reinstalling with --force.
+  [!] Skipped 
+.claude/skills/technical-framework-researcher-terraform/blueprints/verification
+-loop.md: no trustworthy local deployment baseline. Preserve your changes 
+before reinstalling with --force.
+  [!] Skipped .claude/skills/review-stripe-integration/SKILL.md: modified since
+deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped 
+.claude/skills/review-stripe-integration/blueprints/evaluation-scenarios.md: no
+trustworthy local deployment baseline. Preserve your changes before 
+reinstalling with --force.
+  [x] 2 packages failed:
+    +- vercel-labs/agent-browser -- Failed to resolve transitive dep 
+vercel-labs/agent-browser (via 
+./packages/saas/aws-saas-serverless-quarkus-react-nextjs > 
+../../third-party/vercel-frontend > vercel-labs/agent-browser): Failed to clone
+repository vercel-labs/agent-browser: error: Your local changes to the 
+following files would be overwritten by checkout:
+        packages/@agent-browser/eve/package.json
+        packages/@agent-browser/sandbox/README.md
+        packages/@agent-browser/sandbox/mcp-tools.json
+        packages/@agent-browser/sandbox/package.json
+        packages/@agent-browser/sandbox/src/version.ts
+        packages/dashboard/package.json
+        packages/dashboard/src/components/chat-panel.tsx
+        packages/dashboard/src/components/console-panel.tsx
+        packages/dashboard/src/components/network-panel.tsx
+        packages/dashboard/src/components/session-tree.tsx
+        packages/dashboard/src/components/viewport.tsx
+        pnpm-lock.yaml
+        skill-data/core/SKILL.md
+        skill-data/core/references/authentication.md
+        skill-data/core/references/commands.md
+        skill-data/core/references/proxy-support.md
+        skill-data/core/references/session-management.md
+        skill-data/core/references/snapshot-refs.md
+        skill-data/core/references/trust-boundaries.md
+        skill-data/core/references/webgpu.md
+        skill-data/vercel-sandbox/SKILL.md
+        skills/agent-browser/SKILL.md
+Please commit your changes or stash them before you switch branches.
+Aborting
+    +- vercel/turborepo -- Failed to resolve transitive dep vercel/turborepo 
+(via ./packages/saas/aws-saas-serverless-quarkus-react-nextjs > 
+../../third-party/vercel-frontend > vercel/turborepo): Failed to clone 
+repository vercel/turborepo: warning: unable to access 
+'turborepo-tests/integration/fixtures/find_turbo/unplugged_moved/.moved/unplugg
+ed/turbo-linux-64-npm-1.0.0-520925a700/node_modules/turbo-linux-64/.gitattribut
+es': Filename too long
+warning: unable to access 
+'turborepo-tests/integration/fixtures/find_turbo/unplugged_moved/.moved/unplugg
+ed/turbo-linux-64-npm-1.0.0-520925a700/node_modules/turbo-linux-64/bin/.gitattr
+ibutes': Filename too long
+error: Your local changes to the following files would be overwritten by 
+checkout:
+        version.txt
+Please commit your changes or stash them before you switch branches.
+Aborting. Could not discard downloaded candidate 
+C:\agents\agents-factory\apm_modules\.apm-resolution-staging\0c2f230becab\repla
+cements\990aa69eda5bd29e: [WinError 145] The directory is not empty: 
+'C:\\agents\\agents-factory\\apm_modules\\.apm-resolution-staging\\0c2f230becab
+\\replacements\\990aa69eda5bd29e\\turborepo-tests\\integration\\fixtures\\find_
+turbo\\unplugged\\.yarn\\unplugged\\turbo-darwin-arm64-npm-1.0.0-520925a700\\no
+de_modules\\turbo-darwin-arm64'. Inspect the retained staging path before 
+retrying.
+[x] Installation failed with 2 error(s) in 3243.5s. No install transaction 
+changes were committed.

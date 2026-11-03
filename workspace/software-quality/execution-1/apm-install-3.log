@@ -1,0 +1,350 @@
+[>] Installing dependencies from apm.yml...
+Parsed apm.yml: 16 APM deps, 0 MCP deps
+Using apm.lock.yaml (46 locked dependencies)
+    vercel-labs/agent-browser: locked at 1453dd37
+    vercel-labs/agent-skills: locked at 1a2c79d4
+    vercel/ai-elements: locked at ca8be600
+    vercel/components.build: locked at ba727450
+    vercel/next.js: locked at 4c6a3fa4
+    vercel/streamdown: locked at 7dcabc64
+    vercel/turborepo: locked at e158e859
+[i] Seeded ref resolver from lockfile: 7 ref(s) (0 round-trips)
+[>] Resolving ./packages/factory/researching-frameworks...
+[>] Resolving ./packages/harness-quality/auditing...
+[>] Resolving ./packages/factory/researching-platform...
+[>] Resolving ./packages/factory/artifact-authoring...
+[>] Resolving ./packages/harness-quality/validating...
+[>] Resolving ./packages/harness-quality/evaluating...
+[>] Resolving ./packages/content-generation/book-writing...
+[>] Resolving ./packages/java/quarkus/camel-quarkus-integrator...
+[>] Resolving ./packages/factory/agent-package-builder...
+[>] Resolving ./packages/cloud/provider/oci/oci-functions-java...
+[>] Resolving ./packages/cloud/terraform/oci-terraform...
+[>] Resolving ./packages/cloud/provider/oci/oci-observability...
+[>] Resolving ./packages/cloud/provider/oci/oci-architecture...
+[>] Resolving ./packages/java/libs/langchain4j...
+[>] Resolving ./packages/saas/aws-saas-serverless-quarkus-react-nextjs...
+[>] Resolving ./packages/quality/quarkus-acceptance-testing...
+[>] Resolving ../research-core...
+[>] Resolving ../factory-core...
+[>] Resolving ../oci-core...
+[>] Resolving ../camel-quarkus-skills...
+[>] Resolving ../../../../java/clean-code/clean-code-oci...
+[>] Resolving ../../java/quarkus/quarkus-aws...
+[>] Resolving ../../cloud/provider/aws/aws-lambda...
+[>] Resolving ../../cloud/provider/aws/aws-observability...
+[>] Resolving ../../delivery/protocol/handoff-core...
+[>] Resolving ../../cloud/provider/aws/aws-architect...
+[>] Resolving ../../cloud/terraform/terraform...
+[>] Resolving ../../java/libs/stripe-java...
+[>] Resolving ../../delivery/specs/openspec-github...
+[>] Resolving ../../delivery/specs/openspec-poc...
+[>] Resolving ../../architecture/solution-architecture...
+[>] Resolving ../../frontend/react/ui-design...
+[>] Resolving ../../frontend/react/nextjs-frontend...
+[>] Resolving ../../java/quarkus/quarkus-langchain4j...
+[>] Resolving ../../third-party/vercel-frontend...
+[>] Resolving ../../delivery/github/github-actions-cicd...
+[>] Resolving ../acceptance-testing...
+[>] Resolving ../../java/quarkus/quarkus-core...
+[>] Resolving ../../specs/openspec-core...
+[>] Resolving ../../../cloud/provider/aws/aws-skills...
+[>] Resolving ../../../terraform/aws-terraform...
+[>] Resolving ../../../factory/artifact-authoring...
+[>] Resolving ../../github/github-core...
+[>] Resolving vercel-labs/agent-skills...
+[>] Resolving vercel/components.build...
+[>] Resolving vercel/ai-elements...
+[>] Resolving vercel/streamdown...
+[>] Resolving vercel/turborepo...
+[>] Resolving vercel-labs/agent-browser...
+[>] Resolving ../../clean-code/clean-code-quarkus...
+  Failed to resolve transitive dep vercel-labs/agent-browser (via 
+./packages/saas/aws-saas-serverless-quarkus-react-nextjs > 
+../../third-party/vercel-frontend > vercel-labs/agent-browser): Failed to clone
+repository vercel-labs/agent-browser: error: Your local changes to the 
+following files would be overwritten by checkout:
+        CHANGELOG.md
+        README.md
+        agent-browser.schema.json
+        cli/Cargo.lock
+        cli/Cargo.toml
+        cli/build.rs
+        cli/src/commands.rs
+        cli/src/connection.rs
+        cli/src/doctor/launch.rs
+        cli/src/doctor/webgpu.rs
+        cli/src/flags.rs
+        cli/src/install.rs
+        cli/src/main.rs
+        cli/src/mcp.rs
+        cli/src/native/actions.rs
+        cli/src/native/browser.rs
+        cli/src/native/cdp/chrome.rs
+        cli/src/native/cdp/discovery.rs
+        cli/src/native/cdp/types.rs
+        cli/src/native/daemon.rs
+        cli/src/native/e2e_tests.rs
+        cli/src/native/element.rs
+        cli/src/native/interaction.rs
+        cli/src/native/network.rs
+        cli/src/native/snapshot.rs
+        cli/src/native/stream/dashboard.rs
+        cli/src/native/stream/http.rs
+        cli/src/native/test_fixtures/wheel_probe.html
+        cli/src/output.rs
+        cli/src/plugins.rs
+        cli/src/skills.rs
+        cli/src/validation.rs
+        cli/tests/batch_cli.rs
+        cli/tests/max_output_cli.rs
+        cli/tests/mcp_call_cli.rs
+        cli/tests/pin_tab_cli.rs
+        cli/tests/session_validation_cli.rs
+        cli/tests/skills_cli.rs
+        docs/content/docs/cdp-mode.mdx
+        docs/content/docs/changelog.mdx
+        docs/content/docs/commands.mdx
+        docs/content/docs/configuration.mdx
+        docs/content/docs/engines/lightpanda.mdx
+        docs/content/docs/engines/obscura.mdx
+        docs/content/docs/init-scripts.mdx
+        docs/content/docs/installation.mdx
+        docs/content/docs/network.mdx
+        docs/content/docs/next.mdx
+        docs/content/docs/plugins.mdx
+        docs/content/docs/proxy.mdx
+        docs/content/docs/react.mdx
+        docs/content/docs/security.mdx
+        docs/content/docs/sessions.mdx
+        docs/content/docs/skills.mdx
+        docs/content/docs/snapshots.mdx
+        docs/content/docs/webgpu.mdx
+        docs/microfrontends.json
+        docs/next.config.mjs
+        docs/package.json
+        docs/public/schema.json
+        docs/src/app/robots.ts
+        docs/tests/fixtures/docs-edits.json
+        package.json
+        packages/@agent-browser/eve/package.json
+        packages/@agent-browser/sandbox/README.md
+        packages/@agent-browser/sandbox/mcp-tools.json
+        packages/@agent-browser/sandbox/package.json
+        packages/@agent-browser/sandbox/src/version.ts
+        packages/dashboard/package.json
+        packages/dashboard/src/components/chat-panel.tsx
+        packages/dashboard/src/components/console-panel.tsx
+        packages/dashboard/src/components/network-panel.tsx
+        packages/dashboard/src/components/session-tree.tsx
+        packages/dashboard/src/components/viewport.tsx
+        pnpm-lock.yaml
+        skill-data/core/SKILL.md
+        skill-data/core/references/authentication.md
+        skill-data/core/references/commands.md
+        skill-data/core/references/proxy-support.md
+        skill-data/core/references/session-management.md
+        skill-data/core/references/snapshot-refs.md
+        skill-data/core/references/trust-boundaries.md
+        skill-data/core/references/webgpu.md
+        skill-data/vercel-sandbox/SKILL.md
+        skills/agent-browser/SKILL.md
+Please commit your changes or stash them before you switch branches.
+Aborting
+  Failed to resolve transitive dep vercel/turborepo (via 
+./packages/saas/aws-saas-serverless-quarkus-react-nextjs > 
+../../third-party/vercel-frontend > vercel/turborepo): Failed to clone 
+repository vercel/turborepo: warning: unable to access 
+'turborepo-tests/integration/fixtures/find_turbo/unplugged/.yarn/unplugged/turb
+o-darwin-arm64-npm-1.0.0-520925a700/node_modules/turbo-darwin-arm64/.gitattribu
+tes': Filename too long
+warning: unable to access 
+'turborepo-tests/integration/fixtures/find_turbo/unplugged/.yarn/unplugged/turb
+o-darwin-arm64-npm-1.0.0-520925a700/node_modules/turbo-darwin-arm64/bin/.gitatt
+ributes': Filename too long
+warning: unable to access 
+'turborepo-tests/integration/fixtures/find_turbo/unplugged/.yarn/unplugged/turb
+o-linux-64-npm-1.0.0-520925a700/node_modules/turbo-linux-64/bin/.gitattributes'
+: Filename too long
+warning: unable to access 
+'turborepo-tests/integration/fixtures/find_turbo/unplugged/.yarn/unplugged/turb
+o-linux-arm64-npm-1.0.0-520925a700/node_modules/turbo-linux-arm64/.gitattribute
+s': Filename too long
+warning: unable to access 
+'turborepo-tests/integration/fixtures/find_turbo/unplugged/.yarn/unplugged/turb
+o-linux-arm64-npm-1.0.0-520925a700/node_modules/turbo-linux-arm64/bin/.gitattri
+butes': Filename too long
+warning: unable to access 
+'turborepo-tests/integration/fixtures/find_turbo/unplugged/.yarn/unplugged/turb
+o-windows-64-npm-1.0.0-520925a700/node_modules/turbo-windows-64/.gitattributes'
+: Filename too long
+warning: unable to access 
+'turborepo-tests/integration/fixtures/find_turbo/unplugged/.yarn/unplugged/turb
+o-windows-64-npm-1.0.0-520925a700/node_modules/turbo-windows-64/bin/.gitattribu
+tes': Filename too long
+warning: unable to access 
+'turborepo-tests/integration/fixtures/find_turbo/unplugged_moved/.moved/unplugg
+ed/turbo-linux-64-npm-1.0.0-520925a700/node_modules/turbo-linux-64/.gitattribut
+es': Filename too long
+warning: unable to access 
+'turborepo-tests/integration/fixtures/find_turbo/unplugged_moved/.moved/unplugg
+ed/turbo-linux-64-npm-1.0.0-520925a700/node_modules/turbo-linux-64/bin/.gitattr
+ibutes': Filename too long
+error: Your local changes to the following files would be overwritten by 
+checkout:
+        version.txt
+Please commit your changes or stash them before you switch branches.
+Aborting. Could not discard downloaded candidate 
+C:\agents\agents-factory\apm_modules\.apm-resolution-staging\4349a84ea444\repla
+cements\990aa69eda5bd29e: [WinError 145] The directory is not empty: 
+'C:\\agents\\agents-factory\\apm_modules\\.apm-resolution-staging\\4349a84ea444
+\\replacements\\990aa69eda5bd29e\\turborepo-tests\\integration\\fixtures\\find_
+turbo\\unplugged\\.yarn\\unplugged\\turbo-darwin-arm64-npm-1.0.0-520925a700\\no
+de_modules\\turbo-darwin-arm64'. Inspect the retained staging path before 
+retrying.
+WARNING apm_cli.deps.apm_resolver Invalid transitive apm.yml for vercel/next.js: Downloaded package has no apm.yml or SKILL.md: C:\agents\agents-factory\apm_modules\vercel\next.js
+Resolved dependency tree: 16 direct + 35 transitive deps (max depth 3)
+    ./packages/factory/researching-frameworks > ../factory-core
+    ./packages/factory/researching-frameworks > ../research-core
+    ./packages/java/quarkus/camel-quarkus-integrator > ../camel-quarkus-skills
+    ./packages/cloud/provider/oci/oci-functions-java > ../oci-core
+    ./packages/cloud/provider/oci/oci-functions-java > 
+../../../../java/clean-code/clean-code-oci
+    ./packages/saas/aws-saas-serverless-quarkus-react-nextjs > 
+../../java/quarkus/quarkus-aws
+    ./packages/saas/aws-saas-serverless-quarkus-react-nextjs > 
+../../cloud/provider/aws/aws-lambda
+    ./packages/saas/aws-saas-serverless-quarkus-react-nextjs > 
+../../cloud/provider/aws/aws-observability
+    ./packages/saas/aws-saas-serverless-quarkus-react-nextjs > 
+../../delivery/protocol/handoff-core
+    ./packages/saas/aws-saas-serverless-quarkus-react-nextjs > 
+../../cloud/provider/aws/aws-architect
+    ./packages/saas/aws-saas-serverless-quarkus-react-nextjs > 
+../../cloud/terraform/terraform
+    ./packages/saas/aws-saas-serverless-quarkus-react-nextjs > 
+../../java/libs/stripe-java
+    ./packages/saas/aws-saas-serverless-quarkus-react-nextjs > 
+../../delivery/specs/openspec-github
+    ./packages/saas/aws-saas-serverless-quarkus-react-nextjs > 
+../../delivery/specs/openspec-poc
+    ./packages/saas/aws-saas-serverless-quarkus-react-nextjs > 
+../../architecture/solution-architecture
+    ./packages/saas/aws-saas-serverless-quarkus-react-nextjs > 
+../../frontend/react/ui-design
+    ./packages/saas/aws-saas-serverless-quarkus-react-nextjs > 
+../../frontend/react/nextjs-frontend
+    ./packages/saas/aws-saas-serverless-quarkus-react-nextjs > 
+../../java/quarkus/quarkus-langchain4j
+    ./packages/saas/aws-saas-serverless-quarkus-react-nextjs > 
+../../third-party/vercel-frontend
+    ./packages/saas/aws-saas-serverless-quarkus-react-nextjs > 
+../../delivery/github/github-actions-cicd
+    ./packages/quality/quarkus-acceptance-testing > ../acceptance-testing
+    ./packages/quality/quarkus-acceptance-testing > 
+../../java/quarkus/quarkus-core
+    ./packages/saas/aws-saas-serverless-quarkus-react-nextjs > 
+../../java/quarkus/quarkus-aws > ../../../cloud/provider/aws/aws-skills
+    ./packages/saas/aws-saas-serverless-quarkus-react-nextjs > 
+../../cloud/provider/aws/aws-lambda > ../../../terraform/aws-terraform
+    ./packages/saas/aws-saas-serverless-quarkus-react-nextjs > 
+../../delivery/protocol/handoff-core > ../../specs/openspec-core
+    ./packages/saas/aws-saas-serverless-quarkus-react-nextjs > 
+../../cloud/terraform/terraform > ../../../factory/artifact-authoring
+    ./packages/saas/aws-saas-serverless-quarkus-react-nextjs > 
+../../delivery/specs/openspec-github > ../../github/github-core
+    ./packages/saas/aws-saas-serverless-quarkus-react-nextjs > 
+../../third-party/vercel-frontend > vercel-labs/agent-skills
+    ./packages/saas/aws-saas-serverless-quarkus-react-nextjs > 
+../../third-party/vercel-frontend > vercel/next.js
+    ./packages/saas/aws-saas-serverless-quarkus-react-nextjs > 
+../../third-party/vercel-frontend > vercel/components.build
+    ./packages/saas/aws-saas-serverless-quarkus-react-nextjs > 
+../../third-party/vercel-frontend > vercel/ai-elements
+    ./packages/saas/aws-saas-serverless-quarkus-react-nextjs > 
+../../third-party/vercel-frontend > vercel/streamdown
+    ./packages/saas/aws-saas-serverless-quarkus-react-nextjs > 
+../../third-party/vercel-frontend > vercel/turborepo
+    ./packages/saas/aws-saas-serverless-quarkus-react-nextjs > 
+../../third-party/vercel-frontend > vercel-labs/agent-browser
+    ./packages/quality/quarkus-acceptance-testing > 
+../../java/quarkus/quarkus-core > ../../clean-code/clean-code-quarkus
+    [i] perf: ref-resolver tiers: sha_passthrough=6
+Phase: resolve -> 112.200s
+WARNING apm_cli.policy.discovery Policy repo rodrigo-mendes/.github-private not found (or [REDACTED] private-repo read scope). If your org publishes policy in .github-private, ensure the token has Contents:read permission on that repo.
+[i] No org policy found for this project
+Phase: policy_gate -> 6.692s
+[i] Targets: claude  (source: --target flag)
+Phase: targets -> 0.003s
+Copilot native registration: unavailable (copilot target not selected)
+Phase: copilot_activate -> 0.000s
+Phase: policy_target_check -> 0.000s
+Phase: download -> 3.156s
+  [+] ./packages/cloud/provider/oci/oci-architecture (local)
+  [+] ./packages/cloud/provider/oci/oci-functions-java (local)
+  [+] ./packages/cloud/provider/oci/oci-observability (local)
+  [+] ./packages/cloud/terraform/oci-terraform (local)
+  [+] ./packages/content-generation/book-writing (local)
+  [+] ./packages/factory/agent-package-builder (local)
+  [+] ./packages/factory/artifact-authoring (local)
+  [+] ./packages/factory/researching-frameworks (local)
+  [+] ./packages/factory/researching-platform (local)
+  [+] ./packages/harness-quality/auditing (local)
+  [+] ./packages/harness-quality/evaluating (local)
+  [+] ./packages/harness-quality/validating (local)
+  [+] ./packages/java/libs/langchain4j (local)
+  [+] ./packages/java/quarkus/camel-quarkus-integrator (local)
+  [+] ./packages/quality/quarkus-acceptance-testing (local)
+  [+] ./packages/saas/aws-saas-serverless-quarkus-react-nextjs (local)
+  [+] ../../architecture/solution-architecture (local)
+  [+] ../../cloud/provider/aws/aws-architect (local)
+  [+] ../../cloud/provider/aws/aws-lambda (local)
+  [+] ../../cloud/provider/aws/aws-observability (local)
+  [+] ../oci-core (local)
+  [+] ../../cloud/terraform/terraform (local)
+  [+] ../../delivery/github/github-actions-cicd (local)
+  [+] ../../delivery/protocol/handoff-core (local)
+  [+] ../../delivery/specs/openspec-github (local)
+  [+] ../../delivery/specs/openspec-poc (local)
+  [+] ../factory-core (local)
+  [+] ../research-core (local)
+  [+] ../../frontend/react/nextjs-frontend (local)
+  [+] ../../frontend/react/ui-design (local)
+  [+] ../../../../java/clean-code/clean-code-oci (local)
+  [+] ../../java/libs/stripe-java (local)
+  [+] ../camel-quarkus-skills (local)
+  [+] ../../java/quarkus/quarkus-aws (local)
+  [+] ../../java/quarkus/quarkus-core (local)
+  [+] ../../java/quarkus/quarkus-langchain4j (local)
+  [+] ../acceptance-testing (local)
+  [+] ../../third-party/vercel-frontend (local)
+  [+] ../../../cloud/provider/aws/aws-skills (local)
+  [+] ../../../terraform/aws-terraform (local)
+  [+] ../../github/github-core (local)
+  [+] ../../specs/openspec-core (local)
+  [+] ../../../factory/artifact-authoring (local)
+  [+] ../../clean-code/clean-code-quarkus (local)
+  Skipping vercel-labs/agent-browser (already failed during resolution)
+  [+] vercel-labs/agent-skills #1a2c79d4e6c4a2283dc2c614b6538cbe1ed5ca62 
+@1a2c79d4
+  [+] vercel/ai-elements #ca8be600bfd01b3131f9bf6134b51602a71f4374 @ca8be600
+  [+] vercel/components.build #ba727450437385af662810329fa19896215f76d5 
+@ba727450
+[i] Content hash mismatch for vercel/next.js -- re-downloading
+Phase: integrate -> 50.221s
+[!] Install recovery or staging cleanup is incomplete. Close programs using the
+affected paths, then inspect the retained data before retrying. Do not delete 
+backups needed to recover the prior installation.
+[!] Resolution recovery path 
+C:\agents\agents-factory\apm_modules\.apm-resolution-staging\4349a84ea444: 
+could not remove staging: [WinError 145] The directory is not empty: 
+'C:\\agents\\agents-factory\\apm_modules\\.apm-resolution-staging\\4349a84ea444
+\\replacements\\990aa69eda5bd29e\\turborepo-tests\\integration\\fixtures\\find_
+turbo\\unplugged\\.yarn\\unplugged\\turbo-darwin-arm64-npm-1.0.0-520925a700\\no
+de_modules\\turbo-darwin-arm64'
+[x] Failed to install APM dependencies: Failed to resolve APM dependencies: 
+[WinError 145] The directory is not empty: 
+'C:\\agents\\agents-factory\\apm_modules\\vercel\\next.js\\turbopack\\crates\\t
+urbopack-tests\\tests\\snapshot\\cjs-remove-unused-exports\\define-property-get
+ter-reads-export\\output'
+[x] Install failed after 177.6s.

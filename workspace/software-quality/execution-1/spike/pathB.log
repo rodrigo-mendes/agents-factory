@@ -1,0 +1,25 @@
+Executing "java -Dquarkus.http.port=8081 -Dquarkus.http.ssl-port=8444 -Dtest.url=http://localhost:${quarkus.http.test-port:8081} -Dquarkus.log.file.path=C:\agents\agents-factory\workspace\software-quality\execution-1\spike\pathB\target\quarkus.log -Dquarkus.log.file.enabled=true -Dquarkus.log.category."io.quarkus".level=INFO -Dquarkus.profile=prod -jar C:\agents\agents-factory\workspace\software-quality\execution-1\spike\pathB\target\quarkus-app\quarkus-run.jar"
+__  ____  __  _____   ___  __ ____  ______ 
+ --/ __ \/ / / / _ | / _ \/ //_/ / / / __/ 
+ -/ /_/ / /_/ / __ |/ , _/ ,< / /_/ /\ \   
+--\___\_\____/_/ |_/_/|_/_/|_|\____/___/   
+2026-10-31 23:38:43,128 WARN  [io.quarkus.config] (main) Unrecognized configuration key "quarkus.log.category.io.quarkus.level" was provided; it will be ignored; verify that the dependency extension for this configuration is set or that you did not make a typo
+2026-10-31 23:38:43,502 INFO  [io.quarkus] (main) pathb-cucumber8 1.0.0-SNAPSHOT on JVM (powered by Quarkus 3.40.1) started in 0.794s. Listening on: http://0.0.0.0:8081
+2026-10-31 23:38:43,502 INFO  [io.quarkus] (main) Profile prod activated. 
+2026-10-31 23:38:43,503 INFO  [io.quarkus] (main) Installed features: [cdi, rest, smallrye-context-propagation, vertx]
+
+@change-add-greeting @R1 @happy
+Scenario: Valid name                               # classpath:features/greeting.feature:7
+  ? When the visitor asks for a greeting for "ana" # spike.acceptance.GreetingSteps.askGreeting(java.lang.String)
+  ? Then the response status is 200                # spike.acceptance.GreetingSteps.status(int)
+  ? And the response body is "hello ana"           # spike.acceptance.GreetingSteps.body(java.lang.String)
+
+@change-add-greeting @R1 @negative
+Scenario: Name too long                                                   # classpath:features/greeting.feature:13
+  ? When the visitor asks for a greeting for "abcdefghijklmnopqrstuvwxyz" # spike.acceptance.GreetingSteps.askGreeting(java.lang.String)
+  ? Then the response status is 400                                       # spike.acceptance.GreetingSteps.status(int)
+
+2 scenarios (2 passed)
+5 steps (5 passed)
+0m 1.413s (0m 1.305s executing your code)
+Process exited with non-zero status: 1
