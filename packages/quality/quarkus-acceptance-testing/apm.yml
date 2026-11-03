@@ -1,0 +1,13 @@
+name: agents-factory-quarkus-acceptance-testing
+version: 1.0.0
+description: >-
+  Cucumber 8.0 acceptance tests for Quarkus 3.40 LTS REST apps: 2 version-locked knowledge skills, the non-interactive acceptance-test-engineer subagent, the command /building-acceptance-tests and a scoped rule.
+author: rodrigo-mendes
+license: MIT
+dependencies:
+  apm:
+    - path: ../acceptance-testing
+    - path: ../../java/quarkus/quarkus-core
+  mcp: []
+includes: auto
+scripts: {}

@@ -38,6 +38,9 @@ dependencies:
     # NOT listed directly any more (same "ambiguous resolved_by" reason as
     # factory-core above); they still install, transitively.
     - path: ./packages/saas/aws-saas-serverless-quarkus-react-nextjs
+    # quality family: quarkus-acceptance-testing pulls in acceptance-testing (and quarkus-core,
+    # openspec-core), so acceptance-testing is NOT listed directly.
+    - path: ./packages/quality/quarkus-acceptance-testing
     # vercel-frontend, github-actions-cicd, solution-architecture, ui-design, nextjs-frontend and
     # quarkus-langchain4j are NOT listed directly: aws-saas-serverless-quarkus-react-nextjs depends
     # on them, so they resolve transitively (same "ambiguous resolved_by" reason as factory-core).
