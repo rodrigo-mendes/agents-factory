@@ -71,7 +71,11 @@ Ordered lookup table used by `researching-platform-software` (orchestrator) to m
 
 Ask the user which role the platform will play, then route.
 
-### Redis
+### Redis and Valkey
+
+Valkey (aliases: `valkey-server`) is the Linux Foundation fork of Redis. It plays the same three roles and routes the
+same way. Research and skills stay **separate per distribution** (one version per skill): never merge Redis and
+Valkey facts in one run.
 
 | Role | `datastore-type=` | Sibling |
 |---|---|---|
@@ -79,10 +83,25 @@ Ask the user which role the platform will play, then route.
 | Primary persistent key-value store (AOF+RDB, no eviction) | `kv` | `researching-kv-store` |
 | Coordination / distributed locking (Redlock, Redisson) | `coordination-analog` | `researching-coordination-service` |
 
-**Ask**: "Redis has three legitimate roles. Which are you deploying it for?
+**Ask**: "Redis (or Valkey) has three legitimate roles. Which are you deploying it for?
 1. Cache / session store (data expected to be lost on eviction) → `researching-cache-store`
 2. Primary datastore with persistence (data must not be lost) → `researching-kv-store`
 3. Distributed coordination / locking → `researching-coordination-service`"
+
+### Not a platform: route to `researching-technical-frameworks`
+
+These are client libraries, connector frameworks or tools that run on top of a platform. They have no
+self-managed-platform scope (install, HA topology, cluster ops), so do **not** route them to a sibling.
+Reply with the redirect and stop.
+
+| Name | Aliases | Redirect |
+|---|---|---|
+| Kafka Streams | kstreams | `/researching-technical-frameworks "Kafka Streams" <version>` |
+| Kafka Connect | connect | `/researching-technical-frameworks "Kafka Connect" <version>` |
+| Schema Registry | confluent-schema-registry, apicurio | `/researching-technical-frameworks "<vendor> Schema Registry" <version>` (ask which vendor) |
+| Debezium | | `/researching-technical-frameworks Debezium <version>`; the source database itself (e.g. MySQL) goes through this router |
+
+The Kafka broker the framework runs on is still researched here (`Kafka <version>` → `researching-streaming-broker`).
 
 ### Elasticsearch / OpenSearch
 

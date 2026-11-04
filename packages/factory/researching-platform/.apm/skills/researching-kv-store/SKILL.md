@@ -1,6 +1,6 @@
 ---
 name: researching-kv-store
-description: "Researches self-managed persistent key-value stores (Redis-as-primary-datastore, RocksDB, LMDB, TiKV) into a hallucination-proof, version-absolute knowledge base covering installation, persistence/durability, HA, backup, hardening, observability, and key-value data modeling. Use when the platform is the primary persistent store (data must survive restart/eviction) — for ephemeral caching use researching-cache-store."
+description: "Researches self-managed persistent key-value stores (Redis or Valkey as primary datastore, RocksDB, LMDB, TiKV) into a hallucination-proof, version-absolute knowledge base covering installation, persistence/durability, HA, backup, hardening, observability, and key-value data modeling. Use when the platform is the primary persistent store (data must survive restart/eviction) — for ephemeral caching use researching-cache-store."
 argument-hint: "<platform> <version> [deployment=bare-metal|vm|container-compose|kubernetes-operator|hybrid] [depth=exhaustive] [iterations=5] (e.g. Redis 7.2 deployment=vm / TiKV 7.5 deployment=kubernetes-operator)"
 context: fork
 agent: framework-researcher
@@ -11,7 +11,7 @@ disable-model-invocation: true
 
 ## INPUT VARIABLES
 
-- `PLATFORM_SOFTWARE`: Redis (as primary DB) | RocksDB | LMDB | TiKV
+- `PLATFORM_SOFTWARE`: Redis (as primary DB) | Valkey (as primary DB) | RocksDB | LMDB | TiKV
 - `TARGET_VERSION`: exact semver
 - `DEPLOYMENT_MODEL`, `RESEARCH_DEPTH`, `MAX_ITERATIONS`: standard passthrough
 
@@ -76,6 +76,7 @@ Conditional sections:
 | Engine | Primary Docs | K8s Operator | Release Notes |
 |---|---|---|---|
 | Redis (as DB) | redis.io/docs | Redis Enterprise Operator, spotahome/redis-operator | github.com/redis/redis/releases |
+| Valkey (as DB) | valkey.io | operator: identify during research (unverified) | github.com/valkey-io/valkey/releases |
 | RocksDB | rocksdb.org / github.com/facebook/rocksdb/wiki | (embedded library — no operator) | github.com/facebook/rocksdb/releases |
 | LMDB | lmdb.tech/doc | (embedded library — no operator) | git.openldap.org/openldap/openldap (liblmdb) |
 | TiKV | tikv.org/docs | TiDB Operator | github.com/tikv/tikv/releases |
