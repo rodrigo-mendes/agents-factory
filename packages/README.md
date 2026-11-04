@@ -42,6 +42,7 @@ packages/
 │   │                              camel-quarkus-skills, camel-quarkus-integrator
 │   ├── clean-code/                clean-code-quarkus, clean-code-oci (one per stack)
 │   └── libs/                      langchain4j, stripe-java
+├── quality/                     acceptance-testing, quarkus-acceptance-testing
 ├── frontend/react/              nextjs-frontend, ui-design
 ├── third-party/vercel-frontend  points to 7 official Vercel skill repositories (not our content)
 ├── saas/                        aws-saas-serverless-quarkus-react-nextjs (orchestrator)
@@ -132,6 +133,11 @@ JAVA / QUARKUS
   camel-quarkus-integrator → camel-quarkus-skills
   quarkus-aws              → quarkus-core, aws-skills, handoff-core
   quarkus-langchain4j      → quarkus-aws
+
+QUALITY
+  acceptance-testing       → openspec-core
+  quarkus-acceptance-testing
+                           → acceptance-testing, quarkus-core
 
 FRONTEND / REACT
   nextjs-frontend          → vercel-frontend, handoff-core

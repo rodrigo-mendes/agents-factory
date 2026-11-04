@@ -8,3 +8,4 @@ __pycache__/
 
 # sales exports (scripts/export-bundle.py)
 dist/
+workspace/

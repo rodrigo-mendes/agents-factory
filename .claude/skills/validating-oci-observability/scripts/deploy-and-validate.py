@@ -28,7 +28,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import lib_common as L  # noqa: E402
 
 OCIR_HOST = "gru.ocir.io"
-OCIR_NS = "gr2o2hdgzoxw"
+OCIR_NS = ""  # set in main() from $OCIR_NAMESPACE (`oci os ns get`); never hardcode a tenancy namespace
 OCIR_REPO = "serverless-app"
 
 # label|dir|tfvar_name
@@ -69,6 +69,15 @@ def _call(cmd, cwd=None):
 
 
 def main(argv):
+    global OCIR_NS
+    # required, no defaults: the alarm address and the tenancy namespace belong to whoever runs this
+    alarm_email = os.environ.get("ALARM_EMAIL", "").strip()
+    OCIR_NS = os.environ.get("OCIR_NAMESPACE", "").strip()
+    missing = [n for n, v in (("ALARM_EMAIL", alarm_email), ("OCIR_NAMESPACE", OCIR_NS)) if not v]
+    if missing:
+        L.err_raw("Defina " + " e ".join(missing) + " antes de rodar (ALARM_EMAIL = endereço que recebe o "
+                  "alarme de teste; OCIR_NAMESPACE = saída de `oci os ns get`).")
+        return 2
     L.init()
 
     skip_build = "--skip-build" in argv
@@ -78,7 +87,6 @@ def main(argv):
     L.require_session()
 
     services_dir = os.path.join(L.REPO_ROOT, "services")
-    alarm_email = os.environ.get("ALARM_EMAIL") or "rodrigo.mendes@brxretail.com"
 
     # --------------------------------------------------------------------------
     # 1) Build + push

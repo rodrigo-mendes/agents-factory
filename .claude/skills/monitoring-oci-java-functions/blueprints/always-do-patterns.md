@@ -310,7 +310,7 @@ The following is extracted from `libs/obs-commons/MetricsPublisher.java` in the 
 demonstrates all 7 patterns above in a single class used across 3 pub/sub services.
 
 ```java
-// from libs/obs-commons/src/main/java/com/brx/functions/common/obs/MetricsPublisher.java
+// from libs/obs-commons/src/main/java/com/example/functions/common/obs/MetricsPublisher.java
 
 public class MetricsPublisher {
 

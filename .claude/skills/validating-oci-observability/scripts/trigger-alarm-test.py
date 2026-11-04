@@ -119,7 +119,8 @@ def main(argv):
         L.sleep(30)
 
     if fired:
-        L.info("Se a subscription estiver ACTIVE, um email deve chegar em rodrigo.mendes@brxretail.com.")
+        L.info("Se a subscription estiver ACTIVE, um email deve chegar em "
+               + (os.environ.get("ALARM_EMAIL") or "endereço configurado na subscription do tópico") + ".")
     else:
         L.fail(f"Nenhum alarme de erro/5xx entrou em FIRING dentro de {poll_max_min}min.")
         L.info("Cheque: (a) métrica de erro casa com o resourceId do alarme (check-metrics.py); "

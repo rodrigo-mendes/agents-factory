@@ -1,0 +1,36 @@
+Oct 31, 2026 11:39:46 PM org.jboss.logmanager.JBossLoggerFinder getLogger
+ERROR: The LogManager accessed before the "java.util.logging.manager" system property was set to "org.jboss.logmanager.LogManager". Results may be unexpected.
+Downloading from snapshots: https://pkgs.dev.azure.com/devopsmapfre/devopsmapfre/_packaging/snapshots/maven/v1/io/cucumber/messages/maven-metadata.xml
+Downloading from snapshots: https://pkgs.dev.azure.com/devopsmapfre/devopsmapfre/_packaging/snapshots/maven/v1/io/cucumber/query/maven-metadata.xml
+Downloading from releases: https://pkgs.dev.azure.com/devopsmapfre/devopsmapfre/_packaging/releases/maven/v1/io/cucumber/query/maven-metadata.xml
+Downloading from releases: https://pkgs.dev.azure.com/devopsmapfre/devopsmapfre/_packaging/releases/maven/v1/io/quarkiverse/cucumber/quarkus-cucumber-deployment/1.3.0/quarkus-cucumber-deployment-1.3.0.pom
+Downloading from central: https://repo.maven.apache.org/maven2/io/quarkiverse/cucumber/quarkus-cucumber-deployment/1.3.0/quarkus-cucumber-deployment-1.3.0.pom
+Downloaded from central: https://repo.maven.apache.org/maven2/io/quarkiverse/cucumber/quarkus-cucumber-deployment/1.3.0/quarkus-cucumber-deployment-1.3.0.pom (2.0 kB at 19 kB/s)
+Downloading from releases: https://pkgs.dev.azure.com/devopsmapfre/devopsmapfre/_packaging/releases/maven/v1/io/quarkiverse/cucumber/quarkus-cucumber-deployment/1.3.0/quarkus-cucumber-deployment-1.3.0.jar
+Downloading from central: https://repo.maven.apache.org/maven2/io/quarkiverse/cucumber/quarkus-cucumber-deployment/1.3.0/quarkus-cucumber-deployment-1.3.0.jar
+Downloaded from central: https://repo.maven.apache.org/maven2/io/quarkiverse/cucumber/quarkus-cucumber-deployment/1.3.0/quarkus-cucumber-deployment-1.3.0.jar (5.8 kB at 187 kB/s)
+Oct 31, 2026 11:39:54 PM io.quarkus.bootstrap.runner.Timing printStartupTime
+INFO: patha-quarkus-cucumber 1.0.0-SNAPSHOT on JVM (powered by Quarkus 3.40.1) started in 4.595s. Listening on: http://localhost:8081
+Oct 31, 2026 11:39:54 PM io.quarkus.bootstrap.runner.Timing printStartupTime
+INFO: Profile test activated. 
+Oct 31, 2026 11:39:54 PM io.quarkus.bootstrap.runner.Timing printStartupTime
+INFO: Installed features: [cdi, cucumber, rest, smallrye-context-propagation, vertx]
+
+@change-add-greeting @R1 @happy
+Scenario: Valid name                             # features/greeting.feature:7
+  When the visitor asks for a greeting for "ana" # spike.acceptance.GreetingSteps.askGreeting(java.lang.String)
+  Then the response status is 200                # spike.acceptance.GreetingSteps.status(int)
+  And the response body is "hello ana"           # spike.acceptance.GreetingSteps.body(java.lang.String)
+
+@change-add-greeting @R1 @negative
+Scenario: Name too long                                                 # features/greeting.feature:13
+  When the visitor asks for a greeting for "abcdefghijklmnopqrstuvwxyz" # spike.acceptance.GreetingSteps.askGreeting(java.lang.String)
+  Then the response status is 400                                       # spike.acceptance.GreetingSteps.status(int)
+
+2 Scenarios (2 passed)
+5 Steps (5 passed)
+0m1.124s
+
+
+Oct 31, 2026 11:39:56 PM io.quarkus.bootstrap.runner.Timing printStopTime
+INFO: patha-quarkus-cucumber stopped in 0.027s

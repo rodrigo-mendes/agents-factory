@@ -1,0 +1,12 @@
+Agent: quality-validator (VALIDATE, P6 round 2, lean)
+Spec: .claude/skills/skill-best-practices-validator/SKILL.md (read; do not invoke).
+Targets: composing-github-actions-pipelines, automating-terraform-github-actions-v1-17, federating-github-actions-aws-oidc, federating-github-actions-oci, building-java-github-actions (under packages/github-actions-cicd/.apm/skills/). Round-1 reports: workspace/github-actions-cicd/execution-1/rounds/round-1/validate__<skill>.md and test__<skill>.md.
+Approval line: The user approved 9 skills, 2 agents, 4 rules and command /building-cicd-pipelines on 2026-10-30 (G1, workspace/github-actions-cicd/execution-1/state/gates/G1.md), the fan-out at G2, source-first parallel testing (DEC-014, DEC-018) and a budget of 9.5M tokens (DEC-020). This is a relay, not a new approval.
+Hard constraints:
+- Do NOT spawn any agent; do NOT enter plan mode. Read-only except your report file(s).
+- Read the SOURCE under packages/github-actions-cicd/ only, never .claude/.
+- BUDGET: this is a lean confirmation round. Read the round-1 report(s) for your targets in workspace/github-actions-cicd/execution-1/rounds/round-1/, then read only the files those findings point to plus the cross-skill contracts named below. Do not re-review unchanged text. Keep the report short.
+Reference: workspace/github-actions-cicd/_family_facts.md (F1-F42), _family_rules.md (1-18; rule 17 canonical names: ci-gate, <env>/<env>-pr, AWS_PR_ROLE_ARN/AWS_DEPLOY_ROLE_ARN, _image-publish outputs digest+image-ref; rule 18: timeouts, concurrency, id-token only on login job, environment secrets read in the called job).
+Cross-skill contracts to check (new in the fixes): composing catalog-reference.md lists every block with the owner's exact interface, including the new `_code-security.yml` (supply chain), the `environment` input of `_security-scan.yml`, the `artifact-name` input of `_image-publish.yml`, `role-duration-seconds` of cloud/login-aws; images uses `vars.ECR_PUSH_ROLE_ARN` in an `<env>-publish` environment, which rule 17 does not list - say whether this is a defect or an acceptable third role (publish stage) and how the other skills refer to it.
+For each round-1 finding of your targets give FIXED or REOPENED (with file:line evidence); then list only NEW findings introduced by the fixes (severity, file:line, evidence, fix hint). Rubric: 100 - 6/HIGH - 2.5/MEDIUM - 0.5/LOW per target.
+Output: inline report + one file per target workspace/github-actions-cicd/execution-1/rounds/round-2/validate__<skill>.md

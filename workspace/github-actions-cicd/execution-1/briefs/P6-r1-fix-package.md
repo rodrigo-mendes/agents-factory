@@ -1,0 +1,17 @@
+Agent: artifact-author (fix cycle, package artifacts)
+Targets: packages/github-actions-cicd/.apm/agents/*.agent.md, .apm/instructions/*.instructions.md, .apm/skills/building-cicd-pipelines/ (SKILL.md + blueprints/evaluation-scenarios.md), README.md.
+HIGH F-018: one consistent write scope: .github/workflows/**, .github/actions/**, plus exactly the files the skills require: .github/dependabot.yml, scripts/ helper scripts named by a skill blueprint, vercel.json - list them explicitly in the engineer (scope + Never Do), README and command; anything else -> returned as a user-must-add item.
+MEDIUM F-029 (AUD-1): engineer and command are write/fix only; review-only requests are redirected to cicd-pipeline-reviewer (say so in both descriptions; update the command example at SKILL.md:58).
+MEDIUM F-030 (AUD-3): the 4 cross-package skills are optional; if not installed, the engineer returns an open question naming the package to install (one rule, remove the contradiction at engineer:62-63 vs :104-107).
+MEDIUM F-031 (AUD-4): engineer step that reads the 4 rules (from .claude/rules/<name>.md, fallback packages/github-actions-cicd/.apm/instructions/) before writing; precedence list includes rules; a rule's Ask First becomes a question only when the requirement leaves it open.
+MEDIUM F-026: merge-cd rule smoke+rollback requirement vs shipped cd examples -> soften to "for prod deploys, call _smoke-test and _rollback (limiting-blast-radius-github-actions-deploys)"; concurrency wording per app and environment; security rule and reviewer: Free-private carve-out (repository secrets allowed only in the documented Free variant, with warning); command scenario 3 gives environments.
+LOW F-032 (AUD-5/6): rule applyTo globs also cover *.yaml workflows and action.yaml; security rule also covers .github/actions/**; reviewer naming check exempts openspec-*.yml; README recommends (does not configure) permission deny entries for apply/destroy/workflow run/push. Also: canonical names (ci-gate, AWS_DEPLOY_ROLE_ARN) in README/command scenarios; README `ref:refs/heads/main`; engineer "(Never Do, step 6)" reference fix.
+Approval line: The user approved 9 skills, 2 agents, 4 rules and command /building-cicd-pipelines on 2026-10-30 (G1, workspace/github-actions-cicd/execution-1/state/gates/G1.md) and the fan-out at G2 (state/gates/G2.md); this is P6 fix cycle round 1. This is a relay, not a new approval.
+Hard constraints:
+- Do NOT spawn any agent; do NOT enter plan mode.
+- Change only what a listed finding names; keep tags/registers consistent (update unverified-and-risks.md counts and mapping when you add/remove tags); agents keep frontmatter rules of .claude/rules/agent-frontmatter.md; rules keep applyTo.
+- Do not touch _family_* files, shared files, other skills or other packages. If a finding contradicts a family fact, stop and report it.
+- Apply workspace/github-actions-cicd/_family_facts.md (F1-F42) and _family_rules.md (1-18; NEW 17 canonical names, 18 timeouts/concurrency/id-token/env secrets) as given.
+- Never make shipped text READ workspace/; never invent SHAs or versions.
+Evidence: the round-1 reports in workspace/github-actions-cicd/execution-1/rounds/round-1/ (validate__<target>.md, test__<target>.md, audit__package.md) give file:line and fix hints.
+Done when: .claude/skills/building-agent-packages/scripts/verify_skill.py <skill-dir> would exit 0 (the orchestrator runs it) and you return a list "F-id -> what changed (file)".

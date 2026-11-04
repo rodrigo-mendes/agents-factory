@@ -110,5 +110,5 @@ Factory provenance (not shipped; do not cite in runtime briefs):
 - Design plan: `workspace/quarkus-aws-saas/DESIGN_PLAN.md` (historical folder name, from before the rename to `aws-saas-serverless-quarkus-react-nextjs`)
 - Family facts and rules: `workspace/quarkus-aws-saas/_family_facts_v3.40.md`, `workspace/quarkus-aws-saas/_family_rules_v3.40.md`
 - Build state and approvals: `workspace/quarkus-aws-saas/PIPELINE_STATE.md`
-- Agent contracts read from the factory sources: `packages/quarkus-aws/.apm/agents/`, `packages/aws-lambda/.apm/agents/`, `packages/handoff-core/.apm/agents/spec-synchronizer.agent.md`, `packages/stripe-java/.apm/agents/`, `packages/aws-architect/.apm/agents/`, `packages/terraform/.apm/agents/aws-terraform-engineer.agent.md`
-- Model skills for this workflow shape: `packages/agent-package-builder/.apm/skills/building-agent-packages/`, `packages/camel-quarkus-integrator/.apm/skills/integrating-camel-quarkus/`
+- Agent contracts read from the factory sources: `packages/java/quarkus/quarkus-aws/.apm/agents/`, `packages/cloud/provider/aws/aws-lambda/.apm/agents/`, `packages/delivery/protocol/handoff-core/.apm/agents/spec-synchronizer.agent.md`, `packages/java/libs/stripe-java/.apm/agents/`, `packages/cloud/provider/aws/aws-architect/.apm/agents/`, `packages/cloud/terraform/terraform/.apm/agents/aws-terraform-engineer.agent.md`
+- Model skills for this workflow shape: `packages/factory/agent-package-builder/.apm/skills/building-agent-packages/`, `packages/java/quarkus/camel-quarkus-integrator/.apm/skills/integrating-camel-quarkus/`

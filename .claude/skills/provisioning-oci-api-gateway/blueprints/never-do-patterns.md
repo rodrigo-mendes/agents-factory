@@ -8,7 +8,7 @@ provider "oci" {
   tenancy_ocid = "ocid1.tenancy.oc1..aaaa..."
   user_ocid    = "ocid1.user.oc1..bbbb..."
   fingerprint  = "aa:bb:cc:dd:ee:ff:00:11:22:33:44:55:66:77:88:99"
-  private_key  = "-----BEGIN RSA PRIVATE KEY-----\nMIIE..."
+  private_key  = "<PEM private key pasted here>"
   region       = "sa-saopaulo-1"
 }
 

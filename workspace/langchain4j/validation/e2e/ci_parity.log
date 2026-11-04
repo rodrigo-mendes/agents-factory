@@ -1,0 +1,447 @@
+[>] Installing dependencies from apm.yml...
+[x] --frozen: local dependency content does not match apm.lock.yaml.
+  - local dependency './packages/agent-package-builder' content differs from 
+its locked snapshot
+  - local dependency './packages/oci-functions-java' content differs from its 
+locked snapshot
+  - local dependency './packages/oci-terraform' content differs from its locked
+snapshot
+  - local dependency '../aws-skills' content differs from its locked snapshot
+[i] Restore the locked local content, or run 'apm install' without --frozen to 
+explicitly accept and record the change.
+[x] Install failed after 52.1s.
+INSTALL_EXIT=1
+[>] Replaying install (cache-only)...
+Warning: Failed to parse C:\agents\agents-factory\packages\artifact-authoring\.apm\skills\agent-creator\assets\TEMPLATE.AGENT.md: Failed to parse primitive file C:\agents\agents-factory\packages\artifact-authoring\.apm\skills\agent-creator\assets\TEMPLATE.AGENT.md: Unknown primitive file type: C:\agents\agents-factory\packages\artifact-authoring\.apm\skills\agent-creator\assets\TEMPLATE.AGENT.md
+[+] Replayed 24 package(s)
+[>] Diffing scratch vs working tree...
+[!] Drift detected: 105 file(s)
+
+                           [>] APM Policy Compliance                           
+┌──────────┬──────────────────────────┬───────────────────────────────────────┐
+│ Status   │ Check                    │ Message                               │
+├──────────┼──────────────────────────┼───────────────────────────────────────┤
+│ [+]      │ lockfile-exists          │ Lockfile present                      │
+│ [+]      │ ref-consistency          │ All dependency refs match lockfile    │
+│ [+]      │ deployment-ledger-owners │ All deployment ledger owners are      │
+│          │                          │ valid                                 │
+│ [+]      │ deployed-files-present   │ All deployed files present on disk    │
+│ [+]      │ no-orphaned-packages     │ No orphaned packages in lockfile      │
+│ [+]      │ skill-subset-consistency │ Skill subset selections match         │
+│          │                          │ lockfile                              │
+│ [+]      │ config-consistency       │ No MCP configs to check               │
+│          │ content-integrity        │ 47 file(s) with hash drift -- run     │
+│          │                          │ 'apm install' to restore drifted      │
+│          │                          │ files                                 │
+│          │ drift                    │ drift detected: 105 file(s):          │
+│          │                          │ .claude/agents/artifact-author.md,    │
+│          │                          │ .claude/rules/agent-frontmatter.md,   │
+│          │                          │ .claude/rules/aws-iac-reliability-co… │
+│          │                          │ (+102 more)                           │
+└──────────┴──────────────────────────┴───────────────────────────────────────┘
+
+  content-integrity details:
+    - hash-drift: .claude/agents/artifact-author.md 
+(dep=local:packages/artifact-authoring, expected=4772431645c3..., 
+actual=70d463b8f323...)
+    - hash-drift: .claude/rules/agent-frontmatter.md 
+(dep=local:packages/factory-core, expected=5d9ea57fc54b..., 
+actual=5a1463647506...)
+    - hash-drift: .claude/rules/aws-iac-reliability-cost.md 
+(dep=./packages/aws-architect, expected=f905ffcc571c..., 
+actual=62c58a90d97c...)
+    - hash-drift: .claude/rules/aws-security-baseline.md 
+(dep=./packages/aws-architect, expected=e299b4aa4ff3..., 
+actual=8fd8c3166d9e...)
+    - hash-drift: .claude/rules/aws-terraform-code-standards.md 
+(dep=local:packages/aws-terraform, expected=539a407a5dd5..., 
+actual=474404a23f6e...)
+    - hash-drift: .claude/rules/aws-terraform-project-config.md 
+(dep=local:packages/aws-terraform, expected=fdd5eb776441..., 
+actual=799ad239f409...)
+    - hash-drift: .claude/rules/aws-terraform-skills-management.md 
+(dep=local:packages/aws-terraform, expected=f5eaee17d5ae..., 
+actual=a4ed7c9986b0...)
+    - hash-drift: .claude/rules/camel-quarkus-integrator-code-standards.md 
+(dep=./packages/camel-quarkus-integrator, expected=ff81408341eb..., 
+actual=e10177aed621...)
+    - hash-drift: .claude/rules/camel-quarkus-integrator-project-config.md 
+(dep=./packages/camel-quarkus-integrator, expected=a1b1c16da9a8..., 
+actual=53e491f2a60b...)
+    - hash-drift: .claude/rules/camel-quarkus-integrator-skills-management.md 
+(dep=./packages/camel-quarkus-integrator, expected=dc65462a4b36..., 
+actual=6cfbd7bb2757...)
+    - hash-drift: .claude/rules/deployment-preflight-checks.md 
+(dep=./packages/oci-functions-java, expected=c3b50949ec76..., 
+actual=f533f740f2e7...)
+    - hash-drift: .claude/rules/java-environment-validation.md 
+(dep=./packages/oci-functions-java, expected=c7ffb13074e1..., 
+actual=63f7e7a858b4...)
+    - hash-drift: .claude/rules/java-functions-api-gateway.md 
+(dep=./packages/oci-functions-java, expected=475ea4790bf6..., 
+actual=183f4fe26f4c...)
+    - hash-drift: .claude/rules/java-functions-clean-code.md 
+(dep=./packages/oci-functions-java, expected=063bcde0ef78..., 
+actual=3b28915f7372...)
+    - hash-drift: .claude/rules/java-functions-error-handling.md 
+(dep=./packages/oci-functions-java, expected=aa58d13368a7..., 
+actual=167efa5e5966...)
+    - hash-drift: .claude/rules/java-functions-event-driven.md 
+(dep=./packages/oci-functions-java, expected=76fc5481ce16..., 
+actual=881fe54b6f19...)
+    - hash-drift: .claude/rules/java-functions-external-apis.md 
+(dep=./packages/oci-functions-java, expected=fd7e59289866..., 
+actual=19f7a7c1db69...)
+    - hash-drift: .claude/rules/java-functions-fdk.md 
+(dep=./packages/oci-functions-java, expected=972ce44a2446..., 
+actual=c7f546f0a7f9...)
+    - hash-drift: .claude/rules/java-functions-object-storage.md 
+(dep=./packages/oci-functions-java, expected=4b128c1c219f..., 
+actual=8e8e297329a4...)
+    - hash-drift: .claude/rules/java-functions-observability.md 
+(dep=./packages/oci-functions-java, expected=18d50c207883..., 
+actual=de8bb2e3b5dc...)
+    - hash-drift: .claude/rules/java-functions-project-config.md 
+(dep=./packages/oci-functions-java, expected=7d8de7ac96da..., 
+actual=f35647d5242e...)
+    - hash-drift: .claude/rules/java-functions-project-structure.md 
+(dep=./packages/oci-functions-java, expected=24d160b8640e..., 
+actual=561637967f82...)
+    - hash-drift: .claude/rules/java-functions-runtime-debugging.md 
+(dep=./packages/oci-functions-java, expected=6e98075e4180..., 
+actual=0bb6c3bd9abf...)
+    - hash-drift: .claude/rules/java-functions-sdk-integration.md 
+(dep=./packages/oci-functions-java, expected=645a31fd1ae9..., 
+actual=8ec7226a6b92...)
+    - hash-drift: .claude/rules/java-functions-skills.md 
+(dep=./packages/oci-functions-java, expected=b05eec1f0dfb..., 
+actual=e287e71c4b4c...)
+    - hash-drift: .claude/rules/java-functions-standards.md 
+(dep=./packages/oci-functions-java, expected=cf0bfb380c28..., 
+actual=e0d7ae4537ed...)
+    - hash-drift: .claude/rules/java-functions-testing.md 
+(dep=./packages/oci-functions-java, expected=b2815cddb0b5..., 
+actual=f700d08a6f48...)
+    - hash-drift: .claude/rules/langchain4j-code-standards.md 
+(dep=./packages/langchain4j, expected=0525ac4cf2eb..., actual=2b7e3adec05f...)
+    - hash-drift: .claude/rules/langchain4j-project-config.md 
+(dep=./packages/langchain4j, expected=efe292a0bf05..., actual=0e8e98671a94...)
+    - hash-drift: .claude/rules/naming-conventions.md 
+(dep=local:packages/factory-core, expected=459ebc86e72e..., 
+actual=abbe1a11dcfa...)
+    - hash-drift: .claude/rules/observability-skills.md 
+(dep=./packages/oci-observability, expected=529d88df556c..., 
+actual=01ba301f80cb...)
+    - hash-drift: .claude/rules/oci-architecture-data-events-guardrails.md 
+(dep=./packages/oci-architecture, expected=9a60309f1668..., 
+actual=5c5672b5693f...)
+    - hash-drift: .claude/rules/oci-architecture-guardrails.md 
+(dep=./packages/oci-architecture, expected=2fa7dec5a13c..., 
+actual=e2e919553878...)
+    - hash-drift: .claude/rules/rules-frontmatter.md 
+(dep=local:packages/factory-core, expected=1fe2afc6176a..., 
+actual=94039bb21912...)
+    - hash-drift: .claude/rules/skill-frontmatter.md 
+(dep=local:packages/factory-core, expected=1d2151c4ce16..., 
+actual=a81cee6520a4...)
+    - hash-drift: .claude/rules/skill-structure.md 
+(dep=local:packages/factory-core, expected=5f9db35b8e90..., 
+actual=880a12cb960e...)
+    - hash-drift: .claude/rules/stripe-java-code-standards.md 
+(dep=./packages/stripe-java, expected=eab70c5a9664..., actual=17d3fb9c4f9b...)
+    - hash-drift: .claude/rules/terraform-cicd.md 
+(dep=./packages/oci-terraform, expected=6c209e556683..., 
+actual=20f81cd051db...)
+    - hash-drift: .claude/rules/terraform-modules.md 
+(dep=./packages/oci-terraform, expected=e9f94afe275f..., 
+actual=6434c68acbf5...)
+    - hash-drift: .claude/rules/terraform-multi-function.md 
+(dep=./packages/oci-terraform, expected=769ed738e282..., 
+actual=60471f46d166...)
+    - hash-drift: .claude/rules/terraform-project-config.md 
+(dep=./packages/oci-terraform, expected=dc388941c58b..., 
+actual=cc1efd3738ab...)
+    - hash-drift: .claude/rules/terraform-skills.md 
+(dep=./packages/oci-terraform, expected=5e908ddab1db..., 
+actual=79003fe00b1a...)
+    - hash-drift: .claude/rules/terraform-standards.md 
+(dep=./packages/oci-terraform, expected=e73277f33e3d..., 
+actual=dda6c55c94bb...)
+    - hash-drift: .claude/rules/terraform-state-backend.md 
+(dep=./packages/oci-terraform, expected=c29291337b83..., 
+actual=08020832532b...)
+    - hash-drift: .claude/rules/terraform-testing.md 
+(dep=./packages/oci-terraform, expected=f8381fa8f043..., 
+actual=341378709592...)
+    - hash-drift: .claude/skills/refactoring-oci-java/SKILL.md 
+(dep=./packages/oci-functions-java, expected=12f394b80f4c..., 
+actual=fc2f747e32e2...)
+    - hash-drift: .claude/skills/terraform-rules-author/SKILL.md 
+(dep=./packages/terraform, expected=f936e39b2e2e..., actual=9d84f6074b11...)
+
+  drift details:
+    - modified: .claude/agents/artifact-author.md
+    - modified: .claude/rules/agent-frontmatter.md
+    - modified: .claude/rules/aws-iac-reliability-cost.md
+    - modified: .claude/rules/aws-security-baseline.md
+    - modified: .claude/rules/aws-terraform-code-standards.md
+    - modified: .claude/rules/aws-terraform-project-config.md
+    - modified: .claude/rules/aws-terraform-skills-management.md
+    - modified: .claude/rules/camel-quarkus-integrator-code-standards.md
+    - modified: .claude/rules/camel-quarkus-integrator-project-config.md
+    - modified: .claude/rules/camel-quarkus-integrator-skills-management.md
+    - modified: .claude/rules/deployment-preflight-checks.md
+    - modified: .claude/rules/java-environment-validation.md
+    - modified: .claude/rules/java-functions-api-gateway.md
+    - modified: .claude/rules/java-functions-clean-code.md
+    - modified: .claude/rules/java-functions-error-handling.md
+    - modified: .claude/rules/java-functions-event-driven.md
+    - modified: .claude/rules/java-functions-external-apis.md
+    - modified: .claude/rules/java-functions-fdk.md
+    - modified: .claude/rules/java-functions-object-storage.md
+    - modified: .claude/rules/java-functions-observability.md
+    - modified: .claude/rules/java-functions-project-config.md
+    - modified: .claude/rules/java-functions-project-structure.md
+    - modified: .claude/rules/java-functions-runtime-debugging.md
+    - modified: .claude/rules/java-functions-sdk-integration.md
+    - modified: .claude/rules/java-functions-skills.md
+    - modified: .claude/rules/java-functions-standards.md
+    - modified: .claude/rules/java-functions-testing.md
+    - modified: .claude/rules/langchain4j-code-standards.md
+    - modified: .claude/rules/langchain4j-project-config.md
+    - modified: .claude/rules/naming-conventions.md
+    - modified: .claude/rules/observability-skills.md
+    - modified: .claude/rules/oci-architecture-data-events-guardrails.md
+    - modified: .claude/rules/oci-architecture-guardrails.md
+    - modified: .claude/rules/rules-frontmatter.md
+    - modified: .claude/rules/skill-frontmatter.md
+    - modified: .claude/rules/skill-structure.md
+    - modified: .claude/rules/stripe-java-code-standards.md
+    - modified: .claude/rules/terraform-cicd.md
+    - modified: .claude/rules/terraform-modules.md
+    - modified: .claude/rules/terraform-multi-function.md
+    - modified: .claude/rules/terraform-project-config.md
+    - modified: .claude/rules/terraform-skills.md
+    - modified: .claude/rules/terraform-standards.md
+    - modified: .claude/rules/terraform-state-backend.md
+    - modified: .claude/rules/terraform-testing.md
+    - modified: .claude/skills/agent-creator/SKILL.md
+    - unintegrated: 
+.claude/skills/architecting-eventbridge-eda/blueprints/always-do-patterns.md
+    - unintegrated: 
+.claude/skills/architecting-eventbridge-eda/blueprints/ask-first-decisions.md
+    - unintegrated: 
+.claude/skills/architecting-eventbridge-eda/blueprints/never-do-patterns.md
+    - modified: .claude/skills/architecture-approaches-skill-generator/SKILL.md
+    - modified: 
+.claude/skills/building-agent-packages/scripts/verify_package.py
+    - modified: .claude/skills/building-agent-packages/scripts/verify_skill.py
+    - modified: .claude/skills/cloud-architecture-researcher/SKILL.md
+    - unintegrated: 
+.claude/skills/configuring-aws-route53-dns/blueprints/always-do-patterns.md
+    - unintegrated: 
+.claude/skills/configuring-aws-route53-dns/blueprints/ask-first-decisions.md
+    - unintegrated: 
+.claude/skills/configuring-aws-route53-dns/blueprints/never-do-patterns.md
+    - unintegrated: 
+.claude/skills/delivering-cloudfront-cdn/blueprints/always-do-patterns.md
+    - unintegrated: 
+.claude/skills/delivering-cloudfront-cdn/blueprints/ask-first-decisions.md
+    - unintegrated: 
+.claude/skills/delivering-cloudfront-cdn/blueprints/never-do-patterns.md
+    - unintegrated: 
+.claude/skills/designing-aws-vpc-networks/blueprints/reference-architectures.md
+    - unintegrated: 
+.claude/skills/implementing-lambda-powertools-java/blueprints/always-do-pattern
+s.md
+    - unintegrated: 
+.claude/skills/implementing-lambda-powertools-java/blueprints/ask-first-decisio
+ns.md
+    - unintegrated: 
+.claude/skills/implementing-lambda-powertools-java/blueprints/integration-patte
+rns.md
+    - unintegrated: 
+.claude/skills/implementing-lambda-powertools-java/blueprints/never-do-patterns
+.md
+    - modified: 
+.claude/skills/invoking-rest-apis-from-oci-functions/blueprints/integration-pat
+terns.md
+    - modified: .claude/skills/methodologies-skill-generator/SKILL.md
+    - unintegrated: 
+.claude/skills/monitoring-cloudwatch-observability/blueprints/always-do-pattern
+s.md
+    - unintegrated: 
+.claude/skills/monitoring-cloudwatch-observability/blueprints/ask-first-decisio
+ns.md
+    - unintegrated: 
+.claude/skills/monitoring-cloudwatch-observability/blueprints/never-do-patterns
+.md
+    - modified: .claude/skills/provisioning-oci-api-gateway/SKILL.md
+    - modified: 
+.claude/skills/provisioning-oci-api-gateway/blueprints/integration-patterns.md
+    - modified: .claude/skills/provisioning-oci-event-driven-pubsub/SKILL.md
+    - modified: .claude/skills/provisioning-oci-events/SKILL.md
+    - modified: 
+.claude/skills/provisioning-oci-events/blueprints/integration-patterns.md
+    - modified: 
+.claude/skills/provisioning-oci-functions/blueprints/integration-patterns.md
+    - modified: .claude/skills/refactoring-oci-java/SKILL.md
+    - modified: .claude/skills/researching-api-gateway/SKILL.md
+    - modified: .claude/skills/researching-cache-store/SKILL.md
+    - modified: .claude/skills/researching-columnar-analytics/SKILL.md
+    - modified: 
+.claude/skills/researching-columnar-analytics/blueprints/category-specifics.md
+    - modified: 
+.claude/skills/researching-columnar-analytics/blueprints/data-modeling.md
+    - modified: .claude/skills/researching-coordination-service/SKILL.md
+    - modified: .claude/skills/researching-document-store/SKILL.md
+    - modified: 
+.claude/skills/researching-document-store/blueprints/category-specifics.md
+    - modified: .claude/skills/researching-graph-database/SKILL.md
+    - modified: 
+.claude/skills/researching-graph-database/blueprints/category-specifics.md
+    - modified: .claude/skills/researching-kv-store/SKILL.md
+    - modified: 
+.claude/skills/researching-kv-store/blueprints/category-specifics.md
+    - modified: .claude/skills/researching-kv-store/blueprints/data-modeling.md
+    - modified: .claude/skills/researching-object-storage/SKILL.md
+    - modified: 
+.claude/skills/researching-object-storage/blueprints/category-specifics.md
+    - modified: 
+.claude/skills/researching-object-storage/blueprints/data-modeling.md
+    - modified: .claude/skills/researching-platform-software/SKILL.md
+    - modified: .claude/skills/researching-rdbms/SKILL.md
+    - modified: .claude/skills/researching-rdbms/blueprints/data-modeling.md
+    - modified: .claude/skills/researching-search-engine/SKILL.md
+    - modified: 
+.claude/skills/researching-search-engine/blueprints/category-specifics.md
+    - modified: .claude/skills/researching-streaming-broker/SKILL.md
+    - modified: .claude/skills/researching-timeseries-db/SKILL.md
+    - modified: 
+.claude/skills/researching-timeseries-db/blueprints/category-specifics.md
+    - modified: .claude/skills/researching-vector-store/SKILL.md
+    - modified: 
+.claude/skills/researching-vector-store/blueprints/category-specifics.md
+    - modified: .claude/skills/researching-wide-column-store/SKILL.md
+    - modified: 
+.claude/skills/researching-wide-column-store/blueprints/category-specifics.md
+    - modified: .claude/skills/terraform-rules-author/SKILL.md
+
+[x] 2 of 9 check(s) failed
+
+[x] Drift detected: 105 file(s)
+
+  modified (88):
+    - .claude/agents/artifact-author.md  [local:packages/artifact-authoring]
+    - .claude/rules/agent-frontmatter.md  [local:packages/factory-core]
+    - .claude/rules/aws-iac-reliability-cost.md  [./packages/aws-architect]
+    - .claude/rules/aws-security-baseline.md  [./packages/aws-architect]
+    - .claude/rules/aws-terraform-code-standards.md  [local:packages/aws-terraform]
+    - .claude/rules/aws-terraform-project-config.md  [local:packages/aws-terraform]
+    - .claude/rules/aws-terraform-skills-management.md  [local:packages/aws-terraform]
+    - .claude/rules/camel-quarkus-integrator-code-standards.md  [./packages/camel-quarkus-integrator]
+    - .claude/rules/camel-quarkus-integrator-project-config.md  [./packages/camel-quarkus-integrator]
+    - .claude/rules/camel-quarkus-integrator-skills-management.md  [./packages/camel-quarkus-integrator]
+    - .claude/rules/deployment-preflight-checks.md  [./packages/oci-functions-java]
+    - .claude/rules/java-environment-validation.md  [./packages/oci-functions-java]
+    - .claude/rules/java-functions-api-gateway.md  [./packages/oci-functions-java]
+    - .claude/rules/java-functions-clean-code.md  [./packages/oci-functions-java]
+    - .claude/rules/java-functions-error-handling.md  [./packages/oci-functions-java]
+    - .claude/rules/java-functions-event-driven.md  [./packages/oci-functions-java]
+    - .claude/rules/java-functions-external-apis.md  [./packages/oci-functions-java]
+    - .claude/rules/java-functions-fdk.md  [./packages/oci-functions-java]
+    - .claude/rules/java-functions-object-storage.md  [./packages/oci-functions-java]
+    - .claude/rules/java-functions-observability.md  [./packages/oci-functions-java]
+    - .claude/rules/java-functions-project-config.md  [./packages/oci-functions-java]
+    - .claude/rules/java-functions-project-structure.md  [./packages/oci-functions-java]
+    - .claude/rules/java-functions-runtime-debugging.md  [./packages/oci-functions-java]
+    - .claude/rules/java-functions-sdk-integration.md  [./packages/oci-functions-java]
+    - .claude/rules/java-functions-skills.md  [./packages/oci-functions-java]
+    - .claude/rules/java-functions-standards.md  [./packages/oci-functions-java]
+    - .claude/rules/java-functions-testing.md  [./packages/oci-functions-java]
+    - .claude/rules/langchain4j-code-standards.md  [./packages/langchain4j]
+    - .claude/rules/langchain4j-project-config.md  [./packages/langchain4j]
+    - .claude/rules/naming-conventions.md  [local:packages/factory-core]
+    - .claude/rules/observability-skills.md  [./packages/oci-observability]
+    - .claude/rules/oci-architecture-data-events-guardrails.md  [./packages/oci-architecture]
+    - .claude/rules/oci-architecture-guardrails.md  [./packages/oci-architecture]
+    - .claude/rules/rules-frontmatter.md  [local:packages/factory-core]
+    - .claude/rules/skill-frontmatter.md  [local:packages/factory-core]
+    - .claude/rules/skill-structure.md  [local:packages/factory-core]
+    - .claude/rules/stripe-java-code-standards.md  [./packages/stripe-java]
+    - .claude/rules/terraform-cicd.md  [./packages/oci-terraform]
+    - .claude/rules/terraform-modules.md  [./packages/oci-terraform]
+    - .claude/rules/terraform-multi-function.md  [./packages/oci-terraform]
+    - .claude/rules/terraform-project-config.md  [./packages/oci-terraform]
+    - .claude/rules/terraform-skills.md  [./packages/oci-terraform]
+    - .claude/rules/terraform-standards.md  [./packages/oci-terraform]
+    - .claude/rules/terraform-state-backend.md  [./packages/oci-terraform]
+    - .claude/rules/terraform-testing.md  [./packages/oci-terraform]
+    - .claude/skills/agent-creator/SKILL.md  [local:packages/artifact-authoring]
+    - .claude/skills/architecture-approaches-skill-generator/SKILL.md  [local:packages/artifact-authoring]
+    - .claude/skills/building-agent-packages/scripts/verify_package.py  [./packages/agent-package-builder]
+    - .claude/skills/building-agent-packages/scripts/verify_skill.py  [./packages/agent-package-builder]
+    - .claude/skills/cloud-architecture-researcher/SKILL.md  [./packages/researching-frameworks]
+    - .claude/skills/invoking-rest-apis-from-oci-functions/blueprints/integration-patterns.md  [./packages/oci-functions-java]
+    - .claude/skills/methodologies-skill-generator/SKILL.md  [local:packages/artifact-authoring]
+    - .claude/skills/provisioning-oci-api-gateway/SKILL.md  [./packages/oci-terraform]
+    - .claude/skills/provisioning-oci-api-gateway/blueprints/integration-patterns.md  [./packages/oci-terraform]
+    - .claude/skills/provisioning-oci-event-driven-pubsub/SKILL.md  [./packages/oci-terraform]
+    - .claude/skills/provisioning-oci-events/SKILL.md  [./packages/oci-terraform]
+    - .claude/skills/provisioning-oci-events/blueprints/integration-patterns.md  [./packages/oci-terraform]
+    - .claude/skills/provisioning-oci-functions/blueprints/integration-patterns.md  [./packages/oci-terraform]
+    - .claude/skills/refactoring-oci-java/SKILL.md  [./packages/oci-functions-java]
+    - .claude/skills/researching-api-gateway/SKILL.md  [./packages/researching-platform]
+    - .claude/skills/researching-cache-store/SKILL.md  [./packages/researching-platform]
+    - .claude/skills/researching-columnar-analytics/SKILL.md  [./packages/researching-platform]
+    - .claude/skills/researching-columnar-analytics/blueprints/category-specifics.md  [./packages/researching-platform]
+    - .claude/skills/researching-columnar-analytics/blueprints/data-modeling.md  [./packages/researching-platform]
+    - .claude/skills/researching-coordination-service/SKILL.md  [./packages/researching-platform]
+    - .claude/skills/researching-document-store/SKILL.md  [./packages/researching-platform]
+    - .claude/skills/researching-document-store/blueprints/category-specifics.md  [./packages/researching-platform]
+    - .claude/skills/researching-graph-database/SKILL.md  [./packages/researching-platform]
+    - .claude/skills/researching-graph-database/blueprints/category-specifics.md  [./packages/researching-platform]
+    - .claude/skills/researching-kv-store/SKILL.md  [./packages/researching-platform]
+    - .claude/skills/researching-kv-store/blueprints/category-specifics.md  [./packages/researching-platform]
+    - .claude/skills/researching-kv-store/blueprints/data-modeling.md  [./packages/researching-platform]
+    - .claude/skills/researching-object-storage/SKILL.md  [./packages/researching-platform]
+    - .claude/skills/researching-object-storage/blueprints/category-specifics.md  [./packages/researching-platform]
+    - .claude/skills/researching-object-storage/blueprints/data-modeling.md  [./packages/researching-platform]
+    - .claude/skills/researching-platform-software/SKILL.md  [./packages/researching-platform]
+    - .claude/skills/researching-rdbms/SKILL.md  [./packages/researching-platform]
+    - .claude/skills/researching-rdbms/blueprints/data-modeling.md  [./packages/researching-platform]
+    - .claude/skills/researching-search-engine/SKILL.md  [./packages/researching-platform]
+    - .claude/skills/researching-search-engine/blueprints/category-specifics.md  [./packages/researching-platform]
+    - .claude/skills/researching-streaming-broker/SKILL.md  [./packages/researching-platform]
+    - .claude/skills/researching-timeseries-db/SKILL.md  [./packages/researching-platform]
+    - .claude/skills/researching-timeseries-db/blueprints/category-specifics.md  [./packages/researching-platform]
+    - .claude/skills/researching-vector-store/SKILL.md  [./packages/researching-platform]
+    - .claude/skills/researching-vector-store/blueprints/category-specifics.md  [./packages/researching-platform]
+    - .claude/skills/researching-wide-column-store/SKILL.md  [./packages/researching-platform]
+    - .claude/skills/researching-wide-column-store/blueprints/category-specifics.md  [./packages/researching-platform]
+    - .claude/skills/terraform-rules-author/SKILL.md  [./packages/terraform]
+
+  unintegrated (17):
+    - .claude/skills/architecting-eventbridge-eda/blueprints/always-do-patterns.md
+    - .claude/skills/architecting-eventbridge-eda/blueprints/ask-first-decisions.md
+    - .claude/skills/architecting-eventbridge-eda/blueprints/never-do-patterns.md
+    - .claude/skills/configuring-aws-route53-dns/blueprints/always-do-patterns.md
+    - .claude/skills/configuring-aws-route53-dns/blueprints/ask-first-decisions.md
+    - .claude/skills/configuring-aws-route53-dns/blueprints/never-do-patterns.md
+    - .claude/skills/delivering-cloudfront-cdn/blueprints/always-do-patterns.md
+    - .claude/skills/delivering-cloudfront-cdn/blueprints/ask-first-decisions.md
+    - .claude/skills/delivering-cloudfront-cdn/blueprints/never-do-patterns.md
+    - .claude/skills/designing-aws-vpc-networks/blueprints/reference-architectures.md
+    - .claude/skills/implementing-lambda-powertools-java/blueprints/always-do-patterns.md
+    - .claude/skills/implementing-lambda-powertools-java/blueprints/ask-first-decisions.md
+    - .claude/skills/implementing-lambda-powertools-java/blueprints/integration-patterns.md
+    - .claude/skills/implementing-lambda-powertools-java/blueprints/never-do-patterns.md
+    - .claude/skills/monitoring-cloudwatch-observability/blueprints/always-do-patterns.md
+    - .claude/skills/monitoring-cloudwatch-observability/blueprints/ask-first-decisions.md
+    - .claude/skills/monitoring-cloudwatch-observability/blueprints/never-do-patterns.md
+
+  [i] Run 'apm install' to re-sync deployed files with the lockfile.
+
+AUDIT_EXIT=1
+[restore-rule-metadata] done -- 0 file(s) patched
+[fix-cross-package-links] done -- 0 link(s) fixed across 0 file(s)

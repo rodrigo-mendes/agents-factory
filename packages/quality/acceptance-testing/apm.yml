@@ -1,0 +1,13 @@
+name: agents-factory-acceptance-testing
+version: 1.0.0
+description: >-
+  Stack-agnostic acceptance-test authoring from OpenSpec 1.15 specs: the knowledge skill deriving-gherkin-from-openspec-v1-15 (spec or delta to Gherkin .feature files with requirement and change tags, plus the coverage script check_feature_coverage.py), the scoped rule gherkin-feature-authoring and the read-only acceptance-test-reviewer agent that builds the requirement to scenario to step traceability matrix.
+author: rodrigo-mendes
+license: MIT
+dependencies:
+  apm:
+    - path: ../../factory/factory-core
+    - path: ../../delivery/specs/openspec-core
+  mcp: []
+includes: auto
+scripts: {}

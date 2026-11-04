@@ -25,7 +25,7 @@ Skills contain comprehensive code examples in their `blueprints/` subdirectories
 ## Naming Conventions
 - Classes: PascalCase with descriptive purpose suffix (e.g., `OrderProcessorFunction`, `FileUploadHandler`)
 - Handler methods: camelCase — use `handler` for fn-events abstract classes, `handleRequest` for direct POJO handlers
-- Base package: `com.brx.functions.<domain>` (e.g., `com.brx.functions.orders`, `com.brx.functions.payments`)
+- Base package: `<org>.functions.<domain>` (e.g., `com.example.functions.orders`, `com.example.functions.payments`); ask the user for `<org>`
 - Constants: `UPPER_SNAKE_CASE` for `static final` fields
 - Configuration keys and OCID naming: see `java-functions-project-structure.md` → **Configuration Key Naming**
 - Package and directory layout: see `java-functions-project-structure.md` → **Project Structure**

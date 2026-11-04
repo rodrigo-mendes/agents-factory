@@ -69,7 +69,7 @@ This corrected report supersedes the original. Scores and findings below reflect
 - D7: Consider extracting the pre-flight script block and Common Issues table into dedicated blueprint files (e.g., `blueprints/pre-flight-guide.md`, `blueprints/troubleshooting.md`) and linking from the main SKILL.md. This would bring the body closer to the 200-line ideal for complex workflow skills and improve maintainability.
 
 **BAJA**
-- A5: Project-specific OCIR paths (`gru.ocir.io/gr2o2hdgzoxw/`) in inline examples could be replaced with placeholder tokens (e.g., `<region>.ocir.io/<namespace>/<repo>`) to make the skill portable across tenancies.
+- A5: Project-specific OCIR paths (`<region-key>.ocir.io/<namespace>/`) in inline examples could be replaced with placeholder tokens (e.g., `<region>.ocir.io/<namespace>/<repo>`) to make the skill portable across tenancies.
 
 ---
 

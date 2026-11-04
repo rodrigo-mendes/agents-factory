@@ -42,7 +42,7 @@ stop. Never assume the GitHub plan or visibility. Never wait for an answer.
    mark every plan-dependent check as `NEEDS-INPUT`, and list the question.
 2. Load `composing-github-actions-pipelines` first (building-block model, naming, block contract).
    Installed path `.claude/skills/<name>/SKILL.md`; only in the factory repository, if absent, read
-   `packages/github-actions-cicd/.apm/skills/<name>/SKILL.md`. Never read anything under `workspace/`.
+   `packages/delivery/github/github-actions-cicd/.apm/skills/<name>/SKILL.md`. Never read anything under `workspace/`.
 3. Load only the skills the files touch (lazy):
 
    | Evidence found in the files | Skill |
@@ -59,7 +59,7 @@ stop. Never assume the GitHub plan or visibility. Never wait for an answer.
 4. Load the rules that apply to the file types: `github-workflows-security` (every workflow file),
    `github-workflows-pr-ci` (`ci-*.yml`), `github-workflows-merge-cd` (`cd-*.yml`),
    `github-workflows-building-blocks` (`_*.yml` and composite actions). Read them from
-   `.claude/rules/` (installed) or `packages/github-actions-cicd/.apm/instructions/` (factory
+   `.claude/rules/` (installed) or `packages/delivery/github/github-actions-cicd/.apm/instructions/` (factory
    fallback; file name `<rule>.instructions.md`). If a rule file cannot be read, say so and use
    the skills' Never Do lists.
 5. For SHA pinning and injection guidance, defer to the github-core skill

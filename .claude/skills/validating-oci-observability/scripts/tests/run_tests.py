@@ -100,6 +100,8 @@ class Ctx:
             "VOO_GIT_CMD": json.dumps([PY, os.path.join(FAKES, "fake_tool.py"), "git"]),
             "VOO_BASH_CMD": json.dumps([PY, os.path.join(FAKES, "fake_tool.py"), "bash"]),
             "VOO_SLEEP_SCALE": "0",
+            "ALARM_EMAIL": "ops@example.com",
+            "OCIR_NAMESPACE": "tenancyns",
             "VOO_ALLOW_PIPE": "1",
             "FAKE_GIT_TOPLEVEL": self.repo,
             "FAKE_TF_OUTPUTS": self.tf_outputs,
@@ -340,8 +342,16 @@ def t_deploy_refuses_without_yes(c):
         tf = [x["argv"][0] for x in c.tool_calls("terraform") if x["argv"][0] in ("plan", "apply")]
         check(tf == ["plan"], f"answer {answer!r}: terraform calls {tf} (apply must not run)", err)
     plan = [x for x in c.tool_calls("terraform") if x["argv"][0] == "plan"][0]
-    check("api_handler_image=gru.ocir.io/gr2o2hdgzoxw/serverless-app/api-handler:1.2.3" in plan["argv"]
+    check("api_handler_image=gru.ocir.io/tenancyns/serverless-app/api-handler:1.2.3" in plan["argv"]
           and "-out=tfplan" in plan["argv"], f"plan argv {plan['argv']}")
+
+
+def t_deploy_requires_alarm_email_and_namespace(c):
+    # no hardcoded personal e-mail or tenancy namespace: missing values stop before any OCI/terraform call
+    for env in ({"ALARM_EMAIL": ""}, {"OCIR_NAMESPACE": ""}):
+        _, err = expect(c, "deploy-and-validate.py", args=["--skip-build"], rc=2,
+                        err_has=[next(iter(env))], **env)
+        check(c.tool_calls("terraform") == [], f"{env}: terraform must not run", err)
 
 
 def t_deploy_piped_yes_refused_without_terminal(c):

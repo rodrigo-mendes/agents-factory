@@ -1,0 +1,111 @@
+Downloading from releases: https://pkgs.dev.azure.com/devopsmapfre/devopsmapfre/_packaging/releases/maven/v1/io/quarkiverse/wiremock/quarkus-wiremock-deployment/1.8.1/quarkus-wiremock-deployment-1.8.1.pom
+Downloading from central: https://repo.maven.apache.org/maven2/io/quarkiverse/wiremock/quarkus-wiremock-deployment/1.8.1/quarkus-wiremock-deployment-1.8.1.pom
+Downloaded from central: https://repo.maven.apache.org/maven2/io/quarkiverse/wiremock/quarkus-wiremock-deployment/1.8.1/quarkus-wiremock-deployment-1.8.1.pom (2.5 kB at 29 kB/s)
+Downloading from releases: https://pkgs.dev.azure.com/devopsmapfre/devopsmapfre/_packaging/releases/maven/v1/io/quarkus/quarkus-devservices-deployment/3.40.1/quarkus-devservices-deployment-3.40.1.pom
+Downloading from central: https://repo.maven.apache.org/maven2/io/quarkus/quarkus-devservices-deployment/3.40.1/quarkus-devservices-deployment-3.40.1.pom
+Downloaded from central: https://repo.maven.apache.org/maven2/io/quarkus/quarkus-devservices-deployment/3.40.1/quarkus-devservices-deployment-3.40.1.pom (2.5 kB at 93 kB/s)
+Downloading from releases: https://pkgs.dev.azure.com/devopsmapfre/devopsmapfre/_packaging/releases/maven/v1/io/quarkus/quarkus-devservices-common/3.40.1/quarkus-devservices-common-3.40.1.pom
+Downloading from central: https://repo.maven.apache.org/maven2/io/quarkus/quarkus-devservices-common/3.40.1/quarkus-devservices-common-3.40.1.pom
+Downloaded from central: https://repo.maven.apache.org/maven2/io/quarkus/quarkus-devservices-common/3.40.1/quarkus-devservices-common-3.40.1.pom (1.6 kB at 65 kB/s)
+Downloading from releases: https://pkgs.dev.azure.com/devopsmapfre/devopsmapfre/_packaging/releases/maven/v1/com/github/docker-java/docker-java-api/3.7.1/docker-java-api-3.7.1.pom
+Downloading from central: https://repo.maven.apache.org/maven2/com/github/docker-java/docker-java-api/3.7.1/docker-java-api-3.7.1.pom
+Downloaded from central: https://repo.maven.apache.org/maven2/com/github/docker-java/docker-java-api/3.7.1/docker-java-api-3.7.1.pom (3.1 kB at 107 kB/s)
+Downloading from releases: https://pkgs.dev.azure.com/devopsmapfre/devopsmapfre/_packaging/releases/maven/v1/com/github/docker-java/docker-java-parent/3.7.1/docker-java-parent-3.7.1.pom
+Downloading from central: https://repo.maven.apache.org/maven2/com/github/docker-java/docker-java-parent/3.7.1/docker-java-parent-3.7.1.pom
+Downloaded from central: https://repo.maven.apache.org/maven2/com/github/docker-java/docker-java-parent/3.7.1/docker-java-parent-3.7.1.pom (12 kB at 429 kB/s)
+Downloading from releases: https://pkgs.dev.azure.com/devopsmapfre/devopsmapfre/_packaging/releases/maven/v1/org/testcontainers/testcontainers/2.0.5/testcontainers-2.0.5.pom
+Downloading from central: https://repo.maven.apache.org/maven2/org/testcontainers/testcontainers/2.0.5/testcontainers-2.0.5.pom
+Downloaded from central: https://repo.maven.apache.org/maven2/org/testcontainers/testcontainers/2.0.5/testcontainers-2.0.5.pom (2.5 kB at 98 kB/s)
+Downloading from releases: https://pkgs.dev.azure.com/devopsmapfre/devopsmapfre/_packaging/releases/maven/v1/org/jetbrains/annotations/26.1.0/annotations-26.1.0.pom
+Downloading from central: https://repo.maven.apache.org/maven2/org/jetbrains/annotations/26.1.0/annotations-26.1.0.pom
+Downloaded from central: https://repo.maven.apache.org/maven2/org/jetbrains/annotations/26.1.0/annotations-26.1.0.pom (1.7 kB at 70 kB/s)
+Downloading from releases: https://pkgs.dev.azure.com/devopsmapfre/devopsmapfre/_packaging/releases/maven/v1/com/github/docker-java/docker-java-transport-zerodep/3.7.1/docker-java-transport-zerodep-3.7.1.pom
+Downloading from central: https://repo.maven.apache.org/maven2/com/github/docker-java/docker-java-transport-zerodep/3.7.1/docker-java-transport-zerodep-3.7.1.pom
+Downloaded from central: https://repo.maven.apache.org/maven2/com/github/docker-java/docker-java-transport-zerodep/3.7.1/docker-java-transport-zerodep-3.7.1.pom (4.1 kB at 146 kB/s)
+Downloading from releases: https://pkgs.dev.azure.com/devopsmapfre/devopsmapfre/_packaging/releases/maven/v1/com/github/docker-java/docker-java-transport/3.7.1/docker-java-transport-3.7.1.pom
+Downloading from central: https://repo.maven.apache.org/maven2/com/github/docker-java/docker-java-transport/3.7.1/docker-java-transport-3.7.1.pom
+Downloaded from central: https://repo.maven.apache.org/maven2/com/github/docker-java/docker-java-transport/3.7.1/docker-java-transport-3.7.1.pom (1.6 kB at 53 kB/s)
+Downloading from releases: https://pkgs.dev.azure.com/devopsmapfre/devopsmapfre/_packaging/releases/maven/v1/net/java/dev/jna/jna/5.8.0/jna-5.8.0.pom
+Downloaded from releases: https://pkgs.dev.azure.com/devopsmapfre/devopsmapfre/_packaging/releases/maven/v1/net/java/dev/jna/jna/5.8.0/jna-5.8.0.pom (1.6 kB at 6.8 kB/s)
+Downloading from releases: https://pkgs.dev.azure.com/devopsmapfre/devopsmapfre/_packaging/releases/maven/v1/io/quarkus/quarkus-datasource-common/3.40.1/quarkus-datasource-common-3.40.1.pom
+Downloading from central: https://repo.maven.apache.org/maven2/io/quarkus/quarkus-datasource-common/3.40.1/quarkus-datasource-common-3.40.1.pom
+Downloaded from central: https://repo.maven.apache.org/maven2/io/quarkus/quarkus-datasource-common/3.40.1/quarkus-datasource-common-3.40.1.pom (1.1 kB at 39 kB/s)
+Downloading from releases: https://pkgs.dev.azure.com/devopsmapfre/devopsmapfre/_packaging/releases/maven/v1/io/quarkus/quarkus-datasource-parent/3.40.1/quarkus-datasource-parent-3.40.1.pom
+Downloading from central: https://repo.maven.apache.org/maven2/io/quarkus/quarkus-datasource-parent/3.40.1/quarkus-datasource-parent-3.40.1.pom
+Downloaded from central: https://repo.maven.apache.org/maven2/io/quarkus/quarkus-datasource-parent/3.40.1/quarkus-datasource-parent-3.40.1.pom (851 B at 26 kB/s)
+Downloading from releases: https://pkgs.dev.azure.com/devopsmapfre/devopsmapfre/_packaging/releases/maven/v1/io/quarkiverse/wiremock/quarkus-wiremock-deployment/1.8.1/quarkus-wiremock-deployment-1.8.1.jar
+Downloading from releases: https://pkgs.dev.azure.com/devopsmapfre/devopsmapfre/_packaging/releases/maven/v1/io/quarkus/quarkus-devservices-common/3.40.1/quarkus-devservices-common-3.40.1.jar
+Downloading from releases: https://pkgs.dev.azure.com/devopsmapfre/devopsmapfre/_packaging/releases/maven/v1/io/quarkus/quarkus-devservices-deployment/3.40.1/quarkus-devservices-deployment-3.40.1.jar
+Downloading from releases: https://pkgs.dev.azure.com/devopsmapfre/devopsmapfre/_packaging/releases/maven/v1/com/github/docker-java/docker-java-api/3.7.1/docker-java-api-3.7.1.jar
+Downloading from releases: https://pkgs.dev.azure.com/devopsmapfre/devopsmapfre/_packaging/releases/maven/v1/org/jetbrains/annotations/26.1.0/annotations-26.1.0.jar
+Downloading from releases: https://pkgs.dev.azure.com/devopsmapfre/devopsmapfre/_packaging/releases/maven/v1/org/testcontainers/testcontainers/2.0.5/testcontainers-2.0.5.jar
+Downloading from releases: https://pkgs.dev.azure.com/devopsmapfre/devopsmapfre/_packaging/releases/maven/v1/com/github/docker-java/docker-java-transport/3.7.1/docker-java-transport-3.7.1.jar
+Downloading from releases: https://pkgs.dev.azure.com/devopsmapfre/devopsmapfre/_packaging/releases/maven/v1/com/github/docker-java/docker-java-transport-zerodep/3.7.1/docker-java-transport-zerodep-3.7.1.jar
+Downloading from releases: https://pkgs.dev.azure.com/devopsmapfre/devopsmapfre/_packaging/releases/maven/v1/net/java/dev/jna/jna/5.8.0/jna-5.8.0.jar
+Downloading from releases: https://pkgs.dev.azure.com/devopsmapfre/devopsmapfre/_packaging/releases/maven/v1/io/quarkus/quarkus-datasource-common/3.40.1/quarkus-datasource-common-3.40.1.jar
+Downloading from central: https://repo.maven.apache.org/maven2/io/quarkiverse/wiremock/quarkus-wiremock-deployment/1.8.1/quarkus-wiremock-deployment-1.8.1.jar
+Downloaded from central: https://repo.maven.apache.org/maven2/io/quarkiverse/wiremock/quarkus-wiremock-deployment/1.8.1/quarkus-wiremock-deployment-1.8.1.jar (16 kB at 511 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/testcontainers/testcontainers/2.0.5/testcontainers-2.0.5.jar
+Downloading from central: https://repo.maven.apache.org/maven2/io/quarkus/quarkus-devservices-common/3.40.1/quarkus-devservices-common-3.40.1.jar
+Downloading from central: https://repo.maven.apache.org/maven2/io/quarkus/quarkus-devservices-deployment/3.40.1/quarkus-devservices-deployment-3.40.1.jar
+Downloading from central: https://repo.maven.apache.org/maven2/com/github/docker-java/docker-java-api/3.7.1/docker-java-api-3.7.1.jar
+Downloading from central: https://repo.maven.apache.org/maven2/io/quarkus/quarkus-datasource-common/3.40.1/quarkus-datasource-common-3.40.1.jar
+Downloading from central: https://repo.maven.apache.org/maven2/com/github/docker-java/docker-java-transport/3.7.1/docker-java-transport-3.7.1.jar
+Downloaded from central: https://repo.maven.apache.org/maven2/io/quarkus/quarkus-devservices-common/3.40.1/quarkus-devservices-common-3.40.1.jar (33 kB at 561 kB/s)
+Downloaded from central: https://repo.maven.apache.org/maven2/io/quarkus/quarkus-devservices-deployment/3.40.1/quarkus-devservices-deployment-3.40.1.jar (71 kB at 959 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/jetbrains/annotations/26.1.0/annotations-26.1.0.jar
+Downloading from central: https://repo.maven.apache.org/maven2/com/github/docker-java/docker-java-transport-zerodep/3.7.1/docker-java-transport-zerodep-3.7.1.jar
+Downloaded from central: https://repo.maven.apache.org/maven2/io/quarkus/quarkus-datasource-common/3.40.1/quarkus-datasource-common-3.40.1.jar (12 kB at 175 kB/s)
+Downloaded from central: https://repo.maven.apache.org/maven2/com/github/docker-java/docker-java-transport/3.7.1/docker-java-transport-3.7.1.jar (39 kB at 436 kB/s)
+Downloaded from central: https://repo.maven.apache.org/maven2/org/jetbrains/annotations/26.1.0/annotations-26.1.0.jar (31 kB at 587 kB/s)
+Downloaded from central: https://repo.maven.apache.org/maven2/com/github/docker-java/docker-java-api/3.7.1/docker-java-api-3.7.1.jar (500 kB at 3.6 MB/s)
+Downloaded from central: https://repo.maven.apache.org/maven2/org/testcontainers/testcontainers/2.0.5/testcontainers-2.0.5.jar (18 MB at 31 MB/s)
+Downloaded from central: https://repo.maven.apache.org/maven2/com/github/docker-java/docker-java-transport-zerodep/3.7.1/docker-java-transport-zerodep-3.7.1.jar (2.3 MB at 4.3 MB/s)
+Downloaded from releases: https://pkgs.dev.azure.com/devopsmapfre/devopsmapfre/_packaging/releases/maven/v1/net/java/dev/jna/jna/5.8.0/jna-5.8.0.jar (1.7 MB at 2.0 MB/s)
+2026-11-01 00:14:55,063 INFO  [io.quarkiverse.wiremock.devservice.WireMockServer] (ForkJoinPool.commonPool-worker-1) Using HTTP server impl: Jetty11HttpServer
+2026-11-01 00:14:55,112 INFO  [io.quarkus.deployment.builditem.DevServicesRegistryBuildItem] (ForkJoinPool.commonPool-worker-1) The wiremock dev service is ready to accept connections on http://localhost:60007
+Executing "java -Dquarkus.http.port=8081 -Dquarkus.http.ssl-port=8444 -Dtest.url=http://localhost:${quarkus.http.test-port:8081} -Dquarkus.log.file.path=C:\agents\agents-factory\workspace\software-quality\execution-1\spike\pathC\target\quarkus.log -Dquarkus.log.file.enabled=true -Dquarkus.log.category."io.quarkus".level=INFO -Dquarkus.profile=prod -Dwiremock.devservices.mappings-url=http://localhost:60007/__admin/mappings -Dquarkus.wiremock.devservices.port=60007 -jar C:\agents\agents-factory\workspace\software-quality\execution-1\spike\pathC\target\quarkus-app\quarkus-run.jar"
+__  ____  __  _____   ___  __ ____  ______ 
+ --/ __ \/ / / / _ | / _ \/ //_/ / / / __/ 
+ -/ /_/ / /_/ / __ |/ , _/ ,< / /_/ /\ \   
+--\___\_\____/_/ |_/_/|_/_/|_|\____/___/   
+2026-11-01 00:14:56,812 WARN  [io.quarkus.config] (main) Unrecognized configuration key "quarkus.wiremock.devservices.port" was provided; it will be ignored; verify that the dependency extension for this configuration is set or that you did not make a typo
+2026-11-01 00:14:56,812 WARN  [io.quarkus.config] (main) Unrecognized configuration key "quarkus.log.category.io.quarkus.level" was provided; it will be ignored; verify that the dependency extension for this configuration is set or that you did not make a typo
+2026-11-01 00:14:57,163 INFO  [io.quarkus] (main) pathc-wiremock 1.0.0-SNAPSHOT on JVM (powered by Quarkus 3.40.1) started in 0.802s. Listening on: http://0.0.0.0:8081
+2026-11-01 00:14:57,164 INFO  [io.quarkus] (main) Profile prod activated. 
+2026-11-01 00:14:57,164 INFO  [io.quarkus] (main) Installed features: [cdi, rest, rest-client, smallrye-context-propagation, vertx]
+
+@change-add-greeting @R1 @happy
+Scenario: Valid name                               # classpath:features/greeting.feature:7
+2026-11-01 00:14:58,707 INFO  [io.quarkiverse.wiremock.devservice.WireMockServer] (qtp1228641835-93) Request received:
+127.0.0.1 - GET /titles/ana
+
+Accept: [text/plain;charset=UTF-8]
+User-Agent: [Quarkus REST Client]
+Host: [localhost:60007]
+
+
+
+Matched response definition:
+{
+  "status" : 200,
+  "body" : "dr."
+}
+
+Response:
+HTTP/1.1 200
+Matched-Stub-Id: [959410da-54a5-4401-9fb1-7e2bb4a33889]
+
+  ? When the visitor asks for a greeting for "ana" # spike.acceptance.GreetingSteps.askGreeting(java.lang.String)
+  ? Then the response status is 200                # spike.acceptance.GreetingSteps.status(int)
+  ? And the response body is "hello dr. ana"       # spike.acceptance.GreetingSteps.body(java.lang.String)
+
+@change-add-greeting @R1 @negative
+Scenario: Name too long                                                   # classpath:features/greeting.feature:13
+  ? When the visitor asks for a greeting for "abcdefghijklmnopqrstuvwxyz" # spike.acceptance.GreetingSteps.askGreeting(java.lang.String)
+  ? Then the response status is 400                                       # spike.acceptance.GreetingSteps.status(int)
+
+2 scenarios (2 passed)
+5 steps (5 passed)
+0m 1.253s (0m 1.173s executing your code)
+Process exited with non-zero status: 1

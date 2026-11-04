@@ -110,7 +110,7 @@ public class MetricAlertFunction extends ConnectorHubFunction<MetricData> {
 ## Worked Example (from the reference PoC)
 
 ### AuditConsumerFunction — SCH consumer with idempotency and distributed tracing
-// from services/func-evt-consumer-audit/src/main/java/com/brx/functions/event/consumer/audit/AuditConsumerFunction.java
+// from services/func-evt-consumer-audit/src/main/java/com/example/functions/event/consumer/audit/AuditConsumerFunction.java
 
 ```java
 public class AuditConsumerFunction extends ConnectorHubFunction<StreamingData<DomainEvent>> {
@@ -174,7 +174,7 @@ Key patterns encoded here:
 - Per-record isolation: remove event from dedup set on error so SCH can retry that record
 
 ### DomainEvent envelope (shared contract)
-// from libs/obs-commons/src/main/java/com/brx/functions/common/obs/DomainEvent.java
+// from libs/obs-commons/src/main/java/com/example/functions/common/obs/DomainEvent.java
 
 The `DomainEvent` type is the shared wire contract between producers and consumers:
 - `event_type` = Streaming key (partitioning)

@@ -1,0 +1,635 @@
+[>] Installing dependencies from apm.yml...
+WARNING apm_cli.policy.discovery Policy repo rodrigo-mendes/.github-private not found (or [REDACTED] private-repo read scope). If your org publishes policy in .github-private, ensure the token has Contents:read permission on that repo.
+[i] Targets: claude  (source: --target flag)
+  [+] ./packages/agent-package-builder (local)
+  [+] ./packages/artifact-authoring (local)
+  [+] ./packages/auditing (local)
+  [+] ./packages/aws-architect (local)
+  [+] ./packages/book-writing (local)
+  [+] ./packages/camel-quarkus-integrator (local)
+  [+] ./packages/evaluating (local)
+  [+] ./packages/langchain4j (local)
+  [+] ./packages/oci-architecture (local)
+  [+] ./packages/oci-functions-java (local)
+  [+] ./packages/oci-observability (local)
+  [+] ./packages/oci-terraform (local)
+  [+] ./packages/researching-frameworks (local)
+  [+] ./packages/researching-platform (local)
+  [+] ./packages/stripe-java (local)
+  [+] ./packages/terraform (local)
+  [+] ./packages/validating (local)
+  [+] ../artifact-authoring (local)
+  [+] ../aws-skills (local)
+  [+] ../aws-terraform (local)
+  [+] ../camel-quarkus-skills (local)
+  [+] ../factory-core (local)
+  [+] ../oci-core (local)
+  [+] ../research-core (local)
+  |-- 1 skill(s) integrated -> .claude/skills/
+Warning: Failed to parse C:\agents\agents-factory\apm_modules\_local\artifact-authoring\.apm\skills\agent-creator\assets\TEMPLATE.AGENT.md: Failed to parse primitive file C:\agents\agents-factory\apm_modules\_local\artifact-authoring\.apm\skills\agent-creator\assets\TEMPLATE.AGENT.md: Unknown primitive file type: C:\agents\agents-factory\apm_modules\_local\artifact-authoring\.apm\skills\agent-creator\assets\TEMPLATE.AGENT.md
+  |-- 1 agents integrated -> .claude/agents/
+  |-- 5 skill(s) integrated -> .claude/skills/
+  |-- 1 agents adopted -> .claude/agents/
+  |-- 8 skill(s) integrated -> .claude/skills/
+  |-- 1 agents adopted -> .claude/agents/
+  |-- 2 rule(s) integrated -> .claude/rules/
+  |-- 1 skill(s) integrated -> .claude/skills/
+  |-- 13 agents adopted -> .claude/agents/
+  |-- 10 skill(s) integrated -> .claude/skills/
+  |-- 1 agents adopted -> .claude/agents/
+  |-- 3 rule(s) integrated -> .claude/rules/
+  |-- 2 skill(s) integrated -> .claude/skills/
+  |-- 1 agents adopted -> .claude/agents/
+  |-- 1 skill(s) integrated -> .claude/skills/
+  |-- 1 agents adopted -> .claude/agents/
+  |-- 2 rule(s) integrated -> .claude/rules/
+  |-- 3 skill(s) integrated -> .claude/skills/
+  |-- 2 agents adopted -> .claude/agents/
+  |-- 2 rule(s) integrated -> .claude/rules/
+  |-- 8 skill(s) integrated -> .claude/skills/
+  |-- 3 agents adopted -> .claude/agents/
+  |-- 17 rule(s) integrated -> .claude/rules/
+  |-- 14 skill(s) integrated -> .claude/skills/
+  |-- 1 agents adopted -> .claude/agents/
+  |-- 1 rule(s) integrated -> .claude/rules/
+  |-- 10 skill(s) integrated -> .claude/skills/
+  |-- 1 agents adopted -> .claude/agents/
+  |-- 8 rule(s) integrated -> .claude/rules/
+  |-- 20 skill(s) integrated -> .claude/skills/
+  |-- 5 skill(s) integrated -> .claude/skills/
+  |-- 15 skill(s) integrated -> skills/
+  |-- 2 agents adopted -> .claude/agents/
+  |-- 1 rule(s) integrated -> .claude/rules/
+  |-- 6 skill(s) integrated -> .claude/skills/
+  |-- 2 agents adopted -> .claude/agents/
+  |-- 5 skill(s) integrated -> .claude/skills/
+  |-- 1 agents adopted -> .claude/agents/
+  |-- 5 skill(s) integrated -> .claude/skills/
+Warning: Failed to parse C:\agents\agents-factory\apm_modules\_local\cb22016cafe9\artifact-authoring\.apm\skills\agent-creator\assets\TEMPLATE.AGENT.md: Failed to parse primitive file C:\agents\agents-factory\apm_modules\_local\cb22016cafe9\artifact-authoring\.apm\skills\agent-creator\assets\TEMPLATE.AGENT.md: Unknown primitive file type: C:\agents\agents-factory\apm_modules\_local\cb22016cafe9\artifact-authoring\.apm\skills\agent-creator\assets\TEMPLATE.AGENT.md
+  |-- 1 agents integrated -> .claude/agents/
+  |-- 5 skill(s) integrated -> .claude/skills/
+  |-- 40 skill(s) integrated -> .claude/skills/
+  |-- 3 rule(s) integrated -> .claude/rules/
+  |-- 26 skill(s) integrated -> .claude/skills/
+  |-- 13 skill(s) integrated -> .claude/skills/
+  |-- 5 rule(s) integrated -> .claude/rules/
+  |-- 1 skill(s) integrated -> .claude/skills/
+  |-- 3 agents adopted -> .claude/agents/
+  |-- (files unchanged)
+[i] Cleaned 3 stale deployed files for ./packages/agent-package-builder
+[!]   Kept user-edited file .claude/skills/researching-api-gateway/SKILL.md 
+(from ./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/researching-api-gateway/blueprints/references/README.md (from 
+./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file .claude/skills/researching-cache-store/SKILL.md 
+(from ./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/researching-cache-store/blueprints/references/README.md (from 
+./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/researching-columnar-analytics/SKILL.md (from 
+./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/researching-columnar-analytics/blueprints/category-specifics.md 
+(from ./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/researching-columnar-analytics/blueprints/data-modeling.md (from
+./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/researching-columnar-analytics/blueprints/references/README.md 
+(from ./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/researching-coordination-service/SKILL.md (from 
+./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/researching-coordination-service/blueprints/references/README.md
+(from ./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file .claude/skills/researching-document-store/SKILL.md 
+(from ./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/researching-document-store/blueprints/category-specifics.md 
+(from ./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/researching-document-store/blueprints/references/README.md (from
+./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file .claude/skills/researching-graph-database/SKILL.md 
+(from ./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/researching-graph-database/blueprints/category-specifics.md 
+(from ./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/researching-graph-database/blueprints/references/README.md (from
+./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file .claude/skills/researching-kv-store/SKILL.md (from 
+./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/researching-kv-store/blueprints/category-specifics.md (from 
+./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/researching-kv-store/blueprints/data-modeling.md (from 
+./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/researching-kv-store/blueprints/references/README.md (from 
+./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file .claude/skills/researching-object-storage/SKILL.md 
+(from ./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/researching-object-storage/blueprints/category-specifics.md 
+(from ./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/researching-object-storage/blueprints/data-modeling.md (from 
+./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/researching-object-storage/blueprints/references/README.md (from
+./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/researching-platform-software/SKILL.md (from 
+./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/researching-platform-software/blueprints/shared/category-templat
+es/api-management-template.md (from ./packages/researching-platform); delete 
+manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/researching-platform-software/blueprints/shared/data-modeling/RE
+ADME.md (from ./packages/researching-platform); delete manually if no longer 
+needed
+[!]   Kept user-edited file .claude/skills/researching-rdbms/SKILL.md (from 
+./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/researching-rdbms/blueprints/data-modeling.md (from 
+./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/researching-rdbms/blueprints/references/README.md (from 
+./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file .claude/skills/researching-search-engine/SKILL.md 
+(from ./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/researching-search-engine/blueprints/category-specifics.md (from
+./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/researching-search-engine/blueprints/references/README.md (from 
+./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/researching-streaming-broker/SKILL.md (from 
+./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/researching-streaming-broker/blueprints/references/README.md 
+(from ./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file .claude/skills/researching-timeseries-db/SKILL.md 
+(from ./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/researching-timeseries-db/blueprints/category-specifics.md (from
+./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/researching-timeseries-db/blueprints/references/README.md (from 
+./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file .claude/skills/researching-vector-store/SKILL.md 
+(from ./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/researching-vector-store/blueprints/category-specifics.md (from 
+./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/researching-vector-store/blueprints/references/README.md (from 
+./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/researching-wide-column-store/SKILL.md (from 
+./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/researching-wide-column-store/blueprints/category-specifics.md 
+(from ./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/researching-wide-column-store/blueprints/references/README.md 
+(from ./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file .claude/skills/terraform-rules-author/SKILL.md 
+(from ./packages/terraform); delete manually if no longer needed
+  [!] Skipped .claude/skills/building-agent-packages/scripts/verify_package.py:
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped .claude/skills/building-agent-packages/scripts/verify_skill.py: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped .claude/skills/researching-api-gateway/SKILL.md: modified since 
+deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped 
+.claude/skills/researching-api-gateway/blueprints/references/README.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped .claude/skills/researching-cache-store/SKILL.md: modified since 
+deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped 
+.claude/skills/researching-cache-store/blueprints/references/README.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped .claude/skills/researching-columnar-analytics/SKILL.md: modified 
+since deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped 
+.claude/skills/researching-columnar-analytics/blueprints/category-specifics.md:
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped 
+.claude/skills/researching-columnar-analytics/blueprints/data-modeling.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped 
+.claude/skills/researching-columnar-analytics/blueprints/references/README.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped .claude/skills/researching-coordination-service/SKILL.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped 
+.claude/skills/researching-coordination-service/blueprints/references/README.md
+: modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped .claude/skills/researching-document-store/SKILL.md: modified 
+since deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped 
+.claude/skills/researching-document-store/blueprints/category-specifics.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped 
+.claude/skills/researching-document-store/blueprints/references/README.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped .claude/skills/researching-graph-database/SKILL.md: modified 
+since deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped 
+.claude/skills/researching-graph-database/blueprints/category-specifics.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped 
+.claude/skills/researching-graph-database/blueprints/references/README.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped .claude/skills/researching-kv-store/SKILL.md: modified since 
+deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped 
+.claude/skills/researching-kv-store/blueprints/category-specifics.md: modified 
+since deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped .claude/skills/researching-kv-store/blueprints/data-modeling.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped 
+.claude/skills/researching-kv-store/blueprints/references/README.md: modified 
+since deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped .claude/skills/researching-object-storage/SKILL.md: modified 
+since deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped 
+.claude/skills/researching-object-storage/blueprints/category-specifics.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped 
+.claude/skills/researching-object-storage/blueprints/data-modeling.md: modified
+since deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped 
+.claude/skills/researching-object-storage/blueprints/references/README.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped .claude/skills/researching-platform-software/SKILL.md: modified 
+since deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped 
+.claude/skills/researching-platform-software/blueprints/shared/category-templat
+es/api-management-template.md: modified since deployment. Preserve your changes
+before reinstalling with --force.
+  [!] Skipped 
+.claude/skills/researching-platform-software/blueprints/shared/data-modeling/RE
+ADME.md: modified since deployment. Preserve your changes before reinstalling 
+with --force.
+  [!] Skipped .claude/skills/researching-rdbms/SKILL.md: modified since 
+deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped .claude/skills/researching-rdbms/blueprints/data-modeling.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped .claude/skills/researching-rdbms/blueprints/references/README.md:
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped .claude/skills/researching-search-engine/SKILL.md: modified since
+deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped 
+.claude/skills/researching-search-engine/blueprints/category-specifics.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped 
+.claude/skills/researching-search-engine/blueprints/references/README.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped .claude/skills/researching-streaming-broker/SKILL.md: modified 
+since deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped 
+.claude/skills/researching-streaming-broker/blueprints/references/README.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped .claude/skills/researching-timeseries-db/SKILL.md: modified since
+deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped 
+.claude/skills/researching-timeseries-db/blueprints/category-specifics.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped 
+.claude/skills/researching-timeseries-db/blueprints/references/README.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped .claude/skills/researching-vector-store/SKILL.md: modified since 
+deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped 
+.claude/skills/researching-vector-store/blueprints/category-specifics.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped 
+.claude/skills/researching-vector-store/blueprints/references/README.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped .claude/skills/researching-wide-column-store/SKILL.md: modified 
+since deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped 
+.claude/skills/researching-wide-column-store/blueprints/category-specifics.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped 
+.claude/skills/researching-wide-column-store/blueprints/references/README.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped .claude/skills/terraform-rules-author/SKILL.md: modified since 
+deployment. Preserve your changes before reinstalling with --force.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-api-gateway/SKILL.md: file has been edited since APM
+deployed it. Delete it manually if you no longer need it, or ignore this 
+warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-api-gateway/blueprints/references/README.md: file 
+has been edited since APM deployed it. Delete it manually if you no longer need
+it, or ignore this warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-cache-store/SKILL.md: file has been edited since APM
+deployed it. Delete it manually if you no longer need it, or ignore this 
+warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-cache-store/blueprints/references/README.md: file 
+has been edited since APM deployed it. Delete it manually if you no longer need
+it, or ignore this warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-columnar-analytics/SKILL.md: file has been edited 
+since APM deployed it. Delete it manually if you no longer need it, or ignore 
+this warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-columnar-analytics/blueprints/category-specifics.md:
+file has been edited since APM deployed it. Delete it manually if you no longer
+need it, or ignore this warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-columnar-analytics/blueprints/data-modeling.md: file
+has been edited since APM deployed it. Delete it manually if you no longer need
+it, or ignore this warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-columnar-analytics/blueprints/references/README.md: 
+file has been edited since APM deployed it. Delete it manually if you no longer
+need it, or ignore this warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-coordination-service/SKILL.md: file has been edited 
+since APM deployed it. Delete it manually if you no longer need it, or ignore 
+this warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-coordination-service/blueprints/references/README.md
+: file has been edited since APM deployed it. Delete it manually if you no 
+longer need it, or ignore this warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-document-store/SKILL.md: file has been edited since 
+APM deployed it. Delete it manually if you no longer need it, or ignore this 
+warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-document-store/blueprints/category-specifics.md: 
+file has been edited since APM deployed it. Delete it manually if you no longer
+need it, or ignore this warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-document-store/blueprints/references/README.md: file
+has been edited since APM deployed it. Delete it manually if you no longer need
+it, or ignore this warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-graph-database/SKILL.md: file has been edited since 
+APM deployed it. Delete it manually if you no longer need it, or ignore this 
+warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-graph-database/blueprints/category-specifics.md: 
+file has been edited since APM deployed it. Delete it manually if you no longer
+need it, or ignore this warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-graph-database/blueprints/references/README.md: file
+has been edited since APM deployed it. Delete it manually if you no longer need
+it, or ignore this warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-kv-store/SKILL.md: file has been edited since APM 
+deployed it. Delete it manually if you no longer need it, or ignore this 
+warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-kv-store/blueprints/category-specifics.md: file has 
+been edited since APM deployed it. Delete it manually if you no longer need it,
+or ignore this warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-kv-store/blueprints/data-modeling.md: file has been 
+edited since APM deployed it. Delete it manually if you no longer need it, or 
+ignore this warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-kv-store/blueprints/references/README.md: file has 
+been edited since APM deployed it. Delete it manually if you no longer need it,
+or ignore this warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-object-storage/SKILL.md: file has been edited since 
+APM deployed it. Delete it manually if you no longer need it, or ignore this 
+warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-object-storage/blueprints/category-specifics.md: 
+file has been edited since APM deployed it. Delete it manually if you no longer
+need it, or ignore this warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-object-storage/blueprints/data-modeling.md: file has
+been edited since APM deployed it. Delete it manually if you no longer need it,
+or ignore this warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-object-storage/blueprints/references/README.md: file
+has been edited since APM deployed it. Delete it manually if you no longer need
+it, or ignore this warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-platform-software/SKILL.md: file has been edited 
+since APM deployed it. Delete it manually if you no longer need it, or ignore 
+this warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-platform-software/blueprints/shared/category-templat
+es/api-management-template.md: file has been edited since APM deployed it. 
+Delete it manually if you no longer need it, or ignore this warning to keep 
+your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-platform-software/blueprints/shared/data-modeling/RE
+ADME.md: file has been edited since APM deployed it. Delete it manually if you 
+no longer need it, or ignore this warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-rdbms/SKILL.md: file has been edited since APM 
+deployed it. Delete it manually if you no longer need it, or ignore this 
+warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-rdbms/blueprints/data-modeling.md: file has been 
+edited since APM deployed it. Delete it manually if you no longer need it, or 
+ignore this warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-rdbms/blueprints/references/README.md: file has been
+edited since APM deployed it. Delete it manually if you no longer need it, or 
+ignore this warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-search-engine/SKILL.md: file has been edited since 
+APM deployed it. Delete it manually if you no longer need it, or ignore this 
+warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-search-engine/blueprints/category-specifics.md: file
+has been edited since APM deployed it. Delete it manually if you no longer need
+it, or ignore this warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-search-engine/blueprints/references/README.md: file 
+has been edited since APM deployed it. Delete it manually if you no longer need
+it, or ignore this warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-streaming-broker/SKILL.md: file has been edited 
+since APM deployed it. Delete it manually if you no longer need it, or ignore 
+this warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-streaming-broker/blueprints/references/README.md: 
+file has been edited since APM deployed it. Delete it manually if you no longer
+need it, or ignore this warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-timeseries-db/SKILL.md: file has been edited since 
+APM deployed it. Delete it manually if you no longer need it, or ignore this 
+warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-timeseries-db/blueprints/category-specifics.md: file
+has been edited since APM deployed it. Delete it manually if you no longer need
+it, or ignore this warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-timeseries-db/blueprints/references/README.md: file 
+has been edited since APM deployed it. Delete it manually if you no longer need
+it, or ignore this warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-vector-store/SKILL.md: file has been edited since 
+APM deployed it. Delete it manually if you no longer need it, or ignore this 
+warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-vector-store/blueprints/category-specifics.md: file 
+has been edited since APM deployed it. Delete it manually if you no longer need
+it, or ignore this warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-vector-store/blueprints/references/README.md: file 
+has been edited since APM deployed it. Delete it manually if you no longer need
+it, or ignore this warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-wide-column-store/SKILL.md: file has been edited 
+since APM deployed it. Delete it manually if you no longer need it, or ignore 
+this warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-wide-column-store/blueprints/category-specifics.md: 
+file has been edited since APM deployed it. Delete it manually if you no longer
+need it, or ignore this warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-wide-column-store/blueprints/references/README.md: 
+file has been edited since APM deployed it. Delete it manually if you no longer
+need it, or ignore this warning to keep your changes.
+  [!] [./packages/terraform] Skipped removing 
+.claude/skills/terraform-rules-author/SKILL.md: file has been edited since APM 
+deployed it. Delete it manually if you no longer need it, or ignore this 
+warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing skill directory 
+.claude/skills/researching-api-gateway: 2 file(s) not owned by APM or modified 
+since deployment: .claude/skills/researching-api-gateway/SKILL.md, 
+.claude/skills/researching-api-gateway/blueprints/references/README.md. Remove 
+manually if no longer needed.
+  [!] [./packages/researching-platform] Skipped removing skill directory 
+.claude/skills/researching-cache-store: 2 file(s) not owned by APM or modified 
+since deployment: .claude/skills/researching-cache-store/SKILL.md, 
+.claude/skills/researching-cache-store/blueprints/references/README.md. Remove 
+manually if no longer needed.
+  [!] [./packages/researching-platform] Skipped removing skill directory 
+.claude/skills/researching-columnar-analytics: 4 file(s) not owned by APM or 
+modified since deployment: 
+.claude/skills/researching-columnar-analytics/SKILL.md, 
+.claude/skills/researching-columnar-analytics/blueprints/category-specifics.md,
+.claude/skills/researching-columnar-analytics/blueprints/data-modeling.md, 
+.claude/skills/researching-columnar-analytics/blueprints/references/README.md. 
+Remove manually if no longer needed.
+  [!] [./packages/researching-platform] Skipped removing skill directory 
+.claude/skills/researching-coordination-service: 2 file(s) not owned by APM or 
+modified since deployment: 
+.claude/skills/researching-coordination-service/SKILL.md, 
+.claude/skills/researching-coordination-service/blueprints/references/README.md
+. Remove manually if no longer needed.
+  [!] [./packages/researching-platform] Skipped removing skill directory 
+.claude/skills/researching-document-store: 3 file(s) not owned by APM or 
+modified since deployment: .claude/skills/researching-document-store/SKILL.md, 
+.claude/skills/researching-document-store/blueprints/category-specifics.md, 
+.claude/skills/researching-document-store/blueprints/references/README.md. 
+Remove manually if no longer needed.
+  [!] [./packages/researching-platform] Skipped removing skill directory 
+.claude/skills/researching-graph-database: 3 file(s) not owned by APM or 
+modified since deployment: .claude/skills/researching-graph-database/SKILL.md, 
+.claude/skills/researching-graph-database/blueprints/category-specifics.md, 
+.claude/skills/researching-graph-database/blueprints/references/README.md. 
+Remove manually if no longer needed.
+  [!] [./packages/researching-platform] Skipped removing skill directory 
+.claude/skills/researching-kv-store: 4 file(s) not owned by APM or modified 
+since deployment: .claude/skills/researching-kv-store/SKILL.md, 
+.claude/skills/researching-kv-store/blueprints/category-specifics.md, 
+.claude/skills/researching-kv-store/blueprints/data-modeling.md, 
+.claude/skills/researching-kv-store/blueprints/references/README.md. Remove 
+manually if no longer needed.
+  [!] [./packages/researching-platform] Skipped removing skill directory 
+.claude/skills/researching-object-storage: 4 file(s) not owned by APM or 
+modified since deployment: .claude/skills/researching-object-storage/SKILL.md, 
+.claude/skills/researching-object-storage/blueprints/category-specifics.md, 
+.claude/skills/researching-object-storage/blueprints/data-modeling.md, 
+.claude/skills/researching-object-storage/blueprints/references/README.md. 
+Remove manually if no longer needed.
+  [!] [./packages/researching-platform] Skipped removing skill directory 
+.claude/skills/researching-platform-software: 3 file(s) not owned by APM or 
+modified since deployment: 
+.claude/skills/researching-platform-software/SKILL.md, 
+.claude/skills/researching-platform-software/blueprints/shared/category-templat
+es/api-management-template.md, 
+.claude/skills/researching-platform-software/blueprints/shared/data-modeling/RE
+ADME.md. Remove manually if no longer needed.
+  [!] [./packages/researching-platform] Skipped removing skill directory 
+.claude/skills/researching-rdbms: 3 file(s) not owned by APM or modified since 
+deployment: .claude/skills/researching-rdbms/SKILL.md, 
+.claude/skills/researching-rdbms/blueprints/data-modeling.md, 
+.claude/skills/researching-rdbms/blueprints/references/README.md. Remove 
+manually if no longer needed.
+  [!] [./packages/researching-platform] Skipped removing skill directory 
+.claude/skills/researching-search-engine: 3 file(s) not owned by APM or 
+modified since deployment: .claude/skills/researching-search-engine/SKILL.md, 
+.claude/skills/researching-search-engine/blueprints/category-specifics.md, 
+.claude/skills/researching-search-engine/blueprints/references/README.md. 
+Remove manually if no longer needed.
+  [!] [./packages/researching-platform] Skipped removing skill directory 
+.claude/skills/researching-streaming-broker: 2 file(s) not owned by APM or 
+modified since deployment: 
+.claude/skills/researching-streaming-broker/SKILL.md, 
+.claude/skills/researching-streaming-broker/blueprints/references/README.md. 
+Remove manually if no longer needed.
+  [!] [./packages/researching-platform] Skipped removing skill directory 
+.claude/skills/researching-timeseries-db: 3 file(s) not owned by APM or 
+modified since deployment: .claude/skills/researching-timeseries-db/SKILL.md, 
+.claude/skills/researching-timeseries-db/blueprints/category-specifics.md, 
+.claude/skills/researching-timeseries-db/blueprints/references/README.md. 
+Remove manually if no longer needed.
+  [!] [./packages/researching-platform] Skipped removing skill directory 
+.claude/skills/researching-vector-store: 3 file(s) not owned by APM or modified
+since deployment: .claude/skills/researching-vector-store/SKILL.md, 
+.claude/skills/researching-vector-store/blueprints/category-specifics.md, 
+.claude/skills/researching-vector-store/blueprints/references/README.md. Remove
+manually if no longer needed.
+  [!] [./packages/researching-platform] Skipped removing skill directory 
+.claude/skills/researching-wide-column-store: 3 file(s) not owned by APM or 
+modified since deployment: 
+.claude/skills/researching-wide-column-store/SKILL.md, 
+.claude/skills/researching-wide-column-store/blueprints/category-specifics.md, 
+.claude/skills/researching-wide-column-store/blueprints/references/README.md. 
+Remove manually if no longer needed.
+  [!] [./packages/terraform] Skipped removing skill directory 
+.claude/skills/terraform-rules-author: 1 file(s) not owned by APM or modified 
+since deployment: .claude/skills/terraform-rules-author/SKILL.md. Remove 
+manually if no longer needed.
+[*] Installed 24 APM dependencies (3 stale files cleaned) in 71.2s.

@@ -81,7 +81,7 @@ Count: 4.
 ## Source Bibliography
 
 - Shipped: skills `coordinating-agent-handoffs` (SKILL.md, `blueprints/profile-format.md`, `blueprints/record-kinds.md`, `blueprints/protocol.md`, `scripts/`) and `specifying-changes-with-openspec-v1-15`.
-- Factory provenance, not shipped (read 2026-10-28; do not cite in runtime briefs). Generic protocol source: `packages/handoff-core/.apm/skills/coordinating-agent-handoffs/`.
-- Agent definitions (factory provenance, not shipped): `packages/quarkus-aws/.apm/agents/`, `packages/aws-lambda/.apm/agents/` (the deployer is no longer part of this flow), `packages/github-actions-cicd` (cicd agents), `packages/aws-observability/.apm/agents/aws-observability.agent.md`, `packages/handoff-core/.apm/agents/spec-synchronizer.agent.md`, `packages/stripe-java/.apm/agents/`, `packages/aws-architect/.apm/agents/`, `packages/terraform/.apm/agents/aws-terraform-engineer.agent.md`.
+- Factory provenance, not shipped (read 2026-10-28; do not cite in runtime briefs). Generic protocol source: `packages/delivery/protocol/handoff-core/.apm/skills/coordinating-agent-handoffs/`.
+- Agent definitions (factory provenance, not shipped): `packages/java/quarkus/quarkus-aws/.apm/agents/`, `packages/cloud/provider/aws/aws-lambda/.apm/agents/` (the deployer is no longer part of this flow), `packages/delivery/github/github-actions-cicd` (cicd agents), `packages/cloud/provider/aws/aws-observability/.apm/agents/aws-observability.agent.md`, `packages/delivery/protocol/handoff-core/.apm/agents/spec-synchronizer.agent.md`, `packages/java/libs/stripe-java/.apm/agents/`, `packages/cloud/provider/aws/aws-architect/.apm/agents/`, `packages/cloud/terraform/terraform/.apm/agents/aws-terraform-engineer.agent.md`.
 - Family decisions (factory provenance, not shipped): `workspace/quarkus-aws-saas/_family_rules_v3.40.md`, rules 13-15 (dated 2026-10-28).
 - No external web source: the profile is the factory's own design.

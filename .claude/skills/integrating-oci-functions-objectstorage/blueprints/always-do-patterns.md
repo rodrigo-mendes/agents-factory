@@ -302,7 +302,7 @@ public List<String> processLargeTextFile(String bucketName, String objectName) {
 ## Worked Example (from the reference PoC)
 
 ### OciServiceClient — Vault + Object Storage, both clients initialized once
-// from services/func-api-facade/src/main/java/com/brx/functions/apifacade/service/OciServiceClient.java
+// from services/func-api-facade/src/main/java/com/example/functions/apifacade/service/OciServiceClient.java
 
 ```java
 public class OciServiceClient implements OciService {

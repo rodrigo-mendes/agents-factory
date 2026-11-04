@@ -20,7 +20,7 @@ COPY --from=build /function/target/*.jar /function/app/
 COPY --from=build /function/target/dependency/*.jar /function/app/
 
 # MANDATORY — without CMD, container exits immediately → 502
-CMD ["com.brx.functions.{{package}}.{{Class}}Function::handler"]
+CMD ["{{groupId}}.{{package}}.{{Class}}Function::handler"]
 ```
 
 ## Checklist

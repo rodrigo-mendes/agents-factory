@@ -38,7 +38,7 @@ project path), return a **numbered question list** and stop. Never assume.
 
 2. Load the **core skill** first (always): read
    `.claude/skills/developing-stripe-java-core-v34/SKILL.md` (installed path). Only in the factory
-   repository, if it is absent, read the source under `packages/stripe-java/.apm/skills/<name>/SKILL.md`;
+   repository, if it is absent, read the source under `packages/java/libs/stripe-java/.apm/skills/<name>/SKILL.md`;
    the same fallback applies to every skill below.
 
 3. Load domain skills for the identified scope:
@@ -53,7 +53,7 @@ project path), return a **numbered question list** and stop. Never assume.
    `.claude/skills/integrating-stripe-quarkus-v3-40/SKILL.md`; the same factory-source fallback applies).
 
 5. Load the family rules: read `.claude/skills/integrate-stripe-java/references/family-rules-v34.md` (installed path; in the factory source
-   `packages/stripe-java/.apm/skills/integrate-stripe-java/references/family-rules-v34.md`). If it
+   `packages/java/libs/stripe-java/.apm/skills/integrate-stripe-java/references/family-rules-v34.md`). If it
    cannot be read, use the loaded skills' own Always-Do/Never-Do rules, which carry the same
    R01–R07 content. Rules R01–R07 are the primary
    review checklist.

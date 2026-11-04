@@ -43,12 +43,12 @@ services/<function-name>/
 ├── build-push.py       ← Build & push script (Python 3, stdlib only)
 ├── README.md           ← Function description & endpoints
 └── src/
-    ├── main/java/com/brx/functions/<package>/
+    ├── main/java/<groupId as path>/<package>/
     │   ├── <Class>Function.java      ← Handler with initError + observability
     │   └── model/
     │       ├── <Name>Request.java    ← Input model
     │       └── <Name>Response.java   ← Output model with elapsed_ms
-    └── test/java/com/brx/functions/<package>/
+    └── test/java/<groupId as path>/<package>/
         └── <Class>FunctionTest.java  ← FnTestingRule unit test
 ```
 
@@ -61,6 +61,7 @@ Before generating, collect:
 | Parameter | Example | Required |
 |-----------|---------|----------|
 | `function-name` | `func-order-processor` | yes |
+| `groupId` | `com.example.functions` (ask the user; never invent the organisation) | yes |
 | `package` | `order.processor` | yes |
 | `class-name` | `OrderProcessor` | yes |
 | `handler-pattern` | APIGateway / ConnectorHub / Notification | yes |
@@ -114,7 +115,7 @@ WORKDIR /function
 COPY --from=build /function/target/*.jar /function/app/
 
 # ✅ CORRECT — CMD must match func.yaml cmd:
-CMD ["com.brx.functions.{{package}}.{{Class}}Function::handler"]
+CMD ["{{groupId}}.{{package}}.{{Class}}Function::handler"]
 ```
 Impact: guaranteed 502 on every invocation; no error in function logs.
 

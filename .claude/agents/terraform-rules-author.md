@@ -54,8 +54,8 @@ If any of these is missing, or if `RESEARCH_FILE` does not exist at the stated p
    ```
 
 3. Load the standards catalog:
-   - Read `packages/terraform/.apm/skills/terraform-instructions-compiler/assets/terraform-standards-reference.md`
-   - Read `packages/terraform/.apm/skills/terraform-instructions-compiler/SKILL.md` (Phase 3 matrix)
+   - Read `packages/cloud/terraform/terraform/.apm/skills/terraform-instructions-compiler/assets/terraform-standards-reference.md`
+   - Read `packages/cloud/terraform/terraform/.apm/skills/terraform-instructions-compiler/SKILL.md` (Phase 3 matrix)
 
 ### P1 — Analyze Research + Project
 
@@ -92,7 +92,7 @@ Then proceed immediately to P3 — do not wait for approval.
 
 For each planned file:
 1. Pick the matching generic template shape (STANDARDS, CONFIG, or SKILLS) from
-   `packages/artifact-authoring/.apm/skills/rules-compiler/assets/`.
+   `packages/factory/artifact-authoring/.apm/skills/rules-compiler/assets/`.
 2. Fill the template with Terraform data from `RESEARCH_FILE` and the standards catalog.
 3. Use only `TERRAFORM_VERSION` syntax in code examples — never 0.x patterns.
 4. For `TARGET_PLATFORM=claude-code`: produce frontmatter with `paths:` and a specific glob

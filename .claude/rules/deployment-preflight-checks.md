@@ -12,7 +12,7 @@ Ensure all function projects pass mandatory pre-flight checks before building Do
 
 ```dockerfile
 # ✅ REQUIRED — tells FDK which class/method to invoke
-CMD ["com.brx.functions.mypackage.MyFunction::handler"]
+CMD ["com.example.functions.mypackage.MyFunction::handler"]
 ```
 
 Without CMD:
@@ -33,12 +33,12 @@ The entry point in both files must reference the same class and method:
 
 ```yaml
 # func.yaml
-cmd: com.brx.functions.mypackage.MyFunction::handler
+cmd: com.example.functions.mypackage.MyFunction::handler
 ```
 
 ```dockerfile
 # Dockerfile
-CMD ["com.brx.functions.mypackage.MyFunction::handler"]
+CMD ["com.example.functions.mypackage.MyFunction::handler"]
 ```
 
 **Validation:**

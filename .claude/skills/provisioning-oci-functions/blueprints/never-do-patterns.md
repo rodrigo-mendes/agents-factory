@@ -10,7 +10,7 @@ resource "oci_functions_function" "bad" {
   config = {
     "DB_PASSWORD"   = "super-secret-123"        # NEVER — visible in state file
     "API_KEY"       = "sk-live-abc123def456"     # NEVER — visible in Console
-    "PRIVATE_KEY"   = "-----BEGIN RSA..."        # NEVER — visible in API responses
+    "PRIVATE_KEY"   = "<PEM private key pasted here>"        # NEVER — visible in API responses
   }
 }
 

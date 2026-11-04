@@ -178,5 +178,5 @@ java -version   # must show openjdk 21
 - [JUnit 5 — Migration guide from JUnit 4](https://junit.org/junit5/docs/current/user-guide/#migrating-from-junit4) — if tests use `@Rule` patterns that need updating (verified 2026-07-26)
 - [OCI Functions FDK for Java](https://github.com/fnproject/fdk-java) — FDK lifecycle reference: `@FnConfiguration`, handler signatures, hot functions (verified 2026-07-26)
 - [Standing clean-code rules](../../rules/java-functions-clean-code.md) — auto-applied to `src/main/java` (verified 2026-07-26)
-- [Testing rules](../../rules/java-functions-testing.md) — test parity and JVM guard (verified 2026-07-26)
-- [Project structure rules](../../rules/java-functions-project-structure.md) — package taxonomy (verified 2026-07-26)
+- Testing rules: rule `java-functions-testing` (installed with the `oci-functions-java` package) — test parity and JVM guard (verified 2026-07-26)
+- Project structure rules: rule `java-functions-project-structure` (installed with the `oci-functions-java` package) — package taxonomy (verified 2026-07-26)

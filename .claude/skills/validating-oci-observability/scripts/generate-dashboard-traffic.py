@@ -6,7 +6,7 @@
 # Fires real traffic on the ANONYMOUS routes of the API Gateway, spread over time
 # so time-series widgets have multiple data points:
 #   - GET  /proxy/health          -> volume, /health GET (D1, D3)
-#   - POST /proxy/item/webhook    -> spans RMS/BrxServices, custom metrics (D1, D2, D3)
+#   - POST /proxy/item/webhook    -> spans RMS/TargetServices, custom metrics (D1, D2, D3)
 #       * PAYLOAD valid items      -> 200
 #       * PAYLOAD empty item id    -> 207 (RestProxyError{207})
 #       * Invalid JSON             -> 400 (RestProxyError{400})

@@ -194,7 +194,7 @@ public class ApiHandlerTest {
 ## Worked Example (from the reference PoC)
 
 ### ApiHandler — minimal reference function with all mandatory patterns
-// from services/api-handler/src/main/java/com/brx/serverless/handler/ApiHandler.java
+// from services/api-handler/src/main/java/com/example/serverless/handler/ApiHandler.java
 
 This is the recommended minimal function skeleton. All patterns (initError, MDC, tracing, cold-start flag) are pre-applied.
 

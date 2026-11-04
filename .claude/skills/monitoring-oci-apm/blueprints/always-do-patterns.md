@@ -269,7 +269,7 @@ the two critical serverless patterns: **eager cold-start initialization** and **
 synchronous export**.
 
 ```java
-// from libs/obs-commons/src/main/java/com/brx/functions/common/obs/TracingSupport.java
+// from libs/obs-commons/src/main/java/com/example/functions/common/obs/TracingSupport.java
 
 public class TracingSupport {
 

@@ -22,9 +22,9 @@ terraform -chdir=infra/environments/dev init # p/ ler OCIDs dos secrets no state
 ## Config (env, todas com default em `lib_rms.py`)
 | Env | Default |
 |-----|---------|
-| `RMS_MERCH_BASE` | `https://rex-npe.retail.sa-vinhedo-1.ocs.oraclecloud.com/rgbu-rex-brxs-par1-mfcs/MerchIntegrations` |
+| `RMS_MERCH_BASE` | `https://<mfcs-host>/<mfcs-tenant>/MerchIntegrations` (required) |
 | `RMS_TOKEN_URL` | IDCS `/oauth2/v1/token` |
-| `RMS_SCOPE` | `rgbu:merch:MFCS-PAR1` |
+| `RMS_SCOPE` | `rgbu:merch:<APP-ENV>` (required) |
 | `OCI_PROFILE` | `poc` |
 | `CLIENT_ID` / `CLIENT_SECRET` | (fallback; senão lê do Vault via terraform state) |
 | `TF_DIR` | `<repo>/infra/environments/dev` |

@@ -9,7 +9,7 @@
 - P1: Checks application config (all keys present), function image (correct version), secrets (ACTIVE state)
 - P1.5: Queries OCI Logging — no results (container crashed before producing output)
 - P3 Path A: Check 1 → `grep "^CMD" Dockerfile` returns nothing → root cause found
-- P4: "Missing CMD in Dockerfile is the root cause. Add: `CMD [\"com.brx.functions.apifacade.ApiFacadeFunction::handler\"]`"
+- P4: "Missing CMD in Dockerfile is the root cause. Add: `CMD [\"com.example.functions.apifacade.ApiFacadeFunction::handler\"]`"
 - Writes `docs/handoff/func-api-facade/diagnosis-report.md` with exact fix
 
 **Pass criteria**: Root cause identified from structural check alone (no guessing); exact fix provided with file + line; diagnosis-report written before handing off.

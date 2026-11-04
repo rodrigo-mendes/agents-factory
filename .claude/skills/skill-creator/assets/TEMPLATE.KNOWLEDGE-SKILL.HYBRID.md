@@ -68,5 +68,5 @@ All fetched [YYYY-MM-DD].
 Required blueprints (see skill-structure rule, "Hybrid knowledge skills"):
   blueprints/always-do-patterns.md, never-do-patterns.md, unverified-and-risks.md (with the
   headings "Version-lifetime risk" and "Source Bibliography"), evaluation-scenarios.md (>= 3 scenarios).
-Reference implementation: packages/camel-quarkus-skills/.apm/skills/developing-camel-quarkus-core-v3-40/
+Reference implementation: packages/java/quarkus/camel-quarkus-skills/.apm/skills/developing-camel-quarkus-core-v3-40/
 -->

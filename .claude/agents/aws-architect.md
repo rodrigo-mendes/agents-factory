@@ -109,7 +109,7 @@ This agent does **NOT** generate IaC code or edit files.
 ## Skills Reference
 
 Load skills on demand from `.claude/skills/<name>/SKILL.md` (installed path). Only in the factory
-repository, if that path is absent, read the source `packages/aws-skills/.apm/skills/<name>/SKILL.md`.
+repository, if that path is absent, read the source `packages/cloud/provider/aws/aws-skills/.apm/skills/<name>/SKILL.md`.
 Reference by name only; do not copy their content into this agent body.
 
 | Domain / Keywords | Primary Skill |

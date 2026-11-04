@@ -23,7 +23,7 @@ sys.dont_write_bytecode = True  # keep the skill folder free of __pycache__
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import lib_rms as L  # noqa: E402
 
-ENVIRONMENT = "rgbu-rex-brxs-par1-mfcs"
+ENVIRONMENT = os.environ.get("MFCS_TENANT") or "<mfcs-tenant>"
 
 
 def build_items(items):

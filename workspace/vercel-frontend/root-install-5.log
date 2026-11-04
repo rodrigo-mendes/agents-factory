@@ -1,0 +1,1348 @@
+[>] Installing dependencies from apm.yml...
+[>] Resolving vercel-labs/agent-skills...
+[>] Resolving vercel/next.js...
+[>] Resolving vercel/components.build...
+[>] Resolving vercel/ai-elements...
+[>] Resolving vercel/streamdown...
+[>] Resolving vercel/turborepo...
+[>] Resolving vercel-labs/agent-browser...
+WARNING apm_cli.policy.discovery Policy repo rodrigo-mendes/.github-private not found (or [REDACTED] private-repo read scope). If your org publishes policy in .github-private, ensure the token has Contents:read permission on that repo.
+[i] Targets: claude  (source: --target flag)
+  [+] ./packages/agent-package-builder (local)
+  [+] ./packages/artifact-authoring (local)
+  [+] ./packages/auditing (local)
+  [+] ./packages/book-writing (local)
+  [+] ./packages/camel-quarkus-integrator (local)
+  [+] ./packages/evaluating (local)
+  [+] ./packages/langchain4j (local)
+  [+] ./packages/oci-architecture (local)
+  [+] ./packages/oci-functions-java (local)
+  [+] ./packages/oci-observability (local)
+  [+] ./packages/oci-terraform (local)
+  [+] ./packages/quarkus-aws-saas (local)
+  [+] ./packages/researching-frameworks (local)
+  [+] ./packages/researching-platform (local)
+  [+] ./packages/validating (local)
+  [+] ./packages/vercel-frontend (local)
+  [+] ../aws-architect (local)
+  [+] ../aws-lambda (local)
+  [+] ../aws-observability (local)
+  [+] ../camel-quarkus-skills (local)
+  [+] ../factory-core (local)
+  [+] ../handoff-core (local)
+  [+] ../oci-core (local)
+  [+] ../openspec-github (local)
+  [+] ../quarkus-aws (local)
+  [+] ../research-core (local)
+  [+] ../stripe-java (local)
+  [+] ../terraform (local)
+  [+] vercel-labs/agent-browser #1453dd37a40c730fe00f592bc32198a896ff8747 
+@1453dd37
+  [+] vercel-labs/agent-skills #1a2c79d4e6c4a2283dc2c614b6538cbe1ed5ca62 
+@1a2c79d4
+  [+] vercel/ai-elements #ca8be600bfd01b3131f9bf6134b51602a71f4374 @ca8be600
+  [+] vercel/components.build #ba727450437385af662810329fa19896215f76d5 
+@ba727450
+  [+] vercel/next.js #4c6a3fa48041c70e5ebb77f11e49c2e5e4a14bd1 @4c6a3fa4
+  [+] vercel/streamdown #7dcabc64df944edce6f3993732667652e6214af0 @7dcabc64
+  [+] vercel/turborepo #e158e859f804019fa48dd1af15bc247e4759d81e @e158e859
+  [+] ../artifact-authoring (local)
+  [+] ../aws-skills (local)
+  [+] ../aws-terraform (local)
+  [+] ../github-core (local)
+  [+] ../openspec-core (local)
+  [+] ../quarkus-core (local)
+  |-- 1 skill(s) integrated -> .claude/skills/
+Warning: Failed to parse C:\agents\agents-factory\apm_modules\_local\artifact-authoring\.apm\skills\agent-creator\assets\TEMPLATE.AGENT.md: Failed to parse primitive file C:\agents\agents-factory\apm_modules\_local\artifact-authoring\.apm\skills\agent-creator\assets\TEMPLATE.AGENT.md: Unknown primitive file type: C:\agents\agents-factory\apm_modules\_local\artifact-authoring\.apm\skills\agent-creator\assets\TEMPLATE.AGENT.md
+  |-- 1 agents integrated -> .claude/agents/
+  |-- 5 skill(s) integrated -> .claude/skills/
+  |-- 1 agents adopted -> .claude/agents/
+  |-- 8 skill(s) integrated -> .claude/skills/
+  |-- 13 agents adopted -> .claude/agents/
+  |-- 10 skill(s) integrated -> .claude/skills/
+  |-- 1 agents adopted -> .claude/agents/
+  |-- 3 rule(s) integrated -> .claude/rules/
+  |-- 2 skill(s) integrated -> .claude/skills/
+  |-- 1 agents adopted -> .claude/agents/
+  |-- 1 skill(s) integrated -> .claude/skills/
+  |-- 1 agents adopted -> .claude/agents/
+  |-- 2 rule(s) integrated -> .claude/rules/
+  |-- 3 skill(s) integrated -> .claude/skills/
+  |-- 2 agents adopted -> .claude/agents/
+  |-- 2 rule(s) integrated -> .claude/rules/
+  |-- 8 skill(s) integrated -> .claude/skills/
+  |-- 3 agents adopted -> .claude/agents/
+  |-- 17 rule(s) integrated -> .claude/rules/
+  |-- 14 skill(s) integrated -> .claude/skills/
+  |-- 1 agents adopted -> .claude/agents/
+  |-- 1 rule(s) integrated -> .claude/rules/
+  |-- 10 skill(s) integrated -> .claude/skills/
+  |-- 1 agents adopted -> .claude/agents/
+  |-- 8 rule(s) integrated -> .claude/rules/
+  |-- 20 skill(s) integrated -> .claude/skills/
+  |-- 4 skill(s) integrated -> .claude/skills/
+  |-- 5 skill(s) integrated -> .claude/skills/
+  |-- 15 skill(s) integrated -> skills/
+  |-- 1 agents adopted -> .claude/agents/
+  |-- 5 skill(s) integrated -> .claude/skills/
+  |-- (files unchanged)
+  |-- 1 agents adopted -> .claude/agents/
+  |-- 2 rule(s) integrated -> .claude/rules/
+  |-- 1 skill(s) integrated -> .claude/skills/
+  |-- 2 agents adopted -> .claude/agents/
+  |-- 1 rule(s) integrated -> .claude/rules/
+  |-- 2 skill(s) integrated -> .claude/skills/
+  |-- 1 agents adopted -> .claude/agents/
+  |-- 1 rule(s) integrated -> .claude/rules/
+  |-- 2 skill(s) integrated -> .claude/skills/
+  |-- 10 skill(s) integrated -> .claude/skills/
+  |-- 5 rule(s) integrated -> .claude/rules/
+  |-- 1 agents adopted -> .claude/agents/
+  |-- 2 skill(s) integrated -> .claude/skills/
+  |-- 1 skill(s) integrated -> .claude/skills/
+  |-- 1 agents adopted -> .claude/agents/
+  |-- 1 rule(s) integrated -> .claude/rules/
+  |-- 2 skill(s) integrated -> .claude/skills/
+  |-- 2 agents adopted -> .claude/agents/
+  |-- 2 rule(s) integrated -> .claude/rules/
+  |-- 11 skill(s) integrated -> .claude/skills/
+  |-- 3 agents adopted -> .claude/agents/
+  |-- (files unchanged)
+  |-- 2 agents adopted -> .claude/agents/
+  |-- 1 rule(s) integrated -> .claude/rules/
+  |-- 6 skill(s) integrated -> .claude/skills/
+  |-- 2 agents adopted -> .claude/agents/
+  |-- 5 skill(s) integrated -> .claude/skills/
+  |-- Skill integrated -> .claude/skills/
+  |-- 1 skill(s) integrated -> .claude/skills/
+  |-- Skill integrated -> .claude/skills/
+  |-- 9 skill(s) integrated -> .claude/skills/
+  |-- Skill integrated -> .claude/skills/
+  |-- 1 skill(s) integrated -> .claude/skills/
+  |-- Skill integrated -> .claude/skills/
+  |-- 1 skill(s) integrated -> .claude/skills/
+  |-- Skill integrated -> .claude/skills/
+  |-- 6 skill(s) integrated -> .claude/skills/
+  |-- Skill integrated -> .claude/skills/
+  |-- 1 skill(s) integrated -> .claude/skills/
+  |-- Skill integrated -> .claude/skills/
+  |-- 1 skill(s) integrated -> .claude/skills/
+Warning: Failed to parse C:\agents\agents-factory\apm_modules\_local\cb22016cafe9\artifact-authoring\.apm\skills\agent-creator\assets\TEMPLATE.AGENT.md: Failed to parse primitive file C:\agents\agents-factory\apm_modules\_local\cb22016cafe9\artifact-authoring\.apm\skills\agent-creator\assets\TEMPLATE.AGENT.md: Unknown primitive file type: C:\agents\agents-factory\apm_modules\_local\cb22016cafe9\artifact-authoring\.apm\skills\agent-creator\assets\TEMPLATE.AGENT.md
+  |-- 1 agents integrated -> .claude/agents/
+  |-- 5 skill(s) integrated -> .claude/skills/
+  |-- 40 skill(s) integrated -> .claude/skills/
+  |-- 3 rule(s) integrated -> .claude/rules/
+  |-- 26 skill(s) integrated -> .claude/skills/
+  |-- 2 skill(s) integrated -> .claude/skills/
+  |-- 1 skill(s) integrated -> .claude/skills/
+  |-- 1 rule(s) integrated -> .claude/rules/
+  |-- 4 skill(s) integrated -> .claude/skills/
+[i] Cleaned 3 stale deployed files for ./packages/agent-package-builder
+[!]   Kept user-edited file 
+.claude/skills/provisioning-oci-api-gateway/SKILL.md (from 
+./packages/oci-terraform); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/provisioning-oci-api-gateway/blueprints/integration-patterns.md 
+(from ./packages/oci-terraform); delete manually if no longer needed
+[!]   Kept user-edited file .claude/skills/provisioning-oci-events/SKILL.md 
+(from ./packages/oci-terraform); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/provisioning-oci-events/blueprints/integration-patterns.md (from
+./packages/oci-terraform); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/provisioning-oci-functions/blueprints/integration-patterns.md 
+(from ./packages/oci-terraform); delete manually if no longer needed
+[!]   Kept user-edited file .claude/skills/researching-api-gateway/SKILL.md 
+(from ./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/researching-api-gateway/blueprints/references/README.md (from 
+./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file .claude/skills/researching-cache-store/SKILL.md 
+(from ./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/researching-cache-store/blueprints/references/README.md (from 
+./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/researching-columnar-analytics/SKILL.md (from 
+./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/researching-columnar-analytics/blueprints/category-specifics.md 
+(from ./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/researching-columnar-analytics/blueprints/data-modeling.md (from
+./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/researching-columnar-analytics/blueprints/references/README.md 
+(from ./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/researching-coordination-service/SKILL.md (from 
+./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/researching-coordination-service/blueprints/references/README.md
+(from ./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file .claude/skills/researching-document-store/SKILL.md 
+(from ./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/researching-document-store/blueprints/category-specifics.md 
+(from ./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/researching-document-store/blueprints/references/README.md (from
+./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file .claude/skills/researching-graph-database/SKILL.md 
+(from ./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/researching-graph-database/blueprints/category-specifics.md 
+(from ./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/researching-graph-database/blueprints/references/README.md (from
+./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file .claude/skills/researching-kv-store/SKILL.md (from 
+./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/researching-kv-store/blueprints/category-specifics.md (from 
+./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/researching-kv-store/blueprints/data-modeling.md (from 
+./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/researching-kv-store/blueprints/references/README.md (from 
+./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file .claude/skills/researching-object-storage/SKILL.md 
+(from ./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/researching-object-storage/blueprints/category-specifics.md 
+(from ./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/researching-object-storage/blueprints/data-modeling.md (from 
+./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/researching-object-storage/blueprints/references/README.md (from
+./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/researching-platform-software/SKILL.md (from 
+./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/researching-platform-software/blueprints/shared/category-templat
+es/api-management-template.md (from ./packages/researching-platform); delete 
+manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/researching-platform-software/blueprints/shared/data-modeling/RE
+ADME.md (from ./packages/researching-platform); delete manually if no longer 
+needed
+[!]   Kept user-edited file .claude/skills/researching-rdbms/SKILL.md (from 
+./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/researching-rdbms/blueprints/data-modeling.md (from 
+./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/researching-rdbms/blueprints/references/README.md (from 
+./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file .claude/skills/researching-search-engine/SKILL.md 
+(from ./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/researching-search-engine/blueprints/category-specifics.md (from
+./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/researching-search-engine/blueprints/references/README.md (from 
+./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/researching-streaming-broker/SKILL.md (from 
+./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/researching-streaming-broker/blueprints/references/README.md 
+(from ./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file .claude/skills/researching-timeseries-db/SKILL.md 
+(from ./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/researching-timeseries-db/blueprints/category-specifics.md (from
+./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/researching-timeseries-db/blueprints/references/README.md (from 
+./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file .claude/skills/researching-vector-store/SKILL.md 
+(from ./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/researching-vector-store/blueprints/category-specifics.md (from 
+./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/researching-vector-store/blueprints/references/README.md (from 
+./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/researching-wide-column-store/SKILL.md (from 
+./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/researching-wide-column-store/blueprints/category-specifics.md 
+(from ./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/researching-wide-column-store/blueprints/references/README.md 
+(from ./packages/researching-platform); delete manually if no longer needed
+[!]   Kept user-edited file .claude/skills/debugging-aws-lambda/SKILL.md (from 
+local:packages/aws-lambda); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/developing-quarkus-amazon-lambda-http-v3-40/SKILL.md (from 
+local:packages/quarkus-aws); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/developing-quarkus-amazon-lambda-http-v3-40/blueprints/always-do
+-patterns.md (from local:packages/quarkus-aws); delete manually if no longer 
+needed
+[!]   Kept user-edited file 
+.claude/skills/developing-quarkus-amazon-lambda-http-v3-40/blueprints/ask-first
+-decisions.md (from local:packages/quarkus-aws); delete manually if no longer 
+needed
+[!]   Kept user-edited file 
+.claude/skills/developing-quarkus-amazon-lambda-http-v3-40/blueprints/build-out
+put-and-artifact-contract.md (from local:packages/quarkus-aws); delete manually
+if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/developing-quarkus-amazon-lambda-http-v3-40/blueprints/migration
+-notes.md (from local:packages/quarkus-aws); delete manually if no longer 
+needed
+[!]   Kept user-edited file 
+.claude/skills/developing-quarkus-amazon-lambda-http-v3-40/blueprints/never-do-
+patterns.md (from local:packages/quarkus-aws); delete manually if no longer 
+needed
+[!]   Kept user-edited file 
+.claude/skills/integrating-quarkus-amazon-data-v3-40/SKILL.md (from 
+local:packages/quarkus-aws); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/integrating-quarkus-amazon-data-v3-40/blueprints/ask-first-decis
+ions.md (from local:packages/quarkus-aws); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/integrating-quarkus-amazon-data-v3-40/blueprints/dev-services.md
+(from local:packages/quarkus-aws); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/integrating-quarkus-amazon-messaging-v3-40/SKILL.md (from 
+local:packages/quarkus-aws); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/integrating-quarkus-amazon-messaging-v3-40/blueprints/always-do-
+patterns.md (from local:packages/quarkus-aws); delete manually if no longer 
+needed
+[!]   Kept user-edited file 
+.claude/skills/integrating-quarkus-amazon-messaging-v3-40/blueprints/ask-first-
+decisions.md (from local:packages/quarkus-aws); delete manually if no longer 
+needed
+[!]   Kept user-edited file 
+.claude/skills/integrating-quarkus-amazon-messaging-v3-40/blueprints/config-sou
+rces.md (from local:packages/quarkus-aws); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/integrating-quarkus-amazon-messaging-v3-40/blueprints/migration-
+notes.md (from local:packages/quarkus-aws); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/integrating-quarkus-amazon-messaging-v3-40/blueprints/publishing
+-and-limits.md (from local:packages/quarkus-aws); delete manually if no longer 
+needed
+[!]   Kept user-edited file 
+.claude/skills/integrating-quarkus-amazon-messaging-v3-40/blueprints/sqs-handle
+r.md (from local:packages/quarkus-aws); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/integrating-quarkus-amazon-messaging-v3-40/blueprints/verificati
+on-loop.md (from local:packages/quarkus-aws); delete manually if no longer 
+needed
+[!]   Kept user-edited file 
+.claude/skills/monitoring-quarkus-lambda-v3-40/SKILL.md (from 
+local:packages/quarkus-aws); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/monitoring-quarkus-lambda-v3-40/blueprints/ask-first-decisions.m
+d (from local:packages/quarkus-aws); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/monitoring-quarkus-lambda-v3-40/blueprints/emf-implementation.md
+(from local:packages/quarkus-aws); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/monitoring-quarkus-lambda-v3-40/blueprints/migration-notes.md 
+(from local:packages/quarkus-aws); delete manually if no longer needed
+[!]   Kept user-edited file .claude/skills/observing-quarkus-lambda/SKILL.md 
+(from local:packages/quarkus-aws); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/observing-quarkus-lambda/blueprints/always-do-patterns.md (from 
+local:packages/quarkus-aws); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/observing-quarkus-lambda/blueprints/ask-first-decisions.md (from
+local:packages/quarkus-aws); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/observing-quarkus-lambda/blueprints/correlation-recipe.md (from 
+local:packages/quarkus-aws); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/observing-quarkus-lambda/blueprints/never-do-patterns.md (from 
+local:packages/quarkus-aws); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/observing-quarkus-lambda/blueprints/unverified-and-risks.md 
+(from local:packages/quarkus-aws); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/observing-quarkus-lambda/blueprints/verification-loop.md (from 
+local:packages/quarkus-aws); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/securing-quarkus-lambda-cognito-v3-40/SKILL.md (from 
+local:packages/quarkus-aws); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/securing-quarkus-lambda-cognito-v3-40/blueprints/testing-and-ver
+ification.md (from local:packages/quarkus-aws); delete manually if no longer 
+needed
+[!]   Kept user-edited file 
+.claude/skills/structuring-quarkus-lambda-projects/SKILL.md (from 
+local:packages/quarkus-aws); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/structuring-quarkus-lambda-projects/blueprints/always-do-pattern
+s.md (from local:packages/quarkus-aws); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/structuring-quarkus-lambda-projects/blueprints/ask-first-decisio
+ns.md (from local:packages/quarkus-aws); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/structuring-quarkus-lambda-projects/blueprints/never-do-patterns
+.md (from local:packages/quarkus-aws); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/testing-quarkus-amazon-lambda-v3-40/SKILL.md (from 
+local:packages/quarkus-aws); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/tracing-quarkus-lambda-v3-40/SKILL.md (from 
+local:packages/quarkus-aws); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/tracing-quarkus-lambda-v3-40/blueprints/ask-first-decisions.md 
+(from local:packages/quarkus-aws); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/tracing-quarkus-lambda-v3-40/blueprints/lambda-and-api-gateway-t
+racing.md (from local:packages/quarkus-aws); delete manually if no longer 
+needed
+[!]   Kept user-edited file 
+.claude/skills/tracing-quarkus-lambda-v3-40/blueprints/verification-loop.md 
+(from local:packages/quarkus-aws); delete manually if no longer needed
+[!]   Kept user-edited file .claude/skills/terraform-rules-author/SKILL.md 
+(from local:packages/terraform); delete manually if no longer needed
+[!]   Kept user-edited file .claude/skills/refactoring-quarkus-java/SKILL.md 
+(from local:packages/quarkus-core); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/refactoring-quarkus-java/blueprints/always-do-patterns.md (from 
+local:packages/quarkus-core); delete manually if no longer needed
+[!]   Kept user-edited file 
+.claude/skills/refactoring-quarkus-java/blueprints/package-taxonomy.md (from 
+local:packages/quarkus-core); delete manually if no longer needed
+[!] Install recovery or staging cleanup is incomplete. Close programs using the
+affected paths, then inspect the retained data before retrying. Do not delete 
+backups needed to recover the prior installation.
+[!] Resolution recovery path 
+C:\agents\agents-factory\apm_modules\.apm-resolution-staging\db46c1239ba3: 
+could not remove committed staging: [WinError 145] The directory is not empty: 
+'C:\\agents\\agents-factory\\apm_modules\\.apm-resolution-staging\\db46c1239ba3
+\\backups\\079c03199beebe9b\\turbopack\\crates\\turbopack-tests\\tests\\snapsho
+t\\cjs-remove-unused-exports\\define-property-getter-reads-export\\output'
+[!] Resolution recovery path 
+C:\agents\agents-factory\apm_modules\.apm-resolution-staging\3f2527c67d26: 
+legacy backup has no activity lock and may belong to a running install
+[!] Resolution recovery path 
+C:\agents\agents-factory\apm_modules\.apm-resolution-staging\587e3773871e: 
+could not remove backup: [WinError 145] The directory is not empty: 
+'C:\\agents\\agents-factory\\apm_modules\\.apm-resolution-staging\\587e3773871e
+\\replacements\\079c03199beebe9b\\crates\\next-custom-transforms\\tests\\fixtur
+e\\ssg\\getStaticProps\\should-remove-re-exported-function-declarations-depende
+nts-variables-functions-imports'
+[!] Resolution recovery path 
+C:\agents\agents-factory\apm_modules\.apm-resolution-staging\67ab54f6df9f: 
+legacy backup has no activity lock and may belong to a running install
+[!] Resolution recovery path 
+C:\agents\agents-factory\apm_modules\.apm-resolution-staging\af4979e9a641: 
+legacy backup has no activity lock and may belong to a running install
+[!] Resolution recovery path 
+C:\agents\agents-factory\apm_modules\.apm-resolution-staging\da2bbc9e7de4: 
+legacy backup has no activity lock and may belong to a running install
+  [!] 1 file(s) contain hidden characters
+    Run with --verbose to see details
+  [!] 18 files skipped -- local files exist, not managed by APM
+    Use 'apm install --force' to overwrite
+  [!] Skipped 
+.claude/skills/building-agent-packages/assets/PIPELINE_STATE.template.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped 
+.claude/skills/building-agent-packages/scripts/inspect_workspace.py: modified 
+since deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped .claude/skills/building-agent-packages/scripts/verify_skill.py: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped .claude/skills/provisioning-oci-api-gateway/SKILL.md: modified 
+since deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped 
+.claude/skills/provisioning-oci-api-gateway/blueprints/integration-patterns.md:
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped .claude/skills/provisioning-oci-events/SKILL.md: modified since 
+deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped 
+.claude/skills/provisioning-oci-events/blueprints/integration-patterns.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped 
+.claude/skills/provisioning-oci-functions/blueprints/integration-patterns.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped .claude/skills/researching-api-gateway/SKILL.md: modified since 
+deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped 
+.claude/skills/researching-api-gateway/blueprints/references/README.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped .claude/skills/researching-cache-store/SKILL.md: modified since 
+deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped 
+.claude/skills/researching-cache-store/blueprints/references/README.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped .claude/skills/researching-columnar-analytics/SKILL.md: modified 
+since deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped 
+.claude/skills/researching-columnar-analytics/blueprints/category-specifics.md:
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped 
+.claude/skills/researching-columnar-analytics/blueprints/data-modeling.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped 
+.claude/skills/researching-columnar-analytics/blueprints/references/README.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped .claude/skills/researching-coordination-service/SKILL.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped 
+.claude/skills/researching-coordination-service/blueprints/references/README.md
+: modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped .claude/skills/researching-document-store/SKILL.md: modified 
+since deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped 
+.claude/skills/researching-document-store/blueprints/category-specifics.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped 
+.claude/skills/researching-document-store/blueprints/references/README.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped .claude/skills/researching-graph-database/SKILL.md: modified 
+since deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped 
+.claude/skills/researching-graph-database/blueprints/category-specifics.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped 
+.claude/skills/researching-graph-database/blueprints/references/README.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped .claude/skills/researching-kv-store/SKILL.md: modified since 
+deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped 
+.claude/skills/researching-kv-store/blueprints/category-specifics.md: modified 
+since deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped .claude/skills/researching-kv-store/blueprints/data-modeling.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped 
+.claude/skills/researching-kv-store/blueprints/references/README.md: modified 
+since deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped .claude/skills/researching-object-storage/SKILL.md: modified 
+since deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped 
+.claude/skills/researching-object-storage/blueprints/category-specifics.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped 
+.claude/skills/researching-object-storage/blueprints/data-modeling.md: modified
+since deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped 
+.claude/skills/researching-object-storage/blueprints/references/README.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped .claude/skills/researching-platform-software/SKILL.md: modified 
+since deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped 
+.claude/skills/researching-platform-software/blueprints/shared/category-templat
+es/api-management-template.md: modified since deployment. Preserve your changes
+before reinstalling with --force.
+  [!] Skipped 
+.claude/skills/researching-platform-software/blueprints/shared/data-modeling/RE
+ADME.md: modified since deployment. Preserve your changes before reinstalling 
+with --force.
+  [!] Skipped .claude/skills/researching-rdbms/SKILL.md: modified since 
+deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped .claude/skills/researching-rdbms/blueprints/data-modeling.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped .claude/skills/researching-rdbms/blueprints/references/README.md:
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped .claude/skills/researching-search-engine/SKILL.md: modified since
+deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped 
+.claude/skills/researching-search-engine/blueprints/category-specifics.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped 
+.claude/skills/researching-search-engine/blueprints/references/README.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped .claude/skills/researching-streaming-broker/SKILL.md: modified 
+since deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped 
+.claude/skills/researching-streaming-broker/blueprints/references/README.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped .claude/skills/researching-timeseries-db/SKILL.md: modified since
+deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped 
+.claude/skills/researching-timeseries-db/blueprints/category-specifics.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped 
+.claude/skills/researching-timeseries-db/blueprints/references/README.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped .claude/skills/researching-vector-store/SKILL.md: modified since 
+deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped 
+.claude/skills/researching-vector-store/blueprints/category-specifics.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped 
+.claude/skills/researching-vector-store/blueprints/references/README.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped .claude/skills/researching-wide-column-store/SKILL.md: modified 
+since deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped 
+.claude/skills/researching-wide-column-store/blueprints/category-specifics.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped 
+.claude/skills/researching-wide-column-store/blueprints/references/README.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped .claude/skills/debugging-aws-lambda/SKILL.md: modified since 
+deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped 
+.claude/skills/developing-quarkus-amazon-lambda-http-v3-40/SKILL.md: modified 
+since deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped 
+.claude/skills/developing-quarkus-amazon-lambda-http-v3-40/blueprints/always-do
+-patterns.md: modified since deployment. Preserve your changes before 
+reinstalling with --force.
+  [!] Skipped 
+.claude/skills/developing-quarkus-amazon-lambda-http-v3-40/blueprints/ask-first
+-decisions.md: modified since deployment. Preserve your changes before 
+reinstalling with --force.
+  [!] Skipped 
+.claude/skills/developing-quarkus-amazon-lambda-http-v3-40/blueprints/build-out
+put-and-artifact-contract.md: modified since deployment. Preserve your changes 
+before reinstalling with --force.
+  [!] Skipped 
+.claude/skills/developing-quarkus-amazon-lambda-http-v3-40/blueprints/migration
+-notes.md: modified since deployment. Preserve your changes before reinstalling
+with --force.
+  [!] Skipped 
+.claude/skills/developing-quarkus-amazon-lambda-http-v3-40/blueprints/never-do-
+patterns.md: modified since deployment. Preserve your changes before 
+reinstalling with --force.
+  [!] Skipped .claude/skills/integrating-quarkus-amazon-data-v3-40/SKILL.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped 
+.claude/skills/integrating-quarkus-amazon-data-v3-40/blueprints/ask-first-decis
+ions.md: modified since deployment. Preserve your changes before reinstalling 
+with --force.
+  [!] Skipped 
+.claude/skills/integrating-quarkus-amazon-data-v3-40/blueprints/dev-services.md
+: modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped 
+.claude/skills/integrating-quarkus-amazon-messaging-v3-40/SKILL.md: modified 
+since deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped 
+.claude/skills/integrating-quarkus-amazon-messaging-v3-40/blueprints/always-do-
+patterns.md: modified since deployment. Preserve your changes before 
+reinstalling with --force.
+  [!] Skipped 
+.claude/skills/integrating-quarkus-amazon-messaging-v3-40/blueprints/ask-first-
+decisions.md: modified since deployment. Preserve your changes before 
+reinstalling with --force.
+  [!] Skipped 
+.claude/skills/integrating-quarkus-amazon-messaging-v3-40/blueprints/config-sou
+rces.md: modified since deployment. Preserve your changes before reinstalling 
+with --force.
+  [!] Skipped 
+.claude/skills/integrating-quarkus-amazon-messaging-v3-40/blueprints/migration-
+notes.md: modified since deployment. Preserve your changes before reinstalling 
+with --force.
+  [!] Skipped 
+.claude/skills/integrating-quarkus-amazon-messaging-v3-40/blueprints/publishing
+-and-limits.md: modified since deployment. Preserve your changes before 
+reinstalling with --force.
+  [!] Skipped 
+.claude/skills/integrating-quarkus-amazon-messaging-v3-40/blueprints/sqs-handle
+r.md: modified since deployment. Preserve your changes before reinstalling with
+--force.
+  [!] Skipped 
+.claude/skills/integrating-quarkus-amazon-messaging-v3-40/blueprints/verificati
+on-loop.md: modified since deployment. Preserve your changes before 
+reinstalling with --force.
+  [!] Skipped .claude/skills/monitoring-quarkus-lambda-v3-40/SKILL.md: modified
+since deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped 
+.claude/skills/monitoring-quarkus-lambda-v3-40/blueprints/ask-first-decisions.m
+d: modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped 
+.claude/skills/monitoring-quarkus-lambda-v3-40/blueprints/emf-implementation.md
+: modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped 
+.claude/skills/monitoring-quarkus-lambda-v3-40/blueprints/migration-notes.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped .claude/skills/observing-quarkus-lambda/SKILL.md: modified since 
+deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped 
+.claude/skills/observing-quarkus-lambda/blueprints/always-do-patterns.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped 
+.claude/skills/observing-quarkus-lambda/blueprints/ask-first-decisions.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped 
+.claude/skills/observing-quarkus-lambda/blueprints/correlation-recipe.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped 
+.claude/skills/observing-quarkus-lambda/blueprints/never-do-patterns.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped 
+.claude/skills/observing-quarkus-lambda/blueprints/unverified-and-risks.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped 
+.claude/skills/observing-quarkus-lambda/blueprints/verification-loop.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped .claude/skills/securing-quarkus-lambda-cognito-v3-40/SKILL.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped 
+.claude/skills/securing-quarkus-lambda-cognito-v3-40/blueprints/testing-and-ver
+ification.md: modified since deployment. Preserve your changes before 
+reinstalling with --force.
+  [!] Skipped .claude/skills/structuring-quarkus-lambda-projects/SKILL.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped 
+.claude/skills/structuring-quarkus-lambda-projects/blueprints/always-do-pattern
+s.md: modified since deployment. Preserve your changes before reinstalling with
+--force.
+  [!] Skipped 
+.claude/skills/structuring-quarkus-lambda-projects/blueprints/ask-first-decisio
+ns.md: modified since deployment. Preserve your changes before reinstalling 
+with --force.
+  [!] Skipped 
+.claude/skills/structuring-quarkus-lambda-projects/blueprints/never-do-patterns
+.md: modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped .claude/skills/testing-quarkus-amazon-lambda-v3-40/SKILL.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped .claude/skills/tracing-quarkus-lambda-v3-40/SKILL.md: modified 
+since deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped 
+.claude/skills/tracing-quarkus-lambda-v3-40/blueprints/ask-first-decisions.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped 
+.claude/skills/tracing-quarkus-lambda-v3-40/blueprints/lambda-and-api-gateway-t
+racing.md: modified since deployment. Preserve your changes before reinstalling
+with --force.
+  [!] Skipped 
+.claude/skills/tracing-quarkus-lambda-v3-40/blueprints/verification-loop.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped .claude/skills/terraform-rules-author/SKILL.md: modified since 
+deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped .claude/skills/refactoring-quarkus-java/SKILL.md: modified since 
+deployment. Preserve your changes before reinstalling with --force.
+  [!] Skipped 
+.claude/skills/refactoring-quarkus-java/blueprints/always-do-patterns.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] Skipped 
+.claude/skills/refactoring-quarkus-java/blueprints/package-taxonomy.md: 
+modified since deployment. Preserve your changes before reinstalling with 
+--force.
+  [!] [./packages/oci-terraform] Skipped removing 
+.claude/skills/provisioning-oci-api-gateway/SKILL.md: file has been edited 
+since APM deployed it. Delete it manually if you no longer need it, or ignore 
+this warning to keep your changes.
+  [!] [./packages/oci-terraform] Skipped removing 
+.claude/skills/provisioning-oci-api-gateway/blueprints/integration-patterns.md:
+file has been edited since APM deployed it. Delete it manually if you no longer
+need it, or ignore this warning to keep your changes.
+  [!] [./packages/oci-terraform] Skipped removing 
+.claude/skills/provisioning-oci-events/SKILL.md: file has been edited since APM
+deployed it. Delete it manually if you no longer need it, or ignore this 
+warning to keep your changes.
+  [!] [./packages/oci-terraform] Skipped removing 
+.claude/skills/provisioning-oci-events/blueprints/integration-patterns.md: file
+has been edited since APM deployed it. Delete it manually if you no longer need
+it, or ignore this warning to keep your changes.
+  [!] [./packages/oci-terraform] Skipped removing 
+.claude/skills/provisioning-oci-functions/blueprints/integration-patterns.md: 
+file has been edited since APM deployed it. Delete it manually if you no longer
+need it, or ignore this warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-api-gateway/SKILL.md: file has been edited since APM
+deployed it. Delete it manually if you no longer need it, or ignore this 
+warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-api-gateway/blueprints/references/README.md: file 
+has been edited since APM deployed it. Delete it manually if you no longer need
+it, or ignore this warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-cache-store/SKILL.md: file has been edited since APM
+deployed it. Delete it manually if you no longer need it, or ignore this 
+warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-cache-store/blueprints/references/README.md: file 
+has been edited since APM deployed it. Delete it manually if you no longer need
+it, or ignore this warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-columnar-analytics/SKILL.md: file has been edited 
+since APM deployed it. Delete it manually if you no longer need it, or ignore 
+this warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-columnar-analytics/blueprints/category-specifics.md:
+file has been edited since APM deployed it. Delete it manually if you no longer
+need it, or ignore this warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-columnar-analytics/blueprints/data-modeling.md: file
+has been edited since APM deployed it. Delete it manually if you no longer need
+it, or ignore this warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-columnar-analytics/blueprints/references/README.md: 
+file has been edited since APM deployed it. Delete it manually if you no longer
+need it, or ignore this warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-coordination-service/SKILL.md: file has been edited 
+since APM deployed it. Delete it manually if you no longer need it, or ignore 
+this warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-coordination-service/blueprints/references/README.md
+: file has been edited since APM deployed it. Delete it manually if you no 
+longer need it, or ignore this warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-document-store/SKILL.md: file has been edited since 
+APM deployed it. Delete it manually if you no longer need it, or ignore this 
+warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-document-store/blueprints/category-specifics.md: 
+file has been edited since APM deployed it. Delete it manually if you no longer
+need it, or ignore this warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-document-store/blueprints/references/README.md: file
+has been edited since APM deployed it. Delete it manually if you no longer need
+it, or ignore this warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-graph-database/SKILL.md: file has been edited since 
+APM deployed it. Delete it manually if you no longer need it, or ignore this 
+warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-graph-database/blueprints/category-specifics.md: 
+file has been edited since APM deployed it. Delete it manually if you no longer
+need it, or ignore this warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-graph-database/blueprints/references/README.md: file
+has been edited since APM deployed it. Delete it manually if you no longer need
+it, or ignore this warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-kv-store/SKILL.md: file has been edited since APM 
+deployed it. Delete it manually if you no longer need it, or ignore this 
+warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-kv-store/blueprints/category-specifics.md: file has 
+been edited since APM deployed it. Delete it manually if you no longer need it,
+or ignore this warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-kv-store/blueprints/data-modeling.md: file has been 
+edited since APM deployed it. Delete it manually if you no longer need it, or 
+ignore this warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-kv-store/blueprints/references/README.md: file has 
+been edited since APM deployed it. Delete it manually if you no longer need it,
+or ignore this warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-object-storage/SKILL.md: file has been edited since 
+APM deployed it. Delete it manually if you no longer need it, or ignore this 
+warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-object-storage/blueprints/category-specifics.md: 
+file has been edited since APM deployed it. Delete it manually if you no longer
+need it, or ignore this warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-object-storage/blueprints/data-modeling.md: file has
+been edited since APM deployed it. Delete it manually if you no longer need it,
+or ignore this warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-object-storage/blueprints/references/README.md: file
+has been edited since APM deployed it. Delete it manually if you no longer need
+it, or ignore this warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-platform-software/SKILL.md: file has been edited 
+since APM deployed it. Delete it manually if you no longer need it, or ignore 
+this warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-platform-software/blueprints/shared/category-templat
+es/api-management-template.md: file has been edited since APM deployed it. 
+Delete it manually if you no longer need it, or ignore this warning to keep 
+your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-platform-software/blueprints/shared/data-modeling/RE
+ADME.md: file has been edited since APM deployed it. Delete it manually if you 
+no longer need it, or ignore this warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-rdbms/SKILL.md: file has been edited since APM 
+deployed it. Delete it manually if you no longer need it, or ignore this 
+warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-rdbms/blueprints/data-modeling.md: file has been 
+edited since APM deployed it. Delete it manually if you no longer need it, or 
+ignore this warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-rdbms/blueprints/references/README.md: file has been
+edited since APM deployed it. Delete it manually if you no longer need it, or 
+ignore this warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-search-engine/SKILL.md: file has been edited since 
+APM deployed it. Delete it manually if you no longer need it, or ignore this 
+warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-search-engine/blueprints/category-specifics.md: file
+has been edited since APM deployed it. Delete it manually if you no longer need
+it, or ignore this warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-search-engine/blueprints/references/README.md: file 
+has been edited since APM deployed it. Delete it manually if you no longer need
+it, or ignore this warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-streaming-broker/SKILL.md: file has been edited 
+since APM deployed it. Delete it manually if you no longer need it, or ignore 
+this warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-streaming-broker/blueprints/references/README.md: 
+file has been edited since APM deployed it. Delete it manually if you no longer
+need it, or ignore this warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-timeseries-db/SKILL.md: file has been edited since 
+APM deployed it. Delete it manually if you no longer need it, or ignore this 
+warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-timeseries-db/blueprints/category-specifics.md: file
+has been edited since APM deployed it. Delete it manually if you no longer need
+it, or ignore this warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-timeseries-db/blueprints/references/README.md: file 
+has been edited since APM deployed it. Delete it manually if you no longer need
+it, or ignore this warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-vector-store/SKILL.md: file has been edited since 
+APM deployed it. Delete it manually if you no longer need it, or ignore this 
+warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-vector-store/blueprints/category-specifics.md: file 
+has been edited since APM deployed it. Delete it manually if you no longer need
+it, or ignore this warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-vector-store/blueprints/references/README.md: file 
+has been edited since APM deployed it. Delete it manually if you no longer need
+it, or ignore this warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-wide-column-store/SKILL.md: file has been edited 
+since APM deployed it. Delete it manually if you no longer need it, or ignore 
+this warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-wide-column-store/blueprints/category-specifics.md: 
+file has been edited since APM deployed it. Delete it manually if you no longer
+need it, or ignore this warning to keep your changes.
+  [!] [./packages/researching-platform] Skipped removing 
+.claude/skills/researching-wide-column-store/blueprints/references/README.md: 
+file has been edited since APM deployed it. Delete it manually if you no longer
+need it, or ignore this warning to keep your changes.
+  [!] [local:packages/aws-lambda] Skipped removing 
+.claude/skills/debugging-aws-lambda/SKILL.md: file has been edited since APM 
+deployed it. Delete it manually if you no longer need it, or ignore this 
+warning to keep your changes.
+  [!] [local:packages/quarkus-aws] Skipped removing 
+.claude/skills/developing-quarkus-amazon-lambda-http-v3-40/SKILL.md: file has 
+been edited since APM deployed it. Delete it manually if you no longer need it,
+or ignore this warning to keep your changes.
+  [!] [local:packages/quarkus-aws] Skipped removing 
+.claude/skills/developing-quarkus-amazon-lambda-http-v3-40/blueprints/always-do
+-patterns.md: file has been edited since APM deployed it. Delete it manually if
+you no longer need it, or ignore this warning to keep your changes.
+  [!] [local:packages/quarkus-aws] Skipped removing 
+.claude/skills/developing-quarkus-amazon-lambda-http-v3-40/blueprints/ask-first
+-decisions.md: file has been edited since APM deployed it. Delete it manually 
+if you no longer need it, or ignore this warning to keep your changes.
+  [!] [local:packages/quarkus-aws] Skipped removing 
+.claude/skills/developing-quarkus-amazon-lambda-http-v3-40/blueprints/build-out
+put-and-artifact-contract.md: file has been edited since APM deployed it. 
+Delete it manually if you no longer need it, or ignore this warning to keep 
+your changes.
+  [!] [local:packages/quarkus-aws] Skipped removing 
+.claude/skills/developing-quarkus-amazon-lambda-http-v3-40/blueprints/migration
+-notes.md: file has been edited since APM deployed it. Delete it manually if 
+you no longer need it, or ignore this warning to keep your changes.
+  [!] [local:packages/quarkus-aws] Skipped removing 
+.claude/skills/developing-quarkus-amazon-lambda-http-v3-40/blueprints/never-do-
+patterns.md: file has been edited since APM deployed it. Delete it manually if 
+you no longer need it, or ignore this warning to keep your changes.
+  [!] [local:packages/quarkus-aws] Skipped removing 
+.claude/skills/integrating-quarkus-amazon-data-v3-40/SKILL.md: file has been 
+edited since APM deployed it. Delete it manually if you no longer need it, or 
+ignore this warning to keep your changes.
+  [!] [local:packages/quarkus-aws] Skipped removing 
+.claude/skills/integrating-quarkus-amazon-data-v3-40/blueprints/ask-first-decis
+ions.md: file has been edited since APM deployed it. Delete it manually if you 
+no longer need it, or ignore this warning to keep your changes.
+  [!] [local:packages/quarkus-aws] Skipped removing 
+.claude/skills/integrating-quarkus-amazon-data-v3-40/blueprints/dev-services.md
+: file has been edited since APM deployed it. Delete it manually if you no 
+longer need it, or ignore this warning to keep your changes.
+  [!] [local:packages/quarkus-aws] Skipped removing 
+.claude/skills/integrating-quarkus-amazon-messaging-v3-40/SKILL.md: file has 
+been edited since APM deployed it. Delete it manually if you no longer need it,
+or ignore this warning to keep your changes.
+  [!] [local:packages/quarkus-aws] Skipped removing 
+.claude/skills/integrating-quarkus-amazon-messaging-v3-40/blueprints/always-do-
+patterns.md: file has been edited since APM deployed it. Delete it manually if 
+you no longer need it, or ignore this warning to keep your changes.
+  [!] [local:packages/quarkus-aws] Skipped removing 
+.claude/skills/integrating-quarkus-amazon-messaging-v3-40/blueprints/ask-first-
+decisions.md: file has been edited since APM deployed it. Delete it manually if
+you no longer need it, or ignore this warning to keep your changes.
+  [!] [local:packages/quarkus-aws] Skipped removing 
+.claude/skills/integrating-quarkus-amazon-messaging-v3-40/blueprints/config-sou
+rces.md: file has been edited since APM deployed it. Delete it manually if you 
+no longer need it, or ignore this warning to keep your changes.
+  [!] [local:packages/quarkus-aws] Skipped removing 
+.claude/skills/integrating-quarkus-amazon-messaging-v3-40/blueprints/migration-
+notes.md: file has been edited since APM deployed it. Delete it manually if you
+no longer need it, or ignore this warning to keep your changes.
+  [!] [local:packages/quarkus-aws] Skipped removing 
+.claude/skills/integrating-quarkus-amazon-messaging-v3-40/blueprints/publishing
+-and-limits.md: file has been edited since APM deployed it. Delete it manually 
+if you no longer need it, or ignore this warning to keep your changes.
+  [!] [local:packages/quarkus-aws] Skipped removing 
+.claude/skills/integrating-quarkus-amazon-messaging-v3-40/blueprints/sqs-handle
+r.md: file has been edited since APM deployed it. Delete it manually if you no 
+longer need it, or ignore this warning to keep your changes.
+  [!] [local:packages/quarkus-aws] Skipped removing 
+.claude/skills/integrating-quarkus-amazon-messaging-v3-40/blueprints/verificati
+on-loop.md: file has been edited since APM deployed it. Delete it manually if 
+you no longer need it, or ignore this warning to keep your changes.
+  [!] [local:packages/quarkus-aws] Skipped removing 
+.claude/skills/monitoring-quarkus-lambda-v3-40/SKILL.md: file has been edited 
+since APM deployed it. Delete it manually if you no longer need it, or ignore 
+this warning to keep your changes.
+  [!] [local:packages/quarkus-aws] Skipped removing 
+.claude/skills/monitoring-quarkus-lambda-v3-40/blueprints/ask-first-decisions.m
+d: file has been edited since APM deployed it. Delete it manually if you no 
+longer need it, or ignore this warning to keep your changes.
+  [!] [local:packages/quarkus-aws] Skipped removing 
+.claude/skills/monitoring-quarkus-lambda-v3-40/blueprints/emf-implementation.md
+: file has been edited since APM deployed it. Delete it manually if you no 
+longer need it, or ignore this warning to keep your changes.
+  [!] [local:packages/quarkus-aws] Skipped removing 
+.claude/skills/monitoring-quarkus-lambda-v3-40/blueprints/migration-notes.md: 
+file has been edited since APM deployed it. Delete it manually if you no longer
+need it, or ignore this warning to keep your changes.
+  [!] [local:packages/quarkus-aws] Skipped removing 
+.claude/skills/observing-quarkus-lambda/SKILL.md: file has been edited since 
+APM deployed it. Delete it manually if you no longer need it, or ignore this 
+warning to keep your changes.
+  [!] [local:packages/quarkus-aws] Skipped removing 
+.claude/skills/observing-quarkus-lambda/blueprints/always-do-patterns.md: file 
+has been edited since APM deployed it. Delete it manually if you no longer need
+it, or ignore this warning to keep your changes.
+  [!] [local:packages/quarkus-aws] Skipped removing 
+.claude/skills/observing-quarkus-lambda/blueprints/ask-first-decisions.md: file
+has been edited since APM deployed it. Delete it manually if you no longer need
+it, or ignore this warning to keep your changes.
+  [!] [local:packages/quarkus-aws] Skipped removing 
+.claude/skills/observing-quarkus-lambda/blueprints/correlation-recipe.md: file 
+has been edited since APM deployed it. Delete it manually if you no longer need
+it, or ignore this warning to keep your changes.
+  [!] [local:packages/quarkus-aws] Skipped removing 
+.claude/skills/observing-quarkus-lambda/blueprints/never-do-patterns.md: file 
+has been edited since APM deployed it. Delete it manually if you no longer need
+it, or ignore this warning to keep your changes.
+  [!] [local:packages/quarkus-aws] Skipped removing 
+.claude/skills/observing-quarkus-lambda/blueprints/unverified-and-risks.md: 
+file has been edited since APM deployed it. Delete it manually if you no longer
+need it, or ignore this warning to keep your changes.
+  [!] [local:packages/quarkus-aws] Skipped removing 
+.claude/skills/observing-quarkus-lambda/blueprints/verification-loop.md: file 
+has been edited since APM deployed it. Delete it manually if you no longer need
+it, or ignore this warning to keep your changes.
+  [!] [local:packages/quarkus-aws] Skipped removing 
+.claude/skills/securing-quarkus-lambda-cognito-v3-40/SKILL.md: file has been 
+edited since APM deployed it. Delete it manually if you no longer need it, or 
+ignore this warning to keep your changes.
+  [!] [local:packages/quarkus-aws] Skipped removing 
+.claude/skills/securing-quarkus-lambda-cognito-v3-40/blueprints/testing-and-ver
+ification.md: file has been edited since APM deployed it. Delete it manually if
+you no longer need it, or ignore this warning to keep your changes.
+  [!] [local:packages/quarkus-aws] Skipped removing 
+.claude/skills/structuring-quarkus-lambda-projects/SKILL.md: file has been 
+edited since APM deployed it. Delete it manually if you no longer need it, or 
+ignore this warning to keep your changes.
+  [!] [local:packages/quarkus-aws] Skipped removing 
+.claude/skills/structuring-quarkus-lambda-projects/blueprints/always-do-pattern
+s.md: file has been edited since APM deployed it. Delete it manually if you no 
+longer need it, or ignore this warning to keep your changes.
+  [!] [local:packages/quarkus-aws] Skipped removing 
+.claude/skills/structuring-quarkus-lambda-projects/blueprints/ask-first-decisio
+ns.md: file has been edited since APM deployed it. Delete it manually if you no
+longer need it, or ignore this warning to keep your changes.
+  [!] [local:packages/quarkus-aws] Skipped removing 
+.claude/skills/structuring-quarkus-lambda-projects/blueprints/never-do-patterns
+.md: file has been edited since APM deployed it. Delete it manually if you no 
+longer need it, or ignore this warning to keep your changes.
+  [!] [local:packages/quarkus-aws] Skipped removing 
+.claude/skills/testing-quarkus-amazon-lambda-v3-40/SKILL.md: file has been 
+edited since APM deployed it. Delete it manually if you no longer need it, or 
+ignore this warning to keep your changes.
+  [!] [local:packages/quarkus-aws] Skipped removing 
+.claude/skills/tracing-quarkus-lambda-v3-40/SKILL.md: file has been edited 
+since APM deployed it. Delete it manually if you no longer need it, or ignore 
+this warning to keep your changes.
+  [!] [local:packages/quarkus-aws] Skipped removing 
+.claude/skills/tracing-quarkus-lambda-v3-40/blueprints/ask-first-decisions.md: 
+file has been edited since APM deployed it. Delete it manually if you no longer
+need it, or ignore this warning to keep your changes.
+  [!] [local:packages/quarkus-aws] Skipped removing 
+.claude/skills/tracing-quarkus-lambda-v3-40/blueprints/lambda-and-api-gateway-t
+racing.md: file has been edited since APM deployed it. Delete it manually if 
+you no longer need it, or ignore this warning to keep your changes.
+  [!] [local:packages/quarkus-aws] Skipped removing 
+.claude/skills/tracing-quarkus-lambda-v3-40/blueprints/verification-loop.md: 
+file has been edited since APM deployed it. Delete it manually if you no longer
+need it, or ignore this warning to keep your changes.
+  [!] [local:packages/terraform] Skipped removing 
+.claude/skills/terraform-rules-author/SKILL.md: file has been edited since APM 
+deployed it. Delete it manually if you no longer need it, or ignore this 
+warning to keep your changes.
+  [!] [local:packages/quarkus-core] Skipped removing 
+.claude/skills/refactoring-quarkus-java/SKILL.md: file has been edited since 
+APM deployed it. Delete it manually if you no longer need it, or ignore this 
+warning to keep your changes.
+  [!] [local:packages/quarkus-core] Skipped removing 
+.claude/skills/refactoring-quarkus-java/blueprints/always-do-patterns.md: file 
+has been edited since APM deployed it. Delete it manually if you no longer need
+it, or ignore this warning to keep your changes.
+  [!] [local:packages/quarkus-core] Skipped removing 
+.claude/skills/refactoring-quarkus-java/blueprints/package-taxonomy.md: file 
+has been edited since APM deployed it. Delete it manually if you no longer need
+it, or ignore this warning to keep your changes.
+  [!] [./packages/oci-terraform] Skipped removing skill directory 
+.claude/skills/provisioning-oci-api-gateway: 2 file(s) not owned by APM or 
+modified since deployment: 
+.claude/skills/provisioning-oci-api-gateway/SKILL.md, 
+.claude/skills/provisioning-oci-api-gateway/blueprints/integration-patterns.md.
+Remove manually if no longer needed.
+  [!] [./packages/oci-terraform] Skipped removing skill directory 
+.claude/skills/provisioning-oci-events: 2 file(s) not owned by APM or modified 
+since deployment: .claude/skills/provisioning-oci-events/SKILL.md, 
+.claude/skills/provisioning-oci-events/blueprints/integration-patterns.md. 
+Remove manually if no longer needed.
+  [!] [./packages/researching-platform] Skipped removing skill directory 
+.claude/skills/researching-api-gateway: 2 file(s) not owned by APM or modified 
+since deployment: .claude/skills/researching-api-gateway/SKILL.md, 
+.claude/skills/researching-api-gateway/blueprints/references/README.md. Remove 
+manually if no longer needed.
+  [!] [./packages/researching-platform] Skipped removing skill directory 
+.claude/skills/researching-cache-store: 2 file(s) not owned by APM or modified 
+since deployment: .claude/skills/researching-cache-store/SKILL.md, 
+.claude/skills/researching-cache-store/blueprints/references/README.md. Remove 
+manually if no longer needed.
+  [!] [./packages/researching-platform] Skipped removing skill directory 
+.claude/skills/researching-columnar-analytics: 4 file(s) not owned by APM or 
+modified since deployment: 
+.claude/skills/researching-columnar-analytics/SKILL.md, 
+.claude/skills/researching-columnar-analytics/blueprints/category-specifics.md,
+.claude/skills/researching-columnar-analytics/blueprints/data-modeling.md, 
+.claude/skills/researching-columnar-analytics/blueprints/references/README.md. 
+Remove manually if no longer needed.
+  [!] [./packages/researching-platform] Skipped removing skill directory 
+.claude/skills/researching-coordination-service: 2 file(s) not owned by APM or 
+modified since deployment: 
+.claude/skills/researching-coordination-service/SKILL.md, 
+.claude/skills/researching-coordination-service/blueprints/references/README.md
+. Remove manually if no longer needed.
+  [!] [./packages/researching-platform] Skipped removing skill directory 
+.claude/skills/researching-document-store: 3 file(s) not owned by APM or 
+modified since deployment: .claude/skills/researching-document-store/SKILL.md, 
+.claude/skills/researching-document-store/blueprints/category-specifics.md, 
+.claude/skills/researching-document-store/blueprints/references/README.md. 
+Remove manually if no longer needed.
+  [!] [./packages/researching-platform] Skipped removing skill directory 
+.claude/skills/researching-graph-database: 3 file(s) not owned by APM or 
+modified since deployment: .claude/skills/researching-graph-database/SKILL.md, 
+.claude/skills/researching-graph-database/blueprints/category-specifics.md, 
+.claude/skills/researching-graph-database/blueprints/references/README.md. 
+Remove manually if no longer needed.
+  [!] [./packages/researching-platform] Skipped removing skill directory 
+.claude/skills/researching-kv-store: 4 file(s) not owned by APM or modified 
+since deployment: .claude/skills/researching-kv-store/SKILL.md, 
+.claude/skills/researching-kv-store/blueprints/category-specifics.md, 
+.claude/skills/researching-kv-store/blueprints/data-modeling.md, 
+.claude/skills/researching-kv-store/blueprints/references/README.md. Remove 
+manually if no longer needed.
+  [!] [./packages/researching-platform] Skipped removing skill directory 
+.claude/skills/researching-object-storage: 4 file(s) not owned by APM or 
+modified since deployment: .claude/skills/researching-object-storage/SKILL.md, 
+.claude/skills/researching-object-storage/blueprints/category-specifics.md, 
+.claude/skills/researching-object-storage/blueprints/data-modeling.md, 
+.claude/skills/researching-object-storage/blueprints/references/README.md. 
+Remove manually if no longer needed.
+  [!] [./packages/researching-platform] Skipped removing skill directory 
+.claude/skills/researching-platform-software: 3 file(s) not owned by APM or 
+modified since deployment: 
+.claude/skills/researching-platform-software/SKILL.md, 
+.claude/skills/researching-platform-software/blueprints/shared/category-templat
+es/api-management-template.md, 
+.claude/skills/researching-platform-software/blueprints/shared/data-modeling/RE
+ADME.md. Remove manually if no longer needed.
+  [!] [./packages/researching-platform] Skipped removing skill directory 
+.claude/skills/researching-rdbms: 3 file(s) not owned by APM or modified since 
+deployment: .claude/skills/researching-rdbms/SKILL.md, 
+.claude/skills/researching-rdbms/blueprints/data-modeling.md, 
+.claude/skills/researching-rdbms/blueprints/references/README.md. Remove 
+manually if no longer needed.
+  [!] [./packages/researching-platform] Skipped removing skill directory 
+.claude/skills/researching-search-engine: 3 file(s) not owned by APM or 
+modified since deployment: .claude/skills/researching-search-engine/SKILL.md, 
+.claude/skills/researching-search-engine/blueprints/category-specifics.md, 
+.claude/skills/researching-search-engine/blueprints/references/README.md. 
+Remove manually if no longer needed.
+  [!] [./packages/researching-platform] Skipped removing skill directory 
+.claude/skills/researching-streaming-broker: 2 file(s) not owned by APM or 
+modified since deployment: 
+.claude/skills/researching-streaming-broker/SKILL.md, 
+.claude/skills/researching-streaming-broker/blueprints/references/README.md. 
+Remove manually if no longer needed.
+  [!] [./packages/researching-platform] Skipped removing skill directory 
+.claude/skills/researching-timeseries-db: 3 file(s) not owned by APM or 
+modified since deployment: .claude/skills/researching-timeseries-db/SKILL.md, 
+.claude/skills/researching-timeseries-db/blueprints/category-specifics.md, 
+.claude/skills/researching-timeseries-db/blueprints/references/README.md. 
+Remove manually if no longer needed.
+  [!] [./packages/researching-platform] Skipped removing skill directory 
+.claude/skills/researching-vector-store: 3 file(s) not owned by APM or modified
+since deployment: .claude/skills/researching-vector-store/SKILL.md, 
+.claude/skills/researching-vector-store/blueprints/category-specifics.md, 
+.claude/skills/researching-vector-store/blueprints/references/README.md. Remove
+manually if no longer needed.
+  [!] [./packages/researching-platform] Skipped removing skill directory 
+.claude/skills/researching-wide-column-store: 3 file(s) not owned by APM or 
+modified since deployment: 
+.claude/skills/researching-wide-column-store/SKILL.md, 
+.claude/skills/researching-wide-column-store/blueprints/category-specifics.md, 
+.claude/skills/researching-wide-column-store/blueprints/references/README.md. 
+Remove manually if no longer needed.
+  [!] [local:packages/aws-lambda] Skipped removing skill directory 
+.claude/skills/debugging-aws-lambda: 1 file(s) not owned by APM or modified 
+since deployment: .claude/skills/debugging-aws-lambda/SKILL.md. Remove manually
+if no longer needed.
+  [!] [local:packages/quarkus-aws] Skipped removing skill directory 
+.claude/skills/developing-quarkus-amazon-lambda-http-v3-40: 6 file(s) not owned
+by APM or modified since deployment: 
+.claude/skills/developing-quarkus-amazon-lambda-http-v3-40/SKILL.md, 
+.claude/skills/developing-quarkus-amazon-lambda-http-v3-40/blueprints/always-do
+-patterns.md, 
+.claude/skills/developing-quarkus-amazon-lambda-http-v3-40/blueprints/ask-first
+-decisions.md, 
+.claude/skills/developing-quarkus-amazon-lambda-http-v3-40/blueprints/build-out
+put-and-artifact-contract.md, 
+.claude/skills/developing-quarkus-amazon-lambda-http-v3-40/blueprints/migration
+-notes.md (and 1 more). Remove manually if no longer needed.
+  [!] [local:packages/quarkus-aws] Skipped removing skill directory 
+.claude/skills/integrating-quarkus-amazon-data-v3-40: 3 file(s) not owned by 
+APM or modified since deployment: 
+.claude/skills/integrating-quarkus-amazon-data-v3-40/SKILL.md, 
+.claude/skills/integrating-quarkus-amazon-data-v3-40/blueprints/ask-first-decis
+ions.md, 
+.claude/skills/integrating-quarkus-amazon-data-v3-40/blueprints/dev-services.md
+. Remove manually if no longer needed.
+  [!] [local:packages/quarkus-aws] Skipped removing skill directory 
+.claude/skills/integrating-quarkus-amazon-messaging-v3-40: 8 file(s) not owned 
+by APM or modified since deployment: 
+.claude/skills/integrating-quarkus-amazon-messaging-v3-40/SKILL.md, 
+.claude/skills/integrating-quarkus-amazon-messaging-v3-40/blueprints/always-do-
+patterns.md, 
+.claude/skills/integrating-quarkus-amazon-messaging-v3-40/blueprints/ask-first-
+decisions.md, 
+.claude/skills/integrating-quarkus-amazon-messaging-v3-40/blueprints/config-sou
+rces.md, 
+.claude/skills/integrating-quarkus-amazon-messaging-v3-40/blueprints/migration-
+notes.md (and 3 more). Remove manually if no longer needed.
+  [!] [local:packages/quarkus-aws] Skipped removing skill directory 
+.claude/skills/monitoring-quarkus-lambda-v3-40: 4 file(s) not owned by APM or 
+modified since deployment: 
+.claude/skills/monitoring-quarkus-lambda-v3-40/SKILL.md, 
+.claude/skills/monitoring-quarkus-lambda-v3-40/blueprints/ask-first-decisions.m
+d, 
+.claude/skills/monitoring-quarkus-lambda-v3-40/blueprints/emf-implementation.md
+, .claude/skills/monitoring-quarkus-lambda-v3-40/blueprints/migration-notes.md.
+Remove manually if no longer needed.
+  [!] [local:packages/quarkus-aws] Skipped removing skill directory 
+.claude/skills/observing-quarkus-lambda: 7 file(s) not owned by APM or modified
+since deployment: .claude/skills/observing-quarkus-lambda/SKILL.md, 
+.claude/skills/observing-quarkus-lambda/blueprints/always-do-patterns.md, 
+.claude/skills/observing-quarkus-lambda/blueprints/ask-first-decisions.md, 
+.claude/skills/observing-quarkus-lambda/blueprints/correlation-recipe.md, 
+.claude/skills/observing-quarkus-lambda/blueprints/never-do-patterns.md (and 2 
+more). Remove manually if no longer needed.
+  [!] [local:packages/quarkus-aws] Skipped removing skill directory 
+.claude/skills/securing-quarkus-lambda-cognito-v3-40: 2 file(s) not owned by 
+APM or modified since deployment: 
+.claude/skills/securing-quarkus-lambda-cognito-v3-40/SKILL.md, 
+.claude/skills/securing-quarkus-lambda-cognito-v3-40/blueprints/testing-and-ver
+ification.md. Remove manually if no longer needed.
+  [!] [local:packages/quarkus-aws] Skipped removing skill directory 
+.claude/skills/structuring-quarkus-lambda-projects: 4 file(s) not owned by APM 
+or modified since deployment: 
+.claude/skills/structuring-quarkus-lambda-projects/SKILL.md, 
+.claude/skills/structuring-quarkus-lambda-projects/blueprints/always-do-pattern
+s.md, 
+.claude/skills/structuring-quarkus-lambda-projects/blueprints/ask-first-decisio
+ns.md, 
+.claude/skills/structuring-quarkus-lambda-projects/blueprints/never-do-patterns
+.md. Remove manually if no longer needed.
+  [!] [local:packages/quarkus-aws] Skipped removing skill directory 
+.claude/skills/testing-quarkus-amazon-lambda-v3-40: 1 file(s) not owned by APM 
+or modified since deployment: 
+.claude/skills/testing-quarkus-amazon-lambda-v3-40/SKILL.md. Remove manually if
+no longer needed.
+  [!] [local:packages/quarkus-aws] Skipped removing skill directory 
+.claude/skills/tracing-quarkus-lambda-v3-40: 4 file(s) not owned by APM or 
+modified since deployment: 
+.claude/skills/tracing-quarkus-lambda-v3-40/SKILL.md, 
+.claude/skills/tracing-quarkus-lambda-v3-40/blueprints/ask-first-decisions.md, 
+.claude/skills/tracing-quarkus-lambda-v3-40/blueprints/lambda-and-api-gateway-t
+racing.md, 
+.claude/skills/tracing-quarkus-lambda-v3-40/blueprints/verification-loop.md. 
+Remove manually if no longer needed.
+  [!] [local:packages/terraform] Skipped removing skill directory 
+.claude/skills/terraform-rules-author: 1 file(s) not owned by APM or modified 
+since deployment: .claude/skills/terraform-rules-author/SKILL.md. Remove 
+manually if no longer needed.
+  [!] [local:packages/quarkus-core] Skipped removing skill directory 
+.claude/skills/refactoring-quarkus-java: 3 file(s) not owned by APM or modified
+since deployment: .claude/skills/refactoring-quarkus-java/SKILL.md, 
+.claude/skills/refactoring-quarkus-java/blueprints/always-do-patterns.md, 
+.claude/skills/refactoring-quarkus-java/blueprints/package-taxonomy.md. Remove 
+manually if no longer needed.
+[*] Installed 41 APM dependencies (3 stale files cleaned) in 1397.2s.

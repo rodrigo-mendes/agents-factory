@@ -72,7 +72,7 @@ written: return it as a **user-must-add** item in the report.
    in that case. Never invent bucket, role, account, environment or repository names.
 2. **Load the rules, then only the matching skills.** Read the rules for the file types you will
    write from `.claude/rules/<name>.md` (fallback in the factory repository:
-   `packages/github-actions-cicd/.apm/instructions/<name>.instructions.md`): `github-workflows-security`
+   `packages/delivery/github/github-actions-cicd/.apm/instructions/<name>.instructions.md`): `github-workflows-security`
    (all workflows), `github-workflows-pr-ci` (`ci-*`), `github-workflows-merge-cd` (`cd-*`),
    `github-workflows-building-blocks` (`_*` and composites). Then always load
    `composing-github-actions-pipelines` for the building-block model, read

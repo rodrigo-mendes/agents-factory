@@ -100,7 +100,7 @@ def main():
         warn.append('core.autocrlf=true and no .gitattributes: APM may see CRLF-only copies as user-edited')
 
     crlf, drift = [], 0
-    for src in glob.glob('packages/*/.apm/skills/*/**/*', recursive=True):
+    for src in glob.glob('packages/**/.apm/skills/*/**/*', recursive=True):
         if not os.path.isfile(src):
             continue
         rel = src.replace(os.sep, '/').split('/.apm/', 1)[1]

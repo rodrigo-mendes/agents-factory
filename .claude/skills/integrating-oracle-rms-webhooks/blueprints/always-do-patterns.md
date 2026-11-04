@@ -32,7 +32,7 @@ String cred = Base64.getEncoder().encodeToString((clientId+":"+clientSecret).get
 ```
 - Cache: `volatile cachedToken` + `volatile tokenExpiresAt`, `synchronized`, refresh **60s before** expiry.
 - Secrets (`client_id`/`client_secret`) in OCI Vault, referenced by OCID; read in `@FnConfiguration`.
-- Scope: `rgbu:merch:MFCS-PAR1`. Token URL: IDCS `/oauth2/v1/token`.
+- Scope: `rgbu:merch:<APP-ENV>` (per environment). Token URL: IDCS `/oauth2/v1/token`.
 
 ## 5. Retry + timeout budget
 - Retry on 5xx/timeout, exponential backoff (2 attempts typical). Fail-fast on 4xx.

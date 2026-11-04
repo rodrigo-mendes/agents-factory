@@ -224,7 +224,7 @@ public Span startConsumerSpan(String name, String traceparent, String tracestate
 - Export spans with `SimpleSpanProcessor`, not `BatchSpanProcessor` (see never-do #7) — the container freezes on return.
 - Null-guard everything: with tracing disabled or a partial envelope, degrade to `Span.getInvalid()` no-ops so callers can invoke start/end unconditionally.
 
-**Evidence**: `services/func-event-producer/src/main/java/com/brx/functions/event/producer/obs/TracingSupport.java` (`injectTraceContext` / `startConsumerSpan`); `docs/handoff/event-pubsub/observability-validation-report.md` (single TraceId `f94cb37b…` across producer SERVER + 2 consumer CONSUMER siblings + 1 CLIENT downstream).
+**Evidence**: `services/func-event-producer/src/main/java/com/example/functions/event/producer/obs/TracingSupport.java` (`injectTraceContext` / `startConsumerSpan`); `docs/handoff/event-pubsub/observability-validation-report.md` (single TraceId `f94cb37b…` across producer SERVER + 2 consumer CONSUMER siblings + 1 CLIENT downstream).
 
 ---
 
@@ -292,7 +292,7 @@ The following are extracted from `libs/obs-commons/` in the PoC. They show how a
 ### ObservabilityHelper — unified configure + delegate facade
 
 ```java
-// from libs/obs-commons/src/main/java/com/brx/functions/common/obs/ObservabilityHelper.java
+// from libs/obs-commons/src/main/java/com/example/functions/common/obs/ObservabilityHelper.java
 
 // Static facade over three collaborators — one configure() call from @FnConfiguration:
 //   LoggingBridge  — JUL→SLF4J bridge (installed at class load, before any SDK class)
@@ -337,7 +337,7 @@ public class ObservabilityHelper {
 ### TracingSupport — eager cold-start init + SimpleSpanProcessor synchronous export
 
 ```java
-// from libs/obs-commons/src/main/java/com/brx/functions/common/obs/TracingSupport.java
+// from libs/obs-commons/src/main/java/com/example/functions/common/obs/TracingSupport.java
 // (key excerpt — cold-start init path)
 
 public void configure(RuntimeContext ctx, String environment) {

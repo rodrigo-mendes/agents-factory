@@ -1,0 +1,26 @@
+Agent: artifact-author
+Spec: follow packages/factory/artifact-authoring/.apm/skills/skill-creator/SKILL.md and the hybrid template packages/factory/artifact-authoring/.apm/skills/skill-creator/assets/TEMPLATE.KNOWLEDGE-SKILL.HYBRID.md. Checklist: packages/factory/agent-package-builder/.apm/skills/building-agent-packages/blueprints/policy/hybrid-format-checklist.md; evidence rule: .../blueprints/policy/evidence-rule.md; tag notation: .../blueprints/policy/tag-notation-and-registers.md. Reference implementation of the format: packages/java/quarkus/camel-quarkus-skills/.apm/skills/developing-camel-quarkus-core-v3-40/.
+Input:
+- Research: workspace/software-quality/research/research_Cucumber_QuarkusCucumber_v8.0.md
+- Spike evidence (orchestrator, 2026-10-31): workspace/software-quality/execution-1/spike/SPIKE_RESULTS.md and the spike sources under workspace/software-quality/execution-1/spike/pathB/ (pom.xml, AcceptanceIT.java, GreetingSteps.java, greeting.feature) and pathA/.
+- Facts: workspace/software-quality/_family_facts.md ; rules: workspace/software-quality/_family_rules.md
+Skill name: testing-quarkus-cucumber-v8-0
+Write to: packages/quality/quarkus-acceptance-testing/.apm/skills/testing-quarkus-cucumber-v8-0/ (create the folders; NOT .claude/)
+Content decisions (from research + spike; the user will confirm the path at G2, write it so that B is the default and A is an Ask-First option):
+- Default pattern B1 "Cucumber inside @QuarkusIntegrationTest": one Failsafe IT class annotated @QuarkusIntegrationTest that runs Cucumber through `io.cucumber.core.cli.Main.run(args, classLoader)` and asserts exit 0; steps drive the packaged app with RestAssured (Quarkus configures the port). Evidence: spike PASS (medium confidence: built from public APIs, not shown on an official page; cite the spike).
+- Pattern B2 "@Suite engine runner" (official, F3) for an app started outside the test (pipeline-started or Docker) with a base-URI property; Surefire cannot discover .feature, use @Suite; naming-strategy long for Surefire 3.5.4+.
+- Path A quarkus-cucumber 1.3.0: Ask-First only (in-process @QuarkusTest, CDI-bean steps, locks Cucumber 7.21.1, JUnit 6 fix unreleased, no IT support) — F7.
+- Cover from the research: BOMs (cucumber-bom 8.0.x + Quarkus platform BOM; no version overrides — rule 8), dependencies, Failsafe/Surefire split, glue/plugins/tags properties, Cucumber Expressions, ParameterType, DataTable/DataTableType, DocString, hooks (incl. tagged hooks), scenario state (one step instance per scenario; picocontainer for shared state across step classes), reports + explicit Jackson for json/html/messages (F4), parallel execution caveats, 7.x→8.0 migration (final classes, removed cdi2/openejb/deltaspike, deprecated cucumber-junit), traceability tags `@R<n>` `@change-<id>` filtered with `--tags`/`cucumber.filter.tags` (rule 5).
+- Link (do not repeat) developing-quarkus-junit-v3-40 for test types/profiles/mocks (rule 9), and name the sibling skills `testing-quarkus-integration-v3-40` (WireMock, Dev Services, Testcontainers, Failsafe pom details) and `deriving-gherkin-from-openspec-v1-15` (writing the .feature) as neighbours without linking to files that do not exist yet (plain names only).
+- evaluation-scenarios.md: at least 5 scenarios — canonical (add Cucumber acceptance tests to a Quarkus 3.40 REST app), edge (app started by pipeline → B2), rejection (asked to use cucumber-junit / JUnit 4 runner), trap (asked to add quarkus-cucumber "because it is the Quarkus way" → Ask-First with facts), trap (call the real external partner API in a step → refuse, WireMock via sibling skill).
+Approval line: The user approved 3 units (U1 pilot testing-quarkus-cucumber-v8-0, U2, U3), 2 rules, 2 agents, 1 command, 2 packages under packages/quality/, Cucumber 8.0.4 / Quarkus 3.40, exhaustive research on 2026-10-31 (verbatim: "Approve"); recorded in workspace/software-quality/execution-1/state/gates/G1.md. This is a relay, not a new approval.
+Hard constraints:
+- Do NOT spawn any agent, section-investigator or background task.
+- Do NOT enter plan mode and do not wait for a P3 gate: the user approved this scope in this session (see Approval line); it is not a new approval and you must not treat it as one from yourself.
+- Write only files under the "Write to" folder. Report the paths and anything you could not verify.
+- Apply _family_facts.md and _family_rules.md as given; do not edit them.
+- Lessons from earlier batches: none yet.
+- Never make the shipped skill READ a file under workspace/; copy anything needed into the skill's references/ (citing the research/spike as provenance is fine).
+- Do not edit shared files (root apm.yml, lock, CLAUDE.md, docs/, other packages).
+- Description: one quoted line, < 300 characters, "Use when ... Not for ...". SKILL.md 100-200 lines; every other file <= 160 lines; no absolute paths, no relative dates.
+Done when: python packages/factory/agent-package-builder/.apm/skills/building-agent-packages/scripts/verify_skill.py packages/quality/quarkus-acceptance-testing/.apm/skills/testing-quarkus-cucumber-v8-0 exits 0 (you have no Bash: the orchestrator runs it) and the register header counts equal the listed items.

@@ -71,7 +71,7 @@ version: 0.0.1
 runtime: java
 build_image: fnproject/fn-java-fdk-build:jdk17-latest
 run_image: fnproject/fn-java-fdk:jre17-latest
-cmd: com.brx.functions.eventproducer.EventProducerFunction::handler
+cmd: com.example.functions.eventproducer.EventProducerFunction::handler
 memory: 256
 timeout: 60
 config:

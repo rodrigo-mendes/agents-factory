@@ -58,8 +58,8 @@ happens once in `configure()`, not in `handler()`. Warm invocations skip this pa
 **Architecture** (multiple routes, single Function Application):
 ```
 API Gateway
-  ├── POST /v1/proxy/store/create  ─► func-rr-rest-proxy ─► OAuth2 → RMS → transform → BrxServices
-  ├── POST /v1/proxy/store/update  ─► func-rr-rest-proxy ─► OAuth2 → RMS → transform → BrxServices
+  ├── POST /v1/proxy/store/create  ─► func-rr-rest-proxy ─► OAuth2 → RMS → transform → TargetServices
+  ├── POST /v1/proxy/store/update  ─► func-rr-rest-proxy ─► OAuth2 → RMS → transform → TargetServices
   └── POST /v1/proxy/item/webhook  ─► func-rr-rest-proxy ─► signature check → forward
 ```
 

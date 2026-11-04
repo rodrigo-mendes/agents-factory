@@ -1,0 +1,8 @@
+[
+ {"message": "docs: sync counts and add the 23-package catalog\n\nREADME, docs/ and CLAUDE.md now state the real numbers (199 skills: 64\ncommands + 135 knowledge, 34 agents, 44 rules, 23 packages) taken from\ncheck_counts.py / verify_package.py, and README gains a package catalog.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>",
+  "paths": ["README.md", "CLAUDE.md", "docs/", ".claude/MIGRATION.md"]},
+ {"message": "fix(packages): repair broken skill links, port check_counts to Python\n\n- add missing aws-skills blueprints and researching-* references\n- fix OCI cross-skill links and researching-platform shared paths\n- verify_skill/verify_package fixes; check_counts.sh -> check_counts.py\n  (also scans docs/ and Portuguese wording)\n- port .claude-only link fixes of refactoring-oci-java and\n  terraform-rules-author back into their packages\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>",
+  "paths": ["packages/agent-package-builder/", "packages/aws-skills/", "packages/oci-functions-java/", "packages/oci-terraform/", "packages/researching-platform/", "packages/terraform/"]},
+ {"message": "chore(apm): regenerate .claude and lock; drop microsoft/apm\n\nmicrosoft/apm is no longer in apm.yml: its 11 skills (autopilot-*,\npr-description-skill) leave .claude/ and the lock now records langchain4j.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>",
+  "paths": ["apm.lock.yaml", ".claude/skills/", ".claude/rules/"]}
+]

@@ -483,18 +483,18 @@ def tf_out(name, fallback=""):
 #
 # Spec: label | tf_output_base | custom_namespace | prefixo_metrica | fallback_app | fallback_fn
 # tf_output_base resolve "<base>_application_id" e "<base>_function_id"; preferimos
-# SEMPRE o valor vivo do `terraform output`; os OCIDs hardcoded são só fallback.
+# SEMPRE o valor vivo do `terraform output`; os OCIDs abaixo são placeholders fictícios.
 # Os 3 apps pub/sub (Pattern 02) compartilham o namespace `event_pubsub_analytics`.
-# Fallbacks confirmados ao vivo (oci fn ... list, 2026-07-22, região sa-saopaulo-1).
+# Sem terraform output, as consultas usam estes placeholders e voltam vazias.
 # ------------------------------------------------------------------------------
 _FUNCTIONS_META_SPEC = [
-    "api-handler|api_handler|api_handler_analytics|ApiHandler|ocid1.fnapp.oc1.sa-saopaulo-1.amaaaaaa543c4nyadf7booxbvvg6ernldcdbwrxahtw7w2jer3sfhp7ujjyq|ocid1.fnfunc.oc1.sa-saopaulo-1.amaaaaaa543c4nyawaxod6lh5w37le6yfyinnsibpwpq6grvprgua2amij5q",
-    "func-api-facade|api_facade|serverless_facade|ApiFacade|ocid1.fnapp.oc1.sa-saopaulo-1.amaaaaaa543c4nyaetxnny6q7rr3trylculrbucuim3mti7tsa4i2zkzuoyq|ocid1.fnfunc.oc1.sa-saopaulo-1.amaaaaaa543c4nyaqlmzdfkvbe7rwtys7zsukahfmhu6t5ikqqm3mfkq6zdq",
-    "func-rr-rest-proxy|rest_proxy|rest_proxy_analytics|RestProxy|ocid1.fnapp.oc1.sa-saopaulo-1.amaaaaaa543c4nyased4pvcjmegljcx4uw47bypu53bbwkfsb2bajtoxv75a|ocid1.fnfunc.oc1.sa-saopaulo-1.amaaaaaa543c4nyaizt447zllj2362ztaibza5dcsxw2cfcj3ocoeazuty4a",
+    "api-handler|api_handler|api_handler_analytics|ApiHandler|ocid1.fnapp.oc1.sa-saopaulo-1.example-api-handler-app|ocid1.fnfunc.oc1.sa-saopaulo-1.example-api-handler-fn",
+    "func-api-facade|api_facade|serverless_facade|ApiFacade|ocid1.fnapp.oc1.sa-saopaulo-1.example-func-api-facade-app|ocid1.fnfunc.oc1.sa-saopaulo-1.example-func-api-facade-fn",
+    "func-rr-rest-proxy|rest_proxy|rest_proxy_analytics|RestProxy|ocid1.fnapp.oc1.sa-saopaulo-1.example-func-rr-rest-proxy-app|ocid1.fnfunc.oc1.sa-saopaulo-1.example-func-rr-rest-proxy-fn",
     # --- Event-Driven Pub/Sub (Pattern 02) ---
-    "func-event-producer|event_producer|event_pubsub_analytics|EventProduced|ocid1.fnapp.oc1.sa-saopaulo-1.amaaaaaa543c4nyaocnsg26tu2cwf4mqdmhcn7guqtofqisgkyrpop2hxdkq|ocid1.fnfunc.oc1.sa-saopaulo-1.amaaaaaa543c4nyasqb6jm3f5hadyrhlc6y4zqrldu3gm5restrrdip4u3va",
-    "func-evt-consumer-notify|evt_consumer_notify|event_pubsub_analytics|NotifyEventProcessed|ocid1.fnapp.oc1.sa-saopaulo-1.amaaaaaa543c4nyao6cktchg6zm4z3vtqytqkqvps2jlx7tqzfahc3jolmfq|ocid1.fnfunc.oc1.sa-saopaulo-1.amaaaaaa543c4nyaqxui43bkqdhs6gcctenbjs54ozsbnhy2oyal5dshw44a",
-    "func-evt-consumer-audit|evt_consumer_audit|event_pubsub_analytics|AuditEventProcessed|ocid1.fnapp.oc1.sa-saopaulo-1.amaaaaaa543c4nya4afwc7uhswdby5cwm4zzv3xzot5nvoyomj4t4lcmieha|ocid1.fnfunc.oc1.sa-saopaulo-1.amaaaaaa543c4nya4gsk4nyx7a23dqfeszxcljr7hgf2jyxlkgjx2r5vtnbq",
+    "func-event-producer|event_producer|event_pubsub_analytics|EventProduced|ocid1.fnapp.oc1.sa-saopaulo-1.example-func-event-producer-app|ocid1.fnfunc.oc1.sa-saopaulo-1.example-func-event-producer-fn",
+    "func-evt-consumer-notify|evt_consumer_notify|event_pubsub_analytics|NotifyEventProcessed|ocid1.fnapp.oc1.sa-saopaulo-1.example-func-evt-consumer-notify-app|ocid1.fnfunc.oc1.sa-saopaulo-1.example-func-evt-consumer-notify-fn",
+    "func-evt-consumer-audit|evt_consumer_audit|event_pubsub_analytics|AuditEventProcessed|ocid1.fnapp.oc1.sa-saopaulo-1.example-func-evt-consumer-audit-app|ocid1.fnfunc.oc1.sa-saopaulo-1.example-func-evt-consumer-audit-fn",
 ]
 
 REPO_ROOT = ""
@@ -517,8 +517,8 @@ def init():
     REPO_ROOT = top or os.path.abspath(os.path.join(SCRIPT_DIR, "..", ".."))
     TF_DIR = os.environ.get("TF_DIR") or os.path.join(REPO_ROOT, "infra", "environments", "dev")
 
-    COMPARTMENT_OCID = tf_out("compartment_ocid", "ocid1.compartment.oc1..aaaaaaaat3d6o3oron7jqrztl572jjrsdobf6bimutf57jirbzetc4magzja")
-    API_BASE_URL = tf_out("api_base_url", "https://lopiafgboojvw37sqyoxptl7t4.apigateway.sa-saopaulo-1.oci.customer-oci.com/v1")
+    COMPARTMENT_OCID = tf_out("compartment_ocid", "")  # no fallback: comes from terraform output
+    API_BASE_URL = tf_out("api_base_url", "")  # no fallback: comes from terraform output
     LOG_GROUP_ID = tf_out("log_group_id", "")
     APM_DOMAIN_ID = tf_out("apm_domain_id", "")
     NOTIFICATION_TOPIC_ID = tf_out("notification_topic_id", "")
