@@ -35,13 +35,13 @@ This skill is a **thin router**: it identifies the correct specialized sibling s
 | Sibling | Family | Representative Platforms |
 |---|---|---|
 | [researching-streaming-broker](../researching-streaming-broker/SKILL.md) | Streaming & messaging | Apache Kafka, RabbitMQ, Apache Pulsar, NATS, ActiveMQ |
-| [researching-cache-store](../researching-cache-store/SKILL.md) | In-memory cache / session | Redis (as cache), Memcached, KeyDB, Dragonfly |
+| [researching-cache-store](../researching-cache-store/SKILL.md) | In-memory cache / session | Redis or Valkey (as cache), Memcached, KeyDB, Dragonfly |
 | [researching-coordination-service](../researching-coordination-service/SKILL.md) | Distributed coordination | etcd, Apache ZooKeeper, HashiCorp Consul |
 | [researching-search-engine](../researching-search-engine/SKILL.md) | Full-text / analytics search | Elasticsearch, OpenSearch, Solr, Typesense, Meilisearch |
 | [researching-api-gateway](../researching-api-gateway/SKILL.md) | API management / gateway | Kong, APISIX, Tyk, Traefik EE, KrakenD, Envoy Gateway |
 | [researching-rdbms](../researching-rdbms/SKILL.md) | Relational / NewSQL | PostgreSQL, MySQL, MariaDB, CockroachDB |
 | [researching-document-store](../researching-document-store/SKILL.md) | Document database | MongoDB, Couchbase, RavenDB |
-| [researching-kv-store](../researching-kv-store/SKILL.md) | Persistent key-value store | Redis (as primary DB), RocksDB, LMDB, TiKV |
+| [researching-kv-store](../researching-kv-store/SKILL.md) | Persistent key-value store | Redis or Valkey (as primary DB), RocksDB, LMDB, TiKV |
 | [researching-wide-column-store](../researching-wide-column-store/SKILL.md) | Wide-column database | Apache Cassandra, ScyllaDB, HBase |
 | [researching-graph-database](../researching-graph-database/SKILL.md) | Graph database | Neo4j, JanusGraph, ArangoDB, Nebula Graph |
 | [researching-timeseries-db](../researching-timeseries-db/SKILL.md) | Time-series database | InfluxDB, TimescaleDB, VictoriaMetrics, QuestDB |

@@ -168,3 +168,40 @@ than at routing time. This scenario exists to catch that early.
   skill is already mid-research
 - Treat a missing shared asset the same as "platform not found" (Scenario 4) — the two failure
   modes have different causes and different fixes
+
+---
+
+## Scenario 8 — Ambiguous Route (Valkey, Redis fork)
+
+**Input**:
+```
+/researching-platform-software Valkey 8.1
+```
+
+**must_pass**:
+- Detects Valkey as ambiguous with the same three roles as Redis and asks which one (cache / kv / coordination)
+- Routes to the sibling the user picks, passing `Valkey` (not `Redis`) as the platform
+- Keeps Valkey and Redis as separate research runs and states that facts are not shared between them
+
+**must_not**:
+- Return the "no match" fallback (Scenario 4) for Valkey
+- Rewrite the platform to "Redis" or merge Redis release notes into a Valkey run
+
+---
+
+## Scenario 9 — Framework, Not a Platform (redirect)
+
+**Input**:
+```
+/researching-platform-software Debezium 3.0
+```
+
+**must_pass**:
+- Recognises Debezium as a framework (listed under "Not a platform"), not a self-managed platform
+- Replies with the redirect `/researching-technical-frameworks Debezium 3.0` and stops
+- Notes that the source database (e.g. MySQL) is still researched through this router
+- Same behaviour for Kafka Streams, Kafka Connect and Schema Registry (asks the vendor for Schema Registry)
+
+**must_not**:
+- Route Debezium or Kafka Connect to `researching-streaming-broker`
+- Produce research output in this skill

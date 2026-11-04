@@ -1,6 +1,6 @@
 ---
 name: researching-cache-store
-description: "Researches self-managed in-memory cache / session stores (Redis-as-cache, Memcached, KeyDB, Dragonfly) into a hallucination-proof, version-absolute knowledge base covering installation, HA topology, eviction policies, persistence trade-offs, hardening, and observability. Use when the platform is deployed as an ephemeral cache (data expected to be lost on eviction) — for Redis as primary datastore use researching-kv-store; for coordination use researching-coordination-service."
+description: "Researches self-managed in-memory cache / session stores (Redis or Valkey as cache, Memcached, KeyDB, Dragonfly) into a hallucination-proof, version-absolute knowledge base covering installation, HA topology, eviction policies, persistence trade-offs, hardening, and observability. Use when the platform is deployed as an ephemeral cache (data expected to be lost on eviction) — for Redis as primary datastore use researching-kv-store; for coordination use researching-coordination-service."
 argument-hint: "<platform> <version> [deployment=bare-metal|vm|container-compose|kubernetes-operator|hybrid] [depth=exhaustive] [iterations=5] (e.g. Redis 7.2 deployment=vm / Memcached 1.6 deployment=kubernetes-operator)"
 context: fork
 agent: framework-researcher
@@ -11,7 +11,7 @@ disable-model-invocation: true
 
 ## INPUT VARIABLES
 
-- `PLATFORM_SOFTWARE`: Redis | Memcached | KeyDB | Dragonfly (as ephemeral cache)
+- `PLATFORM_SOFTWARE`: Redis | Valkey | Memcached | KeyDB | Dragonfly (as ephemeral cache)
 - `TARGET_VERSION`: exact semver
 - `DEPLOYMENT_MODEL`, `RESEARCH_DEPTH`, `MAX_ITERATIONS`: standard passthrough
 
@@ -76,6 +76,7 @@ Conditional sections:
 | Cache | Primary Docs | K8s Operator | Release Notes |
 |---|---|---|---|
 | Redis | redis.io/docs | Redis Operator (spotahome), Redis Enterprise Operator | github.com/redis/redis/releases |
+| Valkey | valkey.io | operator: identify during research (unverified) | github.com/valkey-io/valkey/releases |
 | Memcached | memcached.org / github.com/memcached/memcached/wiki | Bitnami Helm chart | github.com/memcached/memcached/wiki/ReleaseNotes |
 | KeyDB | docs.keydb.dev | Community Helm charts | github.com/Snapchat/KeyDB/releases |
 | Dragonfly | dragonflydb.io/docs | Dragonfly Operator (dragonflydb/dragonfly-operator) | github.com/dragonflydb/dragonfly/releases |
