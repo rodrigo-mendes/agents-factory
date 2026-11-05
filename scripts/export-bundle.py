@@ -228,7 +228,150 @@ def select(files, sandbox: Path, tdir: str, spec: dict):
 
 
 # ---------------------------------------------------------------------------- output
-def readme(meta: dict, bundle: str, counts: dict, lists: dict, vercel: bool, tdir: str) -> str:
+# ---------------------------------------------------------------------------- usage manuals (docs/)
+KINDS = ("skills", "agents", "rules")
+MAX_LISTED = 12  # names shown per kind in the "not included" banner
+INSTALL_NOTE = ("This package is part of the bundle you received. Copy the bundle's `.claude/` folder into "
+                "your project (see the bundle README). No other install step is needed.")
+MARKER_LINE = re.compile(r"^<!-- (?:BEGIN|END) GENERATED:[a-z-]+ -->[ \t]*\n?", re.M)
+LINK_RE = re.compile(r"(!?)\[([^\]]*)\]\(([^)\s]+)\)")
+CONTENT_ROW = re.compile(r"^\| (command|inline orchestrator|knowledge skill|agent(?: \([a-z]+\))?|rule) \| "
+                         r"\[`/?([^`]+)`\]\([^)]*\) \|")
+AGENT_ROW = re.compile(r"^\| \[`([^`]+)`\]\([^)]*\) \|")
+
+
+def package_dir_of(owner: str):
+    """Folder of the local package that owns a deployed file (lock `active_owner`), or None."""
+    o = owner.replace("\\", "/")
+    if "/packages/" not in o:
+        return None
+    parts = [p for p in o.split("/packages/", 1)[1].split("#")[0].split("/") if p]
+    for n in range(len(parts), 0, -1):
+        cand = REPO.joinpath("packages", *parts[:n])
+        if (cand / "apm.yml").is_file():
+            return cand
+    return None
+
+
+def own_names(pkg_dir: Path) -> dict:
+    """Names of every skill, agent and rule a package defines, as they are deployed."""
+    names = {k: set() for k in KINDS}
+    skills = pkg_dir / ".apm" / "skills"
+    if skills.is_dir():
+        names["skills"] = {p.name for p in skills.iterdir() if (p / "SKILL.md").is_file()}
+    agents = pkg_dir / ".apm" / "agents"
+    for f in agents.glob("*.md") if agents.is_dir() else []:
+        m = re.search(r"(?m)^name:\s*(\S+)", f.read_text(encoding="utf-8"))
+        names["agents"].add(m.group(1).strip("\"'") if m else re.sub(r"\.agent$", "", f.stem))
+    rules = pkg_dir / ".apm" / "instructions"
+    for f in rules.glob("*.md") if rules.is_dir() else []:
+        names["rules"].add(re.sub(r"\.instructions$", "", f.stem))
+    return names
+
+
+def rewrite_links(text: str, src_dir: Path, local: dict) -> str:
+    """Links to another included package manual become local; every other relative link becomes plain
+    text (repo paths do not exist in the export). URLs, mail links and in-page anchors stay."""
+    def sub(m):
+        bang, label, target = m.group(1), m.group(2), m.group(3)
+        if target.startswith("#") or re.match(r"^[A-Za-z][A-Za-z0-9+.-]*:", target):
+            return m.group(0)
+        path, _, frag = target.partition("#")
+        resolved = (src_dir / path).resolve() if path else None
+        if resolved is not None and resolved.name == "README.md" and resolved.parent in local:
+            return f"[{label}]({local[resolved.parent]}" + (f"#{frag}" if frag else "") + ")"
+        return "" if bang else label
+    return LINK_RE.sub(sub, text)
+
+
+def transform_block(text: str, block_id: str, fn) -> str:
+    pattern = re.compile(rf"(<!-- BEGIN GENERATED:{re.escape(block_id)} -->\n)(.*?)(\n?<!-- END GENERATED:{re.escape(block_id)} -->)",
+                         re.DOTALL)
+    return pattern.sub(lambda m: m.group(1) + fn(m.group(2)) + m.group(3), text, count=1)
+
+
+def filter_generated(text: str, kept: dict) -> str:
+    """Keep only what the bundle ships: replace the install block, drop table rows of excluded items and
+    the dependency lines that describe the repository."""
+    def contents(body):
+        out = []
+        for line in body.splitlines():
+            if line.startswith(("**Depends on:**", "**Used by:**")):
+                continue
+            m = CONTENT_ROW.match(line)
+            if m:
+                kind = "skills" if m.group(1) in ("command", "inline orchestrator", "knowledge skill") else \
+                    "agents" if m.group(1).startswith("agent") else "rules"
+                if m.group(2) not in kept[kind]:
+                    continue
+            out.append(line)
+        return "\n".join(out)
+
+    def agents_ref(body):
+        out = []
+        for line in body.splitlines():
+            m = AGENT_ROW.match(line)
+            if m and m.group(1) not in kept["agents"]:
+                continue
+            out.append(line)
+        return "\n".join(out)
+
+    text = transform_block(text, "installation", lambda _: INSTALL_NOTE)
+    text = transform_block(text, "contents", contents)
+    return transform_block(text, "agents-reference", agents_ref)
+
+
+def not_included_banner(own: dict, kept: dict):
+    missing = {k: sorted(own[k] - kept[k]) for k in KINDS if own[k] - kept[k]}
+    if not missing:
+        return ""
+    parts = []
+    for k, names in missing.items():
+        shown = ", ".join(f"`{n}`" for n in names[:MAX_LISTED])
+        more = f" and {len(names) - MAX_LISTED} more" if len(names) > MAX_LISTED else ""
+        parts.append(f"{k} {shown}{more}")
+    return ("> **This bundle includes only part of this package.** Not included: " + "; ".join(parts) +
+            ". Anything below that refers to them does not apply to this bundle.\n\n")
+
+
+def build_docs(kept_files, tdir: str, bundle: str, meta: dict):
+    """{file name under docs/: text} for the packages that own at least one exported file."""
+    owned = {}
+    for rel, owner in kept_files:
+        pkg = package_dir_of(owner)
+        kind, name = kind_and_name(rel, tdir)
+        if pkg is not None and kind in KINDS:
+            owned.setdefault(pkg, {k: set() for k in KINDS})[kind].add(name)
+    local = {pkg: f"{pkg.name}.md" for pkg in owned}
+    docs = {}
+    for pkg, kept in sorted(owned.items(), key=lambda kv: kv[0].name):
+        readme_path = pkg / "README.md"
+        if not readme_path.is_file():
+            continue
+        text = readme_path.read_text(encoding="utf-8")
+        text = filter_generated(text, kept)
+        text = rewrite_links(text, pkg, local)
+        text = MARKER_LINE.sub("", text)
+        head, _, rest = text.partition("\n")  # keep the title line first, then the banner
+        docs[f"{pkg.name}.md"] = head + "\n\n" + not_included_banner(own_names(pkg), kept) + rest.lstrip("\n")
+    if docs:
+        index = [f"# {bundle.replace('-', ' ').title()}: documentation", "", meta.get("description", ""), "",
+                 "Usage manuals for the packages in this bundle. Each one covers installation, quick start, "
+                 "usage scenarios, the command or skill reference, agents and limits.", ""]
+        index += [f"- [{name[:-3]}]({name})" for name in sorted(docs)]
+        docs["README.md"] = "\n".join(index) + "\n"
+    return docs
+
+
+def scan_docs(docs: dict):
+    """Detector findings for the doc files, in the same shape as the findings for exported files."""
+    return [(f"docs/{name}", n, d, m, line.strip())
+            for name, text in docs.items()
+            for n, line in enumerate(text.splitlines(), 1)
+            for d, m in det.scan_text(line)]
+
+
+def readme(meta: dict, bundle: str, counts: dict, lists: dict, vercel: bool, tdir: str, docs=None) -> str:
     title = bundle.replace("-", " ").title()
     lines = [f"# {title}  ·  v{meta.get('version', '1.0.0')}  ·  {datetime.date.today().isoformat()}", "",
              meta.get("description", ""), "", "## Contents"]
@@ -238,6 +381,11 @@ def readme(meta: dict, bundle: str, counts: dict, lists: dict, vercel: bool, tdi
     lines += ["", "## Install",
               f"Copy the `{tdir}/` folder into the root of your project (merge it with an existing one).",
               "Restart your agent so it picks up the new skills, agents and rules."]
+    if docs:
+        lines += ["", "## Documentation",
+                  "The `docs/` folder holds the usage manual of each package in this bundle (it sits next to "
+                  f"`{tdir}/`, outside it, so your agent does not load it). Start with [docs/README.md](docs/README.md):"]
+        lines += [f"- [{name[:-3]}](docs/{name})" for name in sorted(docs) if name != "README.md"]
     if vercel:
         lines += ["", "## Free prerequisites",
                   "Some skills in this bundle build on the official Vercel skills, which are free and are "
@@ -268,7 +416,8 @@ def export(bundle: str, target: str, out: Path, work: Path, apply: bool, keep_sa
         if k in lists:
             lists[k].add(n)
     counts = {k: len(v) for k, v in lists.items()}
-    findings = [(r, *f) for r, _ in kept for f in det.scan_file(sandbox / r)]
+    docs = build_docs(kept, tdir, bundle, meta)
+    findings = [(r, *f) for r, _ in kept for f in det.scan_file(sandbox / r)] + scan_docs(docs)
     bdir = out / bundle
     if findings:
         files = len({f[0] for f in findings})
@@ -283,6 +432,7 @@ def export(bundle: str, target: str, out: Path, work: Path, apply: bool, keep_sa
         status = "blocked"
     else:
         summary = ", ".join(f"{counts[k]} {k}" for k in ("skills", "agents", "rules"))
+        summary += f", {max(len(docs) - 1, 0)} manual(s) in docs/"
         extra = f"; {vercel} arquivo(s) da Vercel fora" if vercel else ""
         if apply:
             dest = bdir / target
@@ -291,7 +441,10 @@ def export(bundle: str, target: str, out: Path, work: Path, apply: bool, keep_sa
             for r, _ in kept:
                 (dest / r).parent.mkdir(parents=True, exist_ok=True)
                 shutil.copy2(sandbox / r, dest / r)
-            (dest / "README.md").write_text(readme(meta, bundle, counts, lists, bool(vercel), tdir),
+            for name, text in docs.items():
+                (dest / "docs").mkdir(parents=True, exist_ok=True)
+                (dest / "docs" / name).write_text(text, encoding="utf-8", newline="\n")
+            (dest / "README.md").write_text(readme(meta, bundle, counts, lists, bool(vercel), tdir, docs),
                                             encoding="utf-8", newline="\n")
             (bdir / "BLOCKED.txt").unlink(missing_ok=True)
             zpath = out / f"{bundle}-{target}.zip"
