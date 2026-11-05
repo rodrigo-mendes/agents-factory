@@ -41,6 +41,9 @@ dependencies:
     # quality family: quarkus-acceptance-testing pulls in acceptance-testing (and quarkus-core,
     # openspec-core), so acceptance-testing is NOT listed directly.
     - path: ./packages/quality/quarkus-acceptance-testing
+    # data-platform family: the Kafka package is listed directly until data-platform-engineer exists and depends on it;
+    # then remove this line (a double listing fails `apm audit --ci` with "ambiguous resolved_by").
+    - path: ./packages/data-platform/streaming/kafka
     # vercel-frontend, github-actions-cicd, solution-architecture, ui-design, nextjs-frontend and
     # quarkus-langchain4j are NOT listed directly: aws-saas-serverless-quarkus-react-nextjs depends
     # on them, so they resolve transitively (same "ambiguous resolved_by" reason as factory-core).
