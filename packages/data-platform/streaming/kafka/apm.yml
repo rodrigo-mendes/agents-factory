@@ -1,0 +1,15 @@
+name: agents-factory-data-platform-kafka
+version: 1.0.0
+description: >-
+  Kafka knowledge skills for a self-managed data platform: Kafka 4.4.0 (KRaft) and 3.9.2 (ZooKeeper line),
+  Kafka Streams and Connect 4.4, Apicurio Registry 3.3 and Confluent Schema Registry 8.4 as separate skills,
+  and Strimzi 1.3 and Confluent for Kubernetes 3.4 as separate operator skills. Each skill is generated from
+  dated, official-source research.
+author: rodrigo-mendes
+license: MIT
+dependencies:
+  apm:
+    - path: ../../../factory/factory-core
+  mcp: []
+includes: auto
+scripts: {}
