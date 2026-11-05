@@ -1,68 +1,32 @@
-# Documentation — Agents Factory
+# Documentation
 
-## By Journey
+Start here. Pick the path that matches what you need.
 
-### 🆕 I'm new here
-1. [Overview](visao-geral.md) — Understand the framework's mental model
-2. [How to Use → Onboarding](como-usar/README.md) — Setup and first use
-3. [Quick Start (5 minutes)](como-usar/inicio-rapido.md) — Complete pipeline in a single read
-4. [Glossary](referencia/glossario.md) — Framework terms
+## I am new
 
-### 🔨 I want to create something
-1. [Capabilities Catalog](capacidades/README.md) — Find the right tool
-2. [Agent Usage Manual](manual/README.md) — Complete reference with invocation examples
-3. [Combined Flows](fluxos/README.md) — End-to-end pipelines
-4. Specific guides:
-   - [Researching technologies](como-usar/pesquisando-tecnologias.md)
-   - [Creating skills](como-usar/criando-skills.md)
-   - [Creating agents](como-usar/criando-agentes.md)
+1. [Overview](overview.md): how the factory works, in five minutes.
+2. [Getting started](getting-started.md): prerequisites, first commands, regeneration.
+3. [Glossary](reference/glossary.md): the terms used across the docs.
 
-### ✅ I want to validate quality
-1. [Validating artifacts](como-usar/validando-artefatos.md)
-2. [Quality Flow](fluxos/fluxo-qualidade.md)
+## I want to use a capability
 
-### 📚 Reference
-1. [Conventions](referencia/convencoes.md) — P0-P5, Three-Tier, naming, YAML
-2. [Glossary](referencia/glossario.md) — All terms
+- [Entry points](entry-points/README.md): every `/command` and inline orchestrator, with what it does and when to use it.
+- [Packages](packages/README.md): every package, what it contains and what it depends on.
+- [Flows](flows/README.md): end-to-end pipelines that chain several entry points.
 
----
+## I want to understand the design
 
-## Full Map
+- [Agent architecture](agents/architecture.md): how commands, subagents, skills and rules are triggered and how they call each other.
+- [Subagents](agents/README.md): the roster of all subagents.
+- [Conventions](reference/conventions.md): P0–P5, three-tier rules, naming and versioning.
 
-```
-docs/
-├── visao-geral.md                 ← Architecture + diagrams
-├── manual/
-│   ├── README.md                  ← Index + cheat sheet of the 40 factory commands
-│   ├── framework-researcher.md    ← 7 research commands + platform-software family
-│   ├── platform-software-family.md ← 15 platform-software commands (1 orchestrator + 14 siblings)
-│   ├── artifact-author.md         ← 6 generation commands
-│   ├── architecture-auditor.md    ← 8 audit commands
-│   ├── quality-validator.md       ← 5 validation commands
-│   └── skill-evaluator.md         ← 1 evaluation command
-├── capacidades/
-│   ├── README.md                  ← Catalog of the 40 factory commands + domain packages
-│   ├── skills.md                  ← foundation skills
-│   ├── templates.md               ← 24 template files + traceability
-│   ├── prompts-pesquisa.md        ← 7 research prompts (+ platform-software family)
-│   ├── prompts-compilacao.md      ← 4 compilation prompts
-│   ├── prompts-validacao.md       ← 4 validation prompts
-│   ├── prompts-arquitetura.md     ← 8 audit prompts (4 Copilot + 4 Claude Code)
-│   └── prompts-framework.md       ← 1 lifecycle prompt
-├── como-usar/
-│   ├── README.md                  ← Quick onboarding
-│   ├── inicio-rapido.md           ← Complete pipeline in 3 steps (5 minutes)
-│   ├── pesquisando-tecnologias.md
-│   ├── criando-skills.md
-│   ├── criando-agentes.md
-│   └── validando-artefatos.md
-├── fluxos/
-│   ├── README.md                  ← General flow map
-│   ├── fluxo-criacao-projeto.md
-│   ├── fluxo-base-conhecimento.md
-│   ├── fluxo-qualidade.md
-│   └── fluxo-implementacao.md
-└── referencia/
-    ├── convencoes.md
-    ├── glossario.md
-```
+## I maintain the repository
+
+- [Maintaining the docs](reference/maintaining-docs.md): what is generated, what is hand-written, and how to regenerate.
+- [Known source issues](reference/known-source-issues.md): inconsistencies found in the packages while writing the manuals.
+- [Frontmatter cheatsheet](reference/frontmatter-cheatsheet.md): skill, agent and rule headers side by side.
+
+## Other
+
+- [Commercial guides](commercial/): bundle strategy and publishing guides.
+- [Post-mortem template](templates/POST_MORTEM_TEMPLATE.md).

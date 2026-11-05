@@ -176,7 +176,7 @@ is sold out of what is installed: `agents` / `skills` / `rules` take a list of n
 
 Export for sale (compiled target dir as a folder + zip, Vercel removed, sensitive-data detectors):
 `python scripts/export-bundle.py <bundle> --apply`. Catalog, prices and publishing steps:
-[docs/comercial/estrategia-bundles.md](../docs/comercial/estrategia-bundles.md).
+[docs/commercial/bundle-strategy.md](../docs/commercial/bundle-strategy.md).
 
 ## Moving or adding a package
 
