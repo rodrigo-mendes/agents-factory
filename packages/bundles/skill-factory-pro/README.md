@@ -7,12 +7,14 @@ Skill Factory Pro: research a technology from official sources, then author vers
 ## Contents
 
 <!-- BEGIN GENERATED:contents -->
-**Packages included:** [`agent-package-builder`](../../factory/agent-package-builder/README.md), [`artifact-authoring`](../../factory/artifact-authoring/README.md), [`researching-frameworks`](../../factory/researching-frameworks/README.md)
+**Packages included:** [`agent-package-builder`](../../factory/agent-package-builder/README.md), [`package-docs`](../../factory/package-docs/README.md), [`artifact-authoring`](../../factory/artifact-authoring/README.md), [`researching-frameworks`](../../factory/researching-frameworks/README.md)
 **Also installed as dependencies:** [`factory-core`](../../factory/factory-core/README.md), [`research-core`](../../factory/research-core/README.md)
 
 | Type | Entry point or agent | Package |
 |---|---|---|
 | inline orchestrator | [`building-agent-packages`](../../factory/agent-package-builder/README.md#building-agent-packages) | `agent-package-builder` |
+| inline orchestrator | [`documenting-agent-packages`](../../factory/package-docs/README.md#documenting-agent-packages) | `package-docs` |
+| agent | [`package-manual-author`](../../factory/package-docs/.apm/agents/package-manual-author.agent.md) | `package-docs` |
 | command | [`/agent-creator`](../../factory/artifact-authoring/README.md#agent-creator) | `artifact-authoring` |
 | command | [`/architecture-approaches-skill-generator`](../../factory/artifact-authoring/README.md#architecture-approaches-skill-generator) | `artifact-authoring` |
 | command | [`/methodologies-skill-generator`](../../factory/artifact-authoring/README.md#methodologies-skill-generator) | `artifact-authoring` |
@@ -58,6 +60,8 @@ includes.
 ```
 
 For the whole chain from a brief to a committed package, run `/building-agent-packages`.
+
+To write or check the manuals of the packages you build, run `/documenting-agent-packages mode=check`.
 
 ## Documentation
 

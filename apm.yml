@@ -24,6 +24,7 @@ dependencies:
     # "ambiguous resolved_by" reason as factory-core above).
     - path: ./packages/java/quarkus/camel-quarkus-integrator
     - path: ./packages/factory/agent-package-builder
+    - path: ./packages/factory/package-docs
     # aws-skills and oci-core are NOT listed directly: aws-saas-serverless-quarkus-react-nextjs (via
     # aws-architect) and the oci-* packages depend on them, so they resolve transitively (same "ambiguous
     # resolved_by" reason as factory-core above).

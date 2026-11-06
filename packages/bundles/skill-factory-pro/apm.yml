@@ -8,6 +8,7 @@ license: MIT
 dependencies:
   apm:
     - path: ../../factory/agent-package-builder
+    - path: ../../factory/package-docs
     - path: ../../factory/artifact-authoring
     - path: ../../factory/researching-frameworks
   mcp: []
