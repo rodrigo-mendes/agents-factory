@@ -7,8 +7,7 @@ import re
 import sys
 from pathlib import Path
 
-DOCS = ['CLAUDE.md', 'README.md', 'docs/visao-geral.md', 'docs/README.md',
-        'docs/capacidades/README.md', 'docs/capacidades/skills.md', 'docs/manual/README.md']
+DOCS = ['CLAUDE.md', 'README.md', 'docs/README.md', 'docs/overview.md', 'docs/packages/README.md']
 COUNT = re.compile(r'\b[0-9]+ (skills|agents|subagents|subagentes|rules|regras|packages|pacotes'
                    r'|commands|comandos)\b', re.IGNORECASE)
 MAX_LINES = 60
