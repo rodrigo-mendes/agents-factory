@@ -1,0 +1,15 @@
+name: agents-factory-package-docs
+version: 1.0.0
+description: >-
+  documenting-agent-packages — inline orchestrator that finds missing or incomplete package and bundle
+  manuals in any APM repository, plans the work, runs package-manual-author writers in parallel and checks the
+  result (generated tables, manual structure, links, presence of every manual). Ships the check scripts and the
+  hooks that validate a manual each time it is saved.
+author: rodrigo-mendes
+license: MIT
+dependencies:
+  apm:
+    - path: ../factory-core
+  mcp: []
+includes: auto
+scripts: {}

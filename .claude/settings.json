@@ -24,5 +24,19 @@
       "Read(./**/.env)",
       "Read(./**/*.tfvars)"
     ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python \"${CLAUDE_PROJECT_DIR}/.claude/hooks/package-docs/manual_hook.py\" post-edit",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
   }
 }

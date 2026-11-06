@@ -1,0 +1,16 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python ./manual_hook.py post-edit",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
+  }
+}

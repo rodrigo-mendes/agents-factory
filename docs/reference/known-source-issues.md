@@ -11,11 +11,12 @@ were not independently re-verified. Check an item before acting on it.
 broken character. It does not: the file is correct, and the problem was how one console displayed an
 em dash.
 
+**Corrected.** An earlier version of this page listed the 34 source rules that use `applyTo:` as a possible scoping bug. It is not one: `applyTo:` is APM's source form, and APM converts it to `paths:` when it installs into `.claude/rules/` (documented in `scripts/restore-rule-metadata.py`). Two small things remain: the rule `rules-frontmatter` describes only the installed form, so it reads as if the sources were wrong, and one source rule (`java-functions-clean-code`) uses `paths:` directly. Whether the installed rules without any `paths:` are meant to load in every session was not established.
+
 ## 1. Fix first (behavior or safety)
 
 | Where | Issue |
 |---|---|
-| Rules in 19 packages | 34 source rule files declare their scope with `applyTo:`, while the rule `rules-frontmatter` says `paths:`. The installed `.claude/rules/` has no `applyTo:`, but 26 installed rules have no `paths:` at all. Whether they are file-scoped is not established. *(checked)* |
 | `deploy-oci-function` | Evaluation scenarios 1 and 3 apply changes (scenario 3 applies a rollback) without the `approve=tfplan sha256=<hash>` gate that the skill and the `oci-deployer` agent require. |
 | `debug-oci-function` | The skill and its scenario 3 send code fixes to `/deploy-oci-function`. The `oci-debugger` agent sends Java code fixes to `/develop-java-function` and only config, dependency and image fixes to the deployer. Scenario 2 sends a config fix to `@oci-terraform`, which the agent file does not do. |
 | Research commands | None has an output-path parameter. Every platform sibling skill says to save under `workspace/docs/`, while `framework-researcher` says it never uses that folder unless it exists and the arguments point to it. |

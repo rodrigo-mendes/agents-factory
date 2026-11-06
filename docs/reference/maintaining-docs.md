@@ -5,7 +5,7 @@ manual must contain.
 
 ## What is generated
 
-`scripts/gen-docs-catalog.py` reads `packages/` and rewrites only the text between markers:
+The generator lives in the `documenting-agent-packages` skill (`packages/factory/package-docs`), together with the manual check and the link check. `scripts/gen-docs-catalog.py` is a thin wrapper that runs it for this repository, so the commands below keep working. It reads `packages/` and rewrites only the text between markers:
 
 ```
 <!-- BEGIN GENERATED:<id> -->
@@ -36,7 +36,7 @@ python scripts/gen-docs-catalog.py --check-manuals # print manual coverage; exit
 python -m unittest scripts/tests/test_gen_docs_catalog.py scripts/tests/test_export_bundle_docs.py
 ```
 
-Run both checks before committing. Neither writes anything.
+Run both checks before committing. Neither writes anything. To write or repair manuals, use `/documenting-agent-packages` (see [Authoring commands](../entry-points/factory-authoring.md)). It also ships `check_manual.py` (structure and presence of every manual, and the hook that runs when a README is saved) and `check_links.py` (every relative link and anchor).
 
 ## What a package manual must contain
 

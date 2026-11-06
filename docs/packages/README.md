@@ -60,6 +60,7 @@ The tables below are generated from the package files. Do not edit them by hand.
 | `agent-package-builder` | 0 | 1 | 0 | 0 | 0 |
 | `artifact-authoring` | 4 | 0 | 1 | 1 | 0 |
 | `factory-core` | 0 | 0 | 0 | 0 | 5 |
+| `package-docs` | 0 | 1 | 0 | 1 | 1 |
 | `research-core` | 0 | 0 | 0 | 3 | 0 |
 | `researching-frameworks` | 5 | 0 | 0 | 0 | 0 |
 | `researching-platform` | 15 | 0 | 0 | 0 | 0 |
@@ -155,7 +156,7 @@ that links to the manuals of the packages it contains. They are not part of the 
 | [`oci-serverless-complete`](../../packages/bundles/oci-serverless-complete/README.md) | `oci-functions-java`, `oci-observability`, `oci-architecture`, `oci-terraform` | no |
 | [`saas-starter-team`](../../packages/bundles/saas-starter-team/README.md) | `aws-saas-serverless-quarkus-react-nextjs` | no |
 | [`serverless-java-aws`](../../packages/bundles/serverless-java-aws/README.md) | `quarkus-aws`, `aws-lambda` | no |
-| [`skill-factory-pro`](../../packages/bundles/skill-factory-pro/README.md) | `agent-package-builder`, `artifact-authoring`, `researching-frameworks` | no |
+| [`skill-factory-pro`](../../packages/bundles/skill-factory-pro/README.md) | `agent-package-builder`, `package-docs`, `artifact-authoring`, `researching-frameworks` | no |
 | [`spec-driven-delivery`](../../packages/bundles/spec-driven-delivery/README.md) | `openspec-github` | no |
 | [`stripe-for-java`](../../packages/bundles/stripe-for-java/README.md) | `stripe-java` | no |
 | [`technical-book-author`](../../packages/bundles/technical-book-author/README.md) | `book-writing` | no |
