@@ -35,13 +35,13 @@ Back to [SKILL.md](../SKILL.md). Provenance: the official pages in the [Source B
 | U20 | The assembled Compose file as a tested whole | (unverified) | Every line traces to an official page, nobody ran the whole |
 | U21 | Registry Java runtime version and image heap settings | (unverified) | page not recorded |
 | U22 | Environment-variable spelling of role-based authorization: the migration page writes `APICURIO_AUTH_ROLE-BASED-AUTHORIZATION`, the compose and security examples use `APICURIO_AUTH_ROLE_BASED_AUTHORIZATION` | (unverified) | Property is `apicurio.auth.role-based-authorization`. Check the server log or the config endpoint after setting it |
-| U23 | Environment-variable spelling of KafkaSQL topic auto-creation: the high availability page gives `APICURIO_KAFKASQL_TOPIC_AUTO-CREATE` with a hyphen, the only hyphenated variable in this skill | (unverified) | Property form not recorded. Check how the server reads it, or pre-create the topic and leave the setting out |
+| U23 | Environment-variable spelling of KafkaSQL topic auto-creation: the high availability page gives `APICURIO_KAFKASQL_TOPIC_AUTO-CREATE` with a hyphen | (unverified) | Property form not recorded. Check how the server reads it, or pre-create the topic and leave the setting out |
 
 ## Irresolvable (I1..): 0 items
 
 No separate irresolvable class is kept. Two gaps are irresolvable (producer-versus-consumer upgrade order, Kafka and PostgreSQL support ranges): they appear once above as U1 and U2 with a human-verify note.
 
-## Medium confidence (M1..M9): 9 items
+## Medium confidence (M1..M11): 11 items
 
 | ID | Claim | Tag |
 |---|---|---|
@@ -54,6 +54,8 @@ No separate irresolvable class is kept. Two gaps are irresolvable (producer-vers
 | M7 | Storage selection guidance, PostgreSQL versus KafkaSQL | (medium confidence) |
 | M8 | Selection guidance, native SerDes versus Confluent clients on the ccompat API | (medium confidence) |
 | M9 | License page read on branch main, not on the 3.3.4 tag | (medium confidence) |
+| M10 | Set `apicurio.registry.fault-tolerant-refresh=true` on clients. Single source: the best-practices page | (medium confidence) |
+| M11 | Keep at least 2 registry replicas during updates. Single source: the high availability page | (medium confidence) |
 
 ## Coverage limits (L1..L8): 8 items
 
@@ -77,7 +79,7 @@ No separate irresolvable class is kept. Two gaps are irresolvable (producer-vers
 | (unverified) | SKILL.md Version Context, Kafka (3.9 brokers) and PostgreSQL support | U2 |
 | (medium confidence) | SKILL.md Version Context, license | M9 |
 | (unverified) | SKILL.md Version-lifetime risk, patch notes conflict | U5 |
-| (medium confidence) | SKILL.md Ask First, storage, compatibility, auto-registration, downgrade | M7, M1, M2, M3 |
+| (medium confidence) | SKILL.md Ask First, which registry, storage, compatibility, auto-registration, downgrade | M9, M7, M1, M2, M3 |
 | (unverified) | SKILL.md Ask First, upgrade order, ID width, partitions, SerDes row, Kafka connection security row | U1, U11, U3, U9, U13 |
 | (unverified) | always-do-patterns.md | U3, U6, U7, U8, U9, U22 |
 | (medium confidence) | always-do-patterns.md | M4 |
@@ -85,19 +87,19 @@ No separate irresolvable class is kept. Two gaps are irresolvable (producer-vers
 | (unverified) | migration-guide.md, always-do-patterns.md, security-and-ha.md, deploy-compose.md, role-based authorization variable | U22 |
 | (unverified) | deploy-compose.md, KafkaSQL topic auto-creation variable | U23 |
 | (medium confidence) | never-do-patterns.md | M3 |
-| (unverified) | ask-first-decisions.md | U1, U3, U4, U5, U11, U13, U15 |
+| (unverified) | ask-first-decisions.md | U1, U3, U4, U5, U9, U11, U13, U15 |
 | (medium confidence) | ask-first-decisions.md | M1, M2, M3, M6, M7, M8 |
 | (unverified) | deploy-compose.md | U2, U8, U19, U20, U22, U23 |
 | (medium confidence) | deploy-compose.md | M4 |
 | (unverified) | compatibility-and-evolution.md | U1, U15 |
-| (medium confidence) | compatibility-and-evolution.md | M4, M5 |
+| (medium confidence) | compatibility-and-evolution.md | M1, M2, M4, M5 |
 | (unverified) | serdes-java.md | U4, U9, U11, U12, U16 |
-| (medium confidence) | serdes-java.md | M2 |
+| (medium confidence) | serdes-java.md | M2, M10 |
 | (unverified) | security-and-ha.md | U2, U7, U17, U22 |
-| (medium confidence) | security-and-ha.md | M3 |
+| (medium confidence) | security-and-ha.md | M3, M11 |
 | (unverified) | migration-guide.md | U2, U5, U11, U14, U17, U18 |
 | (medium confidence) | migration-guide.md | M3 |
-| (unverified), (medium confidence) | evaluation-scenarios.md | U1, U5, M3 |
+| (unverified), (medium confidence) | evaluation-scenarios.md | U1, U3, U5, U20, M1, M3 |
 
 ## Source Bibliography
 

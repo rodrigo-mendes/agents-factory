@@ -8,7 +8,7 @@ dependencies:
   apm:
     - path: ../../../factory/factory-core
     - path: ../../../delivery/protocol/handoff-core
-    - path: ../../../third-party/vercel-frontend
+    #- path: ../../../third-party/vercel-frontend
   mcp: []
 includes: auto
 scripts: {}

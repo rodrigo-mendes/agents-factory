@@ -1,6 +1,6 @@
 # Never-do patterns, Kafka 3.9.2
 
-Back to [SKILL.md](../SKILL.md). Every row rests on at least two versioned official pages read in full and has a High-confidence alternative; the ZooKeeper rows cite the 4.4 KRaft page and the 4.0.0 announcement, both read in full on 2026-11-04. All sources read 2026-11-04. Single-page warnings (for example SCRAM credentials in ZooKeeper only where ZooKeeper is secure and private, SASL/PLAIN without TLS, the unsecured default OAUTHBEARER, finalizing a migration early) are not here: see [ask-first-decisions](./ask-first-decisions.md#single-page-guidance-kept-out-of-always-do-and-never-do).
+Back to [SKILL.md](../SKILL.md). Every row rests on at least two versioned official pages read in full and has a High-confidence alternative; the ZooKeeper rows cite the 4.4 KRaft page and the 4.0.0 announcement, both read in full on 2026-11-04. All sources read 2026-11-04. Single-page warnings (for example SCRAM credentials in ZooKeeper only where ZooKeeper is secure and private, SASL/PLAIN without TLS, the unsecured default OAUTHBEARER, finalizing a migration early, stretching one cluster across datacenters) are not here: see [ask-first-decisions](./ask-first-decisions.md#single-page-guidance-kept-out-of-always-do-and-never-do).
 
 ## min.insync.replicas=1 with RF 1 (risk: critical)
 
@@ -29,7 +29,7 @@ KAFKA_LOG_DIRS: '/tmp/kraft-combined-logs'   # no volume
 KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 3
 KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 3
 KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 2
-KAFKA_LOG_DIRS: '/var/lib/kafka/data'        # named volume mounted here
+KAFKA_LOG_DIRS: '/var/lib/kafka/data'        # named volume mounted here (medium confidence, M20)
 ```
 
 Detection: `grep -nE "REPLICATION_FACTOR: 1|MIN_ISR: 1|/tmp/" docker-compose.yml`. See [deploy-compose-zookeeper](./deploy-compose-zookeeper.md).
@@ -53,7 +53,7 @@ Why: 3.9 is the last bridge release and 4.x runs entirely without ZooKeeper. Sou
 
 ```text
 # 🚫 WRONG: roadmap "ZooKeeper cluster -> 4.x"
-# ✅ CORRECT: ZooKeeper cluster -> 3.9.2 -> KRaft migration (this skill) -> 4.x (operating-kafka-v4-4)
+# ✅ CORRECT: ZooKeeper cluster -> KRaft migration on the 3.9 bridge release (this skill) -> 4.x (operating-kafka-v4-4)
 ```
 
 Detection: `grep -l "zookeeper.connect" /path/to/broker-*.properties`. Runbook: [zk-to-kraft-migration](./zk-to-kraft-migration.md).
@@ -64,21 +64,10 @@ Why: ZooKeeper mode is deprecated since 3.5 and removed in 4.0. Sources: [ZooKee
 
 ```text
 # 🚫 WRONG: roadmap "keep ZooKeeper indefinitely"
-# ✅ CORRECT: plan the KRaft migration on 3.9.2
+# ✅ CORRECT: plan the KRaft migration on the 3.9 bridge release, then follow operating-kafka-v4-4
 ```
 
 Detection: `grep -l "zookeeper.connect" /path/to/broker-*.properties`.
-
-## One cluster across datacenters (risk: high)
-
-Why: the datacenters page advises against a single cluster spanning DCs over a high-latency link, because of slow replication for both Kafka and ZooKeeper writes. Sources: [datacenters](https://kafka.apache.org/39/operations/datacenters/), [geo-replication](https://kafka.apache.org/39/operations/geo-replication-cross-cluster-data-mirroring/).
-
-```text
-# 🚫 WRONG: one Kafka cluster plus one ZooKeeper ensemble over a WAN
-# ✅ CORRECT: a cluster per DC, MirrorMaker 2 flow primary->secondary.enabled = true
-```
-
-Detection: compare broker and ZooKeeper host locations with DC boundaries.
 
 ## ZooKeeper reachable by clients or published (risk: high)
 

@@ -61,15 +61,12 @@ Code and verification commands for each item are in [always-do-patterns](./bluep
 - **Keep producer `acks=all`** ([producer configs](https://kafka.apache.org/39/configuration/producer-configs/), [topic configs](https://kafka.apache.org/39/configuration/topic-level-configs/)).
 - **Keep producer `enable.idempotence=true`** ([producer configs](https://kafka.apache.org/39/configuration/producer-configs/), [design](https://kafka.apache.org/39/design/design/)).
 - **Keep `unclean.leader.election.enable=false`** ([topic configs](https://kafka.apache.org/39/configuration/topic-level-configs/), [design](https://kafka.apache.org/39/design/design/), [broker configs](https://kafka.apache.org/39/configuration/broker-configs/)).
-- **Run an odd number of ZooKeeper servers** ([ZooKeeper page](https://kafka.apache.org/39/operations/zookeeper/), [ZooKeeper Admin Guide 3.8.4](https://zookeeper.apache.org/doc/r3.8.4/zookeeperAdmin.html)).
-- **Run at least 3 ZooKeeper servers** ([ZooKeeper page](https://kafka.apache.org/39/operations/zookeeper/), [ZooKeeper Admin Guide 3.8.4](https://zookeeper.apache.org/doc/r3.8.4/zookeeperAdmin.html)).
 - **Put the ZooKeeper transaction log on a dedicated device (`dataLogDir`)** ([ZooKeeper page](https://kafka.apache.org/39/operations/zookeeper/), [Admin Guide](https://zookeeper.apache.org/doc/r3.8.4/zookeeperAdmin.html)).
 - **Use `SSL` on certificate-authenticated listeners that leave the host** ([SSL](https://kafka.apache.org/39/security/encryption-and-authentication-using-ssl/), [listeners](https://kafka.apache.org/39/security/listener-configuration/)).
-- **Use `SASL_SSL` on SASL-authenticated listeners that leave the host** ([SASL](https://kafka.apache.org/39/security/authentication-using-sasl/), [listeners](https://kafka.apache.org/39/security/listener-configuration/)).
 - **Map `inter.broker.listener.name` to an SSL listener so inter-broker traffic is encrypted** ([SSL](https://kafka.apache.org/39/security/encryption-and-authentication-using-ssl/), [listeners](https://kafka.apache.org/39/security/listener-configuration/), [running cluster](https://kafka.apache.org/39/security/incorporating-security-features-in-a-running-cluster/)).
 - **Keep hostname verification on (`ssl.endpoint.identification.algorithm=https`)** ([SSL](https://kafka.apache.org/39/security/encryption-and-authentication-using-ssl/), [broker configs](https://kafka.apache.org/39/configuration/broker-configs/)).
 - **Run brokers on Java 17 or 21** ([Java](https://kafka.apache.org/39/operations/java-version/), [upgrade notes](https://kafka.apache.org/39/getting-started/upgrade/)).
-- **Generate the cluster ID once with `kafka-storage.sh random-uuid`** ([KRaft](https://kafka.apache.org/39/operations/kraft/), [quickstart](https://kafka.apache.org/39/getting-started/quickstart/)).
+- **Generate a cluster ID with `kafka-storage.sh random-uuid`** ([KRaft](https://kafka.apache.org/39/operations/kraft/), [quickstart](https://kafka.apache.org/39/getting-started/quickstart/)).
 - **Set `inter.broker.protocol.version=3.9` on every broker before provisioning migration controllers** ([KRaft migration](https://kafka.apache.org/39/operations/kraft/), [upgrade notes](https://kafka.apache.org/39/getting-started/upgrade/)).
 - **Restart brokers one at a time** ([upgrade notes](https://kafka.apache.org/39/getting-started/upgrade/), [running cluster](https://kafka.apache.org/39/security/incorporating-security-features-in-a-running-cluster/)).
 - **Mirror to a second cluster with MirrorMaker 2 for DR** ([datacenters](https://kafka.apache.org/39/operations/datacenters/), [geo-replication](https://kafka.apache.org/39/operations/geo-replication-cross-cluster-data-mirroring/)).
@@ -80,15 +77,16 @@ Code and verification commands for each item are in [always-do-patterns](./bluep
 |---|---|---|
 | Metadata mode | ZooKeeper (existing clusters only), KRaft dedicated (new 3.9 clusters), KRaft combined (dev/CI; not recommended in critical environments, medium confidence) | "Is this new or existing? When is the migration scheduled?" |
 | ZooKeeper-mode broker from the stock image | Default `CMD` formats storage and rejects ZooKeeper configs (medium confidence, U1). Override `command` with `kafka-server-start.sh`. Whole Compose layout is (unverified) | "Do you accept an untested command override?" |
-| Cluster ID | Generate once (Always Do); formatting every KRaft node with that same ID rests on one official page (medium confidence, M14). For the migration, use the existing ZooKeeper cluster ID | "Which cluster ID do all nodes share?" |
+| Cluster ID | Generate a cluster ID with `random-uuid` (Always Do); formatting every KRaft node with that same ID rests on one official page (medium confidence, M14). For the migration, use the existing ZooKeeper cluster ID | "Which cluster ID do all nodes share?" |
 | Rolling restart pacing | Waiting for the ISR to rejoin before restarting the next broker rests on one official page, the running-cluster security page (medium confidence, M15) | "How will you confirm the ISR is back between restarts?" |
-| Migration timing and finalize | Procedure rests on one official page (medium confidence). Finalize is irreversible. Building a 3-controller quorum is human-verify (unverified, U26) | "Is dual-write validated, and who signs off finalize?" |
+| Migration timing and finalize | Procedure rests on one official page (medium confidence, M11). Finalize is irreversible. Building a 3-controller quorum is human-verify (unverified, U26) | "Is dual-write validated, and who signs off finalize?" |
 | Patch for migration | Page says 3.9.1; 3.9.2 includes two migration fixes (medium confidence, U3) | "Is every broker on 3.9.2?" |
 | Support window | 12-month statement has an unresolved start date (unverified, U4); 3.9.x archived (medium confidence) | "Can you accept running an archived line until migration?" |
 | Quorum type | Static `controller.quorum.voters` vs dynamic. Conversion static to dynamic is not supported in 3.9. Image formatting of dynamic (unverified, U5) | "Will controllers change without a rebuild?" |
-| ZooKeeper ensemble size | 3 tolerates 1 failure, 5 tolerates 2, 7 tolerates 3 | "How many ZooKeeper failures must you survive?" |
+| ZooKeeper ensemble size | 3 tolerates 1 failure, 5 tolerates 2, 7 tolerates 3. An odd number of servers and at least 3 are stated by the ZooKeeper Admin Guide alone, while the Kafka ZooKeeper page calls 5 or 7 typical (medium confidence, M19) | "How many ZooKeeper failures must you survive?" |
+| SASL listeners | `SASL_SSL` on SASL-authenticated listeners that leave the host rests on the SASL page alone (medium confidence, M13). `SSL` on certificate listeners is Always Do | "Which listeners carry SASL and leave the host?" |
 | Topic auto-creation | `auto.create.topics.enable=false` appears only as an example value (medium confidence) | "Create topics only through tooling?" |
-| Multi-datacenter | One cluster per DC with MM2 vs stretched (discouraged) | "What RPO is acceptable?" |
+| Multi-datacenter | One cluster per DC with MM2 vs stretched (discouraged by one official page, medium confidence, M18) | "What RPO is acceptable?" |
 | Delivery guarantee | At-least-once (default) vs exactly-once | "Can consumers tolerate duplicates?" |
 
 Details: [ask-first-decisions](./blueprints/ask-first-decisions.md).
@@ -98,11 +96,10 @@ Details: [ask-first-decisions](./blueprints/ask-first-decisions.md).
 | ❌ Don't | ✅ Instead |
 |---|---|
 | Run production with `min.insync.replicas=1` and RF 1 ([design](https://kafka.apache.org/39/design/design/), [topic configs](https://kafka.apache.org/39/configuration/topic-level-configs/), [production example](https://kafka.apache.org/39/operations/kafka-configuration/)) | RF 3, `min.insync.replicas=2` |
-| Copy the official Compose example's single-replica settings and `/tmp` log dir into a persistent cluster ([design](https://kafka.apache.org/39/design/design/), [topic configs](https://kafka.apache.org/39/configuration/topic-level-configs/), [broker configs](https://kafka.apache.org/39/configuration/broker-configs/); [examples README](https://raw.githubusercontent.com/apache/kafka/3.9/docker/examples/README.md), branch head, supporting; [example](https://raw.githubusercontent.com/apache/kafka/3.9/docker/examples/docker-compose-files/cluster/isolated/plaintext/docker-compose.yml), branch head, supporting) | RF 3, min ISR 2, a named volume for log dirs |
+| Copy the official Compose example's single-replica settings and `/tmp` log dir into a persistent cluster ([design](https://kafka.apache.org/39/design/design/), [topic configs](https://kafka.apache.org/39/configuration/topic-level-configs/), [broker configs](https://kafka.apache.org/39/configuration/broker-configs/); [examples README](https://raw.githubusercontent.com/apache/kafka/3.9/docker/examples/README.md), branch head, supporting; [example](https://raw.githubusercontent.com/apache/kafka/3.9/docker/examples/docker-compose-files/cluster/isolated/plaintext/docker-compose.yml), branch head, supporting) | RF 3, min ISR 2, a named volume for log dirs (medium confidence, M20) |
 | Enable `unclean.leader.election.enable` on durable topics ([topic configs](https://kafka.apache.org/39/configuration/topic-level-configs/), [design](https://kafka.apache.org/39/design/design/)) | Keep it `false` |
-| Plan a direct ZooKeeper-to-4.x upgrade ([4.4 KRaft](https://kafka.apache.org/44/operations/kraft/), [4.0.0 announcement](https://kafka.apache.org/blog/2025/03/18/apache-kafka-4.0.0-release-announcement/)) | Migrate to KRaft on 3.9.2 (the bridge release), then follow `operating-kafka-v4-4` |
-| Plan to keep ZooKeeper mode as the destination ([ZooKeeper page](https://kafka.apache.org/39/operations/zookeeper/), [4.0.0 announcement](https://kafka.apache.org/blog/2025/03/18/apache-kafka-4.0.0-release-announcement/)) | Migrate to KRaft on 3.9.2 |
-| Stretch one cluster and one ZooKeeper ensemble across datacenters ([datacenters](https://kafka.apache.org/39/operations/datacenters/), [geo-replication](https://kafka.apache.org/39/operations/geo-replication-cross-cluster-data-mirroring/)) | One cluster per DC mirrored with MM2 |
+| Plan a direct ZooKeeper-to-4.x upgrade ([4.4 KRaft](https://kafka.apache.org/44/operations/kraft/), [4.0.0 announcement](https://kafka.apache.org/blog/2025/03/18/apache-kafka-4.0.0-release-announcement/)) | Migrate to KRaft on the 3.9 bridge release, then follow `operating-kafka-v4-4` |
+| Plan to keep ZooKeeper mode as the destination ([ZooKeeper page](https://kafka.apache.org/39/operations/zookeeper/), [4.0.0 announcement](https://kafka.apache.org/blog/2025/03/18/apache-kafka-4.0.0-release-announcement/)) | Migrate to KRaft on the 3.9 bridge release, then follow `operating-kafka-v4-4` |
 | Let clients reach ZooKeeper or publish its ports ([ZooKeeper auth](https://kafka.apache.org/39/security/zookeeper-authentication/), [Admin Guide](https://zookeeper.apache.org/doc/r3.8.4/zookeeperAdmin.html)) | Keep ZooKeeper on an internal network, only brokers and admin tools reach it |
 
 Details: [never-do-patterns](./blueprints/never-do-patterns.md).
@@ -120,7 +117,7 @@ Details: [never-do-patterns](./blueprints/never-do-patterns.md).
 | Producer `acks` / `linger.ms` | all / 0 | https://kafka.apache.org/39/configuration/producer-configs/ |
 | ZooKeeper ensemble tolerance | 3 servers: 1 failure, 5: 2, 7: 3 | https://kafka.apache.org/39/operations/zookeeper/ |
 | ZooKeeper `autopurge.purgeInterval` | 0 (off) by default | https://zookeeper.apache.org/doc/r3.8.4/zookeeperAdmin.html |
-| Env var mapping (image) | `KAFKA_` prefix, `.` to `_`, `_` to `__`, `-` to `___` | https://raw.githubusercontent.com/apache/kafka/3.9/docker/examples/README.md |
+| Env var mapping (image) | `KAFKA_` prefix, `.` to `_`, `_` to `__`, `-` to `___` | https://raw.githubusercontent.com/apache/kafka/3.9/docker/examples/README.md (branch head, supporting) |
 
 ## External Resources
 

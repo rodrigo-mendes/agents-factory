@@ -48,7 +48,7 @@ Sources: [operator upgrade](https://raw.githubusercontent.com/strimzi/strimzi-ka
 7. If an unsupported-Kafka-version error appears, set `spec.kafka.version` to a supported one.
 8. Verify the image tag (Strimzi version, then Kafka version): `kubectl get pods <broker-pod> -o jsonpath='{.spec.containers[0].image}'` (unverified, U6).
 
-Helm: `helm upgrade`, then apply the new CRDs by hand. OLM: change the subscription channel and prefer version-specific channels. Same method as the first install.
+Helm: `helm upgrade` does not update CRDs, so apply the release CRDs by hand; the order relative to `helm upgrade` is (unverified, U7). OLM: change the subscription channel and prefer version-specific channels. Same method as the first install.
 
 ## Kafka upgrade (KRaft)
 

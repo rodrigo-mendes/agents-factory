@@ -25,7 +25,7 @@ Back to [SKILL.md](../SKILL.md). Ask the user before acting on any item below. T
 
 ## Cluster ID
 
-- Generate the ID once with `kafka-storage.sh random-uuid` (Always Do). Formatting every KRaft node with that same ID rests on one official page [S6] (medium confidence, M24); the quickstart shows a one-node `format --standalone` only [S30].
+- Generate a cluster ID with `kafka-storage.sh random-uuid` (Always Do). Formatting every KRaft node with that same ID rests on one official page [S6] (medium confidence, M24); the quickstart shows a one-node `format --standalone` only [S30].
 - Ask: "Which cluster ID do all nodes share?"
 
 ## Authorizer
@@ -46,6 +46,7 @@ Back to [SKILL.md](../SKILL.md). Ask the user before acting on any item below. T
 
 ## SASL mechanism
 
+- Use `SASL_SSL` on SASL-authenticated listeners that leave the host [S10][S31] (medium confidence, M21). Certificate-authenticated listeners use `SSL` (Always Do).
 - SASL/PLAIN must be used only with TLS so passwords are not sent in clear [S10] (medium confidence, M21). Alternative: `SASL_SSL` with SCRAM-SHA-512.
 - SCRAM credentials in KRaft are stored in the metadata log; that suits production only where controllers are secured and the network is private [S10] (medium confidence, M23).
 - Ask: "Which SASL mechanism do your clients support?"
@@ -88,6 +89,7 @@ Back to [SKILL.md](../SKILL.md). Ask the user before acting on any item below. T
 ## Rolling upgrade order
 
 - Controllers first is common practice, not stated on the 4.4 page (unverified). Between nodes check UnderReplicatedPartitions is 0 [S14].
+- Pacing of rolling restarts outside upgrades (for example one node at a time) was not researched (unverified, U19).
 - Ask: "Do you want controllers first, then brokers?"
 
 ## Multi-datacenter
@@ -96,6 +98,8 @@ Back to [SKILL.md](../SKILL.md). Ask the user before acting on any item below. T
 |---|---|---|
 | Local cluster per DC with MM2 (recommended) [S19] | Availability, latency | Asynchronous replication, RPO above 0 |
 | Stretched cluster | Synchronous replication | Write latency, availability on link failure [S19] |
+
+The advice against a stretched cluster rests on the datacenters page [S19] alone; the geo-replication page [S13] supports only the MM2 option (medium confidence, M29).
 
 Ask: "Is cross-DC replication actually required, and what RPO is acceptable for asynchronous mirroring?"
 

@@ -4,7 +4,7 @@ Back to [SKILL.md](../SKILL.md). Kafka 3.9.2 bundles ZooKeeper 3.8.4 ([dependenc
 
 ## Triangulated rules (two pages)
 
-- **Odd size, at least 3.** 3 servers tolerate 1 failure, 5 or 7 are typical and tolerate 2 and 3. Avoid oversized ensembles.
+- **Odd size, at least 3** (Admin Guide alone; the Kafka page names 5 or 7 as typical; medium confidence, M19). 3 servers tolerate 1 failure, 5 or 7 are typical and tolerate 2 and 3. Avoid oversized ensembles.
 - **Dedicated transaction-log device.** `dataLogDir` on its own disk. A dedicated partition is not enough.
 - **Do not expose ZooKeeper.** It expects a trusted environment, and clients do not use it in 3.9: tools connect with `--bootstrap-server` ([basic operations](https://kafka.apache.org/39/operations/basic-kafka-operations/)).
 

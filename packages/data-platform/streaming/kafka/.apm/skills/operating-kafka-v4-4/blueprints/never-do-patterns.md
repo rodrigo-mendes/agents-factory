@@ -1,10 +1,10 @@
 # Never-do patterns, Kafka 4.4.0
 
-Back to [SKILL.md](../SKILL.md). Every row rests on at least two versioned official pages and has a High-confidence alternative, except the descriptive list of removed or deprecated APIs, which cites the upgrade notes only. All sources read 2026-11-04. Single-page warnings (native image, `allow.everyone.if.no.acl.found=true`, SASL/PLAIN without TLS, combined controller mode, publishing the controller port) are not here: see [ask-first-decisions](./ask-first-decisions.md).
+Back to [SKILL.md](../SKILL.md). Every row rests on at least two versioned official pages and has a High-confidence alternative, except the descriptive list of removed or deprecated APIs, which cites the upgrade notes only. All sources read 2026-11-04. Single-page warnings (native image, `allow.everyone.if.no.acl.found=true`, SASL/PLAIN without TLS, combined controller mode, publishing the controller port, stretching one cluster across datacenters) are not here: see [ask-first-decisions](./ask-first-decisions.md).
 
 ## Official Compose examples used unchanged (risk: high)
 
-Why: the 4.4 examples set replication factors and min ISR to 1 and `KAFKA_LOG_DIRS` to `/tmp/kraft-combined-logs`, with no volume. The README says the SSL example is not for production, and that example sets `ssl.endpoint.identification.algorithm` to an empty string (hostname verification off) and reuses one credential set across brokers. Sources for the example contents (release-branch files): [examples README](https://raw.githubusercontent.com/apache/kafka/4.4/docker/examples/README.md), [isolated example](https://raw.githubusercontent.com/apache/kafka/4.4/docker/examples/docker-compose-files/cluster/isolated/plaintext/docker-compose.yml), [combined example](https://raw.githubusercontent.com/apache/kafka/4.4/docker/examples/docker-compose-files/cluster/combined/plaintext/docker-compose.yml). Sources for the RF 1 and min ISR 1 risk: [design](https://kafka.apache.org/44/design/design/), [topic configs](https://kafka.apache.org/44/configuration/topic-configs/).
+Why: the 4.4 examples set replication factors and min ISR to 1 and `KAFKA_LOG_DIRS` to `/tmp/kraft-combined-logs`, with no volume. The README says the SSL example is not for production, and that example sets `ssl.endpoint.identification.algorithm` to an empty string (hostname verification off) and reuses one credential set across brokers. Sources for the example contents (branch head, supporting): [examples README](https://raw.githubusercontent.com/apache/kafka/4.4/docker/examples/README.md), [isolated example](https://raw.githubusercontent.com/apache/kafka/4.4/docker/examples/docker-compose-files/cluster/isolated/plaintext/docker-compose.yml), [combined example](https://raw.githubusercontent.com/apache/kafka/4.4/docker/examples/docker-compose-files/cluster/combined/plaintext/docker-compose.yml). Sources for the RF 1 and min ISR 1 risk: [design](https://kafka.apache.org/44/design/design/), [topic configs](https://kafka.apache.org/44/configuration/topic-configs/).
 
 ```yaml
 # 🚫 WRONG
@@ -15,7 +15,7 @@ KAFKA_SSL_ENDPOINT_IDENTIFICATION_ALGORITHM: ''
 KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 3   # a persistent volume backs KAFKA_LOG_DIRS; SSL endpoint identification stays at default https
 ```
 
-Alternative: RF 3, min ISR 2 and a persistent volume. The assembled layout is in [deploy-compose](./deploy-compose.md), which is not itself a High claim (path, medium confidence, M1; image details, U3).
+Alternative: RF 3, min ISR 2 and a persistent volume (medium confidence, M1). The assembled layout is in [deploy-compose](./deploy-compose.md), which is not itself a High claim (path, medium confidence, M1; image details, U3).
 
 Detection: `grep -nE "REPLICATION_FACTOR: 1|MIN_ISR: 1|/tmp/|ENDPOINT_IDENTIFICATION_ALGORITHM: ''" docker-compose*.yml`. See [deploy-compose](./deploy-compose.md).
 
@@ -35,10 +35,6 @@ Detection: `kafka-configs.sh --bootstrap-server kafka-1:19092 --entity-type topi
 ## Unclean leader election (risk: high)
 
 Why: Kafka by default waits for a consistent replica; enabling unclean election can elect a replica missing committed data ([design](https://kafka.apache.org/44/design/design/), [topic configs](https://kafka.apache.org/44/configuration/topic-configs/)). Alternative: `unclean.leader.election.enable=false` (default). Detection: `kafka-configs.sh --bootstrap-server kafka-1:19092 --entity-type brokers --entity-default --describe --all | grep unclean`.
-
-## Stretched cluster across datacenters (risk: high)
-
-Why: high write replication latency and reduced availability when the link fails ([datacenters](https://kafka.apache.org/44/operations/datacenters/)). Alternative: one cluster per DC mirrored with MirrorMaker 2 (`A->B.enabled = true`) ([geo-replication](https://kafka.apache.org/44/operations/geo-replication-cross-cluster-data-mirroring/)).
 
 ## Adding partitions to keyed topics without a plan (risk: moderate)
 

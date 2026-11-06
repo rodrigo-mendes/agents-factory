@@ -43,15 +43,19 @@ KAFKA_PROCESS_ROLES: 'controller'
 KAFKA_PROCESS_ROLES: 'broker'
 ```
 
-## Cluster ID generated once
+## Cluster ID from random-uuid
 
 Sources: [KRaft](https://kafka.apache.org/44/operations/kraft/), [quickstart](https://kafka.apache.org/44/getting-started/quickstart/) (`random-uuid`). Formatting every KRaft node with that same ID is not in the main guardrail list: the multi-node rule rests on one official page ([KRaft](https://kafka.apache.org/44/operations/kraft/)), so it is an Ask First item (cluster ID, medium confidence, M24). Auto-formatting was removed, so every node must be formatted explicitly.
+
+Dynamic-quorum path (the KRaft page: `--standalone` on the first controller gives a dynamic quorum):
 
 ```bash
 KAFKA_CLUSTER_ID="$(bin/kafka-storage.sh random-uuid)"
 bin/kafka-storage.sh format --cluster-id "$KAFKA_CLUSTER_ID" --standalone --config config/controller.properties   # first controller
 bin/kafka-storage.sh format --cluster-id "$KAFKA_CLUSTER_ID" --config config/server.properties                      # brokers
 ```
+
+The hardened Compose in [deploy-compose](./deploy-compose.md) uses a static `controller.quorum.voters`. For that layout, formatting every controller with the same `--cluster-id` and its own config, without `--standalone`, is (unverified, U20): the pages read document the `--standalone` and `--initial-controllers` forms for controllers and the plain form for brokers. In that Compose the image formats each node from `CLUSTER_ID`.
 
 ## Unique node.id (medium confidence, M17)
 
@@ -73,7 +77,7 @@ kafka-acls.sh --bootstrap-server kafka-1:19092 --add --allow-principal User:Bob 
 
 ## Encrypted listeners
 
-Sources: [SASL](https://kafka.apache.org/44/security/authentication-using-sasl/), [SSL](https://kafka.apache.org/44/security/encryption-and-authentication-using-ssl/), [listener configuration](https://kafka.apache.org/44/security/listener-configuration/). SCRAM-SHA-512 as the mechanism and SASL/PLAIN only with TLS are Ask First items (medium confidence, M21). Details in [tls-and-security](./tls-and-security.md).
+Sources: [SSL](https://kafka.apache.org/44/security/encryption-and-authentication-using-ssl/), [listener configuration](https://kafka.apache.org/44/security/listener-configuration/) (Always Do: `SSL` on certificate-authenticated listeners that leave the host). `SASL_SSL` on SASL-authenticated listeners, SCRAM-SHA-512 as the mechanism and SASL/PLAIN only with TLS are Ask First items resting on the [SASL](https://kafka.apache.org/44/security/authentication-using-sasl/) page (medium confidence, M21). Details in [tls-and-security](./tls-and-security.md).
 
 ```properties
 listener.security.protocol.map=CONTROLLER:SSL,CLIENT:SASL_SSL

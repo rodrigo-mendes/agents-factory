@@ -57,8 +57,7 @@ Each item rests on at least two versioned official pages.
 - **Set `min.insync.replicas=2` on durable topics** ([topic configs](https://kafka.apache.org/44/configuration/topic-configs/), [design](https://kafka.apache.org/44/design/design/)).
 - **Keep producer `acks=all`** ([producer configs](https://kafka.apache.org/44/configuration/producer-configs/), [design](https://kafka.apache.org/44/design/design/)).
 - **Keep producer `enable.idempotence=true`** ([producer configs](https://kafka.apache.org/44/configuration/producer-configs/), [design](https://kafka.apache.org/44/design/design/)).
-- **Generate the cluster ID once with `kafka-storage.sh random-uuid`** ([KRaft](https://kafka.apache.org/44/operations/kraft/), [quickstart](https://kafka.apache.org/44/getting-started/quickstart/)).
-- **Use `SASL_SSL` on SASL-authenticated listeners that leave the host** ([SASL](https://kafka.apache.org/44/security/authentication-using-sasl/), [listeners](https://kafka.apache.org/44/security/listener-configuration/)).
+- **Generate a cluster ID with `kafka-storage.sh random-uuid`** ([KRaft](https://kafka.apache.org/44/operations/kraft/), [quickstart](https://kafka.apache.org/44/getting-started/quickstart/)).
 - **Use `SSL` on certificate-authenticated listeners that leave the host** ([SSL](https://kafka.apache.org/44/security/encryption-and-authentication-using-ssl/), [listeners](https://kafka.apache.org/44/security/listener-configuration/)).
 - **Mirror to a second cluster with MirrorMaker 2 for DR** ([geo-replication](https://kafka.apache.org/44/operations/geo-replication-cross-cluster-data-mirroring/), [datacenters](https://kafka.apache.org/44/operations/datacenters/)).
 
@@ -71,7 +70,7 @@ Each item rests on at least two versioned official pages.
 | Node identity | Unique `node.id` per node; `broker.id` is deprecated (medium confidence, M17) | "Which node ids are free?" |
 | Cluster ID | Format every KRaft node with the one generated cluster ID (one official page, medium confidence, M24) | "Which cluster ID do all nodes share?" |
 | Authorizer | `StandardAuthorizer` with `super.users` on every node, and `allow.everyone.if.no.acl.found` kept at `false` (one official page, medium confidence, M14) | "Should ACL authorization be enabled on this cluster?" |
-| SASL mechanism | SASL/PLAIN only with TLS, with SCRAM-SHA-512 over `SASL_SSL` as the alternative (one official page, medium confidence, M21). SCRAM credentials in the metadata log suit production only on secured controllers (medium confidence, M23) | "Which SASL mechanism do clients support?" |
+| SASL mechanism | `SASL_SSL` on SASL-authenticated listeners that leave the host; SASL/PLAIN only with TLS, with SCRAM-SHA-512 over `SASL_SSL` as the alternative (one official page, medium confidence, M21). SCRAM credentials in the metadata log suit production only on secured controllers (medium confidence, M23) | "Which SASL mechanism do clients support?" |
 | Client certificates | `ssl.client.auth=required`; `requested` is discouraged (one official page, medium confidence, M22) | "Do all clients present certificates?" |
 | Controller port | Publish only client listener ports; keep the controller listener network-isolated (one official page, medium confidence, M20) | "Which ports must leave the host?" |
 | File descriptors | Raise `ulimits: nofile` to at least 100000 (one official page, medium confidence, M19) | "Can the host raise the nofile limit?" |
@@ -81,7 +80,7 @@ Each item rests on at least two versioned official pages.
 | Topic auto-creation | `auto.create.topics.enable=false` is factory practice, not in the docs (medium confidence) | "Should topics be created only through explicit tooling?" |
 | Certificate rotation | Hot keystore reload is not documented for 4.4 (unverified); plan a rolling restart | "Is a rolling restart acceptable for certificate rotation?" |
 | Rolling upgrade order | Controllers first is common practice (unverified) | "Which node order do you want for the roll?" |
-| Multi-datacenter | One cluster per DC with MM2 vs a stretched cluster (discouraged) | "Is cross-DC replication required, and what RPO is acceptable?" |
+| Multi-datacenter | One cluster per DC with MM2 vs a stretched cluster (discouraged by one official page, medium confidence, M29) | "Is cross-DC replication required, and what RPO is acceptable?" |
 | Delivery guarantee | At-least-once (default) vs exactly-once (transactions, `read_committed`) | "Do consumers write side effects outside Kafka?" |
 
 Details: [ask-first-decisions](./blueprints/ask-first-decisions.md).
@@ -90,10 +89,9 @@ Details: [ask-first-decisions](./blueprints/ask-first-decisions.md).
 
 | ❌ Don't | ✅ Instead |
 |---|---|
-| Apply the official Compose example defaults in production: RF 1, min ISR 1, logs in `/tmp` ([README](https://raw.githubusercontent.com/apache/kafka/4.4/docker/examples/README.md), branch head, supporting; [example](https://raw.githubusercontent.com/apache/kafka/4.4/docker/examples/docker-compose-files/cluster/isolated/plaintext/docker-compose.yml), branch head, supporting; [design](https://kafka.apache.org/44/design/design/), [topic configs](https://kafka.apache.org/44/configuration/topic-configs/)) | RF 3, min ISR 2 and a persistent volume |
+| Apply the official Compose example defaults in production: RF 1, min ISR 1, logs in `/tmp` ([README](https://raw.githubusercontent.com/apache/kafka/4.4/docker/examples/README.md), branch head, supporting; [example](https://raw.githubusercontent.com/apache/kafka/4.4/docker/examples/docker-compose-files/cluster/isolated/plaintext/docker-compose.yml), branch head, supporting; [design](https://kafka.apache.org/44/design/design/), [topic configs](https://kafka.apache.org/44/configuration/topic-configs/)) | RF 3, min ISR 2 and a persistent volume (medium confidence, M1) |
 | Create a topic with RF 3 and leave `min.insync.replicas=1` ([topic configs](https://kafka.apache.org/44/configuration/topic-configs/), [design](https://kafka.apache.org/44/design/design/)) | Set `min.insync.replicas=2` |
 | Enable `unclean.leader.election.enable` ([design](https://kafka.apache.org/44/design/design/), [topic configs](https://kafka.apache.org/44/configuration/topic-configs/)) | Keep it `false` (default) |
-| Stretch one cluster across datacenters ([datacenters](https://kafka.apache.org/44/operations/datacenters/), [geo-replication](https://kafka.apache.org/44/operations/geo-replication-cross-cluster-data-mirroring/)) | One cluster per DC mirrored with MM2 |
 | Add ZooKeeper settings such as `zookeeper.connect` ([KRaft vs ZooKeeper](https://kafka.apache.org/44/getting-started/zk2kraft/), [4.0.0 announcement](https://kafka.apache.org/blog/2025/03/18/apache-kafka-4.0.0-release-announcement/)) | KRaft settings. ZooKeeper work goes to `operating-kafka-v3-9` |
 | Run a broker older than the `kafka-storage` tool that formatted its directory ([upgrade notes](https://kafka.apache.org/44/getting-started/upgrade/), [4.4.0 announcement](https://kafka.apache.org/blog/2026/10/22/apache-kafka-4.4.0-release-announcement/)) | Use a broker equal to or newer than the tool |
 
@@ -110,7 +108,7 @@ Details: [never-do-patterns](./blueprints/never-do-patterns.md).
 | `replica.lag.time.max.ms` | 30000 | https://kafka.apache.org/44/configuration/broker-configs/ |
 | Producer `acks` / `linger.ms` | all / 5 | https://kafka.apache.org/44/configuration/producer-configs/ |
 | `ssl.enabled.protocols` | TLSv1.2,TLSv1.3 | https://kafka.apache.org/44/configuration/broker-configs/ |
-| Env var mapping | `KAFKA_` prefix, `.` to `_`, `_` to `__`, `-` to `___` | https://raw.githubusercontent.com/apache/kafka/4.4/docker/examples/README.md |
+| Env var mapping | `KAFKA_` prefix, `.` to `_`, `_` to `__`, `-` to `___` | https://raw.githubusercontent.com/apache/kafka/4.4/docker/examples/README.md (branch head, supporting) |
 | Controller quorum size | 3 tolerates 1 failure, 5 tolerates 2 | https://kafka.apache.org/44/operations/kraft/ |
 
 Coverage: the broker configs page was read 200000 of 201536 characters (register L1).

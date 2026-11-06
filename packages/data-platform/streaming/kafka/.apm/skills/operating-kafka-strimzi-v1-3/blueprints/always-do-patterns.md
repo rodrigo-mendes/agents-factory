@@ -61,9 +61,9 @@ config:
 
 Sources: [upgrade sequence](https://raw.githubusercontent.com/strimzi/strimzi-kafka-operator/1.3.0/documentation/modules/upgrading/con-upgrade-sequence.adoc), [Kafka upgrade](https://raw.githubusercontent.com/strimzi/strimzi-kafka-operator/1.3.0/documentation/modules/upgrading/proc-upgrade-kafka-kraft.adoc), [upgrade assembly](https://raw.githubusercontent.com/strimzi/strimzi-kafka-operator/1.3.0/documentation/assemblies/upgrading/assembly-upgrade.adoc), [v1 conversion](https://raw.githubusercontent.com/strimzi/strimzi-kafka-operator/1.3.0/documentation/modules/upgrading/con-api-conversion-v1.adoc). Order: check Kubernetes, confirm KRaft, convert to the v1 API if coming from before 1.0.0, upgrade the Cluster Operator, change `spec.kafka.version` (keep `metadataVersion`), change `metadataVersion` last. Steps: [rolling-updates-and-upgrades](./rolling-updates-and-upgrades.md).
 
-## 8. CRDs after a Helm upgrade
+## 8. CRDs are not updated by `helm upgrade`
 
-Sources: [Helm README](https://raw.githubusercontent.com/strimzi/strimzi-kafka-operator/1.3.0/packaging/helm-charts/helm3/strimzi-kafka-operator/README.md), [upgrade assembly](https://raw.githubusercontent.com/strimzi/strimzi-kafka-operator/1.3.0/documentation/assemblies/upgrading/assembly-upgrade-cluster-operator.adoc). `helm upgrade` does not update CRDs; install them from the release downloads or the chart's `crd` subdirectory. The exact CRD file name for 1.3.1 is not recorded (unverified).
+Sources: [Helm README](https://raw.githubusercontent.com/strimzi/strimzi-kafka-operator/1.3.0/packaging/helm-charts/helm3/strimzi-kafka-operator/README.md), [upgrade assembly](https://raw.githubusercontent.com/strimzi/strimzi-kafka-operator/1.3.0/documentation/assemblies/upgrading/assembly-upgrade-cluster-operator.adoc). `helm upgrade` does not update CRDs; apply the release CRDs yourself, from the release downloads or the chart's `crd` subdirectory. Whether to apply them before or after `helm upgrade`, and the exact CRD file name for 1.3.1, are not stated by a cited page (unverified, U7).
 
 ## 9. Remove-brokers rebalance before scale-down
 

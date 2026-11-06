@@ -20,7 +20,7 @@ dependencies:
     - path: ../../frontend/react/ui-design
     - path: ../../frontend/react/nextjs-frontend
     - path: ../../java/quarkus/quarkus-langchain4j
-    - path: ../../third-party/vercel-frontend
+   # - path: ../../third-party/vercel-frontend
     - path: ../../delivery/github/github-actions-cicd
   mcp: []
 includes: auto

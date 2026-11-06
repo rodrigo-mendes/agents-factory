@@ -40,7 +40,7 @@ Back to [SKILL.md](../SKILL.md). Eight scenarios: canonical (2), edge (1), rejec
   "query": "Upgrade our operator to 1.3.1 with Helm and show the 1.3.1 docs page for the procedure.",
   "expected_behavior": [
     "States that 1.3.1 has no versioned docs yet and that the procedure comes from the 1.3.0 docs plus the 1.3.1 release notes (the 1.3.1 docs URL returned 404 on 2026-11-04)",
-    "Says the CRDs must be applied separately because helm upgrade does not update them, and marks the CRD file name and a 1.3.1 chart as (unverified)",
+    "Says the CRDs must be applied separately because helm upgrade does not update them, and marks the CRD order, the CRD file name and a 1.3.1 chart as (unverified)",
     "Gives the order: Kubernetes, operator, spec.kafka.version, metadataVersion last",
     "Does not claim a support or end-of-life date (no per-release support policy was found)"
   ]
@@ -70,7 +70,7 @@ Back to [SKILL.md](../SKILL.md). Eight scenarios: canonical (2), edge (1), rejec
   "expected_behavior": [
     "States 4.4.0 is not in the supported list of Strimzi 1.3.x (4.2.0 to 4.3.2 on 1.3.1) and refuses to set it (https://strimzi.io/downloads/, read 2026-11-04)",
     "Suggests 4.3.2 on 1.3.1",
-    "Points to operating-kafka-v4-4 for 4.4 broker facts noting that its 4.4-only items do not apply to a Strimzi 1.3.x cluster"
+    "Says Kafka 4.4.0 is not supported by this Strimzi line; for 4.4 broker facts on Compose see operating-kafka-v4-4; for Confluent Platform on Kubernetes see operating-kafka-confluent-kubernetes-v3-4"
   ]
 }
 ```

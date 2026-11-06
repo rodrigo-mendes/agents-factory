@@ -19,7 +19,7 @@ Official examples live under `docker/examples/docker-compose-files/` [S3]: `sing
 
 ## Hardened isolated cluster
 
-Base: official isolated example [S5] (branch 4.4, read 2026-11-04). Changes: image pinned to 4.4.0 (the official file uses `${IMAGE}`), `ulimits: nofile` and `depends_on` on the controllers (part of the assembled file below, not compared line by line with the official file), RF 3 and min ISR 2, named volumes instead of `/tmp`, host ports bound to `127.0.0.1`, auto topic creation off (medium confidence, U12). The path `/var/lib/kafka/data` is a factory choice (medium confidence). PLAINTEXT is kept for brevity: use SSL or SASL_SSL beyond a laptop ([tls-and-security](./tls-and-security.md)).
+Base: official isolated example [S5] (branch 4.4, read 2026-11-04). Changes: image pinned to 4.4.0 (the official file uses `${IMAGE}`), `ulimits: nofile` and `depends_on` on the controllers (part of the assembled file below, not compared line by line with the official file), RF 3 and min ISR 2, named volumes instead of `/tmp`, host ports bound to `127.0.0.1` (medium confidence, M28), auto topic creation off (medium confidence, U12). The path `/var/lib/kafka/data` is a factory choice (medium confidence). PLAINTEXT is kept for brevity: use SSL or SASL_SSL beyond a laptop ([tls-and-security](./tls-and-security.md)).
 
 ```yaml
 # Representative — adapt to your environment
@@ -52,7 +52,7 @@ services:
   kafka-1:
     image: apache/kafka:4.4.0
     hostname: kafka-1
-    ports: ['127.0.0.1:29092:9092']
+    ports: ['127.0.0.1:29092:9092']   # (medium confidence, M28)
     environment: { <<: *broker-env, KAFKA_NODE_ID: 4, KAFKA_ADVERTISED_LISTENERS: 'PLAINTEXT://kafka-1:19092,PLAINTEXT_HOST://localhost:29092' }
     volumes: ['b1:/var/lib/kafka/data']
     depends_on: [controller-1, controller-2, controller-3]

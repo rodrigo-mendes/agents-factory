@@ -9,7 +9,7 @@ Back to [SKILL.md](../SKILL.md). Provenance: the official pages in the Source Bi
 - Support policy: the Apache wiki says rolling upgrades are tested from the last 3 releases, bugfix releases are attempted for the last 3 releases, and a release ships every 4 months (medium confidence, M9). No official per-version end-of-life table exists (unverified, U13).
 - No successor to 4.4.0 (released 2026-10-22) is recorded in the pages read on 2026-11-04. Re-check the downloads page for any release after 4.4.0 before relying on this skill.
 
-## Unverified (U1..U18): 18 items
+## Unverified (U1..U20): 20 items
 
 | ID | Item | Tag | Note |
 |---|---|---|---|
@@ -31,12 +31,14 @@ Back to [SKILL.md](../SKILL.md). Provenance: the official pages in the Source Bi
 | U16 | A JMX-to-Prometheus bridge for 4.4: the monitoring page names no exporter, so any bridge and its 4.4 compatibility are third-party | (unverified) | Not official, not researched |
 | U17 | Exact broker startup and refusal messages: OAUTHBEARER JWKS without audience and issuer, and an older broker on a KIP-1170 directory | (unverified) | Read the container logs |
 | U18 | Cruise Control and similar third-party rebalancers on 4.4 | (unverified) | Not official, not researched |
+| U19 | Pacing of rolling restarts outside upgrades (for example one node at a time, waiting for the ISR) | (unverified) | Not researched for 4.4 |
+| U20 | Formatting each controller of a static `controller.quorum.voters` quorum with `--cluster-id <ID> --config <file>` and no `--standalone` | (unverified) | The pages read show `--standalone`, `--initial-controllers` and the plain broker form only |
 
 ## Irresolvable (I1..): 0 items
 
 No separate irresolvable class is kept. Facts that cannot be resolved from documentation are listed once above as U-ids (U1, U4, U13) with a human-verify note.
 
-## Medium confidence (M1..M28): 28 items
+## Medium confidence (M1..M29): 29 items
 
 | ID | Claim | Tag |
 |---|---|---|
@@ -60,14 +62,15 @@ No separate irresolvable class is kept. Facts that cannot be resolved from docum
 | M18 | `kafka-metadata-quorum.sh describe --status` as the quorum health check: one official page (KRaft [S6]) | (medium confidence) |
 | M19 | File descriptors at least 100000 (`ulimits: nofile`): one official page (hardware and OS [S16]) | (medium confidence) |
 | M20 | Controller listener network-isolated and controller port not published: one official page (listener configuration [S31]); the example file is a release-branch file | (medium confidence) |
-| M21 | SASL/PLAIN only with TLS, with SCRAM-SHA-512 over `SASL_SSL` as the alternative: one official page (SASL [S10]) | (medium confidence) |
+| M21 | `SASL_SSL` on SASL-authenticated listeners that leave the host, SASL/PLAIN only with TLS, with SCRAM-SHA-512 over `SASL_SSL` as the alternative: one official page (SASL [S10]) | (medium confidence) |
 | M22 | `ssl.client.auth=requested` is discouraged: one official page (SSL [S11]) | (medium confidence) |
 | M23 | SCRAM credentials in the KRaft metadata log suit production only where controllers are secured and private: one official page (SASL [S10]) | (medium confidence) |
 | M24 | Format every KRaft node with the same cluster ID: the multi-node rule is on one official page (KRaft [S6]); the quickstart [S30] shows a one-node `format --standalone` only | (medium confidence) |
-| M25 | Do not format or start a replacement controller until a majority has all committed data: one official page ([S16] as read) | (medium confidence) |
+| M25 | Do not format or start a replacement controller until a majority has all committed data: one official page (Hardware and OS [S16]) | (medium confidence) |
 | M26 | In Compose give each broker its own certificate: one release-branch file (examples README [S3]), not a versioned page | (medium confidence) |
 | M27 | Docker 20.10.4 or later: one release-branch file (examples README [S3]), not a versioned page | (medium confidence) |
 | M28 | Publish only client listener ports bound to `127.0.0.1` or the application network: derived from release-branch example files [S4][S5], not a versioned page | (medium confidence) |
+| M29 | One cluster per datacenter mirrored with MM2 rather than a stretched cluster: the discouragement is on one official page (datacenters [S19]); the geo-replication page [S13] supports only the MM2 option | (medium confidence) |
 
 ## Coverage limits (L1..L6): 6 items
 
@@ -75,7 +78,7 @@ No separate irresolvable class is kept. Facts that cannot be resolved from docum
 |---|---|
 | L1 | Broker configs page read 200000 of 201536 characters |
 | L2 | Monitoring page read 100000 of 157611 characters; Connect and Streams sections unread |
-| L3 | Downloads page (F1) read 100000 of 152730 characters by the orchestrator |
+| L3 | Downloads page (S33) read 100000 of 152730 characters |
 | L4 | 3.9 upgrade page read 100000 of 233388 characters for this skill (the same page was read in full for `operating-kafka-v3-9`) |
 | L5 | Security landing page read as navigation only |
 | L6 | Every page was read through WebFetch, which returns a summarized page, not verbatim text |
@@ -88,22 +91,24 @@ No separate irresolvable class is kept. Facts that cannot be resolved from docum
 | (medium confidence) | SKILL.md Ask First, controller placement | M12, M13 |
 | (medium confidence) | SKILL.md Ask First, authorizer | M14 |
 | (medium confidence) | SKILL.md Ask First, image tag | M15 |
-| (medium confidence) | SKILL.md Ask First, quorum size, node identity, cluster ID, SASL mechanism, client certificates, controller port, file descriptors | M16, M17, M18, M19, M20, M21, M22, M23, M24 |
+| (medium confidence) | SKILL.md Ask First, quorum size, node identity, cluster ID, SASL mechanism (incl. SASL_SSL), client certificates, controller port, file descriptors | M16, M17, M18, M19, M20, M21, M22, M23, M24 |
+| (medium confidence) | SKILL.md Ask First, multi-datacenter | M29 |
+| (medium confidence) | SKILL.md Never Do, persistent volume alternative | M1 |
 | (medium confidence), (unverified) | SKILL.md Ask First, static vs dynamic quorum | U4, U5 |
 | (unverified) | SKILL.md Ask First, native image SASL | U1 |
 | (medium confidence) | SKILL.md Version Context, support policy | M9 |
 | (unverified) | SKILL.md Ask First, native SASL, quorum format, certificate reload, upgrade order | U1, U5, U7, U11 |
 | (unverified) | SKILL.md Version Context, end-of-life table | U13 |
-| (medium confidence) | ask-first-decisions.md | U4, U12, M6, M12, M13, M14, M15, M16, M17, M18, M19, M20, M21, M22, M23, M24 |
-| (unverified) | ask-first-decisions.md | U1, U5, U7, U11, U9 |
+| (medium confidence) | ask-first-decisions.md | U4, U12, M6, M12, M13, M14, M15, M16, M17, M18, M19, M20, M21, M22, M23, M24, M29 |
+| (unverified) | ask-first-decisions.md | U1, U5, U7, U11, U9, U19 |
 | (medium confidence) | always-do-patterns.md, high-availability-dr.md, never-do-patterns.md | U3, U4, L2, M1, M2, M11, M12, M13, M14, M15, M16, M17, M18, M19, M21, M24, M25 |
-| (unverified) | always-do-patterns.md | U2 |
+| (unverified) | always-do-patterns.md | U2, U20 |
 | (medium confidence), (unverified) | evaluation-scenarios.md | M12, M14, M20, U1, U4 |
-| (medium confidence) | deploy-compose.md, paths, single-host scope, file descriptors, auto topic creation, Docker version | M1, M12, M19, U12, M27 |
+| (medium confidence) | deploy-compose.md, paths, single-host scope, file descriptors, auto topic creation, Docker version | M1, M12, M19, U12, M27, M28 |
 | (unverified) | deploy-compose.md, image details, native image SASL | U1, U3, U5 |
 | (medium confidence) | tls-and-security.md | M2, L2, U15, M14, M19, M20, M21, M22, M23, M26, M28 |
 | (unverified) | tls-and-security.md | U7, U8, U14 |
-| (medium confidence) | observability.md | M7, M8, M11 |
+| (medium confidence) | observability.md | M2, M7, M8, M11 |
 | (unverified) | observability.md | U9, U10, U16, U17 |
 | (unverified) | high-availability-dr.md | U8, U9 |
 | (medium confidence) | performance-tuning.md, capacity-sizing.md | M3, M4, M5, M6, M10, M12, M16, M19, U6 |
@@ -147,4 +152,4 @@ All pages read 2026-11-04. S8 and S21 are navigation pages and are not cited.
 | S30 | Quick Start | https://kafka.apache.org/44/getting-started/quickstart/ |
 | S31 | Listener Configuration | https://kafka.apache.org/44/security/listener-configuration/ |
 | S32 | Compatibility | https://kafka.apache.org/44/getting-started/compatibility/ |
-| F1 | Downloads page | https://kafka.apache.org/community/downloads/ |
+| S33 | Downloads page | https://kafka.apache.org/community/downloads/ |

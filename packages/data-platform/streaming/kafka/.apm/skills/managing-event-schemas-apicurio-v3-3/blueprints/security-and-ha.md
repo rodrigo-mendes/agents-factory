@@ -24,7 +24,7 @@ All options are off by default. HTTP basic client credentials (`APICURIO_AUTHN_B
 
 Source: high availability page.
 
-- The registry and the UI are stateless and scale horizontally (the page example uses 3 registry replicas and 2 UI replicas). Keep at least 2 replicas during updates.
+- The registry and the UI are stateless and scale horizontally (the page example uses 3 registry replicas and 2 UI replicas). Keep at least 2 replicas during updates (medium confidence, M11).
 - PostgreSQL: needs replication with automatic failover (Patroni, CloudNativePG or a managed service). Tune Agroal pool validation, timeouts and maximum lifetime for failover.
 - KafkaSQL: topics with replication factor 3 and `min.insync.replicas=2`. Every replica consumes the full journal. Do not set a fixed consumer group ID. Topic auto-creation is "not recommended" for HA production, so pre-create the topics with the settings in [always-do-patterns](./always-do-patterns.md).
 - Request limits exist but are unlimited by default (`apicurio.limits.config.max-requests-per-second=-1`, config reference).

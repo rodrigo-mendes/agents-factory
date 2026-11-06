@@ -1,6 +1,6 @@
 # Never-do patterns, Strimzi 1.3.x
 
-Back to [SKILL.md](../SKILL.md). Nine High items (two or more official documents read in full each); every alternative is High too. Single-source prohibitions are not here: see [ask-first-decisions](./ask-first-decisions.md#single-source-prohibitions-medium-confidence). Do not copy the older shared Kubernetes operator guide: it shows v1beta2, operator 0.40.0 and Kafka 3.7.0, all rejected or unsupported on 1.3.x.
+Back to [SKILL.md](../SKILL.md). Nine High items (two or more official documents read in full each); every alternative is High too. Single-source prohibitions are not here: see [ask-first-decisions](./ask-first-decisions.md#single-source-prohibitions-medium-confidence). Also rejected: `v1beta2` manifests, operator pins other than 1.3.x and Kafka versions outside the supported list ([1.3.0 notes](https://github.com/strimzi/strimzi-kafka-operator/releases/tag/1.3.0), [downloads](https://strimzi.io/downloads/)).
 
 ## N1. ZooKeeper-based cluster on Strimzi 1.3.x
 
@@ -105,9 +105,9 @@ Sources: [Helm README](https://raw.githubusercontent.com/strimzi/strimzi-kafka-o
 
 ```bash
 # ❌ helm upgrade alone leaves old CRD schemas
-# ✅ apply the release CRDs first (file name unverified), then upgrade (a 1.3.1 chart is unconfirmed, unverified)
+# ✅ also apply the release CRDs yourself (file name and order relative to helm upgrade: unverified, U7)
 kubectl apply -f <strimzi-crds-from-the-release>
-helm upgrade my-strimzi-cluster-operator oci://quay.io/strimzi-helm/strimzi-kafka-operator --version <chart-version>
+# helm upgrade my-strimzi-cluster-operator oci://quay.io/strimzi-helm/strimzi-kafka-operator --version <chart-version>   (a 1.3.1 chart is unconfirmed, unverified, U1)
 ```
 
 ## N9. Clear-text secrets in `custom` OAuth config

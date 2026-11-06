@@ -33,11 +33,11 @@ Static uses `controller.quorum.voters`. Dynamic uses `controller.quorum.bootstra
 
 ## ZooKeeper ensemble size
 
-3 tolerates 1 failure, 5 tolerates 2, 7 tolerates 3. More servers add read capacity and cost write traffic ([ZooKeeper page](https://kafka.apache.org/39/operations/zookeeper/), [Admin Guide](https://zookeeper.apache.org/doc/r3.8.4/zookeeperAdmin.html)). Ask: "How many simultaneous failures, including maintenance, must you survive?"
+3 tolerates 1 failure, 5 tolerates 2, 7 tolerates 3. More servers add read capacity and cost write traffic ([ZooKeeper page](https://kafka.apache.org/39/operations/zookeeper/), [Admin Guide](https://zookeeper.apache.org/doc/r3.8.4/zookeeperAdmin.html)). The Kafka ZooKeeper page calls 5 or 7 typical; "three servers is the minimum recommended size" and "best to use an odd number" are stated by the Admin Guide alone (medium confidence, M19). Ask: "How many simultaneous failures, including maintenance, must you survive?"
 
 ## Cluster ID
 
-Generate the ID once with `kafka-storage.sh random-uuid` (Always Do). Formatting every KRaft node with that same ID rests on one official page ([KRaft](https://kafka.apache.org/39/operations/kraft/), medium confidence, M14); the quickstart shows a one-node format only. For the migration use the existing ZooKeeper cluster ID. Ask: "Which cluster ID do all nodes share?"
+Generate a cluster ID with `kafka-storage.sh random-uuid` (Always Do). Formatting every KRaft node with that same ID rests on one official page ([KRaft](https://kafka.apache.org/39/operations/kraft/), medium confidence, M14); the quickstart shows a one-node format only. For the migration use the existing ZooKeeper cluster ID. Ask: "Which cluster ID do all nodes share?"
 
 ## Rolling restart pacing
 
@@ -50,7 +50,7 @@ Restart one broker at a time (Always Do). Waiting for the ISR to rejoin before t
 | Topic auto-creation | `auto.create.topics.enable=false` appears in the production example as a value, not as a rule (medium confidence, M12). Default is `true` | "Should topics be created only through tooling?" |
 | Delivery guarantee | At-least-once (defaults) vs exactly-once (`transactional.id`, `isolation.level=read_committed`) ([producer](https://kafka.apache.org/39/configuration/producer-configs/), [consumer](https://kafka.apache.org/39/configuration/consumer-configs/), [design](https://kafka.apache.org/39/design/design/)) | "Can consumers tolerate duplicates?" |
 | Retention | Time (`retention.ms`, 7 days), size (`retention.bytes`, -1), compaction ([topic configs](https://kafka.apache.org/39/configuration/topic-level-configs/)) | "What is the replay window?" |
-| Multi-datacenter | MM2 per DC (preferred) vs stretched (discouraged) | "What RPO is acceptable for asynchronous mirroring?" |
+| Multi-datacenter | MM2 per DC (preferred) vs stretched (discouraged). The datacenters page ([S22]) advises against a single cluster over a high-latency link, noting slow Kafka and ZooKeeper writes; the geo-replication page supports only the MM2 option (medium confidence, M18) | "What RPO is acceptable for asynchronous mirroring?" |
 | KRaft rolling-upgrade order | Controllers vs brokers first is not stated on the 3.9 upgrade page (unverified, U19) | "Which node order do you want?" |
 | Certificate rotation | Dynamic keystore update is not described on the 3.9 SSL page (unverified, U14). Plan a rolling restart | "Is a rolling restart acceptable?" |
 | AlterConfigPolicy | `alter.config.policy.kraft.compatibility.enable=true` (KIP-1252, default `false`) when you use a policy and migrate (medium confidence, M6) | "Do you use an AlterConfigPolicy?" |
@@ -61,6 +61,7 @@ Restart one broker at a time (Always Do). Waiting for the ISR to rejoin before t
 
 Each item below rests on one official page, so it is a recommendation to confirm, tagged (medium confidence, M13) unless noted.
 
+- **`SASL_SSL`** on SASL-authenticated listeners that leave the host ([SASL](https://kafka.apache.org/39/security/authentication-using-sasl/)). Certificate-authenticated listeners use `SSL` (Always Do).
 - **SASL/PLAIN** should be used only with TLS as transport ([SASL](https://kafka.apache.org/39/security/authentication-using-sasl/)). Prefer SCRAM-SHA-512 over SASL_SSL.
 - **SCRAM credentials stored in ZooKeeper** suit production only where ZooKeeper is secure and on a private network ([SASL](https://kafka.apache.org/39/security/authentication-using-sasl/), medium confidence, M4).
 - **Default OAUTHBEARER** (unsecured JWT) is only suitable for non-production ([SASL](https://kafka.apache.org/39/security/authentication-using-sasl/)). Production needs custom callback handlers.

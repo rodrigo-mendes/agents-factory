@@ -40,7 +40,7 @@ c.put("apicurio.registry.url", "https://registry.example.com/apis/registry/v3");
 c.put("apicurio.registry.use-specific-avro-reader", "true");   // generated classes
 ```
 
-Keep client id and secret out of source code. The `fault-tolerant-refresh` line is recommended by the [best-practices page](https://www.apicur.io/registry/docs/apicurio-registry/3.3.x/getting-started/assembly-schema-lifecycle-best-practices.html).
+Keep client id and secret out of source code. The `fault-tolerant-refresh` line is recommended by the [best-practices page](https://www.apicur.io/registry/docs/apicurio-registry/3.3.x/getting-started/assembly-schema-lifecycle-best-practices.html) alone (medium confidence, M10).
 
 - Protobuf: `io.apicurio.registry.serde.protobuf.ProtobufKafkaSerializer` and `ProtobufKafkaDeserializer`. The deserialized type is `DynamicMessage` unless `apicurio.registry.deserializer.value.return-class` is set.
 - JSON Schema: `io.apicurio.registry.serde.jsonschema.JsonSchemaKafkaSerializer` and `JsonSchemaKafkaDeserializer`. `apicurio.registry.serde.validation-enabled` defaults to `true`. Auto-registration support conflicts between the two pages (unverified, U4).

@@ -20,7 +20,7 @@ Back to [SKILL.md](../SKILL.md). Provenance: the official pages in the Source Bi
 | U4 | The Connect and connector YAML (field names `bootstrapServers`, `tls`, `certificateAndKey`, `state` values) | (unverified) |
 | U5 | OAuth `listenerConfig` JAAS string and the `${secrets:...}` placeholder syntax | (unverified) |
 | U6 | kubectl verification commands (grep patterns, columns, `--dry-run=server`, under-replicated check, label selector, Kubernetes version wording) | (unverified) |
-| U7 | Exact CRD file names to apply for 1.3.1 before `helm upgrade` | (unverified) |
+| U7 | Exact CRD file names to apply for 1.3.1, and whether to apply them before or after `helm upgrade` (no cited page pins the order) | (unverified) |
 | U8 | `metadataVersion` for Kafka 4.3.2 (the official example shows 4.3-IV0 for 4.3.1) | (unverified) |
 | U9 | 1.3.1 defaults inferred from 1.3.0 docs (for example the Connect default Kafka version) | (unverified) |
 | U10 | No Strimzi-native topic-data backup and no Velero or snapshot guidance in the pages read (absence of evidence) | (unverified) |
@@ -82,18 +82,21 @@ Back to [SKILL.md](../SKILL.md). Provenance: the official pages in the Source Bi
 |---|---|---|
 | (unverified) | SKILL.md Version Context and Ask First (Helm 1.3.1, 1.3.1 defaults, end-of-life) | U1, U9, I2 |
 | (unverified, I3), (unverified, I4) | SKILL.md Ask First (`UseBackgroundPodDeletion` default, pod names) | I3, I4 |
-| (unverified) | SKILL.md Quick Reference (`kubectl apply --dry-run=server`), hardened-overlay.md | U6 |
+| (unverified) | SKILL.md Quick Reference (`kubectl apply --dry-run=server`) | U6 |
+| (unverified), (medium confidence) | hardened-overlay.md | U3, U6, U8, U11, M3 |
+| (unverified, U7) | SKILL.md Always Do and Never Do, always-do-patterns.md, never-do-patterns.md, rolling-updates-and-upgrades.md (CRD order and file name) | U7 |
+| (medium confidence) | SKILL.md Ask First (existing ZooKeeper cluster, single-source prohibitions) | M21, M22 |
 | (medium confidence) | SKILL.md Version Context, Quick Reference, Ask First (ZooKeeper release number, reconciliation, node IDs, tlsroute, practices) | M22, M17, M19, M1..M4 |
 | (medium confidence) | ask-first-decisions.md (recommendations, prohibitions, tlsroute) | M1..M15, M19, M21 |
 | (unverified) | ask-first-decisions.md (Helm chart 1.3.1, 1.3.1 Connect default) | U1, U9 |
 | (unverified) | always-do-patterns.md, never-do-patterns.md (commands, CRD file name, metadataVersion, OAuth placeholder) | U5, U6, U7, U8 |
-| (unverified) | deploy-install-and-cr.md | U1, U2, U3, U6, U8, U11 |
+| (unverified) | deploy-install-and-cr.md | U1, U2, U6 |
 | (medium confidence) | deploy-install-and-cr.md, storage-and-scaling.md | M3, M4, M11, M15, M17, M18 |
 | (unverified), (medium confidence) | security-listeners-auth.md | U3, U5, M9, M10 |
 | (unverified), (medium confidence) | connect-topics-users.md | U4, M5..M8, M16, M17, M20 |
 | (unverified), (medium confidence) | observability.md | U6, U12, M1, M12, M17, M18 |
 | (unverified), (medium confidence) | recovery-and-dr.md, rolling-updates-and-upgrades.md | U10, M17, M18, M21, M22 |
-| (unverified), (medium confidence) | evaluation-scenarios.md | U3, U9, M22 |
+| (unverified), (medium confidence) | evaluation-scenarios.md | U1, U3, U5, U7, U9, M22 |
 | (unverified) | rolling-updates-and-upgrades.md (sed and jsonpath commands) | U6 |
 | (unverified) | storage-and-scaling.md (JBOD reading of the storage-reduction sentence) | U13 |
 

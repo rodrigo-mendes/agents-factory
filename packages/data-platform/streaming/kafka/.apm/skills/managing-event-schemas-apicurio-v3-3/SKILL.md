@@ -15,10 +15,10 @@ description: "Manages Kafka event schemas with Apicurio Registry 3.3.x (pinned 3
 |---|---|---|
 | Apicurio Registry | 3.3.4, released 2026-11-03. Minor line 3.3.x since 3.3.0 (2026-06-08). Active | https://github.com/Apicurio/apicurio-registry/releases/tag/3.3.4 and https://github.com/Apicurio/apicurio-registry/releases/tag/3.3.0 |
 | Support policy | The two most recent minor lines get security patches: 3.3.x and 3.2.x as of 2026-11-04. No dated end-of-life is published | https://www.apicur.io/registry/docs/apicurio-registry/3.3.x/getting-started/assembly-versioning-support-policy.html |
-| Container images | `apicurio/apicurio-registry:3.3.4` and `apicurio/apicurio-registry-ui:3.3.4` | https://hub.docker.com/v2/repositories/apicurio/apicurio-registry/tags?page_size=25&name=3.3 |
+| Container images | `apicurio/apicurio-registry:3.3.4` and `apicurio/apicurio-registry-ui:3.3.4` | https://hub.docker.com/v2/repositories/apicurio/apicurio-registry/tags?page_size=25&name=3.3 and https://hub.docker.com/v2/repositories/apicurio/apicurio-registry-ui/tags?page_size=10&name=3.3 |
 | Java SerDes | `io.apicurio:apicurio-registry-avro-serde-kafka` 3.3.4 confirmed on Maven Central. Protobuf and JSON Schema artifacts exist, their 3.3.4 version was not opened (unverified) | https://repo1.maven.org/maven2/io/apicurio/apicurio-registry-avro-serde-kafka/maven-metadata.xml |
 | Registry Java runtime | page not recorded (unverified) | page not recorded |
-| Kafka (including 3.9 brokers) and PostgreSQL versions supported | no support matrix found, so compatibility with 3.9 brokers is not stated (unverified, U2). The official sample compose uses `postgres:15` | https://raw.githubusercontent.com/Apicurio/apicurio-registry/3.3.4/distro/docker-compose/in-memory-with-auth/docker-compose.yml |
+| Kafka (including 3.9 brokers) and PostgreSQL versions supported | no support matrix found, so compatibility with 3.9 brokers is not stated (unverified, U2). The official sample compose uses `postgres:15` | https://raw.githubusercontent.com/Apicurio/apicurio-registry/3.3.4/distro/docker-compose/pg-secrets/docker-compose.yml and https://raw.githubusercontent.com/Apicurio/apicurio-registry/3.3.4/distro/docker-compose/in-memory-with-auth/docker-compose.yml |
 | License | Apache License, Version 2.0, read on branch main, not on the 3.3.4 tag (medium confidence) | https://raw.githubusercontent.com/Apicurio/apicurio-registry/main/LICENSE |
 
 **Version-lifetime risk** (as of 2026-11-04; details in [unverified and risks](./blueprints/unverified-and-risks.md#version-lifetime-risk)).
@@ -28,7 +28,7 @@ description: "Manages Kafka event schemas with Apicurio Registry 3.3.x (pinned 3
 
 ## Scope
 
-In scope: Apicurio Registry 3.3.x as the schema registry for Kafka (Avro, Protobuf, JSON Schema), with PostgreSQL or KafkaSQL storage, on Docker Compose, with Java Kafka SerDes. Out of scope: Confluent Schema Registry (use `managing-event-schemas-confluent-v8-4`), Registry 2.x, Kubernetes operator content (Strimzi and Confluent for Kubernetes skills), Debezium, the Kafka broker itself (use `operating-kafka-v4-4`). The Strimzi and Confluent for Kubernetes skills cover Kafka itself and not a registry.
+In scope: Apicurio Registry 3.3.x as the schema registry for Kafka (Avro, Protobuf, JSON Schema), with PostgreSQL or KafkaSQL storage, on Docker Compose, with Java Kafka SerDes. Out of scope: Confluent Schema Registry (use `managing-event-schemas-confluent-v8-4`), Registry 2.x, Kubernetes operator content (Strimzi and Confluent for Kubernetes skills), Debezium, the Kafka broker itself (use `operating-kafka-v4-4`). The `operating-kafka-strimzi-v1-3` and `operating-kafka-confluent-kubernetes-v3-4` skills cover Kafka itself and not a registry.
 
 ## Quick Navigation
 
@@ -66,7 +66,7 @@ Code and verification commands for each item are in [always-do-patterns](./bluep
 
 | Decision | Options and tradeoff | Ask |
 |---|---|---|
-| Which registry? | The request names no registry and no file is open: Apicurio (`managing-event-schemas-apicurio-v3-3`) or Confluent (`managing-event-schemas-confluent-v8-4`) | "Do you run Apicurio Registry 3.3 or Confluent Schema Registry 8.4?" |
+| Which registry? | The request names no registry and no file is open: Apicurio (`managing-event-schemas-apicurio-v3-3`) or Confluent (`managing-event-schemas-confluent-v8-4`). Criteria: license (Apicurio is Apache 2.0, medium confidence, M9; Confluent terms are in its own skill), storage (Apicurio PostgreSQL or KafkaSQL; Confluent the `_schemas` Kafka topic), Confluent-client compatibility (Apicurio offers `/apis/ccompat/v7` with gaps: no KEK/DEK, no exporters) | "Do you run Apicurio Registry 3.3 or Confluent Schema Registry 8.4, and which of license, storage and Confluent-client compatibility decides?" |
 | Storage backend | PostgreSQL (standard DB backup, needs HA Postgres) vs KafkaSQL (reuses Kafka, every replica replays the journal) (medium confidence) | "Which stateful platform do you operate and back up today, PostgreSQL or Kafka only?" |
 | Compatibility level | `BACKWARD_TRANSITIVE` recommended for production by one official page (medium confidence) vs `BACKWARD` vs `FULL(_TRANSITIVE)` | "How long is topic retention, and how far can consumers lag?" |
 | Upgrade order | Which side upgrades first per mode is not stated (unverified) | "Do you control both producers and consumers? Verify with a human before asserting an order" |

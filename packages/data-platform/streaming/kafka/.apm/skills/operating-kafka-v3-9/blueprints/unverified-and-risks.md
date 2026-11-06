@@ -28,7 +28,7 @@ Back to [SKILL.md](../SKILL.md). Provenance: the official pages in the Source Bi
 | U11 | Failover durations, RTO and RPO numbers, alert durations and thresholds beyond the value 0, ZooKeeper normal ranges | (unverified) | Set from your own baseline |
 | U12 | Healthcheck and diagnostic commands inside the image: `zookeeper-shell.sh ls /`, bash `/dev/tcp` with `srvr`, `zookeeper-shell.sh getAcl`, `kafka-topics.sh --under-min-isr-partitions` | (unverified) | Inferred commands |
 | U13 | Docker scripts and Dockerfile were read from branch `3.9` head, not tag `3.9.2` (dependencies.gradle and zookeeper.properties were read from tag 3.9.2). Covers `/opt/kafka`, volumes, `appuser`, base image, JMX defaults, default `CLUSTER_ID`, `configure` script messages | (medium confidence) | Re-check against the tag |
-| U14 | Dynamic keystore and certificate rotation on 3.9 (research id U7b) | (unverified) | Plan a rolling restart |
+| U14 | Dynamic keystore and certificate rotation on 3.9 | (unverified) | Plan a rolling restart |
 | U15 | Official per-version end-of-life table | (unverified) | Human-verify. None on kafka.apache.org |
 | U19 | Controller versus broker order in a KRaft rolling upgrade on 3.9 | (unverified) | Not stated on the upgrade page |
 | U22 | `zookeeper.set.acl` with mTLS only: the authentication page sample sets it, the encryption page says to set it only with SASL | (medium confidence) | Follow the authentication page for mTLS |
@@ -46,7 +46,7 @@ Back to [SKILL.md](../SKILL.md). Provenance: the official pages in the Source Bi
 
 No separate irresolvable class is kept. Facts that cannot be resolved from documentation are listed once above as U-ids (U4, U15, U26) with a human-verify note.
 
-## Medium confidence (M1..M17): 17 items
+## Medium confidence (M1..M20): 20 items
 
 | ID | Claim | Tag |
 |---|---|---|
@@ -62,18 +62,21 @@ No separate irresolvable class is kept. Facts that cannot be resolved from docum
 | M10 | Single-page ZooKeeper Admin Guide, hardware page and upgrade-page guidance kept out of Always Do (autopurge, 4lw, AdminServer, heap, file descriptors, disk sizing numbers, other sizing numbers, ZooKeeper binary upgrade). The dedicated `dataLogDir` device is not in this list: it is an Always Do item because the ZooKeeper page and the Admin Guide both state it | (medium confidence) |
 | M11 | The ZooKeeper-to-KRaft migration procedure and finalize guidance rest on one official page, the 3.9 KRaft page. The `inter.broker.protocol.version=3.9` prerequisite is excluded: it is an Always Do item because the KRaft page and the upgrade notes both state it | (medium confidence) |
 | M12 | `auto.create.topics.enable=false` appears in the production example only as a value, not as a rule | (medium confidence) |
-| M13 | Single-page security guidance: SASL/PLAIN needs TLS, default OAUTHBEARER, `ssl.client.auth=requested`, authorizer class, ZooKeeper ACL step order, sasl mechanism choice | (medium confidence) |
+| M13 | Single-page security guidance: SASL/PLAIN needs TLS, default OAUTHBEARER, `ssl.client.auth=requested`, authorizer class, ZooKeeper ACL step order, sasl mechanism choice, `SASL_SSL` on SASL-authenticated listeners that leave the host (SASL page [S9]) | (medium confidence) |
 | M14 | Format every KRaft node with the same cluster ID: the multi-node rule is on one official page (KRaft [S1]); the quickstart [S38] shows a one-node format only | (medium confidence) |
 | M15 | Wait for the ISR to rejoin before restarting the next broker: stated by one official page (running cluster [S20]); the upgrade notes [S5] only say to roll one broker at a time | (medium confidence) |
 | M16 | Odd KRaft controller quorum of 3 or 5 (2N+1 survives N failures): one versioned page (KRaft [S1]) | (medium confidence) |
-| M17 | Do not format or start a replacement KRaft controller until a majority of controllers has all committed data: one official page (KRaft [S1]) | (medium confidence) |
+| M17 | Do not format or start a replacement KRaft controller until a majority of controllers has all committed data: one official page (Hardware and OS [S13]) | (medium confidence) |
+| M18 | One cluster per datacenter mirrored with MM2 rather than a stretched cluster (Kafka and ZooKeeper): the discouragement is on one official page (datacenters [S22]); the geo-replication page [S23] supports only the MM2 option | (medium confidence) |
+| M19 | ZooKeeper ensemble of an odd size and at least 3 servers: stated by the ZooKeeper Admin Guide [S37] alone; the Kafka ZooKeeper page [S6] names 5 or 7 as typical | (medium confidence) |
+| M20 | A named volume for log dirs and the path `/var/lib/kafka/data` are factory choices, not an official recommendation | (medium confidence) |
 
 ## Coverage limits (L1..L4): 4 items
 
 | ID | Limit |
 |---|---|
-| L1 | Downloads page (F1, F4) read 100000 of 152730 characters. The 3.9.x and supported-releases entries were inside the part read |
-| L2 | The 4.4 KRaft page and the 4.0.0 announcement were read in full by the orchestrator on 2026-11-04; the skill author used only their bridge-release and ZooKeeper sentences |
+| L1 | Downloads page (S25) read 100000 of 152730 characters. The 3.9.x and supported-releases entries were inside the part read |
+| L2 | The 4.4 KRaft page and the 4.0.0 announcement were read in full on 2026-11-04; only their bridge-release and ZooKeeper sentences are used here |
 | L3 | Every page was read through WebFetch, which returns a summarized page, not verbatim text. For pages under 100000 characters the sizes are estimates, one untruncated call each |
 | L4 | The tiered storage page was not read, and the operations index was read as navigation only |
 
@@ -86,16 +89,19 @@ No separate irresolvable class is kept. Facts that cannot be resolved from docum
 | (medium confidence) | SKILL.md Version Context and Ask First (image, ZooKeeper-mode command override) | U1 |
 | (unverified) | SKILL.md Ask First (Compose layout, quorum type, 3-controller quorum) | U28, U5, U26 |
 | (medium confidence) | SKILL.md Ask First (migration procedure, patch, combined mode, auto-create, cluster ID, rolling restart pacing) | M11, U3, M3, M12, M14, M15 |
-| (medium confidence) | always-do-patterns.md (paths, Compose single-host, cluster ID, rolling restart pacing) | U13, M5, M14, M15 |
+| (medium confidence) | SKILL.md Ask First (ZooKeeper ensemble size, SASL listeners, multi-datacenter) | M19, M13, M18 |
+| (medium confidence) | SKILL.md Never Do (named volume alternative) | M20 |
+| (medium confidence) | always-do-patterns.md (paths, Compose single-host, cluster ID, rolling restart pacing, ZooKeeper ensemble size, SASL_SSL) | U13, M5, M14, M15, M19, M13 |
 | (unverified) | always-do-patterns.md (ZooKeeper health command) | U12 |
-| (medium confidence), (unverified) | ask-first-decisions.md | U1, U3, U4, U5, U7, U8, U13, U14, U15, U19, U23, U26, M2, M3, M4, M5, M6, M9, M10, M11, M12, M13, M14, M15 |
+| (medium confidence), (unverified) | ask-first-decisions.md | U1, U3, U4, U5, U7, U8, U13, U14, U15, U19, U23, U26, M2, M3, M4, M5, M6, M9, M10, M11, M12, M13, M14, M15, M18, M19 |
 | (medium confidence), (unverified) | deploy-compose-zookeeper.md | U1, U2, U12, U13, U23, U28, M5, M7, M10 |
-| (medium confidence), (unverified) | zookeeper-ensemble.md | M10, U10, U12, U24, U27, U31 |
+| (medium confidence), (unverified) | zookeeper-ensemble.md | M10, M19, U10, U12, U24, U27, U31 |
 | (medium confidence), (unverified) | zookeeper-security.md | M4, M8, M13, U6, U7, U8, U9, U13, U14, U22 |
 | (medium confidence), (unverified) | zk-to-kraft-migration.md | M6, M11, U3, U19, U25, U26, U29 |
 | (unverified) | high-availability-dr.md, observability.md | U10, U11, U12, U27, U30 |
-| (medium confidence) | high-availability-dr.md, observability.md | M5, M8, M16, M17 |
+| (medium confidence) | high-availability-dr.md, observability.md | M5, M8, M16, M17, M18 |
 | (medium confidence), (unverified) | performance-tuning.md, capacity-sizing.md | M6, M7, M8, M10, M11, M12, M13, U7, U31 |
+| (medium confidence) | never-do-patterns.md (named volume alternative) | M20 |
 | (medium confidence), (unverified) | evaluation-scenarios.md | U1, U3, U4, U5, U15, U26, U28, M11 |
 
 ## Source Bibliography

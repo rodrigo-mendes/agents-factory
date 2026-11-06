@@ -31,7 +31,7 @@ KRaft on 3.9: 3 controllers (quorum 2) + 3 brokers. Quorum sizes: ZooKeeper 3, 5
 
 ## Split-brain
 
-Majority quorum in ZooKeeper (odd size) or the controller quorum prevents it. With a minority, metadata changes stop (inferred, unverified, U30). Do not stretch one cluster across datacenters.
+Majority quorum in ZooKeeper (odd size) or the controller quorum prevents it. With a minority, metadata changes stop (inferred, unverified, U30). Stretching one cluster across datacenters is discouraged by the datacenters page (medium confidence, M18).
 
 ## DR with MirrorMaker 2
 
@@ -61,6 +61,6 @@ No native backup tool was found in the pages read (unverified, U10). Durability 
 
 **Disk full on a broker.** Detection: `df -h` on the data volume. Response: lower `retention.ms` or `retention.bytes` on large topics with `kafka-configs.sh`, or add disk. Recovery: move partitions with `kafka-reassign-partitions.sh --generate/--execute/--verify --throttle`. A ZooKeeper broker with several log dirs shuts down on any dir failure (KAFKA-16431).
 
-**Replacing a failed KRaft controller (KRaft on 3.9).** Detection: `kafka-metadata-quorum.sh --bootstrap-server kafka-1:19092 describe --replication`. Do not format and start the new controller until a majority of controllers has all committed data (check Lag, LogEndOffset, LastCaughtUpTimestamp) (medium confidence, M17). Then `kafka-storage.sh format` (use `--ignore-formatted` only when just the metadata log dir was lost in combined mode) and start.
+**Replacing a failed KRaft controller (KRaft on 3.9).** Detection: `kafka-metadata-quorum.sh --bootstrap-server kafka-1:19092 describe --replication`. Do not format and start the new controller until a majority of controllers has all committed data (check Lag, LogEndOffset, LastCaughtUpTimestamp) (Hardware and OS page [S13]; medium confidence, M17: one official page). Then `kafka-storage.sh format` (use `--ignore-formatted` only when just the metadata log dir was lost in combined mode) and start.
 
 **Migration stalls or revert fails after the controller epoch advanced.** See [zk-to-kraft-migration](./zk-to-kraft-migration.md).

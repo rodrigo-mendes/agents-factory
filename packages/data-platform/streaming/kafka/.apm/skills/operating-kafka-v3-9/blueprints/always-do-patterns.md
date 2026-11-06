@@ -42,7 +42,7 @@ docker exec kafka-1 /opt/kafka/bin/kafka-configs.sh --bootstrap-server kafka-1:1
 
 ## 5. Odd ZooKeeper ensemble, at least 3
 
-Sources: [ZooKeeper page](https://kafka.apache.org/39/operations/zookeeper/) (5 or 7 typical; tolerates 2 and 3), [Admin Guide](https://zookeeper.apache.org/doc/r3.8.4/zookeeperAdmin.html) ("Three ZooKeeper servers is the minimum recommended size", odd count best).
+Not in the main guardrail list: the [ZooKeeper page](https://kafka.apache.org/39/operations/zookeeper/) says 5 or 7 is typical (tolerates 2 and 3), while "Three ZooKeeper servers is the minimum recommended size" and the odd count come from the [Admin Guide](https://zookeeper.apache.org/doc/r3.8.4/zookeeperAdmin.html) alone, so they are an Ask First item (ZooKeeper ensemble size, medium confidence, M19).
 
 ```bash
 docker exec zk-1 bash -c 'exec 3<>/dev/tcp/127.0.0.1/2181; echo srvr >&3; cat <&3'
@@ -64,7 +64,7 @@ Containers on one host share its disks unless you bind-mount separate devices, s
 
 ## 7. Encrypted listeners
 
-Sources: [SSL](https://kafka.apache.org/39/security/encryption-and-authentication-using-ssl/), [listeners](https://kafka.apache.org/39/security/listener-configuration/). Default is `listeners=PLAINTEXT://:9092`, so set the protocol explicitly.
+Sources: [SSL](https://kafka.apache.org/39/security/encryption-and-authentication-using-ssl/), [listeners](https://kafka.apache.org/39/security/listener-configuration/) (Always Do: `SSL` on certificate-authenticated listeners that leave the host). `SASL_SSL` on SASL-authenticated listeners rests on the SASL page alone, so it is an Ask First item (medium confidence, M13). Default is `listeners=PLAINTEXT://:9092`, so set the protocol explicitly.
 
 ```properties
 listeners=CLIENT://:9092,INTERNAL://:19092
@@ -93,7 +93,7 @@ docker exec kafka-1 java -version
 # Expected: version 17 or 21
 ```
 
-## 11. Generate the cluster ID once
+## 11. Generate a cluster ID with random-uuid
 
 Sources: [KRaft](https://kafka.apache.org/39/operations/kraft/), [quickstart](https://kafka.apache.org/39/getting-started/quickstart/) (`random-uuid`). Formatting every KRaft node with that same ID is not in the main guardrail list: the multi-node rule rests on one official page ([KRaft](https://kafka.apache.org/39/operations/kraft/)), so it is an Ask First item (cluster ID, medium confidence, M14). For the ZooKeeper migration, use the existing ZooKeeper cluster ID instead (see [migration](./zk-to-kraft-migration.md)).
 

@@ -57,7 +57,7 @@ volumes:
   postgres_data: {}
 ```
 
-The realm URL is the full `/realms/<realm>` path (migration page). The registry-side variable names come from the [security page](https://www.apicur.io/registry/docs/apicurio-registry/3.3.x/getting-started/assembly-configuring-registry-security.html) and [config reference](https://www.apicur.io/registry/docs/apicurio-registry/3.3.x/getting-started/assembly-config-reference.html). Publish port 9000 only on a trusted network. A Compose `healthcheck` with `curl` inside the image is not confirmed (unverified, U8).
+The realm URL is the full `/realms/<realm>` path (migration page). The registry-side variable names come from the [security page](https://www.apicur.io/registry/docs/apicurio-registry/3.3.x/getting-started/assembly-configuring-registry-security.html) and [config reference](https://www.apicur.io/registry/docs/apicurio-registry/3.3.x/getting-started/assembly-config-reference.html). A Compose `healthcheck` with `curl` inside the image is not confirmed (unverified, U8).
 
 ## KafkaSQL variant
 

@@ -8,7 +8,12 @@ author: rodrigo-mendes
 license: MIT
 dependencies:
   apm:
-    - path: ../../saas/aws-saas-serverless-quarkus-react-nextjs
+    # Git dependency (object form, https://microsoft.github.io/apm/reference/manifest-schema/):
+    # `git` = repo URL, `path` = package folder inside the repo, `ref` = commit SHA of origin/master
+    # (resolved 2026-11-05). Bump `ref` after pushing changes to the package.
+    - git: https://github.com/rodrigo-mendes/agents-factory.git
+      path: packages/saas/aws-saas-serverless-quarkus-react-nextjs
+      ref: e30c3e1dcb5c3096f6308240959d0cb33dba0e67
   mcp: []
 includes: auto
 scripts: {}

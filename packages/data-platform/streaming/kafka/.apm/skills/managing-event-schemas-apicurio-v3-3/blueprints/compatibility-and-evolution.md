@@ -47,7 +47,7 @@ Source: [compatibility modes](https://www.apicur.io/registry/docs/apicurio-regis
 | `BACKWARD` | The latest version only |
 | `BACKWARD_TRANSITIVE` | Every prior version |
 | `FULL`, `FULL_TRANSITIVE` | Both directions; `FULL_TRANSITIVE` is the strictest mode |
-| `NONE` | No check; the best-practices page says avoid it in production |
+| `NONE` | No check; the best-practices page says avoid it in production (medium confidence, M1) |
 
 Which side (producer or consumer) must upgrade first for each mode is not stated (unverified, U1). Do not assert an order. Choosing the level is an Ask First item ([ask-first-decisions](./ask-first-decisions.md)).
 
@@ -57,7 +57,7 @@ Sources: [compatibility modes](https://www.apicur.io/registry/docs/apicurio-regi
 
 - Avro: add new fields with defaults. For optional fields use `["null", "type"]` with `default: null`. Adding a field without a default is not backward compatible.
 - Protobuf: when removing a field add `reserved` for its number and name. Removing it without reserving is incompatible.
-- Compatibility gate in CI: register through `io.apicurio:apicurio-registry-maven-plugin` (goal `register`). A failed build signals a violation. The plugin XML was not read (unverified, U15).
+- Compatibility gate in CI: register through `io.apicurio:apicurio-registry-maven-plugin` (goal `register`). A failed build signals a violation (medium confidence, M2). The plugin XML was not read (unverified, U15).
 
 ```avro
 {"name": "discountCode", "type": ["null", "string"], "default": null}

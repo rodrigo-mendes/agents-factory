@@ -22,19 +22,19 @@ Back to [SKILL.md](../SKILL.md). Sources read 2026-11-04: [hardware](https://kaf
 | `zookeeper.ssl.client.enable` | false | true with a TLS ZooKeeper port (medium confidence, M13) |
 | `zookeeper.clientCnxnSocket` | null | `org.apache.zookeeper.ClientCnxnSocketNetty` for TLS (medium confidence, M13) |
 | `zookeeper.ssl.endpoint.identification.algorithm` | HTTPS | keep |
-| `zookeeper.metadata.migration.enable` | false | true only during migration |
+| `zookeeper.metadata.migration.enable` | false | true only during migration (medium confidence, M11) |
 | `broker.id` | -1 (auto) | explicit and unique, at most `reserved.broker.max.id` (medium confidence, M11) |
 | `reserved.broker.max.id` | 1000 | keep. Migration needs `broker.id` at most this value (medium confidence, M11) |
 | `process.roles` | empty (ZooKeeper mode) | `broker` or `controller` on KRaft |
 | `node.id` | -1 | unique, no collision with broker ids during migration (medium confidence, M11) |
 | `controller.quorum.bootstrap.servers` / `controller.quorum.voters` | empty | dynamic quorum / static quorum |
-| `listeners` | `PLAINTEXT://:9092` | named listeners (INTERNAL, EXTERNAL) |
+| `listeners` | `PLAINTEXT://:9092` | named listeners (INTERNAL, EXTERNAL) (medium confidence, M11) |
 | `inter.broker.protocol.version` | 3.9-IV0 | pin during upgrades, 3.9 before migration |
 | `log.dirs` | null (falls back to `log.dir`) | dedicated disks (medium confidence, M10) |
 | `default.replication.factor` | 1 | 3 |
 | `min.insync.replicas` | 1 | 2 |
 | `offsets.topic.replication.factor` | 3 | 3 |
-| `transaction.state.log.replication.factor` / `.min.isr` | 3 / 2 | keep on 3 or more brokers |
+| `transaction.state.log.replication.factor` / `.min.isr` | 3 / 2 | keep on 3 or more brokers (medium confidence, M11) |
 | `auto.create.topics.enable` | true | false is an example value (medium confidence, M12) |
 | `unclean.leader.election.enable` | false | false |
 | `replica.lag.time.max.ms` | 30000 | keep |

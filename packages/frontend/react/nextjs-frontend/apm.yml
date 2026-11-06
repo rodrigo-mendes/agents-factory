@@ -7,7 +7,7 @@ license: MIT
 dependencies:
   apm:
     - path: ../../../factory/factory-core
-    - path: ../../../third-party/vercel-frontend
+    #- path: ../../../third-party/vercel-frontend
     - path: ../../../delivery/protocol/handoff-core
   mcp: []
 includes: auto

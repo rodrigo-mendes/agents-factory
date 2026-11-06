@@ -22,7 +22,7 @@ Durability: "With this ISR model and f+1 replicas, a Kafka topic can tolerate f 
 ## Split-brain mitigation
 
 - Risk: losing the controller majority. Restoring a controller disk early can elect a leader missing committed data.
-- Mitigation: majority quorum (2N+1) [S6] (medium confidence, M16). Do not format or start a replacement controller until a majority has all committed data [S16] (medium confidence, M25: one official page). Auto-formatting was removed for this reason [S6].
+- Mitigation: majority quorum (2N+1) [S6] (medium confidence, M16). Do not format or start a replacement controller until a majority has all committed data [S16] (Hardware and OS page; medium confidence, M25: one official page). Auto-formatting was removed for this reason [S6].
 
 ```bash
 /opt/kafka/bin/kafka-metadata-quorum.sh --bootstrap-server kafka-1:19092 describe --status
@@ -39,7 +39,7 @@ Durability: "With this ISR model and f+1 replicas, a Kafka topic can tolerate f 
 
 ## Multi-DC and DR
 
-- One cluster per DC mirrored by MM2; a stretched cluster is discouraged [S19][S13].
+- One cluster per DC mirrored by MM2; a stretched cluster is discouraged by the datacenters page [S19] (medium confidence, M29); the MM2 option is supported by [S13].
 - Patterns: active/passive (`A->B`) and active/active (`A->B`, `B->A`). Define both flows in one config file to avoid loops. `DefaultReplicationPolicy` renames remote topics to `{source}.{topic}` [S13].
 - Exactly-once MM2 (dedicated mode): `{cluster}.exactly.once.source.support = enabled` plus `dedicated.mode.enable.internal.rest = true`; consumers set `isolation.level = read_committed`. Use `tasks.max` of at least 2 [S13].
 
@@ -83,4 +83,4 @@ bin/kafka-consumer-groups.sh --bootstrap-server kafka-1:19092 --describe --group
 
 - Detect: `describe --status` fails or shows no LeaderId; the sum of `ActiveControllerCount` is 0 [S6][S14].
 - Respond: restart the existing controllers with their volumes intact. Do not reformat.
-- Recover: `docker compose up -d controller-1 controller-2 controller-3`. Replace a controller disk only once a majority has all committed data [S16] (medium confidence, M25). A new controller formats with `--cluster-id <ID> --no-initial-controllers`, then `add-controller` [S6].
+- Recover: `docker compose up -d controller-1 controller-2 controller-3`. Replace a controller disk only once a majority has all committed data [S16] (Hardware and OS page; medium confidence, M25). A new controller formats with `--cluster-id <ID> --no-initial-controllers`, then `add-controller` [S6].
