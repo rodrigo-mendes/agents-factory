@@ -13,6 +13,7 @@ before you commit it.
 | [`/methodologies-skill-generator`](../../packages/factory/artifact-authoring/README.md#methodologies-skill-generator) | Research and create a methodology skill in one step. | `<methodology>` |
 | [`/architecture-approaches-skill-generator`](../../packages/factory/artifact-authoring/README.md#architecture-approaches-skill-generator) | Research and create an architecture-approach skill in one step. | `<approach>` |
 | [`/building-agent-packages`](../../packages/factory/agent-package-builder/README.md#building-agent-packages) | Orchestrate a full package: research, skills, agent, rules, quality loop and commit plan. Runs inline. | (none; it asks) |
+| [`documenting-agent-packages`](../../packages/factory/package-docs/README.md#documenting-agent-packages) | Find missing or incomplete package manuals, write them with helper agents and check them. Runs inline. | `mode=check\|package\|changed\|all\|bundles [package=<path>] [since=<ref>] [writers=<n>]` |
 
 ## Examples
 
@@ -46,6 +47,7 @@ Build a full package, step by step, with your approval at each gate:
 - You need a new agent and no skill: `/agent-creator`.
 - You want a methodology or an approach and have no research yet: the `-generator` commands.
 - You want the whole chain from a brief to a committed package: `/building-agent-packages`.
+- A package has no manual, or a command changed: `/documenting-agent-packages`.
 
 ## Rules to remember
 

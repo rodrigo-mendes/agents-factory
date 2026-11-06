@@ -52,6 +52,7 @@ Generated from the agent files. Do not edit these tables by hand.
 | `openspec-github-syncer` | `openspec-github` | sonnet | `/syncing-openspec-to-github` | OpenSpec GitHub Syncer - non-interactive executor that mirrors one OpenSpec change into its GitHub Project with gh_projects_sync.py (push and status only) and reports PLAN or applied lines, exit code… |
 | `poc-spec-extractor` | `openspec-poc` | sonnet | other agents or an orchestrator | POC Spec Extractor - read-only drafter that turns the source code of a proof of concept (back end and/or front end, any stack) plus its inventory (poc_inventory.py output) into a draft spec bundle: O… |
 | `artifact-author` | `artifact-authoring` | sonnet | `/terraform-instructions-compiler`, `/agent-creator`, `/architecture-approaches-skill-generator` +2 more | Skill & Instructions Author — turns validated research into production-ready SKILL.md and rules/instructions artifacts following official Claude best practices and team conventions. |
+| `package-manual-author` | `package-docs` | sonnet | other agents or an orchestrator | Package Manual Author - non-interactive writer that turns the files of one or more APM packages into usage manuals (README.md): installation, quick start, usage scenarios, a command or skill referenc… |
 | `framework-researcher` | `research-core` | opus | `/technical-framework-researcher-terraform`, `/terraform-engineering-best-practices-researcher`, `/architecture-methodology-researcher` +19 more | Technical/Framework/Cloud/Domain Researcher — builds hallucination-proof, version-absolute knowledge bases from official documentation. |
 | `research-synthesizer` | `research-core` | sonnet | other agents or an orchestrator | Research Merge & Format Enforcement Agent — receives raw findings from parallel section-investigators and assembles them into the mandatory output-format skeleton for a research knowledge base. |
 | `section-investigator` | `research-core` | sonnet | other agents or an orchestrator | Lightweight parallel sub-investigator for a single research section. |
@@ -121,6 +122,7 @@ Read-only reviewers have no `Write` or `Edit`. Only four agents can start other 
 | `openspec-github-syncer` | x | x | x |  |  | x |  |  |  |
 | `poc-spec-extractor` | x | x | x |  |  | x |  |  |  |
 | `artifact-author` | x | x | x | x | x |  |  |  |  |
+| `package-manual-author` | x | x | x | x | x | x |  |  |  |
 | `framework-researcher` | x | x | x |  | x |  | x | x | x |
 | `research-synthesizer` | x | x |  |  | x |  |  |  |  |
 | `section-investigator` |  |  |  |  |  |  | x | x |  |
